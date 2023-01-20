@@ -9,7 +9,7 @@ use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
 use Psr\Log\LoggerInterface;
 
-//use App\Models\JuegoModel;
+use App\Models\UsuarioModel;
 
 /**
  * Class BaseController
@@ -21,14 +21,16 @@ use Psr\Log\LoggerInterface;
  *
  * For security be sure to declare any new methods as protected or private.
  */
-abstract class BaseController extends Controller
-{
+abstract class BaseController extends Controller {
     /**
      * Instance of the main Request object.
      *
      * @var CLIRequest|IncomingRequest
      */
     protected $request;
+    protected $CI_VERSION = \CodeIgniter\CodeIgniter::CI_VERSION;
+    public $system_version = "1.0";
+    public $session = null;
 
     /**
      * An array of helpers to be loaded automatically upon
@@ -48,19 +50,19 @@ abstract class BaseController extends Controller
     /**
      * Constructor.
      */
-    public function initController(RequestInterface $request, ResponseInterface $response, LoggerInterface $logger)
-    {
+    public function initController(RequestInterface $request, ResponseInterface $response, LoggerInterface $logger){
         // Do Not Edit This Line
         parent::initController($request, $response, $logger);
+
 
         // Preload any models, libraries, etc, here.
         $this->db = \Config\Database::connect();
 
-        //$this->juegoModel = new JuegoModel($this->db);
+        $this->usuarioModel = new UsuarioModel($this->db);
 
         // E.g.: $this->session = \Config\Services::session();
-        /*$this->session = \Config\Services::session();
+        $this->session = \Config\Services::session();
         $this->request = \Config\Services::request();
-        $this->validation = \Config\Services::validation();*/
+        $this->validation = \Config\Services::validation();
     }
 }

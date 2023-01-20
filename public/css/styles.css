@@ -141,10 +141,13 @@ section svg {
 footer {
     background-color: rgba(221, 72, 20, .8);
     text-align: center;
+    position: absolute;
+    width: 100%;
+    bottom: 0;
 }
 footer .environment {
     color: rgba(255, 255, 255, 1);
-    padding: 2rem 1.75rem;
+    padding: 0.7rem 1.75rem;
 }
 footer .copyrights {
     background-color: rgba(62, 62, 62, 1);
@@ -178,4 +181,14 @@ footer .copyrights {
         background-color: rgba(221, 72, 20, .7);
         color: rgba(255, 255, 255, .8);
     }
+}
+
+#wrap {
+	margin: 0 auto 0 auto;
+	width: 40%;
+	min-width: 300px;
+}
+
+#login{
+    margin-top: 6%;
 }

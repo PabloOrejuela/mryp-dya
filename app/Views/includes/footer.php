@@ -1,6 +1,6 @@
 <!-- FOOTER: DEBUG INFO + COPYRIGHTS -->
 
-<footer>
+<footer id="footer">
     <div class="environment">
 
         <p>Page rendered in {elapsed_time} seconds</p>
