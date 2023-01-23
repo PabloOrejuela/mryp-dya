@@ -14,7 +14,16 @@ class UsuarioModel extends Model {
     protected $returnType       = 'object';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = [];
+    protected $allowedFields    = [
+        'nombre',
+        'user',
+        'telefono',
+        'email',
+        'password',
+        'cedula',
+        'irdol',
+        'is_logged',
+    ];
 
     // Dates
     protected $useTimestamps = false;
@@ -44,7 +53,7 @@ class UsuarioModel extends Model {
         $result = NULL;
         $builder = $this->db->table('usuarios');
         $builder->select('*')->where('user', $usuario['user'])->where('password', md5($usuario['password']));
-        $builder->join('roles', 'roles.id=usuarios.idroles');
+        $builder->join('roles', 'roles.id=usuarios.idrol');
         $query = $builder->get();
         if ($query->getResult() != null) {
             foreach ($query->getResult() as $row) {

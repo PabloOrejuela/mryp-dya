@@ -31,6 +31,7 @@ $routes->set404Override();
 // route since we don't have to scan directories.
 $routes->get('/', 'Inicio::login');
 $routes->post('validate_login', 'Inicio::validate_login');
+$routes->get('inicio', 'Inicio::index');
 
 /*
  * --------------------------------------------------------------------

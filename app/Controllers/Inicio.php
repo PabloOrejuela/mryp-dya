@@ -41,21 +41,22 @@ class Inicio extends BaseController {
                 //valido el login y pongo el id en sesion
                 //echo '<pre>'.var_export($usuario, true).'</pre>';
                 $sessiondata = [
-                    'logged_in' => 1,
-                    'idusuario' => $usuario->idusuario,
+                    'is_logged' => 1,
+                    'idusuario' => $usuario->id,
                     'nombre' => $usuario->nombre,
                     'idrol' => $usuario->idrol,
                     'rol' => $usuario->rol,
-                    'administracion' => $usuario->administracion,
-                    'cobros' => $usuario->cobros,
-                    'reportes' => $usuario->reportes
+                    'centro_educativo' => $usuario->centro_educativo,
+                    'editar' => $usuario->editar,
+                    'componente' => $usuario->componente,
+                    'ver_info' => $usuario->ver_info
                 ];
 
                 $user = [
-                    'logged' => 1
+                    'is_logged' => 1
                 ];
                 
-                $this->usuarioModel->update($usuario->idusuario, $user);
+                $this->usuarioModel->update($usuario->id, $user);
                 $this->session->set($sessiondata);
 
                 return redirect()->to('inicio');
