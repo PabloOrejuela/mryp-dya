@@ -13,8 +13,8 @@
                 <button onclick="toggleMenu();">&#9776;</button>
             </li>
                 <li class="menu-item hidden"><a href="<?= site_url(); ?>">Inicio</a></li>
-                <li class="menu-item hidden"><a href="<?= site_url(); ?>jugando">Item 2</a>
-                <li class="menu-item hidden"><a href="<?= site_url(); ?>sistemas">Item 3</a>
+                <li class="menu-item hidden"><a href="<?= site_url(); ?>cargar_info">Cargar Información</a>
+                <li class="menu-item hidden"><a href="<?= site_url(); ?>sistemas">Reportes</a>
             </li>
         </ul>
     </div>
