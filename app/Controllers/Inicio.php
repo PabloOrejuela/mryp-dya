@@ -8,6 +8,8 @@ class Inicio extends BaseController {
 
     public function index(){
 
+        //echo '<pre>'.var_export($this->session->idusuario, true).'</pre>';
+
         $data['title']='MYRP - DYA';
         $data['main_content']='inicio';
         return view('includes/template', $data);
@@ -126,4 +128,23 @@ class Inicio extends BaseController {
 		//Close and output PDF document
 		$pdf->Output("PDF de prueba-".md5(time()).'.pdf', 'I');
 	}
+
+    public function logout(){
+        //destruyo la session  y salgo
+        //echo '<pre>'.var_export($this->session->idusuario, true).'</pre>';
+        
+        $data['idusuario'] = $this->session->idusuario;
+        
+
+        $user = [
+            'id' => $data['idusuario'],
+            'is_logged' => 0
+        ];
+        echo '<pre>'.var_export($user, true).'</pre>';
+        $this->usuarioModel->save($user);
+        $this->session->destroy();
+        
+        return redirect()->to('/');
+        
+    }
 }

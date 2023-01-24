@@ -34,6 +34,10 @@ $routes->post('validate_login', 'Inicio::validate_login');
 $routes->get('generate_pdf', 'Inicio::generate_pdf');
 $routes->get('inicio', 'Inicio::index');
 
+$routes->get('cargar_info_view', 'CargarInformacion::index');
+
+$routes->get('logout', 'Inicio::logout');
+
 
 /*
  * --------------------------------------------------------------------

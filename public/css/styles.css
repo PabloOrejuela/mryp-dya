@@ -56,7 +56,7 @@ header li.menu-item a:focus {
 header .logo {
     float: left;
     height: 44px;
-    padding: .4rem .5rem;
+    padding: .1rem .5rem .3rem .5rem;
 }
 header .menu-toggle {
     display: none;
