@@ -9,10 +9,19 @@ class Inicio extends BaseController {
     public function index(){
 
         //echo '<pre>'.var_export($this->session->idusuario, true).'</pre>';
+        $data['idrol'] = $this->session->idrol;
+        $data['id'] = $this->session->idusuario;
+        $data['is_logged'] = $this->session->is_logged;
+        $data['nombre'] = $this->session->nombre;
 
-        $data['title']='MYRP - DYA';
-        $data['main_content']='inicio';
-        return view('includes/template', $data);
+        if ($data['is_logged'] == 1) {
+
+            $data['title']='MYRP - DYA';
+            $data['main_content']='inicio';
+            return view('includes/template', $data);
+        }else{
+            $this->logout();
+        }
     }
 
     public function login($message = NULL){
@@ -30,7 +39,7 @@ class Inicio extends BaseController {
             'user' => $this->request->getPostGet('user'),
             'password' => $this->request->getPostGet('password'),
         );
-
+        //echo '<pre>'.var_export($data, true).'</pre>';
         $this->validation->setRuleGroup('login');
         
         if (!$this->validation->withRequest($this->request)->run()) {
@@ -40,7 +49,7 @@ class Inicio extends BaseController {
         }else{ 
 
             $usuario = $this->usuarioModel->_getUsuario($data);
-//echo '<pre>'.var_export($usuario, true).'</pre>';
+//echo '<pre>'.var_export($usuario, true).'</pre>';exit;
             if (isset($usuario) && $usuario != NULL) {
                 //valido el login y pongo el id en sesion
                 //echo '<pre>'.var_export($usuario, true).'</pre>';
@@ -53,6 +62,7 @@ class Inicio extends BaseController {
                     'centro_educativo' => $usuario->centro_educativo,
                     'editar' => $usuario->editar,
                     'componente' => $usuario->componente,
+                    'reportes' => $usuario->reportes,
                     'ver_info' => $usuario->ver_info
                 ];
 
@@ -65,7 +75,6 @@ class Inicio extends BaseController {
 
                 return redirect()->to('inicio');
             }else{
-
                 return redirect()->to('/');
             }
         }
@@ -135,12 +144,11 @@ class Inicio extends BaseController {
         
         $data['idusuario'] = $this->session->idusuario;
         
-
         $user = [
             'id' => $data['idusuario'],
             'is_logged' => 0
         ];
-        echo '<pre>'.var_export($user, true).'</pre>';
+        //echo '<pre>'.var_export($user, true).'</pre>';
         $this->usuarioModel->save($user);
         $this->session->destroy();
         

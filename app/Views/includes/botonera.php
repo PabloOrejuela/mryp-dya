@@ -1,5 +1,5 @@
 <body>
-
+<?php $this->session = session(); ?>
 <!-- HEADER: MENU + HEROE SECTION -->
 <header>
 
@@ -13,8 +13,17 @@
                 <button onclick="toggleMenu();">&#9776;</button>
             </li>
                 <li class="menu-item hidden"><a href="<?= site_url(); ?>">Inicio</a></li>
-                <li class="menu-item hidden"><a href="<?= site_url(); ?>cargar_info_view">Cargar Información</a>
-                <li class="menu-item hidden"><a href="<?= site_url(); ?>sistemas">Reportes</a>
+                <?php
+                    if ($this->session->editar) {
+                        echo '<li class="menu-item hidden"><a href="'.site_url().'cargar_info_view">Cargar Información</a></li>';
+                    }
+
+                    if ($this->session->reportes) {
+                        echo '<li class="menu-item hidden"><a href="'.site_url().'reportes_view">Reportes</a></li>';
+                    }
+                ?>
+                
+                
                 <li class="menu-item hidden"><a href="<?= site_url(); ?>logout">Salir</a>
             </li>
         </ul>

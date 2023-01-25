@@ -10,6 +10,7 @@ use CodeIgniter\HTTP\ResponseInterface;
 use Psr\Log\LoggerInterface;
 
 use App\Models\UsuarioModel;
+use App\Models\ProductoModel;
 
 /**
  * Class BaseController
@@ -39,7 +40,7 @@ abstract class BaseController extends Controller {
      *
      * @var array
      */
-    protected $helpers = ['form', 'url'];
+    protected $helpers = ['form', 'url', 'html'];
 
     /**
      * Be sure to declare properties for any property fetch you initialized.
@@ -59,6 +60,7 @@ abstract class BaseController extends Controller {
         $this->db = \Config\Database::connect();
 
         $this->usuarioModel = new UsuarioModel($this->db);
+        $this->productoModel = new ProductoModel($this->db);
 
         // E.g.: $this->session = \Config\Services::session();
         $this->session = \Config\Services::session();
