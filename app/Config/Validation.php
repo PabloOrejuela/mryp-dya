@@ -55,4 +55,14 @@ class Validation extends BaseConfig
             'required' => 'El campo "Contraseña" es obligatorio',
         ]
     ];
+
+    public $uploadFile = [
+        'tablaDatos' => 'uploaded[tablaDatos]',
+    ];
+
+    public $uploadFile_errors = [
+        'tablaDatos' => [
+            'uploaded' => 'Es necesario seleccionar un archivo para poder subirlo',
+        ]
+    ];
 }

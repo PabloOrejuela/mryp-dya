@@ -10,9 +10,9 @@
                 <div class="card-body"> 
                     <form action="<?php echo base_url().'/getExcel';?>" method="post" id="form-subir-excel" enctype="multipart/form-data">
                         <?= csrf_field(); ?>
-                        <div class="container mb-5" style="margin-top:30px;">
+                        <div class="container mb-3" style="margin-top:20px;">
                             <div class="col-sm-6 mb-3">
-                                <label for="idrol" class="col-sm-2 col-form-label">Componente: </label>
+                                <label for="idrol" class="col-sm-3 col-form-label">Componente: </label>
                                 <select class="form-select" aria-label="Default select example" value="<?= old('idempresa'); ?>" name="idempresa">
                                     <option value="0" selected>-- Escoja un Componente --</option>
                                     <?php  
@@ -29,7 +29,7 @@
                             </div>
                             <div class="col-sm-5 mb-3">
                                 <h5>Subir archivo de datos (.xls)</h5>
-                                <input class="form-control form-control-sm" type="file" name="tablaCartera" id="formFile" value="Subir archivo excel">
+                                <input class="form-control form-control-sm" type="file" name="tablaDatos" id="formFile" value="Subir archivo excel">
                             </div>
                             <p id="error-message"><?= session('errors.tablaCartera');?> </p>
                             <div>
