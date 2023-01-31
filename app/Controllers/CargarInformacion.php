@@ -4,6 +4,11 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController;
 
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx as XlsxWriter;
+use PhpOffice\PhpSpreadsheet\Reader\Xlsx as XlsxReader;
+
+
 class CargarInformacion extends BaseController {
 
     public function index(){
@@ -17,7 +22,7 @@ class CargarInformacion extends BaseController {
             $data['componentes'] = $this->productoModel->findAll();
 
             $data['title']='MYRP - DYA';
-            $data['main_content']='home/frm_subirExcel';
+            $data['main_content']='home/selecciona_componente';
             return view('includes/template', $data);
         }else{
 
@@ -26,7 +31,7 @@ class CargarInformacion extends BaseController {
         
     }
 
-    public function frm_subir_excel(){
+    public function frm_subir_excel($componente = null){
         $data['idrol'] = $this->session->idrol;
         $data['id'] = $this->session->idusuario;
         $data['is_logged'] = $this->session->is_logged;
@@ -34,6 +39,8 @@ class CargarInformacion extends BaseController {
 
         if ($data['is_logged'] == 1) {
 
+            $data['idproducto'] = $componente;
+
             $data['title']='MYRP - DYA';
             $data['main_content']='home/frm_subirExcel';
             return view('includes/template', $data);
@@ -42,57 +49,58 @@ class CargarInformacion extends BaseController {
         }
     }
 
-    public function getExcel(){
+    public function getExcelC1(){
+        
         $data['idrol'] = $this->session->idrol;
         $data['id'] = $this->session->idusuario;
         $data['is_logged'] = $this->session->is_logged;
         $data['nombre'] = $this->session->nombre;
-        if ($data['logged_in'] == 1) {
+        if ($data['is_logged'] == 1) {
 
-            $data['title']='MYRP - DYA';
-            $idempresa = $this->request->getPostGet('idproducto');
-
-            $tipo = $_FILES['tablaDatos']['type'];
-            $size = $_FILES['tablaDatos']['size'];
-            $fileTemp = $_FILES['tablaDatos']['tmp_name'];
+            //Creo la ruta
+            $ruta = './public/excel/';
             
-            $this->validation->setRuleGroup('uploadFile');
-        
-            if (!$this->validation->withRequest($this->request)->run()) {
-                //Depuración
-                //dd($validation->getErrors());
-                return redirect()->back()->withInput()->with('errors', $this->validation->getErrors());
+            //Recibo el archivo excel
+            $file = $this->request->getFile('hoja');
+
+            //Verifico que sea válido
+            if (!$file->isValid()) {
+                throw new RuntimeException($file->getErrorString());
             }else{
-                $filas = file($fileTemp);
-                $num_registros = count($filas)-1;
-                //echo '<pre>'.var_export($filas[1], true).'</pre>';exit;
-                foreach ($filas as $key => $fila) {
-                    if ($key != 0) {
-                        $datos = explode(";", $fila);
-                        
-                        if ($datos[6] == 'SOLTERO') {
-                            $idestado_civil = 1;
-                        }else if ($datos[6] == 'CASADO') {
-                            $idestado_civil = 2;
-                        }else if ($datos[6] == 'DIVORCIADO') {
-                            $idestado_civil = 3;
-                        }else{
-                            $idestado_civil = 4;
-                        }
-                        
-                        $cliente = array(
-                            'nombre' => trim($datos[4]),
-                            'cedula' => trim($datos[2]),
-                            'idestado_civil' => $idestado_civil,
+                //obtengo el nombre del archivo
+                $nameFile = $file->getName();
+
+                //Muevo el archjivo del temporal a la carpeta
+                $file->move($ruta);
+
+                //Verifico que se haya movido
+                if ($file->hasMoved()) {
+                    //Creo qel reader
+                    $reader = new XlsxReader();
+
+                    //leo el archivo
+                    $spreadsheet = $reader->load($ruta.$nameFile);
+
+                    //Determino la pestaña 
+                    $sheet = $spreadsheet->getSheet(0);
+
+                    //accedo a cada fila extrayendo los datos
+                    foreach ($sheet->getRowIterator(2) as $row) {
+
+                        $benefiario = array(
+                            'nombre' => trim($sheet->getCellByColumnAndRow(1,$row->getRowIndex())),
+                            'edad' => trim($sheet->getCellByColumnAndRow(2,$row->getRowIndex())),
                             'calificacion' => "E",
                             'direccion' => trim($datos[32]),
                             'dir_trabajo' => 'N/A',
                             'telefono_domicilio' => trim($datos[34]),
                             'telefono_trabajo' => 'N/A',
                         );
-                        
+
+                        //Verifico si es que existe
                         $exist = $this->clienteModel->_getClienteId($cliente['cedula']);
-                        //echo '<pre>'.var_export($exist, true).'</pre>';exit;
+
+                        //Logica del registro
                         if ($exist == 0) {
                             $this->clienteModel->save($cliente);
                             $idcliente = $this->db->insertID();
@@ -113,7 +121,7 @@ class CargarInformacion extends BaseController {
                                 'total' => $datos[53],
                                 'idempresa' => $idempresa
                             );
-                            $this->carteraModel->save($registro);
+                            //$this->carteraModel->save($registro);
                         }else{
                             $idcliente = $exist;
                             $registro = array(
@@ -133,20 +141,23 @@ class CargarInformacion extends BaseController {
                                 'total' => $datos[53],
                                 'idempresa' => $idempresa
                             );
-                            $this->carteraModel->save($registro);
+                            //$this->carteraModel->save($registro);
                         }
-                        
 
-                        //echo '<pre>'.var_export($cliente, true).'</pre>';
+                        //muestro los datos o los grabo en base de datos
+                        echo '<pre>'.var_export($registro, true).'</pre>';
                     }
                     
-                }       
-            return redirect()->to('/cartera');
+                }
+            }else{
+                $this->frm_subir_excel();
             }
         }else{
             $this->logout();
-        }
+        } 
     }
+
+    
     
 
     public function logout(){

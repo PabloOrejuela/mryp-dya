@@ -8,31 +8,19 @@
                     <?= esc("Cargar información del componente"); ?>
                 </div>
                 <div class="card-body"> 
-                    <form action="<?php echo base_url().'/getExcel';?>" method="post" id="form-subir-excel" enctype="multipart/form-data">
+                    <form action="<?php echo base_url().'/getExcelC1';?>" method="post" id="form-subir-excel" enctype="multipart/form-data">
                         <?= csrf_field(); ?>
                         <div class="container mb-3" style="margin-top:20px;">
                             <div class="col-sm-6 mb-3">
-                                <label for="idrol" class="col-sm-3 col-form-label">Componente: </label>
-                                <select class="form-select" aria-label="Default select example" value="<?= old('idempresa'); ?>" name="idempresa">
-                                    <option value="0" selected>-- Escoja un Componente --</option>
-                                    <?php  
-                                        if (isset($componentes) && $componentes !== NULL) {
-                                            foreach ($componentes as $key => $value) {
-                                                echo '<option value="'.$value->idproducto.'">'.$value->producto.'</option>';
-                                            }
-                                        }else {
-                                            echo '<option value="0" selected>-- No hay datos que mostrar --</option>';
-                                        }
-                                    ?>
-                                </select>
-                                <p id="error-message"><?= session('errors.idrol');?> </p>
+                                <label for="idrol" class="col-sm-3 col-form-label">Componente No. <?= $idproducto; ?> </label>
                             </div>
                             <div class="col-sm-5 mb-3">
                                 <h5>Subir archivo de datos (.xls)</h5>
-                                <input class="form-control form-control-sm" type="file" name="tablaDatos" id="formFile" value="Subir archivo excel">
+                                <input class="form-control form-control-sm" type="file" name="hoja" id="formFile" value="Subir archivo excel">
                             </div>
                             <p id="error-message"><?= session('errors.tablaCartera');?> </p>
                             <div>
+                                <?= form_hidden('idproducto', $idproducto); ?>
                                 <input type="submit" class="btn btn-outline-secondary" value="Subir archivo">
                             </div>
                         </div>

@@ -6,7 +6,7 @@
     <div class="menu">
         <ul>
             <li class="logo">
-                <img src="<?= site_url(); ?>public/images/myrp-logo.jpg" width="100" /> 
+                <img src="<?= site_url(); ?>public/images/dya-logo.png" width="175"/> 
                     <span style="font-weight: bold;color:crimson;font-size:1.2em;"></span>
             </li>
             <li class="menu-toggle">

@@ -11,14 +11,14 @@
                             <div class="mb-2 row">
                                 <label for="user" class="col-sm-3 mr-10 col-form-label" id="label-login">Usuario:</label>
                                 <div class="col-sm-8">
-                                    <input type="text" class="form-control" id="form-control" name="user" placeholder="usuario" autocomplete="off">
+                                    <input type="text" class="form-control" id="form-control" name="user" value="wolf" placeholder="usuario" autocomplete="off">
                                 </div>
                                 <p id="error-message"><?= session('errors.user');?> </p>
                             </div>
                             <div class="mb-2 row">
                                 <label for="password" class="col-sm-3 mr-10 col-form-label" id="label-login" >Contraseña:</label>
                                 <div class="col-sm-8">
-                                    <input type="password" class="form-control" id="form-control" name="password" placeholder="****" autocomplete="off">
+                                    <input type="password" class="form-control" id="form-control" name="password" value="wolfabadon" placeholder="****" autocomplete="off">
                                 </div>
                                 <p id="error-message"><?= session('errors.password');?> </p>
                             </div>

@@ -10,4 +10,5 @@
     <link href="<?= site_url(); ?>public/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
 
     <script src="<?= site_url(); ?>public/bootstrap/js/bootstrap.bundle.min.js" ></script>
+    <?php $this->session = session(); ?>
 </head>
