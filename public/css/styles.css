@@ -197,3 +197,8 @@ footer .copyrights {
     float: left;
     margin: 3px;
 }
+
+#txt-descripcion{
+    font-size: 1em;
+    text-align: justify;
+}

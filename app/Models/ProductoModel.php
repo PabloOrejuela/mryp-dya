@@ -8,7 +8,7 @@ class ProductoModel extends Model {
 
     protected $DBGroup          = 'default';
     protected $table            = 'productos';
-    protected $primaryKey       = 'idproductos';
+    protected $primaryKey       = 'idproducto';
     protected $useAutoIncrement = true;
     protected $insertID         = 0;
     protected $returnType       = 'object';

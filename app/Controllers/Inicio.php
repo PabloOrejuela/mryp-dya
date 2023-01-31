@@ -65,6 +65,8 @@ class Inicio extends BaseController {
                     'ver_info' => $usuario->ver_info,
                     'componente_1' => $usuario->componente_1,
                     'componente_2' => $usuario->componente_2,
+                    'componente_3' => $usuario->componente_3,
+                    'componente_4' => $usuario->componente_4,
                 ];
 
                 $user = [

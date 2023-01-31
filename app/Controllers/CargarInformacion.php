@@ -40,7 +40,8 @@ class CargarInformacion extends BaseController {
         if ($data['is_logged'] == 1) {
 
             $data['idproducto'] = $componente;
-
+            $data['componente'] = $this->productoModel->find($componente);
+            //echo '<pre>'.var_export($data['componente'], true).'</pre>';
             $data['title']='MYRP - DYA';
             $data['main_content']='home/frm_subirExcel';
             return view('includes/template', $data);
@@ -149,8 +150,6 @@ class CargarInformacion extends BaseController {
                     }
                     
                 }
-            }else{
-                $this->frm_subir_excel();
             }
         }else{
             $this->logout();
