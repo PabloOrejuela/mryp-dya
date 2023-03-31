@@ -18,6 +18,10 @@
                         echo '<li class="menu-item hidden"><a href="'.site_url().'cargar_info_view">Cargar Información</a></li>';
                     }
 
+                    if ($this->session->editar && $this->session->cargar_info == 1) {
+                        echo '<li class="menu-item hidden"><a href="'.site_url().'cargar_info_extra_view">Cargar info extra</a></li>';
+                    }
+
                     if ($this->session->reportes) {
                         echo '<li class="menu-item hidden"><a href="'.site_url().'reportes_view">Reportes</a></li>';
                     }

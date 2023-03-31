@@ -31,6 +31,24 @@ class CargarInformacion extends BaseController {
         
     }
 
+    public function carga_extra(){
+        $data['idrol'] = $this->session->idrol;
+        $data['id'] = $this->session->idusuario;
+        $data['is_logged'] = $this->session->is_logged;
+        $data['nombre'] = $this->session->nombre;
+
+        if ($data['is_logged'] == 1) {
+
+            $data['title']='MYRP - DYA';
+            $data['main_content']='home/frm_cargar_info_extra';
+            return view('includes/template', $data);
+        }else{
+
+            $this->logout();
+        }
+        
+    }
+
     public function frm_subir_excel($componente = null){
         $data['idrol'] = $this->session->idrol;
         $data['id'] = $this->session->idusuario;
@@ -48,6 +66,49 @@ class CargarInformacion extends BaseController {
         }else{
             $this->logout();
         }
+    }
+
+    public function cargar_centro_educativo(){
+        
+        //Creo la ruta
+        $ruta = './public/excel/';
+        
+        //Recibo el archivo excel
+        $file = $this->request->getFile('hoja');
+
+        //Verifico que sea válido
+        if (!$file->isValid()) {
+            throw new RuntimeException($file->getErrorString());
+        }else{
+            //obtengo el nombre del archivo
+            $nameFile = $file->getName();
+
+            //Muevo el archjivo del temporal a la carpeta
+            $file->move($ruta);
+
+            //Verifico que se haya movido
+            if ($file->hasMoved()) {
+                //Creo qel reader
+                $reader = new XlsxReader();
+
+                //leo el archivo
+                $spreadsheet = $reader->load($ruta.$nameFile);
+
+                //Determino la pestaña 
+                $sheet = $spreadsheet->getSheet(0);
+
+                //Accedo a cada fila extrayendo los datos
+                foreach ($sheet->getRowIterator(2) as $row) {
+                    $nombre = trim($sheet->getCellByColumnAndRow(1,$row->getRowIndex()));
+                    $edad = trim($sheet->getCellByColumnAndRow(3,$row->getRowIndex()));
+                    $nombre = trim($sheet->getCell('D'.$row->getRowIndex()));
+
+                    //muestro los datos o los grabo en base de datos
+                    echo '<pre>'.var_export($nombre.' '.$edad, true).'</pre>';
+                }
+                
+            }
+        } 
     }
 
     public function getExcelC1(){
