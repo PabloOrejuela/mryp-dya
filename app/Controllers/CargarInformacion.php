@@ -99,14 +99,46 @@ class CargarInformacion extends BaseController {
 
                 //Accedo a cada fila extrayendo los datos
                 foreach ($sheet->getRowIterator(2) as $row) {
-                    $nombre = trim($sheet->getCellByColumnAndRow(1,$row->getRowIndex()));
-                    $edad = trim($sheet->getCellByColumnAndRow(3,$row->getRowIndex()));
-                    $nombre = trim($sheet->getCell('D'.$row->getRowIndex()));
 
-                    //muestro los datos o los grabo en base de datos
-                    echo '<pre>'.var_export($nombre.' '.$edad, true).'</pre>';
+                    $centro = array(
+                        'amie' => trim($sheet->getCell('A'.$row->getRowIndex())),
+                        'intervencion' => trim($sheet->getCell('B'.$row->getRowIndex())),
+                        'observacion' => trim($sheet->getCell('C'.$row->getRowIndex())),
+                        'clima_escolar' => trim($sheet->getCell('D'.$row->getRowIndex())), 
+                        'cod_parroquia' => trim($sheet->getCell('H'.$row->getRowIndex())),
+                        'nombre' => trim($sheet->getCell('I'.$row->getRowIndex())),
+                        'escolarizacion' => trim($sheet->getCell('J'.$row->getRowIndex())),
+                        'tipo_educacion' => trim($sheet->getCell('K'.$row->getRowIndex())),
+                        'nivel_educacion' => trim($sheet->getCell('L'.$row->getRowIndex())),
+                        'sostenimiento' => trim($sheet->getCell('M'.$row->getRowIndex())),
+                        'num_docentes' => trim($sheet->getCell('N'.$row->getRowIndex())),
+                        'num_docentes_evaluados' => trim($sheet->getCell('O'.$row->getRowIndex())),
+                        'res_evaluacion_docentes' => trim($sheet->getCell('P'.$row->getRowIndex())),
+                        'cant_est' => trim($sheet->getCell('Q'.$row->getRowIndex())),
+                        'cant_est_discapacidad' => trim($sheet->getCell('R'.$row->getRowIndex())),
+                        'proporcion_ninias_adoles' => trim($sheet->getCell('S'.$row->getRowIndex())),
+                        'ecuatoriana' => trim($sheet->getCell('T'.$row->getRowIndex())),
+                        'colombiana' => trim($sheet->getCell('U'.$row->getRowIndex())),
+                        'peruana' => trim($sheet->getCell('V'.$row->getRowIndex())),
+                        'venezolana' => trim($sheet->getCell('W'.$row->getRowIndex())),
+                        'otros_paises' => trim($sheet->getCell('X'.$row->getRowIndex())),
+                        'porcentaje_extranjeros' => trim($sheet->getCell('Y'.$row->getRowIndex())),
+                        'alumnos_docente' => trim($sheet->getCell('Z'.$row->getRowIndex())),
+                        'agua' => trim($sheet->getCell('AA'.$row->getRowIndex())),
+                        'higiene' =>trim($sheet->getCell('AB'.$row->getRowIndex())),
+                        'saneamiento' =>trim($sheet->getCell('AC'.$row->getRowIndex())),
+                        'prioridad' =>trim($sheet->getCell('AD'.$row->getRowIndex()))
+
+                    );
+                    
+                    //Verifico si existe
+                    $exist = $this->centroEducativoModel->find($centro['amie']);
+                    if (!isset($exist) || $exist == NULL) {
+                        //muestro los datos o los grabo en base de datos
+                        $this->centroEducativoModel->save($centro);
+                    } 
                 }
-                
+                return redirect()->to('cargar_info_extra_view');
             }
         } 
     }
