@@ -39,6 +39,10 @@ $routes->get('cargar_info_extra_view', 'CargarInformacion::carga_extra');
 $routes->post('cargar-centro-educativo', 'CargarInformacion::cargar_centro_educativo');
 $routes->get('subirExcel_view/(:num)', 'CargarInformacion::frm_subir_excel/$1');
 
+$routes->post('cargar-nap3', 'CargarInformacion::cargar_nap3');
+
+$routes->post('cargar-prod-1', 'CargarInformacion::cargar_prod_1');
+
 $routes->post('getExcelC1', 'CargarInformacion::getExcelC1');
 $routes->post('getExcelC2', 'CargarInformacion::getExcelC2');
 $routes->post('getExcelC3', 'CargarInformacion::getExcelC3');

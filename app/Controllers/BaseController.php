@@ -12,6 +12,7 @@ use Psr\Log\LoggerInterface;
 use App\Models\UsuarioModel;
 use App\Models\ProductoModel;
 use App\Models\CentroEducativoModel;
+use App\Models\Nap3Model;
 
 
 /**
@@ -64,6 +65,7 @@ abstract class BaseController extends Controller {
         $this->usuarioModel = new UsuarioModel($this->db);
         $this->productoModel = new ProductoModel($this->db);
         $this->centroEducativoModel = new CentroEducativoModel($this->db);
+        $this->nap3Model = new Nap3Model($this->db);
 
         // E.g.: $this->session = \Config\Services::session();
         $this->session = \Config\Services::session();
