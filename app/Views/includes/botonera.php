@@ -15,11 +15,11 @@
                 <li class="menu-item hidden"><a href="<?= site_url(); ?>inicio">Inicio</a></li>
                 <?php
                     if ($this->session->editar) {
-                        echo '<li class="menu-item hidden"><a href="'.site_url().'cargar_info_view">Cargar Información</a></li>';
+                        echo '<li class="menu-item hidden"><a href="'.site_url().'cargar_info_view">Componentes</a></li>';
                     }
 
                     if ($this->session->editar && $this->session->cargar_info == 1) {
-                        echo '<li class="menu-item hidden"><a href="'.site_url().'cargar_info_extra_view">Cargar info extra</a></li>';
+                        echo '<li class="menu-item hidden"><a href="'.site_url().'cargar_info_extra_view">Cargar info</a></li>';
                     }
 
                     if ($this->session->reportes) {

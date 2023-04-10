@@ -229,6 +229,8 @@ class CargarInformacion extends BaseController {
             if ($file->hasMoved()) {
                 //Creo qel reader
                 $reader = new XlsxReader();
+                //$reader = new \PhpOffice\PhpSpreadsheet\Reader\Xls();
+                $reader->setReadDataOnly(true);
 
                 //leo el archivo
                 $spreadsheet = $reader->load($ruta.$nameFile);
@@ -237,11 +239,15 @@ class CargarInformacion extends BaseController {
                 $sheet = $spreadsheet->getSheet(0);
 
                 //Accedo a cada fila extrayendo los datos
+                
                 foreach ($sheet->getRowIterator(2) as $row) {
-
+                
+                    $amie = trim($sheet->getCell('B'.$row->getRowIndex()));
+                    
                     $centro = array(
                         'amie' => trim($sheet->getCell('B'.$row->getRowIndex())),
-
+                        'idparroquia' => trim($sheet->getCell('D'.$row->getRowIndex())),
+                        'nombre' => trim($sheet->getCell('E'.$row->getRowIndex())),
                     );
                     
                     //Verifico si existe
@@ -249,79 +255,86 @@ class CargarInformacion extends BaseController {
                     
                     if (!isset($exist) || $exist == NULL) {
                         //muestro los datos o los grabo en base de datos
-                        echo "existe";
-                        //$this->centroEducativoModel->save($centro);
-                    }else{
-                        echo "NO existe";
-                    }
-                    $fecha_actual = date('Y-m-d');
-
-                    if (trim($sheet->getCell('G'.$row->getRowIndex())) != '') {
-                        $fecha_inicio = \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject(trim($sheet->getCell('G'.$row->getRowIndex())))->format('Y-m-d');
-                    }else{
-                        $fecha_inicio = '0000-00-00';
+                        //echo 'No existe';
+                        $this->centroEducativoModel->save($centro);
                     }
 
-                    if (trim($sheet->getCell('H'.$row->getRowIndex())) != '') {
-                        $fecha_fin = \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject(trim($sheet->getCell('H'.$row->getRowIndex())))->format('Y-m-d');
-                    }else{
-                        $fecha_fin = '0000-00-00';
-                    }
-
-                    if (trim($sheet->getCell('N'.$row->getRowIndex())) != '') {
-                        $fecha_nac = \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject(trim($sheet->getCell('N'.$row->getRowIndex())))->format('Y-m-d');
-                        $anio_nac = Time::parse($fecha_nac);
-                        $anio_actual = Time::parse($fecha_actual);
-                        $edad = $anio_actual->getYear() - $anio_nac->getYear();
-                    }else{
-                        $fecha_nac = '0000-00-00';
-                        $edad = 0;
-                    }
+                    $anio_actual = date('Y');
                     
-                    $prod = array(
-                        
-                        'amie' => trim($sheet->getCell('B'.$row->getRowIndex())),
-                        'cohorte' => trim($sheet->getCell('F'.$row->getRowIndex())),
-                        'fecha_inicio' => $fecha_inicio,
-                        'fecha_fin' => $fecha_fin,
-                        'nombres' => trim($sheet->getCell('I'.$row->getRowIndex())),
-                        'apellidos' => trim($sheet->getCell('J'.$row->getRowIndex())),
-                        'documento' => trim($sheet->getCell('K'.$row->getRowIndex())),
-                        'nacionalidad' => trim($sheet->getCell('L'.$row->getRowIndex())),
-                        'etnia' => trim($sheet->getCell('M'.$row->getRowIndex())),
-                        'fecha_nac' => $fecha_nac,
-                        'edad' => $edad,
-                        'genero' => trim($sheet->getCell('P'.$row->getRowIndex())),
-                        'discapacidad' => trim($sheet->getCell('Q'.$row->getRowIndex())),
-                        'tipo_discapacidad' => trim($sheet->getCell('R'.$row->getRowIndex())),
-                        'anio_egb' => trim($sheet->getCell('S'.$row->getRowIndex())),
-                        'tutor_apoyo' => trim($sheet->getCell('T'.$row->getRowIndex())),
-                        'docente_tutor' => trim($sheet->getCell('U'.$row->getRowIndex())),
-                        'representante' => trim($sheet->getCell('V'.$row->getRowIndex())),
-                        'documento_rep' => trim($sheet->getCell('W'.$row->getRowIndex())),
-                        'parentesto_rep' => trim($sheet->getCell('X'.$row->getRowIndex())),
-                        'nacionalidad_rep' => trim($sheet->getCell('Y'.$row->getRowIndex())),
-                        'direccion_rep' => trim($sheet->getCell('Z'.$row->getRowIndex())),
-                        'contacto_telf' => trim($sheet->getCell('AA'.$row->getRowIndex())),
-                        'email' => trim($sheet->getCell('AB'.$row->getRowIndex())),
+                     if (trim($sheet->getCell('G'.$row->getRowIndex())) != '') {
+                         $fecha_inicio = date("Y-m-d", strtotime(trim($sheet->getCell('G'.$row->getRowIndex()))));
+                         //$fecha_inicio = \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject(trim($sheet->getCell('G'.$row->getRowIndex())))->format('Y-m-d');
+                     }else{
+                         $fecha_inicio = '0000-00-00';
+                     }
+                    
+                     if (trim($sheet->getCell('H'.$row->getRowIndex())) != '') {
 
-                    );
-                    echo '<pre>'.var_export($prod, true).'</pre>';exit;
+                         $fecha_fin = date("Y-m-d", strtotime(trim($sheet->getCell('H'.$row->getRowIndex()))));
+                         //$fecha_fin = \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject(trim($sheet->getCell('H'.$row->getRowIndex())))->format('Y-m-d');
+                     }else{
+                         $fecha_fin = '0000-00-00';
+                     }
+
+                     if (trim($sheet->getCell('N'.$row->getRowIndex())) != '') {
+
+                         $fecha_nac = date("Y-m-d", strtotime(trim($sheet->getCell('N'.$row->getRowIndex()))));
+                         $anio_nac = date("Y", strtotime(trim($sheet->getCell('N'.$row->getRowIndex()))));
+                         //$fecha_nac = \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject(trim($sheet->getCell('N'.$row->getRowIndex())))->format('Y-m-d');
+
+                         $edad = $anio_actual - $anio_nac;
+                     }else{
+                         $fecha_nac = '0000-00-00';
+                         $edad = 0;
+                     }
+                     
+                     //echo '<pre>'.var_export($amie.' - '.$fecha_inicio.' - '.$fecha_fin.' - '.$fecha_nac.' - '.$edad, true).'</pre>';
+                    
+                
+                    //echo '<pre>'.var_export($centro, true).'</pre>';exit;
+                    $prod = array(
+                         'num'=> trim($sheet->getCell('A'.$row->getRowIndex())),
+                         'amie' => trim($sheet->getCell('B'.$row->getRowIndex())),
+                         'cohorte' => trim($sheet->getCell('F'.$row->getRowIndex())),
+                         'fecha_inicio' => $fecha_inicio,
+                         'fecha_fin' => $fecha_fin,
+                         'nombres' => trim($sheet->getCell('I'.$row->getRowIndex())),
+                         'apellidos' => trim($sheet->getCell('J'.$row->getRowIndex())),
+                         'documento' => trim($sheet->getCell('K'.$row->getRowIndex())),
+                         'nacionalidad' => trim($sheet->getCell('L'.$row->getRowIndex())),
+                         'etnia' => trim($sheet->getCell('M'.$row->getRowIndex())),
+                         'fecha_nac' => $fecha_nac,
+                         'edad' => $edad,
+                         'genero' => trim($sheet->getCell('P'.$row->getRowIndex())),
+                         'discapacidad' => trim($sheet->getCell('Q'.$row->getRowIndex())),
+                         'tipo_discapacidad' => trim($sheet->getCell('R'.$row->getRowIndex())),
+                         'anio_egb' => trim($sheet->getCell('S'.$row->getRowIndex())),
+                         'tutor_apoyo' => trim($sheet->getCell('T'.$row->getRowIndex())),
+                         'docente_tutor' => trim($sheet->getCell('U'.$row->getRowIndex())),
+                         'representante' => trim($sheet->getCell('V'.$row->getRowIndex())),
+                         'documento_rep' => trim($sheet->getCell('W'.$row->getRowIndex())),
+                         'parentesto_rep' => trim($sheet->getCell('X'.$row->getRowIndex())),
+                         'nacionalidad_rep' => trim($sheet->getCell('Y'.$row->getRowIndex())),
+                         'direccion_rep' => trim($sheet->getCell('Z'.$row->getRowIndex())),
+                         'contacto_telf' => trim($sheet->getCell('AA'.$row->getRowIndex())),
+                         'email' => trim($sheet->getCell('AB'.$row->getRowIndex())),
+
+                     );
+                    //echo '<pre>'.var_export($prod['num'].' - '.$prod['amie'], true).'</pre>';
                     //Verifico si existe
-                    $exist = $this->nap3Model->find($docente['documento']);
+                    $exist = $this->prod1Model->find($prod['documento']);
                     if (!isset($exist) || $exist == NULL) {
                         //muestro los datos o los grabo en base de datos
-                        //$this->nap3Model->save($docente);
+                        $this->prod1Model->save($prod);
                     } 
+                    if ($amie == 'END') {
+                        break;
+                    }
                 }
                 return redirect()->to('cargar_info_extra_view');
             }
         } 
     }
-
-    
-
-    
     
 
     public function logout(){
