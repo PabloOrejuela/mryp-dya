@@ -5,6 +5,7 @@ namespace App\Models;
 use CodeIgniter\Model;
 
 class Nap3Model extends Model {
+    
     protected $DBGroup          = 'default';
     protected $table            = 'nap3';
     protected $primaryKey       = 'idnap3';

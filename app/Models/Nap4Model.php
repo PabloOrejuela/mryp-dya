@@ -4,12 +4,12 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class CentroEducativoModel extends Model {
-    
+class Nap4Model extends Model {
+
     protected $DBGroup          = 'default';
-    protected $table            = 'centro_educativo';
-    protected $primaryKey       = 'amie';
-    protected $useAutoIncrement = false;
+    protected $table            = 'nap4';
+    protected $primaryKey       = 'id';
+    protected $useAutoIncrement = true;
     protected $insertID         = 0;
     protected $returnType       = 'object';
     protected $useSoftDeletes   = false;
@@ -17,32 +17,28 @@ class CentroEducativoModel extends Model {
     protected $allowedFields    = [
         'amie',
         'regimen',
-        'intervencion' ,
-        'observacion',
-        'clima_escolar'  ,
-        'cod_parroquia',
-        'nombre',
-        'escolarizacion',
-        'tipo_educacion',
-        'nivel_educacion'   ,
-        'sostenimiento',
-        'num_docentes',
-        'num_docentes_evaluados',
-        'res_evaluacion_docentes',
-        'cant_est',
-        'cant_est_discapacidad',
-        'proporcion_ninias_adoles',
-        'ecuatoriana' ,
-        'colombiana' ,
-        'peruana' ,
-        'venezolana' ,
-        'otros_paises' ,
-        'porcentaje_extranjeros',
-        'alumnos_docente',
-        'agua',
-        'higiene',
-        'saneamiento',
-        'prioridad',
+        'doc_tutor',
+        'docente_tutor',
+        'email_tutor',
+        'telf_tutor',
+        'etnia_tutor',
+        'documento',
+        'apellidos',
+        'nombres',
+        'nacionalidad',
+        'etnia',
+        'genero',
+        'fecha_nac',
+        'edad',
+        'discapacidad',
+        'tipo_discapacidad',
+        'documento_rep',
+        'representante',
+        'parentesto_rep',
+        'nacionalidad_rep',
+        'direccion_rep',
+        'contacto_telf',
+        'email',
     ];
 
     // Dates

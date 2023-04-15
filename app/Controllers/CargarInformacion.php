@@ -148,6 +148,119 @@ class CargarInformacion extends BaseController {
         } 
     }
 
+    public function cargar_nap2(){
+        
+        //Creo la ruta
+        $ruta = './public/excel/';
+        
+        //Recibo el archivo excel
+        $file = $this->request->getFile('hoja');
+
+        //Verifico que sea válido
+        if (!$file->isValid()) {
+            return redirect()->to('cargar_info_extra_view');
+        }else{
+            //obtengo el nombre del archivo
+            $nameFile = $file->getName();
+
+            //Muevo el archjivo del temporal a la carpeta
+            $file->move($ruta);
+
+            //Verifico que se haya movido
+            if ($file->hasMoved()) {
+                //Creo qel reader
+                $reader = new XlsxReader();
+                //$reader = new \PhpOffice\PhpSpreadsheet\Reader\Xls();
+                $reader->setReadDataOnly(true);
+
+                //leo el archivo
+                $spreadsheet = $reader->load($ruta.$nameFile);
+
+                //Determino la pestaña 
+                $sheet = $spreadsheet->getSheet(0);
+
+                //Accedo a cada fila extrayendo los datos
+                
+                foreach ($sheet->getRowIterator(4) as $row) {
+                
+                    $amie = trim($sheet->getCell('B'.$row->getRowIndex()));
+                    
+                    $centro = array(
+                        'amie' => trim($sheet->getCell('B'.$row->getRowIndex())),
+                        'idparroquia' => trim($sheet->getCell('E'.$row->getRowIndex())),
+                        'nombre' => trim($sheet->getCell('C'.$row->getRowIndex())),
+                    );
+                    
+                    //Verifico si existe
+                    $exist = $this->centroEducativoModel->find($centro['amie']);
+                    //echo '<pre>'.var_export($exist, true).'</pre>';
+                    if (!isset($exist) || $exist == NULL) {
+                        //muestro los datos o los grabo en base de datos
+                        //echo 'No existe';
+                        $this->centroEducativoModel->save($centro);
+                    }
+
+                    $anio_actual = date('Y');
+                    
+                     if (trim($sheet->getCell('L'.$row->getRowIndex())) != '') {
+
+                         $fecha_nac = date("Y-m-d", strtotime(trim($sheet->getCell('L'.$row->getRowIndex()))));
+                         $anio_nac = date("Y", strtotime(trim($sheet->getCell('L'.$row->getRowIndex()))));
+                         //$fecha_nac = \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject(trim($sheet->getCell('N'.$row->getRowIndex())))->format('Y-m-d');
+
+                         $edad = $anio_actual - $anio_nac;
+                     }else{
+                         $fecha_nac = '0000-00-00';
+                         $edad = 0;
+                     }
+                     
+                     //echo '<pre>'.var_export(trim($sheet->getCell('A'.$row->getRowIndex())).' - '.$amie.' - '.$fecha_nac.' - '.$edad, true).'</pre>';
+                    
+                
+                    //echo '<pre>'.var_export($centro, true).'</pre>';exit;
+                    $prod = array(
+                         'num'=> trim($sheet->getCell('A'.$row->getRowIndex())),
+                         'amie' => trim($sheet->getCell('B'.$row->getRowIndex())),
+                         'nombres' => trim($sheet->getCell('H'.$row->getRowIndex())),
+                         'apellidos' => trim($sheet->getCell('G'.$row->getRowIndex())),
+                         'documento' => trim($sheet->getCell('F'.$row->getRowIndex())),
+                         'nacionalidad' => trim($sheet->getCell('I'.$row->getRowIndex())),
+                         'etnia' => trim($sheet->getCell('J'.$row->getRowIndex())),
+                         'fecha_nac' => $fecha_nac,
+                         'edad' => $edad,
+                         'genero' => trim($sheet->getCell('K'.$row->getRowIndex())),
+                         'discapacidad' => trim($sheet->getCell('N'.$row->getRowIndex())),
+                         'tipo_discapacidad' => trim($sheet->getCell('O'.$row->getRowIndex())),
+                         'representante' => trim($sheet->getCell('Q'.$row->getRowIndex())),
+                         'documento_rep' => trim($sheet->getCell('P'.$row->getRowIndex())),
+                         'parentesto_rep' => trim($sheet->getCell('R'.$row->getRowIndex())),
+                         'nacionalidad_rep' => trim($sheet->getCell('S'.$row->getRowIndex())),
+                         'direccion_rep' => trim($sheet->getCell('T'.$row->getRowIndex())),
+                         'contacto_telf' => trim($sheet->getCell('U'.$row->getRowIndex())),
+                         'email' => 'email@email.com',
+
+                     );
+                    //echo '<pre>'.var_export($prod['num'].' - '.$prod['amie'], true).'</pre>';
+                    //Verifico si existe
+                    if ($amie == 'END') {
+                        break;
+                    }
+                    $exist = $this->nap2Model->find($prod['documento']);
+                    if (!isset($exist) || $exist == NULL) {
+                        
+                        //muestro los datos o los grabo en base de datos
+                        $this->nap2Model->save($prod);
+                        //echo $this->db->getLastQuery();exit;
+                        //echo 'NO existe';
+                    }
+                    
+                    
+                }
+                return redirect()->to('cargar_info_extra_view');
+            }
+        } 
+    }
+
     public function cargar_nap3(){
         
         //Creo la ruta
@@ -330,6 +443,125 @@ class CargarInformacion extends BaseController {
                     if ($amie == 'END') {
                         break;
                     }
+                }
+                return redirect()->to('cargar_info_extra_view');
+            }
+        } 
+    }
+
+    public function cargar_nap4(){
+        
+        //Creo la ruta
+        $ruta = './public/excel/';
+        
+        //Recibo el archivo excel
+        $file = $this->request->getFile('hoja');
+
+        //Verifico que sea válido
+        if (!$file->isValid()) {
+            return redirect()->to('cargar_info_extra_view');
+        }else{
+            //obtengo el nombre del archivo
+            $nameFile = $file->getName();
+
+            //Muevo el archjivo del temporal a la carpeta
+            $file->move($ruta);
+
+            //Verifico que se haya movido
+            if ($file->hasMoved()) {
+                //Creo qel reader
+                $reader = new XlsxReader();
+                //$reader = new \PhpOffice\PhpSpreadsheet\Reader\Xls();
+                $reader->setReadDataOnly(true);
+
+                //leo el archivo
+                $spreadsheet = $reader->load($ruta.$nameFile);
+
+                //Determino la pestaña 
+                $sheet = $spreadsheet->getSheet(0);
+
+                //Accedo a cada fila extrayendo los datos
+                
+                foreach ($sheet->getRowIterator(3) as $row) {
+                
+                    $amie = trim($sheet->getCell('B'.$row->getRowIndex()));
+                    
+                    $centro = array(
+                        'amie' => trim($sheet->getCell('B'.$row->getRowIndex())),
+                        'idparroquia' => trim($sheet->getCell('F'.$row->getRowIndex())),
+                        'nombre' => trim($sheet->getCell('C'.$row->getRowIndex())),
+                        'regimen' => trim($sheet->getCell('G'.$row->getRowIndex())),
+                    );
+                    
+                    //Verifico si existe
+                    $exist = $this->centroEducativoModel->find($centro['amie']);
+                    //echo '<pre>'.var_export($exist, true).'</pre>';
+                    if (!isset($exist) || $exist == NULL) {
+                        //muestro los datos o los grabo en base de datos
+                        //echo 'No existe';
+                        $this->centroEducativoModel->save($centro);
+                    }
+
+                    $anio_actual = date('Y');
+                    
+                    //Fecha de nacimiento
+                     if (trim($sheet->getCell('T'.$row->getRowIndex())) != '') {
+
+                         $fecha_nac = date("Y-m-d", strtotime(trim($sheet->getCell('T'.$row->getRowIndex()))));
+                         $anio_nac = date("Y", strtotime(trim($sheet->getCell('T'.$row->getRowIndex()))));
+                         //$fecha_nac = \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject(trim($sheet->getCell('N'.$row->getRowIndex())))->format('Y-m-d');
+
+                         $edad = $anio_actual - $anio_nac;
+                     }else{
+                         $fecha_nac = '0000-00-00';
+                         $edad = 0;
+                     }
+                     
+                     //echo '<pre>'.var_export(trim($sheet->getCell('A'.$row->getRowIndex())).' - '.$amie.' - '.$fecha_nac.' - '.$edad, true).'</pre>';
+                    
+                    //echo '<pre>'.var_export($centro, true).'</pre>';exit;
+
+                    $prod = array(
+                         'num'=> trim($sheet->getCell('A'.$row->getRowIndex())),
+                         'amie' => trim($sheet->getCell('B'.$row->getRowIndex())),
+                         'doc_tutor' => trim($sheet->getCell('H'.$row->getRowIndex())),
+                         'docente_tutor' => trim($sheet->getCell('I'.$row->getRowIndex())).' '.trim($sheet->getCell('J'.$row->getRowIndex())),
+                         'email_tutor' => trim($sheet->getCell('K'.$row->getRowIndex())),
+                         'telf_tutor' => trim($sheet->getCell('L'.$row->getRowIndex())),
+                         'etnia_tutor' => trim($sheet->getCell('M'.$row->getRowIndex())),
+                         'documento' => trim($sheet->getCell('N'.$row->getRowIndex())),
+                         'apellidos' => trim($sheet->getCell('O'.$row->getRowIndex())),
+                         'nombres' => trim($sheet->getCell('P'.$row->getRowIndex())),
+                         'nacionalidad' => trim($sheet->getCell('Q'.$row->getRowIndex())),
+                         'etnia' => trim($sheet->getCell('R'.$row->getRowIndex())),
+                         'genero' => trim($sheet->getCell('S'.$row->getRowIndex())),
+                         'fecha_nac' => $fecha_nac,
+                         'edad' => $edad,
+                         'discapacidad' => trim($sheet->getCell('V'.$row->getRowIndex())),
+                         'tipo_discapacidad' => trim($sheet->getCell('W'.$row->getRowIndex())),
+                         'documento_rep' => trim($sheet->getCell('X'.$row->getRowIndex())),
+                         'representante' => trim($sheet->getCell('Y'.$row->getRowIndex())),
+                         'parentesto_rep' => trim($sheet->getCell('Z'.$row->getRowIndex())),
+                         'nacionalidad_rep' => trim($sheet->getCell('AA'.$row->getRowIndex())),
+                         'direccion_rep' => trim($sheet->getCell('AB'.$row->getRowIndex())),
+                         'contacto_telf' => trim($sheet->getCell('AC'.$row->getRowIndex())),
+                         'email' => 'email@email.com',
+
+                     );
+                    //echo '<pre>'.var_export($prod['num'].' - '.$prod['amie'], true).'</pre>';
+                    //Verifico si existe
+                    if ($amie == 'END') {
+                        break;
+                    }
+                    $this->nap4Model->save($prod);
+                    //$exist = $this->nap4Model->find($prod['documento']);
+                    //if (!isset($exist) || $exist == NULL) {
+                        
+                        //muestro los datos o los grabo en base de datos
+                        
+                        //echo $this->db->getLastQuery();exit;
+                        //echo 'NO existe';
+                    //} 
                 }
                 return redirect()->to('cargar_info_extra_view');
             }
