@@ -4,25 +4,45 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class UsuarioModel extends Model {
-
+class CentroEducativoModel extends Model {
+    
     protected $DBGroup          = 'default';
-    protected $table            = 'usuarios';
-    protected $primaryKey       = 'id';
-    protected $useAutoIncrement = true;
+    protected $table            = 'centro_educativo';
+    protected $primaryKey       = 'amie';
+    protected $useAutoIncrement = false;
     protected $insertID         = 0;
     protected $returnType       = 'object';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
     protected $allowedFields    = [
+        'amie',
+        'regimen',
+        'intervencion' ,
+        'observacion',
+        'clima_escolar'  ,
+        'cod_parroquia',
         'nombre',
-        'user',
-        'telefono',
-        'email',
-        'password',
-        'cedula',
-        'irdol',
-        'is_logged',
+        'escolarizacion',
+        'tipo_educacion',
+        'nivel_educacion'   ,
+        'sostenimiento',
+        'num_docentes',
+        'num_docentes_evaluados',
+        'res_evaluacion_docentes',
+        'cant_est',
+        'cant_est_discapacidad',
+        'proporcion_ninias_adoles',
+        'ecuatoriana' ,
+        'colombiana' ,
+        'peruana' ,
+        'venezolana' ,
+        'otros_paises' ,
+        'porcentaje_extranjeros',
+        'alumnos_docente',
+        'agua',
+        'higiene',
+        'saneamiento',
+        'prioridad',
     ];
 
     // Dates
@@ -48,19 +68,4 @@ class UsuarioModel extends Model {
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
-
-    function _getUsuario($usuario){
-        $result = NULL;
-        $builder = $this->db->table('usuarios');
-        $builder->select('*')->where('user', $usuario['user'])->where('password', md5($usuario['password']));
-        $builder->join('roles', 'roles.id=usuarios.idrol');
-        $query = $builder->get();
-        if ($query->getResult() != null) {
-            foreach ($query->getResult() as $row) {
-                $result = $row;
-            }
-        }
-        //echo $this->db->getLastQuery();
-        return $result;
-    }
 }

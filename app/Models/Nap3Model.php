@@ -4,25 +4,29 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class UsuarioModel extends Model {
-
+class Nap3Model extends Model {
+    
     protected $DBGroup          = 'default';
-    protected $table            = 'usuarios';
-    protected $primaryKey       = 'id';
+    protected $table            = 'nap3';
+    protected $primaryKey       = 'idnap3';
     protected $useAutoIncrement = true;
     protected $insertID         = 0;
     protected $returnType       = 'object';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
     protected $allowedFields    = [
-        'nombre',
-        'user',
-        'telefono',
+        'regimen' ,
+        'subnivel',
+        'documento',
+        'apellidos',
+        'nombres',
         'email',
-        'password',
-        'cedula',
-        'irdol',
-        'is_logged',
+        'celular',
+        'autoidentificacion',
+        'genero',
+        'discapacidad',
+        'tipo',
+        'amie',
     ];
 
     // Dates
@@ -48,19 +52,4 @@ class UsuarioModel extends Model {
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
-
-    function _getUsuario($usuario){
-        $result = NULL;
-        $builder = $this->db->table('usuarios');
-        $builder->select('*')->where('user', $usuario['user'])->where('password', md5($usuario['password']));
-        $builder->join('roles', 'roles.id=usuarios.idrol');
-        $query = $builder->get();
-        if ($query->getResult() != null) {
-            foreach ($query->getResult() as $row) {
-                $result = $row;
-            }
-        }
-        //echo $this->db->getLastQuery();
-        return $result;
-    }
 }

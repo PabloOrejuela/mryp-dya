@@ -61,6 +61,7 @@ class Inicio extends BaseController {
                     'rol' => $usuario->rol,
                     'centro_educativo' => $usuario->centro_educativo,
                     'editar' => $usuario->editar,
+                    'cargar_info' => $usuario->cargar_info,
                     'reportes' => $usuario->reportes,
                     'ver_info' => $usuario->ver_info,
                     'componente_1' => $usuario->componente_1,

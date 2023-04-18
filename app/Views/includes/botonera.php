@@ -14,11 +14,16 @@
             </li>
                 <li class="menu-item hidden"><a href="<?= site_url(); ?>inicio">Inicio</a></li>
                 <?php
-                    if ($this->session->editar) {
-                        echo '<li class="menu-item hidden"><a href="'.site_url().'cargar_info_view">Cargar Información</a></li>';
+
+                    if ($this->session->editar == 1) {
+                        echo '<li class="menu-item hidden"><a href="'.site_url().'cargar_info_view">Componentes</a></li>';
                     }
 
-                    if ($this->session->reportes) {
+                    if ($this->session->editar == 1 && $this->session->cargar_info == 1) {
+                        echo '<li class="menu-item hidden"><a href="'.site_url().'cargar_info_extra_view">Cargar info</a></li>';
+                    }
+
+                    if ($this->session->reportes == 1) {
                         echo '<li class="menu-item hidden"><a href="'.site_url().'reportes_view">Reportes</a></li>';
                     }
                 ?>
