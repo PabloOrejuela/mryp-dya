@@ -86,6 +86,29 @@ class Prod1 extends BaseController {
         }
     }
 
+    public function prod_1_reg_proceso($idprod) {
+        $data['idrol'] = $this->session->idrol;
+        $data['id'] = $this->session->idusuario;
+        $data['is_logged'] = $this->session->is_logged;
+        $data['nombre'] = $this->session->nombre;
+
+        if ($data['is_logged'] == 1) {
+            
+            $data['idprod'] = $idprod;
+            $data['datos'] = $this->diagDocenteP1->_getDiagDocente($idprod);
+            $data['datos_diag_myrp'] = $this->diagMyrpP1->_getDiagMyrpP1($idprod);
+
+            //echo '<pre>'.var_export($data['datos'], true).'</pre>';exit;
+
+            $data['title']='MYRP - DYA';
+            $data['main_content']='componente1/prod1_edit_process_view';
+            return view('includes/template', $data);
+        }else{
+
+            $this->logout();
+        }
+    }
+
     public function logout(){
         //destruyo la session  y salgo
         $data['idusuario'] = $this->session->idusuario;

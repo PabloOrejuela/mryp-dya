@@ -207,3 +207,15 @@ footer .copyrights {
     font-size: 1em;
     text-align: justify;
 }
+
+.contenedor{
+    display: flex;
+    justify-content: center;
+}
+
+.edit{
+    margin: 0 auto;
+}
+.row{
+    font-size: 0.8em;
+}

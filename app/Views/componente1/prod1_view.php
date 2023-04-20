@@ -20,6 +20,7 @@
                         <th>Amie</th>
                         <th>Año EGB</th>
                         <th>Representante</th>
+                        <th>Registrar proceso</th>
                     </thead>
                 <?php
                     if (isset($componente_1) && $componente_1 != NULL) {
@@ -34,7 +35,14 @@
                                 <td>'.$value->fecha_nac.'</td>
                                 <td>'.$value->amie.'</td>
                                 <td>'.$value->anio_egb.'</td>
-                                <td>'.$value->representante.'</td>';
+                                <td>'.$value->representante.'</td>
+                                <td>
+                                    <div class="contenedor">
+                                        <a type="button" id="btn-register" href="'.site_url().'prod-1-reg-proceso/'.$value->id.'" class="edit">
+                                            <img src="'.site_url().'public/images/reg-process.png" >
+                                        </a>
+                                    </div>
+                                </td>';
                         }
                     }
                     

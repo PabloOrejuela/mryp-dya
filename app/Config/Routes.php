@@ -40,8 +40,10 @@ $routes->post('cargar-centro-educativo', 'CargarInformacion::cargar_centro_educa
 $routes->get('subirExcel_view/(:num)', 'CargarInformacion::frm_subir_excel/$1');
 
 $routes->get('prod_1', 'Prod1::index');
+$routes->get('prod_1_process', 'Prod1::frm_procesos');
 $routes->get('prod_1_edit/(:num)', 'Prod1::frm_edit/$1');
 $routes->post('prod1_update', 'Prod1::update');
+$routes->get('prod-1-reg-proceso/(:num)', 'Prod1::prod_1_reg_proceso/$1');
 
 $routes->post('cargar-prod-1', 'CargarInformacion::cargar_prod_1');
 

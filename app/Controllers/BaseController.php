@@ -17,6 +17,11 @@ use App\Models\Nap3Model;
 use App\Models\Nap4Model;
 use App\Models\CiudadesModel;
 use App\Models\Prod1Model;
+use App\Models\DiagnosticoDocenteP1Model;
+use App\Models\DiagnosticoMyrpP1Model;
+use App\Models\AsistenciaP1Model;
+use App\Models\EvalFinalP1Model;
+
 
 
 
@@ -76,6 +81,10 @@ abstract class BaseController extends Controller {
         $this->nap4Model = new Nap4Model($this->db);
         $this->ciudadesModel = new CiudadesModel($this->db);
         $this->prod1Model = new Prod1Model($this->db);
+        $this->diagDocenteP1 = new DiagnosticoDocenteP1Model($this->db);
+        $this->diagMyrpP1 = new DiagnosticoMyrpP1Model($this->db);
+        $this->asistenciaP1 = new AsistenciaP1Model($this->db);
+        $this->evalFinalP1 = new EvalFinalP1Model($this->db);
 
         // E.g.: $this->session = \Config\Services::session();
         $this->session = \Config\Services::session();
