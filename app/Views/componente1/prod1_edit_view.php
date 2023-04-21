@@ -120,9 +120,8 @@
             </div>
             <?= form_hidden('id', $datos->id);  ?>
             <button type="submit" class="btn btn-info mb-3">Actualizar</button>
-            
-            <button onclick="history.back()" class="btn btn-success mb-3">Regresar</button>
         </form>
+        <button onclick="history.back()" class="btn btn-success mb-3">Regresar</button>
     </div>
     
 </main>
