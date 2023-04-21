@@ -60,4 +60,49 @@ class AsistenciaP1Model extends Model {
         //echo $this->db->getLastQuery();
         return $result;
     }
+
+    public function _update($datos) {
+        $builder = $this->db->table($this->table);
+        if ($datos['dias_atencion'] != '0') {
+            $builder->set('dias_atencion', $datos['dias_atencion']);
+        }
+
+        if ($datos['horas_planificadas'] != '0') {
+            $builder->set('horas_planificadas', $datos['horas_planificadas']);
+        }
+        
+        if ($datos['horas_efectivas'] != '0') {
+            $builder->set('horas_efectivas', $datos['horas_efectivas']);
+        }
+
+        if ($datos['horas_perdidas'] != '0') {
+            $builder->set('horas_perdidas', $datos['horas_perdidas']);
+        }
+
+        $builder->set('idtipo', $datos['idtipo']);
+        $builder->where('idprod', $datos['idprod']);
+        $builder->update();
+    }
+
+    public function _save($datos) {
+        $builder = $this->db->table($this->table);
+        if ($datos['dias_atencion'] != '0') {
+            $builder->set('dias_atencion', $datos['dias_atencion']);
+        }
+
+        if ($datos['horas_planificadas'] != '0') {
+            $builder->set('horas_planificadas', $datos['horas_planificadas']);
+        }
+        
+        if ($datos['horas_efectivas'] != '0') {
+            $builder->set('horas_efectivas', $datos['horas_efectivas']);
+        }
+
+        if ($datos['horas_perdidas'] != '0') {
+            $builder->set('horas_perdidas', $datos['horas_perdidas']);
+        }
+        $builder->set('idtipo', $datos['idtipo']);
+        $builder->set('idprod', $datos['idprod']);
+        $builder->insert();
+    }
 }

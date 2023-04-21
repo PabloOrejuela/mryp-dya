@@ -8,126 +8,14 @@
 </style>
 <main class="container-md px-0 mb-4">
     <div class="container-fluid px-0">
-        <h3 class="mt-4" id="titulo-nombre"><?= esc($title).' : '.$prod->apellidos.' '.$prod->nombres ; ?></h3>
-        <form action="<?php echo base_url().'/prod1-diagnostico-update';?>" method="post">
+        <h3 class="mt-4" id="titulo-nombre"><?= esc($title).' - EVALUACION FINAL DE '.$datos->apellidos.' '.$datos->nombres; ?></h3>
+        <form action="<?php echo base_url().'/prod1-eval-update';?>" method="post">
             <?= session()->getFlashdata('error'); ?>
             <?= csrf_field(); ?>
             <div class="card mb-4">
                 <div class="card-body">
                     <div class="row">
-                        <h3 class="mt-3"><?= esc ('Diagnóstico Docente'); ?></h3>
-                        <div class="col-md-4 mb-2">
-                            <label for="escritura">Escritura:</label>
-                            <div class="col-sm-6">
-                                <select 
-                                    class="form-select" 
-                                    aria-label="Default select example" 
-                                    name="escritura" 
-                                    id="escritura"  
-                                >
-                                <?php
-                                    if ($datos != NULL) {
-                                        if ($datos->escritura == 'SI') {
-                                            echo '<option value="SI" selected>SI</option>
-                                                    <option value="NO">NO</option>';
-                                        }elseif ($datos->escritura == 'NO') {
-                                            echo '<option value="SI">SI</option>
-                                                    <option value="NO" selected>NO</option>';
-                                        }elseif ($datos->escritura == NULL || $datos->escritura == '0') {
-                                            echo '<option value="NULL" selected>Registrar dato</option>
-                                                <option value="SI">SI</option>
-                                                <option value="NO">NO</option>';
-                                        }
-                                    }else{
-                                        echo '<option value="NULL" selected>Registrar dato</option>
-                                                <option value="SI">SI</option>
-                                                <option value="NO">NO</option>';
-                                    }
-                                    
-                                ?>
-                                </select>
-                                <p id="error-message"><?= session('errors.idmetodo_pago');?> </p>
-                            </div>
-                        </div>  
-                        <div class="col-md-4 mb-2">
-                            <label for="lectura">Lectura:</label>
-                            <div class="col-sm-6">
-                                <select 
-                                    class="form-select" 
-                                    aria-label="Default select example" 
-                                    name="lectura" 
-                                    id="lectura"  
-                                >
-                                <?php
-                                    if ($datos != NULL) {
-                                        if ($datos->lectura == 'SI') {
-                                            echo '<option value="SI" selected>SI</option>
-                                                    <option value="NO">NO</option>';
-                                        }elseif ($datos->lectura == 'NO') {
-                                            echo '<option value="SI">SI</option>
-                                                    <option value="NO" selected>NO</option>';
-                                        }elseif ($datos->lectura == NULL || $datos->lectura == '0') {
-                                            echo '<option value="NULL" selected>Registrar dato</option>
-                                                    <option value="SI">SI</option>
-                                                    <option value="NO">NO</option>';
-                                        }
-
-                                    }else{
-                                        echo '<option value="NULL" selected>Registrar dato</option>
-                                                <option value="SI">SI</option>
-                                                <option value="NO">NO</option>';
-                                    }
-                                    
-                                ?>
-                                </select>
-                                <p id="error-message"><?= session('errors.idmetodo_pago');?> </p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                <div class="col-md-4 mb-2">
-                    <label for="lectura">Matemática:</label>
-                    <div class="col-sm-6">
-                        <select 
-                            class="form-select" 
-                            aria-label="Default select example" 
-                            name="matematica" 
-                            id="matematica"  
-                        >
-                        <?php
-                            if ($datos != NULL) {
-                                if ($datos->matematica == 'SI') {
-                                    echo '<option value="SI" selected>SI</option>
-                                            <option value="NO">NO</option>';
-                                }elseif ($datos->matematica == 'NO') {
-                                    echo '<option value="SI">SI</option>
-                                            <option value="NO" selected>NO</option>';
-                                }elseif($datos->matematica == NULL || $datos->matematica == '0'){
-                                    echo '<option value="NULL" selected>Registrar dato</option>
-                                            <option value="SI">SI</option>
-                                            <option value="NO">NO</option>';
-                                }
-                            }else{
-                                echo '<option value="NULL" selected>Registrar dato</option>
-                                        <option value="SI">SI</option>
-                                        <option value="NO">NO</option>';
-                            }
-                            
-                        ?>
-                        </select>
-                        <p id="error-message"><?= session('errors.idmetodo_pago');?> </p>
-                    </div>
-                </div>
-                <div class="col-md-4 mb-2">
-                    
-                </div>
-            </div>
-                </div>
-            </div>
-            <div class="card mb-4">
-                <div class="card-body">
-                    <div class="row">
-                        <h3 class="mt-3"><?= esc ('Diagnóstico MYRP'); ?></h3>
+                        <h3 class="mt-3"><?= esc ('Evaluación'); ?></h3>
                         
                         <div class="col-md-4 mb-2">
                             <label for="apoyo">Necesitó apoyo consigna lectora (S,N):</label>
@@ -139,14 +27,14 @@
                                     id="necesito_apoyo"  
                                 >
                                 <?php
-                                    if ($datos_diag_myrp != NULL) {
-                                        if ($datos_diag_myrp->necesito_apoyo == 'SI') {
+                                    if ($eval_final != NULL) {
+                                        if ($eval_final->necesito_apoyo == 'SI') {
                                             echo '<option value="SI" selected>SI</option>
                                                     <option value="NO">NO</option>';
-                                        }elseif ($datos_diag_myrp->necesito_apoyo == 'NO') {
+                                        }elseif ($eval_final->necesito_apoyo == 'NO') {
                                             echo '<option value="SI">SI</option>
                                                     <option value="NO" selected>NO</option>';
-                                        }elseif ($datos_diag_myrp->necesito_apoyo == NULL || $datos_diag_myrp->necesito_apoyo == '0') {
+                                        }elseif ($eval_final->necesito_apoyo == NULL || $eval_final->necesito_apoyo == '0') {
                                             echo '<option value="NULL" selected>Registrar dato</option>
                                                     <option value="SI">SI</option>
                                                     <option value="NO">NO</option>';
@@ -166,8 +54,8 @@
                             <label for="observacion">Observación durante la aplicación:</label>
                             <div class="col-sm-6">
                                 <?php
-                                    if (isset($datos_diag_myrp->observacion) && $datos_diag_myrp->observacion != null && $datos_diag_myrp->observacion != '') {
-                                        echo '<textarea name="observacion" id="observacion" cols="30" rows="3">'.$datos_diag_myrp->observacion.'</textarea>';
+                                    if (isset($eval_final->observacion) && $eval_final->observacion != null && $eval_final->observacion != '') {
+                                        echo '<textarea name="observacion" id="observacion" cols="30" rows="3">'.$eval_final->observacion.'</textarea>';
                                     }else{
                                         echo '<textarea name="observacion" id="observacion" cols="30" rows="3"></textarea>';
                                     }
@@ -191,14 +79,14 @@
                                     id="p1_comprension_lectora"  
                                 >
                                 <?php
-                                    if ($datos_diag_myrp != NULL) {
-                                        if ($datos_diag_myrp->p1_comprension_lectora == 'A') {
+                                    if ($eval_final != NULL) {
+                                        if ($eval_final->p1_comprension_lectora == 'A') {
                                             echo '<option value="A" selected>A</option>
                                                     <option value="B">B</option>';
-                                        }elseif ($datos_diag_myrp->p1_comprension_lectora == 'B') {
+                                        }elseif ($eval_final->p1_comprension_lectora == 'B') {
                                             echo '<option value="A">A</option>
                                                     <option value="B" selected>B</option>';
-                                        }elseif ($datos_diag_myrp->p1_comprension_lectora == NULL || $datos_diag_myrp->p1_comprension_lectora == '0') {
+                                        }elseif ($eval_final->p1_comprension_lectora == NULL || $eval_final->p1_comprension_lectora == '0') {
                                             echo '<option value="NULL" selected>Registrar dato</option>
                                                     <option value="A">A</option>
                                                     <option value="B">B</option>';
@@ -224,14 +112,14 @@
                                     id="p1_inteligibilidad"  
                                 >
                                 <?php
-                                    if ($datos_diag_myrp != NULL) {
-                                        if ($datos_diag_myrp->p1_inteligibilidad == 'A') {
+                                    if ($eval_final != NULL) {
+                                        if ($eval_final->p1_inteligibilidad == 'A') {
                                             echo '<option value="A" selected>A</option>
                                                     <option value="B">B</option>';
-                                        }elseif ($datos_diag_myrp->p1_inteligibilidad == 'B') {
+                                        }elseif ($eval_final->p1_inteligibilidad == 'B') {
                                             echo '<option value="A">A</option>
                                                     <option value="B" selected>B</option>';
-                                        }elseif ($datos_diag_myrp->p1_inteligibilidad == NULL || $datos_diag_myrp->p1_inteligibilidad == '0') {
+                                        }elseif ($eval_final->p1_inteligibilidad == NULL || $eval_final->p1_inteligibilidad == '0') {
                                             echo '<option value="NULL" selected>Registrar dato</option>
                                                     <option value="A">A</option>
                                                     <option value="B">B</option>';
@@ -264,14 +152,14 @@
                                     id="p2_comprension_lectora"  
                                 >
                                 <?php
-                                    if ($datos_diag_myrp != NULL) {
-                                        if ($datos_diag_myrp->p2_comprension_lectora == 'A') {
+                                    if ($eval_final != NULL) {
+                                        if ($eval_final->p2_comprension_lectora == 'A') {
                                             echo '<option value="A" selected>A</option>
                                                     <option value="B">B</option>';
-                                        }elseif ($datos_diag_myrp->p2_comprension_lectora == 'B') {
+                                        }elseif ($eval_final->p2_comprension_lectora == 'B') {
                                             echo '<option value="A">A</option>
                                                     <option value="B" selected>B</option>';
-                                        }elseif ($datos_diag_myrp->p2_comprension_lectora == NULL || $datos_diag_myrp->p2_comprension_lectora == '0') {
+                                        }elseif ($eval_final->p2_comprension_lectora == NULL || $eval_final->p2_comprension_lectora == '0') {
                                             echo '<option value="NULL" selected>Registrar dato</option>
                                                     <option value="A">A</option>
                                                     <option value="B">B</option>';
@@ -291,8 +179,8 @@
                             <label for="p2_descripcion_dibujo">Descripción del dibujo:</label>
                             <div class="col-sm-6">
                                 <?php
-                                    if (isset($datos_diag_myrp->p2_descripcion_dibujo) && $datos_diag_myrp->p2_descripcion_dibujo != null && $datos_diag_myrp->p2_descripcion_dibujo != '') {
-                                        echo '<textarea name="p2_descripcion_dibujo" id="" cols="30" rows="3">'.$datos_diag_myrp->p2_descripcion_dibujo.'</textarea>';
+                                    if (isset($eval_final->p2_descripcion_dibujo) && $eval_final->p2_descripcion_dibujo != null && $eval_final->p2_descripcion_dibujo != '') {
+                                        echo '<textarea name="p2_descripcion_dibujo" id="" cols="30" rows="3">'.$eval_final->p2_descripcion_dibujo.'</textarea>';
                                     }else{
                                         echo '<textarea name="p2_descripcion_dibujo" id="" cols="30" rows="3"></textarea>';
                                     }
@@ -316,20 +204,20 @@
                                     id="p3_comprension_lectora"  
                                 >
                                 <?php
-                                    if ($datos_diag_myrp != NULL) {
-                                        if ($datos_diag_myrp->p3_comprension_lectora == 'A') {
+                                    if ($eval_final != NULL) {
+                                        if ($eval_final->p3_comprension_lectora == 'A') {
                                             echo '<option value="A" selected>A</option>
                                                     <option value="B">B</option>
                                                     <option value="C">C</option>';
-                                        }elseif ($datos_diag_myrp->p3_comprension_lectora == 'B') {
+                                        }elseif ($eval_final->p3_comprension_lectora == 'B') {
                                             echo '<option value="A">A</option>
                                                     <option value="B" selected>B</option>
                                                     <option value="C">C</option>';
-                                        }elseif ($datos_diag_myrp->p3_comprension_lectora == 'C') {
+                                        }elseif ($eval_final->p3_comprension_lectora == 'C') {
                                             echo '<option value="A">A</option>
                                                     <option value="B">B</option>
                                                     <option value="C" selected>C</option>';
-                                        }elseif ($datos_diag_myrp->p3_comprension_lectora == NULL || $datos_diag_myrp->p3_comprension_lectora == '0') {
+                                        }elseif ($eval_final->p3_comprension_lectora == NULL || $eval_final->p3_comprension_lectora == '0') {
                                             echo '<option value="NULL" selected>Registrar dato</option>
                                                     <option value="A">A</option>
                                                     <option value="B">B</option>
@@ -357,20 +245,20 @@
                                     id="p3_inteligibilidad"  
                                 >
                                 <?php
-                                    if ($datos_diag_myrp != NULL) {
-                                        if ($datos_diag_myrp->p3_inteligibilidad == 'A') {
+                                    if ($eval_final != NULL) {
+                                        if ($eval_final->p3_inteligibilidad == 'A') {
                                             echo '<option value="A" selected>A</option>
                                                     <option value="B">B</option>
                                                     <option value="C">C</option>';
-                                        }elseif ($datos_diag_myrp->p3_inteligibilidad == 'B') {
+                                        }elseif ($eval_final->p3_inteligibilidad == 'B') {
                                             echo '<option value="A">A</option>
                                                     <option value="B" selected>B</option>
                                                     <option value="C">C</option>';
-                                        }elseif ($datos_diag_myrp->p3_inteligibilidad == 'C') {
+                                        }elseif ($eval_final->p3_inteligibilidad == 'C') {
                                             echo '<option value="A">A</option>
                                                     <option value="B">B</option>
                                                     <option value="C" selected>C</option>';
-                                        }elseif ($datos_diag_myrp->p3_inteligibilidad == NULL || $datos_diag_myrp->p3_inteligibilidad == '0') {
+                                        }elseif ($eval_final->p3_inteligibilidad == NULL || $eval_final->p3_inteligibilidad == '0') {
                                             echo '<option value="NULL" selected>Registrar dato</option>
                                                     <option value="A">A</option>
                                                     <option value="B">B</option>
@@ -400,28 +288,28 @@
                                     id="p3_coherencia"  
                                 >
                                 <?php
-                                    if ($datos_diag_myrp != NULL) {
-                                        if ($datos_diag_myrp->p3_coherencia == 'A') {
+                                    if ($eval_final != NULL) {
+                                        if ($eval_final->p3_coherencia == 'A') {
                                             echo '<option value="A" selected>A</option>
                                                     <option value="B">B</option>
                                                     <option value="C">C</option>
                                                     <option value="D">D</option>';
-                                        }elseif ($datos_diag_myrp->p3_coherencia == 'B') {
+                                        }elseif ($eval_final->p3_coherencia == 'B') {
                                             echo '<option value="A">A</option>
                                                     <option value="B" selected>B</option>
                                                     <option value="C">C</option>
                                                     <option value="D">D</option>';
-                                        }elseif ($datos_diag_myrp->p3_coherencia == 'C') {
+                                        }elseif ($eval_final->p3_coherencia == 'C') {
                                             echo '<option value="A">A</option>
                                                     <option value="B">B</option>
                                                     <option value="C" selected>C</option>
                                                     <option value="D" >D</option>';
-                                        }elseif ($datos_diag_myrp->p3_coherencia == 'D') {
+                                        }elseif ($eval_final->p3_coherencia == 'D') {
                                             echo '<option value="A">A</option>
                                                     <option value="B">B</option>
                                                     <option value="C" >C</option>
                                                     <option value="D" selected>D</option>';
-                                        }elseif ($datos_diag_myrp->p3_coherencia == NULL || $datos_diag_myrp->p3_coherencia == '0') {
+                                        }elseif ($eval_final->p3_coherencia == NULL || $eval_final->p3_coherencia == '0') {
                                             echo '<option value="NULL" selected>Registrar dato</option>
                                                     <option value="A">A</option>
                                                     <option value="B">B</option>
@@ -451,28 +339,28 @@
                                     id="p3_sintaxis"  
                                 >
                                 <?php
-                                    if ($datos_diag_myrp != NULL) {
-                                        if ($datos_diag_myrp->p3_sintaxis == 'A') {
+                                    if ($eval_final != NULL) {
+                                        if ($eval_final->p3_sintaxis == 'A') {
                                             echo '<option value="A" selected>A</option>
                                                     <option value="B">B</option>
                                                     <option value="C">C</option>
                                                     <option value="D">D</option>';
-                                        }elseif ($datos_diag_myrp->p3_sintaxis == 'B') {
+                                        }elseif ($eval_final->p3_sintaxis == 'B') {
                                             echo '<option value="A">A</option>
                                                     <option value="B" selected>B</option>
                                                     <option value="C">C</option>
                                                     <option value="D">D</option>';
-                                        }elseif ($datos_diag_myrp->p3_sintaxis == 'C') {
+                                        }elseif ($eval_final->p3_sintaxis == 'C') {
                                             echo '<option value="A">A</option>
                                                     <option value="B">B</option>
                                                     <option value="C" selected>C</option>
                                                     <option value="D" >D</option>';
-                                        }elseif ($datos_diag_myrp->p3_sintaxis == 'D') {
+                                        }elseif ($eval_final->p3_sintaxis == 'D') {
                                             echo '<option value="A">A</option>
                                                     <option value="B">B</option>
                                                     <option value="C" >C</option>
                                                     <option value="D" selected>D</option>';
-                                        }elseif ($datos_diag_myrp->p3_sintaxis == NULL || $datos_diag_myrp->p3_sintaxis == '0') {
+                                        }elseif ($eval_final->p3_sintaxis == NULL || $eval_final->p3_sintaxis == '0') {
                                             echo '<option value="NULL" selected>Registrar dato</option>
                                                     <option value="A">A</option>
                                                     <option value="B">B</option>
@@ -502,14 +390,14 @@
                                     id="p3_estandares_egb_sub2y3"  
                                 >
                                 <?php
-                                    if ($datos_diag_myrp != NULL) {
-                                        if ($datos_diag_myrp->p3_estandares_egb_sub2y3 == 'A') {
+                                    if ($eval_final != NULL) {
+                                        if ($eval_final->p3_estandares_egb_sub2y3 == 'A') {
                                             echo '<option value="A" selected>A</option>
                                                     <option value="B">B</option>';
-                                        }elseif ($datos_diag_myrp->p3_estandares_egb_sub2y3 == 'B') {
+                                        }elseif ($eval_final->p3_estandares_egb_sub2y3 == 'B') {
                                             echo '<option value="A">A</option>
                                                     <option value="B" selected>B</option>';
-                                        }elseif ($datos_diag_myrp->p3_estandares_egb_sub2y3 == NULL || $datos_diag_myrp->p3_estandares_egb_sub2y3 == '0') {
+                                        }elseif ($eval_final->p3_estandares_egb_sub2y3 == NULL || $eval_final->p3_estandares_egb_sub2y3 == '0') {
                                             echo '<option value="NULL" selected>Registrar dato</option>
                                                     <option value="A">A</option>
                                                     <option value="B">B</option>';
@@ -542,20 +430,20 @@
                                     id="p4_comprension_lectora"  
                                 >
                                 <?php
-                                    if ($datos_diag_myrp != NULL) {
-                                        if ($datos_diag_myrp->p4_comprension_lectora == 'A') {
+                                    if ($eval_final != NULL) {
+                                        if ($eval_final->p4_comprension_lectora == 'A') {
                                             echo '<option value="A" selected>A</option>
                                                     <option value="B">B</option>
                                                     <option value="C">C</option>';
-                                        }elseif ($datos_diag_myrp->p4_comprension_lectora == 'B') {
+                                        }elseif ($eval_final->p4_comprension_lectora == 'B') {
                                             echo '<option value="A">A</option>
                                                     <option value="B" selected>B</option>
                                                     <option value="C">C</option>';
-                                        }elseif ($datos_diag_myrp->p4_comprension_lectora == 'C') {
+                                        }elseif ($eval_final->p4_comprension_lectora == 'C') {
                                             echo '<option value="A">A</option>
                                                     <option value="B">B</option>
                                                     <option value="C" selected>C</option>';
-                                        }elseif ($datos_diag_myrp->p4_comprension_lectora == NULL || $datos_diag_myrp->p4_comprension_lectora == '0') {
+                                        }elseif ($eval_final->p4_comprension_lectora == NULL || $eval_final->p4_comprension_lectora == '0') {
                                             echo '<option value="NULL" selected>Registrar dato</option>
                                                     <option value="A">A</option>
                                                     <option value="B">B</option>
@@ -583,20 +471,20 @@
                                     id="p4_inteligibilidad"  
                                 >
                                 <?php
-                                    if ($datos_diag_myrp != NULL) {
-                                        if ($datos_diag_myrp->p4_inteligibilidad == 'A') {
+                                    if ($eval_final != NULL) {
+                                        if ($eval_final->p4_inteligibilidad == 'A') {
                                             echo '<option value="A" selected>A</option>
                                                     <option value="B">B</option>
                                                     <option value="C">C</option>';
-                                        }elseif ($datos_diag_myrp->p4_inteligibilidad == 'B') {
+                                        }elseif ($eval_final->p4_inteligibilidad == 'B') {
                                             echo '<option value="A">A</option>
                                                     <option value="B" selected>B</option>
                                                     <option value="C">C</option>';
-                                        }elseif ($datos_diag_myrp->p4_inteligibilidad == 'C') {
+                                        }elseif ($eval_final->p4_inteligibilidad == 'C') {
                                             echo '<option value="A">A</option>
                                                     <option value="B">B</option>
                                                     <option value="C" selected>C</option>';
-                                        }elseif ($datos_diag_myrp->p4_inteligibilidad == NULL || $datos_diag_myrp->p4_inteligibilidad == '0') {
+                                        }elseif ($eval_final->p4_inteligibilidad == NULL || $eval_final->p4_inteligibilidad == '0') {
                                             echo '<option value="NULL" selected>Registrar dato</option>
                                                     <option value="A">A</option>
                                                     <option value="B">B</option>
@@ -626,28 +514,28 @@
                                     id="p4_coherencia"  
                                 >
                                 <?php
-                                    if ($datos_diag_myrp != NULL) {
-                                        if ($datos_diag_myrp->p4_coherencia == 'A') {
+                                    if ($eval_final != NULL) {
+                                        if ($eval_final->p4_coherencia == 'A') {
                                             echo '<option value="A" selected>A</option>
                                                     <option value="B">B</option>
                                                     <option value="C">C</option>
                                                     <option value="D">D</option>';
-                                        }elseif ($datos_diag_myrp->p4_coherencia == 'B') {
+                                        }elseif ($eval_final->p4_coherencia == 'B') {
                                             echo '<option value="A">A</option>
                                                     <option value="B" selected>B</option>
                                                     <option value="C">C</option>
                                                     <option value="D">D</option>';
-                                        }elseif ($datos_diag_myrp->p4_coherencia == 'C') {
+                                        }elseif ($eval_final->p4_coherencia == 'C') {
                                             echo '<option value="A">A</option>
                                                     <option value="B">B</option>
                                                     <option value="C" selected>C</option>
                                                     <option value="D" >D</option>';
-                                        }elseif ($datos_diag_myrp->p4_coherencia == 'D') {
+                                        }elseif ($eval_final->p4_coherencia == 'D') {
                                             echo '<option value="A">A</option>
                                                     <option value="B">B</option>
                                                     <option value="C" >C</option>
                                                     <option value="D" selected>D</option>';
-                                        }elseif ($datos_diag_myrp->p4_coherencia == NULL || $datos_diag_myrp->p4_coherencia == '0') {
+                                        }elseif ($eval_final->p4_coherencia == NULL || $eval_final->p4_coherencia == '0') {
                                             echo '<option value="NULL" selected>Registrar dato</option>
                                                     <option value="A">A</option>
                                                     <option value="B">B</option>
@@ -677,28 +565,28 @@
                                     id="p4_sintaxis"  
                                 >
                                 <?php
-                                    if ($datos_diag_myrp != NULL) {
-                                        if ($datos_diag_myrp->p4_sintaxis == 'A') {
+                                    if ($eval_final != NULL) {
+                                        if ($eval_final->p4_sintaxis == 'A') {
                                             echo '<option value="A" selected>A</option>
                                                     <option value="B">B</option>
                                                     <option value="C">C</option>
                                                     <option value="D">D</option>';
-                                        }elseif ($datos_diag_myrp->p4_sintaxis == 'B') {
+                                        }elseif ($eval_final->p4_sintaxis == 'B') {
                                             echo '<option value="A">A</option>
                                                     <option value="B" selected>B</option>
                                                     <option value="C">C</option>
                                                     <option value="D">D</option>';
-                                        }elseif ($datos_diag_myrp->p4_sintaxis == 'C') {
+                                        }elseif ($eval_final->p4_sintaxis == 'C') {
                                             echo '<option value="A">A</option>
                                                     <option value="B">B</option>
                                                     <option value="C" selected>C</option>
                                                     <option value="D" >D</option>';
-                                        }elseif ($datos_diag_myrp->p4_sintaxis == 'D') {
+                                        }elseif ($eval_final->p4_sintaxis == 'D') {
                                             echo '<option value="A">A</option>
                                                     <option value="B">B</option>
                                                     <option value="C" >C</option>
                                                     <option value="D" selected>D</option>';
-                                        }elseif ($datos_diag_myrp->p4_sintaxis == NULL || $datos_diag_myrp->p4_sintaxis == '0') {
+                                        }elseif ($eval_final->p4_sintaxis == NULL || $eval_final->p4_sintaxis == '0') {
                                             echo '<option value="NULL" selected>Registrar dato</option>
                                                     <option value="A">A</option>
                                                     <option value="B">B</option>
@@ -728,14 +616,14 @@
                                     id="p4_estandares_egb_sub2y3"  
                                 >
                                 <?php
-                                    if ($datos_diag_myrp != NULL) {
-                                        if ($datos_diag_myrp->p4_estandares_egb_sub2y3 == 'A') {
+                                    if ($eval_final != NULL) {
+                                        if ($eval_final->p4_estandares_egb_sub2y3 == 'A') {
                                             echo '<option value="A" selected>A</option>
                                                     <option value="B">B</option>';
-                                        }elseif ($datos_diag_myrp->p4_estandares_egb_sub2y3 == 'B') {
+                                        }elseif ($eval_final->p4_estandares_egb_sub2y3 == 'B') {
                                             echo '<option value="A">A</option>
                                                     <option value="B" selected>B</option>';
-                                        }elseif ($datos_diag_myrp->p4_estandares_egb_sub2y3 == NULL || $datos_diag_myrp->p4_estandares_egb_sub2y3 == '0') {
+                                        }elseif ($eval_final->p4_estandares_egb_sub2y3 == NULL || $eval_final->p4_estandares_egb_sub2y3 == '0') {
                                             echo '<option value="NULL" selected>Registrar dato</option>
                                                     <option value="A">A</option>
                                                     <option value="B">B</option>';
@@ -756,7 +644,6 @@
             </div>
             
             <?= form_hidden('id', $idprod);  ?>
-            <?= form_hidden('idtipo', 1);  ?>
             <button type="submit" class="btn btn-info mb-3">Actualizar</button>
             
             <button onclick="history.back()" class="btn btn-success mb-3">Regresar</button>
