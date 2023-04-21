@@ -5,7 +5,7 @@
         <div class="card mb-4">
             <div class="card-header">
                 <i class="fa-solid fa-cash-register"></i>
-                <?= esc("Componente 1 - Click en el NOMBRE para ver y editar datos del registro"); ?>
+                <?= esc("Componente 1 - Ingreso y edición de variables de diagnóstico, proceso y evaluación"); ?>
             </div>
             <div class="card-body"> 
                 <table class="table table-bordered table-striped table-hover" id="table">
@@ -13,13 +13,10 @@
                         <th>No.</th>
                         <th>Nombre</th>
                         <th>Documento</th>
-                        <th>Edad</th>
-                        <th>Género</th>
-                        <th>Discapacidad</th>
-                        <th>Fecha Nac</th>
                         <th>Amie</th>
-                        <th>Año EGB</th>
-                        <th>Representante</th>
+                        <th>Registro de Diagnosticos</th>
+                        <th>Registro de Procesos</th>
+                        <th>Evaluación</th>
                     </thead>
                     <tbody>
                     <?php
@@ -27,15 +24,30 @@
                             foreach ($componente_1 as $key => $value) {
                                 echo '<tr>
                                     <td>'.$value->id.'</td>
-                                    <td><a href="'.site_url().'prod_1_edit/'.$value->id.'">'.$value->nombres.' '.$value->apellidos.'</a></td>
+                                    <td>'.$value->nombres.' '.$value->apellidos.'</td>
                                     <td>'.$value->documento.'</td>
-                                    <td>'.$value->edad.'</td>
-                                    <td>'.$value->genero.'</td>
-                                    <td>'.$value->discapacidad.'</td>
-                                    <td>'.$value->fecha_nac.'</td>
                                     <td>'.$value->amie.'</td>
-                                    <td>'.$value->anio_egb.'</td>
-                                    <td>'.$value->representante.'</td>';
+                                    <td>
+                                        <div class="contenedor">
+                                            <a type="button" id="btn-register" href="'.site_url().'prod-1-reg-diagnostico/'.$value->id.'" class="edit">
+                                                <img src="'.site_url().'public/images/test.png" >
+                                            </a>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="contenedor">
+                                            <a type="button" id="btn-register" href="'.site_url().'prod-1-reg-proceso/'.$value->id.'" class="edit">
+                                                <img src="'.site_url().'public/images/reg-process.png" >
+                                            </a>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="contenedor">
+                                            <a type="button" id="btn-register" href="'.site_url().'prod-1-reg-eval-final/'.$value->id.'" class="edit">
+                                                <img src="'.site_url().'public/images/eval-final.png" >
+                                            </a>
+                                        </div>
+                                    </td></tr>';
                             }
                         }
                         

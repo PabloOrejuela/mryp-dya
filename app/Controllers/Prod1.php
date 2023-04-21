@@ -86,7 +86,134 @@ class Prod1 extends BaseController {
         }
     }
 
+    public function asistencia_update() {
+        $data['idrol'] = $this->session->idrol;
+        $data['id'] = $this->session->idusuario;
+        $data['is_logged'] = $this->session->is_logged;
+        $data['nombre'] = $this->session->nombre;
+
+        if ($data['is_logged'] == 1) {
+            $id = $this->request->getPostGet('id');
+            $producto_1 = array(
+                'nombres' => strtoupper($this->request->getPostGet('nombres')),
+                'apellidos' => strtoupper($this->request->getPostGet('apellidos')),
+                'documento' => strtoupper($this->request->getPostGet('documento')),
+                'nacionalidad' => strtoupper($this->request->getPostGet('nacionalidad')),
+                'etnia' => strtoupper($this->request->getPostGet('etnia')),
+                'fecha_nac' => $this->request->getPostGet('fecha_nac'),
+                'edad' => strtoupper($this->request->getPostGet('edad')),
+                'genero' => strtoupper($this->request->getPostGet('genero')),
+                'discapacidad' => strtoupper($this->request->getPostGet('discapacidad')),
+                'tipo_discapacidad' => strtoupper($this->request->getPostGet('tipo_discapacidad')),
+                'anio_egb' => $this->request->getPostGet('anio_egb'),
+                'tutor_apoyo' => strtoupper($this->request->getPostGet('tutor_apoyo')),
+                'docente_tutor' => strtoupper($this->request->getPostGet('docente_tutor')),
+                'representante' => strtoupper($this->request->getPostGet('representante')),
+                'documento_rep' => strtoupper($this->request->getPostGet('documento_rep')),
+                'parentesto_rep' => strtoupper($this->request->getPostGet('parentesto_rep')),
+                'nacionalidad_rep' => strtoupper($this->request->getPostGet('nacionalidad_rep')),
+                'direccion_rep' => strtoupper($this->request->getPostGet('direccion_rep')),
+                'contacto_telf' => $this->request->getPostGet('contacto_telf'),
+                'email' => $this->request->getPostGet('email'),
+            );
+
+            //$this->prod1Model->update($id, $producto_1);
+
+            return redirect()->to('prod_1');
+        }else{
+
+            $this->logout();
+        }
+    }
+
+    public function diagnostico_update() {
+        $data['idrol'] = $this->session->idrol;
+        $data['id'] = $this->session->idusuario;
+        $data['is_logged'] = $this->session->is_logged;
+        $data['nombre'] = $this->session->nombre;
+
+        if ($data['is_logged'] == 1) {
+
+            $p1_diagnostico_docente = array(
+                'idtipo' => $this->request->getPostGet('idtipo'),
+                'idprod' => $this->request->getPostGet('id'),
+                'escritura' => strtoupper($this->request->getPostGet('escritura')),
+                'lectura' => strtoupper($this->request->getPostGet('lectura')),
+                'matematica' => strtoupper($this->request->getPostGet('matematica')),
+            );
+
+            $p1_diagnostico_myrp = array(
+                'idtipo' => $this->request->getPostGet('idtipo'),
+                'idprod' => $this->request->getPostGet('id'),
+                'necesito_apoyo' => $this->request->getPostGet('necesito_apoyo'),
+                'observacion' => $this->request->getPostGet('observacion'),
+                'p1_comprension_lectora' => $this->request->getPostGet('p1_comprension_lectora'),
+                'p1_inteligibilidad' => $this->request->getPostGet('p1_inteligibilidad'),
+                'p2_comprension_lectora' => $this->request->getPostGet('p2_comprension_lectora'),
+                'p2_descripcion_dibujo' => $this->request->getPostGet('p2_descripcion_dibujo'),
+                'p3_comprension_lectora' => $this->request->getPostGet('p3_comprension_lectora'),
+                'p3_inteligibilidad' => $this->request->getPostGet('p3_inteligibilidad'),
+                'p3_coherencia' => $this->request->getPostGet('p3_coherencia'),
+                'p3_sintaxis' => $this->request->getPostGet('p3_sintaxis'),
+                'p3_estandares_egb_sub2y3' => $this->request->getPostGet('p3_estandares_egb_sub2y3'),
+                'p4_comprension_lectora' => $this->request->getPostGet('p4_comprension_lectora'),
+                'p4_inteligibilidad' => $this->request->getPostGet('p4_inteligibilidad'),
+                'p4_coherencia' => $this->request->getPostGet('p4_coherencia'),
+                'p4_sintaxis' => $this->request->getPostGet('p4_sintaxis'),
+                'p4_estandares_egb_sub2y3' => $this->request->getPostGet('p4_estandares_egb_sub2y3'),
+            );
+
+            $hay = $this->diagDocenteP1->_getDiagDocente($p1_diagnostico_docente['idprod']);
+            if ($hay) {
+                //Actualizo
+                $this->diagDocenteP1->_update($p1_diagnostico_docente);
+            }else{
+                //Grabo
+                $this->diagDocenteP1->_save($p1_diagnostico_docente);
+            }
+
+            $hay_diagnostico_myrp = $this->diagMyrpP1->_getDiagMyrpP1($p1_diagnostico_myrp['idprod']);
+            //echo '<pre>'.var_export($hay_diagnostico_myrp, true).'</pre>';exit;
+            if ($hay_diagnostico_myrp) {
+                //Actualizo
+                $this->diagMyrpP1->_update($p1_diagnostico_myrp);
+            }else{
+                //Grabo
+                $this->diagMyrpP1->_save($p1_diagnostico_myrp);
+            }
+            
+        
+            return redirect()->to('prod_1_process');
+        }else{
+
+            $this->logout();
+        }
+    }
+
     public function prod_1_reg_proceso($idprod) {
+        $data['idrol'] = $this->session->idrol;
+        $data['id'] = $this->session->idusuario;
+        $data['is_logged'] = $this->session->is_logged;
+        $data['nombre'] = $this->session->nombre;
+
+        if ($data['is_logged'] == 1) {
+            
+            $data['idprod'] = $idprod;
+            $data['asistencia'] = $this->asistenciaP1->_getAsistencia($idprod);
+            $data['eval_final'] = $this->evalFinalP1->_getEvalFinal($idprod);
+
+            //echo '<pre>'.var_export($data['datos'], true).'</pre>';exit;
+
+            $data['title']='MYRP - DYA';
+            $data['main_content']='componente1/prod1_edit_process_view';
+            return view('includes/template', $data);
+        }else{
+
+            $this->logout();
+        }
+    }
+
+    public function prod_1_reg_diagnostico($idprod) {
         $data['idrol'] = $this->session->idrol;
         $data['id'] = $this->session->idusuario;
         $data['is_logged'] = $this->session->is_logged;
@@ -101,7 +228,26 @@ class Prod1 extends BaseController {
             //echo '<pre>'.var_export($data['datos'], true).'</pre>';exit;
 
             $data['title']='MYRP - DYA';
-            $data['main_content']='componente1/prod1_edit_process_view';
+            $data['main_content']='componente1/prod1_edit_diagnostico_view';
+            return view('includes/template', $data);
+        }else{
+
+            $this->logout();
+        }
+    }
+
+    public function frm_procesos() {
+        $data['idrol'] = $this->session->idrol;
+        $data['id'] = $this->session->idusuario;
+        $data['is_logged'] = $this->session->is_logged;
+        $data['nombre'] = $this->session->nombre;
+
+        if ($data['is_logged'] == 1) {
+
+            $data['componente_1'] = $this->prod1Model->findAll();
+
+            $data['title']='MYRP - DYA';
+            $data['main_content']='componente1/prod1_process_view';
             return view('includes/template', $data);
         }else{
 

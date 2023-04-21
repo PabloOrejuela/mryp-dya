@@ -48,7 +48,7 @@ class DiagnosticoDocenteP1Model extends Model {
 
     public function _getDiagDocente($idprod) {
         $result = NULL;
-        $builder = $this->db->table('diagnostico_docente');
+        $builder = $this->db->table($this->table);
         $builder->select('*')->where('idprod', strtoupper($idprod));
         $query = $builder->get();
         if ($query->getResult() != null) {
@@ -58,5 +58,41 @@ class DiagnosticoDocenteP1Model extends Model {
         }
         //echo $this->db->getLastQuery();
         return $result;
+    }
+
+    public function _update($datos) {
+        $builder = $this->db->table($this->table);
+        if ($datos['escritura'] != 'NULL') {
+            $builder->set('escritura', $datos['escritura']);
+        }
+
+        if ($datos['lectura'] != 'NULL') {
+            $builder->set('lectura', $datos['lectura']);
+        }
+        
+        if ($datos['matematica'] != 'NULL') {
+            $builder->set('matematica', $datos['matematica']);
+        }
+        $builder->set('idtipo', $datos['idtipo']);
+        $builder->where('idprod', $datos['idprod']);
+        $builder->update();
+    }
+
+    public function _save($datos) {
+        $builder = $this->db->table($this->table);
+        if ($datos['escritura'] != 'NULL') {
+            $builder->set('escritura', $datos['escritura']);
+        }
+
+        if ($datos['lectura'] != 'NULL') {
+            $builder->set('lectura', $datos['lectura']);
+        }
+        
+        if ($datos['matematica'] != 'NULL') {
+            $builder->set('matematica', $datos['matematica']);
+        }
+        $builder->set('idtipo', $datos['idtipo']);
+        $builder->set('idprod', $datos['idprod']);
+        $builder->insert();
     }
 }
