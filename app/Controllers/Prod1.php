@@ -99,11 +99,23 @@ class Prod1 extends BaseController {
                 'horas_planificadas' => strtoupper($this->request->getPostGet('horas_planificadas')),
                 'horas_efectivas' => strtoupper($this->request->getPostGet('horas_efectivas')),
                 'horas_perdidas' => strtoupper($this->request->getPostGet('horas_perdidas')),
+                'kit' => strtoupper($this->request->getPostGet('kit')),
+                'retirado' => strtoupper($this->request->getPostGet('retirado')),
                 'idtipo' => 2,
                 'idprod' =>  $id,
             );
-            $hay = $this->asistenciaP1->_getAsistencia($asistencia['idprod']);
             //echo '<pre>'.var_export($asistencia, true).'</pre>';exit;
+            if ($this->request->getPostGet('cohorte') != '') {
+                $prod['cohorte'] = $this->request->getPostGet('cohorte');
+            }
+            if ($this->request->getPostGet('fecha_inicio') != '') {
+                $prod['fecha_inicio'] = $this->request->getPostGet('fecha_inicio');
+            }
+            if ($this->request->getPostGet('fecha_fin') != '') {
+                $prod['fecha_fin'] = $this->request->getPostGet('fecha_fin');
+            }
+            $hay = $this->asistenciaP1->_getAsistencia($asistencia['idprod']);
+            //echo '<pre>'.var_export($prod, true).'</pre>';exit;
             if ($hay) {
                 //Actualizo
                 $this->asistenciaP1->_update($asistencia);
@@ -111,6 +123,8 @@ class Prod1 extends BaseController {
                 //Grabo
                 $this->asistenciaP1->_save($asistencia);
             }
+
+            $this->prod1Model->update($id, $prod);
 
             return redirect()->to('prod_1_process');
         }else{

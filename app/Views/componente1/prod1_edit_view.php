@@ -3,9 +3,9 @@
         font-size: 0.8em;
     }
 </style>
-<main class="container-sm px-0 mb-5">
+<main class="container-sm px-2 mb-5">
     <div class="container-fluid px-0">
-        <h3 class="mt-4"><?= esc($title); ?></h3>
+        <h4 class="mt-4"><?= esc($title); ?></h4>
         <form action="<?php echo base_url().'/prod1_update';?>" method="post">
             <?= session()->getFlashdata('error'); ?>
             <?= csrf_field(); ?>

@@ -6,16 +6,16 @@
         color: rgb(106, 145, 40);
     }
 </style>
-<main class="container-md px-0 mb-4">
+<main class="container-md px-2 mb-4">
     <div class="container-fluid px-0">
-        <h3 class="mt-4" id="titulo-nombre"><?= esc($title).' - EVALUACION FINAL DE '.$datos->apellidos.' '.$datos->nombres; ?></h3>
+        <h4 class="mt-4" id="titulo-nombre"><?= esc($title).' - EVALUACION FINAL DE '.$datos->apellidos.' '.$datos->nombres; ?></h4>
         <form action="<?php echo base_url().'/prod1-eval-update';?>" method="post">
             <?= session()->getFlashdata('error'); ?>
             <?= csrf_field(); ?>
             <div class="card mb-4">
                 <div class="card-body">
                     <div class="row">
-                        <h3 class="mt-3"><?= esc ('Evaluación'); ?></h3>
+                        <h4 class="mt-3"><?= esc ('Evaluación'); ?></h4>
                         
                         <div class="col-md-4 mb-2">
                             <label for="apoyo">Necesitó apoyo consigna lectora (S,N):</label>

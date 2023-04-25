@@ -1,4 +1,4 @@
-<main class="container px-0">
+<main class="container px-2">
     <div class="container-fluid px-0">
         <h3 class="mt-4"><?= esc($title); ?></h3>
                     

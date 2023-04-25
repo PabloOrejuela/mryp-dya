@@ -78,6 +78,14 @@ class AsistenciaP1Model extends Model {
         if ($datos['horas_perdidas'] != '0') {
             $builder->set('horas_perdidas', $datos['horas_perdidas']);
         }
+        if ($datos['kit'] != '') {
+            $builder->set('kit', $datos['kit']);
+        }
+        if ($datos['retirado'] != '') {
+            $builder->set('retirado', $datos['retirado']);
+        }else{
+            $builder->set('retirado', 0);
+        }
 
         $builder->set('idtipo', $datos['idtipo']);
         $builder->where('idprod', $datos['idprod']);
@@ -101,6 +109,15 @@ class AsistenciaP1Model extends Model {
         if ($datos['horas_perdidas'] != '0') {
             $builder->set('horas_perdidas', $datos['horas_perdidas']);
         }
+        if ($datos['kit'] != '') {
+            $builder->set('kit', $datos['kit']);
+        }
+        if ($datos['retirado'] != '') {
+            $builder->set('retirado', $datos['retirado']);
+        }else{
+            $builder->set('retirado', 0);
+        }
+
         $builder->set('idtipo', $datos['idtipo']);
         $builder->set('idprod', $datos['idprod']);
         $builder->insert();

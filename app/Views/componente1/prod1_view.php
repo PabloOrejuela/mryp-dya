@@ -1,4 +1,4 @@
-<main class="container px-0">
+<main class="container px-2">
     <div class="container-fluid px-0">
         <h3 class="mt-4"><?= esc($title); ?></h3>
                     
@@ -13,28 +13,29 @@
                         <th>No.</th>
                         <th>Nombre</th>
                         <th>Documento</th>
-                        <th>Edad</th>
-                        <th>Género</th>
-                        <th>Discapacidad</th>
-                        <th>Fecha Nac</th>
                         <th>Amie</th>
-                        <th>Año EGB</th>
+                        <th>Centro educativo</th>
+                        <th>Género</th>
+                        <th>Fecha Nac</th>
                         <th>Representante</th>
                     </thead>
                     <tbody>
                     <?php
+                        //Llamo al modelo
+                        use App\Models\CentroEducativoModel;
+                        $this->centroEducativoModel = new CentroEducativoModel();
+
                         if (isset($componente_1) && $componente_1 != NULL) {
                             foreach ($componente_1 as $key => $value) {
+                                $centro_educativo = $this->centroEducativoModel->find($value->amie);
                                 echo '<tr>
                                     <td>'.$value->id.'</td>
                                     <td><a href="'.site_url().'prod_1_edit/'.$value->id.'">'.$value->nombres.' '.$value->apellidos.'</a></td>
                                     <td>'.$value->documento.'</td>
-                                    <td>'.$value->edad.'</td>
-                                    <td>'.$value->genero.'</td>
-                                    <td>'.$value->discapacidad.'</td>
-                                    <td>'.$value->fecha_nac.'</td>
                                     <td>'.$value->amie.'</td>
-                                    <td>'.$value->anio_egb.'</td>
+                                    <td>'.$centro_educativo->nombre.'</td>
+                                    <td>'.$value->genero.'</td>
+                                    <td>'.$value->fecha_nac.'</td>
                                     <td>'.$value->representante.'</td>';
                             }
                         }
