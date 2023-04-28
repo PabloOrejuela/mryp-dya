@@ -7,7 +7,12 @@
 }
 
 table{
-    font-size: 0.7em;
+    font-size: 0.9em;
+}
+
+
+a:link, a:visited, a:active {
+    text-decoration:none;
 }
 
 html, body {
@@ -206,4 +211,20 @@ footer .copyrights {
 #txt-descripcion{
     font-size: 1em;
     text-align: justify;
+}
+
+.contenedor{
+    display: flex;
+    justify-content: center;
+}
+
+.edit{
+    margin: 0 auto;
+}
+.row{
+    font-size: 0.8em;
+}
+
+#titulo-nombre{
+    color: rgb(106, 145, 40);
 }
