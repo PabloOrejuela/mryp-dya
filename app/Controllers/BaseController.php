@@ -24,6 +24,8 @@ use App\Models\AsistenciaP1Model;
 use App\Models\EvalFinalP1Model;
 use App\Models\EvalMateP1Model;
 use App\Models\EvalMateElementalP1Model;
+use App\Models\EvalMateFinalP1Model;
+use App\Models\EvalMateFinalElementalP1Model;
 
 
 
@@ -91,6 +93,8 @@ abstract class BaseController extends Controller {
         $this->evalFinalP1 = new EvalFinalP1Model($this->db);
         $this->evalMateP1 = new EvalMateP1Model($this->db);
         $this->evalMateElemP1 = new EvalMateElementalP1Model($this->db);
+        $this->evalMateFinalP1 = new EvalMateFinalP1Model($this->db);
+        $this->evalMateFinalElemP1 = new EvalMateFinalElementalP1Model($this->db);
 
         // E.g.: $this->session = \Config\Services::session();
         $this->session = \Config\Services::session();

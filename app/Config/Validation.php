@@ -65,4 +65,16 @@ class Validation extends BaseConfig
             'uploaded' => 'Es necesario seleccionar un archivo para poder subirlo',
         ]
     ];
+
+    public $tipo_prueba_mate = [
+        'idprod'  => 'required',
+        'tipo_prueba'   => 'required',
+    ];
+
+    public $tipo_prueba_mate_errors = [
+        'tipo_prueba' => [
+            'required' => 'Es obligatorio elegir un tipo de prueba',
+            'greater_than' => 'Es obligatorio elegir un tipo de prueba',
+        ]
+    ];
 }

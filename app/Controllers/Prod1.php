@@ -372,6 +372,56 @@ class Prod1 extends BaseController {
         }
     }
 
+    public function eval_mateFinal_update() {
+        $data['idrol'] = $this->session->idrol;
+        $data['id'] = $this->session->idusuario;
+        $data['is_logged'] = $this->session->is_logged;
+        $data['nombre'] = $this->session->nombre;
+
+        if ($data['is_logged'] == 1) {
+
+            $evaluacion = array(
+                'idtipo' => 4,
+                'idprod' => $this->request->getPostGet('id'),
+                'orientacion_espacial_1' => $this->request->getPostGet('orientacion_espacial_1'),
+                'orientacion_espacial_2' => $this->request->getPostGet('orientacion_espacial_2'),
+                'orientacion_espacial_3' => $this->request->getPostGet('orientacion_espacial_3'),
+                'orientacion_espacial_4' => $this->request->getPostGet('orientacion_espacial_4'),
+                'clasificacion_5' => $this->request->getPostGet('clasificacion_5'),
+                'clasificacion_6' => $this->request->getPostGet('clasificacion_6'),
+                'seriacion_7' => $this->request->getPostGet('seriacion_7'),
+                'seriacion_8' => $this->request->getPostGet('seriacion_8'),
+                'seriacion_9' => $this->request->getPostGet('seriacion_9'),
+                'esquema_corporal_10' => $this->request->getPostGet('esquema_corporal_10'),
+                'esquema_corporal_11' => $this->request->getPostGet('esquema_corporal_11'),
+                'suma_dos_cifras' => $this->request->getPostGet('suma_dos_cifras'),
+                'suma_cuatro_cifras' => $this->request->getPostGet('suma_cuatro_cifras'),
+                'suma_cinco_mas' => $this->request->getPostGet('suma_cinco_mas'),
+                'resta_tres_cifras' => $this->request->getPostGet('resta_tres_cifras'),
+                'resta_cuatro_cifras' => $this->request->getPostGet('resta_cuatro_cifras'),
+                'multiplicacion_una_cifra' => $this->request->getPostGet('multiplicacion_una_cifra'),
+                'multiplicacion_dos_cifras' => $this->request->getPostGet('multiplicacion_dos_cifras'),
+                'division_una_cifra' => $this->request->getPostGet('division_una_cifra'),
+                'division_dos_cifras' => $this->request->getPostGet('division_dos_cifras'),
+            );
+
+            $hay = $this->evalMateFinalP1->_getEvalMateFinal($evaluacion['idprod']);
+            //echo '<pre>'.var_export($hay, true).'</pre>';exit;
+            if ($hay) {
+                //Actualizo
+                $this->evalMateFinalP1->_update($evaluacion);
+            }else{
+                //Grabo
+                $this->evalMateFinalP1->_save($evaluacion);
+            }
+            
+            return redirect()->to('prod_1_process');
+        }else{
+
+            $this->logout();
+        }
+    }
+
     public function eval_mateElem_update() {
         $data['idrol'] = $this->session->idrol;
         $data['id'] = $this->session->idusuario;
@@ -422,6 +472,56 @@ class Prod1 extends BaseController {
         }
     }
 
+    public function eval_mateFinalElem_update() {
+        $data['idrol'] = $this->session->idrol;
+        $data['id'] = $this->session->idusuario;
+        $data['is_logged'] = $this->session->is_logged;
+        $data['nombre'] = $this->session->nombre;
+
+        if ($data['is_logged'] == 1) {
+
+            $evaluacion = array(
+                'idtipo' => 4,
+                'idprod' => $this->request->getPostGet('id'),
+                'relacion_figuras_geo_1' => $this->request->getPostGet('relacion_figuras_geo_1'),
+                'relacion_figuras_geo_1_1' => $this->request->getPostGet('relacion_figuras_geo_1_1'),
+                'seriacion_2' => $this->request->getPostGet('seriacion_2'),
+                'conjuntos_2_1' => $this->request->getPostGet('conjuntos_2_1'),
+                'seriacion_2_2' => $this->request->getPostGet('seriacion_2_2'),
+                'orientacion_3' => $this->request->getPostGet('orientacion_3'),
+                'orientacion_3_1' => $this->request->getPostGet('orientacion_3_1'),
+                'orientacion_3_2' => $this->request->getPostGet('orientacion_3_2'),
+                'esquema_corporal_3_3' => $this->request->getPostGet('esquema_corporal_3_3'),
+                'esquema_corporal_4' => $this->request->getPostGet('esquema_corporal_4'),
+                'esquema_corporal_4_1' => $this->request->getPostGet('esquema_corporal_4_1'),
+                'seriacion_5' => $this->request->getPostGet('seriacion_5'),
+                'suma_6' => $this->request->getPostGet('suma_6'),
+                'suma_7' => $this->request->getPostGet('suma_7'),
+                'resta_8' => $this->request->getPostGet('resta_8'),
+                'resta_9' => $this->request->getPostGet('resta_9'),
+                'multiplica_10' => $this->request->getPostGet('multiplica_10'),
+                'multiplica_11' => $this->request->getPostGet('multiplica_11'),
+                'divide_12' => $this->request->getPostGet('divide_12'),
+                'divide_13' => $this->request->getPostGet('divide_13')
+            );
+
+            $hay = $this->evalMateFinalElemP1->_getEvalMateFinalElem($evaluacion['idprod']);
+            //echo '<pre>'.var_export($hay, true).'</pre>';exit;
+            if ($hay) {
+                //Actualizo
+                $this->evalMateFinalElemP1->_update($evaluacion);
+            }else{
+                //Grabo
+                $this->evalMateFinalElemP1->_save($evaluacion);
+            }
+            
+            return redirect()->to('prod_1_process');
+        }else{
+
+            $this->logout();
+        }
+    }
+
     public function prod_1_reg_proceso($idprod) {
         $data['idrol'] = $this->session->idrol;
         $data['id'] = $this->session->idusuario;
@@ -440,6 +540,139 @@ class Prod1 extends BaseController {
             $data['title']='MYRP - DYA';
             $data['main_content']='componente1/prod1_edit_process_view';
             return view('includes/template', $data);
+        }else{
+
+            $this->logout();
+        }
+    }
+
+    public function prod_1_form_elije_eval_mate($idprod) {
+        $data['idrol'] = $this->session->idrol;
+        $data['id'] = $this->session->idusuario;
+        $data['is_logged'] = $this->session->is_logged;
+        $data['nombre'] = $this->session->nombre;
+
+        if ($data['is_logged'] == 1) {
+            
+            $data['idprod'] = $idprod;
+            $data['datos'] = $this->prod1Model->find($idprod);
+            $data['mensaje'] = $this->session->form_error;
+
+            //echo '<pre>'.var_export($data['datos'], true).'</pre>';exit;
+
+            $data['title']='MYRP - DYA';
+            $data['main_content']='componente1/prod1_elije_evalmate_view';
+            return view('includes/template', $data);
+        }else{
+
+            $this->logout();
+        }
+    }
+
+    public function prod_1_form_elije_eval_mate_final($idprod) {
+        $data['idrol'] = $this->session->idrol;
+        $data['id'] = $this->session->idusuario;
+        $data['is_logged'] = $this->session->is_logged;
+        $data['nombre'] = $this->session->nombre;
+
+        if ($data['is_logged'] == 1) {
+            
+            $data['idprod'] = $idprod;
+            $data['datos'] = $this->prod1Model->find($idprod);
+            $data['mensaje'] = $this->session->form_error;
+
+            //echo '<pre>'.var_export($data['datos'], true).'</pre>';exit;
+
+            $data['title']='MYRP - DYA';
+            $data['main_content']='componente1/prod1_elije_evalmatefinal_view';
+            return view('includes/template', $data);
+        }else{
+
+            $this->logout();
+        }
+    }
+
+
+    public function prod1_elije_evalMate() {
+        $data['idrol'] = $this->session->idrol;
+        $data['id'] = $this->session->idusuario;
+        $data['is_logged'] = $this->session->is_logged;
+        $data['nombre'] = $this->session->nombre;
+
+        if ($data['is_logged'] == 1) {
+            $data['tipo_prueba'] =  $this->request->getPostGet('tipo_prueba');
+            $data['idprod'] =  $this->request->getPostGet('id');
+
+            if ($this->request->getPostGet('tipo_prueba') != '0') {
+                
+                $this->session->set('form_error', "");
+                $data['datos'] = $this->prod1Model->find($data['idprod']);
+                if ($this->request->getPostGet('tipo_prueba') == 1) {
+                    //Prueba ELEMENTAL
+                    
+                    $data['eval_mate'] = $this->evalMateElemP1->_getEvalMateElem($data['idprod']);
+                    //echo '<pre>'.var_export($data['eval_mate'], true).'</pre>';exit;
+                    $data['title']='MYRP - DYA';
+                    $data['main_content']='componente1/prod1_edit_evalMateElemental_view';
+                    return view('includes/template', $data);
+                }else{
+                    //Prueba SUPERIOR
+                    $data['eval_mate'] = $this->evalMateP1->_getEvalMate($data['idprod']);
+                    $data['title']='MYRP - DYA';
+                    $data['main_content']='componente1/prod1_edit_evalMate_view';
+                    return view('includes/template', $data);
+                }
+                
+                
+            }else{
+                $this->session->set('form_error', "Es obligatorio elegir un tipo de prueba");
+                return redirect()->to('prod-1-form-tipo-eval-mate/'.$data['idprod']);
+            }
+            //echo '<pre>'.var_export($data['tipo_prueba'], true).'</pre>';exit;
+
+            
+        }else{
+
+            $this->logout();
+        }
+    }
+
+    public function prod1_elije_evalMateFinal() {
+        $data['idrol'] = $this->session->idrol;
+        $data['id'] = $this->session->idusuario;
+        $data['is_logged'] = $this->session->is_logged;
+        $data['nombre'] = $this->session->nombre;
+
+        if ($data['is_logged'] == 1) {
+            $data['tipo_prueba'] =  $this->request->getPostGet('tipo_prueba');
+            $data['idprod'] =  $this->request->getPostGet('id');
+            //echo '<pre>'.var_export($data['tipo_prueba'], true).'</pre>';exit;
+            if ($this->request->getPostGet('tipo_prueba') != '0') {
+                
+                $this->session->set('form_error', "");
+                $data['datos'] = $this->prod1Model->find($data['idprod']);
+                if ($this->request->getPostGet('tipo_prueba') == 1) {
+                    //Prueba ELEMENTAL
+                    
+                    $data['eval_mate'] = $this->evalMateFinalElemP1->_getEvalMateFinalElem($data['idprod']);
+                    //echo '<pre>'.var_export($data['eval_mate'], true).'</pre>';exit;
+                    $data['title']='MYRP - DYA';
+                    $data['main_content']='componente1/prod1_edit_evalMateFinalElemental_view';
+                    return view('includes/template', $data);
+                }else{
+                    //Prueba SUPERIOR
+                    $data['eval_mate'] = $this->evalMateFinalP1->_getEvalMateFinal($data['idprod']);
+                    $data['title']='MYRP - DYA';
+                    $data['main_content']='componente1/prod1_edit_evalMateFinal_view';
+                    return view('includes/template', $data);
+                }
+                
+                
+            }else{
+                $this->session->set('form_error', "Es obligatorio elegir un tipo de prueba");
+                return redirect()->to('prod-1-form-tipo-eval-mate-final/'.$data['idprod']);
+            }
+            
         }else{
 
             $this->logout();
@@ -469,7 +702,7 @@ class Prod1 extends BaseController {
         }
     }
 
-    public function prod_1_reg_eval_mate($idprod) {
+    public function prod_1_reg_eval_mate() {
         $data['idrol'] = $this->session->idrol;
         $data['id'] = $this->session->idusuario;
         $data['is_logged'] = $this->session->is_logged;
@@ -481,7 +714,7 @@ class Prod1 extends BaseController {
             $data['datos'] = $this->prod1Model->find($idprod);
 
             
-            if ($data['datos']->anio_egb > 5) {
+            if ($data['datos']->anio_egb >= 5) {
                 $data['eval_mate'] = $this->evalMateP1->_getEvalMate($idprod);
                 $data['title']='MYRP - DYA';
                 $data['main_content']='componente1/prod1_edit_evalMate_view';
@@ -491,6 +724,37 @@ class Prod1 extends BaseController {
                 //echo '<pre>'.var_export($data['eval_mate'], true).'</pre>';exit;
                 $data['title']='MYRP - DYA';
                 $data['main_content']='componente1/prod1_edit_evalMateElemental_view';
+                return view('includes/template', $data);
+            }
+            
+        }else{
+
+            $this->logout();
+        }
+    }
+
+    public function prod_1_reg_eval_mate_final($idprod) {
+        $data['idrol'] = $this->session->idrol;
+        $data['id'] = $this->session->idusuario;
+        $data['is_logged'] = $this->session->is_logged;
+        $data['nombre'] = $this->session->nombre;
+
+        if ($data['is_logged'] == 1) {
+            
+            $data['idprod'] = $idprod;
+            $data['datos'] = $this->prod1Model->find($idprod);
+
+            
+            if ($data['datos']->anio_egb >= 5) {
+                $data['eval_mate'] = $this->evalMateFinalP1->_getEvalMateFinal($idprod);
+                $data['title']='MYRP - DYA';
+                $data['main_content']='componente1/prod1_edit_evalMateFinal_view';
+                return view('includes/template', $data);
+            }else{
+                $data['eval_mate'] = $this->evalMateFinalElemP1->_getEvalMateFinalElem($idprod);
+                //echo '<pre>'.var_export($data['eval_mate'], true).'</pre>';exit;
+                $data['title']='MYRP - DYA';
+                $data['main_content']='componente1/prod1_edit_evalMateFinalElemental_view';
                 return view('includes/template', $data);
             }
             

@@ -39,6 +39,7 @@ $routes->get('cargar_info_extra_view', 'CargarInformacion::carga_extra');
 $routes->post('cargar-centro-educativo', 'CargarInformacion::cargar_centro_educativo');
 $routes->get('subirExcel_view/(:num)', 'CargarInformacion::frm_subir_excel/$1');
 
+//Producto 1
 $routes->get('prod_1', 'Prod1::index');
 $routes->get('prod-1-create', 'Prod1::prod_1_create');
 $routes->post('prod-1-new', 'Prod1::prod_1_new');
@@ -49,15 +50,24 @@ $routes->post('prod1-asistencia-update', 'Prod1::asistencia_update');
 $routes->post('prod1-diagnostico-update', 'Prod1::diagnostico_update');
 $routes->post('prod1-eval-update', 'Prod1::eval_final_update');
 $routes->post('prod1-evalMate-update', 'Prod1::eval_mate_update');
+$routes->post('prod1-evalMateFinal-update', 'Prod1::eval_mateFinal_update');
 $routes->post('prod1-evalMateElem-update', 'Prod1::eval_mateElem_update');
+$routes->post('prod1-evalMateFinalElem-update', 'Prod1::eval_mateFinalElem_update');
 $routes->get('prod-1-reg-diagnostico/(:num)', 'Prod1::prod_1_reg_diagnostico/$1');
 $routes->get('prod-1-reg-proceso/(:num)', 'Prod1::prod_1_reg_proceso/$1');
 $routes->get('prod-1-reg-eval-final/(:num)', 'Prod1::prod_1_reg_eval_final/$1');
-$routes->get('prod-1-reg-eval-mate/(:num)', 'Prod1::prod_1_reg_eval_mate/$1');
+$routes->get('prod-1-form-tipo-eval-mate/(:num)', 'Prod1::prod_1_form_elije_eval_mate/$1');
+$routes->get('prod-1-form-tipo-eval-mate-final/(:num)', 'Prod1::prod_1_form_elije_eval_mate_final/$1');
+$routes->post('prod1-elije-evalMate', 'Prod1::prod1_elije_evalMate');
+$routes->post('prod1-elije-evalMateFinal', 'Prod1::prod1_elije_evalMateFinal');
+
+$routes->get('prod-1-reg-eval-mate', 'Prod1::prod_1_reg_eval_mate');
+$routes->get('prod-1-reg-eval-mate-final/(:num)', 'Prod1::prod_1_reg_eval_mate_final/$1');
 $routes->get('prod-1-delete/(:num)', 'Prod1::prod_1_delete/$1');
 
 $routes->post('cargar-prod-1', 'CargarInformacion::cargar_prod_1');
 
+//NAP
 $routes->post('cargar-nap2', 'CargarInformacion::cargar_nap2');
 $routes->post('cargar-nap3', 'CargarInformacion::cargar_nap3');
 $routes->post('cargar-nap4', 'CargarInformacion::cargar_nap4');

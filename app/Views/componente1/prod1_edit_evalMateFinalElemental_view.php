@@ -15,8 +15,8 @@
 </style>
 <main class="container-md px-2 mb-4">
     <div class="container-fluid px-0">
-        <h5 class="mt-4" id="titulo-nombre"><?= esc($title).' - EVALUACION MATEMÁTICA (Elemental): '.$datos->apellidos.' '.$datos->nombres; ?></h5>
-        <form action="<?php echo base_url().'/prod1-evalMateElem-update';?>" method="post">
+        <h5 class="mt-4" id="titulo-nombre"><?= esc($title).' - EVALUACION MATEMÁTICA FINAL (Elemental): '.$datos->apellidos.' '.$datos->nombres; ?></h5>
+        <form action="<?php echo base_url().'/prod1-evalMateFinalElem-update';?>" method="post">
             <?= session()->getFlashdata('error'); ?>
             <?= csrf_field(); ?>
             <div class="card mb-4">

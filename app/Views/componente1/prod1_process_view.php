@@ -19,6 +19,7 @@
                         <th>Registro de Procesos</th>
                         <th>Evaluación</th>
                         <th>Eval Matemáticas</th>
+                        <th>Eval Matemáticas Final</th>
                     </thead>
                     <tbody>
                     <?php
@@ -53,8 +54,15 @@
                                     </td>
                                     <td>
                                         <div class="contenedor">
-                                            <a type="button" id="btn-register" href="'.site_url().'prod-1-reg-eval-mate/'.$value->id.'" class="edit">
+                                            <a type="button" id="btn-register" href="'.site_url().'prod-1-form-tipo-eval-mate/'.$value->id.'" class="edit">
                                                 <img src="'.site_url().'public/images/eval-mate.png" >
+                                            </a>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="contenedor">
+                                            <a type="button" id="btn-register" href="'.site_url().'prod-1-form-tipo-eval-mate-final/'.$value->id.'" class="edit">
+                                                <img src="'.site_url().'public/images/eval-mate-final.png" >
                                             </a>
                                         </div>
                                     </td>

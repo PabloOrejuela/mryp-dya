@@ -11,7 +11,7 @@
                     <!--- <img src="..." class="card-img-top" alt="..."> -->
                     <?php  
                         if ($this->session->componente_1 == 1) {
-                            echo '<div class="card" style="width: 18rem;" id="card-componente">
+                            echo '<div class="card" style="width: 12rem;" id="card-componente">
                                     <img src="'.site_url().'public/images/card-01.jpg" class="card-img-top" alt="card1">
                                     <div class="card-body" >
                                         <h5 class="card-title">Componente 1</h5>
@@ -22,7 +22,7 @@
                                 </div>';
                         }
                         if ($this->session->componente_2 == 1) {
-                            echo '<div class="card" style="width: 18rem;" id="card-componente">
+                            echo '<div class="card" style="width: 12rem;" id="card-componente">
                                 <img src="'.site_url().'public/images/card-02.jpg" class="card-img-top" alt="card2">
                                     <div class="card-body" >
                                         <h5 class="card-title">Componente 2</h5>
@@ -35,7 +35,7 @@
                         }
 
                         if ($this->session->componente_3 == 1) {
-                            echo '<div class="card" style="width: 18rem;" id="card-componente">
+                            echo '<div class="card" style="width: 12rem;" id="card-componente">
                                     <img src="'.site_url().'public/images/card-03.jpg" class="card-img-top" alt="card3">
                                     <div class="card-body" >
                                         <h5 class="card-title">Componente 3</h5>
@@ -47,7 +47,7 @@
                         }
 
                         if ($this->session->componente_4 == 1) {
-                            echo '<div class="card" style="width: 18rem;" id="card-componente">
+                            echo '<div class="card" style="width: 12rem;" id="card-componente">
                                     <img src="'.site_url().'public/images/card-04.jpg" class="card-img-top" alt="card4">
                                     <div class="card-body" >
                                         <h5 class="card-title">Programa de Apoyo Escolar a Madres Adolescentes</h5>
