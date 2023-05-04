@@ -9,11 +9,11 @@
                     
         <div class="card mb-4">
             <div class="card-header">
-                <?php echo '<span id="titulo-componente">Componente 1 - Click en el NOMBRE para ver y editar datos del registro</span>'; ?>
+                <?php echo '<span id="titulo-componente">Componente 3 - Click en el NOMBRE para ver y editar datos del registro</span>'; ?>
             </div><div class="card-header">
                 <a type="button" id="btn-register" href="<?= site_url().'prod-1-create/'; ?>" class="edit">
                     <img src="<?= site_url().'public/images/new.png'; ?>" >
-                    <span id="title-link">Registrar un nuevo estudiante</span>
+                    <span id="title-link">Crear un nuevo registro</span>
                 </a>
             </div>           
             <div class="card-body"> 
@@ -24,9 +24,6 @@
                         <th>Documento</th>
                         <th>Amie</th>
                         <th>Centro educativo</th>
-                        <th>Cohorte</th>
-                        <th>Fecha Nac</th>
-                        <th>Tutor</th>
                         <th>Borrar registro</th>
                     </thead>
                     <tbody>
@@ -35,22 +32,19 @@
                         use App\Models\CentroEducativoModel;
                         $this->centroEducativoModel = new CentroEducativoModel();
 
-                        if (isset($componente_1) && $componente_1 != NULL) {
-                            foreach ($componente_1 as $key => $value) {
+                        if (isset($componente_3) && $componente_3 != NULL) {
+                            foreach ($componente_3 as $key => $value) {
                                 $centro_educativo = $this->centroEducativoModel->find($value->amie);
                                 echo '<tr>
                                     <td>'.$value->id.'</td>
-                                    <td><a href="'.site_url().'prod_1_edit/'.$value->id.'">'.$value->nombres.' '.$value->apellidos.'</a></td>
+                                    <td><a href="'.site_url().'prod_3_edit/'.$value->id.'">'.$value->nombre.'</a></td>
                                     <td>'.$value->documento.'</td>
                                     <td>'.$value->amie.'</td>
                                     <td>'.$centro_educativo->nombre.'</td>
-                                    <td>'.$value->cohorte.'</td>
-                                    <td>'.$value->fecha_nac.'</td>
-                                    <td>'.$value->tutor_apoyo.'</td>
                                     <td>
                                         <div class="contenedor">
                                             <a type="button" id="btn-register" href="'.site_url().'prod-1-delete/'.$value->id.'" class="edit">
-                                                <img src="'.site_url().'public/images/delete.png" height="25" >
+                                                <img src="'.site_url().'public/images/delete.png" height="25">
                                             </a>
                                         </div>
                                     </td>';

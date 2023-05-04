@@ -68,4 +68,30 @@ class CentroEducativoModel extends Model {
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
+
+    public function _save($centro) {
+        $builder = $this->db->table($this->table);
+        //echo '<pre>'.var_export($ciudad, true).'</pre>';exit;
+        $builder->set('amie', $centro['amie']);
+        $builder->set('nombre', $centro['nombre']);
+        $builder->set('idciudades', $centro['idciudades']);
+        $builder->set('idparroquia', $centro['idparroquia']);
+        $builder->insert();
+    }
+
+    public function _getCentros() {
+        $result = NULL;
+        $builder = $this->db->table($this->table);
+        $builder->select('*');
+        $builder->orderBy('nombre');
+        $query = $builder->get();
+        if ($query->getResult() != null) {
+            foreach ($query->getResult() as $row) {
+                $result[] = $row;
+            }
+        }
+        //echo $this->db->getLastQuery();
+        return $result;
+    }
+
 }

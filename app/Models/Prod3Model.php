@@ -4,22 +4,47 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class CiudadesModel extends Model {
+class Prod3Model extends Model {
 
     protected $DBGroup          = 'default';
-    protected $table            = 'ciudades';
-    protected $primaryKey       = 'idciudades';
+    protected $table            = 'producto_3';
+    protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $insertID         = 0;
     protected $returnType       = 'object';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
     protected $allowedFields    = [
-        'ciudad', 'cod_ciudad', 'idprovincias'
+        'amie',
+        'nombre',
+        'documento',
+        'nacionalidad',                
+        'genero',
+        'discapacidad',
+        'tipo',
+        'email',
+        'celular',
+        'inicial_1',
+        'inicial_2',
+        'pri_egb',
+        'seg_egb',
+        'ter_egb',
+        'cuart_egb',
+        'quin_egb',
+        'sex_egb',
+        'sept_egb',
+        'oct_egb',
+        'nov_egb',
+        'dec_egb',
+        'pri_bach',
+        'seg_bach',
+        'ter_bach',
+        'especialidad',
+        'funcion'
     ];
 
     // Dates
-    protected $useTimestamps = false;
+    protected $useTimestamps = true;
     protected $dateFormat    = 'datetime';
     protected $createdField  = 'created_at';
     protected $updatedField  = 'updated_at';
@@ -41,26 +66,4 @@ class CiudadesModel extends Model {
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
-
-    public function _getIdciudades($ciudad) {
-        $result = NULL;
-        $builder = $this->db->table($this->table);
-        $builder->select('*')->where('ciudad', strtoupper($ciudad));
-        $query = $builder->get();
-        if ($query->getResult() != null) {
-            foreach ($query->getResult() as $row) {
-                $result = $row;
-            }
-        }
-        //echo $this->db->getLastQuery();
-        return $result;
-    }
-
-    public function _save($ciudad) {
-        $builder = $this->db->table($this->table);
-        //echo '<pre>'.var_export($ciudad, true).'</pre>';exit;
-        $builder->set('ciudad', $ciudad['ciudad']);
-        $builder->set('idprovincias', $ciudad['idprovincias']);
-        $builder->insert();
-    }
 }

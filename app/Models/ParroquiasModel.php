@@ -4,18 +4,18 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class CiudadesModel extends Model {
+class ParroquiasModel extends Model {
 
     protected $DBGroup          = 'default';
-    protected $table            = 'ciudades';
-    protected $primaryKey       = 'idciudades';
+    protected $table            = 'parroquias';
+    protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $insertID         = 0;
     protected $returnType       = 'object';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
     protected $allowedFields    = [
-        'ciudad', 'cod_ciudad', 'idprovincias'
+        'cod_parroquia', 'parroquia', 'idciudades '
     ];
 
     // Dates
@@ -42,10 +42,10 @@ class CiudadesModel extends Model {
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
 
-    public function _getIdciudades($ciudad) {
+    public function _getIdParroquia($parroquia) {
         $result = NULL;
         $builder = $this->db->table($this->table);
-        $builder->select('*')->where('ciudad', strtoupper($ciudad));
+        $builder->select('*')->where('parroquia', strtoupper($parroquia));
         $query = $builder->get();
         if ($query->getResult() != null) {
             foreach ($query->getResult() as $row) {
@@ -56,11 +56,11 @@ class CiudadesModel extends Model {
         return $result;
     }
 
-    public function _save($ciudad) {
+    public function _save($parroquia) {
         $builder = $this->db->table($this->table);
         //echo '<pre>'.var_export($ciudad, true).'</pre>';exit;
-        $builder->set('ciudad', $ciudad['ciudad']);
-        $builder->set('idprovincias', $ciudad['idprovincias']);
+        $builder->set('parroquia', $parroquia['parroquia']);
+        $builder->set('idciudades', $parroquia['idciudades']);
         $builder->insert();
     }
 }

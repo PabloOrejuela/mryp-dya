@@ -16,8 +16,13 @@ use App\Models\CursoModel;
 use App\Models\Nap2Model;
 use App\Models\Nap3Model;
 use App\Models\Nap4Model;
+use App\Models\Nap5Model;
+use App\Models\Nap6Model;
 use App\Models\CiudadesModel;
+use App\Models\ParroquiasModel;
 use App\Models\Prod1Model;
+use App\Models\Prod3Model;
+use App\Models\VarProd3Model;
 use App\Models\DiagnosticoDocenteP1Model;
 use App\Models\DiagnosticoMyrpP1Model;
 use App\Models\AsistenciaP1Model;
@@ -85,8 +90,12 @@ abstract class BaseController extends Controller {
         $this->nap2Model = new Nap2Model($this->db);
         $this->nap3Model = new Nap3Model($this->db);
         $this->nap4Model = new Nap4Model($this->db);
+        $this->nap5Model = new Nap5Model($this->db);
+        $this->nap6Model = new Nap6Model($this->db);
         $this->ciudadesModel = new CiudadesModel($this->db);
+        $this->parroquiasModel = new ParroquiasModel($this->db);
         $this->prod1Model = new Prod1Model($this->db);
+        $this->prod3Model = new Prod3Model($this->db);
         $this->diagDocenteP1 = new DiagnosticoDocenteP1Model($this->db);
         $this->diagMyrpP1 = new DiagnosticoMyrpP1Model($this->db);
         $this->asistenciaP1 = new AsistenciaP1Model($this->db);
@@ -95,6 +104,7 @@ abstract class BaseController extends Controller {
         $this->evalMateElemP1 = new EvalMateElementalP1Model($this->db);
         $this->evalMateFinalP1 = new EvalMateFinalP1Model($this->db);
         $this->evalMateFinalElemP1 = new EvalMateFinalElementalP1Model($this->db);
+        $this->varProd3Model = new VarProd3Model($this->db);
 
         // E.g.: $this->session = \Config\Services::session();
         $this->session = \Config\Services::session();

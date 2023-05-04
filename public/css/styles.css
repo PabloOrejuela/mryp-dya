@@ -10,6 +10,14 @@ table{
     font-size: 0.9em;
 }
 
+.card-body{
+    color: rgb(9, 38, 3);
+}
+
+.btn-info{
+    color: rgb(252, 252, 252);
+}
+
 
 a:link, a:visited, a:active {
     text-decoration:none;
@@ -227,4 +235,23 @@ footer .copyrights {
 
 #titulo-nombre{
     color: rgb(106, 145, 40);
+}
+
+#titulo-componente{
+    color: rgb(106, 145, 40);
+    font-weight: bold;
+}
+
+label{
+    font-weight: bold;
+}
+
+.card-body{
+    background-color: rgb(245, 245, 245);
+}
+
+textarea {
+    height: 60px;
+    width: 100%;
+    resize: none;
 }

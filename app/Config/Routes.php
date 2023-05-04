@@ -67,10 +67,21 @@ $routes->get('prod-1-delete/(:num)', 'Prod1::prod_1_delete/$1');
 
 $routes->post('cargar-prod-1', 'CargarInformacion::cargar_prod_1');
 
+//Producto 3
+$routes->post('cargar-prod-3', 'CargarInformacion::cargar_prod_3');
+$routes->get('prod_3', 'Prod3::index');
+$routes->get('prod_3_process', 'Prod3::frm_procesos_prod_3');
+$routes->get('prod_3_edit/(:num)', 'Prod3::frm_edit/$1');
+$routes->post('prod3_update', 'Prod3::update');
+$routes->get('prod-3-variables/(:num)', 'Prod3::prod_3_variables/$1');
+$routes->post('prod3-process-update', 'Prod3::prod3_process_update');
+
 //NAP
 $routes->post('cargar-nap2', 'CargarInformacion::cargar_nap2');
 $routes->post('cargar-nap3', 'CargarInformacion::cargar_nap3');
 $routes->post('cargar-nap4', 'CargarInformacion::cargar_nap4');
+$routes->post('cargar-nap5', 'CargarInformacion::cargar_nap5');
+$routes->post('cargar-nap6', 'CargarInformacion::cargar_nap6');
 
 
 $routes->post('getExcelC1', 'CargarInformacion::getExcelC1');

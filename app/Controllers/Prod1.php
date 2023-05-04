@@ -11,8 +11,9 @@ class Prod1 extends BaseController {
         $data['id'] = $this->session->idusuario;
         $data['is_logged'] = $this->session->is_logged;
         $data['nombre'] = $this->session->nombre;
+        $data['componente_1'] = $this->session->componente_1;
 
-        if ($data['is_logged'] == 1) {
+        if ($data['is_logged'] == 1 && $data['componente_1'] == 1) {
             $this->session->set('form_error', "");
             $data['componente_1'] = $this->prod1Model->findAll();
 
@@ -33,6 +34,7 @@ class Prod1 extends BaseController {
 
         if ($data['is_logged'] == 1) {
             
+            $data['centros'] = $this->centroEducativoModel->_getCentros();
             $data['datos'] = $this->prod1Model->find($id);
 
             //echo '<pre>'.var_export($data['datos'], true).'</pre>';exit;
@@ -114,6 +116,7 @@ class Prod1 extends BaseController {
         if ($data['is_logged'] == 1) {
             $id = $this->request->getPostGet('id');
             $producto_1 = array(
+                'amie' => strtoupper($this->request->getPostGet('amie')),
                 'nombres' => strtoupper($this->request->getPostGet('nombres')),
                 'apellidos' => strtoupper($this->request->getPostGet('apellidos')),
                 'documento' => strtoupper($this->request->getPostGet('documento')),

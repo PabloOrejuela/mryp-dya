@@ -16,8 +16,8 @@
                                     <div class="card-body" >
                                         <h5 class="card-title">Componente 1</h5>
                                             <p class="card-text">Servicio de Apoyo Escolar implementado en tres provincias: Carchi, El Oro y Manabí (Manta) </p>
-                                            <a href="'.site_url().'prod_1" class="btn btn-secondary mb-2">Ver y editar información de registro</a>
-                                            <a href="'.site_url().'prod_1_process" class="btn btn-secondary mb-2">Ver y editar variables de Proceso</a>
+                                            <a href="'.site_url().'prod_1" class="btn btn-info mb-2">Ver y editar información de registro</a>
+                                            <a href="'.site_url().'prod_1_process" class="btn btn-info mb-2">Ver y editar variables de Proceso</a>
                                     </div>
                                 </div>';
                         }
@@ -39,9 +39,9 @@
                                     <img src="'.site_url().'public/images/card-03.jpg" class="card-img-top" alt="card3">
                                     <div class="card-body" >
                                         <h5 class="card-title">Componente 3</h5>
-                                            <p class="card-text">Programa de Acompañamiento Pedagógico</p>';
-                                            //<a href="'.site_url().'subirExcel_view/3" class="btn btn-secondary" disabled>Cargar información</a>
-                                            echo '
+                                            <p class="card-text">Programa de Acompañamiento Pedagógico</p>
+                                            <a href="'.site_url().'prod_3" class="btn btn-info mb-2">Ver y editar información de registro</a>
+                                            <a href="'.site_url().'prod_3_process" class="btn btn-info mb-2">Editar variables de Proceso</a>
                                     </div>
                                 </div>';
                         }

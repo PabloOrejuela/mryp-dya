@@ -1,5 +1,5 @@
 <style>
-    .form-control{
+    .form-control, .form-select{
         font-size: 0.8em;
     }
 </style>
@@ -76,7 +76,29 @@
                 </div>
                 <div class="col-md-4 mb-3">
                     <label for="amie">Centro educativo:</label>
-                    <input type="text" id="amie" name="amie" value="<?= $datos->amie; ?>" class="form-control" placeholder="Docente tutor" aria-label="amie" readonly>
+                    
+                    <select 
+                        class="form-select" 
+                        aria-label="Default select example" 
+                        name="amie"
+                        id="select_info"  
+                    >
+                    <?php
+                        
+                        if ($centros != NULL && isset($centros) ) {
+                            foreach ($centros as $key => $ce) {
+                                if ($ce->amie == $datos->amie) {
+                                    echo '<option value="'.$ce->amie.'" selected>'.$ce->amie.' - '.$ce->nombre.'</option>';
+                                }else{
+                                    echo '<option value="'.$ce->amie.'">'.$ce->amie.' - '.$ce->nombre.'</option>';
+                                }
+                            }
+                        }else{
+                            echo '<option value="NULL" selected>Hubo un errror, no se cargaron los datos</option>';
+                        }
+                        
+                    ?>
+                    </select>
                 </div>
             </div>
             <div class="row">

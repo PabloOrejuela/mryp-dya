@@ -7,7 +7,7 @@ use TCPDF;
 class Inicio extends BaseController {
 
     public function index(){
-
+    
         //echo '<pre>'.var_export($this->session->idusuario, true).'</pre>';
         $data['idrol'] = $this->session->idrol;
         $data['id'] = $this->session->idusuario;
@@ -24,10 +24,8 @@ class Inicio extends BaseController {
         }
     }
 
-    public function login($message = NULL){
-
+    public function login(){
         $this->session->destroy();
-        $data['mensaje'] = $this->request->getPostGet('message');
 
         $data['title']='Acceso al sistema:';
         $data['main_content']='home/login';
@@ -155,8 +153,6 @@ class Inicio extends BaseController {
         //echo '<pre>'.var_export($user, true).'</pre>';
         $this->usuarioModel->save($user);
         $this->session->destroy();
-        
         return redirect()->to('/');
-        
     }
 }

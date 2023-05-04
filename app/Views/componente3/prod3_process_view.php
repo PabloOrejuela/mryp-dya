@@ -1,21 +1,12 @@
-<style>
-    #title-link{
-    text-decoration: none;
-}
-</style>
 <main class="container px-2">
     <div class="container-fluid px-0">
         <h3 class="mt-4"><?= esc($title); ?></h3>
                     
         <div class="card mb-4">
             <div class="card-header">
-                <?php echo '<span id="titulo-componente">Componente 1 - Click en el NOMBRE para ver y editar datos del registro</span>'; ?>
-            </div><div class="card-header">
-                <a type="button" id="btn-register" href="<?= site_url().'prod-1-create/'; ?>" class="edit">
-                    <img src="<?= site_url().'public/images/new.png'; ?>" >
-                    <span id="title-link">Registrar un nuevo estudiante</span>
-                </a>
-            </div>           
+                <i class="fa-solid fa-cash-register"></i>
+                <?= esc("Componente 3 - Ingreso y edición de variables de proceso"); ?>
+            </div>
             <div class="card-body"> 
                 <table class="table table-bordered table-striped table-hover" id="table">
                     <thead>
@@ -23,37 +14,25 @@
                         <th>Nombre</th>
                         <th>Documento</th>
                         <th>Amie</th>
-                        <th>Centro educativo</th>
-                        <th>Cohorte</th>
-                        <th>Fecha Nac</th>
-                        <th>Tutor</th>
-                        <th>Borrar registro</th>
+                        <th>Registro de Procesos</th>
                     </thead>
                     <tbody>
                     <?php
-                        //Llamo al modelo
-                        use App\Models\CentroEducativoModel;
-                        $this->centroEducativoModel = new CentroEducativoModel();
-
-                        if (isset($componente_1) && $componente_1 != NULL) {
-                            foreach ($componente_1 as $key => $value) {
-                                $centro_educativo = $this->centroEducativoModel->find($value->amie);
+                        if (isset($componente_3) && $componente_3 != NULL) {
+                            foreach ($componente_3 as $key => $value) {
                                 echo '<tr>
                                     <td>'.$value->id.'</td>
-                                    <td><a href="'.site_url().'prod_1_edit/'.$value->id.'">'.$value->nombres.' '.$value->apellidos.'</a></td>
+                                    <td>'.$value->nombre.'</td>
                                     <td>'.$value->documento.'</td>
                                     <td>'.$value->amie.'</td>
-                                    <td>'.$centro_educativo->nombre.'</td>
-                                    <td>'.$value->cohorte.'</td>
-                                    <td>'.$value->fecha_nac.'</td>
-                                    <td>'.$value->tutor_apoyo.'</td>
                                     <td>
                                         <div class="contenedor">
-                                            <a type="button" id="btn-register" href="'.site_url().'prod-1-delete/'.$value->id.'" class="edit">
-                                                <img src="'.site_url().'public/images/delete.png" height="25" >
+                                            <a type="button" id="btn-register" href="'.site_url().'prod-3-variables/'.$value->id.'" class="edit">
+                                                <img src="'.site_url().'public/images/taller.png" height="25" >
                                             </a>
                                         </div>
-                                    </td>';
+                                    </td>
+                                    </tr>';
                             }
                         }
                         
