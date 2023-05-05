@@ -68,6 +68,9 @@ $routes->get('prod-1-delete/(:num)', 'Prod1::prod_1_delete/$1');
 $routes->post('cargar-prod-1', 'CargarInformacion::cargar_prod_1');
 
 //Producto 3
+$routes->get('prod-3-create', 'Prod3::prod_3_create');
+$routes->post('prod-3-new', 'Prod3::prod_3_new');
+$routes->get('prod-3-delete/(:num)', 'Prod3::prod_3_delete/$1');
 $routes->post('cargar-prod-3', 'CargarInformacion::cargar_prod_3');
 $routes->get('prod_3', 'Prod3::index');
 $routes->get('prod_3_process', 'Prod3::frm_procesos_prod_3');

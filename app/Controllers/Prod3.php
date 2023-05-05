@@ -26,6 +26,83 @@ class Prod3 extends BaseController {
         }
     }
 
+    public function prod_3_create() {
+        $data['idrol'] = $this->session->idrol;
+        $data['id'] = $this->session->idusuario;
+        $data['is_logged'] = $this->session->is_logged;
+        $data['nombre'] = $this->session->nombre;
+        $data['componente_3'] = $this->session->componente_3;
+
+        if ($data['is_logged'] == 1 && $data['componente_3'] == 1) {
+            //$this->session->set('form_error', "Los campos con asterisco son obligatorios");
+            $data['centros'] = $this->centroEducativoModel->findAll();
+            $data['cursos'] = $this->cursoModel->findAll();
+            $data['mensaje'] = $this->session->form_error;
+            
+            //echo '<pre>'.var_export($data['datos'], true).'</pre>';exit;
+
+            $data['title']='MYRP - DYA';
+            $data['main_content']='componente3/prod3_create_view';
+            return view('includes/template', $data);
+        }else{
+
+            $this->logout();
+        }
+    }
+
+    public function prod_3_new() {
+        $data['idrol'] = $this->session->idrol;
+        $data['id'] = $this->session->idusuario;
+        $data['is_logged'] = $this->session->is_logged;
+        $data['nombre'] = $this->session->nombre;
+        $data['componente_3'] = $this->session->componente_3;
+
+        if ($data['is_logged'] == 1 && $data['componente_3'] == 1) {
+
+            $producto_3 = array(
+                'amie' => strtoupper($this->request->getPostGet('amie')),
+                'nombre' => strtoupper($this->request->getPostGet('nombre')),
+                'documento' => strtoupper($this->request->getPostGet('documento')),
+                'genero' => strtoupper($this->request->getPostGet('genero')),
+            );
+            
+            if ($producto_3['nombre'] == 'NULL' || $producto_3['nombre'] == '') {
+                
+                $this->session->set('form_error', "Falta llenar campos obligatorios");
+                return redirect()->to('prod-3-create');
+            }else{
+                $this->session->set('form_error', "");
+                $this->prod3Model->save($producto_3);
+                return redirect()->to('prod_3');
+            }
+            //echo '<pre>'.var_export($this->session->form_error, true).'</pre>';exit;
+
+            
+        }else{
+
+            $this->logout();
+        }
+    }
+
+    public function prod_3_delete($id) {
+        $data['idrol'] = $this->session->idrol;
+        $data['id'] = $this->session->idusuario;
+        $data['is_logged'] = $this->session->is_logged;
+        $data['nombre'] = $this->session->nombre;
+        $data['componente_3'] = $this->session->componente_3;
+
+        if ($data['is_logged'] == 1 && $data['componente_3'] == 1) {
+            $id = $id;
+            //echo '<pre>'.var_export($id, true).'</pre>';exit;
+            $this->prod3Model->delete($id);
+
+            return redirect()->to('prod_3');
+        }else{
+
+            $this->logout();
+        }
+    }
+
     public function frm_procesos_prod_3() {
         $data['idrol'] = $this->session->idrol;
         $data['id'] = $this->session->idusuario;

@@ -11,7 +11,7 @@
             <div class="card-header">
                 <?php echo '<span id="titulo-componente">Componente 3 - Click en el NOMBRE para ver y editar datos del registro</span>'; ?>
             </div><div class="card-header">
-                <a type="button" id="btn-register" href="<?= site_url().'prod-1-create/'; ?>" class="edit">
+                <a type="button" id="btn-register" href="<?= site_url().'prod-3-create/'; ?>" class="edit">
                     <img src="<?= site_url().'public/images/new.png'; ?>" >
                     <span id="title-link">Crear un nuevo registro</span>
                 </a>
@@ -43,7 +43,7 @@
                                     <td>'.$centro_educativo->nombre.'</td>
                                     <td>
                                         <div class="contenedor">
-                                            <a type="button" id="btn-register" href="'.site_url().'prod-1-delete/'.$value->id.'" class="edit">
+                                            <a type="button" id="btn-register" href="'.site_url().'prod-3-delete/'.$value->id.'" class="edit">
                                                 <img src="'.site_url().'public/images/delete.png" height="25">
                                             </a>
                                         </div>
