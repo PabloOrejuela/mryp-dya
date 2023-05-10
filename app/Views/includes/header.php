@@ -11,7 +11,7 @@
     <link href="<?= site_url(); ?>public/css/styles.css" rel="stylesheet" />
     <script src="<?= site_url(); ?>public/js/jquery-3.6.0.min.js" ></script>
     <script src="<?= site_url(); ?>public/bootstrap/js/bootstrap.bundle.min.js" ></script>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.js"></script>
 
 
     <!--DATATABLES -->

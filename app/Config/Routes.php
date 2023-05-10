@@ -94,6 +94,10 @@ $routes->post('getExcelC4', 'CargarInformacion::getExcelC4');
 
 $routes->get('logout', 'Inicio::logout');
 
+//REPORTES
+$routes->get('reportes-view', 'Reportes::index');
+$routes->get('reportes-p1', 'Reportes::reportes_prod_1');
+$routes->post('recibe-tab', 'Reportes::recibe_tab');
 
 /*
  * --------------------------------------------------------------------

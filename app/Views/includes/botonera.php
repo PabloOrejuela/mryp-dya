@@ -24,7 +24,7 @@
                     }
 
                     if ($this->session->reportes == 1) {
-                        echo '<li class="menu-item hidden"><a href="'.site_url().'reportes_view">Reportes</a></li>';
+                        echo '<li class="menu-item hidden"><a href="'.site_url().'reportes-view">Reportes</a></li>';
                     }
                 ?>
                 <li class="menu-item hidden"><a href="<?= site_url(); ?>logout">Salir</a>
