@@ -1,18 +1,25 @@
 <style>
     #codigo_0{
-        background-color:#fdfffc;
+        background-color:#edf0ee;
+        text-align: center;
     }
     #codigo_1{
-        background-color:#e3e4e6;
+        background-color:#edf0ee;
     }
     #codigo_2{
-        background-color:#f7e1f2;
+        background-color:#ed5c5c;
     }
     #codigo_3{
-        background-color:#f7f6e1;
+        background-color:#f5d5d9;
     }
     #codigo_4{
+        background-color:#f1f5d5;
+    }
+    #codigo_5{
         background-color:#e8f7e1;
+    }
+    #cabecera{
+        background-color:#dcedf5;
     }
 </style>
 <main class="container">
@@ -24,7 +31,7 @@
                 <?= esc("ANÁLISIS DE LA PRUEBA FINAL CON LA INTERVENCIÓN DEL PROGRAMA"); ?>
             </div>
             <div class="card-body" id="card-reportes"> 
-                <form action="<?php echo base_url().'/recibe-eval-prueba-final-tab';?>" method="post" id="form">
+                <form action="<?php echo base_url().'/recibe-eval-prueba-diagnostico-tab';?>" method="post" id="form">
                     <div class="col-md-8 mb-3">
                         <label for="amie">Centro educativo:</label>
                         <select 
@@ -46,7 +53,7 @@
                         </select>
                     </div>
                     <!-- Reporte -->
-                    <div class="contenedor mb-3 mt-3 col-md-6">
+                    <div class="contenedor mb-3 mt-3 col-md-9">
                         <table class="table table-bordered tabla-codigos-eval">
                             <thead>
                                 <th id="codigo_0">Puntaje</th>
@@ -60,19 +67,24 @@
                                     <td id="codigo_1">No corresponde a la enseñanza de acuerdo con la edad</td>
                                 </tr>
                                 <tr>
-                                    <td id="codigo_2">1</td>
+                                    <td id="codigo_2">1 - 10</td>
                                     <td id="codigo_2">Muy por debajo de lo esperado</td>
                                     <td id="codigo_2">Falta de mediación escolar para la enseñanza de la escritura</td>
                                 </tr>
                                 <tr>
-                                    <td id="codigo_3">2</td>
+                                    <td id="codigo_3">11 - 20</td>
                                     <td id="codigo_3">En proceso</td>
-                                    <td id="codigo_3">Mediación escolar es básica para la enseñanza de la escritura de acuerdo con la edad</td>
+                                    <td id="codigo_3">Mediación escolar no es básica para la enseñanza de la escritura de acuerdo con la edad</td>
                                 </tr>
                                 <tr>
-                                    <td id="codigo_4">3</td>
+                                    <td id="codigo_4">21 - 25</td>
                                     <td id="codigo_4">Adecuado</td>
                                     <td id="codigo_4">Mediación escolar es adecuada para la enseñanza de la escritura de acuerdo con la edad</td>
+                                </tr>
+                                <tr>
+                                    <td id="codigo_5">26</td>
+                                    <td id="codigo_5">Adecuado</td>
+                                    <td id="codigo_5">Mediación escolar es adecuada para la enseñanza de la escritura de acuerdo con la edad</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -83,7 +95,7 @@
             </div>
         <section>
             <h4>ANÁLISIS DE LA PRUEBA FINAL CON LA INTERVENCIÓN DEL PROGRAMA</h4>
-            <div class="col-md-9" style="width: 800px;">
+            <div class="col-md-9" style="width: 800px;font-size:0.8em;text-align:center;">
                 <div class="contenedor mb-3 mt-3">
                     <table class="table table-bordered tabla-codigos-eval col-md-6">
                         <thead>
@@ -98,13 +110,21 @@
                             </th>
                         </thead>
                         <thead>
-                            <th>No</th>
-                            <th>Nombres del estudiante</th>
-                            <th>Apellidos del estudiante</th>
-                            <th>Año EGB</th>
-                            <th>Lectura</th>
-                            <th>Escritura</th>
-                            <th>Matemáticas</th>
+                            <th id="cabecera" colspan="4"></th>
+                            <th id="cabecera" colspan="3">Dificultades en el aprendizaje seleccionado por docentes</th>
+                            <th id="cabecera" colspan="3">Dificultades encontradas en las pruebas de diagnóstico aplicadas</th>
+                        </thead>
+                        <thead>
+                            <th id="cabecera">No</th>
+                            <th id="cabecera">Nombres del estudiante</th>
+                            <th id="cabecera">Apellidos del estudiante</th>
+                            <th id="cabecera">Año EGB</th>
+                            <th id="cabecera">Lectura</th>
+                            <th id="cabecera">Escritura</th>
+                            <th id="cabecera">Matemáticas</th>
+                            <th id="cabecera">Lectura</th>
+                            <th id="cabecera">Escritura</th>
+                            <th id="cabecera">Matemáticas</th>
                         </thead>
                         <tbody>
                             <?php
@@ -117,27 +137,31 @@
                                             <td>'.$value->apellidos.'</td>';
     
                                             if ($value->anio_egb == '11') {
-                                                echo '<td id="codigo_3">1ro BTI</td>';
+                                                echo '<td>1ro BTI</td>';
                                             }else if($value->anio_egb == '12'){
-                                                echo '<td id="codigo_3">2do BTI</td>';
+                                                echo '<td>2do BTI</td>';
                                             }else if($value->anio_egb == '13'){
-                                                echo '<td id="codigo_3">3ro BTI</td>';
+                                                echo '<td>3ro BTI</td>';
                                             }else if($value->anio_egb == '14'){
-                                                echo '<td id="codigo_3">Analfabeta</td>';
+                                                echo '<td>Analfabeta</td>';
                                             }else if($value->anio_egb <= '10' && $value->anio_egb != ''){
-                                                echo '<td id="codigo_3">'.$value->anio_egb.' EGB</td>';
+                                                echo '<td>'.$value->anio_egb.' EGB</td>';
                                             }else{
-                                                echo '<td id="codigo_3">'.$value->anio_egb.'</td>';
+                                                echo '<td>'.$value->anio_egb.'</td>';
                                             }
                                             
-                                        echo '<td id="codigo_3"></td>
-                                            <td id="codigo_3"></td>
-                                            <td id="codigo_3"></td>
+                                        echo '<td id="codigo_1"></td>
+                                            <td id="codigo_1"></td>
+                                            <td id="codigo_1"></td>
+
+                                            <td id="codigo_1"></td>
+                                            <td id="codigo_1"></td>
+                                            <td id="codigo_1"></td>
                                         </tr>';
                                         $num++;
                                     }
                                 }else{
-                                    echo '<tr><td colspan="7">AUN NO HAY REGISTROS QUE MOSTRAR</td></tr>';
+                                    echo '<tr><td colspan="10">AUN NO HAY REGISTROS QUE MOSTRAR</td></tr>';
                                 }
                             ?>
                         </tbody>

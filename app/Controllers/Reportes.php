@@ -90,6 +90,37 @@ class Reportes extends BaseController {
         }
     }
 
+    public function reporte_analisis_pruebadiagnostico_p1() {
+        $data['idrol'] = $this->session->idrol;
+        $data['id'] = $this->session->idusuario;
+        $data['is_logged'] = $this->session->is_logged;
+        $data['nombre'] = $this->session->nombre;
+        $data['componente_1'] = $this->session->componente_1;
+        $data['reportes'] = $this->session->reportes;
+
+        if ($data['is_logged'] == 1 && $data['componente_1'] == 1 && $data['reportes'] == 1) {
+
+            $data['centros'] = $this->prod1Model->_getCentrosEducativos();
+            $data['cursos'] = $this->cursoModel->findAll();
+            $data['nacionalidades'] = $this->prod1Model->_getNacionalidades();
+            $data['genero'] = $this->prod1Model->_getGeneros();
+
+            $data['centro'] = '';
+            $data['registros'] = NULL;
+
+            //Evito el error de que llegue vacío el objeto
+            $data['chart_data'] = '';
+            //echo '<pre>'.var_export($data['genero'], true).'</pre>';exit;
+
+            $data['title']='MYRP - DYA';
+            $data['main_content']='reportes/prod1_reportes_analisis_prueba_diagnostico_view';
+            return view('includes/template_reportes', $data);
+        }else{
+
+            $this->logout();
+        }
+    }
+
     public function reporte_diagnostico_p1() {
         $data['idrol'] = $this->session->idrol;
         $data['id'] = $this->session->idusuario;
@@ -226,6 +257,32 @@ class Reportes extends BaseController {
 
         $data['title']='MYRP - DYA';
         $data['main_content']='reportes/prod1_reportes_analisis_prueba_final_view';
+        return view('includes/template_reportes', $data);
+        
+    }
+
+    public function recibe_eval_prueba_diagnostico_tab() {
+
+        if ($this->request->getPostGet('amie') == NULL) {
+            return redirect()->to('reportes-p1');
+        }
+
+        $data['amie'] = $this->request->getPostGet('amie');
+
+        $data['centro'] = $this->centroEducativoModel->find($data['amie']);
+
+        //$data['result'] = $this->asistenciaP1->_getAsistenciaReporte($data);
+
+        //echo '<pre>'.var_export($data['horas_planificadas'], true).'</pre>';exit;
+        $data['centros'] = $this->prod1Model->_getCentrosEducativos();
+        $data['registros'] = $this->prod1Model->_getRegistros($data['amie']);
+
+        //Evito el error de que llegue vacío el objeto
+        $data['chart_data'] = '';
+        //echo '<pre>'.var_export($data['registros'], true).'</pre>';exit;
+
+        $data['title']='MYRP - DYA';
+        $data['main_content']='reportes/prod1_reportes_analisis_prueba_diagnostico_view';
         return view('includes/template_reportes', $data);
         
     }

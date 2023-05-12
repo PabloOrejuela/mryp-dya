@@ -7,4 +7,5 @@
     <li>Habilitada la funcionalidad de borrado de un registro del producto 3</li>
     <li>Cargada la librería de charts</li>
     <li>Implementadas pruebas estáticas</li>
+    <li>Implementadas Analisis de diagnóstico</li>
 </ul>        
