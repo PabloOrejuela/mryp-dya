@@ -97,7 +97,8 @@ $routes->get('logout', 'Inicio::logout');
 //REPORTES
 $routes->get('reportes-view', 'Reportes::index');
 $routes->get('reportes-p1', 'Reportes::reportes_prod_1');
-$routes->post('recibe-tab', 'Reportes::recibe_tab');
+$routes->post('recibe-asistencia-tab', 'Reportes::recibe_asistencia_tab');
+$routes->post('recibe-diagnostico-tab', 'Reportes::recibe_diagnostico_tab');
 
 /*
  * --------------------------------------------------------------------

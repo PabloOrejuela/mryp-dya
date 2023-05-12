@@ -10,17 +10,17 @@
                 
                     <!--- <img src="..." class="card-img-top" alt="..."> -->
                     <?php  
-                        if ($this->session->componente_1 == 1) {
+                        if ($this->session->componente_1 == 1 && $this->session->reportes == 1) {
                             echo '<div class="card" style="width: 12rem;" id="card-componente">
                                     <img src="'.site_url().'public/images/card-01.jpg" class="card-img-top" alt="card1">
                                     <div class="card-body" >
                                         <h5 class="card-title">Componente 1</h5>
                                             <p class="card-text">Servicio de Apoyo Escolar implementado en tres provincias: Carchi, El Oro y Manabí (Manta) </p>
-                                            <a href="'.site_url().'reportes-p1" class="btn btn-info mb-2">REPORTES</a>
+                                            <a href="'.site_url().'reportes-p1" class="btn btn-info mb-2">Reportes</a>
                                     </div>
                                 </div>';
                         }
-                        if ($this->session->componente_2 == 1) {
+                        if ($this->session->componente_2 == 1 && $this->session->reportes == 1) {
                             echo '<div class="card" style="width: 12rem;" id="card-componente">
                                 <img src="'.site_url().'public/images/card-02.jpg" class="card-img-top" alt="card2">
                                     <div class="card-body" >
@@ -33,7 +33,7 @@
                                 </div>';
                         }
 
-                        if ($this->session->componente_3 == 1) {
+                        if ($this->session->componente_3 == 1 && $this->session->reportes == 1) {
                             echo '<div class="card" style="width: 12rem;" id="card-componente">
                                     <img src="'.site_url().'public/images/card-03.jpg" class="card-img-top" alt="card3">
                                     <div class="card-body" >
@@ -44,7 +44,7 @@
                                 </div>';
                         }
 
-                        if ($this->session->componente_4 == 1) {
+                        if ($this->session->componente_4 == 1 && $this->session->reportes == 1) {
                             echo '<div class="card" style="width: 12rem;" id="card-componente">
                                     <img src="'.site_url().'public/images/card-04.jpg" class="card-img-top" alt="card4">
                                     <div class="card-body" >

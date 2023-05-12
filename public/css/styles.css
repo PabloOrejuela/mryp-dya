@@ -248,10 +248,72 @@ label{
 
 .card-body{
     background-color: rgb(245, 245, 245);
+    padding-left: 10px;
 }
 
 textarea {
     height: 60px;
     width: 100%;
     resize: none;
+}
+
+#card-reportes{
+    font-size: 0.8em;
+}
+
+.tab-pane{
+    padding: 10px;
+}
+
+.tabla-asistencia th{
+    text-align: center;
+}
+
+.tabla-asistencia td{
+    text-align: center;
+}
+
+#th-dias{
+    background-color:#ca835d;
+    color: rgb(255, 255, 255);
+}
+
+#td-dias{
+    background-color:#e9af90;
+    color: rgb(255, 255, 255);
+}
+
+#th-hplan{
+    background-color:#a1a31d;
+    color: rgb(255, 255, 255);
+}
+
+#td-hplan{
+    background-color:#c4c558;
+    color: rgb(255, 255, 255);
+}
+
+#th-hefect{
+    background-color:#128e83;
+    color: rgb(255, 255, 255);
+}
+
+#td-hefect{
+    background-color:#2cd6c8;
+    color: rgb(255, 255, 255);
+}
+
+#th-perdidas{
+    background-color:#124e8e;
+    color: rgb(255, 255, 255);
+}
+
+#td-perdidas{
+    background-color:#347cc9;
+    color: rgb(255, 255, 255);
+}
+
+#table-asistencia{
+    padding: 10px;
+    width: 400px;
 }

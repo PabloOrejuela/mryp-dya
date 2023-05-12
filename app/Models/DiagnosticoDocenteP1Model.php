@@ -95,4 +95,63 @@ class DiagnosticoDocenteP1Model extends Model {
         $builder->set('idprod', $datos['idprod']);
         $builder->insert();
     }
+
+    public function _getDiagDocenteLectura($registros) {
+        $result = NULL;
+        foreach ($registros as $key => $value) {
+            
+            $builder = $this->db->table($this->table);
+            $builder->select('id');
+            $builder->where('idprod', $value->id);
+            $builder->where('lectura', 'SI');
+            $query = $builder->get();
+            if ($query->getResult() != null) {
+                foreach ($query->getResult() as $row) {
+                    $result[] = $row;
+                }
+            }
+            //echo $this->db->getLastQuery();
+            
+        }
+        return $result;
+    }
+
+    public function _getDiagDocenteEscritura($registros) {
+        $result = NULL;
+        foreach ($registros as $key => $value) {
+            
+            $builder = $this->db->table($this->table);
+            $builder->select('id');
+            $builder->where('idprod', $value->id);
+            $builder->where('escritura', 'SI');
+            $query = $builder->get();
+            if ($query->getResult() != null) {
+                foreach ($query->getResult() as $row) {
+                    $result[] = $row;
+                }
+            }
+            //echo $this->db->getLastQuery();
+            
+        }
+        return $result;
+    }
+
+    public function _getDiagDocenteMate($registros) {
+        $result = NULL;
+        foreach ($registros as $key => $value) {
+            
+            $builder = $this->db->table($this->table);
+            $builder->select('id');
+            $builder->where('idprod', $value->id);
+            $builder->where('matematica', 'SI');
+            $query = $builder->get();
+            if ($query->getResult() != null) {
+                foreach ($query->getResult() as $row) {
+                    $result[] = $row;
+                }
+            }
+            //echo $this->db->getLastQuery();
+        }
+        return $result;
+    }
 }

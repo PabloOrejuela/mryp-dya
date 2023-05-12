@@ -6,30 +6,31 @@
                 <i class="fa-solid fa-cash-register"></i>
                 <?= esc("Reportes"); ?>
             </div>
+            <div class="card-body" id="card-reportes"> 
                 
                     <ul class="nav nav-tabs" id="myTab" role="tablist">
                         <li class="nav-item" role="presentation">
                             <button 
-                                class="nav-link active" 
+                                class="nav-link" 
                                 id="asistencia-tab" 
                                 data-bs-toggle="tab" 
                                 data-bs-target="#asistencia" 
                                 type="button" 
                                 role="tab" 
                                 aria-controls="asistencia" 
-                                aria-selected="true">Asistencia
+                                aria-selected="false">Asistencia
                             </button>
                         </li>
                         <li class="nav-item" role="presentation">
                             <button 
-                                class="nav-link" 
+                                class="nav-link active" 
                                 id="diagnostico-tab" 
                                 data-bs-toggle="tab" 
                                 data-bs-target="#diagnostico" 
                                 type="button" 
                                 role="tab" 
                                 aria-controls="diagnostico" 
-                                aria-selected="false">Diagnóstico
+                                aria-selected="true">Diagnóstico
                             </button>
                         </li>
 
@@ -75,33 +76,7 @@
                                 <label class="form-check-label" for="flexCheckDefault">Horas perdidas</label>
                             </div>
                             <!-- Reporte -->
-                            <div class="contenedor mb-3 mt-3" id="table-asistencia">
-                                <table class="table table-bordered table-stripped tabla-asistencia col-md-6">
-                                    <thead>
-                                        <th colspan="4">
-                                            <?php
-                                                if ($centro != NULL && isset($centro)) {
-                                                    echo $centro->nombre;
-                                                }
-                                            ?>
-                                        </th>
-                                    </thead>
-                                    <thead>
-                                        <th id="th-dias">Días atención</th>
-                                        <th id="th-hplan">Horas planificadas</th>
-                                        <th id="th-hefect">Horas efectivas</th>
-                                        <th id="th-perdidas">Horas perdidas</th>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td id="td-dias"><?php echo $dias_atencion ?></td>
-                                            <td id="td-hplan"><?php echo $horas_planificadas ?></td>
-                                            <td id="td-hefect"><?php echo $horas_efectivas ?></td>
-                                            <td id="td-perdidas"><?php echo $horas_perdidas ?></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
+                            
                                 <button type="submit" class="btn btn-success">Generar reporte</button>
                             </form> 
                         </div>
@@ -144,6 +119,7 @@
                             </form>
                         </div>
                     </div>    
+            </div>
         </div>
         <section>
         

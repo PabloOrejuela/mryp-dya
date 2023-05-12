@@ -122,4 +122,70 @@ class AsistenciaP1Model extends Model {
         $builder->set('idprod', $datos['idprod']);
         $builder->insert();
     }
+
+    public function _getDiasatencionReporte($obj) {
+        $result = 0;
+        $builder = $this->db->table($this->table);
+        $builder->selectAvg('dias_atencion');
+        $builder->where('amie', $obj['amie']);
+        $builder->join('producto_1', 'producto_1.id = asistencia.idprod');
+        $query = $builder->get();
+        if ($query->getResult() != null) {
+            foreach ($query->getResult() as $row) {
+                if ($row->dias_atencion != NULL) {
+                    $result = $row->dias_atencion;
+                }
+            }
+        }
+        //echo $this->db->getLastQuery();exit;
+        return $result;
+    }
+
+    public function _getHorasPlanificadasReporte($obj) {
+        $result = NULL;
+        $builder = $this->db->table($this->table);
+        $builder->selectAvg('horas_planificadas');
+        $builder->where('amie', $obj['amie']);
+        $builder->join('producto_1', 'producto_1.id = asistencia.idprod');
+        $query = $builder->get();
+        if ($query->getResult() != null) {
+            foreach ($query->getResult() as $row) {
+                $result = $row->horas_planificadas;
+            }
+        }
+        //echo $this->db->getLastQuery();exit;
+        return $result;
+    }
+
+    public function _getHorasEfectivasReporte($obj) {
+        $result = NULL;
+        $builder = $this->db->table($this->table);
+        $builder->selectAvg('horas_efectivas');
+        $builder->where('amie', $obj['amie']);
+        $builder->join('producto_1', 'producto_1.id = asistencia.idprod');
+        $query = $builder->get();
+        if ($query->getResult() != null) {
+            foreach ($query->getResult() as $row) {
+                $result = $row->horas_efectivas;
+            }
+        }
+        //echo $this->db->getLastQuery();exit;
+        return $result;
+    }
+
+    public function _getHorasPerdidasReporte($obj) {
+        $result = NULL;
+        $builder = $this->db->table($this->table);
+        $builder->selectAvg('horas_perdidas');
+        $builder->where('amie', $obj['amie']);
+        $builder->join('producto_1', 'producto_1.id = asistencia.idprod');
+        $query = $builder->get();
+        if ($query->getResult() != null) {
+            foreach ($query->getResult() as $row) {
+                $result = $row->horas_perdidas;
+            }
+        }
+        //echo $this->db->getLastQuery();exit;
+        return $result;
+    }
 }

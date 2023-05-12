@@ -12,6 +12,8 @@
     <script src="<?= site_url(); ?>public/js/jquery-3.6.0.min.js" ></script>
     <script src="<?= site_url(); ?>public/bootstrap/js/bootstrap.bundle.min.js" ></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.0.0/dist/chart.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
 
 
     <!--DATATABLES -->
