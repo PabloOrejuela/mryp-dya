@@ -214,4 +214,71 @@ class EvalMateElementalP1Model extends Model {
         
         $builder->insert();
     }
+
+    public function _getRelacionFiguras($registros, $num) {
+        $result = NULL;
+        foreach ($registros as $key => $value) {
+            
+            $builder = $this->db->table($this->table);
+            $builder->select('id');
+            $builder->where('idprod', $value->id);
+            if ($num == 1) {
+                $builder->where('relacion_figuras_geo_1', 1);
+            }elseif ($num == 2) {
+                $builder->where('relacion_figuras_geo_1_1', 1);
+            }
+            $query = $builder->get();
+            if ($query->getResult() != null) {
+                foreach ($query->getResult() as $row) {
+                    $result++;
+                }
+            }else{
+                $result += 0;
+            }
+            //echo $this->db->getLastQuery();
+        }
+        return $result;
+    }
+
+    public function _getSeriacion($registros, $num) {
+        $result = 0;
+        foreach ($registros as $key => $value) {
+            
+            $builder = $this->db->table($this->table);
+            $builder->select('id');
+            $builder->where('idprod', $value->id);
+            $builder->where('seriacion_'.$num, 1);
+            $query = $builder->get();
+            if ($query->getResult() != null) {
+                foreach ($query->getResult() as $row) {
+                    $result++;
+                }
+            }else{
+                $result += 0;
+            }
+            //echo $this->db->getLastQuery();
+        }
+        return $result;
+    }
+
+    public function _getDato($registros, $campo, $num) {
+        $result = 0;
+        foreach ($registros as $key => $value) {
+            
+            $builder = $this->db->table($this->table);
+            $builder->select('id');
+            $builder->where('idprod', $value->id);
+            $builder->where($campo.$num, 1);
+            $query = $builder->get();
+            if ($query->getResult() != null) {
+                foreach ($query->getResult() as $row) {
+                    $result++;
+                }
+            }else{
+                $result += 0;
+            }
+            //echo $this->db->getLastQuery();exit;
+        }
+        return $result;
+    }
 }

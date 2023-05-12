@@ -94,11 +94,17 @@ $routes->post('getExcelC4', 'CargarInformacion::getExcelC4');
 
 $routes->get('logout', 'Inicio::logout');
 
-//REPORTES
+//REPORTES ESTÁTICOS
 $routes->get('reportes-view', 'Reportes::index');
-$routes->get('reportes-p1', 'Reportes::reportes_prod_1');
+$routes->get('reportes-p1', 'Reportes::reporte_asistencia_p1');
+$routes->get('reporte-asistencia-p1', 'Reportes::reporte_asistencia_p1');
 $routes->post('recibe-asistencia-tab', 'Reportes::recibe_asistencia_tab');
+$routes->get('reporte-diagnostico-p1', 'Reportes::reporte_diagnostico_p1');
 $routes->post('recibe-diagnostico-tab', 'Reportes::recibe_diagnostico_tab');
+$routes->get('reporte-despistaje-mat-p1', 'Reportes::reporte_despistaje_mat_p1');
+$routes->post('recibe-despistaje-mat-tab', 'Reportes::recibe_despistaje_mat_tab');
+$routes->get('reporte-analisis-pruebafinal-p1', 'Reportes::reporte_analisis_pruebafinal_p1');
+$routes->post('recibe-eval-prueba-final-tab', 'Reportes::recibe_eval_prueba_final_tab');
 
 /*
  * --------------------------------------------------------------------

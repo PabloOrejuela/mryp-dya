@@ -273,6 +273,10 @@ textarea {
     text-align: center;
 }
 
+.tabla-codigos-eval td{
+    text-align: center;
+}
+
 #th-dias{
     background-color:#ca835d;
     color: rgb(255, 255, 255);
@@ -316,4 +320,9 @@ textarea {
 #table-asistencia{
     padding: 10px;
     width: 400px;
+}
+
+.nav-reportes{
+    padding-left: 45px;
+    background-color: aliceblue;
 }

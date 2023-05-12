@@ -6,4 +6,5 @@
     <li>Implementada la creación de un nuevo registro del producto 3</li>
     <li>Habilitada la funcionalidad de borrado de un registro del producto 3</li>
     <li>Cargada la librería de charts</li>
+    <li>Implementadas pruebas estáticas</li>
 </ul>        

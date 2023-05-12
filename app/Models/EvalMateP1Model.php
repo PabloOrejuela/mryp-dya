@@ -214,4 +214,190 @@ class EvalMateP1Model extends Model {
         
         $builder->insert();
     }
+
+    public function _getOrientacionEspacial($registros, $num) {
+        $result = 0;
+        foreach ($registros as $key => $value) {
+            
+            $builder = $this->db->table($this->table);
+            $builder->select('id');
+            $builder->where('idprod', $value->id);
+            $builder->where('orientacion_espacial_'.$num, 1);
+            $query = $builder->get();
+            if ($query->getResult() != null) {
+                foreach ($query->getResult() as $row) {
+                    $result++;
+                }
+            }else{
+                $result += 0;
+            }
+            //echo $this->db->getLastQuery();
+        }
+        return $result;
+    }
+
+    public function _getClasificacion($registros, $num) {
+        $result = 0;
+        foreach ($registros as $key => $value) {
+            
+            $builder = $this->db->table($this->table);
+            $builder->select('id');
+            $builder->where('idprod', $value->id);
+            $builder->where('clasificacion_'.$num, 1);
+            $query = $builder->get();
+            if ($query->getResult() != null) {
+                foreach ($query->getResult() as $row) {
+                    $result++;
+                }
+            }else{
+                $result += 0;
+            }
+            //echo $this->db->getLastQuery();
+        }
+        return $result;
+    }
+
+    public function _getSeriacion($registros, $num) {
+        $result = 0;
+        foreach ($registros as $key => $value) {
+            
+            $builder = $this->db->table($this->table);
+            $builder->select('id');
+            $builder->where('idprod', $value->id);
+            $builder->where('seriacion_'.$num, 1);
+            $query = $builder->get();
+            if ($query->getResult() != null) {
+                foreach ($query->getResult() as $row) {
+                    $result++;
+                }
+            }else{
+                $result += 0;
+            }
+            //echo $this->db->getLastQuery();
+        }
+        return $result;
+    }
+
+    public function _getEsquema($registros, $num) {
+        $result = NULL;
+        foreach ($registros as $key => $value) {
+            
+            $builder = $this->db->table($this->table);
+            $builder->select('id');
+            $builder->where('idprod', $value->id);
+            $builder->where('esquema_corporal_'.$num, 1);
+            $query = $builder->get();
+            if ($query->getResult() != null) {
+                foreach ($query->getResult() as $row) {
+                    $result++;
+                }
+            }else{
+                $result += 0;
+            }
+            //echo $this->db->getLastQuery();
+        }
+        return $result;
+    }
+
+    public function _getSuma($registros, $num) {
+        $result = NULL;
+        foreach ($registros as $key => $value) {
+            
+            $builder = $this->db->table($this->table);
+            $builder->select('id');
+            $builder->where('idprod', $value->id);
+            if ($num == 2) {
+                $builder->where('suma_dos_cifras', 1);
+            }elseif ($num == 4) {
+                $builder->where('suma_cuatro_cifras', 1);
+            }elseif ($num == 5) {
+                $builder->where('suma_cinco_mas', 1);
+            }
+            $query = $builder->get();
+            if ($query->getResult() != null) {
+                foreach ($query->getResult() as $row) {
+                    $result++;
+                }
+            }else{
+                $result += 0;
+            }
+            //echo $this->db->getLastQuery();
+        }
+        return $result;
+    }
+
+    public function _getResta($registros, $num) {
+        $result = NULL;
+        foreach ($registros as $key => $value) {
+            
+            $builder = $this->db->table($this->table);
+            $builder->select('id');
+            $builder->where('idprod', $value->id);
+            if ($num == 3) {
+                $builder->where('resta_tres_cifras', 1);
+            }elseif ($num == 4) {
+                $builder->where('resta_cuatro_cifras', 1);
+            }
+            $query = $builder->get();
+            if ($query->getResult() != null) {
+                foreach ($query->getResult() as $row) {
+                    $result++;
+                }
+            }else{
+                $result += 0;
+            }
+            //echo $this->db->getLastQuery();
+        }
+        return $result;
+    }
+
+    public function _getMultiplica($registros, $num) {
+        $result = NULL;
+        foreach ($registros as $key => $value) {
+            
+            $builder = $this->db->table($this->table);
+            $builder->select('id');
+            $builder->where('idprod', $value->id);
+            if ($num == 1) {
+                $builder->where('multiplicacion_una_cifra', 1);
+            }elseif ($num == 2) {
+                $builder->where('multiplicacion_dos_cifras', 1);
+            }
+            $query = $builder->get();
+            if ($query->getResult() != null) {
+                foreach ($query->getResult() as $row) {
+                    $result++;
+                }
+            }else{
+                $result += 0;
+            }
+            //echo $this->db->getLastQuery();
+        }
+        return $result;
+    }
+
+    public function _getDivide($registros, $num) {
+        $result = NULL;
+        foreach ($registros as $key => $value) {
+            
+            $builder = $this->db->table($this->table);
+            $builder->select('id');
+            $builder->where('idprod', $value->id);
+            if ($num == 1) {
+                $builder->where('division_una_cifra', 1);
+            }elseif ($num == 2) {
+                $builder->where('division_dos_cifras', 2);
+            }
+            $query = $builder->get();
+            if ($query->getResult() != null) {
+                foreach ($query->getResult() as $row) {
+                    $result++;
+                }
+            }else{
+                $result += 0;
+            }
+            //echo $this->db->getLastQuery();
+        }
+        return $result;
+    }
 }
