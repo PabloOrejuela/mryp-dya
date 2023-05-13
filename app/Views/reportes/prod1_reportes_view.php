@@ -51,7 +51,7 @@
             </div>
         <section>
         
-            <div class="col-md-06" style="width: 600px;">
+            <div class="col-md-7" style="width: 700px;">
                 <div class="contenedor mb-3 mt-3" id="table-asistencia">
                     <table class="table table-bordered table-stripped tabla-asistencia col-md-6">
                         <thead>

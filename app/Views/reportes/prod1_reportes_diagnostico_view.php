@@ -29,14 +29,21 @@
                         </select>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" value="dif_docentes" name="diagnostico" id="flexCheckDefault">
-                        <label class="form-check-label" for="flexCheckDefault">Dificultades encontradas por docentes</label>
+                        <input class="form-radio-input" type="radio" value="dif_docentes" name="diagnostico" id="flexCheckDefault">
+                        <label class="form-radio-label" for="flexCheckDefault">Dificultades encontradas por docentes</label>
+                        
                     </div>
                     <div class="form-check">
                         <input class="form-check-input" type="radio" value="dif_diag_aplicado" name="diagnostico" id="flexCheckDefault" disabled>
                         <label class="form-check-label" for="flexCheckDefault">Dificultades de aprendizaje encontradas a partir de los diagnósticos aplicados</label>
                     </div>
-                    <button type="submit" class="btn btn-success">Generar reporte</button>
+                    <div class="form-check mt-3">
+                        <input class="form-radio-input" type="radio" value="pie" name="tipo_grafico" id="flexCheckDefault" checked>
+                        <label class="form-radio-label" for="flexCheckDefault">Pastel</label>
+                        <input class="form-radio-input" type="radio" value="bar" name="tipo_grafico" id="flexCheckDefault">
+                        <label class="form-radio-label" for="flexCheckDefault">Barras</label>
+                    </div>
+                    <button type="submit" class="btn btn-success mt-3">Generar reporte</button>
                 </form>   
             </div>
         </div>
@@ -62,7 +69,7 @@
     var cData = JSON.parse(`<?php echo $chart_data; ?>`);
     var ctx = document.getElementById('myChart').getContext('2d');
     var myChart = new Chart(ctx, {
-        type: "pie",
+        type: ""+cData.tipoGrafico,
         data: {
             labels: cData.etiquetas,
             datasets: [{

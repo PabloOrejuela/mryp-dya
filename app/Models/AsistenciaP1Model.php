@@ -7,7 +7,7 @@ use CodeIgniter\Model;
 class AsistenciaP1Model extends Model {
     
     protected $DBGroup          = 'default';
-    protected $table            = 'asistencia';
+    protected $table            = 'asistencia_prod_1';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $insertID         = 0;
@@ -15,16 +15,17 @@ class AsistenciaP1Model extends Model {
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
     protected $allowedFields    = [
-        'dias_atencion',
+        'horas_atencion_total',
         'horas_planificadas',
         'horas_efectivas',
         'horas_perdidas',
+        'cohorte',
         'idtipo',
         'idprod',
     ];
 
     // Dates
-    protected $useTimestamps = false;
+    protected $useTimestamps = true;
     protected $dateFormat    = 'datetime';
     protected $createdField  = 'created_at';
     protected $updatedField  = 'updated_at';
@@ -47,10 +48,10 @@ class AsistenciaP1Model extends Model {
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
 
-    public function _getAsistencia($idprod) {
+    public function _getAsistencia($amie) {
         $result = NULL;
         $builder = $this->db->table($this->table);
-        $builder->select('*')->where('idprod', strtoupper($idprod));
+        $builder->select('*')->where('amie', $amie);
         $query = $builder->get();
         if ($query->getResult() != null) {
             foreach ($query->getResult() as $row) {
@@ -63,8 +64,8 @@ class AsistenciaP1Model extends Model {
 
     public function _update($datos) {
         $builder = $this->db->table($this->table);
-        if ($datos['dias_atencion'] != '0') {
-            $builder->set('dias_atencion', $datos['dias_atencion']);
+        if ($datos['horas_atencion_total'] != '0') {
+            $builder->set('horas_atencion_total', $datos['horas_atencion_total']);
         }
 
         if ($datos['horas_planificadas'] != '0') {
@@ -78,24 +79,15 @@ class AsistenciaP1Model extends Model {
         if ($datos['horas_perdidas'] != '0') {
             $builder->set('horas_perdidas', $datos['horas_perdidas']);
         }
-        if ($datos['kit'] != '') {
-            $builder->set('kit', $datos['kit']);
-        }
-        if ($datos['retirado'] != '') {
-            $builder->set('retirado', $datos['retirado']);
-        }else{
-            $builder->set('retirado', 0);
-        }
 
-        $builder->set('idtipo', $datos['idtipo']);
-        $builder->where('idprod', $datos['idprod']);
+        $builder->where('amie', $datos['amie']);
         $builder->update();
     }
 
     public function _save($datos) {
         $builder = $this->db->table($this->table);
-        if ($datos['dias_atencion'] != '0') {
-            $builder->set('dias_atencion', $datos['dias_atencion']);
+        if ($datos['horas_atencion_total'] != '0') {
+            $builder->set('horas_atencion_total', $datos['horas_atencion_total']);
         }
 
         if ($datos['horas_planificadas'] != '0') {
@@ -109,31 +101,21 @@ class AsistenciaP1Model extends Model {
         if ($datos['horas_perdidas'] != '0') {
             $builder->set('horas_perdidas', $datos['horas_perdidas']);
         }
-        if ($datos['kit'] != '') {
-            $builder->set('kit', $datos['kit']);
-        }
-        if ($datos['retirado'] != '') {
-            $builder->set('retirado', $datos['retirado']);
-        }else{
-            $builder->set('retirado', 0);
-        }
 
-        $builder->set('idtipo', $datos['idtipo']);
-        $builder->set('idprod', $datos['idprod']);
+        $builder->set('amie', $datos['amie']);
         $builder->insert();
     }
 
     public function _getDiasatencionReporte($obj) {
         $result = 0;
         $builder = $this->db->table($this->table);
-        $builder->selectAvg('dias_atencion');
+        $builder->selectAvg('horas_atencion_total');
         $builder->where('amie', $obj['amie']);
-        $builder->join('producto_1', 'producto_1.id = asistencia.idprod');
         $query = $builder->get();
         if ($query->getResult() != null) {
             foreach ($query->getResult() as $row) {
                 if ($row->dias_atencion != NULL) {
-                    $result = $row->dias_atencion;
+                    $result = $row->horas_atencion_total;
                 }
             }
         }
@@ -146,7 +128,6 @@ class AsistenciaP1Model extends Model {
         $builder = $this->db->table($this->table);
         $builder->selectAvg('horas_planificadas');
         $builder->where('amie', $obj['amie']);
-        $builder->join('producto_1', 'producto_1.id = asistencia.idprod');
         $query = $builder->get();
         if ($query->getResult() != null) {
             foreach ($query->getResult() as $row) {
@@ -162,7 +143,6 @@ class AsistenciaP1Model extends Model {
         $builder = $this->db->table($this->table);
         $builder->selectAvg('horas_efectivas');
         $builder->where('amie', $obj['amie']);
-        $builder->join('producto_1', 'producto_1.id = asistencia.idprod');
         $query = $builder->get();
         if ($query->getResult() != null) {
             foreach ($query->getResult() as $row) {
@@ -178,7 +158,6 @@ class AsistenciaP1Model extends Model {
         $builder = $this->db->table($this->table);
         $builder->selectAvg('horas_perdidas');
         $builder->where('amie', $obj['amie']);
-        $builder->join('producto_1', 'producto_1.id = asistencia.idprod');
         $query = $builder->get();
         if ($query->getResult() != null) {
             foreach ($query->getResult() as $row) {

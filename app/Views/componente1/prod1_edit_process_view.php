@@ -15,14 +15,14 @@
             <div class="card mb-4">
                 <div class="card-body">
                     <div class="row">
-                    <h4 class="mt-3" id="titulo-nombre"><?= esc ('Procesos - '.$datos->apellidos.' '.$datos->nombres); ?></h4>
+                    <h4 class="mt-3" id="titulo-nombre"><?= esc ('Procesos - '.$datos->nombre.' '.$datos->amie); ?></h4>
                     <h4>Asistencia</h4>
                         
                         <div class="col-md-3 mb-3">
-                            <label for="dias_atencion">DIAS ATENCION:</label>
+                            <label for="dias_atencion">HORAS TOTAL ATENCION:</label>
                         
                             <?php
-                            
+                            exit;
                                 if ($asistencia != NULL) {
                                     if ($asistencia->dias_atencion != NULL && isset($asistencia->dias_atencion) && $asistencia->dias_atencion != '' ) {
                                         echo '<input 

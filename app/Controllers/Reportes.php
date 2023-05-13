@@ -295,6 +295,7 @@ class Reportes extends BaseController {
         }else{
             $data['amie'] = $this->request->getPostGet('amie');
             $data['diagnostico'] = $this->request->getPostGet('diagnostico');
+            $data['tipo_grafico'] = $this->request->getPostGet('tipo_grafico');
         
             $data['centro'] = $this->centroEducativoModel->find($data['amie']);
             $data['dias_atencion'] = 0;
@@ -332,6 +333,7 @@ class Reportes extends BaseController {
             $respuesta = [
                 "etiquetas" => $etiquetas,
                 "datos" => $datosVentas,
+                "tipoGrafico" => $data['tipo_grafico'],
             ];
             //echo '<pre>'.var_export($respuesta, true).'</pre>';
             $data['centros'] = $this->prod1Model->_getCentrosEducativos();

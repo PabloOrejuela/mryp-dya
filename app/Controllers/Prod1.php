@@ -525,18 +525,18 @@ class Prod1 extends BaseController {
         }
     }
 
-    public function prod_1_reg_proceso($idprod) {
+    public function prod_1_reg_proceso($amie) {
         $data['idrol'] = $this->session->idrol;
         $data['id'] = $this->session->idusuario;
         $data['is_logged'] = $this->session->is_logged;
         $data['nombre'] = $this->session->nombre;
+        $data['componente_1'] = $this->session->componente_1;
 
-        if ($data['is_logged'] == 1) {
+        if ($data['is_logged'] == 1 && $data['componente_1'] == 1) {
             
-            $data['idprod'] = $idprod;
-            $data['asistencia'] = $this->asistenciaP1->_getAsistencia($idprod);
-            $data['eval_final'] = $this->evalFinalP1->_getEvalFinal($idprod);
-            $data['datos'] = $this->prod1Model->find($idprod);
+            $data['amie'] = $amie;
+            $data['asistencia'] = $this->asistenciaP1->_getAsistencia($amie);
+            $data['eval_final'] = $this->evalFinalP1->_getEvalFinal($amie);
 
             //echo '<pre>'.var_export($data['datos'], true).'</pre>';exit;
 
@@ -804,6 +804,27 @@ class Prod1 extends BaseController {
 
             $data['title']='MYRP - DYA';
             $data['main_content']='componente1/prod1_process_view';
+            return view('includes/template', $data);
+        }else{
+
+            $this->logout();
+        }
+    }
+
+    public function prod_1_asistencia() {
+        $data['idrol'] = $this->session->idrol;
+        $data['id'] = $this->session->idusuario;
+        $data['is_logged'] = $this->session->is_logged;
+        $data['nombre'] = $this->session->nombre;
+        $data['componente_1'] = $this->session->componente_1;
+
+        if ($data['is_logged'] == 1 && $data['componente_1'] == 1) {
+
+            $data['centros'] = $this->prod1Model->_getCentrosEducativos();
+            //echo '<pre>'.var_export($data['centro'], true).'</pre>';exit;
+
+            $data['title']='MYRP - DYA';
+            $data['main_content']='componente1/prod1_asistencia_view';
             return view('includes/template', $data);
         }else{
 

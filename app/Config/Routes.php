@@ -47,6 +47,7 @@ $routes->get('prod_1_process', 'Prod1::frm_procesos');
 $routes->get('prod_1_edit/(:num)', 'Prod1::frm_edit/$1');
 $routes->post('prod1_update', 'Prod1::update');
 $routes->post('prod1-asistencia-update', 'Prod1::asistencia_update');
+$routes->get('prod-1-asistencia', 'Prod1::prod_1_asistencia');
 $routes->post('prod1-diagnostico-update', 'Prod1::diagnostico_update');
 $routes->post('prod1-eval-update', 'Prod1::eval_final_update');
 $routes->post('prod1-evalMate-update', 'Prod1::eval_mate_update');

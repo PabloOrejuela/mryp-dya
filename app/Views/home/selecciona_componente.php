@@ -18,6 +18,7 @@
                                             <p class="card-text">Servicio de Apoyo Escolar implementado en tres provincias: Carchi, El Oro y Manabí (Manta) </p>
                                             <a href="'.site_url().'prod_1" class="btn btn-info mb-2">Ver y editar información de registro</a>
                                             <a href="'.site_url().'prod_1_process" class="btn btn-info mb-2">Ver y editar variables de Proceso</a>
+                                            <a href="'.site_url().'prod-1-asistencia" class="btn btn-info mb-2">Registrar asistencia</a>
                                     </div>
                                 </div>';
                         }
