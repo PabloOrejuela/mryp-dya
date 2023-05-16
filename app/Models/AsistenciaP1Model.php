@@ -48,10 +48,15 @@ class AsistenciaP1Model extends Model {
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
 
-    public function _getAsistencia($amie) {
+    public function _getAsistencia($amie, $cohorte) {
         $result = NULL;
         $builder = $this->db->table($this->table);
         $builder->select('*')->where('amie', $amie);
+        if ($cohorte == 'PRIMERA COHORTE') {
+            $builder->where('cohorte', 1);
+        }else if($cohorte == 'SEGUNDA COHORTE'){
+            $builder->where('cohorte', 2);
+        }
         $query = $builder->get();
         if ($query->getResult() != null) {
             foreach ($query->getResult() as $row) {
@@ -63,46 +68,39 @@ class AsistenciaP1Model extends Model {
     }
 
     public function _update($datos) {
+        //echo '<pre>'.var_export($datos, true).'</pre>';exit;
         $builder = $this->db->table($this->table);
-        if ($datos['horas_atencion_total'] != '0') {
-            $builder->set('horas_atencion_total', $datos['horas_atencion_total']);
-        }
 
-        if ($datos['horas_planificadas'] != '0') {
-            $builder->set('horas_planificadas', $datos['horas_planificadas']);
-        }
-        
-        if ($datos['horas_efectivas'] != '0') {
-            $builder->set('horas_efectivas', $datos['horas_efectivas']);
-        }
-
-        if ($datos['horas_perdidas'] != '0') {
-            $builder->set('horas_perdidas', $datos['horas_perdidas']);
-        }
-
+        $builder->set('horas_atencion_total', $datos['horas_atencion_total']);
+        $builder->set('horas_efectivas', $datos['horas_efectivas']);
+        $builder->set('horas_perdidas', $datos['horas_perdidas']);
         $builder->where('amie', $datos['amie']);
+
+        if ($datos['cohorte'] == 'PRIMERA COHORTE') {
+            $builder->where('cohorte', 1);
+        }else if($datos['cohorte'] == 'SEGUNDA COHORTE'){
+            $builder->where('cohorte', 2);
+        }
+
         $builder->update();
+        //echo $this->db->getLastQuery();
     }
 
     public function _save($datos) {
         $builder = $this->db->table($this->table);
-        if ($datos['horas_atencion_total'] != '0') {
-            $builder->set('horas_atencion_total', $datos['horas_atencion_total']);
-        }
-
-        if ($datos['horas_planificadas'] != '0') {
-            $builder->set('horas_planificadas', $datos['horas_planificadas']);
-        }
         
-        if ($datos['horas_efectivas'] != '0') {
-            $builder->set('horas_efectivas', $datos['horas_efectivas']);
-        }
-
-        if ($datos['horas_perdidas'] != '0') {
-            $builder->set('horas_perdidas', $datos['horas_perdidas']);
-        }
+        $builder->set('horas_atencion_total', $datos['horas_atencion_total']);
+        $builder->set('horas_efectivas', $datos['horas_efectivas']);
+        $builder->set('horas_perdidas', $datos['horas_perdidas']);
 
         $builder->set('amie', $datos['amie']);
+
+        if ($datos['cohorte'] == 'PRIMERA COHORTE') {
+            $builder->set('cohorte', 1);
+        }else if($datos['cohorte'] == 'SEGUNDA COHORTE'){
+            $builder->set('cohorte', 2);
+        }
+
         $builder->insert();
     }
 
@@ -117,21 +115,6 @@ class AsistenciaP1Model extends Model {
                 if ($row->dias_atencion != NULL) {
                     $result = $row->horas_atencion_total;
                 }
-            }
-        }
-        //echo $this->db->getLastQuery();exit;
-        return $result;
-    }
-
-    public function _getHorasPlanificadasReporte($obj) {
-        $result = NULL;
-        $builder = $this->db->table($this->table);
-        $builder->selectAvg('horas_planificadas');
-        $builder->where('amie', $obj['amie']);
-        $query = $builder->get();
-        if ($query->getResult() != null) {
-            foreach ($query->getResult() as $row) {
-                $result = $row->horas_planificadas;
             }
         }
         //echo $this->db->getLastQuery();exit;

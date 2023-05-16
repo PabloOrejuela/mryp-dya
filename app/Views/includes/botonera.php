@@ -12,7 +12,7 @@
             <li class="menu-toggle">
                 <button onclick="toggleMenu();">&#9776;</button>
             </li>
-                <li class="menu-item hidden"><a href="<?= site_url(); ?>inicio">Inicio</a></li>
+                <li class="menu-item hidden"><a href="<?= site_url(); ?>inicio">Inicio </a></li>
                 <?php
 
                     if ($this->session->editar == 1) {
@@ -27,8 +27,8 @@
                         echo '<li class="menu-item hidden"><a href="'.site_url().'reportes-view">Reportes</a></li>';
                     }
                 ?>
-                <li class="menu-item hidden"><a href="<?= site_url(); ?>logout">Salir</a>
-            </li>
+                <li class="menu-item hidden"><a href="<?= site_url(); ?>logout">Salir</a></li>
+                <li style="font-size:0.9em;font-weight:bold;"><?= esc($this->session->nombre); ?></li>
         </ul>
     </div>
 

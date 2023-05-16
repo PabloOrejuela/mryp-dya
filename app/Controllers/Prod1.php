@@ -15,8 +15,16 @@ class Prod1 extends BaseController {
 
         if ($data['is_logged'] == 1 && $data['componente_1'] == 1) {
             $this->session->set('form_error', "");
-            $data['componente_1'] = $this->prod1Model->findAll();
+            
+            //$data['mis_amie'] = $this->prod1Model->_getMisAmie($data['nombre']);
 
+            //$data['componente_1'] = $this->prod1Model->findAll();
+            if ($this->session->idrol == 2) {
+                $data['componente_1'] = $this->prod1Model->_getMisRegistros($data['nombre']);
+            }else{
+                $data['componente_1'] = $this->prod1Model->findAll();
+            }
+            
             $data['title']='MYRP - DYA';
             $data['main_content']='componente1/prod1_view';
             return view('includes/template', $data);
@@ -56,7 +64,7 @@ class Prod1 extends BaseController {
 
         if ($data['is_logged'] == 1) {
             //$this->session->set('form_error', "Los campos con asterisco son obligatorios");
-            $data['centros'] = $this->centroEducativoModel->findAll();
+            $data['centros'] = $this->prod1Model->_getMisAmie($this->session->nombre);
             $data['cursos'] = $this->cursoModel->findAll();
             $data['mensaje'] = $this->session->form_error;
             
@@ -79,6 +87,7 @@ class Prod1 extends BaseController {
 
         if ($data['is_logged'] == 1) {
             $id = $this->request->getPostGet('id');
+
             $producto_1 = array(
                 'amie' => strtoupper($this->request->getPostGet('amie')),
                 'nombres' => strtoupper($this->request->getPostGet('nombres')),
@@ -87,10 +96,15 @@ class Prod1 extends BaseController {
                 'fecha_nac' => $this->request->getPostGet('fecha_nac'),
                 'anio_egb' => $this->request->getPostGet('anio_egb'),
                 'cohorte' => $this->request->getPostGet('cohorte'),
-                'tutor_apoyo' => strtoupper($this->request->getPostGet('tutor_apoyo')),
+                'tutor_apoyo' => $this->session->nombre,
             );
             
-            if ($producto_1['anio_egb'] == 'NULL' || $producto_1['tutor_apoyo'] == 'NULL' || $producto_1['cohorte'] == 'NULL') {
+            if (
+                    $producto_1['anio_egb'] == 'NULL' || 
+                    $producto_1['tutor_apoyo'] == 'NULL' || 
+                    $producto_1['cohorte'] == 'NULL' || 
+                    $producto_1['amie'] == 'NULL'
+                ) {
                 
                 $this->session->set('form_error', "Falta llenar campos obligatorios");
                 return redirect()->to('prod-1-create');
@@ -98,7 +112,6 @@ class Prod1 extends BaseController {
                 $this->session->set('form_error', "");
                 $this->prod1Model->save($producto_1);
             }
-            //echo '<pre>'.var_export($this->session->form_error, true).'</pre>';exit;
 
             return redirect()->to('prod_1');
         }else{
@@ -165,47 +178,57 @@ class Prod1 extends BaseController {
         }
     }
 
-    public function asistencia_update() {
+    public function prod1_asistencia_centro_update() {
         $data['idrol'] = $this->session->idrol;
         $data['id'] = $this->session->idusuario;
         $data['is_logged'] = $this->session->is_logged;
         $data['nombre'] = $this->session->nombre;
 
         if ($data['is_logged'] == 1) {
-            $id = $this->request->getPostGet('id');
-            $asistencia = array(
-                'dias_atencion' => strtoupper($this->request->getPostGet('dias_atencion')),
+            
+            $amie = $this->request->getPostGet('amie');
+            $cohorte = $this->request->getPostGet('cohorte');
+
+            $data = array(
+                'amie' => $amie,
+                'horas_atencion_total' => strtoupper($this->request->getPostGet('horas_atencion_total')),
                 'horas_planificadas' => strtoupper($this->request->getPostGet('horas_planificadas')),
                 'horas_efectivas' => strtoupper($this->request->getPostGet('horas_efectivas')),
                 'horas_perdidas' => strtoupper($this->request->getPostGet('horas_perdidas')),
-                'kit' => strtoupper($this->request->getPostGet('kit')),
-                'retirado' => strtoupper($this->request->getPostGet('retirado')),
-                'idtipo' => 2,
-                'idprod' =>  $id,
+                'cohorte' => $cohorte
             );
-            //echo '<pre>'.var_export($asistencia, true).'</pre>';exit;
-            if ($this->request->getPostGet('cohorte') != '') {
-                $prod['cohorte'] = $this->request->getPostGet('cohorte');
+            
+            if ($amie  != NULL && isset($amie) && $cohorte  != NULL && isset($cohorte) && $cohorte != 'NULL') {
+                $hay = $this->asistenciaP1->_getAsistencia($amie, $cohorte);
+            }else{
+                if ($this->session->idrol == 2) {
+                    $data['centros'] = $this->prod1Model->_getMisAmie($this->session->nombre);
+                }else{
+                    $data['centros'] = $this->prod1Model->_getCentrosEducativos();
+                }
+
+                $data['title']='MYRP - DYA';
+                $data['main_content']='componente1/prod1_asistencia_view';
+                return view('includes/template', $data);
             }
-            if ($this->request->getPostGet('fecha_inicio') != '') {
-                $prod['fecha_inicio'] = $this->request->getPostGet('fecha_inicio');
-            }
-            if ($this->request->getPostGet('fecha_fin') != '') {
-                $prod['fecha_fin'] = $this->request->getPostGet('fecha_fin');
-            }
-            $hay = $this->asistenciaP1->_getAsistencia($asistencia['idprod']);
-            //echo '<pre>'.var_export($prod, true).'</pre>';exit;
+            //echo '<pre>'.var_export($amie, true).'</pre>';exit;
             if ($hay) {
                 //Actualizo
-                $this->asistenciaP1->_update($asistencia);
+                $this->asistenciaP1->_update($data);
             }else{
                 //Grabo
-                $this->asistenciaP1->_save($asistencia);
+                $this->asistenciaP1->_save($data);
             }
 
-            $this->prod1Model->update($id, $prod);
+            if ($this->session->idrol == 2) {
+                $data['centros'] = $this->prod1Model->_getMisAmie($this->session->nombre);
+            }else{
+                $data['centros'] = $this->prod1Model->_getCentrosEducativos();
+            }
 
-            return redirect()->to('prod_1_process');
+            $data['title']='MYRP - DYA';
+            $data['main_content']='componente1/prod1_asistencia_view';
+            return view('includes/template', $data);
         }else{
 
             $this->logout();
@@ -797,10 +820,15 @@ class Prod1 extends BaseController {
         $data['id'] = $this->session->idusuario;
         $data['is_logged'] = $this->session->is_logged;
         $data['nombre'] = $this->session->nombre;
+        $data['componente_1'] = $this->session->componente_1;
 
-        if ($data['is_logged'] == 1) {
+        if ($data['is_logged'] == 1 && $data['componente_1'] == 1) {
 
-            $data['componente_1'] = $this->prod1Model->findAll();
+            if ($this->session->idrol == 2) {
+                $data['componente_1'] = $this->prod1Model->_getMisRegistros($data['nombre']);
+            }else{
+                $data['componente_1'] = $this->prod1Model->findAll();
+            }
 
             $data['title']='MYRP - DYA';
             $data['main_content']='componente1/prod1_process_view';
@@ -820,9 +848,34 @@ class Prod1 extends BaseController {
 
         if ($data['is_logged'] == 1 && $data['componente_1'] == 1) {
 
-            $data['centros'] = $this->prod1Model->_getCentrosEducativos();
-            //echo '<pre>'.var_export($data['centro'], true).'</pre>';exit;
+            $data = array(
+                'amie' => null,
+                'horas_atencion_total' => 0,
+                'horas_planificadas' => 0,
+                'horas_efectivas' => 0,
+                'horas_perdidas' => 0,
+                'cohorte' => null
+            );
 
+            $data['amie'] = $this->request->getPostGet('amie');
+            $data['cohorte'] = $this->request->getPostGet('cohorte');
+            
+            
+            if ($this->session->idrol == 1 && $this->session->componente_1 == 1 && $this->session->ver_info == 1) {
+                $data['centros'] = $this->prod1Model->_getCentrosEducativos(); 
+            }else{
+                $data['centros'] = $this->prod1Model->_getMisAmie($this->session->nombre); 
+            }
+            
+            if ($data['amie']  != NULL && isset($data['amie']) && $data['cohorte']  != NULL && isset($data['cohorte']) && $data['cohorte'] != 'NULL') {
+                $data['asistencia'] = $this->asistenciaP1->_getAsistencia($data['amie'], $data['cohorte']);
+                //echo '<pre>'.var_export($data['asistencia'], true).'</pre>';exit;
+            }else{
+                $data['cohorte'] = 'NULL';
+                $data['amie'] = 'NULL';
+                $data['asistencia'] = NULL;
+            }
+            //echo '<pre>'.var_export($data['centros'], true).'</pre>';exit;
             $data['title']='MYRP - DYA';
             $data['main_content']='componente1/prod1_asistencia_view';
             return view('includes/template', $data);

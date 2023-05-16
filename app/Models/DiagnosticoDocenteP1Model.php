@@ -97,7 +97,7 @@ class DiagnosticoDocenteP1Model extends Model {
     }
 
     public function _getDiagDocenteLectura($registros) {
-        $result = NULL;
+        $result = 0;
         foreach ($registros as $key => $value) {
             
             $builder = $this->db->table($this->table);
@@ -106,18 +106,15 @@ class DiagnosticoDocenteP1Model extends Model {
             $builder->where('lectura', 'SI');
             $query = $builder->get();
             if ($query->getResult() != null) {
-                foreach ($query->getResult() as $row) {
-                    $result[] = $row;
-                }
+                $result++;
             }
             //echo $this->db->getLastQuery();
-            
         }
         return $result;
     }
 
     public function _getDiagDocenteEscritura($registros) {
-        $result = NULL;
+        $result = 0;
         foreach ($registros as $key => $value) {
             
             $builder = $this->db->table($this->table);
@@ -126,9 +123,7 @@ class DiagnosticoDocenteP1Model extends Model {
             $builder->where('escritura', 'SI');
             $query = $builder->get();
             if ($query->getResult() != null) {
-                foreach ($query->getResult() as $row) {
-                    $result[] = $row;
-                }
+                $result++;
             }
             //echo $this->db->getLastQuery();
             
@@ -137,7 +132,7 @@ class DiagnosticoDocenteP1Model extends Model {
     }
 
     public function _getDiagDocenteMate($registros) {
-        $result = NULL;
+        $result = 0;
         foreach ($registros as $key => $value) {
             
             $builder = $this->db->table($this->table);
@@ -146,12 +141,11 @@ class DiagnosticoDocenteP1Model extends Model {
             $builder->where('matematica', 'SI');
             $query = $builder->get();
             if ($query->getResult() != null) {
-                foreach ($query->getResult() as $row) {
-                    $result[] = $row;
-                }
+                $result++;
             }
             //echo $this->db->getLastQuery();
         }
+
         return $result;
     }
 }

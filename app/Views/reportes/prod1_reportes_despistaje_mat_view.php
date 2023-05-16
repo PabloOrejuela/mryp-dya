@@ -28,6 +28,32 @@
                             ?>
                         </select>
                     </div>
+                    <div class="col-md-3 mb-3">
+                        <label for="cohorte">Cohorte:</label>
+                        <select 
+                            class="form-select" 
+                            aria-label="Default select example" 
+                            name="cohorte"
+                            id="select_info"  
+                        >   
+                            <?php
+                                if ($cohorte == 'PRIMERA COHORTE') {
+                                    echo '<option value="NULL">Elegir cohorte</option>';
+                                    echo '<option value="PRIMERA COHORTE" selected>PRIMERA COHORTE</option>';
+                                    echo '<option value="SEGUNDA COHORTE">SEGUNDA COHORTE</option>';
+                                }else if($cohorte == 'SEGUNDA COHORTE'){
+                                    echo '<option value="NULL">Elegir cohorte</option>';
+                                    echo '<option value="PRIMERA COHORTE">PRIMERA COHORTE</option>';
+                                    echo '<option value="SEGUNDA COHORTE" selected>SEGUNDA COHORTE</option>';
+
+                                }else{
+                                    echo '<option value="NULL" selected>Elegir cohorte</option>';
+                                    echo '<option value="PRIMERA COHORTE">PRIMERA COHORTE</option>';
+                                    echo '<option value="SEGUNDA COHORTE">SEGUNDA COHORTE</option>';
+                                }
+                            ?>
+                        </select>
+                    </div>
                     <div class="col-md-4 mb-2">
                         <label for="apoyo" class="mb-2">Tipo de prueba:</label>
                         <div class="col-sm-8">

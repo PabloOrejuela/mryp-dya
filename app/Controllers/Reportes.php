@@ -36,12 +36,14 @@ class Reportes extends BaseController {
 
         if ($data['is_logged'] == 1 && $data['componente_1'] == 1 && $data['reportes'] == 1) {
 
-            $data['centros'] = $this->prod1Model->_getCentrosEducativos();
+            $data['centros'] = $this->prod1Model->_getMisAmie($data['nombre']);
             $data['cursos'] = $this->cursoModel->findAll();
             $data['nacionalidades'] = $this->prod1Model->_getNacionalidades();
             $data['genero'] = $this->prod1Model->_getGeneros();
 
             $data['centro'] = '';
+            $data['amie'] = '';
+            $data['cohorte'] = '';
             $data['dias_atencion'] = 0;
             $data['horas_planificadas'] = 0;
             $data['horas_efectivas'] = 0;
@@ -69,7 +71,7 @@ class Reportes extends BaseController {
 
         if ($data['is_logged'] == 1 && $data['componente_1'] == 1 && $data['reportes'] == 1) {
 
-            $data['centros'] = $this->prod1Model->_getCentrosEducativos();
+            $data['centros'] = $this->prod1Model->_getMisAmie($data['nombre']);
             $data['cursos'] = $this->cursoModel->findAll();
             $data['nacionalidades'] = $this->prod1Model->_getNacionalidades();
             $data['genero'] = $this->prod1Model->_getGeneros();
@@ -100,7 +102,7 @@ class Reportes extends BaseController {
 
         if ($data['is_logged'] == 1 && $data['componente_1'] == 1 && $data['reportes'] == 1) {
 
-            $data['centros'] = $this->prod1Model->_getCentrosEducativos();
+            $data['centros'] = $this->prod1Model->_getMisAmie($data['nombre']);
             $data['cursos'] = $this->cursoModel->findAll();
             $data['nacionalidades'] = $this->prod1Model->_getNacionalidades();
             $data['genero'] = $this->prod1Model->_getGeneros();
@@ -131,12 +133,14 @@ class Reportes extends BaseController {
 
         if ($data['is_logged'] == 1 && $data['componente_1'] == 1 && $data['reportes'] == 1) {
 
-            $data['centros'] = $this->prod1Model->_getCentrosEducativos();
+            $data['centros'] = $this->prod1Model->_getMisAmie($data['nombre']);
             $data['cursos'] = $this->cursoModel->findAll();
             $data['nacionalidades'] = $this->prod1Model->_getNacionalidades();
             $data['genero'] = $this->prod1Model->_getGeneros();
 
             $data['centro'] = '';
+            $data['amie'] = '';
+            $data['cohorte'] = '';
             $data['dias_atencion'] = 0;
             $data['horas_planificadas'] = 0;
             $data['horas_efectivas'] = 0;
@@ -164,12 +168,13 @@ class Reportes extends BaseController {
 
         if ($data['is_logged'] == 1 && $data['componente_1'] == 1 && $data['reportes'] == 1) {
 
-            $data['centros'] = $this->prod1Model->_getCentrosEducativos();
+            $data['centros'] = $this->prod1Model->_getMisAmie($data['nombre']);
             $data['cursos'] = $this->cursoModel->findAll();
             $data['nacionalidades'] = $this->prod1Model->_getNacionalidades();
             $data['genero'] = $this->prod1Model->_getGeneros();
 
             $data['centro'] = '';
+            $data['cohorte'] = '';
             $data['dias_atencion'] = 0;
             $data['horas_planificadas'] = 0;
             $data['horas_efectivas'] = 0;
@@ -195,33 +200,13 @@ class Reportes extends BaseController {
 
         $data['amie'] = $this->request->getPostGet('amie');
         $data['cohorte'] = $this->request->getPostGet('cohorte');
-        $data['dias_atencion'] = $this->request->getPostGet('dias_atencion');
-        $data['horas_planificadas'] = $this->request->getPostGet('horas_planificadas');
-        $data['horas_efectivas'] = $this->request->getPostGet('horas_efectivas');
-        $data['horas_perdidas'] = $this->request->getPostGet('horas_perdidas');
-
-        if ($this->request->getPostGet('dias_atencion') != NUll) {
-            $data['dias_atencion'] = $this->asistenciaP1->_getDiasatencionReporte($data);
-        }
-
-        if ($this->request->getPostGet('horas_planificadas') != NUll) {
-            $data['horas_planificadas'] = $this->asistenciaP1->_getHorasPlanificadasReporte($data);
-        }
-
-        if ($this->request->getPostGet('horas_efectivas') != NUll) {
-            $data['horas_efectivas'] = $this->asistenciaP1->_getHorasEfectivasReporte($data);
-        }
-
-        if ($this->request->getPostGet('horas_perdidas') != NUll) {
-            $data['horas_perdidas'] = $this->asistenciaP1->_getHorasPerdidasReporte($data);
-        }
 
         $data['centro'] = $this->centroEducativoModel->find($data['amie']);
 
-        //$data['result'] = $this->asistenciaP1->_getAsistenciaReporte($data);
+        $data['asistencia'] = $this->asistenciaP1->_getAsistencia($data['amie'], $data['cohorte']);
 
         //echo '<pre>'.var_export($data['centro'], true).'</pre>';exit;
-        $data['centros'] = $this->prod1Model->_getCentrosEducativos();
+        $data['centros'] = $this->prod1Model->_getMisAmie($this->session->nombre);
         $data['cursos'] = $this->cursoModel->findAll();
         $data['nacionalidades'] = $this->prod1Model->_getNacionalidades();
         $data['genero'] = $this->prod1Model->_getGeneros();
@@ -248,7 +233,7 @@ class Reportes extends BaseController {
         //$data['result'] = $this->asistenciaP1->_getAsistenciaReporte($data);
 
         //echo '<pre>'.var_export($data['horas_planificadas'], true).'</pre>';exit;
-        $data['centros'] = $this->prod1Model->_getCentrosEducativos();
+        $data['centros'] = $this->prod1Model->_getMisAmie($data['nombre']);
         $data['registros'] = $this->prod1Model->_getRegistros($data['amie']);
 
         //Evito el error de que llegue vacío el objeto
@@ -274,7 +259,7 @@ class Reportes extends BaseController {
         //$data['result'] = $this->asistenciaP1->_getAsistenciaReporte($data);
 
         //echo '<pre>'.var_export($data['horas_planificadas'], true).'</pre>';exit;
-        $data['centros'] = $this->prod1Model->_getCentrosEducativos();
+        $data['centros'] = $this->prod1Model->_getMisAmie($data['nombre']);
         $data['registros'] = $this->prod1Model->_getRegistros($data['amie']);
 
         //Evito el error de que llegue vacío el objeto
@@ -290,10 +275,15 @@ class Reportes extends BaseController {
     public function recibe_diagnostico_tab() {
         
         // Ahora las imprimimos como JSON para pasarlas a AJAX, pero las agrupamos
-        if ($this->request->getPostGet('amie') == NULL||  $this->request->getPostGet('amie') == 'NULL') {
+        if (
+                $this->request->getPostGet('amie') == NULL ||  
+                $this->request->getPostGet('amie') == 'NULL' || 
+                $this->request->getPostGet('cohorte')  == 'NULL'
+        ) {
             return redirect()->to('reporte-diagnostico-p1');
         }else{
             $data['amie'] = $this->request->getPostGet('amie');
+            $data['cohorte'] = $this->request->getPostGet('cohorte');
             $data['diagnostico'] = $this->request->getPostGet('diagnostico');
             $data['tipo_grafico'] = $this->request->getPostGet('tipo_grafico');
         
@@ -302,7 +292,7 @@ class Reportes extends BaseController {
             $data['horas_planificadas'] = 0;
             $data['horas_efectivas'] = 0;
             $data['horas_perdidas'] = 0;
-            $data['registros'] = $this->prod1Model->_getIdsAmie($data['amie']);
+            $data['registros'] = $this->prod1Model->_getRegistrosAmieCohorte($data['amie'], $data['cohorte']);
             
             if ($data['diagnostico'] != NULL && $data['diagnostico'] == 'dif_docentes') {
                 //Traigo la información
@@ -311,24 +301,24 @@ class Reportes extends BaseController {
                 $data['escritura'] = $this->diagDocenteP1->_getDiagDocenteEscritura($data['registros']);
                 $data['matematica'] = $this->diagDocenteP1->_getDiagDocenteMate($data['registros']);
     
-    
+                
                 $total = count($data['registros']);
-                $sin_dato = $total - (count($data['lectura']) + count($data['matematica']) + count($data['escritura'] ));
-                $datosVentas[0] = number_format((count($data['lectura'] ) * 100)/$total, 2);
-                $datosVentas[1] = number_format((count($data['matematica'] ) * 100)/$total,2);
-                $datosVentas[2] = number_format((count($data['escritura'] ) * 100)/$total,2);
-                $datosVentas[3] = number_format(($sin_dato * 100)/$total,2);
-    
+
+                //Para poder mostrar los que no tienen info hayq ue hacer pasteles por separado
+                //$sin_dato = $total - $data['lectura'] - $data['matematica'] - $data['escritura'];
+                $datosVentas[0] = number_format(($data['lectura'] * 100)/$total, 2);
+                $datosVentas[1] = number_format(($data['matematica'] * 100)/$total,2);
+                $datosVentas[2] = number_format(($data['escritura'] * 100)/$total,2);
+                //echo '<pre>'.var_export($, true).'</pre>';exit;
             }else if($data['diagnostico'] != NULL && $data['diagnostico'] == 'dif_diag_aplicado'){
 
             }else {
                 $datosVentas[0] = 0;
                 $datosVentas[1] = 0;
                 $datosVentas[2] = 0;
-                $datosVentas[3] = 0;
             }
             //echo '<pre>'.var_export($this->request->getPostGet('diagnostico'), true).'</pre>';exit;
-            $etiquetas = ["Lectura", "Escritura", "Matemática", "No registra información"];
+            $etiquetas = ["Lectura", "Escritura", "Matemática"];
             
             $respuesta = [
                 "etiquetas" => $etiquetas,
@@ -336,7 +326,7 @@ class Reportes extends BaseController {
                 "tipoGrafico" => $data['tipo_grafico'],
             ];
             //echo '<pre>'.var_export($respuesta, true).'</pre>';
-            $data['centros'] = $this->prod1Model->_getCentrosEducativos();
+            $data['centros'] = $this->prod1Model->_getMisAmie($this->session->nombre);
             $data['chart_data'] =  json_encode($respuesta);
             $data['title']='MYRP - DYA';
             $data['main_content']='reportes/prod1_reportes_diagnostico_view';
@@ -349,14 +339,19 @@ class Reportes extends BaseController {
     public function recibe_despistaje_mat_tab() {
         
         // Ahora las imprimimos como JSON para pasarlas a AJAX, pero las agrupamos
-        if ($this->request->getPostGet('amie') == NULL ||  $this->request->getPostGet('amie') == 'NULL' || $this->request->getPostGet('tipo_prueba') == '0') {
+        if (
+                $this->request->getPostGet('amie') == NULL ||  
+                $this->request->getPostGet('amie') == 'NULL' || 
+                $this->request->getPostGet('cohorte') == 'NULL' ||
+                $this->request->getPostGet('tipo_prueba') == '0') {
             return redirect()->to('reporte-despistaje-mat-p1');
         }else{
             $data['amie'] = $this->request->getPostGet('amie');
+            $data['cohorte'] = $this->request->getPostGet('cohorte');
             $data['tipo_prueba'] = $this->request->getPostGet('tipo_prueba');
         
             $data['centro'] = $this->centroEducativoModel->find($data['amie']);
-            $data['registros'] = $this->prod1Model->_getIdsAmie($data['amie']);
+            $data['registros'] = $this->prod1Model->_getRegistrosAmieCohorte($data['amie'], $data['cohorte']);
             
             if ($data['registros'] != NULL && $data['tipo_prueba'] == 1) {
                 //Traigo la información
@@ -400,11 +395,11 @@ class Reportes extends BaseController {
                 $data['divide_12'] = $this->evalMateElemP1->_getDato($data['registros'], 'divide_', '12');
                 $datosGrafica[18] = $data['divide_12'];
                 $data['divide_13'] = $this->evalMateElemP1->_getDato($data['registros'], 'divide_', '13');
-                $datosGrafica[18] = $data['divide_13'];
+                $datosGrafica[19] = $data['divide_13'];
 
 
                 $total_registrados = 0;
-                for ($i=0; $i < 19; $i++) { 
+                for ($i=0; $i <= 19; $i++) { 
                     $total_registrados += $datosGrafica[$i];
                 }
 
@@ -420,7 +415,7 @@ class Reportes extends BaseController {
                     "total" => $total,
                 ];
                 
-                $data['centros'] = $this->prod1Model->_getCentrosEducativos();
+                $data['centros'] = $this->prod1Model->_getMisAmie($this->session->nombre);
                 $data['chart_data'] =  json_encode($respuesta);
                 $data['title']='MYRP - DYA';
                 $data['main_content']='reportes/prod1_reportes_despistaje_mat_elemental_view';
@@ -527,7 +522,7 @@ class Reportes extends BaseController {
                 "total" => $total,
             ];
             //echo '<pre>'.var_export($respuesta, true).'</pre>';
-            $data['centros'] = $this->prod1Model->_getCentrosEducativos();
+            $data['centros'] = $this->prod1Model->_getMisAmie($this->session->nombre);
             $data['chart_data'] =  json_encode($respuesta);
             $data['title']='MYRP - DYA';
             $data['main_content']='reportes/prod1_reportes_despistaje_mat_view';

@@ -12,11 +12,10 @@
                     <thead>
                         <th>No.</th>
                         <th>Nombre</th>
-                        <th>Documento</th>
                         <th>Amie</th>
                         <th>Cohorte</th>
+                        <th>Tutor</th>
                         <th>Registro de Diagnosticos</th>
-                        <th>Registro de Procesos</th>
                         <th>Evaluación</th>
                         <th>Eval Matemáticas</th>
                         <th>Eval Matemáticas Final</th>
@@ -28,20 +27,13 @@
                                 echo '<tr>
                                     <td>'.$value->id.'</td>
                                     <td>'.$value->nombres.' '.$value->apellidos.'</td>
-                                    <td>'.$value->documento.'</td>
                                     <td>'.$value->amie.'</td>
                                     <td>'.$value->cohorte.'</td>
+                                    <td>'.$value->tutor_apoyo.'</td>
                                     <td>
                                         <div class="contenedor">
                                             <a type="button" id="btn-register" href="'.site_url().'prod-1-reg-diagnostico/'.$value->id.'" class="edit">
                                                 <img src="'.site_url().'public/images/test.png" >
-                                            </a>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="contenedor">
-                                            <a type="button" id="btn-register" href="'.site_url().'prod-1-reg-proceso/'.$value->id.'" class="edit">
-                                                <img src="'.site_url().'public/images/reg-process.png" >
                                             </a>
                                         </div>
                                     </td>

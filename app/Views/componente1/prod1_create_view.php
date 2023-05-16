@@ -55,7 +55,16 @@
                 </div>
                 <div class="col-md-4 mb-3">
                     <label for="tutor_apoyo">Tutor de apoyo *:</label>
-                    <input type="text" id="tutor_apoyo" name="tutor_apoyo" value="" class="form-control" placeholder="Tutor apoyo" aria-label="tutor_apoyo">
+                    <input 
+                        type="text" 
+                        id="tutor_apoyo" 
+                        name="tutor_apoyo" 
+                        value="<?= $this->session->nombre ?>" 
+                        class="form-control" 
+                        placeholder="Tutor apoyo" 
+                        aria-label="tutor_apoyo"
+                        disabled
+                    >
                 </div>
             </div>
             <div class="row">

@@ -20,7 +20,11 @@
                             <?php
                                 if ($centros != NULL && isset($centros) ) {
                                     foreach ($centros as $key => $ce) {
-                                        echo '<option value="'.$ce->amie.'">'.$ce->amie.' - '.$ce->nombre.'</option>';
+                                        if ($ce->amie == $amie) {
+                                            echo '<option value="'.$ce->amie.'" selected>'.$ce->amie.' - '.$ce->nombre.'</option>';
+                                        }else{
+                                            echo '<option value="'.$ce->amie.'">'.$ce->amie.' - '.$ce->nombre.'</option>';
+                                        } 
                                     }
                                 }else{
                                     echo '<option value="NULL" selected>Hubo un errror, no se cargaron los datos</option>';
@@ -28,24 +32,32 @@
                             ?>
                         </select>
                     </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="1" name="dias_atencion" id="flexCheckDefault">
-                        <label class="form-check-label" for="flexCheckDefault">Días atención</label>
+                    <div class="col-md-3 mb-3">
+                        <label for="cohorte">Cohorte:</label>
+                        <select 
+                            class="form-select" 
+                            aria-label="Default select example" 
+                            name="cohorte"
+                            id="select_info"  
+                        >   
+                            <?php
+                                if ($cohorte == 'PRIMERA COHORTE') {
+                                    echo '<option value="NULL">Elegir cohorte</option>';
+                                    echo '<option value="PRIMERA COHORTE" selected>PRIMERA COHORTE</option>';
+                                    echo '<option value="SEGUNDA COHORTE">SEGUNDA COHORTE</option>';
+                                }else if($cohorte == 'SEGUNDA COHORTE'){
+                                    echo '<option value="NULL">Elegir cohorte</option>';
+                                    echo '<option value="PRIMERA COHORTE">PRIMERA COHORTE</option>';
+                                    echo '<option value="SEGUNDA COHORTE" selected>SEGUNDA COHORTE</option>';
+
+                                }else{
+                                    echo '<option value="NULL" selected>Elegir cohorte</option>';
+                                    echo '<option value="PRIMERA COHORTE">PRIMERA COHORTE</option>';
+                                    echo '<option value="SEGUNDA COHORTE">SEGUNDA COHORTE</option>';
+                                }
+                            ?>
+                        </select>
                     </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="1" name="horas_planificadas" id="flexCheckDefault">
-                        <label class="form-check-label" for="flexCheckDefault">Horas planificadas</label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="1" name="horas_efectivas" id="flexCheckDefault">
-                        <label class="form-check-label" for="flexCheckDefault">Horas efectivas</label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="1" name="horas_perdidas" id="flexCheckDefault">
-                        <label class="form-check-label" for="flexCheckDefault">Horas perdidas</label>
-                    </div>
-                    <!-- Reporte -->
-                    
                     <button type="submit" class="btn btn-success">Generar reporte</button>
                 </form>
             </div>
@@ -67,17 +79,29 @@
                         </thead>
                         <thead>
                             <th id="th-dias">Días atención</th>
-                            <th id="th-hplan">Horas planificadas</th>
                             <th id="th-hefect">Horas efectivas</th>
                             <th id="th-perdidas">Horas perdidas</th>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td id="td-dias"><?php echo number_format($dias_atencion, 0); ?></td>
-                                <td id="td-hplan"><?php echo number_format($horas_planificadas, 0); ?></td>
-                                <td id="td-hefect"><?php echo number_format($horas_efectivas, 0); ?></td>
-                                <td id="td-perdidas"><?php echo number_format($horas_perdidas, 0); ?></td>
-                            </tr>
+                            <?php 
+                                if (isset($asistencia) && $asistencia != NULL) {
+                                    echo'
+                                        <tr>
+                                            <td id="td-dias">'.number_format($asistencia->horas_atencion_total, 0).'</td>
+                                            <td id="td-hefect">'.number_format($asistencia->horas_efectivas, 0).'</td>
+                                            <td id="td-perdidas">'.number_format($asistencia->horas_perdidas, 0).'</td>
+                                        </tr>
+                                    ';
+                                }else{
+                                    echo'
+                                        <tr>
+                                            <td id="td-dias">0</td>
+                                            <td id="td-hefect">0</td>
+                                            <td id="td-perdidas">0</td>
+                                        </tr>
+                                    ';
+                                }
+                            ?>
                         </tbody>
                     </table>
                 </div>

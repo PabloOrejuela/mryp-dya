@@ -21,12 +21,12 @@
                     <thead>
                         <th>No.</th>
                         <th>Nombre</th>
-                        <th>Documento</th>
                         <th>Amie</th>
                         <th>Centro educativo</th>
                         <th>Cohorte</th>
                         <th>Fecha Nac</th>
                         <th>Tutor</th>
+                        <th>Tutor 2</th>
                         <th>Borrar registro</th>
                     </thead>
                     <tbody>
@@ -41,12 +41,12 @@
                                 echo '<tr>
                                     <td>'.$value->id.'</td>
                                     <td><a href="'.site_url().'prod_1_edit/'.$value->id.'">'.$value->nombres.' '.$value->apellidos.'</a></td>
-                                    <td>'.$value->documento.'</td>
                                     <td>'.$value->amie.'</td>
                                     <td>'.$centro_educativo->nombre.'</td>
                                     <td>'.$value->cohorte.'</td>
                                     <td>'.$value->fecha_nac.'</td>
                                     <td>'.$value->tutor_apoyo.'</td>
+                                    <td>'.$value->tutor_apoyo_2.'</td>
                                     <td>
                                         <div class="contenedor">
                                             <a type="button" id="btn-register" href="'.site_url().'prod-1-delete/'.$value->id.'" class="edit">

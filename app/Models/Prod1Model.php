@@ -139,6 +139,79 @@ class Prod1Model extends Model {
         return $result;
     }
 
+    public function _getRegistrosAmieCohorte($amie, $cohorte) {
+        $result = NULL;
+        $builder = $this->db->table($this->table);
+        $builder->select('id');
+        $builder->where('amie', $amie);
+
+        $builder->where('cohorte', $cohorte);
+
+        $builder->orderBy('id');
+        $query = $builder->get();
+        if ($query->getResult() != null) {
+            foreach ($query->getResult() as $row) {
+                if ($row->id != NULL && $row != '') {
+                    $result[] = $row;
+                }
+            }
+        }
+        //echo $this->db->getLastQuery();
+        return $result;
+    }
+
+    /**
+     *
+     * Esta función trae los Centros educativos cuyos registros tienen a
+     * tutor de apoyo y tutor de apoyo 2
+     *
+     * @param Type $var El código amie del CE
+     * @return array
+     **/
+    public function _getMisAmie($nombre) {
+        $result = NULL;
+        $builder = $this->db->table($this->table);
+        $builder->select('producto_1.amie as amie, nombre');
+        $builder->distinct();
+        $builder->where('tutor_apoyo', $nombre);
+        $builder->orWhere('tutor_apoyo_2', $nombre);
+        $builder->join('centro_educativo', 'centro_educativo.amie = producto_1.amie');
+        $builder->orderBy('nombre');
+        $query = $builder->get();
+        if ($query->getResult() != null) {
+            foreach ($query->getResult() as $row) {
+                $result[] = $row;
+            }
+        }
+        //echo $this->db->getLastQuery();
+        return $result;
+    }
+
+    /**
+     *
+     * Esta función trae los registros que tienen a
+     * tutor de apoyo y tutor de apoyo 2
+     *
+     * @param Type $var El código amie del CE
+     * @return array
+     **/
+    public function _getMisRegistros($nombre) {
+        $result = NULL;
+        $builder = $this->db->table($this->table);
+        $builder->select('*');
+        $builder->where('tutor_apoyo', $nombre);
+        $builder->orWhere('tutor_apoyo_2', $nombre);
+        $builder->orderBy('id');
+        $query = $builder->get();
+        if ($query->getResult() != null) {
+            foreach ($query->getResult() as $row) {
+                $result[] = $row;
+            }
+        }
+        //echo $this->db->getLastQuery();
+        return $result;
+    }
+
     public function _getCentrosEducativos() {
         $result = NULL;
         $builder = $this->db->table($this->table);

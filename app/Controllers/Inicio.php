@@ -47,10 +47,10 @@ class Inicio extends BaseController {
         }else{ 
 
             $usuario = $this->usuarioModel->_getUsuario($data);
-//echo '<pre>'.var_export($usuario, true).'</pre>';exit;
+            //echo '<pre>'.var_export($usuario, true).'</pre>';exit;
             if (isset($usuario) && $usuario != NULL) {
                 //valido el login y pongo el id en sesion
-                //echo '<pre>'.var_export($usuario, true).'</pre>';
+                
                 $sessiondata = [
                     'is_logged' => 1,
                     'idusuario' => $usuario->id,

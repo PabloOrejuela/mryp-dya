@@ -21,7 +21,7 @@ class UsuarioModel extends Model {
         'email',
         'password',
         'cedula',
-        'irdol',
+        'idrol',
         'is_logged',
     ];
 
@@ -52,7 +52,27 @@ class UsuarioModel extends Model {
     function _getUsuario($usuario){
         $result = NULL;
         $builder = $this->db->table('usuarios');
-        $builder->select('*')->where('user', $usuario['user'])->where('password', md5($usuario['password']));
+        $builder->select(
+            'usuarios.id as id,
+            nombre,
+            user,
+            telefono,
+            email,
+            password,
+            cedula,
+            idrol,
+            is_logged,
+            rol,
+            centro_educativo,
+            editar,
+            componente_1,
+            ver_info,
+            cargar_info,
+            reportes,
+            componente_2,
+            componente_3,
+            componente_4'
+        )->where('user', $usuario['user'])->where('password', md5($usuario['password']));
         $builder->join('roles', 'roles.id=usuarios.idrol');
         $query = $builder->get();
         if ($query->getResult() != null) {
