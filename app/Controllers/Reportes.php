@@ -179,6 +179,7 @@ class Reportes extends BaseController {
             $data['genero'] = $this->prod1Model->_getGeneros();
 
             $data['centro'] = '';
+            $data['amie'] = '';
             $data['cohorte'] = '';
             $data['tipo_prueba'] = '';
             $data['dias_atencion'] = 0;
@@ -312,25 +313,28 @@ class Reportes extends BaseController {
                 $data['matematica'] = $this->diagDocenteP1->_getDiagDocenteMate($data['registros']);
     
                 
-                $total = count($data['registros']);
+                $total = count($data['registros'])*3;
 
                 //Para poder mostrar los que no tienen info hayq ue hacer pasteles por separado
-                //$sin_dato = $total - $data['lectura'] - $data['matematica'] - $data['escritura'];
+                $sin_dato = 100 - $data['lectura'] - $data['matematica'] - $data['escritura'];
                 $datosVentas[0] = $data['lectura'];
-                $datosVentas[1] = $data['matematica'];
-                $datosVentas[2] = $data['escritura'];
+                $datosVentas[1] = $data['escritura'];
+                $datosVentas[2] = $data['matematica'];
+                $datosVentas[3] = number_format($sin_dato, 2);
 
-                $etiquetas = ["Lectura", "Escritura", "Matemática"];
+                $etiquetas = ["Lectura", "Escritura", "Matemática", "Sin datos"];
                 
             }else if($data['diagnostico'] != NULL && $data['diagnostico'] == 'dif_diag_aplicado'){
-                // $data['lectura'] = $this->diagDocenteP1->_getDiagDocente($data['registros']);
-                // $data['escritura'] = $this->diagDocenteP1->_getDiagDocenteEscritura($data['registros']);
+                $data['lectura'] = $this->diagDocenteP1->_getDiagDocenteLectura($data['registros']);
+                $data['escritura'] = $this->diagDocenteP1->_getDiagDocenteEscritura($data['registros']);
 
+                $sin_dato = 100 - $data['lectura'] -  $data['escritura'];
                 //Traigo los datos de los diagnósticos aplicados
                 $datosVentas[0] = $data['lectura'];
                 $datosVentas[1] = $data['escritura'];
+                $datosVentas[2] = number_format($sin_dato, 2);
 
-                $etiquetas = ["Lectura", "Escritura"];
+                $etiquetas = ["Lectura", "Escritura", "Sin datos"];
             }else {
                 $datosVentas[0] = 0;
                 $datosVentas[1] = 0;

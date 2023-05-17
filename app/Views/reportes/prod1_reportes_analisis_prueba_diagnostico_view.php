@@ -7,7 +7,7 @@
         background-color:#edf0ee;
     }
     #codigo_2{
-        background-color:#ed5c5c;
+        background-color:#fc656d;
     }
     #codigo_3{
         background-color:#f5d5d9;
@@ -192,6 +192,7 @@
                                             }else{
                                                 echo '<td>'.$value->anio_egb.'</td>';
                                             }
+
                                             if (isset($diag_docente) && $diag_docente != NULL) {
                                                 //Diagnóstico docente
                                                 if ($diag_docente->lectura == 'SI') {
@@ -315,10 +316,9 @@
                                             }
 
                                             
-    
                                             //Cálculo el valor de Matemática
-                                            $superior = $this->evalMateP1->find($value->id);
-                                            $elemental = $this->evalMateElemP1->find($value->id);
+                                            $superior = $this->evalMateP1->_getEvalMate($value->id);
+                                            $elemental = $this->evalMateElemP1->_getEvalMateElem($value->id);
                                             //echo '<pre>'.var_export($elemental, true).'</pre>';exit;
                                             $valor_matematica = 0;
                                             if(isset($elemental) && $elemental != NULL) {

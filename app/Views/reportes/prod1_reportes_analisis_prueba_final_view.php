@@ -98,17 +98,17 @@
                                     <td id="codigo_1">No corresponde a la enseñanza de acuerdo con la edad</td>
                                 </tr>
                                 <tr>
-                                    <td id="codigo_3">1</td>
+                                    <td id="codigo_3">1 - 2</td>
                                     <td id="codigo_3">Muy por debajo de lo esperado</td>
                                     <td id="codigo_3">Falta de mediación escolar para la enseñanza de la escritura</td>
                                 </tr>
                                 <tr>
-                                    <td id="codigo_4">2</td>
+                                    <td id="codigo_4">3 - 5</td>
                                     <td id="codigo_4">En proceso</td>
                                     <td id="codigo_4">Mediación escolar es básica para la enseñanza de la escritura de acuerdo con la edad</td>
                                 </tr>
                                 <tr>
-                                    <td id="codigo_5">3</td>
+                                    <td id="codigo_5">5 - 7</td>
                                     <td id="codigo_5">Adecuado</td>
                                     <td id="codigo_5">Mediación escolar es adecuada para la enseñanza de la escritura de acuerdo con la edad</td>
                                 </tr>
@@ -147,9 +147,18 @@
                         </thead>
                         <tbody>
                             <?php
+                                use App\Models\EvalFinalP1Model;
+                                use App\Models\EvalMateFinalP1Model;
+                                use App\Models\EvalMateFinalElementalP1Model;
+                                $this->evalMateFinalP1 = new EvalMateFinalP1Model();
+                                $this->evalMateFinalElemP1 = new EvalMateFinalElementalP1Model();
+                                $this->evalFinalP1 = new EvalFinalP1Model();
+                                $this->db = \Config\Database::connect();
+
                                 $num = 1;
                                 if ($registros != NULL && isset($registros)) {
                                     foreach ($registros as $key => $value) {
+                                        $eval_final = $this->evalFinalP1->_getEvalFinal($value->id);
                                         echo '<tr>
                                             <td>'.$num.'</td>
                                             <td>'.$value->nombres.'</td>
@@ -168,15 +177,194 @@
                                             }else{
                                                 echo '<td id="codigo_3">'.$value->anio_egb.'</td>';
                                             }
+
+                                            //Eval final de lectura y escritura
+                                            if (isset($eval_final) && $eval_final != NULL) {
+                                                //Diagnóstico MYRP Lectura
+                                                if ($eval_final->necesito_apoyo == 'SI') {
+                                                    echo '<td id="codigo_3">1</td>';
+                                                }else{
+                                                    //Si no necesitó apoyo le calculo
+                                                    $valor_lectura = 0;
+
+                                                    if ($eval_final->p1_comprension_lectora == 'A') {
+                                                        $valor_lectura += 0;
+                                                    }else if($eval_final->p1_comprension_lectora == 'B'){
+                                                        $valor_lectura += 1;
+                                                    }
+
+                                                    if ($eval_final->p2_comprension_lectora == 'A') {
+                                                        $valor_lectura += 0;
+                                                    }else if($eval_final->p2_comprension_lectora == 'B'){
+                                                        $valor_lectura += 1;
+                                                    }
+
+                                                    if ($eval_final->p3_comprension_lectora == 'A') {
+                                                        $valor_lectura += 0;
+                                                    }else if($eval_final->p3_comprension_lectora == 'B'){
+                                                        $valor_lectura += 1;
+                                                    }else if($eval_final->p3_comprension_lectora == 'C'){
+                                                        $valor_lectura += 2;
+                                                    }
+
+                                                    if ($eval_final->p4_comprension_lectora == 'A') {
+                                                        $valor_lectura += 0;
+                                                    }else if($eval_final->p4_comprension_lectora == 'B'){
+                                                        $valor_lectura += 1;
+                                                    }else if($eval_final->p4_comprension_lectora == 'C'){
+                                                        $valor_lectura += 2;
+                                                    }
+
+                                                    if ($valor_lectura > 0 && $valor_lectura <= 2) {
+                                                        echo '<td id="codigo_3">'.$valor_lectura.'</td>';
+                                                    }else if($valor_lectura > 3 && $valor_lectura <= 5){
+                                                        echo '<td id="codigo_4">'.$valor_lectura.'</td>';
+                                                    }else if($valor_lectura > 5 && $valor_lectura <= 7){
+                                                        echo '<td id="codigo_5">'.$valor_lectura.'</td>';
+                                                    }else{
+                                                        echo '<td id="codigo_1">'.$valor_lectura.'</td>';
+                                                    }
+
+                                                }
+
+
+                                                //Diagnóstico MYRP Escritura
+                                                //Cálculo el valor de Escritura
+                                                $valor_escritura = 0;
+                                                if ($eval_final->p1_inteligibilidad == 'A') {
+                                                    $valor_escritura += 0;
+                                                }else if($eval_final->p1_inteligibilidad == 'B'){
+                                                    $valor_escritura += 1;
+                                                }
+
+                                                if ($eval_final->p3_inteligibilidad == 'A') {
+                                                    $valor_escritura += 0;
+                                                }else if($eval_final->p3_inteligibilidad == 'B'){
+                                                    $valor_escritura += 1;
+                                                }else if($eval_final->p3_inteligibilidad == 'C'){
+                                                    $valor_escritura += 2;
+                                                }
+
+                                                if ($eval_final->p3_coherencia == 'A') {
+                                                    $valor_escritura += 0;
+                                                }else if($eval_final->p3_coherencia == 'B'){
+                                                    $valor_escritura += 1;
+                                                }else if($eval_final->p3_coherencia == 'C'){
+                                                    $valor_escritura += 2;
+                                                }else if($eval_final->p3_coherencia == 'D'){
+                                                    $valor_escritura += 3;
+                                                }
+
+                                                if ($eval_final->p3_sintaxis == 'A') {
+                                                    $valor_escritura += 0;
+                                                }else if($eval_final->p3_sintaxis == 'B'){
+                                                    $valor_escritura += 1;
+                                                }else if($eval_final->p3_sintaxis == 'C'){
+                                                    $valor_escritura += 2;
+                                                }else if($eval_final->p3_sintaxis == 'D'){
+                                                    $valor_escritura += 3;
+                                                }
+
+                                                if ($eval_final->p3_estandares_egb_sub2y3 == 'A') {
+                                                    $valor_escritura += 0;
+                                                }else if($eval_final->p3_estandares_egb_sub2y3 == 'B'){
+                                                    $valor_escritura += 1;
+                                                }
+
+                                                if ($eval_final->p4_inteligibilidad == 'A') {
+                                                    $valor_escritura += 0;
+                                                }else if($eval_final->p4_inteligibilidad == 'B'){
+                                                    $valor_escritura += 1;
+                                                }
+
+                                                if ($eval_final->p4_coherencia == 'A') {
+                                                    $valor_escritura += 0;
+                                                }else if($eval_final->p4_coherencia == 'B'){
+                                                    $valor_escritura += 1;
+                                                }else if($eval_final->p4_coherencia == 'C'){
+                                                    $valor_escritura += 2;
+                                                }else if($eval_final->p4_coherencia == 'D'){
+                                                    $valor_escritura += 3;
+                                                }
+
+                                                if ($eval_final->p4_sintaxis == 'A') {
+                                                    $valor_escritura += 0;
+                                                }else if($eval_final->p4_sintaxis == 'B'){
+                                                    $valor_escritura += 1;
+                                                }else if($eval_final->p4_sintaxis == 'C'){
+                                                    $valor_escritura += 2;
+                                                }else if($eval_final->p4_sintaxis == 'D'){
+                                                    $valor_escritura += 3;
+                                                }
+
+                                                if ($eval_final->p4_estandares_egb_sub2y3 == 'A') {
+                                                    $valor_escritura += 0;
+                                                }else if($eval_final->p4_estandares_egb_sub2y3 == 'B'){
+                                                    $valor_escritura += 1;
+                                                }
+
+                                                if ($valor_escritura > 0 && $valor_escritura <= 2) {
+                                                    echo '<td id="codigo_3">'.$valor_escritura.'</td>';
+                                                }else if($valor_escritura > 3 && $valor_escritura <= 5){
+                                                    echo '<td id="codigo_4">'.$valor_escritura.'</td>';
+                                                }else if($valor_escritura > 5 && $valor_escritura <= 7){
+                                                    echo '<td id="codigo_5">'.$valor_escritura.'</td>';
+                                                }else{
+                                                    echo '<td id="codigo_1">'.$valor_escritura.'</td>';
+                                                }
+
+                                            }else{
+                                                echo '<td id="codigo_1"></td>';
+                                                echo '<td id="codigo_1"></td>';
+                                            }
                                             
-                                        echo '<td id="codigo_3"></td>
-                                            <td id="codigo_3"></td>
-                                            <td id="codigo_3"></td>
-                                        </tr>';
+                                            //Cálculo el valor de Matemática
+                                            $superior = $this->evalMateFinalP1->_getEvalMateFinal($value->id);
+                                            //echo $this->db->getLastQuery();
+                                            $elemental = $this->evalMateFinalElemP1->_getEvalMateFinalElem($value->id);
+                                            $valor_matematica = 0;
+
+                                            if(isset($elemental) && $elemental != NULL) {
+                                                $valor_matematica = $this->evalMateFinalElemP1->_getEvalFinalMateElementalP1($value->id);
+
+                                                if ($valor_matematica > 0 && $valor_matematica <= 2) {
+                                                    echo '<td id="codigo_3">'.$valor_matematica.'</td>';
+                                                }else if($valor_matematica > 3 && $valor_matematica <= 5){
+                                                    echo '<td id="codigo_4">'.$valor_matematica.'</td>';
+                                                }else if($valor_matematica > 5 && $valor_matematica <= 7){
+                                                    echo '<td id="codigo_5">'.$valor_matematica.'</td>';
+                                                }else{
+                                                    echo '<td id="codigo_1">'.$valor_matematica.'</td>';
+                                                }
+
+                                            }else{
+                                                echo '<td id="codigo_1">No aplica</td>';
+                                            }
+
+                                            if (isset($superior) && $superior != NULL) {
+                                                $valor_matematica_sup = $this->evalMateFinalP1->_getEvalMateFinalP1($value->id);
+
+                                                if ($valor_matematica_sup > 0 && $valor_matematica_sup <= 10) {
+                                                    echo '<td id="codigo_2">'.$valor_matematica_sup.'</td>';
+                                                }else if($valor_matematica_sup > 10 && $valor_matematica_sup <= 20){
+                                                    echo '<td id="codigo_3">'.$valor_matematica_sup.'</td>';
+                                                }else if($valor_matematica_sup > 20 && $valor_matematica_sup <= 25){
+                                                    echo '<td id="codigo_4">'.$valor_matematica_sup.'</td>';
+                                                }else if($valor_matematica_sup > 25){
+                                                    echo '<td id="codigo_5">'.$valor_matematica_sup.'</td>';
+                                                }else{
+                                                    echo '<td id="codigo_2">'.$valor_matematica_sup.'</td>';
+                                                }
+
+                                            }else{
+                                                echo '<td id="codigo_1">No aplica</td>';
+                                            }
+
+                                            echo '</tr>';
                                         $num++;
                                     }
                                 }else{
-                                    echo '<tr><td colspan="7">AUN NO HAY REGISTROS QUE MOSTRAR</td></tr>';
+                                    echo '<tr><td colspan="8">AUN NO HAY REGISTROS QUE MOSTRAR</td></tr>';
                                 }
                             ?>
                         </tbody>

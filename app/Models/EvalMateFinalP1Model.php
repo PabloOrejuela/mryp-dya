@@ -68,11 +68,85 @@ class EvalMateFinalP1Model extends Model {
     public function _getEvalMateFinal($idprod) {
         $result = NULL;
         $builder = $this->db->table($this->table);
-        $builder->select('*')->where('idprod', strtoupper($idprod));
+        $builder->select('*')->where('idprod', $idprod);
         $query = $builder->get();
         if ($query->getResult() != null) {
             foreach ($query->getResult() as $row) {
                 $result = $row;
+            }
+        }
+        //echo $this->db->getLastQuery();
+        return $result;
+    }
+
+    public function _getEvalMateFinalP1($id) {
+        $result = 0;
+        $builder = $this->db->table($this->table);
+        $builder->select('*')->where('idprod', $id);
+        $query = $builder->get();
+        if ($query->getResult() != null) {
+            foreach ($query->getResult() as $row) {
+                if ($row->orientacion_espacial_1 == 1) {
+                    $result++;
+                }
+                if ($row->orientacion_espacial_2 == 1) {
+                    $result++;
+                }
+                if ($row->orientacion_espacial_3 == 1) {
+                    $result++;
+                }
+                if ($row->orientacion_espacial_4 == 1) {
+                    $result++;
+                }
+                if ($row->clasificacion_5 == 1) {
+                    $result++;
+                }
+                if ($row->clasificacion_6 == 1) {
+                    $result++;
+                }
+                if ($row->seriacion_7 == 1) {
+                    $result++;
+                }
+                if ($row->seriacion_8 == 1) {
+                    $result++;
+                }
+                if ($row->seriacion_9 == 1) {
+                    $result++;
+                }
+                if ($row->esquema_corporal_10 == 1) {
+                    $result++;
+                }
+                if ($row->esquema_corporal_11 == 1) {
+                    $result++;
+                }
+                if ($row->suma_dos_cifras == 1) {
+                    $result++;
+                }
+                if ($row->suma_cuatro_cifras == 1) {
+                    $result++;
+                }
+                if ($row->suma_cinco_mas == 1) {
+                    $result++;
+                }
+                if ($row->resta_tres_cifras == 1) {
+                    $result++;
+                }
+                if ($row->resta_cuatro_cifras == 1) {
+                    $result++;
+                }
+                if ($row->multiplicacion_una_cifra == 1) {
+                    $result++;
+                }
+                if ($row->multiplicacion_dos_cifras == 1) {
+                    $result++;
+                }
+                if ($row->division_una_cifra == 1) {
+                    $result++;
+                }
+                if ($row->division_dos_cifras == 1) {
+                    $result++;
+                }
+                
             }
         }
         //echo $this->db->getLastQuery();

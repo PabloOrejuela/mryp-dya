@@ -112,7 +112,7 @@ class DiagnosticoDocenteP1Model extends Model {
             //echo $this->db->getLastQuery();
         }
         
-        $porcentaje = ($result * 100) / count($registros);
+        $porcentaje = ($result * 100) / (count($registros)*3);
         return number_format($porcentaje, 2);
     }
 
@@ -131,7 +131,7 @@ class DiagnosticoDocenteP1Model extends Model {
             }
             //echo $this->db->getLastQuery();
         }
-        $porcentaje = ($result * 100) / count($registros);
+        $porcentaje = ($result * 100) / (count($registros)*3);
         return number_format($porcentaje, 2);
     }
 
@@ -151,7 +151,7 @@ class DiagnosticoDocenteP1Model extends Model {
             //echo $this->db->getLastQuery();
         }
 
-        $porcentaje = ($result * 100) / count($registros);
+        $porcentaje = ($result * 100) / (count($registros)*3);
         return number_format($porcentaje, 2);
     }
 }

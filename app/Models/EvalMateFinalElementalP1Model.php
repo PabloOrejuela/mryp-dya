@@ -79,6 +79,80 @@ class EvalMateFinalElementalP1Model extends Model {
         return $result;
     }
 
+    public function _getEvalFinalMateElementalP1($id) {
+        $result = 0;
+        $builder = $this->db->table($this->table);
+        $builder->select('*')->where('idprod', $id);
+        $query = $builder->get();
+        if ($query->getResult() != null) {
+            foreach ($query->getResult() as $row) {
+                if ($row->relacion_figuras_geo_1 == 1) {
+                    $result++;
+                }
+                if ($row->relacion_figuras_geo_1_1 == 1) {
+                    $result++;
+                }
+                if ($row->seriacion_2 == 1) {
+                    $result++;
+                }
+                if ($row->conjuntos_2_1 == 1) {
+                    $result++;
+                }
+                if ($row->seriacion_2_2 == 1) {
+                    $result++;
+                }
+                if ($row->orientacion_3 == 1) {
+                    $result++;
+                }
+                if ($row->orientacion_3_1 == 1) {
+                    $result++;
+                }
+                if ($row->orientacion_3_2 == 1) {
+                    $result++;
+                }
+                if ($row->esquema_corporal_3_3 == 1) {
+                    $result++;
+                }
+                if ($row->esquema_corporal_4 == 1) {
+                    $result++;
+                }
+                if ($row->esquema_corporal_4_1 == 1) {
+                    $result++;
+                }
+                if ($row->seriacion_5 == 1) {
+                    $result++;
+                }
+                if ($row->suma_6 == 1) {
+                    $result++;
+                }
+                if ($row->suma_7 == 1) {
+                    $result++;
+                }
+                if ($row->resta_8 == 1) {
+                    $result++;
+                }
+                if ($row->resta_9 == 1) {
+                    $result++;
+                }
+                if ($row->multiplica_10 == 1) {
+                    $result++;
+                }
+                if ($row->multiplica_11 == 1) {
+                    $result++;
+                }
+                if ($row->divide_12 == 1) {
+                    $result++;
+                }
+                if ($row->divide_13 == 1) {
+                    $result++;
+                }
+                
+            }
+        }
+        //echo $this->db->getLastQuery();
+        return $result;
+    }
+
     public function _update($datos) {
         $builder = $this->db->table($this->table);
         if ($datos['relacion_figuras_geo_1'] != 'NULL') {
