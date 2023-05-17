@@ -16,6 +16,7 @@
             <li><a class="dropdown-item" href="<?php echo site_url();?>reporte-despistaje-mat-p1">Prueba Despistaje Matemáticas</a></li>
             <li><a class="dropdown-item" href="<?php echo site_url();?>reporte-analisis-pruebafinal-p1">Análisis de la prueba final con la intervención del programa</a></li>
             <li><a class="dropdown-item" href="<?php echo site_url();?>reporte-analisis-pruebadiagnostico-p1">Análisis de la prueba de diagnóstico</a></li>
+            <!-- <li><a class="dropdown-item" href="<?php echo site_url();?>reporte-destrezas-p1">Destrezas</a></li> -->
             <li><hr class="dropdown-divider"></li>
             <li><a class="dropdown-item" href="#"></a></li>
           </ul>

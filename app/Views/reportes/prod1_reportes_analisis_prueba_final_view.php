@@ -98,17 +98,17 @@
                                     <td id="codigo_1">No corresponde a la enseñanza de acuerdo con la edad</td>
                                 </tr>
                                 <tr>
-                                    <td id="codigo_3">1 - 2</td>
+                                    <td id="codigo_3">1</td>
                                     <td id="codigo_3">Muy por debajo de lo esperado</td>
                                     <td id="codigo_3">Falta de mediación escolar para la enseñanza de la escritura</td>
                                 </tr>
                                 <tr>
-                                    <td id="codigo_4">3 - 5</td>
+                                    <td id="codigo_4">2</td>
                                     <td id="codigo_4">En proceso</td>
                                     <td id="codigo_4">Mediación escolar es básica para la enseñanza de la escritura de acuerdo con la edad</td>
                                 </tr>
                                 <tr>
-                                    <td id="codigo_5">5 - 7</td>
+                                    <td id="codigo_5">3</td>
                                     <td id="codigo_5">Adecuado</td>
                                     <td id="codigo_5">Mediación escolar es adecuada para la enseñanza de la escritura de acuerdo con la edad</td>
                                 </tr>
@@ -162,7 +162,7 @@
                                         echo '<tr>
                                             <td>'.$num.'</td>
                                             <td>'.$value->nombres.'</td>
-                                            <td>'.$value->apellidos.'</td>';
+                                            <td>'.$value->apellidos.$value->id.'</td>';
     
                                             if ($value->anio_egb == '11') {
                                                 echo '<td>1ro BTI</td>';
@@ -182,48 +182,49 @@
                                             if (isset($eval_final) && $eval_final != NULL) {
                                                 //Diagnóstico MYRP Lectura
                                                 if ($eval_final->necesito_apoyo == 'SI') {
-                                                    echo '<td id="codigo_3">1</td>';
+                                                    echo '<td id="codigo_3">SI</td>';
                                                 }else{
+                                                    echo '<td id="codigo_4">NO</td>';
                                                     //Si no necesitó apoyo le calculo
-                                                    $valor_lectura = 0;
+                                                    // $valor_lectura = 0;
 
-                                                    if ($eval_final->p1_comprension_lectora == 'A') {
-                                                        $valor_lectura += 0;
-                                                    }else if($eval_final->p1_comprension_lectora == 'B'){
-                                                        $valor_lectura += 1;
-                                                    }
+                                                    // if ($eval_final->p1_comprension_lectora == 'A') {
+                                                    //     $valor_lectura += 0;
+                                                    // }else if($eval_final->p1_comprension_lectora == 'B'){
+                                                    //     $valor_lectura += 1;
+                                                    // }
 
-                                                    if ($eval_final->p2_comprension_lectora == 'A') {
-                                                        $valor_lectura += 0;
-                                                    }else if($eval_final->p2_comprension_lectora == 'B'){
-                                                        $valor_lectura += 1;
-                                                    }
+                                                    // if ($eval_final->p2_comprension_lectora == 'A') {
+                                                    //     $valor_lectura += 0;
+                                                    // }else if($eval_final->p2_comprension_lectora == 'B'){
+                                                    //     $valor_lectura += 1;
+                                                    // }
 
-                                                    if ($eval_final->p3_comprension_lectora == 'A') {
-                                                        $valor_lectura += 0;
-                                                    }else if($eval_final->p3_comprension_lectora == 'B'){
-                                                        $valor_lectura += 1;
-                                                    }else if($eval_final->p3_comprension_lectora == 'C'){
-                                                        $valor_lectura += 2;
-                                                    }
+                                                    // if ($eval_final->p3_comprension_lectora == 'A') {
+                                                    //     $valor_lectura += 0;
+                                                    // }else if($eval_final->p3_comprension_lectora == 'B'){
+                                                    //     $valor_lectura += 1;
+                                                    // }else if($eval_final->p3_comprension_lectora == 'C'){
+                                                    //     $valor_lectura += 2;
+                                                    // }
 
-                                                    if ($eval_final->p4_comprension_lectora == 'A') {
-                                                        $valor_lectura += 0;
-                                                    }else if($eval_final->p4_comprension_lectora == 'B'){
-                                                        $valor_lectura += 1;
-                                                    }else if($eval_final->p4_comprension_lectora == 'C'){
-                                                        $valor_lectura += 2;
-                                                    }
+                                                    // if ($eval_final->p4_comprension_lectora == 'A') {
+                                                    //     $valor_lectura += 0;
+                                                    // }else if($eval_final->p4_comprension_lectora == 'B'){
+                                                    //     $valor_lectura += 1;
+                                                    // }else if($eval_final->p4_comprension_lectora == 'C'){
+                                                    //     $valor_lectura += 2;
+                                                    // }
 
-                                                    if ($valor_lectura > 0 && $valor_lectura <= 2) {
-                                                        echo '<td id="codigo_3">'.$valor_lectura.'</td>';
-                                                    }else if($valor_lectura > 3 && $valor_lectura <= 5){
-                                                        echo '<td id="codigo_4">'.$valor_lectura.'</td>';
-                                                    }else if($valor_lectura > 5 && $valor_lectura <= 7){
-                                                        echo '<td id="codigo_5">'.$valor_lectura.'</td>';
-                                                    }else{
-                                                        echo '<td id="codigo_1">'.$valor_lectura.'</td>';
-                                                    }
+                                                    // if ($valor_lectura > 0 && $valor_lectura <= 2) {
+                                                    //     echo '<td id="codigo_3">'.$valor_lectura.'</td>';
+                                                    // }else if($valor_lectura > 3 && $valor_lectura <= 5){
+                                                    //     echo '<td id="codigo_4">'.$valor_lectura.'</td>';
+                                                    // }else if($valor_lectura > 5 && $valor_lectura <= 7){
+                                                    //     echo '<td id="codigo_5">'.$valor_lectura.'</td>';
+                                                    // }else{
+                                                    //     echo '<td id="codigo_1">'.$valor_lectura.'</td>';
+                                                    // }
 
                                                 }
 
@@ -303,14 +304,16 @@
                                                     $valor_escritura += 1;
                                                 }
 
-                                                if ($valor_escritura > 0 && $valor_escritura <= 2) {
-                                                    echo '<td id="codigo_3">'.$valor_escritura.'</td>';
-                                                }else if($valor_escritura > 3 && $valor_escritura <= 5){
-                                                    echo '<td id="codigo_4">'.$valor_escritura.'</td>';
-                                                }else if($valor_escritura > 5 && $valor_escritura <= 7){
-                                                    echo '<td id="codigo_5">'.$valor_escritura.'</td>';
+                                                $rango_escritura = ($valor_escritura * 100) / 18;
+
+                                                if ($rango_escritura > 0 && $rango_escritura <= 33) {
+                                                    echo '<td id="codigo_3">1</td>';
+                                                }else if($rango_escritura > 33 && $rango_escritura <= 66){
+                                                    echo '<td id="codigo_4">2</td>';
+                                                }else if($rango_escritura > 66){
+                                                    echo '<td id="codigo_5">3</td>';
                                                 }else{
-                                                    echo '<td id="codigo_1">'.$valor_escritura.'</td>';
+                                                    echo '<td id="codigo_1">0</td>';
                                                 }
 
                                             }else{
@@ -327,37 +330,39 @@
                                             if(isset($elemental) && $elemental != NULL) {
                                                 $valor_matematica = $this->evalMateFinalElemP1->_getEvalFinalMateElementalP1($value->id);
 
-                                                if ($valor_matematica > 0 && $valor_matematica <= 2) {
-                                                    echo '<td id="codigo_3">'.$valor_matematica.'</td>';
-                                                }else if($valor_matematica > 3 && $valor_matematica <= 5){
-                                                    echo '<td id="codigo_4">'.$valor_matematica.'</td>';
-                                                }else if($valor_matematica > 5 && $valor_matematica <= 7){
-                                                    echo '<td id="codigo_5">'.$valor_matematica.'</td>';
+                                                $rango_mate = ($valor_matematica * 100) / 20;
+
+                                                if ($rango_mate > 0 && $rango_mate <= 33) {
+                                                    echo '<td id="codigo_3">1</td>';
+                                                }else if($rango_mate > 33 && $rango_mate <= 66){
+                                                    echo '<td id="codigo_4">2</td>';
+                                                }else if($rango_mate > 66){
+                                                    echo '<td id="codigo_5">3</td>';
                                                 }else{
-                                                    echo '<td id="codigo_1">'.$valor_matematica.'</td>';
+                                                    echo '<td id="codigo_1">0</td>';
                                                 }
 
                                             }else{
-                                                echo '<td id="codigo_1">No aplica</td>';
+                                                echo '<td id="codigo_1"></td>';
                                             }
 
                                             if (isset($superior) && $superior != NULL) {
                                                 $valor_matematica_sup = $this->evalMateFinalP1->_getEvalMateFinalP1($value->id);
 
-                                                if ($valor_matematica_sup > 0 && $valor_matematica_sup <= 10) {
-                                                    echo '<td id="codigo_2">'.$valor_matematica_sup.'</td>';
-                                                }else if($valor_matematica_sup > 10 && $valor_matematica_sup <= 20){
-                                                    echo '<td id="codigo_3">'.$valor_matematica_sup.'</td>';
-                                                }else if($valor_matematica_sup > 20 && $valor_matematica_sup <= 25){
-                                                    echo '<td id="codigo_4">'.$valor_matematica_sup.'</td>';
-                                                }else if($valor_matematica_sup > 25){
-                                                    echo '<td id="codigo_5">'.$valor_matematica_sup.'</td>';
+                                                $rango_mate_sup = ($valor_matematica_sup * 100) / 20;
+
+                                                if ($rango_mate_sup > 0 && $rango_mate_sup <= 33) {
+                                                    echo '<td id="codigo_3">1</td>';
+                                                }else if($rango_mate_sup > 33 && $rango_mate_sup <= 66){
+                                                    echo '<td id="codigo_4">2</td>';
+                                                }else if($rango_mate_sup > 66){
+                                                    echo '<td id="codigo_5">3</td>';
                                                 }else{
-                                                    echo '<td id="codigo_2">'.$valor_matematica_sup.'</td>';
+                                                    echo '<td id="codigo_1">0</td>';
                                                 }
 
                                             }else{
-                                                echo '<td id="codigo_1">No aplica</td>';
+                                                echo '<td id="codigo_1"></td>';
                                             }
 
                                             echo '</tr>';

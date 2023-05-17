@@ -109,6 +109,8 @@ $routes->get('reporte-analisis-pruebafinal-p1', 'Reportes::reporte_analisis_prue
 $routes->post('recibe-eval-prueba-final-tab', 'Reportes::recibe_eval_prueba_final_tab');
 $routes->get('reporte-analisis-pruebadiagnostico-p1', 'Reportes::reporte_analisis_pruebadiagnostico_p1');
 $routes->post('recibe-eval-prueba-diagnostico-tab', 'Reportes::recibe_eval_prueba_diagnostico_tab');
+$routes->get('reporte-destrezas-p1', 'Reportes::reporte_destrezas_p1');
+$routes->post('recibe-reporte-destrezas-p1-tab', 'Reportes::recibe_reporte_destrezas_p1_tab');
 
 /*
  * --------------------------------------------------------------------

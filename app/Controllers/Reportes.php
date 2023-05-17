@@ -163,6 +163,39 @@ class Reportes extends BaseController {
         }
     }
 
+    public function reporte_destrezas_p1() {
+        $data['idrol'] = $this->session->idrol;
+        $data['id'] = $this->session->idusuario;
+        $data['is_logged'] = $this->session->is_logged;
+        $data['nombre'] = $this->session->nombre;
+        $data['componente_1'] = $this->session->componente_1;
+        $data['reportes'] = $this->session->reportes;
+
+        if ($data['is_logged'] == 1 && $data['componente_1'] == 1 && $data['reportes'] == 1) {
+
+            $data['centros'] = $this->prod1Model->_getMisAmie($data['nombre']);
+            $data['cursos'] = $this->cursoModel->findAll();
+            $data['nacionalidades'] = $this->prod1Model->_getNacionalidades();
+            $data['genero'] = $this->prod1Model->_getGeneros();
+
+            $data['centro'] = '';
+            $data['amie'] = '';
+            $data['cohorte'] = '';
+            $data['reporte'] = '';
+
+            //Evito el error de que llegue vacío el objeto
+            $data['chart_data'] = '';
+            //echo '<pre>'.var_export($data['genero'], true).'</pre>';exit;
+
+            $data['title']='MYRP - DYA';
+            $data['main_content']='reportes/prod1_reportes_destrezas_view';
+            return view('includes/template_reportes', $data);
+        }else{
+
+            $this->logout();
+        }
+    }
+
     public function reporte_despistaje_mat_p1() {
         $data['idrol'] = $this->session->idrol;
         $data['id'] = $this->session->idusuario;
@@ -313,6 +346,78 @@ class Reportes extends BaseController {
                 $data['matematica'] = $this->diagDocenteP1->_getDiagDocenteMate($data['registros']);
     
                 
+                $total = count($data['registros'])*3;
+
+                //Para poder mostrar los que no tienen info hayq ue hacer pasteles por separado
+                $sin_dato = 100 - $data['lectura'] - $data['matematica'] - $data['escritura'];
+                $datosVentas[0] = $data['lectura'];
+                $datosVentas[1] = $data['escritura'];
+                $datosVentas[2] = $data['matematica'];
+                $datosVentas[3] = number_format($sin_dato, 2);
+
+                $etiquetas = ["Lectura", "Escritura", "Matemática", "Sin datos"];
+                
+            }else if($data['diagnostico'] != NULL && $data['diagnostico'] == 'dif_diag_aplicado'){
+                $data['lectura'] = $this->diagDocenteP1->_getDiagDocenteLectura($data['registros']);
+                $data['escritura'] = $this->diagDocenteP1->_getDiagDocenteEscritura($data['registros']);
+
+                $sin_dato = 100 - $data['lectura'] -  $data['escritura'];
+                //Traigo los datos de los diagnósticos aplicados
+                $datosVentas[0] = $data['lectura'];
+                $datosVentas[1] = $data['escritura'];
+                $datosVentas[2] = number_format($sin_dato, 2);
+
+                $etiquetas = ["Lectura", "Escritura", "Sin datos"];
+            }else {
+                $datosVentas[0] = 0;
+                $datosVentas[1] = 0;
+                $datosVentas[2] = 0;
+            }
+
+            
+            $respuesta = [
+                "etiquetas" => $etiquetas,
+                "datos" => $datosVentas,
+                "tipoGrafico" => $data['tipo_grafico'],
+            ];
+            //echo '<pre>'.var_export($respuesta, true).'</pre>';
+            $data['centros'] = $this->prod1Model->_getMisAmie($this->session->nombre);
+            $data['chart_data'] =  json_encode($respuesta);
+            $data['title']='MYRP - DYA';
+            $data['main_content']='reportes/prod1_reportes_diagnostico_view';
+            return view('includes/template_reportes', $data);
+        }
+ 
+        
+    }
+
+    public function recibe_reporte_destrezas_p1_tab() {
+        
+        // Ahora las imprimimos como JSON para pasarlas a AJAX, pero las agrupamos
+        if (
+                $this->request->getPostGet('amie') == NULL ||  
+                $this->request->getPostGet('reporte') == 'NULL' || 
+                $this->request->getPostGet('cohorte')  == 'NULL'
+        ) {
+            return redirect()->to('reporte-destrezas-p1');
+        }else{
+            $data['amie'] = $this->request->getPostGet('amie');
+            $data['cohorte'] = $this->request->getPostGet('cohorte');
+            $data['reporte'] = $this->request->getPostGet('reporte');
+            $data['tipo_grafico'] = $this->request->getPostGet('tipo_grafico');
+        
+            $data['centro'] = $this->centroEducativoModel->find($data['amie']);
+            $data['registros'] = $this->prod1Model->_getRegistrosAmieCohorte($data['amie'], $data['cohorte']);
+            
+            if ($data['reporte'] != NULL && $data['reporte'] == '1') {
+                
+                //Traigo la información de 
+                
+                $data['lectura'] = $this->evalFinalP1->_getDiagDocenteLectura($data['registros']);
+                $data['escritura'] = $this->evalFinalP1->_getDiagDocenteEscritura($data['registros']);
+                $data['matematica'] = $this->evalMateFinalP1->_getDiagDocenteMate($data['registros']);
+    
+                echo '<pre>'.var_export($data['escritura'], true).'</pre>';exit;
                 $total = count($data['registros'])*3;
 
                 //Para poder mostrar los que no tienen info hayq ue hacer pasteles por separado
