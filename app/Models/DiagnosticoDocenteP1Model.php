@@ -46,10 +46,10 @@ class DiagnosticoDocenteP1Model extends Model {
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
 
-    public function _getDiagDocente($idprod) {
+    public function _getDiagDocente($id) {
         $result = NULL;
         $builder = $this->db->table($this->table);
-        $builder->select('*')->where('idprod', strtoupper($idprod));
+        $builder->select('*')->where('idprod', $id);
         $query = $builder->get();
         if ($query->getResult() != null) {
             foreach ($query->getResult() as $row) {
@@ -97,6 +97,7 @@ class DiagnosticoDocenteP1Model extends Model {
     }
 
     public function _getDiagDocenteLectura($registros) {
+        $porcentaje = 0;
         $result = 0;
         foreach ($registros as $key => $value) {
             
@@ -110,10 +111,13 @@ class DiagnosticoDocenteP1Model extends Model {
             }
             //echo $this->db->getLastQuery();
         }
-        return $result;
+        
+        $porcentaje = ($result * 100) / count($registros);
+        return number_format($porcentaje, 2);
     }
 
     public function _getDiagDocenteEscritura($registros) {
+        $porcentaje = 0;
         $result = 0;
         foreach ($registros as $key => $value) {
             
@@ -126,12 +130,13 @@ class DiagnosticoDocenteP1Model extends Model {
                 $result++;
             }
             //echo $this->db->getLastQuery();
-            
         }
-        return $result;
+        $porcentaje = ($result * 100) / count($registros);
+        return number_format($porcentaje, 2);
     }
 
     public function _getDiagDocenteMate($registros) {
+        $porcentaje = 0;
         $result = 0;
         foreach ($registros as $key => $value) {
             
@@ -146,6 +151,7 @@ class DiagnosticoDocenteP1Model extends Model {
             //echo $this->db->getLastQuery();
         }
 
-        return $result;
+        $porcentaje = ($result * 100) / count($registros);
+        return number_format($porcentaje, 2);
     }
 }

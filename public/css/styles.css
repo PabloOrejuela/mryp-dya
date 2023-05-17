@@ -328,3 +328,26 @@ textarea {
     padding-left: 45px;
     background-color: aliceblue;
 }
+
+#codigo_0{
+    background-color:#edf0ee;
+    text-align: center;
+}
+#codigo_1{
+    background-color:#edf0ee;
+}
+#codigo_2{
+    background-color:#ed5c5c;
+}
+#codigo_3{
+    background-color:#f5d5d9;
+}
+#codigo_4{
+    background-color:#f1f5d5;
+}
+#codigo_5{
+    background-color:#e8f7e1;
+}
+#cabecera{
+    background-color:#dcedf5;
+}

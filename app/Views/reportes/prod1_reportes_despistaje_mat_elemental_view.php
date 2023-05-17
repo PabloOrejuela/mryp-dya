@@ -20,7 +20,11 @@
                             <?php
                                 if ($centros != NULL && isset($centros) ) {
                                     foreach ($centros as $key => $ce) {
-                                        echo '<option value="'.$ce->amie.'">'.$ce->amie.' - '.$ce->nombre.'</option>';
+                                        if ($ce->amie == $amie) {
+                                            echo '<option value="'.$ce->amie.'" selected>'.$ce->amie.' - '.$ce->nombre.'</option>';
+                                        }else{
+                                            echo '<option value="'.$ce->amie.'">'.$ce->amie.' - '.$ce->nombre.'</option>';
+                                        }
                                     }
                                 }else{
                                     echo '<option value="NULL" selected>Hubo un errror, no se cargaron los datos</option>';
@@ -28,6 +32,32 @@
                             ?>
                         </select>
                     </div>
+                    <div class="col-md-3 mb-3">
+                            <label for="cohorte">Cohorte:</label>
+                            <select 
+                                class="form-select" 
+                                aria-label="Default select example" 
+                                name="cohorte"
+                                id="select_info"  
+                            >   
+                                <?php
+                                    if ($cohorte == 'PRIMERA COHORTE') {
+                                        echo '<option value="NULL">Elegir cohorte</option>';
+                                        echo '<option value="PRIMERA COHORTE" selected>PRIMERA COHORTE</option>';
+                                        echo '<option value="SEGUNDA COHORTE">SEGUNDA COHORTE</option>';
+                                    }else if($cohorte == 'SEGUNDA COHORTE'){
+                                        echo '<option value="NULL">Elegir cohorte</option>';
+                                        echo '<option value="PRIMERA COHORTE">PRIMERA COHORTE</option>';
+                                        echo '<option value="SEGUNDA COHORTE" selected>SEGUNDA COHORTE</option>';
+
+                                    }else{
+                                        echo '<option value="NULL" selected>Elegir cohorte</option>';
+                                        echo '<option value="PRIMERA COHORTE">PRIMERA COHORTE</option>';
+                                        echo '<option value="SEGUNDA COHORTE">SEGUNDA COHORTE</option>';
+                                    }
+                                ?>
+                            </select>
+                        </div>
                     <div class="col-md-4 mb-2">
                         <label for="apoyo" class="mb-2">Tipo de prueba:</label>
                         <div class="col-sm-8">
@@ -37,9 +67,24 @@
                                 name="tipo_prueba" 
                                 id="select-pregunta"  
                             >
-                                <option value="0" selected>Elija un tipo de prueba</option>
-                                <option value="1">Prueba Elemental</option>
-                                <option value="2">Prueba Media/Superior</option>
+                            
+                                <?php
+                                    if ($tipo_prueba == 1) {
+                                        echo '<option value="0">Elija un tipo de prueba</option>';
+                                        echo '<option value="1" selected>Prueba Elemental</option>';
+                                        echo '<option value="2">Prueba Media/Superior</option>';
+                                    }else if($tipo_prueba == 2){
+                                        echo '<option value="0">Elija un tipo de prueba</option>';
+                                        echo '<option value="1">Prueba Elemental</option>';
+                                        echo '<option value="2" selected>Prueba Media/Superior</option>';
+
+                                    }else{
+                                        echo '<option value="0" selected>Elija un tipo de prueba</option>';
+                                        echo '<option value="1">Prueba Elemental</option>';
+                                        echo '<option value="2">Prueba Media/Superior</option>';
+                                    }
+                                ?>
+                            
                             </select>
                             <p id="error-message"><?= session('errors.tipo_prueba_mate');?> </p>
                         </div>

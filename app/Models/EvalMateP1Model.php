@@ -79,6 +79,80 @@ class EvalMateP1Model extends Model {
         return $result;
     }
 
+    public function _getEvalMateP1($id) {
+        $result = 0;
+        $builder = $this->db->table($this->table);
+        $builder->select('*')->where('idprod', $id);
+        $query = $builder->get();
+        if ($query->getResult() != null) {
+            foreach ($query->getResult() as $row) {
+                if ($row->orientacion_espacial_1 == 1) {
+                    $result++;
+                }
+                if ($row->orientacion_espacial_2 == 1) {
+                    $result++;
+                }
+                if ($row->orientacion_espacial_3 == 1) {
+                    $result++;
+                }
+                if ($row->orientacion_espacial_4 == 1) {
+                    $result++;
+                }
+                if ($row->clasificacion_5 == 1) {
+                    $result++;
+                }
+                if ($row->clasificacion_6 == 1) {
+                    $result++;
+                }
+                if ($row->seriacion_7 == 1) {
+                    $result++;
+                }
+                if ($row->seriacion_8 == 1) {
+                    $result++;
+                }
+                if ($row->seriacion_9 == 1) {
+                    $result++;
+                }
+                if ($row->esquema_corporal_10 == 1) {
+                    $result++;
+                }
+                if ($row->esquema_corporal_11 == 1) {
+                    $result++;
+                }
+                if ($row->suma_dos_cifras == 1) {
+                    $result++;
+                }
+                if ($row->suma_cuatro_cifras == 1) {
+                    $result++;
+                }
+                if ($row->suma_cinco_mas == 1) {
+                    $result++;
+                }
+                if ($row->resta_tres_cifras == 1) {
+                    $result++;
+                }
+                if ($row->resta_cuatro_cifras == 1) {
+                    $result++;
+                }
+                if ($row->multiplicacion_una_cifra == 1) {
+                    $result++;
+                }
+                if ($row->multiplicacion_dos_cifras == 1) {
+                    $result++;
+                }
+                if ($row->division_una_cifra == 1) {
+                    $result++;
+                }
+                if ($row->division_dos_cifras == 1) {
+                    $result++;
+                }
+                
+            }
+        }
+        //echo $this->db->getLastQuery();
+        return $result;
+    }
+
     public function _update($datos) {
         $builder = $this->db->table($this->table);
         if ($datos['orientacion_espacial_1'] != 'NULL') {
@@ -216,13 +290,14 @@ class EvalMateP1Model extends Model {
     }
 
     public function _getOrientacionEspacial($registros, $num) {
+        $porcentaje = 0;
         $result = 0;
         foreach ($registros as $key => $value) {
             
             $builder = $this->db->table($this->table);
-            $builder->select('id');
+            $builder->select('*');
             $builder->where('idprod', $value->id);
-            $builder->where('orientacion_espacial_'.$num, 1);
+            $builder->where('orientacion_espacial_'.$num, 0);
             $query = $builder->get();
             if ($query->getResult() != null) {
                 foreach ($query->getResult() as $row) {
@@ -231,19 +306,22 @@ class EvalMateP1Model extends Model {
             }else{
                 $result += 0;
             }
-            //echo $this->db->getLastQuery();
+            //echo $this->db->getLastQuery().';';
         }
-        return $result;
+        $porcentaje = ($result * 100) / count($registros);
+
+        return $porcentaje;
     }
 
     public function _getClasificacion($registros, $num) {
+        $porcentaje = 0;
         $result = 0;
         foreach ($registros as $key => $value) {
             
             $builder = $this->db->table($this->table);
             $builder->select('id');
             $builder->where('idprod', $value->id);
-            $builder->where('clasificacion_'.$num, 1);
+            $builder->where('clasificacion_'.$num, 0);
             $query = $builder->get();
             if ($query->getResult() != null) {
                 foreach ($query->getResult() as $row) {
@@ -254,10 +332,13 @@ class EvalMateP1Model extends Model {
             }
             //echo $this->db->getLastQuery();
         }
-        return $result;
+
+        $porcentaje = ($result * 100) / count($registros);
+        return $porcentaje;
     }
 
     public function _getSeriacion($registros, $num) {
+        $porcentaje = 0;
         $result = 0;
         foreach ($registros as $key => $value) {
             
@@ -275,11 +356,13 @@ class EvalMateP1Model extends Model {
             }
             //echo $this->db->getLastQuery();
         }
-        return $result;
+        $porcentaje = ($result * 100) / count($registros);
+        return $porcentaje;
     }
 
     public function _getEsquema($registros, $num) {
-        $result = NULL;
+        $porcentaje = 0;
+        $result = 0;
         foreach ($registros as $key => $value) {
             
             $builder = $this->db->table($this->table);
@@ -296,11 +379,13 @@ class EvalMateP1Model extends Model {
             }
             //echo $this->db->getLastQuery();
         }
-        return $result;
+        $porcentaje = ($result * 100) / count($registros);
+        return $porcentaje;
     }
 
     public function _getSuma($registros, $num) {
-        $result = NULL;
+        $porcentaje = 0;
+        $result = 0;
         foreach ($registros as $key => $value) {
             
             $builder = $this->db->table($this->table);
@@ -323,11 +408,13 @@ class EvalMateP1Model extends Model {
             }
             //echo $this->db->getLastQuery();
         }
-        return $result;
+        $porcentaje = ($result * 100) / count($registros);
+        return $porcentaje;
     }
 
     public function _getResta($registros, $num) {
-        $result = NULL;
+        $porcentaje = 0;
+        $result = 0;
         foreach ($registros as $key => $value) {
             
             $builder = $this->db->table($this->table);
@@ -348,11 +435,13 @@ class EvalMateP1Model extends Model {
             }
             //echo $this->db->getLastQuery();
         }
-        return $result;
+        $porcentaje = ($result * 100) / count($registros);
+        return $porcentaje;
     }
 
     public function _getMultiplica($registros, $num) {
-        $result = NULL;
+        $porcentaje = 0;
+        $result = 0;
         foreach ($registros as $key => $value) {
             
             $builder = $this->db->table($this->table);
@@ -373,11 +462,13 @@ class EvalMateP1Model extends Model {
             }
             //echo $this->db->getLastQuery();
         }
-        return $result;
+        $porcentaje = ($result * 100) / count($registros);
+        return $porcentaje;
     }
 
     public function _getDivide($registros, $num) {
-        $result = NULL;
+        $porcentaje = 0;
+        $result = 0;
         foreach ($registros as $key => $value) {
             
             $builder = $this->db->table($this->table);
@@ -398,6 +489,7 @@ class EvalMateP1Model extends Model {
             }
             //echo $this->db->getLastQuery();
         }
-        return $result;
+        $porcentaje = ($result * 100) / count($registros);
+        return $porcentaje;
     }
 }

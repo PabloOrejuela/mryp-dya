@@ -60,10 +60,39 @@ class DiagnosticoMyrpP1Model extends Model {
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
 
-    public function _getDiagMyrpP1($idprod) {
+    public function _getDiagMyrpLectura($id) {
+        $result = 0;
+        //foreach ($registros as $key => $value) {
+            
+            $builder = $this->db->table($this->table);
+            $builder->select('*');
+            //$builder->where('idprod', $value->id);
+            $builder->where('idprod', $id);
+            $query = $builder->get();
+            if ($query->getResult() != null) {
+                foreach ($query->getResult() as $row) {
+                    if ($row->necesito_apoyo != 'SI') {
+                        if ($row->p1_comprension_lectora == 'A') {
+                            
+                        }else if($row->p1_comprension_lectora == 'B'){
+
+                        }
+                    }else{
+                        $result['necesito_apoyo'] += 1;
+                    }
+                }
+            }
+            //echo $this->db->getLastQuery();
+        //}
+        echo '<pre>'.var_export($result, true).'</pre>';exit;
+        $porcentaje = ($result * 100) / count($registros);
+        return number_format($porcentaje, 2);
+    }
+
+    public function _getDiagMyrpP1($id) {
         $result = NULL;
         $builder = $this->db->table($this->table);
-        $builder->select('*')->where('idprod', strtoupper($idprod));
+        $builder->select('*')->where('idprod', $id);
         $query = $builder->get();
         if ($query->getResult() != null) {
             foreach ($query->getResult() as $row) {
@@ -184,5 +213,24 @@ class DiagnosticoMyrpP1Model extends Model {
         $builder->set('idprod', $datos['idprod']);
         
         $builder->insert();
+    }
+
+    public function _getDiagMyrp($registros, $campo) {
+        $porcentaje = 0;
+        $result = 0;
+        foreach ($registros as $key => $value) {
+            
+            $builder = $this->db->table($this->table);
+            $builder->select('id');
+            $builder->where('idprod', $value->id);
+            $builder->where('escritura', 'SI');
+            $query = $builder->get();
+            if ($query->getResult() != null) {
+                $result++;
+            }
+            //echo $this->db->getLastQuery();
+        }
+        $porcentaje = ($result * 100) / count($registros);
+        return number_format($porcentaje, 2);
     }
 }

@@ -58,20 +58,75 @@
                             ?>
                         </select>
                     </div>
-                    <div class="form-check">
-                        <input class="form-radio-input" type="radio" value="dif_docentes" name="diagnostico" id="flexCheckDefault" checked>
-                        <label class="form-radio-label" for="flexCheckDefault">Dificultades encontradas por docentes</label>
-                        
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" value="dif_diag_aplicado" name="diagnostico" id="flexCheckDefault" disabled>
-                        <label class="form-check-label" for="flexCheckDefault">Dificultades de aprendizaje encontradas a partir de los diagnósticos aplicados</label>
-                    </div>
+                    <?php
+                        if ($diagnostico == 'dif_docentes') {
+                            echo '
+                                <div class="form-check">
+                                    <input class="form-radio-input" type="radio" value="dif_docentes" name="diagnostico" id="flexRadioDefault" checked>
+                                    <label class="form-radio-label" for="flexRadioDefault">Dificultades encontradas por docentes</label>
+                                    
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-radio-input" type="radio" value="dif_diag_aplicado" name="diagnostico" id="flexRadioDefault">
+                                    <label class="form-radio-label" for="flexRadioDefault">Dificultades de aprendizaje encontradas a partir de los diagnósticos aplicados</label>
+                                </div>
+                            ';
+
+                        }else{
+                            echo '
+                                <div class="form-check">
+                                    <input class="form-radio-input" type="radio" value="dif_docentes" name="diagnostico" id="flexRadioDefault">
+                                    <label class="form-radio-label" for="flexRadioDefault">Dificultades encontradas por docentes</label>
+                                    
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-radio-input" type="radio" value="dif_diag_aplicado" name="diagnostico" id="flexRadioDefault" checked>
+                                    <label class="form-radio-label" for="flexRadioDefault">Dificultades de aprendizaje encontradas a partir de los diagnósticos aplicados</label>
+                                </div>
+                            ';
+                        }
+                    ?>
                     <div class="form-check mt-3">
-                        <input class="form-radio-input" type="radio" value="pie" name="tipo_grafico" id="flexCheckDefault" checked>
-                        <label class="form-radio-label" for="flexCheckDefault">Pastel</label>
-                        <input class="form-radio-input" type="radio" value="bar" name="tipo_grafico" id="flexCheckDefault">
-                        <label class="form-radio-label" for="flexCheckDefault">Barras</label>
+                        <input class="form-radio-input" type="radio" value="pie" name="tipo_grafico" id="flexRadioDefault" checked>
+                        <label class="form-radio-label" for="flexRadioDefault">Pastel</label>
+                        <input class="form-radio-input" type="radio" value="bar" name="tipo_grafico" id="flexRadioDefault">
+                        <label class="form-radio-label" for="flexRadioDefault">Barras</label>
+                    </div>
+                    <div class="contenedor mb-3 mt-3 col-md-9">
+                        <table class="table table-bordered tabla-codigos-eval">
+                            <thead>
+                                <th id="codigo_0">Puntaje</th>
+                                <th id="codigo_0">Nivel de logro de acuerdo con la edad</th>
+                                <th id="codigo_0">Descriptor</th>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td id="codigo_1">0</td>
+                                    <td id="codigo_1">No aplica</td>
+                                    <td id="codigo_1">No corresponde a la enseñanza de acuerdo con la edad</td>
+                                </tr>
+                                <tr>
+                                    <td id="codigo_2">1 - 10</td>
+                                    <td id="codigo_2">Muy por debajo de lo esperado</td>
+                                    <td id="codigo_2">Falta de mediación escolar para la enseñanza de la escritura</td>
+                                </tr>
+                                <tr>
+                                    <td id="codigo_3">11 - 20</td>
+                                    <td id="codigo_3">En proceso</td>
+                                    <td id="codigo_3">Mediación escolar no es básica para la enseñanza de la escritura de acuerdo con la edad</td>
+                                </tr>
+                                <tr>
+                                    <td id="codigo_4">21 - 25</td>
+                                    <td id="codigo_4">Adecuado</td>
+                                    <td id="codigo_4">Mediación escolar es adecuada para la enseñanza de la escritura de acuerdo con la edad</td>
+                                </tr>
+                                <tr>
+                                    <td id="codigo_5">26</td>
+                                    <td id="codigo_5">Adecuado</td>
+                                    <td id="codigo_5">Mediación escolar es adecuada para la enseñanza de la escritura de acuerdo con la edad</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                     <button type="submit" class="btn btn-success mt-3">Generar reporte</button>
                 </form>   
@@ -103,12 +158,12 @@
         data: {
             labels: cData.etiquetas,
             datasets: [{
-                label:  'Num Datos',
+                label:  'Porcentaje de estudiantes con dificultades',
                 data: cData.datos,
                 backgroundColor: [
                     'rgba(118, 168, 134, 0.5)',
                     'rgba(186, 209, 188, 0.5)',
-                    'rgba(45, 107, 53, 0.5)',
+                    'rgba(145, 107, 53, 0.5)',
                 ],
                 borderColor: [
                 'rgb(118, 168, 134)',

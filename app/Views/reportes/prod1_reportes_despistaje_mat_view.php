@@ -1,6 +1,6 @@
 <main class="container">
     <div class="container-fluid px-4">
-        <h3 class="mt-4"><?= esc($title).' - REPORTES'; ?></h3>
+        <h3 class="mt-4"><?= esc($title).' - REPORTES'.$tipo_prueba; ?></h3>
         <div class="card mb-4">
             <div class="card-header">
                 <i class="fa-solid fa-cash-register"></i>
@@ -20,7 +20,11 @@
                             <?php
                                 if ($centros != NULL && isset($centros) ) {
                                     foreach ($centros as $key => $ce) {
-                                        echo '<option value="'.$ce->amie.'">'.$ce->amie.' - '.$ce->nombre.'</option>';
+                                        if ($ce->amie == $amie) {
+                                            echo '<option value="'.$ce->amie.'" selected>'.$ce->amie.' - '.$ce->nombre.'</option>';
+                                        }else{
+                                            echo '<option value="'.$ce->amie.'">'.$ce->amie.' - '.$ce->nombre.'</option>';
+                                        }
                                     }
                                 }else{
                                     echo '<option value="NULL" selected>Hubo un errror, no se cargaron los datos</option>';
@@ -63,9 +67,23 @@
                                 name="tipo_prueba" 
                                 id="select-pregunta"  
                             >
-                                <option value="0" selected>Elija un tipo de prueba</option>
-                                <option value="1">Prueba Elemental</option>
-                                <option value="2">Prueba Media/Superior</option>
+                                <?php
+                                    
+                                    if ($tipo_prueba == 1) {
+                                        echo '<option value="0">Elija un tipo de prueba</option>';
+                                        echo '<option value="1" selected>Prueba Elemental</option>';
+                                        echo '<option value="2">Prueba Media/Superior</option>';
+                                    }else if($tipo_prueba == 2){
+                                        echo '<option value="0">Elija un tipo de prueba</option>';
+                                        echo '<option value="1">Prueba Elemental</option>';
+                                        echo '<option value="2" selected>Prueba Media/Superior</option>';
+
+                                    }else{
+                                        echo '<option value="0" selected>Elija un tipo de prueba</option>';
+                                        echo '<option value="1">Prueba Elemental</option>';
+                                        echo '<option value="2">Prueba Media/Superior</option>';
+                                    }
+                                ?>
                             </select>
                             <p id="error-message"><?= session('errors.tipo_prueba_mate');?> </p>
                         </div>
@@ -192,7 +210,7 @@
                 },
                 y: {
                     min: 0,
-                    max: 30
+                    max: 100
                 }
             },
             plugins: {

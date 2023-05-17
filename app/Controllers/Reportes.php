@@ -77,6 +77,8 @@ class Reportes extends BaseController {
             $data['genero'] = $this->prod1Model->_getGeneros();
 
             $data['centro'] = '';
+            $data['amie'] = '';
+            $data['cohorte'] = '';
             $data['registros'] = NULL;
 
             //Evito el error de que llegue vacío el objeto
@@ -108,6 +110,8 @@ class Reportes extends BaseController {
             $data['genero'] = $this->prod1Model->_getGeneros();
 
             $data['centro'] = '';
+            $data['amie'] = '';
+            $data['cohorte'] = '';
             $data['registros'] = NULL;
 
             //Evito el error de que llegue vacío el objeto
@@ -142,6 +146,7 @@ class Reportes extends BaseController {
             $data['amie'] = '';
             $data['cohorte'] = '';
             $data['dias_atencion'] = 0;
+            $data['diagnostico'] = 0;
             $data['horas_planificadas'] = 0;
             $data['horas_efectivas'] = 0;
             $data['horas_perdidas'] = 0;
@@ -175,13 +180,14 @@ class Reportes extends BaseController {
 
             $data['centro'] = '';
             $data['cohorte'] = '';
+            $data['tipo_prueba'] = '';
             $data['dias_atencion'] = 0;
             $data['horas_planificadas'] = 0;
             $data['horas_efectivas'] = 0;
             $data['horas_perdidas'] = 0;
             //Evito el error de que llegue vacío el objeto
             $data['chart_data'] = '';
-            //echo '<pre>'.var_export($data['genero'], true).'</pre>';exit;
+            
 
             $data['title']='MYRP - DYA';
             $data['main_content']='reportes/prod1_reportes_despistaje_mat_view';
@@ -222,18 +228,20 @@ class Reportes extends BaseController {
 
     public function recibe_eval_prueba_final_tab() {
 
-        if ($this->request->getPostGet('amie') == NULL) {
-            return redirect()->to('reportes-p1');
+        if ($this->request->getPostGet('amie') == NULL ||  $this->request->getPostGet('cohorte') == 'NULL') {
+            $data['centro'] = '';
+            $data['amie'] = '';
+            $data['cohorte'] = '';
+            $data['registros'] = NULL;
+            return redirect()->to('reporte-analisis-pruebafinal-p1');
         }
 
         $data['amie'] = $this->request->getPostGet('amie');
-
+        $data['cohorte'] = $this->request->getPostGet('cohorte');
         $data['centro'] = $this->centroEducativoModel->find($data['amie']);
 
-        //$data['result'] = $this->asistenciaP1->_getAsistenciaReporte($data);
 
-        //echo '<pre>'.var_export($data['horas_planificadas'], true).'</pre>';exit;
-        $data['centros'] = $this->prod1Model->_getMisAmie($data['nombre']);
+        $data['centros'] = $this->prod1Model->_getMisAmie($this->session->nombre);
         $data['registros'] = $this->prod1Model->_getRegistros($data['amie']);
 
         //Evito el error de que llegue vacío el objeto
@@ -248,18 +256,20 @@ class Reportes extends BaseController {
 
     public function recibe_eval_prueba_diagnostico_tab() {
 
-        if ($this->request->getPostGet('amie') == NULL) {
-            return redirect()->to('reportes-p1');
+        if ($this->request->getPostGet('amie') == 'NULL' ||  $this->request->getPostGet('cohorte') == 'NULL') {
+
+            $data['centro'] = '';
+            $data['amie'] = '';
+            $data['cohorte'] = '';
+            $data['registros'] = NULL;
+            return redirect()->to('reporte-analisis-pruebadiagnostico-p1');
         }
 
         $data['amie'] = $this->request->getPostGet('amie');
-
+        $data['cohorte'] = $this->request->getPostGet('cohorte');
         $data['centro'] = $this->centroEducativoModel->find($data['amie']);
 
-        //$data['result'] = $this->asistenciaP1->_getAsistenciaReporte($data);
-
-        //echo '<pre>'.var_export($data['horas_planificadas'], true).'</pre>';exit;
-        $data['centros'] = $this->prod1Model->_getMisAmie($data['nombre']);
+        $data['centros'] = $this->prod1Model->_getMisAmie($this->session->nombre);
         $data['registros'] = $this->prod1Model->_getRegistros($data['amie']);
 
         //Evito el error de que llegue vacío el objeto
@@ -306,19 +316,27 @@ class Reportes extends BaseController {
 
                 //Para poder mostrar los que no tienen info hayq ue hacer pasteles por separado
                 //$sin_dato = $total - $data['lectura'] - $data['matematica'] - $data['escritura'];
-                $datosVentas[0] = number_format(($data['lectura'] * 100)/$total, 2);
-                $datosVentas[1] = number_format(($data['matematica'] * 100)/$total,2);
-                $datosVentas[2] = number_format(($data['escritura'] * 100)/$total,2);
-                //echo '<pre>'.var_export($, true).'</pre>';exit;
-            }else if($data['diagnostico'] != NULL && $data['diagnostico'] == 'dif_diag_aplicado'){
+                $datosVentas[0] = $data['lectura'];
+                $datosVentas[1] = $data['matematica'];
+                $datosVentas[2] = $data['escritura'];
 
+                $etiquetas = ["Lectura", "Escritura", "Matemática"];
+                
+            }else if($data['diagnostico'] != NULL && $data['diagnostico'] == 'dif_diag_aplicado'){
+                // $data['lectura'] = $this->diagDocenteP1->_getDiagDocente($data['registros']);
+                // $data['escritura'] = $this->diagDocenteP1->_getDiagDocenteEscritura($data['registros']);
+
+                //Traigo los datos de los diagnósticos aplicados
+                $datosVentas[0] = $data['lectura'];
+                $datosVentas[1] = $data['escritura'];
+
+                $etiquetas = ["Lectura", "Escritura"];
             }else {
                 $datosVentas[0] = 0;
                 $datosVentas[1] = 0;
                 $datosVentas[2] = 0;
             }
-            //echo '<pre>'.var_export($this->request->getPostGet('diagnostico'), true).'</pre>';exit;
-            $etiquetas = ["Lectura", "Escritura", "Matemática"];
+
             
             $respuesta = [
                 "etiquetas" => $etiquetas,
@@ -424,60 +442,60 @@ class Reportes extends BaseController {
             }else if ($data['registros'] != NULL && $data['tipo_prueba'] == 2) {
                 //Orientación espacial
                 $data['orientacion_espacial_1'] = $this->evalMateP1->_getOrientacionEspacial($data['registros'], 1);
-                $datosGrafica[0] = $data['orientacion_espacial_1'];
+                $datosGrafica[0] = number_format($data['orientacion_espacial_1'],2);
                 $data['orientacion_espacial_2'] = $this->evalMateP1->_getOrientacionEspacial($data['registros'], 2);
-                $datosGrafica[1] = $data['orientacion_espacial_2'];
+                $datosGrafica[1] = number_format($data['orientacion_espacial_2'], 2);
                 $data['orientacion_espacial_3'] = $this->evalMateP1->_getOrientacionEspacial($data['registros'], 3);
-                $datosGrafica[2] = $data['orientacion_espacial_3'];
+                $datosGrafica[2] = number_format($data['orientacion_espacial_3'], 2);
                 $data['orientacion_espacial_4'] = $this->evalMateP1->_getOrientacionEspacial($data['registros'], 4);
-                $datosGrafica[3] = $data['orientacion_espacial_4'];
-
+                $datosGrafica[3] = number_format($data['orientacion_espacial_4'],2);
+                
                 
                 //Clasificación
                 $data['clasificacion_5'] = $this->evalMateP1->_getClasificacion($data['registros'], 5);
-                $datosGrafica[4] = $data['clasificacion_5'];
+                $datosGrafica[4] = number_format($data['clasificacion_5'],2);
                 $data['clasificacion_6'] = $this->evalMateP1->_getClasificacion($data['registros'], 6);
-                $datosGrafica[5] = $data['clasificacion_6'];
+                $datosGrafica[5] = number_format($data['clasificacion_6'],2);
 
                 //Seriación
                 $data['seriacion_7'] = $this->evalMateP1->_getSeriacion($data['registros'], 7);
-                $datosGrafica[6] = $data['seriacion_7'];
+                $datosGrafica[6] = number_format($data['seriacion_7'],2);
                 $data['seriacion_8'] = $this->evalMateP1->_getSeriacion($data['registros'], 8);
-                $datosGrafica[7] = $data['seriacion_8'];
+                $datosGrafica[7] = number_format($data['seriacion_8'] , 2);
                 $data['seriacion_9'] = $this->evalMateP1->_getSeriacion($data['registros'], 9);
-                $datosGrafica[8] = $data['seriacion_9'];
+                $datosGrafica[8] = number_format($data['seriacion_9'], 2);
 
                 //Esquema Corporal
                 $data['esquema_corporal_10'] = $this->evalMateP1->_getEsquema($data['registros'], 10);
-                $datosGrafica[9] = $data['esquema_corporal_10'];
+                $datosGrafica[9] = number_format($data['esquema_corporal_10'] , 2);
                 $data['esquema_corporal_11'] = $this->evalMateP1->_getEsquema($data['registros'], 11);
-                $datosGrafica[10] = $data['esquema_corporal_11'];
+                $datosGrafica[10] = number_format($data['esquema_corporal_11'] , 2);
 
                 //Suma
                 $data['suma_dos_cifras'] = $this->evalMateP1->_getSuma($data['registros'], 2);
-                $datosGrafica[11] = $data['suma_dos_cifras'];
+                $datosGrafica[11] = number_format($data['suma_dos_cifras'] , 2);
                 $data['suma_cuatro_cifras'] = $this->evalMateP1->_getSuma($data['registros'], 4);
-                $datosGrafica[12] = $data['suma_cuatro_cifras'];
+                $datosGrafica[12] = number_format($data['suma_cuatro_cifras'] , 2);
                 $data['suma_cinco_mas'] = $this->evalMateP1->_getSuma($data['registros'], 5);
-                $datosGrafica[13] = $data['suma_cinco_mas'];
+                $datosGrafica[13] = number_format($data['suma_cinco_mas'] , 2);
 
                 //Resta
                 $data['resta_tres_cifras'] = $this->evalMateP1->_getResta($data['registros'], 3);
-                $datosGrafica[14] = $data['resta_tres_cifras'];
+                $datosGrafica[14] = number_format($data['resta_tres_cifras'], 2);
                 $data['resta_cuatro_cifras'] = $this->evalMateP1->_getResta($data['registros'], 4);
-                $datosGrafica[15] = $data['resta_tres_cifras'];
+                $datosGrafica[15] = number_format($data['resta_cuatro_cifras'], 2);
 
                 //Multiplicación
                 $data['multiplicacion_una_cifra'] = $this->evalMateP1->_getMultiplica($data['registros'], 1);
-                $datosGrafica[16] = $data['multiplicacion_una_cifra'];
+                $datosGrafica[16] = number_format($data['multiplicacion_una_cifra'], 2);
                 $data['multiplicacion_dos_cifras'] = $this->evalMateP1->_getMultiplica($data['registros'], 2);
-                $datosGrafica[17] = $data['multiplicacion_dos_cifras'];
+                $datosGrafica[17] = number_format($data['multiplicacion_dos_cifras'], 2);
 
                 //División
                 $data['division_una_cifra'] = $this->evalMateP1->_getDivide($data['registros'], 1);
-                $datosGrafica[18] = $data['division_una_cifra'];
+                $datosGrafica[18] = number_format($data['division_una_cifra'], 2);
                 $data['division_dos_cifras'] = $this->evalMateP1->_getDivide($data['registros'], 2);
-                $datosGrafica[19] = $data['division_dos_cifras'];
+                $datosGrafica[19] = number_format($data['division_dos_cifras'], 2);
 
                 $total_registrados = 0;
                 for ($i=0; $i < 19; $i++) { 
@@ -566,5 +584,19 @@ class Reportes extends BaseController {
         $data['title']='MYRP - DYA';
         $data['main_content']='reportes/prod1_reportes_view';
         return view('includes/template_reportes', $data);
+    }
+
+    public function logout(){
+        //destruyo la session  y salgo
+        $data['idusuario'] = $this->session->idusuario;
+        $this->session->destroy();
+
+        $user = [
+            'is_logged' => 1
+        ];
+        
+        $this->usuarioModel->update($data['idusuario'], $user);
+        
+        return redirect()->to('/');
     }
 }
