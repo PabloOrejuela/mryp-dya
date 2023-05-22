@@ -84,11 +84,13 @@ class Prod1Model extends Model {
         return $result;
     }
 
-    public function _getRegistros($amie) {
+    public function _getRegistros($amie, $cohorte, $tutor) {
         $result = NULL;
         $builder = $this->db->table($this->table);
         $builder->select('*');
         $builder->where('amie', $amie);
+        $builder->where('cohorte', $cohorte);
+        $builder->where('tutor_apoyo', $tutor);
         //$builder->join('eval_final', 'eval_final.idprod = producto_1.id');
         $builder->orderBy('apellidos');
         $query = $builder->get();

@@ -30,6 +30,7 @@
             <div class="card-header">
                 <i class="fa-solid fa-cash-register"></i>
                 <?= esc("ANÁLISIS DE LA PRUEBA FINAL CON LA INTERVENCIÓN DEL PROGRAMA"); ?>
+                
             </div>
             <div class="card-body" id="card-reportes"> 
                 <form action="<?php echo base_url().'/recibe-eval-prueba-final-tab';?>" method="post" id="form">
@@ -154,11 +155,29 @@
                                 $this->evalMateFinalElemP1 = new EvalMateFinalElementalP1Model();
                                 $this->evalFinalP1 = new EvalFinalP1Model();
                                 $this->db = \Config\Database::connect();
+                                
 
                                 $num = 1;
+                                $num_a = 0;
+                                $num_b = 0;
+                                $num_c = 0;
+                                $num_d = 0;
+                                $mate_a = 0;
+                                $mate_b = 0;
+                                $mate_c = 0;
+                                $mate_d = 0;
+                                $lect_a = 0;
+                                $lect_b = 0;
+                                $lect_c = 0;
+                                $lect_d = 0;
+                                $total_registros = 0;
                                 if ($registros != NULL && isset($registros)) {
+                                    
                                     foreach ($registros as $key => $value) {
                                         $eval_final = $this->evalFinalP1->_getEvalFinal($value->id);
+                                        $valor_escritura = 0;
+                                        
+                                                
                                         echo '<tr>
                                             <td>'.$num.'</td>
                                             <td>'.$value->nombres.'</td>
@@ -181,135 +200,184 @@
                                             //Eval final de lectura y escritura
                                             if (isset($eval_final) && $eval_final != NULL) {
                                                 //Diagnóstico MYRP Lectura
+                                                
+                                                //Si no necesitó apoyo le calculo
+                                                $valor_lectura = 0;
+
+                                                if ($eval_final->p1_comprension_lectora == 'A') {
+                                                    $valor_lectura += 0;
+                                                    $lect_a++;
+                                                }else if($eval_final->p1_comprension_lectora == 'B'){
+                                                    $valor_lectura += 1;
+                                                    $lect_b++;
+                                                }
+
+                                                if ($eval_final->p2_comprension_lectora == 'A') {
+                                                    $valor_lectura += 0;
+                                                    $lect_a++;
+                                                }else if($eval_final->p2_comprension_lectora == 'B'){
+                                                    $valor_lectura += 1;
+                                                    $lect_b++;
+                                                }
+
+                                                if ($eval_final->p3_comprension_lectora == 'A') {
+                                                    $valor_lectura += 0;
+                                                    $lect_a++;
+                                                }else if($eval_final->p3_comprension_lectora == 'B'){
+                                                    $valor_lectura += 1;
+                                                    $lect_b++;
+                                                }else if($eval_final->p3_comprension_lectora == 'C'){
+                                                    $valor_lectura += 2;
+                                                    $lect_c++;
+                                                }
+
+                                                if ($eval_final->p4_comprension_lectora == 'A') {
+                                                    $valor_lectura += 0;
+                                                    $lect_a++;
+                                                }else if($eval_final->p4_comprension_lectora == 'B'){
+                                                    $valor_lectura += 1;
+                                                    $lect_b++;
+                                                }else if($eval_final->p4_comprension_lectora == 'C'){
+                                                    $valor_lectura += 2;
+                                                    $lect_c++;
+                                                }
+
                                                 if ($eval_final->necesito_apoyo == 'SI') {
-                                                    echo '<td id="codigo_3">SI</td>';
+                                                    if ($valor_lectura > 0 && $valor_lectura <= 2) {
+                                                        echo '<td id="codigo_3">SI</td>';
+                                                    }else if($valor_lectura > 3 && $valor_lectura <= 5){
+                                                        echo '<td id="codigo_4">SI</td>';
+                                                    }else if($valor_lectura > 5 && $valor_lectura <= 7){
+                                                        echo '<td id="codigo_5">SI</td>';
+                                                    }else{
+                                                        echo '<td id="codigo_1">SI</td>';
+                                                    }
+                                                    $lect_a++;
+                                                    $lect_b++;
                                                 }else{
-                                                    echo '<td id="codigo_4">NO</td>';
-                                                    //Si no necesitó apoyo le calculo
-                                                    // $valor_lectura = 0;
-
-                                                    // if ($eval_final->p1_comprension_lectora == 'A') {
-                                                    //     $valor_lectura += 0;
-                                                    // }else if($eval_final->p1_comprension_lectora == 'B'){
-                                                    //     $valor_lectura += 1;
-                                                    // }
-
-                                                    // if ($eval_final->p2_comprension_lectora == 'A') {
-                                                    //     $valor_lectura += 0;
-                                                    // }else if($eval_final->p2_comprension_lectora == 'B'){
-                                                    //     $valor_lectura += 1;
-                                                    // }
-
-                                                    // if ($eval_final->p3_comprension_lectora == 'A') {
-                                                    //     $valor_lectura += 0;
-                                                    // }else if($eval_final->p3_comprension_lectora == 'B'){
-                                                    //     $valor_lectura += 1;
-                                                    // }else if($eval_final->p3_comprension_lectora == 'C'){
-                                                    //     $valor_lectura += 2;
-                                                    // }
-
-                                                    // if ($eval_final->p4_comprension_lectora == 'A') {
-                                                    //     $valor_lectura += 0;
-                                                    // }else if($eval_final->p4_comprension_lectora == 'B'){
-                                                    //     $valor_lectura += 1;
-                                                    // }else if($eval_final->p4_comprension_lectora == 'C'){
-                                                    //     $valor_lectura += 2;
-                                                    // }
-
-                                                    // if ($valor_lectura > 0 && $valor_lectura <= 2) {
-                                                    //     echo '<td id="codigo_3">'.$valor_lectura.'</td>';
-                                                    // }else if($valor_lectura > 3 && $valor_lectura <= 5){
-                                                    //     echo '<td id="codigo_4">'.$valor_lectura.'</td>';
-                                                    // }else if($valor_lectura > 5 && $valor_lectura <= 7){
-                                                    //     echo '<td id="codigo_5">'.$valor_lectura.'</td>';
-                                                    // }else{
-                                                    //     echo '<td id="codigo_1">'.$valor_lectura.'</td>';
-                                                    // }
-
+                                                    if ($valor_lectura > 0 && $valor_lectura <= 2) {
+                                                        echo '<td id="codigo_3">NO</td>';
+                                                    }else if($valor_lectura > 3 && $valor_lectura <= 5){
+                                                        echo '<td id="codigo_4">NO</td>';
+                                                    }else if($valor_lectura > 5 && $valor_lectura <= 7){
+                                                        echo '<td id="codigo_5">NO</td>';
+                                                    }else{
+                                                        echo '<td id="codigo_1">NO</td>';
+                                                    }
+                                                    $lect_c++;
+                                                    $lect_d++;
                                                 }
 
 
                                                 //Diagnóstico MYRP Escritura
                                                 //Cálculo el valor de Escritura
-                                                $valor_escritura = 0;
+                                                
                                                 if ($eval_final->p1_inteligibilidad == 'A') {
                                                     $valor_escritura += 0;
+                                                    $num_a++;
                                                 }else if($eval_final->p1_inteligibilidad == 'B'){
                                                     $valor_escritura += 1;
+                                                    $num_b++;
                                                 }
 
                                                 if ($eval_final->p3_inteligibilidad == 'A') {
                                                     $valor_escritura += 0;
+                                                    $num_a++;
                                                 }else if($eval_final->p3_inteligibilidad == 'B'){
                                                     $valor_escritura += 1;
+                                                    $num_b++;
                                                 }else if($eval_final->p3_inteligibilidad == 'C'){
                                                     $valor_escritura += 2;
+                                                    $num_c++;
                                                 }
 
                                                 if ($eval_final->p3_coherencia == 'A') {
                                                     $valor_escritura += 0;
+                                                    $num_a++;
                                                 }else if($eval_final->p3_coherencia == 'B'){
                                                     $valor_escritura += 1;
+                                                    $num_b++;
                                                 }else if($eval_final->p3_coherencia == 'C'){
                                                     $valor_escritura += 2;
+                                                    $num_c++;
                                                 }else if($eval_final->p3_coherencia == 'D'){
                                                     $valor_escritura += 3;
+                                                    $num_d++;
                                                 }
 
                                                 if ($eval_final->p3_sintaxis == 'A') {
                                                     $valor_escritura += 0;
+                                                    $num_a++;
                                                 }else if($eval_final->p3_sintaxis == 'B'){
                                                     $valor_escritura += 1;
+                                                    $num_b++;
                                                 }else if($eval_final->p3_sintaxis == 'C'){
                                                     $valor_escritura += 2;
+                                                    $num_c++;
                                                 }else if($eval_final->p3_sintaxis == 'D'){
                                                     $valor_escritura += 3;
+                                                    $num_c++;
                                                 }
 
                                                 if ($eval_final->p3_estandares_egb_sub2y3 == 'A') {
                                                     $valor_escritura += 0;
+                                                    $num_a++;
                                                 }else if($eval_final->p3_estandares_egb_sub2y3 == 'B'){
                                                     $valor_escritura += 1;
-                                                }
+                                                    $num_b++;                                                }
 
                                                 if ($eval_final->p4_inteligibilidad == 'A') {
                                                     $valor_escritura += 0;
+                                                    $num_a++;
                                                 }else if($eval_final->p4_inteligibilidad == 'B'){
                                                     $valor_escritura += 1;
+                                                    $num_b++;
                                                 }
 
                                                 if ($eval_final->p4_coherencia == 'A') {
                                                     $valor_escritura += 0;
+                                                    $num_a++;
                                                 }else if($eval_final->p4_coherencia == 'B'){
                                                     $valor_escritura += 1;
+                                                    $num_b++;
                                                 }else if($eval_final->p4_coherencia == 'C'){
                                                     $valor_escritura += 2;
+                                                    $num_c++;
                                                 }else if($eval_final->p4_coherencia == 'D'){
                                                     $valor_escritura += 3;
+                                                    $num_d++;
                                                 }
 
                                                 if ($eval_final->p4_sintaxis == 'A') {
                                                     $valor_escritura += 0;
+                                                    $num_a++;
                                                 }else if($eval_final->p4_sintaxis == 'B'){
                                                     $valor_escritura += 1;
+                                                    $num_b++;
                                                 }else if($eval_final->p4_sintaxis == 'C'){
                                                     $valor_escritura += 2;
+                                                    $num_c++;
                                                 }else if($eval_final->p4_sintaxis == 'D'){
                                                     $valor_escritura += 3;
+                                                    $num_d++;
                                                 }
 
                                                 if ($eval_final->p4_estandares_egb_sub2y3 == 'A') {
                                                     $valor_escritura += 0;
+                                                    $num_a++;
                                                 }else if($eval_final->p4_estandares_egb_sub2y3 == 'B'){
                                                     $valor_escritura += 1;
+                                                    $num_b++;
                                                 }
 
                                                 $rango_escritura = ($valor_escritura * 100) / 18;
 
                                                 if ($rango_escritura > 0 && $rango_escritura <= 33) {
                                                     echo '<td id="codigo_3">1</td>';
+                                                    
                                                 }else if($rango_escritura > 33 && $rango_escritura <= 66){
                                                     echo '<td id="codigo_4">2</td>';
+                                                    
                                                 }else if($rango_escritura > 66){
                                                     echo '<td id="codigo_5">3</td>';
                                                 }else{
@@ -334,12 +402,16 @@
 
                                                 if ($rango_mate > 0 && $rango_mate <= 33) {
                                                     echo '<td id="codigo_3">1</td>';
+                                                    $mate_b++;
                                                 }else if($rango_mate > 33 && $rango_mate <= 66){
                                                     echo '<td id="codigo_4">2</td>';
+                                                    $mate_c++;
                                                 }else if($rango_mate > 66){
                                                     echo '<td id="codigo_5">3</td>';
+                                                    $mate_d++;
                                                 }else{
                                                     echo '<td id="codigo_1">0</td>';
+                                                    $mate_a++;
                                                 }
 
                                             }else{
@@ -353,12 +425,16 @@
 
                                                 if ($rango_mate_sup > 0 && $rango_mate_sup <= 33) {
                                                     echo '<td id="codigo_3">1</td>';
+                                                    $mate_b++;
                                                 }else if($rango_mate_sup > 33 && $rango_mate_sup <= 66){
                                                     echo '<td id="codigo_4">2</td>';
+                                                    $mate_c++;
                                                 }else if($rango_mate_sup > 66){
                                                     echo '<td id="codigo_5">3</td>';
+                                                    $mate_d++;
                                                 }else{
                                                     echo '<td id="codigo_1">0</td>';
+                                                    $mate_a++;
                                                 }
 
                                             }else{
@@ -366,16 +442,267 @@
                                             }
 
                                             echo '</tr>';
+
                                         $num++;
                                     }
+                                    
                                 }else{
+                                    
                                     echo '<tr><td colspan="8">AUN NO HAY REGISTROS QUE MOSTRAR</td></tr>';
                                 }
                             ?>
                         </tbody>
                     </table>
+                    <?php
+                        $total_registros_lect = $lect_a+$lect_b+$lect_c+$lect_d;
+                        
+                        //Lectura
+                        $etiquetas = ["Por debajo de lo esperado", "En proceso", "Adecuadas"];
+                        if ($total_registros_lect == 0) {
+                            $datosGrafica[0] = number_format((($lect_b)*100)/1,1);
+                            $datosGrafica[1] = number_format(($lect_c*100)/1, 1);
+                            $datosGrafica[2] = number_format(($lect_d*100)/1, 1);
+                        }else{
+                            $datosGrafica[0] = number_format((($lect_b)*100)/$total_registros_lect,1);
+                            $datosGrafica[1] = number_format(($lect_c*100)/$total_registros_lect, 1);
+                            $datosGrafica[2] = number_format(($lect_d*100)/$total_registros_lect, 1);
+                        }
+                        
+                        $respuesta = [
+                            "etiquetas" => $etiquetas,
+                            "datos" => $datosGrafica,
+                            "total" => $total_registros,
+                        ];
+                        $chart_data =  json_encode($respuesta); 
+
+                        //Escritura
+                        //echo $num_d;exit;
+                        $total_registros_esc = $num_a+$num_b+$num_c+$num_d;
+                        $etiquetas_1 = ["Por debajo de lo esperado", "En proceso", "Adecuadas"];
+                        if ($total_registros_esc == 0) {
+                            $datosGrafica_1[0] = number_format((($num_b)*100)/1,1);//65
+                            $datosGrafica_1[1] = number_format(($num_c*100)/1,1);//23.80
+                            $datosGrafica_1[2] = number_format(($num_d*100)/1,1);//11.11
+                        }else{
+                            $datosGrafica_1[0] = number_format((($num_a+$num_b)*100)/$total_registros_esc, 1);//65
+                            $datosGrafica_1[1] = number_format(($num_c*100)/$total_registros_esc, 1);//23.80
+                            $datosGrafica_1[2] = number_format(($num_d*100)/$total_registros_esc, 1);//11.11
+                        }
+                        
+                        $respuesta_1 = [
+                            "etiquetas" => $etiquetas_1,
+                            "datos" => $datosGrafica_1,
+                            "total" => $total_registros_esc,
+                        ];
+                        $chart_data_1 =  json_encode($respuesta_1); 
+
+                        //Matemáticas
+                        $total_registros_mate = $mate_a+$mate_b+$mate_c+$mate_d;
+                        //echo $total_registros_mate;exit;
+                        $etiquetas_2 = ["Por debajo de lo esperado", "En proceso", "Adecuadas"];
+                        if ($total_registros_mate == 0) {
+                            $datosGrafica_2[0] = number_format((($mate_b)*100)/1, 1);
+                            $datosGrafica_2[1] = number_format(($mate_c*100)/1, 1);//23.80
+                            $datosGrafica_2[2] = number_format(($mate_d*100)/1, 1);//23.80
+                        }else{
+                            $datosGrafica_2[0] = number_format((($mate_a+$mate_b)*100)/$total_registros_mate, 1);
+                            $datosGrafica_2[1] = number_format(($mate_c*100)/$total_registros_mate, 1);//23.80
+                            $datosGrafica_2[2] = number_format(($mate_d*100)/$total_registros_mate, 1);//23.80
+                        }
+                        
+                        $respuesta_2 = [
+                            "etiquetas" => $etiquetas_2,
+                            "datos" => $datosGrafica_2,
+                            "total" => $total_registros,
+                        ];
+                        $chart_data_2 =  json_encode($respuesta_2); 
+                    ?>
                 </div>
+                <div class="col-md-6"><canvas id="myChart"></canvas></div>
+                <div class="col-md-6"><canvas id="myChart_1"></canvas></div>
+                <div class="col-md-6"><canvas id="myChart_2"></canvas></div>
             </div>
         </section>
     </div>
 </main>
+<script>
+    //Le paso el JSON con los datos Chart 1
+    var cData = JSON.parse(`<?php echo $chart_data; ?>`);
+    var ctx = document.getElementById('myChart').getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: "pie",
+        data: {
+            labels: cData.etiquetas,
+            datasets: [{
+                label:  'Número de registros: '+ cData.total,
+                data: cData.datos,
+                backgroundColor: [
+
+                    //Por debajo
+                    'rgba(238, 176, 183, 1)',
+
+                    //Proceso
+                    'rgba(237, 197, 202, 0.7)',
+
+                    //Adecuado
+                    'rgba(245, 213, 217, 0.3)',
+
+                ],
+                borderColor: [
+                'rgb(95, 96, 86)',
+                ],
+                borderWidth: 0.5
+            
+            }
+        ]
+        },
+        plugins: [ChartDataLabels],
+        options: {
+            scales:{
+                aspectRatio: 1,
+                y:[{
+                    ticks:{
+                        beginAtZero:true
+                    }
+                }],
+                x: {
+                    max: 20
+                },
+                y: {
+                    min: 0,
+                    max: 100
+                }
+            },
+            plugins: {
+                // Change options for ALL labels of THIS CHART
+                datalabels: {
+                    color: '#000000'
+                },
+                title: {
+                    display: true,
+                    text: 'Destrezas (Lectura) en porcentaje %'
+                }
+            }
+        }
+    });
+</script>
+<script>
+    //Le paso el JSON con los datos Chart 1
+    var cData = JSON.parse(`<?php echo $chart_data_1; ?>`);
+    var ctx = document.getElementById('myChart_1').getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: "pie",
+        data: {
+            labels: cData.etiquetas,
+            datasets: [{
+                label:  'Número de registros: '+ cData.total,
+                data: cData.datos,
+                backgroundColor: [
+
+                    //Por debajo
+                    'rgba(185, 226, 106, 1)',
+
+                    //Proceso
+                    'rgba(195, 226, 136, 0.7)',
+
+                    //Adecuado
+                    'rgba(241, 245, 213, 0.5)',
+
+                ],
+                borderColor: [
+                'rgb(95, 96, 86)',
+                ],
+                borderWidth: 0.5
+            }
+        ]
+        },
+        plugins: [ChartDataLabels],
+        options: {
+            scales:{
+                aspectRatio: 1,
+                y:[{
+                    ticks:{
+                        beginAtZero:true
+                    }
+                }],
+                x: {
+                    max: 20
+                },
+                y: {
+                    min: 0,
+                    max: 100
+                }
+            },
+            plugins: {
+                // Change options for ALL labels of THIS CHART
+                datalabels: {
+                    color: '#000000'
+                },
+                title: {
+                    display: true,
+                    text: 'Destrezas (Escritura) en porcentaje %'
+                }
+            }
+        }
+    });
+</script>
+<script>
+    //Le paso el JSON con los datos Chart 1
+    var cData = JSON.parse(`<?php echo $chart_data_2; ?>`);
+    var ctx = document.getElementById('myChart_2').getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: "pie",
+        data: {
+            labels: cData.etiquetas,
+            datasets: [{
+                label:  'Número de registros: '+ cData.total,
+                data: cData.datos,
+                backgroundColor: [
+
+                    //Por debajo
+                    'rgba(112, 201, 215, 1)',
+
+                    //Proceso
+                    'rgba(149, 208, 217, 0.7)',
+
+                    //Adecuado
+                    'rgba(232, 247, 255, 0.5)',
+
+                ],
+                borderColor: [
+                'rgb(118, 168, 134)',
+                ],
+                borderWidth: 1
+            }
+        ]
+        },
+        plugins: [ChartDataLabels],
+        options: {
+            scales:{
+                aspectRatio: 1,
+                y:[{
+                    ticks:{
+                        beginAtZero:true
+                    }
+                }],
+                x: {
+                    max: 20
+                },
+                y: {
+                    min: 0,
+                    max: 100
+                }
+            },
+            plugins: {
+                // Change options for ALL labels of THIS CHART
+                datalabels: {
+                    color: '#000000'
+                },
+                title: {
+                    display: true,
+                    text: 'Destrezas (Matemáticas) en porcentaje %'
+                }
+            }
+        }
+    });
+</script>

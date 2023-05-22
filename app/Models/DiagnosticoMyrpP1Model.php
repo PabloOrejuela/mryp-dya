@@ -233,4 +233,5 @@ class DiagnosticoMyrpP1Model extends Model {
         $porcentaje = ($result * 100) / count($registros);
         return number_format($porcentaje, 2);
     }
+
 }

@@ -1,6 +1,6 @@
 <main class="container">
     <div class="container-fluid px-4">
-        <h3 class="mt-4"><?= esc($title).' - REPORTES'.$tipo_prueba; ?></h3>
+        <h3 class="mt-4"><?= esc($title).' - REPORTES'; ?></h3>
         <div class="card mb-4">
             <div class="card-header">
                 <i class="fa-solid fa-cash-register"></i>

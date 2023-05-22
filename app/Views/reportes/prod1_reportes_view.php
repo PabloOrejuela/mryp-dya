@@ -78,7 +78,7 @@
                             </th>
                         </thead>
                         <thead>
-                            <th id="th-dias">Días atención</th>
+                            <th id="th-dias">Total horas</th>
                             <th id="th-hefect">Horas efectivas</th>
                             <th id="th-perdidas">Horas perdidas</th>
                         </thead>

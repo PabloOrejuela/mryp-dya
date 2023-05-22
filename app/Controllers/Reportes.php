@@ -83,6 +83,8 @@ class Reportes extends BaseController {
 
             //Evito el error de que llegue vacío el objeto
             $data['chart_data'] = '';
+            $data['chart_data_1'] = '';
+            $data['chart_data_2'] = '';
             //echo '<pre>'.var_export($data['genero'], true).'</pre>';exit;
 
             $data['title']='MYRP - DYA';
@@ -152,6 +154,7 @@ class Reportes extends BaseController {
             $data['horas_perdidas'] = 0;
             //Evito el error de que llegue vacío el objeto
             $data['chart_data'] = '';
+            $data['chart_data_1'] = '';
             //echo '<pre>'.var_export($data['genero'], true).'</pre>';exit;
 
             $data['title']='MYRP - DYA';
@@ -276,11 +279,46 @@ class Reportes extends BaseController {
 
 
         $data['centros'] = $this->prod1Model->_getMisAmie($this->session->nombre);
-        $data['registros'] = $this->prod1Model->_getRegistros($data['amie']);
+        $data['registros'] = $this->prod1Model->_getRegistros($data['amie'], $data['cohorte'], $this->session->nombre);
+        $total = count($data['registros'])*3;
 
-        //Evito el error de que llegue vacío el objeto
-        $data['chart_data'] = '';
+        //Destrezas muy por debajo de lo esperado
+        $etiquetas = ["L", "M", "Mi"];
+        $datosGrafica[0] = 10;
+        $datosGrafica[1] = 20;
+        $datosGrafica[2] = 30;
+        $respuesta = [
+            "etiquetas" => $etiquetas,
+            "datos" => $datosGrafica,
+            "total" => $total,
+        ];
+        $data['chart_data'] = json_encode($respuesta);
         //echo '<pre>'.var_export($data['registros'], true).'</pre>';exit;
+
+        //Destrezas en proceso
+        $etiquetas_1 = ["L", "M", "Mi"];
+        $datosGrafica_1[0] = 13;
+        $datosGrafica_1[1] = 24;
+        $datosGrafica_1[2] = 31;
+        $respuesta_1 = [
+            "etiquetas" => $etiquetas_1,
+            "datos" => $datosGrafica_1,
+            "total" => $total,
+        ];
+        $data['chart_data_1'] = json_encode($respuesta_1);
+        
+        //Destrezas adecuadas
+        $etiquetas_2 = ["L", "M", "Mi"];
+        $datosGrafica_2[0] = 12;
+        $datosGrafica_2[1] = 29;
+        $datosGrafica_2[2] = 45;
+        $respuesta_2 = [
+            "etiquetas" => $etiquetas_2,
+            "datos" => $datosGrafica_2,
+            "total" => $total,
+        ];
+        $data['chart_data_2'] = json_encode($respuesta_2);
+        
 
         $data['title']='MYRP - DYA';
         $data['main_content']='reportes/prod1_reportes_analisis_prueba_final_view';
@@ -304,7 +342,7 @@ class Reportes extends BaseController {
         $data['centro'] = $this->centroEducativoModel->find($data['amie']);
 
         $data['centros'] = $this->prod1Model->_getMisAmie($this->session->nombre);
-        $data['registros'] = $this->prod1Model->_getRegistros($data['amie']);
+        $data['registros'] = $this->prod1Model->_getRegistros($data['amie'], $data['cohorte'], $this->session->nombre);
 
         //Evito el error de que llegue vacío el objeto
         $data['chart_data'] = '';
@@ -328,7 +366,6 @@ class Reportes extends BaseController {
         }else{
             $data['amie'] = $this->request->getPostGet('amie');
             $data['cohorte'] = $this->request->getPostGet('cohorte');
-            $data['diagnostico'] = $this->request->getPostGet('diagnostico');
             $data['tipo_grafico'] = $this->request->getPostGet('tipo_grafico');
         
             $data['centro'] = $this->centroEducativoModel->find($data['amie']);
@@ -336,53 +373,135 @@ class Reportes extends BaseController {
             $data['horas_planificadas'] = 0;
             $data['horas_efectivas'] = 0;
             $data['horas_perdidas'] = 0;
-            $data['registros'] = $this->prod1Model->_getRegistrosAmieCohorte($data['amie'], $data['cohorte']);
+            $data['registros'] = $this->prod1Model->_getRegistrosAmieCohorte($data['amie'], $data['cohorte'], $this->session->nombre);
             
-            if ($data['diagnostico'] != NULL && $data['diagnostico'] == 'dif_docentes') {
-                //Traigo la información
-                
-                $data['lectura'] = $this->diagDocenteP1->_getDiagDocenteLectura($data['registros']);
-                $data['escritura'] = $this->diagDocenteP1->_getDiagDocenteEscritura($data['registros']);
-                $data['matematica'] = $this->diagDocenteP1->_getDiagDocenteMate($data['registros']);
-    
-                
-                $total = count($data['registros'])*3;
 
-                //Para poder mostrar los que no tienen info hayq ue hacer pasteles por separado
-                $sin_dato = 100 - $data['lectura'] - $data['matematica'] - $data['escritura'];
-                $datosVentas[0] = $data['lectura'];
-                $datosVentas[1] = $data['escritura'];
-                $datosVentas[2] = $data['matematica'];
-                $datosVentas[3] = number_format($sin_dato, 2);
-
-                $etiquetas = ["Lectura", "Escritura", "Matemática", "Sin datos"];
-                
-            }else if($data['diagnostico'] != NULL && $data['diagnostico'] == 'dif_diag_aplicado'){
-                $data['lectura'] = $this->diagDocenteP1->_getDiagDocenteLectura($data['registros']);
-                $data['escritura'] = $this->diagDocenteP1->_getDiagDocenteEscritura($data['registros']);
-
-                $sin_dato = 100 - $data['lectura'] -  $data['escritura'];
-                //Traigo los datos de los diagnósticos aplicados
-                $datosVentas[0] = $data['lectura'];
-                $datosVentas[1] = $data['escritura'];
-                $datosVentas[2] = number_format($sin_dato, 2);
-
-                $etiquetas = ["Lectura", "Escritura", "Sin datos"];
-            }else {
-                $datosVentas[0] = 0;
-                $datosVentas[1] = 0;
-                $datosVentas[2] = 0;
-            }
+            //Traigo la información Docentes
+            $data['lectura'] = $this->diagDocenteP1->_getDiagDocenteLectura($data['registros']);
+            $data['escritura'] = $this->diagDocenteP1->_getDiagDocenteEscritura($data['registros']);
+            $data['matematica'] = $this->diagDocenteP1->_getDiagDocenteMate($data['registros']);
 
             
+            $total = count($data['registros'])*3;
+
+            //Para poder mostrar los que no tienen info hayq ue hacer pasteles por separado
+            $sin_dato = 100 - $data['lectura'] - $data['matematica'] - $data['escritura'];
+            $datosVentas[0] = $data['lectura'];
+            $datosVentas[1] = $data['escritura'];
+            $datosVentas[2] = $data['matematica'];
+            //$datosVentas[3] = number_format($sin_dato, 2);
+
+            $etiquetas = ["Lectura", "Escritura", "Matemática"];
+
             $respuesta = [
                 "etiquetas" => $etiquetas,
                 "datos" => $datosVentas,
                 "tipoGrafico" => $data['tipo_grafico'],
             ];
-            //echo '<pre>'.var_export($respuesta, true).'</pre>';
-            $data['centros'] = $this->prod1Model->_getMisAmie($this->session->nombre);
+            //LECTURA
+            if ($data['lectura'] > 0 && $data['lectura'] <= 10) {
+                $respuesta['color_lectura'] = '#fc656d';
+            }else if($data['lectura'] > 10 && $data['lectura'] <= 20){
+                $respuesta['color_lectura'] = '#f5d5d9';
+            }else if($data['lectura'] > 20 && $data['lectura'] <= 25){
+                $respuesta['color_lectura'] = '#f1f5d5';
+            }else if($data['lectura'] > 25){echo 402;
+                $respuesta['color_lectura'] = '#e8f7e1';
+            }else{
+                $respuesta['color_lectura'] = '#dcedf5';
+            }
+
+            //LECTURA
+            if ($data['escritura'] > 0 && $data['escritura'] <= 10) {
+                $respuesta['color_escritura'] = '#fc656d';
+            }else if($data['escritura'] > 10 && $data['escritura'] <= 20){
+                $respuesta['color_escritura'] = '#f5d5d9';
+            }else if($data['escritura'] > 20 && $data['escritura'] <= 25){
+                $respuesta['color_escritura'] = '#f1f5d5';
+            }else if($data['escritura'] > 25){
+                $respuesta['color_escritura'] = '#e8f7e1';
+            }else{
+                $respuesta['color_escritura'] = '#dcedf5';
+            }
+
+            //MATEMÁTICAS
+            if ($data['matematica'] > 0 && $data['matematica'] <= 10) {
+                $respuesta['color_matematica'] = '#fc656d';
+            }else if($data['matematica'] > 10 && $data['matematica'] <= 20){
+                $respuesta['color_matematica'] = '#f5d5d9';
+            }else if($data['matematica'] > 20 && $data['matematica'] <= 25){
+                $respuesta['color_matematica'] = '#f1f5d5';
+            }else if($data['matematica'] > 25){
+                $respuesta['color_matematica'] = '#e8f7e1';
+            }else{
+                $respuesta['color_matematica'] = '#dcedf5';
+            }
+
             $data['chart_data'] =  json_encode($respuesta);
+
+
+            $data['lectura'] = $this->diagDocenteP1->_getDiagDocenteLectura($data['registros']);
+            $data['escritura'] = $this->diagDocenteP1->_getDiagDocenteEscritura($data['registros']);
+
+
+            $sin_dato = 100 - $data['lectura'] -  $data['escritura'];
+            //Traigo los datos de los diagnósticos aplicados
+            $datosVentas_1[0] = $data['lectura'];
+            $datosVentas_1[1] = $data['escritura'];
+            $datosVentas_1[2] = number_format($sin_dato, 2);
+
+            $etiquetas_1 = ["Lectura", "Escritura", "Matemáticas", "Sin datos"];
+
+            $respuesta_1 = [
+                "etiquetas" => $etiquetas_1,
+                "datos" => $datosVentas_1,
+                "tipoGrafico" => $data['tipo_grafico'],
+            ];
+
+            //LECTURA
+            if ($data['lectura'] > 0 && $data['lectura'] <= 10) {
+                $respuesta_1['color_lectura'] = '#fc656d';
+            }else if($data['lectura'] > 10 && $data['lectura'] <= 20){
+                $respuesta_1['color_lectura'] = '#f5d5d9';
+            }else if($data['lectura'] > 20 && $data['lectura'] <= 25){
+                $respuesta_1['color_lectura'] = '#f1f5d5';
+            }else if($data['lectura'] > 25){echo 402;
+                $respuesta_1['color_lectura'] = '#e8f7e1';
+            }else{
+                $respuesta_1['color_lectura'] = '#dcedf5';
+            }
+
+            //LECTURA
+            if ($data['escritura'] > 0 && $data['escritura'] <= 10) {
+                $respuesta_1['color_escritura'] = '#fc656d';
+            }else if($data['escritura'] > 10 && $data['escritura'] <= 20){
+                $respuesta_1['color_escritura'] = '#f5d5d9';
+            }else if($data['escritura'] > 20 && $data['escritura'] <= 25){
+                $respuesta_1['color_escritura'] = '#f1f5d5';
+            }else if($data['escritura'] > 25){
+                $respuesta_1['color_escritura'] = '#e8f7e1';
+            }else{
+                $respuesta_1['color_escritura'] = '#dcedf5';
+            }
+
+            //MATEMÁTICAS
+            if ($data['matematica'] > 0 && $data['matematica'] <= 10) {
+                $respuesta_1['color_matematica'] = '#fc656d';
+            }else if($data['matematica'] > 10 && $data['matematica'] <= 20){
+                $respuesta_1['color_matematica'] = '#f5d5d9';
+            }else if($data['matematica'] > 20 && $data['matematica'] <= 25){
+                $respuesta_1['color_matematica'] = '#f1f5d5';
+            }else if($data['matematica'] > 25){
+                $respuesta_1['color_matematica'] = '#e8f7e1';
+            }else{
+                $respuesta_1['color_matematica'] = '#dcedf5';
+            }
+
+            $data['chart_data_1'] =  json_encode($respuesta_1);
+
+            //echo '<pre>'.var_export($data['lectura'], true).'</pre>';exit;
+            $data['centros'] = $this->prod1Model->_getMisAmie($this->session->nombre);
+            
             $data['title']='MYRP - DYA';
             $data['main_content']='reportes/prod1_reportes_diagnostico_view';
             return view('includes/template_reportes', $data);
@@ -407,7 +526,7 @@ class Reportes extends BaseController {
             $data['tipo_grafico'] = $this->request->getPostGet('tipo_grafico');
         
             $data['centro'] = $this->centroEducativoModel->find($data['amie']);
-            $data['registros'] = $this->prod1Model->_getRegistrosAmieCohorte($data['amie'], $data['cohorte']);
+            $data['registros'] = $this->prod1Model->_getRegistrosAmieCohorte($data['amie'], $data['cohorte'], $this->session->nombre);
             
             if ($data['reporte'] != NULL && $data['reporte'] == '1') {
                 
@@ -478,7 +597,7 @@ class Reportes extends BaseController {
             $data['tipo_prueba'] = $this->request->getPostGet('tipo_prueba');
         
             $data['centro'] = $this->centroEducativoModel->find($data['amie']);
-            $data['registros'] = $this->prod1Model->_getRegistrosAmieCohorte($data['amie'], $data['cohorte']);
+            $data['registros'] = $this->prod1Model->_getRegistrosAmieCohorte($data['amie'], $data['cohorte'], $this->session->nombre);
             
             if ($data['registros'] != NULL && $data['tipo_prueba'] == 1) {
                 //Traigo la información
@@ -651,6 +770,7 @@ class Reportes extends BaseController {
             //echo '<pre>'.var_export($respuesta, true).'</pre>';
             $data['centros'] = $this->prod1Model->_getMisAmie($this->session->nombre);
             $data['chart_data'] =  json_encode($respuesta);
+
             $data['title']='MYRP - DYA';
             $data['main_content']='reportes/prod1_reportes_despistaje_mat_view';
             return view('includes/template_reportes', $data);

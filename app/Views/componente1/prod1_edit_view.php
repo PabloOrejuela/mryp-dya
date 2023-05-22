@@ -137,7 +137,7 @@
                 </div>
                 <div class="col-md-4 mb-3">
                     <label for="email">Email de contacto:</label>
-                    <input type="email" id="email" name="email" value="<?= $datos->email; ?>" class="form-control" placeholder="Email" aria-label="email">
+                    <input type="text" id="email" name="email" value="<?= $datos->email; ?>" class="form-control" placeholder="Email" aria-label="email">
                 </div>
             </div>
             <?= form_hidden('id', $datos->id);  ?>

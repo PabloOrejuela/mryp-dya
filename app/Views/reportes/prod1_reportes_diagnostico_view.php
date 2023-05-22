@@ -6,6 +6,7 @@
                 <i class="fa-solid fa-cash-register"></i>
                 <?= esc("Reporte de Diagnóstico Docente"); ?>
             </div>
+
             <div class="card-body" id="card-reportes"> 
                 <form action="<?php echo base_url().'/recibe-diagnostico-tab';?>" method="post" id="form">
                     <div class="col-md-8 mb-3">
@@ -58,34 +59,6 @@
                             ?>
                         </select>
                     </div>
-                    <?php
-                        if ($diagnostico == 'dif_docentes') {
-                            echo '
-                                <div class="form-check">
-                                    <input class="form-radio-input" type="radio" value="dif_docentes" name="diagnostico" id="flexRadioDefault" checked>
-                                    <label class="form-radio-label" for="flexRadioDefault">Dificultades encontradas por docentes</label>
-                                    
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-radio-input" type="radio" value="dif_diag_aplicado" name="diagnostico" id="flexRadioDefault">
-                                    <label class="form-radio-label" for="flexRadioDefault">Dificultades de aprendizaje encontradas a partir de los diagnósticos aplicados</label>
-                                </div>
-                            ';
-
-                        }else{
-                            echo '
-                                <div class="form-check">
-                                    <input class="form-radio-input" type="radio" value="dif_docentes" name="diagnostico" id="flexRadioDefault">
-                                    <label class="form-radio-label" for="flexRadioDefault">Dificultades encontradas por docentes</label>
-                                    
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-radio-input" type="radio" value="dif_diag_aplicado" name="diagnostico" id="flexRadioDefault" checked>
-                                    <label class="form-radio-label" for="flexRadioDefault">Dificultades de aprendizaje encontradas a partir de los diagnósticos aplicados</label>
-                                </div>
-                            ';
-                        }
-                    ?>
                     <div class="form-check mt-3">
                         <input class="form-radio-input" type="radio" value="pie" name="tipo_grafico" id="flexRadioDefault" checked>
                         <label class="form-radio-label" for="flexRadioDefault">Pastel</label>
@@ -132,8 +105,8 @@
                 </form>   
             </div>
         </div>
-        <section>
         
+        <section>
             <div class="col-md-06" style="width: 600px;">
                 <label style="text-align:center;" for="myChart">Centro educativo: 
                     <?php
@@ -144,7 +117,8 @@
                         }
                     ?>
                 </label>
-                <canvas id="myChart"></canvas>
+                <div class="col-md-9 mb-3"><canvas id="myChart"></canvas></div>
+                <div class="col-md-9 mt-5"><canvas id="myChart_1"></canvas></div>
             </div>
         </section>
     </div>
@@ -152,6 +126,7 @@
 <script>
     //Le paso el JSON con los datos
     var cData = JSON.parse(`<?php echo $chart_data; ?>`);
+    console.log(cData.color_lectura);
     var ctx = document.getElementById('myChart').getContext('2d');
     var myChart = new Chart(ctx, {
         type: ""+cData.tipoGrafico,
@@ -161,10 +136,15 @@
                 label:  'Porcentaje de estudiantes con dificultades',
                 data: cData.datos,
                 backgroundColor: [
-                    'rgba(118, 168, 134, 0.5)',
-                    'rgba(186, 209, 188, 0.5)',
-                    'rgba(145, 107, 53, 0.5)',
-                    'rgba(5, 17, 3, 0.2)',
+                    //Por debajo
+                    cData.color_lectura,
+
+                    //Proceso
+                    cData.color_escritura,
+
+                    //Adecuado
+                    cData.color_matematica,
+
                 ],
                 borderColor: [
                 'rgb(118, 168, 134)',
@@ -197,7 +177,69 @@
                 },
                 title: {
                     display: true,
-                    text: 'Dificultades encontradas por docentes (% en porcentajes)'
+                    text: "Dificultades encontradas por docentes"
+                }
+            }
+        }
+    });
+
+</script>
+
+<script>
+    //Le paso el JSON con los datos
+    var cData = JSON.parse(`<?php echo $chart_data_1; ?>`);
+    var ctx = document.getElementById('myChart_1').getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: ""+cData.tipoGrafico,
+        data: {
+            labels: cData.etiquetas,
+            datasets: [{
+                label:  'Porcentaje de estudiantes con dificultades',
+                data: cData.datos,
+                backgroundColor: [
+                    //Por debajo
+                    'rgba(185, 226, 106, 1)',
+
+                    //Proceso
+                    'rgba(195, 226, 136, 0.7)',
+
+                    //Adecuado
+                    'rgba(241, 245, 213, 0.5)',
+
+                    'rgba(232, 235, 233, 0.3)',
+                ],
+                borderColor: [
+                'rgb(118, 168, 134)',
+                ],
+                borderWidth: 1
+            }
+        ]
+        },
+        plugins: [ChartDataLabels],
+        options: {
+            scales:{
+                aspectRatio: 1,
+                y:[{
+                    ticks:{
+                        beginAtZero:true
+                    }
+                }],
+                x: {
+                    max: 600
+                },
+                y: {
+                    min: 0,
+                    max: 100
+                }
+            },
+            plugins: {
+                // Change options for ALL labels of THIS CHART
+                datalabels: {
+                    color: '#000000'
+                },
+                title: {
+                    display: true,
+                    text: "Dificultades de aprendizaje encontradas a partir de los diagnósticos aplicados"
                 }
             }
         }
