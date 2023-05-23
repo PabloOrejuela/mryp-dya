@@ -12,8 +12,7 @@
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
             <li><a class="dropdown-item" href="<?php echo site_url();?>reporte-asistencia-p1">Reporte de asistencia</a></li>
-            <li><a class="dropdown-item" href="<?php echo site_url();?>reporte-analisis-pruebadiagnostico-p1">Análisis de la prueba de diagnóstico (Cuadros)</a></li>
-            <li><a class="dropdown-item" href="<?php echo site_url();?>reporte-diagnostico-p1">Reporte de Diagnostico docente (Gráficos)</a></li>
+            <li><a class="dropdown-item" href="<?php echo site_url();?>reporte-analisis-pruebadiagnostico-p1">Análisis de la prueba de diagnóstico</a></li>
             <li><a class="dropdown-item" href="<?php echo site_url();?>reporte-despistaje-mat-p1">Prueba Despistaje Matemáticas</a></li>
             <li><a class="dropdown-item" href="<?php echo site_url();?>reporte-analisis-pruebafinal-p1">Análisis de la prueba final con la intervención del programa</a></li>
             

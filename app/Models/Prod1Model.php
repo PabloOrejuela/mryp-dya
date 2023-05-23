@@ -141,7 +141,7 @@ class Prod1Model extends Model {
         return $result;
     }
 
-    public function _getRegistrosAmieCohorte($amie, $cohorte) {
+    public function _getRegistrosAmieCohorte($amie, $cohorte, $tutor) {
         $result = NULL;
         $builder = $this->db->table($this->table);
         $builder->select('id');

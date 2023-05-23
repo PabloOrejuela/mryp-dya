@@ -103,6 +103,7 @@ class DiagnosticoMyrpP1Model extends Model {
         return $result;
     }
 
+
     public function _update($datos) {
         $builder = $this->db->table($this->table);
         if ($datos['necesito_apoyo'] != 'NULL') {

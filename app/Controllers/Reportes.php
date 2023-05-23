@@ -114,6 +114,7 @@ class Reportes extends BaseController {
             $data['centro'] = '';
             $data['amie'] = '';
             $data['cohorte'] = '';
+            $data['num'] = 0;
             $data['registros'] = NULL;
 
             //Evito el error de que llegue vacío el objeto
@@ -346,6 +347,9 @@ class Reportes extends BaseController {
 
         //Evito el error de que llegue vacío el objeto
         $data['chart_data'] = '';
+        $data['chart_data_1'] = '';
+        $data['centro'] = '';
+        $data['num'] = 0;
         //echo '<pre>'.var_export($data['registros'], true).'</pre>';exit;
 
         $data['title']='MYRP - DYA';
@@ -373,131 +377,11 @@ class Reportes extends BaseController {
             $data['horas_planificadas'] = 0;
             $data['horas_efectivas'] = 0;
             $data['horas_perdidas'] = 0;
+            $data['horas_perdidas'] = 0;
+            $data['chart_data'] = '';
+            $data['chart_data_1'] = '';
             $data['registros'] = $this->prod1Model->_getRegistrosAmieCohorte($data['amie'], $data['cohorte'], $this->session->nombre);
-            
-
-            //Traigo la información Docentes
-            $data['lectura'] = $this->diagDocenteP1->_getDiagDocenteLectura($data['registros']);
-            $data['escritura'] = $this->diagDocenteP1->_getDiagDocenteEscritura($data['registros']);
-            $data['matematica'] = $this->diagDocenteP1->_getDiagDocenteMate($data['registros']);
-
-            
-            $total = count($data['registros'])*3;
-
-            //Para poder mostrar los que no tienen info hayq ue hacer pasteles por separado
-            $sin_dato = 100 - $data['lectura'] - $data['matematica'] - $data['escritura'];
-            $datosVentas[0] = $data['lectura'];
-            $datosVentas[1] = $data['escritura'];
-            $datosVentas[2] = $data['matematica'];
-            //$datosVentas[3] = number_format($sin_dato, 2);
-
-            $etiquetas = ["Lectura", "Escritura", "Matemática"];
-
-            $respuesta = [
-                "etiquetas" => $etiquetas,
-                "datos" => $datosVentas,
-                "tipoGrafico" => $data['tipo_grafico'],
-            ];
-            //LECTURA
-            if ($data['lectura'] > 0 && $data['lectura'] <= 10) {
-                $respuesta['color_lectura'] = '#fc656d';
-            }else if($data['lectura'] > 10 && $data['lectura'] <= 20){
-                $respuesta['color_lectura'] = '#f5d5d9';
-            }else if($data['lectura'] > 20 && $data['lectura'] <= 25){
-                $respuesta['color_lectura'] = '#f1f5d5';
-            }else if($data['lectura'] > 25){echo 402;
-                $respuesta['color_lectura'] = '#e8f7e1';
-            }else{
-                $respuesta['color_lectura'] = '#dcedf5';
-            }
-
-            //LECTURA
-            if ($data['escritura'] > 0 && $data['escritura'] <= 10) {
-                $respuesta['color_escritura'] = '#fc656d';
-            }else if($data['escritura'] > 10 && $data['escritura'] <= 20){
-                $respuesta['color_escritura'] = '#f5d5d9';
-            }else if($data['escritura'] > 20 && $data['escritura'] <= 25){
-                $respuesta['color_escritura'] = '#f1f5d5';
-            }else if($data['escritura'] > 25){
-                $respuesta['color_escritura'] = '#e8f7e1';
-            }else{
-                $respuesta['color_escritura'] = '#dcedf5';
-            }
-
-            //MATEMÁTICAS
-            if ($data['matematica'] > 0 && $data['matematica'] <= 10) {
-                $respuesta['color_matematica'] = '#fc656d';
-            }else if($data['matematica'] > 10 && $data['matematica'] <= 20){
-                $respuesta['color_matematica'] = '#f5d5d9';
-            }else if($data['matematica'] > 20 && $data['matematica'] <= 25){
-                $respuesta['color_matematica'] = '#f1f5d5';
-            }else if($data['matematica'] > 25){
-                $respuesta['color_matematica'] = '#e8f7e1';
-            }else{
-                $respuesta['color_matematica'] = '#dcedf5';
-            }
-
-            $data['chart_data'] =  json_encode($respuesta);
-
-
-            $data['lectura'] = $this->diagDocenteP1->_getDiagDocenteLectura($data['registros']);
-            $data['escritura'] = $this->diagDocenteP1->_getDiagDocenteEscritura($data['registros']);
-
-
-            $sin_dato = 100 - $data['lectura'] -  $data['escritura'];
-            //Traigo los datos de los diagnósticos aplicados
-            $datosVentas_1[0] = $data['lectura'];
-            $datosVentas_1[1] = $data['escritura'];
-            $datosVentas_1[2] = number_format($sin_dato, 2);
-
-            $etiquetas_1 = ["Lectura", "Escritura", "Matemáticas", "Sin datos"];
-
-            $respuesta_1 = [
-                "etiquetas" => $etiquetas_1,
-                "datos" => $datosVentas_1,
-                "tipoGrafico" => $data['tipo_grafico'],
-            ];
-
-            //LECTURA
-            if ($data['lectura'] > 0 && $data['lectura'] <= 10) {
-                $respuesta_1['color_lectura'] = '#fc656d';
-            }else if($data['lectura'] > 10 && $data['lectura'] <= 20){
-                $respuesta_1['color_lectura'] = '#f5d5d9';
-            }else if($data['lectura'] > 20 && $data['lectura'] <= 25){
-                $respuesta_1['color_lectura'] = '#f1f5d5';
-            }else if($data['lectura'] > 25){echo 402;
-                $respuesta_1['color_lectura'] = '#e8f7e1';
-            }else{
-                $respuesta_1['color_lectura'] = '#dcedf5';
-            }
-
-            //LECTURA
-            if ($data['escritura'] > 0 && $data['escritura'] <= 10) {
-                $respuesta_1['color_escritura'] = '#fc656d';
-            }else if($data['escritura'] > 10 && $data['escritura'] <= 20){
-                $respuesta_1['color_escritura'] = '#f5d5d9';
-            }else if($data['escritura'] > 20 && $data['escritura'] <= 25){
-                $respuesta_1['color_escritura'] = '#f1f5d5';
-            }else if($data['escritura'] > 25){
-                $respuesta_1['color_escritura'] = '#e8f7e1';
-            }else{
-                $respuesta_1['color_escritura'] = '#dcedf5';
-            }
-
-            //MATEMÁTICAS
-            if ($data['matematica'] > 0 && $data['matematica'] <= 10) {
-                $respuesta_1['color_matematica'] = '#fc656d';
-            }else if($data['matematica'] > 10 && $data['matematica'] <= 20){
-                $respuesta_1['color_matematica'] = '#f5d5d9';
-            }else if($data['matematica'] > 20 && $data['matematica'] <= 25){
-                $respuesta_1['color_matematica'] = '#f1f5d5';
-            }else if($data['matematica'] > 25){
-                $respuesta_1['color_matematica'] = '#e8f7e1';
-            }else{
-                $respuesta_1['color_matematica'] = '#dcedf5';
-            }
-
-            $data['chart_data_1'] =  json_encode($respuesta_1);
+    
 
             //echo '<pre>'.var_export($data['lectura'], true).'</pre>';exit;
             $data['centros'] = $this->prod1Model->_getMisAmie($this->session->nombre);
