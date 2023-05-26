@@ -157,7 +157,7 @@
                                 $this->db = \Config\Database::connect();
                                 
 
-                                $num = 1;
+                                $num = 0;
                                 $num_a = 0;
                                 $num_b = 0;
                                 $num_c = 0;
@@ -170,18 +170,25 @@
                                 $lect_b = 0;
                                 $lect_c = 0;
                                 $lect_d = 0;
+                                $esc_b = 0;
+                                $esc_c = 0;
+                                $esc_d = 0;
+                                $lec_b = 0;
+                                $lec_c = 0;
+                                $lec_d = 0;
                                 $total_registros = 0;
                                 if ($registros != NULL && isset($registros)) {
                                     
                                     foreach ($registros as $key => $value) {
                                         $eval_final = $this->evalFinalP1->_getEvalFinal($value->id);
+                                        //$eval_final = $this->evalFinalP1->_getEvalFinal(1292);
                                         $valor_escritura = 0;
                                         
                                                 
                                         echo '<tr>
                                             <td>'.$num.'</td>
                                             <td>'.$value->nombres.'</td>
-                                            <td>'.$value->apellidos.$value->id.'</td>';
+                                            <td>'.$value->apellidos.'</td>';
     
                                             if ($value->anio_egb == '11') {
                                                 echo '<td>1ro BTI</td>';
@@ -241,28 +248,34 @@
                                                     $valor_lectura += 2;
                                                     $lect_c++;
                                                 }
-
-                                                if ($eval_final->necesito_apoyo == 'SI') {
+                                               //echo '<pre>'.var_export($eval_final, true).'</pre>';exit;
+                                                if ($eval_final->necesito_apoyo == 'SI') {//echo '252'.'<br>';
                                                     if ($valor_lectura > 0 && $valor_lectura <= 2) {
+                                                        $lec_b++;
                                                         echo '<td id="codigo_3">SI</td>';
-                                                    }else if($valor_lectura > 3 && $valor_lectura <= 5){
+                                                    }else if($valor_lectura > 2 && $valor_lectura <= 5){
+                                                        $lec_c++;
                                                         echo '<td id="codigo_4">SI</td>';
                                                     }else if($valor_lectura > 5 && $valor_lectura <= 7){
+                                                        $lec_d++;
                                                         echo '<td id="codigo_5">SI</td>';
                                                     }else{
-                                                        echo '<td id="codigo_1">SI</td>';
+                                                        echo '<td id="codigo_1"></td>';
                                                     }
                                                     $lect_a++;
                                                     $lect_b++;
                                                 }else{
                                                     if ($valor_lectura > 0 && $valor_lectura <= 2) {
+                                                        $lec_b++;
                                                         echo '<td id="codigo_3">NO</td>';
-                                                    }else if($valor_lectura > 3 && $valor_lectura <= 5){
+                                                    }else if($valor_lectura > 2 && $valor_lectura <= 5){
+                                                        $lec_c++;
                                                         echo '<td id="codigo_4">NO</td>';
                                                     }else if($valor_lectura > 5 && $valor_lectura <= 7){
+                                                        $lec_d++;
                                                         echo '<td id="codigo_5">NO</td>';
                                                     }else{
-                                                        echo '<td id="codigo_1">NO</td>';
+                                                        echo '<td id="codigo_1"></td>';
                                                     }
                                                     $lect_c++;
                                                     $lect_d++;
@@ -374,12 +387,13 @@
 
                                                 if ($rango_escritura > 0 && $rango_escritura <= 33) {
                                                     echo '<td id="codigo_3">1</td>';
-                                                    
+                                                    $esc_b++;
                                                 }else if($rango_escritura > 33 && $rango_escritura <= 66){
                                                     echo '<td id="codigo_4">2</td>';
-                                                    
+                                                    $esc_c++;
                                                 }else if($rango_escritura > 66){
                                                     echo '<td id="codigo_5">3</td>';
+                                                    $esc_d++;
                                                 }else{
                                                     echo '<td id="codigo_1">0</td>';
                                                 }
@@ -450,43 +464,68 @@
                                     
                                     echo '<tr><td colspan="8">AUN NO HAY REGISTROS QUE MOSTRAR</td></tr>';
                                 }
+                                
                             ?>
                         </tbody>
                     </table>
                     <?php
-                        $total_registros_lect = $lect_a+$lect_b+$lect_c+$lect_d;
+                        $total_registros_lect = $lec_b+$lec_c+$lec_d;
                         
                         //Lectura
-                        $etiquetas = ["Por debajo de lo esperado", "En proceso", "Adecuadas"];
+                        //$etiquetas = ["Por debajo de lo esperado", "En proceso", "Adecuadas"];
                         if ($total_registros_lect == 0) {
-                            $datosGrafica[0] = number_format((($lect_b)*100)/1,1);
-                            $datosGrafica[1] = number_format(($lect_c*100)/1, 1);
-                            $datosGrafica[2] = number_format(($lect_d*100)/1, 1);
+                            $datosGrafica[0] = number_format(($lec_b*100)/1,1);
+                            $datosGrafica[1] = number_format(($lec_c*100)/1, 1);
+                            $datosGrafica[2] = number_format(($lec_d*100)/1, 1);
                         }else{
-                            $datosGrafica[0] = number_format((($lect_b)*100)/$total_registros_lect,1);
-                            $datosGrafica[1] = number_format(($lect_c*100)/$total_registros_lect, 1);
-                            $datosGrafica[2] = number_format(($lect_d*100)/$total_registros_lect, 1);
+                            if (($lec_b*100)/$total_registros_lect != 0) {
+                                $datosGrafica[] = number_format((($lec_b)*100)/$total_registros_lect,1);
+                                $etiquetas[] = ("Por debajo de lo esperado");
+                            }
+
+                            if (($lec_c*100)/$total_registros_lect != 0) {
+                                $datosGrafica[] = number_format(($lec_c*100)/$total_registros_lect, 1);
+                                $etiquetas[] = ("En proceso");
+                            }
+                            
+                            if (($lec_d*100)/$total_registros_lect != 0) {
+                                $datosGrafica[] = number_format(($lec_d*100)/$total_registros_lect, 1);
+                                $etiquetas[] = ("Adecuadas");
+                            }
+                            
                         }
-                        
+                        //echo '<pre>'.var_export($total_registros_lect, true).'</pre>';exit;
                         $respuesta = [
                             "etiquetas" => $etiquetas,
                             "datos" => $datosGrafica,
-                            "total" => $total_registros,
+                            "total" => $total_registros_lect,
                         ];
                         $chart_data =  json_encode($respuesta); 
-
+                        
                         //Escritura
                         //echo $num_d;exit;
-                        $total_registros_esc = $num_a+$num_b+$num_c+$num_d;
-                        $etiquetas_1 = ["Por debajo de lo esperado", "En proceso", "Adecuadas"];
+                        $total_registros_esc = $esc_b+$esc_c+$esc_d;
+                        //$etiquetas_1 = ["Por debajo de lo esperado", "En proceso", "Adecuadas"];
                         if ($total_registros_esc == 0) {
-                            $datosGrafica_1[0] = number_format((($num_b)*100)/1,1);//65
-                            $datosGrafica_1[1] = number_format(($num_c*100)/1,1);//23.80
-                            $datosGrafica_1[2] = number_format(($num_d*100)/1,1);//11.11
+                            $datosGrafica_1[0] = number_format(($esc_b*100)/1,1);//65
+                            $datosGrafica_1[1] = number_format(($esc_c*100)/1,1);//23.80
+                            $datosGrafica_1[2] = number_format(($esc_d*100)/1,1);//11.11
                         }else{
-                            $datosGrafica_1[0] = number_format((($num_a+$num_b)*100)/$total_registros_esc, 1);//65
-                            $datosGrafica_1[1] = number_format(($num_c*100)/$total_registros_esc, 1);//23.80
-                            $datosGrafica_1[2] = number_format(($num_d*100)/$total_registros_esc, 1);//11.11
+                            if (($esc_b*100)/$total_registros_esc != 0) {
+                                $datosGrafica_1[] = number_format((($esc_b)*100)/$total_registros_esc, 1);//65
+                                $etiquetas_1[] = ("Por debajo de lo esperado");
+                            }
+
+                            if (($esc_c*100)/$total_registros_esc != 0) {
+                                $datosGrafica_1[] = number_format(($esc_c*100)/$total_registros_esc, 1);//23.80
+                                $etiquetas_1[] = ("En proceso");
+                            }
+                            
+                            if (($esc_d*100)/$total_registros_esc != 0) {
+                                $datosGrafica_1[] = number_format(($esc_d*100)/$total_registros_esc, 1);//11.11
+                                $etiquetas_1[] = ("Adecuadas");
+                            }
+                        
                         }
                         
                         $respuesta_1 = [
@@ -497,24 +536,37 @@
                         $chart_data_1 =  json_encode($respuesta_1); 
 
                         //Matemáticas
-                        $total_registros_mate = $mate_a+$mate_b+$mate_c+$mate_d;
-                        //echo $total_registros_mate;exit;
-                        $etiquetas_2 = ["Por debajo de lo esperado", "En proceso", "Adecuadas"];
+                        $total_registros_mate = $mate_b+$mate_c+$mate_d;
+                        //echo '<pre>'.var_export(($mate_c*100)/$total_registros_mate, true).'</pre>';exit;
+                        //$etiquetas_2 = ["Por debajo de lo esperado", "En proceso", "Adecuadas"];
                         if ($total_registros_mate == 0) {
-                            $datosGrafica_2[0] = number_format((($mate_b)*100)/1, 1);
+                            $datosGrafica_2[0] = number_format(($mate_b*100)/1, 1);
                             $datosGrafica_2[1] = number_format(($mate_c*100)/1, 1);//23.80
                             $datosGrafica_2[2] = number_format(($mate_d*100)/1, 1);//23.80
                         }else{
-                            $datosGrafica_2[0] = number_format((($mate_a+$mate_b)*100)/$total_registros_mate, 1);
-                            $datosGrafica_2[1] = number_format(($mate_c*100)/$total_registros_mate, 1);//23.80
-                            $datosGrafica_2[2] = number_format(($mate_d*100)/$total_registros_mate, 1);//23.80
+                            if (($mate_b*100)/$total_registros_mate != 0) {
+                                $datosGrafica_2[] = number_format(($mate_b*100)/$total_registros_mate, 1);
+                                $etiquetas_2[] = ("Por debajo de lo esperado");
+                            }
+
+                            if (($mate_c*100)/$total_registros_mate != 0) {
+                                $datosGrafica_2[] = number_format(($mate_c*100)/$total_registros_mate, 1);//23.80
+                                $etiquetas_2[] = ("En proceso");
+                            }
+                            
+                            if (($mate_d*100)/$total_registros_mate != 0) {
+                                $datosGrafica_2[] = number_format(($mate_d*100)/$total_registros_mate, 1);//23.80
+                                $etiquetas_2[] = ("Adecuadas");
+                            }
+                            
                         }
                         
                         $respuesta_2 = [
                             "etiquetas" => $etiquetas_2,
                             "datos" => $datosGrafica_2,
-                            "total" => $total_registros,
+                            "total" => $total_registros_mate,
                         ];
+                        //echo '<pre>'.var_export($respuesta_2, true).'</pre>';exit;
                         $chart_data_2 =  json_encode($respuesta_2); 
                     ?>
                 </div>
@@ -539,13 +591,13 @@
                 backgroundColor: [
 
                     //Por debajo
-                    'rgba(238, 176, 183, 1)',
+                    'rgba(245, 213, 217, 1)',
 
                     //Proceso
-                    'rgba(237, 197, 202, 0.7)',
+                    'rgba(241, 245, 213, 1)',
 
                     //Adecuado
-                    'rgba(245, 213, 217, 0.3)',
+                    'rgba(232, 247, 225, 1)',
 
                 ],
                 borderColor: [
@@ -600,13 +652,13 @@
                 backgroundColor: [
 
                     //Por debajo
-                    'rgba(185, 226, 106, 1)',
+                    'rgba(245, 213, 217, 1)',
 
                     //Proceso
-                    'rgba(195, 226, 136, 0.7)',
+                    'rgba(241, 245, 213, 1)',
 
                     //Adecuado
-                    'rgba(241, 245, 213, 0.5)',
+                    'rgba(232, 247, 225, 1)',
 
                 ],
                 borderColor: [
@@ -660,13 +712,13 @@
                 backgroundColor: [
 
                     //Por debajo
-                    'rgba(112, 201, 215, 1)',
+                    'rgba(245, 213, 217, 1)',
 
                     //Proceso
-                    'rgba(149, 208, 217, 0.7)',
+                    'rgba(241, 245, 213, 1)',
 
                     //Adecuado
-                    'rgba(232, 247, 255, 0.5)',
+                    'rgba(232, 247, 225, 1)',
 
                 ],
                 borderColor: [

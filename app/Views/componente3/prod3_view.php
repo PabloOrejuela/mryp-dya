@@ -22,6 +22,7 @@
                         <th>No.</th>
                         <th>Nombre</th>
                         <th>Documento</th>
+                        <th>Profesor</th>
                         <th>Amie</th>
                         <th>Centro educativo</th>
                         <th>Borrar registro</th>
@@ -38,6 +39,7 @@
                                 echo '<tr>
                                     <td>'.$value->id.'</td>
                                     <td><a href="'.site_url().'prod_3_edit/'.$value->id.'">'.$value->nombre.'</a></td>
+                                    <td>'.$value->documento.'</td>
                                     <td>'.$value->documento.'</td>
                                     <td>'.$value->amie.'</td>
                                     <td>'.$centro_educativo->nombre.'</td>

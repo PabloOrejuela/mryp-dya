@@ -79,6 +79,9 @@ class Reportes extends BaseController {
             $data['centro'] = '';
             $data['amie'] = '';
             $data['cohorte'] = '';
+            $data['etiquetas'] = '';
+            $data['etiquetas_1'] = '';
+            $data['etiquetas_2'] = '';
             $data['registros'] = NULL;
 
             //Evito el error de que llegue vacío el objeto
@@ -114,6 +117,9 @@ class Reportes extends BaseController {
             $data['centro'] = '';
             $data['amie'] = '';
             $data['cohorte'] = '';
+            $data['etiquetas'] = '';
+            $data['etiquetas_1'] = '';
+            $data['etiquetas_2'] = '';
             $data['num'] = 0;
             $data['registros'] = NULL;
 
@@ -349,6 +355,9 @@ class Reportes extends BaseController {
         $data['chart_data'] = '';
         $data['chart_data_1'] = '';
         $data['centro'] = '';
+        $data['etiquetas'] = '';
+        $data['etiquetas_1'] = '';
+        $data['etiquetas_2'] = '';
         $data['num'] = 0;
         //echo '<pre>'.var_export($data['registros'], true).'</pre>';exit;
 
@@ -378,6 +387,9 @@ class Reportes extends BaseController {
             $data['horas_efectivas'] = 0;
             $data['horas_perdidas'] = 0;
             $data['horas_perdidas'] = 0;
+            $data['etiquetas'] = '';
+            $data['etiquetas_1'] = '';
+            $data['etiquetas_2'] = '';
             $data['chart_data'] = '';
             $data['chart_data_1'] = '';
             $data['registros'] = $this->prod1Model->_getRegistrosAmieCohorte($data['amie'], $data['cohorte'], $this->session->nombre);
@@ -467,7 +479,7 @@ class Reportes extends BaseController {
     }
 
     public function recibe_despistaje_mat_tab() {
-        
+        $total = 0;
         // Ahora las imprimimos como JSON para pasarlas a AJAX, pero las agrupamos
         if (
                 $this->request->getPostGet('amie') == NULL ||  

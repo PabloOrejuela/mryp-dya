@@ -199,7 +199,7 @@
                                 $lect_myrp_b = 0;
                                 $lect_myrp_c = 0;
                                 $lect_myrp_d = 0;
-
+                                
                                 $total_mate = 0;
                                 $total_mate_bajo20 = 0;
                                 $total_esc_bajo20 = 0;
@@ -235,29 +235,30 @@
                                             }
 
                                             if (isset($diag_docente) && $diag_docente != NULL) {
+                                                
                                                 //Diagnóstico docente
                                                 if ($diag_docente->lectura == 'SI') {
-                                                    echo '<td id="codigo_2">'.$diag_docente->lectura.'</td>';
+                                                    echo '<td id="codigo_3">'.$diag_docente->lectura.'</td>';
                                                     $lect_a++;
                                                 }else{
-                                                    echo '<td id="codigo_3">'.$diag_docente->lectura.'</td>';
+                                                    echo '<td id="codigo_4">'.$diag_docente->lectura.'</td>';
                                                     $lect_d++;
                                                 }
 
                                                 if ($diag_docente->escritura == 'SI') {
-                                                    echo '<td id="codigo_2">'.$diag_docente->escritura.'</td>';
+                                                    echo '<td id="codigo_3">'.$diag_docente->escritura.'</td>';
                                                     $esc_a++;
                                                 }else{
-                                                    echo '<td id="codigo_3">'.$diag_docente->escritura.'</td>';
+                                                    echo '<td id="codigo_4">'.$diag_docente->escritura.'</td>';
                                                     $esc_d++;
                                                 }
                                                 
 
                                                 if ($diag_docente->matematica == 'SI') {
-                                                    echo '<td id="codigo_2">'.$diag_docente->matematica.'</td>';
+                                                    echo '<td id="codigo_3">'.$diag_docente->matematica.'</td>';
                                                     $mate_a++;
                                                 }else{
-                                                    echo '<td id="codigo_3">'.$diag_docente->matematica.'</td>';
+                                                    echo '<td id="codigo_4">'.$diag_docente->matematica.'</td>';
                                                     $mate_d++;
                                                 }
                                                 
@@ -312,35 +313,35 @@
                                                 
                                                 if ($diag_myrp->necesito_apoyo == 'SI') {
                                                     if ($valor_lectura > 0 && $valor_lectura <= 2) {
+                                                        echo '<td id="codigo_2">SI</td>';
+                                                        $lect_myrp_a++;
+                                                        $total_lec_bajo20++;
+                                                    }else if($valor_lectura > 2 && $valor_lectura <= 5){
                                                         echo '<td id="codigo_3">SI</td>';
                                                         $lect_myrp_a++;
                                                         $total_lec_bajo20++;
-                                                    }else if($valor_lectura > 3 && $valor_lectura <= 5){
+                                                    }else if($valor_lectura > 5 && $valor_lectura <= 7){
                                                         echo '<td id="codigo_4">SI</td>';
                                                         $lect_myrp_a++;
                                                         $total_lec_bajo20++;
-                                                    }else if($valor_lectura > 5 && $valor_lectura <= 7){
-                                                        echo '<td id="codigo_5">SI</td>';
-                                                        $lect_myrp_a++;
-                                                        $total_lec_bajo20++;
                                                     }else{
-                                                        echo '<td id="codigo_1">SI</td>';
+                                                        echo '<td id="codigo_5">SI</td>';
                                                         $lect_myrp_a++;
                                                         $total_lec_bajo20++;
                                                     }
                                                     
                                                 }else{
                                                     if ($valor_lectura > 0 && $valor_lectura <= 2) {
+                                                        echo '<td id="codigo_2">NO</td>';
+                                                        $lect_myrp_c++;
+                                                    }else if($valor_lectura > 2 && $valor_lectura <= 5){
                                                         echo '<td id="codigo_3">NO</td>';
                                                         $lect_myrp_c++;
-                                                    }else if($valor_lectura > 3 && $valor_lectura <= 5){
+                                                    }else if($valor_lectura > 5 && $valor_lectura <= 7){
                                                         echo '<td id="codigo_4">NO</td>';
                                                         $lect_myrp_c++;
-                                                    }else if($valor_lectura > 5 && $valor_lectura <= 7){
-                                                        echo '<td id="codigo_5">NO</td>';
-                                                        $lect_myrp_c++;
                                                     }else{
-                                                        echo '<td id="codigo_1">NO</td>';
+                                                        echo '<td id="codigo_5">NO</td>';
                                                         $lect_myrp_c++;
                                                     }
                                                     
@@ -486,7 +487,7 @@
                                                 }else if($valor_escritura > 10 && $valor_escritura <= 20){
                                                     echo '<td id="codigo_3">'.$valor_escritura.'</td>';
                                                     $total_esc_bajo20++;
-                                                }else if($valor_escritura > 21 && $valor_escritura <= 26){
+                                                }else if($valor_escritura > 20 && $valor_escritura <= 26){
                                                     echo '<td id="codigo_4">'.$valor_escritura.'</td>';
                                                 }else if($valor_escritura > 26){
                                                     echo '<td id="codigo_5">'.$valor_escritura.'</td>';
@@ -503,7 +504,7 @@
                                             $superior = $this->evalMateP1->_getEvalMateP1($value->id);
                                             //echo $this->db->getLastQuery();
                                             $elemental = $this->evalMateElemP1->_getEvalMateElementalP1($value->id);
-                                            
+                                            //echo '<pre>'.var_export($elemental, true).'</pre><br>';
                                             $valor_matematica = 0;
 
                                             if(isset($elemental) && $elemental != NULL) {
@@ -520,7 +521,7 @@
                                                     echo '<td id="codigo_3">'.$valor_matematica.'</td>';
                                                     $mate_myrp_b++;
                                                     $total_mate_bajo20++;
-                                                }else if($valor_matematica > 21 && $valor_matematica <= 26){
+                                                }else if($valor_matematica > 20 && $valor_matematica <= 26){
                                                     echo '<td id="codigo_4">'.$valor_matematica.'</td>';
                                                     $mate_myrp_c++;
                                                 }else if($valor_matematica > 26){
@@ -547,7 +548,7 @@
                                                     echo '<td id="codigo_3">'.$valor_matematica_sup.'</td>';
                                                     $mate_myrp_b++;
                                                     $total_mate_bajo20++;
-                                                }else if($valor_matematica_sup > 21 && $valor_matematica_sup <= 26){
+                                                }else if($valor_matematica_sup > 20 && $valor_matematica_sup <= 26){
                                                     echo '<td id="codigo_4">'.$valor_matematica_sup.'</td>';
                                                     $mate_myrp_c++;
                                                 }else if($valor_matematica_sup > 26){
@@ -587,7 +588,7 @@
                     $total_mate_doc = $total_dificultades_mate + $total_buenas_mate;
 
 
-                    //echo ($total_buenas*2)/($total_dificultades+$total_buenas);exit;
+                    //echo '<pre>'.var_export($num_lectura, true).'</pre>';exit;
                     //Dificultades encontradas por docentes
                     $etiquetas = ["Lectura", "Escritura", "Matemáticas"];
 
