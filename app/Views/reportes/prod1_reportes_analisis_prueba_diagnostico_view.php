@@ -127,14 +127,20 @@
             <h4 style="text-align:center">ANALISIS DE LA PRUEBA DE DIAGNÓSTICO</h4>
             <div class="col-md-12" style="font-size:0.7em;text-align:center;">
                 <div class="contenedor mb-3 mt-3">
-                    <table class="table table-bordered tabla-codigos-eval col-md-6">
+                    <table class="table table-bordered tabla-codigos-eval col-md-6" id="contenedor">
+                        <thead>
+                            <th colspan="11">ANALISIS DE LA PRUEBA DE DIAGNÓSTICO</th>
+                        </thead>
                         <thead>
                             <th colspan="11">
                                 <?php
+                                
                                     if ($centro != NULL && isset($centro)) {
                                         echo 'Centro educativo '.$centro->nombre.' - '.$cohorte;
+                                        $nombre =  json_encode($centro->nombre); 
                                     }else{
                                         echo 'CENTRO EDUCATIVO';
+                                        $nombre =  json_encode("Centro educativo"); 
                                     }
                                 ?>
                             </th>
@@ -572,7 +578,9 @@
                         </tbody>
                     </table>
                 </div>
+                <button class="btn btn-info mb-5" id="btnCapturar">Descargar cuadro</button>
             </div>
+            
             <?php
                     
                     $total_dificultades_lect = $lect_a;
@@ -923,4 +931,27 @@
         }
     });
 
+</script>
+<script>
+    var nombre = JSON.parse(`<?php echo $nombre; ?>`);
+    //Definimos el botón para escuchar su click
+    const $boton = document.querySelector("#btnCapturar"), // El botón que desencadena
+    $objetivo = document.getElementById("contenedor"); // A qué le tomamos la fotocanvas
+    // Nota: no necesitamos contenedor, pues vamos a descargarla    
+
+    // Agregar el listener al botón
+    $boton.addEventListener("click", () => {
+    html2canvas($objetivo) // Llamar a html2canvas y pasarle el elemento
+        .then(canvas => {
+        // Cuando se resuelva la promesa traerá el canvas
+        // Crear un elemento <a>
+        let enlace = document.createElement('a');
+        enlace.download = "ANALISIS DE LA PRUEBA DE DIAGNÓSTICO - "+nombre+".png";
+        
+        // Convertir la imagen a Base64
+        enlace.href = canvas.toDataURL();
+        // Hacer click en él
+        enlace.click();
+        });
+    });
 </script>

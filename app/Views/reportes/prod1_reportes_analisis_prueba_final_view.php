@@ -122,16 +122,21 @@
             </div>
         <section>
             <h4>ANÁLISIS DE LA PRUEBA FINAL CON LA INTERVENCIÓN DEL PROGRAMA</h4>
-            <div class="col-md-12" style="font-size:0.7em;text-align:center;">
+            <div class="col-md-12" style="font-size:0.7em;text-align:center;" >
                 <div class="contenedor mb-3 mt-3">
-                    <table class="table table-bordered tabla-codigos-eval col-md-6">
+                    <table class="table table-bordered tabla-codigos-eval col-md-6" id="contenedor">
+                        <thead>
+                            <th colspan="8">ANÁLISIS DE LA PRUEBA FINAL CON LA INTERVENCIÓN DEL PROGRAMA</th>
+                        </thead>
                         <thead>
                             <th colspan="8">
                                 <?php
                                     if ($centro != NULL && isset($centro)) {
                                         echo 'Centro educativo '.$centro->nombre;
+                                        $nombre =  json_encode($centro->nombre); 
                                     }else{
                                         echo 'CENTRO EDUCATIVO';
+                                        $nombre =  json_encode("Centro educativo"); 
                                     }
                                 ?>
                             </th>
@@ -468,6 +473,8 @@
                             ?>
                         </tbody>
                     </table>
+                    </div>
+                    <button class="btn btn-info mb-5" id="btnCapturar">Descargar cuadro</button>
                     <?php
                         $total_registros_lect = $lec_b+$lec_c+$lec_d;
                         
@@ -527,6 +534,7 @@
                             }
                         
                         }
+                        //echo '<pre>'.var_export($centro, true).'</pre>';exit;
                         
                         $respuesta_1 = [
                             "etiquetas" => $etiquetas_1,
@@ -573,6 +581,7 @@
                 <div class="col-md-6"><canvas id="myChart"></canvas></div>
                 <div class="col-md-6"><canvas id="myChart_1"></canvas></div>
                 <div class="col-md-6"><canvas id="myChart_2"></canvas></div>
+                
             </div>
         </section>
     </div>
@@ -756,5 +765,28 @@
                 }
             }
         }
+    });
+</script>
+<script>
+    var nombre = JSON.parse(`<?php echo $nombre; ?>`);
+    //Definimos el botón para escuchar su click
+    const $boton = document.querySelector("#btnCapturar"), // El botón que desencadena
+    $objetivo = document.getElementById("contenedor"); // A qué le tomamos la fotocanvas
+    // Nota: no necesitamos contenedor, pues vamos a descargarla    
+
+    // Agregar el listener al botón
+    $boton.addEventListener("click", () => {
+    html2canvas($objetivo) // Llamar a html2canvas y pasarle el elemento
+        .then(canvas => {
+        // Cuando se resuelva la promesa traerá el canvas
+        // Crear un elemento <a>
+        let enlace = document.createElement('a');
+        enlace.download = "ANÁLISIS DE LA PRUEBA FINAL CON LA INTERVENCIÓN DEL PROGRAMA - "+nombre+".png";
+        
+        // Convertir la imagen a Base64
+        enlace.href = canvas.toDataURL();
+        // Hacer click en él
+        enlace.click();
+        });
     });
 </script>

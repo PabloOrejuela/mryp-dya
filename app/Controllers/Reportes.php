@@ -284,7 +284,6 @@ class Reportes extends BaseController {
         $data['cohorte'] = $this->request->getPostGet('cohorte');
         $data['centro'] = $this->centroEducativoModel->find($data['amie']);
 
-
         $data['centros'] = $this->prod1Model->_getMisAmie($this->session->nombre);
         $data['registros'] = $this->prod1Model->_getRegistros($data['amie'], $data['cohorte'], $this->session->nombre);
         $total = count($data['registros'])*3;
@@ -341,20 +340,25 @@ class Reportes extends BaseController {
             $data['amie'] = '';
             $data['cohorte'] = '';
             $data['registros'] = NULL;
+            $data['chart_data'] = '';
+            $data['chart_data_1'] = '';
+            $data['etiquetas'] = '';
+            $data['etiquetas_1'] = '';
+            $data['etiquetas_2'] = '';
+            $data['num'] = 0;
             return redirect()->to('reporte-analisis-pruebadiagnostico-p1');
         }
 
         $data['amie'] = $this->request->getPostGet('amie');
         $data['cohorte'] = $this->request->getPostGet('cohorte');
         $data['centro'] = $this->centroEducativoModel->find($data['amie']);
-
+        
         $data['centros'] = $this->prod1Model->_getMisAmie($this->session->nombre);
         $data['registros'] = $this->prod1Model->_getRegistros($data['amie'], $data['cohorte'], $this->session->nombre);
 
         //Evito el error de que llegue vacío el objeto
         $data['chart_data'] = '';
         $data['chart_data_1'] = '';
-        $data['centro'] = '';
         $data['etiquetas'] = '';
         $data['etiquetas_1'] = '';
         $data['etiquetas_2'] = '';
