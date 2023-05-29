@@ -123,7 +123,7 @@ class Prod3 extends BaseController {
         }
     }
 
-    public function prod_3_variables($id) {
+    public function prod_3_arte($id) {
         $data['idrol'] = $this->session->idrol;
         $data['id'] = $this->session->idusuario;
         $data['is_logged'] = $this->session->is_logged;
@@ -139,7 +139,55 @@ class Prod3 extends BaseController {
             //echo '<pre>'.var_export($data['datos'], true).'</pre>';exit;
 
             $data['title']='MYRP - DYA';
-            $data['main_content']='componente3/prod3_edit_proceso_view';
+            $data['main_content']='componente3/prod3_edit_arte_view';
+            return view('includes/template', $data);
+        }else{
+
+            $this->logout();
+        }
+    }
+
+    public function prod_3_lenguaje($id) {
+        $data['idrol'] = $this->session->idrol;
+        $data['id'] = $this->session->idusuario;
+        $data['is_logged'] = $this->session->is_logged;
+        $data['nombre'] = $this->session->nombre;
+        $data['componente_3'] = $this->session->componente_3;
+
+        if ($data['is_logged'] == 1 && $data['componente_3'] == 1) {
+            
+            $data['id'] = $id;
+            $data['var_pro3'] = $this->varProd3Model->find($id);
+            $data['datos'] = $this->prod3Model->find($id);
+
+            //echo '<pre>'.var_export($data['datos'], true).'</pre>';exit;
+
+            $data['title']='MYRP - DYA';
+            $data['main_content']='componente3/prod3_edit_lenguaje_view';
+            return view('includes/template', $data);
+        }else{
+
+            $this->logout();
+        }
+    }
+
+    public function prod_3_ciudadania($id) {
+        $data['idrol'] = $this->session->idrol;
+        $data['id'] = $this->session->idusuario;
+        $data['is_logged'] = $this->session->is_logged;
+        $data['nombre'] = $this->session->nombre;
+        $data['componente_3'] = $this->session->componente_3;
+
+        if ($data['is_logged'] == 1 && $data['componente_3'] == 1) {
+            
+            $data['id'] = $id;
+            $data['var_pro3'] = $this->varProd3Model->find($id);
+            $data['datos'] = $this->prod3Model->find($id);
+
+            //echo '<pre>'.var_export($data['datos'], true).'</pre>';exit;
+
+            $data['title']='MYRP - DYA';
+            $data['main_content']='componente3/prod3_edit_ciudadania_view';
             return view('includes/template', $data);
         }else{
 

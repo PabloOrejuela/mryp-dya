@@ -318,7 +318,7 @@
                                                 }
                                                 
                                                 if ($diag_myrp->necesito_apoyo == 'SI') {
-                                                    if ($valor_lectura > 0 && $valor_lectura <= 2) {
+                                                    if ($valor_lectura <= 2) {
                                                         echo '<td id="codigo_2">SI</td>';
                                                         $lect_myrp_a++;
                                                         $total_lec_bajo20++;
@@ -337,7 +337,7 @@
                                                     }
                                                     
                                                 }else{
-                                                    if ($valor_lectura > 0 && $valor_lectura <= 2) {
+                                                    if ($valor_lectura <= 2) {
                                                         echo '<td id="codigo_2">NO</td>';
                                                         $lect_myrp_c++;
                                                     }else if($valor_lectura > 2 && $valor_lectura <= 5){
@@ -487,7 +487,7 @@
                                                
                                                 //$rango_escritura = ($valor_escritura * 100) / 26;
                                                 
-                                                if ($valor_escritura > 0 && $valor_escritura <= 10) {
+                                                if ($valor_escritura <= 10) {
                                                     echo '<td id="codigo_2">'.number_format($valor_escritura).'</td>';
                                                     $total_esc_bajo20++;
                                                 }else if($valor_escritura > 10 && $valor_escritura <= 20){
@@ -519,7 +519,7 @@
                                                 $total_mate += $valor_matematica;
                                                 //$rango_mate = ($valor_matematica * 100) / 20;
 
-                                                if ($valor_matematica > 0 && $valor_matematica <= 10) {
+                                                if ($valor_matematica <= 10) {
                                                     echo '<td id="codigo_2">'.$valor_matematica.'</td>';
                                                     $mate_myrp_a++;
                                                     $total_mate_bajo20++;
@@ -546,7 +546,7 @@
                                                 $total_mate += $valor_matematica_sup;
                                                 //$rango_mate_sup = ($valor_matematica_sup * 100) / 20;
 
-                                                if ($valor_matematica_sup > 0 && $valor_matematica_sup <= 10) {
+                                                if ($valor_matematica_sup <= 10) {
                                                     echo '<td id="codigo_2">'.$valor_matematica_sup.'</td>';
                                                     $mate_myrp_a++;
                                                     $total_mate_bajo20++;

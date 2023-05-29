@@ -14,7 +14,9 @@
                         <th>Nombre</th>
                         <th>Documento</th>
                         <th>Amie</th>
-                        <th>Registro de Procesos</th>
+                        <th>E. Arística</th>
+                        <th>Lenguaje</th>
+                        <th>Ciudadanía</th>
                     </thead>
                     <tbody>
                     <?php
@@ -27,8 +29,22 @@
                                     <td>'.$value->amie.'</td>
                                     <td>
                                         <div class="contenedor">
-                                            <a type="button" id="btn-register" href="'.site_url().'prod-3-variables/'.$value->id.'" class="edit">
+                                            <a type="button" id="btn-register" href="'.site_url().'prod-3-arte/'.$value->id.'" class="edit">
+                                                <img src="'.site_url().'public/images/exp-artistica.png" height="25" >
+                                            </a>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="contenedor">
+                                            <a type="button" id="btn-register" href="'.site_url().'prod-3-lenguaje/'.$value->id.'" class="edit">
                                                 <img src="'.site_url().'public/images/taller.png" height="25" >
+                                            </a>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="contenedor">
+                                            <a type="button" id="btn-register" href="'.site_url().'prod-3-ciudadania/'.$value->id.'" class="edit">
+                                                <img src="'.site_url().'public/images/ciudadania.png" height="25" >
                                             </a>
                                         </div>
                                     </td>

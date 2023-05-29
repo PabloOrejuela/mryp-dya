@@ -9,7 +9,7 @@
 </style>
 <main class="container-md px-2 mb-4">
     <div class="container-fluid px-0">
-        <h4 class="mt-4" id="titulo-nombre"><?= esc($title).' - Registro de procesos de: '.$datos->nombre; ?></h4>
+        <h4 class="mt-4" id="titulo-nombre"><?= esc($title).' - Cuidadanía de: '.$datos->nombre; ?></h4>
         <form action="<?php echo base_url().'/prod3-process-update';?>" method="post">
             <?= session()->getFlashdata('error'); ?>
             <?= csrf_field(); ?>

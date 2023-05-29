@@ -276,6 +276,7 @@ class Reportes extends BaseController {
             $data['centro'] = '';
             $data['amie'] = '';
             $data['cohorte'] = '';
+            $data['etiquetas'] = '';
             $data['registros'] = NULL;
             return redirect()->to('reporte-analisis-pruebafinal-p1');
         }
@@ -286,7 +287,13 @@ class Reportes extends BaseController {
 
         $data['centros'] = $this->prod1Model->_getMisAmie($this->session->nombre);
         $data['registros'] = $this->prod1Model->_getRegistros($data['amie'], $data['cohorte'], $this->session->nombre);
-        $total = count($data['registros'])*3;
+        //echo '<pre>'.var_export($this->session->nombre, true).'</pre>';exit;
+        if ($data['registros'] != NULL) {
+            $total = count($data['registros'])*3;
+        }else{
+            $total = 0;
+        }
+        
 
         //Destrezas muy por debajo de lo esperado
         $etiquetas = ["L", "M", "Mi"];

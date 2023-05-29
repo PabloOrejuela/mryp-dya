@@ -78,7 +78,9 @@ $routes->get('prod_3', 'Prod3::index');
 $routes->get('prod_3_process', 'Prod3::frm_procesos_prod_3');
 $routes->get('prod_3_edit/(:num)', 'Prod3::frm_edit/$1');
 $routes->post('prod3_update', 'Prod3::update');
-$routes->get('prod-3-variables/(:num)', 'Prod3::prod_3_variables/$1');
+$routes->get('prod-3-arte/(:num)', 'Prod3::prod_3_arte/$1');
+$routes->get('prod-3-lenguaje/(:num)', 'Prod3::prod_3_lenguaje/$1');
+$routes->get('prod-3-ciudadania/(:num)', 'Prod3::prod_3_ciudadania/$1');
 $routes->post('prod3-process-update', 'Prod3::prod3_process_update');
 
 //NAP

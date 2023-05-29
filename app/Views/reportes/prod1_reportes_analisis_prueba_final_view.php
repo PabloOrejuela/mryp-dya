@@ -189,11 +189,10 @@
                                         //$eval_final = $this->evalFinalP1->_getEvalFinal(1292);
                                         $valor_escritura = 0;
                                         
-                                                
                                         echo '<tr>
                                             <td>'.$num.'</td>
                                             <td>'.$value->nombres.'</td>
-                                            <td>'.$value->apellidos.'</td>';
+                                            <td>'.$value->apellidos.$value->id.'</td>';
     
                                             if ($value->anio_egb == '11') {
                                                 echo '<td>1ro BTI</td>';
@@ -254,8 +253,8 @@
                                                     $lect_c++;
                                                 }
                                                //echo '<pre>'.var_export($eval_final, true).'</pre>';exit;
-                                                if ($eval_final->necesito_apoyo == 'SI') {//echo '252'.'<br>';
-                                                    if ($valor_lectura > 0 && $valor_lectura <= 2) {
+                                                if ($eval_final->necesito_apoyo == 'SI') {
+                                                    if ($valor_lectura <= 2) {
                                                         $lec_b++;
                                                         echo '<td id="codigo_3">SI</td>';
                                                     }else if($valor_lectura > 2 && $valor_lectura <= 5){
@@ -270,7 +269,7 @@
                                                     $lect_a++;
                                                     $lect_b++;
                                                 }else{
-                                                    if ($valor_lectura > 0 && $valor_lectura <= 2) {
+                                                    if ($valor_lectura <= 2) {
                                                         $lec_b++;
                                                         echo '<td id="codigo_3">NO</td>';
                                                     }else if($valor_lectura > 2 && $valor_lectura <= 5){
@@ -390,7 +389,7 @@
 
                                                 $rango_escritura = ($valor_escritura * 100) / 18;
 
-                                                if ($rango_escritura > 0 && $rango_escritura <= 33) {
+                                                if ($rango_escritura <= 33) {
                                                     echo '<td id="codigo_3">1</td>';
                                                     $esc_b++;
                                                 }else if($rango_escritura > 33 && $rango_escritura <= 66){
@@ -419,7 +418,7 @@
 
                                                 $rango_mate = ($valor_matematica * 100) / 20;
 
-                                                if ($rango_mate > 0 && $rango_mate <= 33) {
+                                                if ($rango_mate <= 33) {
                                                     echo '<td id="codigo_3">1</td>';
                                                     $mate_b++;
                                                 }else if($rango_mate > 33 && $rango_mate <= 66){
@@ -442,7 +441,7 @@
 
                                                 $rango_mate_sup = ($valor_matematica_sup * 100) / 20;
 
-                                                if ($rango_mate_sup > 0 && $rango_mate_sup <= 33) {
+                                                if ($rango_mate_sup <= 33) {
                                                     echo '<td id="codigo_3">1</td>';
                                                     $mate_b++;
                                                 }else if($rango_mate_sup > 33 && $rango_mate_sup <= 66){
@@ -480,10 +479,11 @@
                         
                         //Lectura
                         //$etiquetas = ["Por debajo de lo esperado", "En proceso", "Adecuadas"];
-                        if ($total_registros_lect == 0) {
+                        if ($total_registros_lect == 0 ||$total_registros_lect == NULL) {
                             $datosGrafica[0] = number_format(($lec_b*100)/1,1);
                             $datosGrafica[1] = number_format(($lec_c*100)/1, 1);
                             $datosGrafica[2] = number_format(($lec_d*100)/1, 1);
+                            $etiquetas[] = ("");
                         }else{
                             if (($lec_b*100)/$total_registros_lect != 0) {
                                 $datosGrafica[] = number_format((($lec_b)*100)/$total_registros_lect,1);
@@ -513,10 +513,11 @@
                         //echo $num_d;exit;
                         $total_registros_esc = $esc_b+$esc_c+$esc_d;
                         //$etiquetas_1 = ["Por debajo de lo esperado", "En proceso", "Adecuadas"];
-                        if ($total_registros_esc == 0) {
+                        if ($total_registros_esc == 0 || $total_registros_esc == NULL) {
                             $datosGrafica_1[0] = number_format(($esc_b*100)/1,1);//65
                             $datosGrafica_1[1] = number_format(($esc_c*100)/1,1);//23.80
                             $datosGrafica_1[2] = number_format(($esc_d*100)/1,1);//11.11
+                            $etiquetas_1[] = ("");
                         }else{
                             if (($esc_b*100)/$total_registros_esc != 0) {
                                 $datosGrafica_1[] = number_format((($esc_b)*100)/$total_registros_esc, 1);//65
@@ -547,10 +548,11 @@
                         $total_registros_mate = $mate_b+$mate_c+$mate_d;
                         //echo '<pre>'.var_export(($mate_c*100)/$total_registros_mate, true).'</pre>';exit;
                         //$etiquetas_2 = ["Por debajo de lo esperado", "En proceso", "Adecuadas"];
-                        if ($total_registros_mate == 0) {
+                        if ($total_registros_mate == 0 || $total_registros_mate == NULL) {
                             $datosGrafica_2[0] = number_format(($mate_b*100)/1, 1);
                             $datosGrafica_2[1] = number_format(($mate_c*100)/1, 1);//23.80
                             $datosGrafica_2[2] = number_format(($mate_d*100)/1, 1);//23.80
+                            $etiquetas_2[] = ("");
                         }else{
                             if (($mate_b*100)/$total_registros_mate != 0) {
                                 $datosGrafica_2[] = number_format(($mate_b*100)/$total_registros_mate, 1);
