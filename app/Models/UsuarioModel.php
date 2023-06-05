@@ -67,6 +67,7 @@ class UsuarioModel extends Model {
             editar,
             componente_1,
             ver_info,
+            descargar_info,
             cargar_info,
             reportes,
             componente_2,

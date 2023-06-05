@@ -19,7 +19,7 @@
                     <div class="row">
                         <h4 class="mt-3"><?= esc ('TALLERES'); ?></h4>
                         <div class="col-md-2 mb-2">
-                            <label for="taller_1">Taller 1:</label>
+                            <label for="taller_1">Docente y Autoestima:</label>
                             <div class="col-sm-8">
                                 <select 
                                     class="form-select" 
@@ -52,7 +52,7 @@
                             </div>
                         </div>
                         <div class="col-md-2 mb-2">
-                            <label for="taller_2">Taller 2:</label>
+                            <label for="taller_2">Arte y sus usos:</label>
                             <div class="col-sm-8">
                                 <select 
                                     class="form-select" 
@@ -85,7 +85,7 @@
                             </div>
                         </div>
                         <div class="col-md-2 mb-2">
-                            <label for="taller_3">Taller 3:</label>
+                            <label for="taller_3">Creatividad:</label>
                             <div class="col-sm-8">
                                 <select 
                                     class="form-select" 
@@ -118,7 +118,7 @@
                             </div>
                         </div>
                         <div class="col-md-2 mb-2">
-                            <label for="taller_4">Taller 4:</label>
+                            <label for="taller_4">Etapas de desarrollo artístico en los niños:</label>
                             <div class="col-sm-8">
                                 <select 
                                     class="form-select" 
@@ -151,7 +151,7 @@
                             </div>
                         </div>
                         <div class="col-md-2 mb-2">
-                            <label for="taller_5">Taller 5:</label>
+                            <label for="taller_5">Clase de arte: Autorretrato:</label>
                             <div class="col-sm-8">
                                 <select 
                                     class="form-select" 
@@ -184,7 +184,7 @@
                             </div>
                         </div>
                         <div class="col-md-2 mb-2">
-                            <label for="taller_6">Taller 6:</label>
+                            <label for="taller_6">Incluir el arte en nuestras clases:</label>
                             <div class="col-sm-8">
                                 <select 
                                     class="form-select" 
@@ -258,7 +258,7 @@
                     <div class="row">
                         <h4 class="mt-3"><?= esc ('CLASES DEMOSTRATIVAS'); ?></h4>
                         <div class="col-md-2 mb-2">
-                            <label for="clase_1">Clase 1:</label>
+                            <label for="clase_1">Autorretrato:</label>
                             <div class="col-sm-8">
                                 <select 
                                     class="form-select" 
@@ -291,7 +291,7 @@
                             </div>
                         </div>
                         <div class="col-md-2 mb-2">
-                            <label for="clase_2">Clase 2:</label>
+                            <label for="clase_2">Emociones:</label>
                             <div class="col-sm-8">
                                 <select 
                                     class="form-select" 
@@ -324,7 +324,7 @@
                             </div>
                         </div>
                         <div class="col-md-2 mb-2">
-                            <label for="clase_3">Clase 3:</label>
+                            <label for="clase_3">La familia:</label>
                             <div class="col-sm-8">
                                 <select 
                                     class="form-select" 
@@ -357,7 +357,7 @@
                             </div>
                         </div>
                         <div class="col-md-2 mb-2">
-                            <label for="clase_4">Clase 4:</label>
+                            <label for="clase_4">La camiseta:</label>
                             <div class="col-sm-8">
                                 <select 
                                     class="form-select" 

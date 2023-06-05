@@ -108,4 +108,23 @@ class CentroEducativoModel extends Model {
         //echo $this->db->getLastQuery();
         return $result;
     }
+
+    public function _getProvinciaCentro($idparroquia) {
+        $result = NULL;
+        $builder = $this->db->table('parroquias');
+        $builder->select('*');
+        $builder->where('id', $idparroquia);
+        $builder->join('ciudades', 'ciudades.idciudades = parroquias.idciudades');
+        $builder->join('provincias', 'provincias.idprovincias = ciudades.idprovincias');
+        $builder->orderBy('id');
+        $query = $builder->get();
+        if ($query->getResult() != null) {
+            foreach ($query->getResult() as $row) {
+                $result = $row;
+            }
+        }
+        //echo $this->db->getLastQuery();
+        return $result;
+    }
+
 }

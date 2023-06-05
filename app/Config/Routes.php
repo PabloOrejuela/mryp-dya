@@ -49,6 +49,7 @@ $routes->post('prod1_update', 'Prod1::update');
 $routes->post('prod1-asistencia-centro-update', 'Prod1::prod1_asistencia_centro_update');
 $routes->get('prod-1-asistencia', 'Prod1::prod_1_asistencia');
 $routes->post('prod-1-asistencia', 'Prod1::prod_1_asistencia');
+$routes->post('prod-1-asistencia-form', 'Prod1::prod_1_asistencia_form');
 $routes->post('prod1-diagnostico-update', 'Prod1::diagnostico_update');
 $routes->post('prod1-eval-update', 'Prod1::eval_final_update');
 $routes->post('prod1-evalMate-update', 'Prod1::eval_mate_update');
@@ -62,6 +63,7 @@ $routes->get('prod-1-form-tipo-eval-mate/(:num)', 'Prod1::prod_1_form_elije_eval
 $routes->get('prod-1-form-tipo-eval-mate-final/(:num)', 'Prod1::prod_1_form_elije_eval_mate_final/$1');
 $routes->post('prod1-elije-evalMate', 'Prod1::prod1_elije_evalMate');
 $routes->post('prod1-elije-evalMateFinal', 'Prod1::prod1_elije_evalMateFinal');
+$routes->get('prod-1-descargar-registros', 'Prod1::prod_1_descargar_registros');
 
 $routes->get('prod-1-reg-eval-mate', 'Prod1::prod_1_reg_eval_mate');
 $routes->get('prod-1-reg-eval-mate-final/(:num)', 'Prod1::prod_1_reg_eval_mate_final/$1');

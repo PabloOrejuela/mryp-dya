@@ -354,7 +354,7 @@ class CargarInformacion extends BaseController {
 
                 //Accedo a cada fila extrayendo los datos
                 
-                foreach ($sheet->getRowIterator(2) as $row) {
+                foreach ($sheet->getRowIterator(3) as $row) {
                 
                     $amie = trim($sheet->getCell('B'.$row->getRowIndex()));
                     
@@ -364,14 +364,14 @@ class CargarInformacion extends BaseController {
                         'nombre' => trim($sheet->getCell('E'.$row->getRowIndex())),
                     );
                     
-                    //Verifico si existe
-                    $exist = $this->centroEducativoModel->find($centro['amie']);
+                    //Verifico si existe el AMIE
+                    // $exist = $this->centroEducativoModel->find($centro['amie']);
                     
-                    if (!isset($exist) || $exist == NULL) {
-                        //muestro los datos o los grabo en base de datos
-                        //echo 'No existe';
-                        $this->centroEducativoModel->save($centro);
-                    }
+                    // if (!isset($exist) || $exist == NULL) {
+                    //     //muestro los datos o los grabo en base de datos
+                    //     //echo 'No existe';
+                    //     $this->centroEducativoModel->save($centro);
+                    // }
 
                     $anio_actual = date('Y');
                     
@@ -409,7 +409,7 @@ class CargarInformacion extends BaseController {
                     $prod = array(
                          'num'=> trim($sheet->getCell('A'.$row->getRowIndex())),
                          'amie' => trim($sheet->getCell('B'.$row->getRowIndex())),
-                         'cohorte' => trim($sheet->getCell('F'.$row->getRowIndex())),
+                         'cohorte' => 'SEGUNDA COHORTE',//trim($sheet->getCell('F'.$row->getRowIndex())),
                          'fecha_inicio' => $fecha_inicio,
                          'fecha_fin' => $fecha_fin,
                          'nombres' => trim($sheet->getCell('I'.$row->getRowIndex())),

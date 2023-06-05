@@ -3,6 +3,9 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx as XlsxWriter;
+use PhpOffice\PhpSpreadsheet\Reader\Xlsx as XlsxReader;
 
 class Prod1 extends BaseController {
 
@@ -42,10 +45,15 @@ class Prod1 extends BaseController {
 
         if ($data['is_logged'] == 1) {
             
-            $data['centros'] = $this->centroEducativoModel->_getCentros();
+            if ($this->session->idrol == 2) {
+                $data['centros'] = $this->prod1Model->_getMisAmie($this->session->nombre);
+            }else{
+                $data['centros'] = $this->prod1Model->_getCentrosEducativos();
+            }
+            
             $data['datos'] = $this->prod1Model->find($id);
 
-            //echo '<pre>'.var_export($data['datos'], true).'</pre>';exit;
+            //echo '<pre>'.var_export($data['centros'], true).'</pre>';exit;
 
             $data['title']='MYRP - DYA';
             $data['main_content']='componente1/prod1_edit_view';
@@ -64,7 +72,13 @@ class Prod1 extends BaseController {
 
         if ($data['is_logged'] == 1) {
             //$this->session->set('form_error', "Los campos con asterisco son obligatorios");
-            $data['centros'] = $this->prod1Model->_getMisAmie($this->session->nombre);
+
+            if ($this->session->idrol == 2) {
+                $data['centros'] = $this->prod1Model->_getMisAmie($this->session->nombre);
+            }else{
+                $data['centros'] = $this->prod1Model->_getCentrosEducativos();
+            }
+ 
             $data['cursos'] = $this->cursoModel->findAll();
             $data['mensaje'] = $this->session->form_error;
             
@@ -861,10 +875,10 @@ class Prod1 extends BaseController {
             $data['cohorte'] = $this->request->getPostGet('cohorte');
             
             
-            if ($this->session->idrol == 1 && $this->session->componente_1 == 1 && $this->session->ver_info == 1) {
-                $data['centros'] = $this->prod1Model->_getCentrosEducativos(); 
+            if ($this->session->idrol == 2) {
+                $data['centros'] = $this->prod1Model->_getMisAmie($this->session->nombre);
             }else{
-                $data['centros'] = $this->prod1Model->_getMisAmie($this->session->nombre); 
+                $data['centros'] = $this->prod1Model->_getCentrosEducativos();
             }
             
             if ($data['amie']  != NULL && isset($data['amie']) && $data['cohorte']  != NULL && isset($data['cohorte']) && $data['cohorte'] != 'NULL') {
@@ -875,7 +889,7 @@ class Prod1 extends BaseController {
                 $data['amie'] = 'NULL';
                 $data['asistencia'] = NULL;
             }
-            //echo '<pre>'.var_export($data['centros'], true).'</pre>';exit;
+
             $data['title']='MYRP - DYA';
             $data['main_content']='componente1/prod1_asistencia_view';
             return view('includes/template', $data);
@@ -883,6 +897,157 @@ class Prod1 extends BaseController {
 
             $this->logout();
         }
+    }
+
+    public function prod_1_asistencia_form() {
+        $data['idrol'] = $this->session->idrol;
+        $data['id'] = $this->session->idusuario;
+        $data['is_logged'] = $this->session->is_logged;
+        $data['nombre'] = $this->session->nombre;
+        $data['componente_1'] = $this->session->componente_1;
+
+        if ($data['is_logged'] == 1 && $data['componente_1'] == 1) {
+
+            $data = array(
+                'amie' => null,
+                'horas_atencion_total' => 0,
+                'horas_planificadas' => 0,
+                'horas_efectivas' => 0,
+                'horas_perdidas' => 0,
+                'cohorte' => null
+            );
+
+            $data['amie'] = $this->request->getPostGet('amie');
+            $data['cohorte'] = $this->request->getPostGet('cohorte');
+
+            if ($data['amie'] == 'NULL' || $data['cohorte'] == 'NULL') {
+                return redirect()->to('prod-1-asistencia');
+            }else{
+                if ($this->session->idrol == 2) {
+                    $data['centros'] = $this->prod1Model->_getMisAmie($this->session->nombre);
+                }else{
+                    $data['centros'] = $this->prod1Model->_getCentrosEducativos();
+                }
+                
+                if ($data['amie']  != NULL && isset($data['amie']) && $data['cohorte']  != NULL && isset($data['cohorte']) && $data['cohorte'] != 'NULL') {
+                    $data['asistencia'] = $this->asistenciaP1->_getAsistencia($data['amie'], $data['cohorte']);
+                    //echo '<pre>'.var_export($data['asistencia'], true).'</pre>';exit;
+                }else{
+                    $data['cohorte'] = 'NULL';
+                    $data['amie'] = 'NULL';
+                    $data['asistencia'] = NULL;
+                }
+                //echo '<pre>'.var_export($data['centros'], true).'</pre>';exit;
+                $data['title']='MYRP - DYA';
+                $data['main_content']='componente1/prod1_asistencia_form_view';
+                return view('includes/template', $data);
+            }
+            
+        }else{
+
+            $this->logout();
+        }
+    }
+
+    public function prod_1_descargar_registros(){
+
+        $registros = $this->prod1Model->_getAllRegistrosExcel();
+        $fila = 2;
+
+
+        //Creo la hoja
+        $phpExcel = new Spreadsheet();
+        $phpExcel
+            ->getProperties()
+            ->setCreator("Aquí va el creador, como cadena")
+            ->setLastModifiedBy('Parzibyte') // última vez modificado por
+            ->setTitle('Mi primer documento creado con PhpSpreadSheet')
+            ->setSubject('El asunto')
+            ->setDescription('Este documento fue generado para parzibyte.me')
+            ->setKeywords('etiquetas o palabras clave separadas por espacios')
+            ->setCategory('La categoría'
+        );
+
+        $nombreDelDocumento = "Mi primer archivo.xlsx";
+
+        //Selecciono la pestaña
+        $hoja = $phpExcel->getActiveSheet();
+
+        $styleCabecera = [
+            'font' => [
+                'bold' => true,
+            ],
+            'alignment' => [
+                'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
+            ]
+        ];
+
+        $styleFila = [
+            'font' => [
+                'bold' => false,
+            ],
+            'alignment' => [
+                'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT,
+            ]
+        ];
+
+        $phpExcel->getActiveSheet()->getStyle('A1:Z1')->applyFromArray($styleCabecera);
+
+        //Edito la info que va a ir en el archivo excel
+        $hoja->setCellValue('A1', "AMIE");
+        $hoja->setCellValue('B1', "CENTRO EDUCATIVO");
+        $hoja->setCellValue('C1', "COHORTE");
+        $hoja->setCellValue('D1', "FECHA INICIO");
+        $hoja->setCellValue('E1', "FECHA FIN");
+        $hoja->setCellValue('F1', "NOMBRES");
+        $hoja->setCellValue('G1', "APELLIDOS");
+        $hoja->setCellValue('H1', "DOCUMENTO");
+        $hoja->setCellValue('I1', "NACIONALIDAD");
+        $hoja->setCellValue('J1', "ETNIA");
+        $hoja->setCellValue('K1', "FECHA NACIMIENTO");
+        $hoja->setCellValue('L1', "EDAD");
+        $hoja->setCellValue('M1', "GÉNERO");
+        $hoja->setCellValue('N1', "DISCAPACIDAD");
+        $hoja->setCellValue('O1', "TIPO DISCAPACIDAD");
+
+        foreach ($registros as $key => $value) {
+            $phpExcel->getActiveSheet()->getStyle('A'.$fila.':Z'.$fila)->applyFromArray($styleFila);
+            $hoja->setCellValue('A'.$fila, $value->amie);
+            $hoja->setCellValue('B'.$fila, $value->nombre);
+            $hoja->setCellValue('C'.$fila, $value->cohorte);
+            $hoja->setCellValue('D'.$fila, $value->fecha_inicio);
+            $hoja->setCellValue('E'.$fila, $value->fecha_fin);
+            $hoja->setCellValue('F'.$fila, $value->nombres);
+            $hoja->setCellValue('G'.$fila, $value->apellidos);
+            $hoja->setCellValue('H'.$fila, $value->documento);
+            $hoja->setCellValue('I'.$fila, $value->nacionalidad);
+            $hoja->setCellValue('J'.$fila, $value->etnia);
+            $hoja->setCellValue('K'.$fila, $value->fecha_nac);
+            $hoja->setCellValue('L'.$fila, $value->edad);
+            $hoja->setCellValue('M'.$fila, $value->genero);
+            $hoja->setCellValue('N'.$fila, $value->discapacidad);
+            $hoja->setCellValue('O'.$fila, $value->tipo_discapacidad);
+
+
+            $fila++;
+        }
+
+        //Creo el writter y guardo la hoja
+        
+        $writter = new XlsxWriter($phpExcel, 'Xlsx');
+        
+        //Cabeceras para descarga
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        header('Content-Disposition: attachment;filename="' . $nombreDelDocumento . '"');
+        header('Cache-Control: max-age=0');
+        
+        $r = $writter->save('php://output');exit;
+        if ($r) {
+            return redirect()->to('cargar_info_view');
+        }else{
+            $error = 'Hubo un error u no se pudo descargar';
+            return redirect()->to('cargar_info_view');
+        }        
     }
 
     public function logout(){

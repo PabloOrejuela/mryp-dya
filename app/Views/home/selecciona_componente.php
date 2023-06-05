@@ -15,11 +15,14 @@
                                     <img src="'.site_url().'public/images/card-01.jpg" class="card-img-top" alt="card1">
                                     <div class="card-body" >
                                         <h5 class="card-title">Componente 1</h5>
-                                            <p class="card-text">Servicio de Apoyo Escolar implementado en tres provincias: Carchi, El Oro y Manabí (Manta) </p>
+                                            <p class="card-text">Apoyo escolar</p>
                                             <a href="'.site_url().'prod_1" class="btn btn-info mb-2">Ver y editar información de registro</a>
                                             <a href="'.site_url().'prod_1_process" class="btn btn-info mb-2">Ver y editar variables de Proceso</a>
-                                            <a href="'.site_url().'prod-1-asistencia" class="btn btn-info mb-2">Registrar asistencia</a>
-                                    </div>
+                                            <a href="'.site_url().'prod-1-asistencia" class="btn btn-info mb-2">Registrar asistencia</a>';
+                                            if ($this->session->descargar_info == 1) {
+                                                echo'<a href="'.site_url().'prod-1-descargar-registros" class="btn btn-info mb-2">Descargar registros (.xlsx)</a>';
+                                            }
+                            echo'   </div>
                                 </div>';
                         }
                         if ($this->session->componente_2 == 1) {
@@ -27,7 +30,7 @@
                                 <img src="'.site_url().'public/images/card-02.jpg" class="card-img-top" alt="card2">
                                     <div class="card-body" >
                                         <h5 class="card-title">Componente 2</h5>
-                                            <p class="card-text">Programa de Atención al Rezago Escolar de Adolescentes</p>
+                                            <p class="card-text">Servicio educativo NAP </p>
                                             <a href="'.site_url().'prod_2" class="btn btn-info mb-2">Ver y editar información de registro</a>
                                             <a href="'.site_url().'prod_2_process" class="btn btn-info mb-2">Ver y editar variables de Proceso</a>
                                             <a href="'.site_url().'prod-2-asistencia" class="btn btn-info mb-2">Registrar asistencia</a>
@@ -40,7 +43,7 @@
                                     <img src="'.site_url().'public/images/card-03.jpg" class="card-img-top" alt="card3">
                                     <div class="card-body" >
                                         <h5 class="card-title">Componente 3</h5>
-                                            <p class="card-text">Programa de Acompañamiento Pedagógico</p>
+                                            <p class="card-text">Acompañamiento Pedagógico </p>
                                             <a href="'.site_url().'prod_3" class="btn btn-info mb-2">Ver y editar información de registro</a>
                                             <a href="'.site_url().'prod_3_process" class="btn btn-info mb-2">Editar variables de Proceso</a>
                                     </div>
@@ -51,8 +54,8 @@
                             echo '<div class="card" style="width: 12rem;" id="card-componente">
                                     <img src="'.site_url().'public/images/card-04.jpg" class="card-img-top" alt="card4">
                                     <div class="card-body" >
-                                        <h5 class="card-title">Programa de Apoyo Escolar a Madres Adolescentes</h5>
-                                            <p class="card-text">Algún texto que desccriba el componente 4</p>
+                                        <h5 class="card-title">Componente 4</h5>
+                                            <p class="card-text">Apoyo escolar a adolescentes madres y embarazadas</p>
                                             <a href="'.site_url().'prod_4" class="btn btn-info mb-2">Ver y editar información de registro</a>
                                             <a href="'.site_url().'prod_4_process" class="btn btn-info mb-2">Ver y editar variables de Proceso</a>
                                             <a href="'.site_url().'prod-4-asistencia" class="btn btn-info mb-2">Registrar asistencia</a>

@@ -52,7 +52,7 @@
                     </form>
                 </div>
             </div>
-            <!-- <div class="card mb-4">
+            <div class="card mb-4">
                 <div class="card-header">
                     <i class="fa-solid fa-cash-register"></i>
                     <?= esc("Cargar NAP2"); ?>
@@ -101,8 +101,8 @@
                         </div>
                     </form>
                 </div>
-            </div> -->
-            <!-- <div class="card mb-4">
+            </div>
+            <div class="card mb-4">
                 <div class="card-header">
                     <i class="fa-solid fa-cash-register"></i>
                     <?= esc("Cargar NAP 4"); ?>
@@ -126,8 +126,8 @@
                         </div>
                     </form>
                 </div>
-            </div> -->
-            <!-- <div class="card mb-4">
+            </div>
+            <div class="card mb-4">
                 <div class="card-header">
                     <i class="fa-solid fa-cash-register"></i>
                     <?= esc("Cargar NAP 5"); ?>
@@ -151,8 +151,8 @@
                         </div>
                     </form>
                 </div>
-            </div> -->
-            <!--<div class="card mb-4">
+            </div>
+            <div class="card mb-4">
                 <div class="card-header">
                     <i class="fa-solid fa-cash-register"></i>
                     <?= esc("Cargar NAP 6"); ?>
@@ -176,8 +176,8 @@
                         </div>
                     </form>
                 </div>
-            </div>-->
-            <!-- <div class="card mb-4">
+            </div>
+            <div class="card mb-4">
                 <div class="card-header">
                     <i class="fa-solid fa-cash-register"></i>
                     <?= esc("Cargar Pro 3"); ?>
@@ -201,6 +201,6 @@
                         </div>
                     </form>
                 </div>
-            </div> -->
+            </div>
         </div>
     </main>

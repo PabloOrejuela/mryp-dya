@@ -15,7 +15,7 @@ class Prod3 extends BaseController {
 
         if ($data['is_logged'] == 1 && $data['componente_3'] == 1) {
             $this->session->set('form_error', "");
-            $data['componente_3'] = $this->prod3Model->findAll();
+            $data['componente_3'] = $this->prod3Model->_getMisRegistros($this->session->idusuario);
 
             $data['title']='MYRP - DYA';
             $data['main_content']='componente3/prod3_view';
@@ -35,7 +35,7 @@ class Prod3 extends BaseController {
 
         if ($data['is_logged'] == 1 && $data['componente_3'] == 1) {
             //$this->session->set('form_error', "Los campos con asterisco son obligatorios");
-            $data['centros'] = $this->centroEducativoModel->findAll();
+            $data['centros'] = $this->prod3Model->_getMisAmie($this->session->idusuario);
             $data['cursos'] = $this->cursoModel->findAll();
             $data['mensaje'] = $this->session->form_error;
             
@@ -75,8 +75,6 @@ class Prod3 extends BaseController {
                 $this->prod3Model->save($producto_3);
                 return redirect()->to('prod_3');
             }
-            //echo '<pre>'.var_export($this->session->form_error, true).'</pre>';exit;
-
             
         }else{
 
@@ -93,7 +91,7 @@ class Prod3 extends BaseController {
 
         if ($data['is_logged'] == 1 && $data['componente_3'] == 1) {
             $id = $id;
-            //echo '<pre>'.var_export($id, true).'</pre>';exit;
+
             $this->prod3Model->delete($id);
 
             return redirect()->to('prod_3');

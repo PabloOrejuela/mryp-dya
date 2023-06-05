@@ -22,9 +22,9 @@
                         <th>No.</th>
                         <th>Nombre</th>
                         <th>Documento</th>
-                        <th>Profesor</th>
                         <th>Amie</th>
                         <th>Centro educativo</th>
+                        <th>Provincia</th>
                         <th>Borrar registro</th>
                     </thead>
                     <tbody>
@@ -36,13 +36,15 @@
                         if (isset($componente_3) && $componente_3 != NULL) {
                             foreach ($componente_3 as $key => $value) {
                                 $centro_educativo = $this->centroEducativoModel->find($value->amie);
+                                $provincia = $this->centroEducativoModel->_getProvinciaCentro($centro_educativo->idparroquia);
+
                                 echo '<tr>
                                     <td>'.$value->id.'</td>
                                     <td><a href="'.site_url().'prod_3_edit/'.$value->id.'">'.$value->nombre.'</a></td>
                                     <td>'.$value->documento.'</td>
-                                    <td>'.$value->documento.'</td>
                                     <td>'.$value->amie.'</td>
                                     <td>'.$centro_educativo->nombre.'</td>
+                                    <td>'.$provincia->provincia.'</td>
                                     <td>
                                         <div class="contenedor">
                                             <a type="button" id="btn-register" href="'.site_url().'prod-3-delete/'.$value->id.'" class="edit">

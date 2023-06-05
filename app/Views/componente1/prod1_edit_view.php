@@ -26,13 +26,126 @@
                 </div>
                 <div class="col-md-4 mb-3">
                     <label for="nacionalidad">Nacionalidad:</label>
-                    <input type="text" id="nacionalidad" name="nacionalidad" value="<?= $datos->nacionalidad; ?>" class="form-control" placeholder="Nacionalidad" aria-label="nacionalidad">
+                    <select name="nacionalidad" class="form-control" id="nacionalidad" aria-label="nacionalidad">
+                        <?php
+                            if ($datos->nacionalidad == "ECUATORIANA") {
+                                echo '<option value="ECUATORIANA" selected>ECUATORIANA</option>
+                                        <option value="VENEZOLANA">VENEZOLANA</option>
+                                        <option value="COLOMBIANA">COLOMBIANA</option>
+                                        <option value="PERUANA">PERUANA</option>
+                                        <option value="OTROS">OTROS</option>
+                                ';
+                            }elseif ($datos->nacionalidad == "VENEZOLANA") {
+                                echo '<option value="ECUATORIANA">ECUATORIANA</option>
+                                        <option value="VENEZOLANA" selected>VENEZOLANA</option>
+                                        <option value="COLOMBIANA">COLOMBIANA</option>
+                                        <option value="PERUANA">PERUANA</option>
+                                        <option value="OTROS">OTROS</option>
+                                ';
+                            }elseif ($datos->nacionalidad == "COLOMBIANA") {
+                                echo '<option value="ECUATORIANA">ECUATORIANA</option>
+                                        <option value="VENEZOLANA">VENEZOLANA</option>
+                                        <option value="COLOMBIANA" selected>COLOMBIANA</option>
+                                        <option value="PERUANA">PERUANA</option>
+                                        <option value="OTROS">OTROS</option>
+                                ';
+                            }elseif ($datos->nacionalidad == "PERUANA") {
+                                echo '<option value="ECUATORIANA">ECUATORIANA</option>
+                                        <option value="VENEZOLANA">VENEZOLANA</option>
+                                        <option value="COLOMBIANA">COLOMBIANA</option>
+                                        <option value="PERUANA" selected>PERUANA</option>
+                                        <option value="OTROS">OTROS</option>
+                                ';
+                            }else {
+                                echo '<option value="ECUATORIANA">ECUATORIANA</option>
+                                        <option value="VENEZOLANA">VENEZOLANA</option>
+                                        <option value="COLOMBIANA">COLOMBIANA</option>
+                                        <option value="PERUANA">PERUANA</option>
+                                        <option value="OTROS" selected>OTROS</option>
+                                ';
+                            }
+                        ?>
+                        
+                        
+                    </select>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-4 mb-3">
                     <label for="etnia">Etnia:</label>
-                    <input type="text" id="etnia" name="etnia" value="<?= $datos->etnia; ?>" class="form-control" placeholder="Etnia" aria-label="etnia">
+                    <select name="etnia" class="form-control" id="etnia" aria-label="etnia">
+                        <?php
+                            if ($datos->etnia == "MESTIZA") {
+                                echo '<option value="MESTIZA" selected>MESTIZA</option>
+                                        <option value="INDIGENA">INDIGENA</option>
+                                        <option value="AFRODECENDIENTE">AFRODECENDIENTE</option>
+                                        <option value="AFROECUATORIANA">AFROECUATORIANA</option>
+                                        <option value="AFROVENEZOLANA">AFROVENEZOLANA</option>
+                                        <option value="BLANCA">BLANCA</option>
+                                        <option value="OTROS">OTROS</option>
+                                ';
+                            }elseif ($datos->etnia == "INDIGENA") {
+                                echo '<option value="MESTIZA">MESTIZA</option>
+                                        <option value="INDIGENA" selected>INDIGENA</option>
+                                        <option value="AFRODECENDIENTE">AFRODECENDIENTE</option>
+                                        <option value="AFROECUATORIANA">AFROECUATORIANA</option>
+                                        <option value="AFROVENEZOLANA">AFROVENEZOLANA</option>
+                                        <option value="BLANCA">BLANCA</option>
+                                        <option value="OTROS">OTROS</option>
+                                ';
+                            }elseif ($datos->etnia == "AFRODECENDIENTE") {
+                                echo '<option value="MESTIZA">MESTIZA</option>
+                                        <option value="INDIGENA">INDIGENA</option>
+                                        <option value="AFRODECENDIENTE" selected>AFRODECENDIENTE</option>
+                                        <option value="AFROECUATORIANA">AFROECUATORIANA</option>
+                                        <option value="AFROVENEZOLANA">AFROVENEZOLANA</option>
+                                        <option value="BLANCA">BLANCA</option>
+                                        <option value="OTROS">OTROS</option>    
+                                ';
+                            }elseif ($datos->etnia == "AFROECUATORIANA") {
+                                echo '<option value="ECUATORIANA">ECUATORIANA</option>
+                                        <option value="INDIGENA">INDIGENA</option>
+                                        <option value="AFRODECENDIENTE">AFRODECENDIENTE</option>
+                                        <option value="AFROECUATORIANA" selected>AFROECUATORIANA</option>
+                                        <option value="AFROVENEZOLANA">AFROVENEZOLANA</option>
+                                        <option value="BLANCA">BLANCA</option>
+                                        <option value="OTROS">OTROS</option>    
+                                ';
+                                
+                            }elseif ($datos->etnia == "AFROVENEZOLANA") {
+                                echo '<option value="ECUATORIANA">ECUATORIANA</option>
+                                        <option value="INDIGENA">INDIGENA</option>
+                                        <option value="AFRODECENDIENTE">AFRODECENDIENTE</option>
+                                        <option value="AFROECUATORIANA">AFROECUATORIANA</option>
+                                        <option value="AFROVENEZOLANA" selected>AFROVENEZOLANA</option>
+                                        <option value="BLANCA">BLANCA</option>
+                                        <option value="OTROS">OTROS</option>    
+                                ';
+                                
+                            }elseif ($datos->etnia == "BLANCA") {
+                                echo '<option value="ECUATORIANA">ECUATORIANA</option>
+                                        <option value="INDIGENA">INDIGENA</option>
+                                        <option value="AFRODECENDIENTE">AFRODECENDIENTE</option>
+                                        <option value="AFROECUATORIANA">AFROECUATORIANA</option>
+                                        <option value="AFROVENEZOLANA">AFROVENEZOLANA</option>
+                                        <option value="BLANCA" selected>BLANCA</option>
+                                        <option value="OTROS">OTROS</option>    
+                                ';
+                                
+                            }else {
+                                echo '<option value="ECUATORIANA">ECUATORIANA</option>
+                                        <option value="INDIGENA">INDIGENA</option>
+                                        <option value="AFRODECENDIENTE">AFRODECENDIENTE</option>
+                                        <option value="AFROECUATORIANA">AFROECUATORIANA</option>
+                                        <option value="AFROVENEZOLANA">AFROVENEZOLANA</option>
+                                        <option value="BLANCA">BLANCA</option>
+                                        <option value="OTRA" selected>OTROS</option>    
+                                ';
+                            }
+                        ?>
+                        
+                        
+                    </select>
                 </div>
                 <div class="col-md-4 mb-3">
                     <label for="genero">Fecha de nacimiento:</label>

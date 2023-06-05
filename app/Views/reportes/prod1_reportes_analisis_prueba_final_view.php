@@ -192,7 +192,7 @@
                                         echo '<tr>
                                             <td>'.$num.'</td>
                                             <td>'.$value->nombres.'</td>
-                                            <td>'.$value->apellidos.$value->id.'</td>';
+                                            <td>'.$value->apellidos.'</td>';
     
                                             if ($value->anio_egb == '11') {
                                                 echo '<td>1ro BTI</td>';
@@ -483,7 +483,7 @@
                             $datosGrafica[0] = number_format(($lec_b*100)/1,1);
                             $datosGrafica[1] = number_format(($lec_c*100)/1, 1);
                             $datosGrafica[2] = number_format(($lec_d*100)/1, 1);
-                            $etiquetas[] = ("");
+                            $etiquetas = ("");
                         }else{
                             if (($lec_b*100)/$total_registros_lect != 0) {
                                 $datosGrafica[] = number_format((($lec_b)*100)/$total_registros_lect,1);
@@ -517,7 +517,7 @@
                             $datosGrafica_1[0] = number_format(($esc_b*100)/1,1);//65
                             $datosGrafica_1[1] = number_format(($esc_c*100)/1,1);//23.80
                             $datosGrafica_1[2] = number_format(($esc_d*100)/1,1);//11.11
-                            $etiquetas_1[] = ("");
+                            $etiquetas_1 = ("");
                         }else{
                             if (($esc_b*100)/$total_registros_esc != 0) {
                                 $datosGrafica_1[] = number_format((($esc_b)*100)/$total_registros_esc, 1);//65
@@ -552,7 +552,7 @@
                             $datosGrafica_2[0] = number_format(($mate_b*100)/1, 1);
                             $datosGrafica_2[1] = number_format(($mate_c*100)/1, 1);//23.80
                             $datosGrafica_2[2] = number_format(($mate_d*100)/1, 1);//23.80
-                            $etiquetas_2[] = ("");
+                            $etiquetas_2 = ("");
                         }else{
                             if (($mate_b*100)/$total_registros_mate != 0) {
                                 $datosGrafica_2[] = number_format(($mate_b*100)/$total_registros_mate, 1);

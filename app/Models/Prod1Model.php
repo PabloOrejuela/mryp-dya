@@ -105,6 +105,23 @@ class Prod1Model extends Model {
         return $result;
     }
 
+    public function _getAllRegistrosExcel() {
+        $result = NULL;
+        $builder = $this->db->table($this->table);
+        $builder->select('*');
+        $builder->join('centro_educativo', 'centro_educativo.amie = producto_1.amie');
+        $query = $builder->get();
+        if ($query->getResult() != null) {
+            foreach ($query->getResult() as $row) {
+                if ($row->id != NULL && $row != '') {
+                    $result[] = $row;
+                }
+            }
+        }
+        //echo $this->db->getLastQuery();
+        return $result;
+    }
+
     public function _getGeneros() {
         $result = NULL;
         $builder = $this->db->table($this->table);

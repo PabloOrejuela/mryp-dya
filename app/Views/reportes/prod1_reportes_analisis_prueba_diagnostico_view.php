@@ -224,7 +224,7 @@
                                         echo '<tr>
                                             <td>'.$num.'</td>
                                             <td>'.$value->nombres.'</td>
-                                            <td>'.$value->apellidos.'</td>';
+                                            <td>'.$value->apellidos.$value->id.'</td>';
     
                                             if ($value->anio_egb == '11') {
                                                 echo '<td>1ro BTI</td>';

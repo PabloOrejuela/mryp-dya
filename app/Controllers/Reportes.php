@@ -36,7 +36,12 @@ class Reportes extends BaseController {
 
         if ($data['is_logged'] == 1 && $data['componente_1'] == 1 && $data['reportes'] == 1) {
 
-            $data['centros'] = $this->prod1Model->_getMisAmie($data['nombre']);
+            if ($this->session->idrol == 2) {
+                $data['centros'] = $this->prod1Model->_getMisAmie($this->session->nombre);
+            }else{
+                $data['centros'] = $this->prod1Model->_getCentrosEducativos();
+            }
+
             $data['cursos'] = $this->cursoModel->findAll();
             $data['nacionalidades'] = $this->prod1Model->_getNacionalidades();
             $data['genero'] = $this->prod1Model->_getGeneros();
@@ -71,7 +76,11 @@ class Reportes extends BaseController {
 
         if ($data['is_logged'] == 1 && $data['componente_1'] == 1 && $data['reportes'] == 1) {
 
-            $data['centros'] = $this->prod1Model->_getMisAmie($data['nombre']);
+            if ($this->session->idrol == 2) {
+                $data['centros'] = $this->prod1Model->_getMisAmie($this->session->nombre);
+            }else{
+                $data['centros'] = $this->prod1Model->_getCentrosEducativos();
+            }
             $data['cursos'] = $this->cursoModel->findAll();
             $data['nacionalidades'] = $this->prod1Model->_getNacionalidades();
             $data['genero'] = $this->prod1Model->_getGeneros();
@@ -109,7 +118,11 @@ class Reportes extends BaseController {
 
         if ($data['is_logged'] == 1 && $data['componente_1'] == 1 && $data['reportes'] == 1) {
 
-            $data['centros'] = $this->prod1Model->_getMisAmie($data['nombre']);
+            if ($this->session->idrol == 2) {
+                $data['centros'] = $this->prod1Model->_getMisAmie($this->session->nombre);
+            }else{
+                $data['centros'] = $this->prod1Model->_getCentrosEducativos();
+            }
             $data['cursos'] = $this->cursoModel->findAll();
             $data['nacionalidades'] = $this->prod1Model->_getNacionalidades();
             $data['genero'] = $this->prod1Model->_getGeneros();
@@ -146,7 +159,11 @@ class Reportes extends BaseController {
 
         if ($data['is_logged'] == 1 && $data['componente_1'] == 1 && $data['reportes'] == 1) {
 
-            $data['centros'] = $this->prod1Model->_getMisAmie($data['nombre']);
+            if ($this->session->idrol == 2) {
+                $data['centros'] = $this->prod1Model->_getMisAmie($this->session->nombre);
+            }else{
+                $data['centros'] = $this->prod1Model->_getCentrosEducativos();
+            }
             $data['cursos'] = $this->cursoModel->findAll();
             $data['nacionalidades'] = $this->prod1Model->_getNacionalidades();
             $data['genero'] = $this->prod1Model->_getGeneros();
@@ -183,7 +200,11 @@ class Reportes extends BaseController {
 
         if ($data['is_logged'] == 1 && $data['componente_1'] == 1 && $data['reportes'] == 1) {
 
-            $data['centros'] = $this->prod1Model->_getMisAmie($data['nombre']);
+            if ($this->session->idrol == 2) {
+                $data['centros'] = $this->prod1Model->_getMisAmie($this->session->nombre);
+            }else{
+                $data['centros'] = $this->prod1Model->_getCentrosEducativos();
+            }
             $data['cursos'] = $this->cursoModel->findAll();
             $data['nacionalidades'] = $this->prod1Model->_getNacionalidades();
             $data['genero'] = $this->prod1Model->_getGeneros();
@@ -216,7 +237,11 @@ class Reportes extends BaseController {
 
         if ($data['is_logged'] == 1 && $data['componente_1'] == 1 && $data['reportes'] == 1) {
 
-            $data['centros'] = $this->prod1Model->_getMisAmie($data['nombre']);
+            if ($this->session->idrol == 2) {
+                $data['centros'] = $this->prod1Model->_getMisAmie($this->session->nombre);
+            }else{
+                $data['centros'] = $this->prod1Model->_getCentrosEducativos();
+            }
             $data['cursos'] = $this->cursoModel->findAll();
             $data['nacionalidades'] = $this->prod1Model->_getNacionalidades();
             $data['genero'] = $this->prod1Model->_getGeneros();
@@ -250,19 +275,22 @@ class Reportes extends BaseController {
 
         $data['amie'] = $this->request->getPostGet('amie');
         $data['cohorte'] = $this->request->getPostGet('cohorte');
-
         $data['centro'] = $this->centroEducativoModel->find($data['amie']);
-
         $data['asistencia'] = $this->asistenciaP1->_getAsistencia($data['amie'], $data['cohorte']);
 
-        //echo '<pre>'.var_export($data['centro'], true).'</pre>';exit;
-        $data['centros'] = $this->prod1Model->_getMisAmie($this->session->nombre);
+
+        if ($this->session->idrol == 2) {
+            $data['centros'] = $this->prod1Model->_getMisAmie($this->session->nombre);
+        }else{
+            $data['centros'] = $this->prod1Model->_getCentrosEducativos();
+        }
+
         $data['cursos'] = $this->cursoModel->findAll();
         $data['nacionalidades'] = $this->prod1Model->_getNacionalidades();
         $data['genero'] = $this->prod1Model->_getGeneros();
         //Evito el error de que llegue vacío el objeto
         $data['chart_data'] = '';
-        //echo '<pre>'.var_export($data['chart_data'], true).'</pre>';exit;
+
 
         $data['title']='MYRP - DYA';
         $data['main_content']='reportes/prod1_reportes_view';
@@ -285,7 +313,12 @@ class Reportes extends BaseController {
         $data['cohorte'] = $this->request->getPostGet('cohorte');
         $data['centro'] = $this->centroEducativoModel->find($data['amie']);
 
-        $data['centros'] = $this->prod1Model->_getMisAmie($this->session->nombre);
+        if ($this->session->idrol == 2) {
+            $data['centros'] = $this->prod1Model->_getMisAmie($this->session->nombre);
+        }else{
+            $data['centros'] = $this->prod1Model->_getCentrosEducativos();
+        }
+
         $data['registros'] = $this->prod1Model->_getRegistros($data['amie'], $data['cohorte'], $this->session->nombre);
         //echo '<pre>'.var_export($this->session->nombre, true).'</pre>';exit;
         if ($data['registros'] != NULL) {
@@ -360,7 +393,12 @@ class Reportes extends BaseController {
         $data['cohorte'] = $this->request->getPostGet('cohorte');
         $data['centro'] = $this->centroEducativoModel->find($data['amie']);
         
-        $data['centros'] = $this->prod1Model->_getMisAmie($this->session->nombre);
+        if ($this->session->idrol == 2) {
+            $data['centros'] = $this->prod1Model->_getMisAmie($this->session->nombre);
+        }else{
+            $data['centros'] = $this->prod1Model->_getCentrosEducativos();
+        }
+
         $data['registros'] = $this->prod1Model->_getRegistros($data['amie'], $data['cohorte'], $this->session->nombre);
 
         //Evito el error de que llegue vacío el objeto
@@ -407,7 +445,11 @@ class Reportes extends BaseController {
     
 
             //echo '<pre>'.var_export($data['lectura'], true).'</pre>';exit;
-            $data['centros'] = $this->prod1Model->_getMisAmie($this->session->nombre);
+            if ($this->session->idrol == 2) {
+                $data['centros'] = $this->prod1Model->_getMisAmie($this->session->nombre);
+            }else{
+                $data['centros'] = $this->prod1Model->_getCentrosEducativos();
+            }
             
             $data['title']='MYRP - DYA';
             $data['main_content']='reportes/prod1_reportes_diagnostico_view';
@@ -443,7 +485,7 @@ class Reportes extends BaseController {
                 $data['escritura'] = $this->evalFinalP1->_getDiagDocenteEscritura($data['registros']);
                 $data['matematica'] = $this->evalMateFinalP1->_getDiagDocenteMate($data['registros']);
     
-                echo '<pre>'.var_export($data['escritura'], true).'</pre>';exit;
+                
                 $total = count($data['registros'])*3;
 
                 //Para poder mostrar los que no tienen info hayq ue hacer pasteles por separado
@@ -478,8 +520,13 @@ class Reportes extends BaseController {
                 "datos" => $datosVentas,
                 "tipoGrafico" => $data['tipo_grafico'],
             ];
-            //echo '<pre>'.var_export($respuesta, true).'</pre>';
-            $data['centros'] = $this->prod1Model->_getMisAmie($this->session->nombre);
+            
+            if ($this->session->idrol == 2) {
+                $data['centros'] = $this->prod1Model->_getMisAmie($this->session->nombre);
+            }else{
+                $data['centros'] = $this->prod1Model->_getCentrosEducativos();
+            }
+            
             $data['chart_data'] =  json_encode($respuesta);
             $data['title']='MYRP - DYA';
             $data['main_content']='reportes/prod1_reportes_diagnostico_view';
@@ -568,7 +615,12 @@ class Reportes extends BaseController {
                     "total" => $total,
                 ];
                 
-                $data['centros'] = $this->prod1Model->_getMisAmie($this->session->nombre);
+                if ($this->session->idrol == 2) {
+                    $data['centros'] = $this->prod1Model->_getMisAmie($this->session->nombre);
+                }else{
+                    $data['centros'] = $this->prod1Model->_getCentrosEducativos();
+                }
+
                 $data['chart_data'] =  json_encode($respuesta);
                 $data['title']='MYRP - DYA';
                 $data['main_content']='reportes/prod1_reportes_despistaje_mat_elemental_view';
@@ -675,7 +727,12 @@ class Reportes extends BaseController {
                 "total" => $total,
             ];
             //echo '<pre>'.var_export($respuesta, true).'</pre>';
-            $data['centros'] = $this->prod1Model->_getMisAmie($this->session->nombre);
+            if ($this->session->idrol == 2) {
+                $data['centros'] = $this->prod1Model->_getMisAmie($this->session->nombre);
+            }else{
+                $data['centros'] = $this->prod1Model->_getCentrosEducativos();
+            }
+            
             $data['chart_data'] =  json_encode($respuesta);
 
             $data['title']='MYRP - DYA';
