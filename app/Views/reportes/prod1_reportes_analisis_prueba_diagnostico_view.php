@@ -220,7 +220,7 @@
                                         $diag_docente = $this->diagDocenteP1->_getDiagDocente($value->id);
                                         $diag_myrp = $this->diagMyrpP1->_getDiagMyrpP1($value->id);
                                         
-                                        //echo '<pre>'.var_export($diag_docente, true).'</pre>';
+                                        
                                         echo '<tr>
                                             <td>'.$num.'</td>
                                             <td>'.$value->nombres.'</td>

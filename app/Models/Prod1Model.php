@@ -105,6 +105,26 @@ class Prod1Model extends Model {
         return $result;
     }
 
+    public function _getRegistrosAdmin($amie, $cohorte) {
+        $result = NULL;
+        $builder = $this->db->table($this->table);
+        $builder->select('*');
+        $builder->where('amie', $amie);
+        $builder->where('cohorte', $cohorte);
+        //$builder->join('eval_final', 'eval_final.idprod = producto_1.id');
+        $builder->orderBy('apellidos');
+        $query = $builder->get();
+        if ($query->getResult() != null) {
+            foreach ($query->getResult() as $row) {
+                if ($row->id != NULL && $row != '') {
+                    $result[] = $row;
+                }
+            }
+        }
+        //echo $this->db->getLastQuery();
+        return $result;
+    }
+
     public function _getAllRegistrosExcel() {
         $result = NULL;
         $builder = $this->db->table($this->table);
@@ -163,9 +183,8 @@ class Prod1Model extends Model {
         $builder = $this->db->table($this->table);
         $builder->select('id');
         $builder->where('amie', $amie);
-
         $builder->where('cohorte', $cohorte);
-
+        $builder->where('tutor_apoyo', $tutor);
         $builder->orderBy('id');
         $query = $builder->get();
         if ($query->getResult() != null) {
@@ -178,6 +197,27 @@ class Prod1Model extends Model {
         //echo $this->db->getLastQuery();
         return $result;
     }
+
+    public function _getRegistrosAmieCohorteAdmin($amie, $cohorte) {
+        $result = NULL;
+        $builder = $this->db->table($this->table);
+        $builder->select('id');
+        $builder->where('amie', $amie);
+        $builder->where('cohorte', $cohorte);
+        $builder->orderBy('id');
+        $query = $builder->get();
+        if ($query->getResult() != null) {
+            foreach ($query->getResult() as $row) {
+                if ($row->id != NULL && $row != '') {
+                    $result[] = $row;
+                }
+            }
+        }
+        //echo $this->db->getLastQuery();
+        return $result;
+    }
+
+
 
     /**
      *

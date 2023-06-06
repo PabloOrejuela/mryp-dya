@@ -77,9 +77,9 @@
             
         </form>
         <form action="<?php echo base_url().'/prod1-asistencia-centro-update';?>" method="post">
-            <table class="table table-bordered" id="table-asistencia">
+            <table class="table table-bordered table-striped table-hover" id="table-asistencia">
                 <thead>
-                    <th colspan="4">Asistencia del Centro educativo <?= $amie; ?></th>
+                    <th colspan="4" style="background-color: #edffff">Asistencia del Centro educativo <?= $amie; ?></th>
                 </thead>
                 <thead>
                     <th>Total Horas</th>

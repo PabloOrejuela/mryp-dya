@@ -399,7 +399,12 @@ class Reportes extends BaseController {
             $data['centros'] = $this->prod1Model->_getCentrosEducativos();
         }
 
-        $data['registros'] = $this->prod1Model->_getRegistros($data['amie'], $data['cohorte'], $this->session->nombre);
+        // $data['registros'] = $this->prod1Model->_getRegistros($data['amie'], $data['cohorte'], $this->session->nombre);
+        if ($this->session->rol == 2) {
+            $data['registros'] = $this->prod1Model->_getRegistros($data['amie'], $data['cohorte'], $this->session->nombre);
+        } else{
+            $data['registros'] = $this->prod1Model->_getRegistrosAdmin($data['amie'], $data['cohorte']);
+        }
 
         //Evito el error de que llegue vacío el objeto
         $data['chart_data'] = '';
@@ -441,8 +446,15 @@ class Reportes extends BaseController {
             $data['etiquetas_2'] = '';
             $data['chart_data'] = '';
             $data['chart_data_1'] = '';
-            $data['registros'] = $this->prod1Model->_getRegistrosAmieCohorte($data['amie'], $data['cohorte'], $this->session->nombre);
-    
+
+            //Trae los registros del amie
+
+            if ($this->session->rol == 2) {
+                $data['registros'] = $this->prod1Model->_getRegistrosAmieCohorte($data['amie'], $data['cohorte'], $this->session->nombre);
+            } else{
+                $data['registros'] = $this->prod1Model->_getRegistrosAmieCohorteAdmin($data['amie'], $data['cohorte']);
+            }
+            
 
             //echo '<pre>'.var_export($data['lectura'], true).'</pre>';exit;
             if ($this->session->idrol == 2) {

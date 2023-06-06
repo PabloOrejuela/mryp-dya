@@ -28,17 +28,91 @@
                     <div class="row">
                         <div class="col-md-4 mb-3">
                             <label for="nacionalidad">Nacionalidad:</label>
-                            <input type="text" id="nacionalidad" name="nacionalidad" value="<?= $datos->nacionalidad; ?>" class="form-control" placeholder="Nacionalidad" aria-label="nacionalidad">
+                            <select name="nacionalidad" class="form-control" id="nacionalidad" aria-label="nacionalidad">
+                                <?php
+                                    if ($datos->nacionalidad == "ECUATORIANA") {
+                                        echo '<option value="ECUATORIANA" selected>ECUATORIANA</option>
+                                                <option value="VENEZOLANA">VENEZOLANA</option>
+                                                <option value="COLOMBIANA">COLOMBIANA</option>
+                                                <option value="PERUANA">PERUANA</option>
+                                                <option value="OTROS">OTROS</option>
+                                        ';
+                                    }elseif ($datos->nacionalidad == "VENEZOLANA") {
+                                        echo '<option value="ECUATORIANA">ECUATORIANA</option>
+                                                <option value="VENEZOLANA" selected>VENEZOLANA</option>
+                                                <option value="COLOMBIANA">COLOMBIANA</option>
+                                                <option value="PERUANA">PERUANA</option>
+                                                <option value="OTROS">OTROS</option>
+                                        ';
+                                    }elseif ($datos->nacionalidad == "COLOMBIANA") {
+                                        echo '<option value="ECUATORIANA">ECUATORIANA</option>
+                                                <option value="VENEZOLANA">VENEZOLANA</option>
+                                                <option value="COLOMBIANA" selected>COLOMBIANA</option>
+                                                <option value="PERUANA">PERUANA</option>
+                                                <option value="OTROS">OTROS</option>
+                                        ';
+                                    }elseif ($datos->nacionalidad == "PERUANA") {
+                                        echo '<option value="ECUATORIANA">ECUATORIANA</option>
+                                                <option value="VENEZOLANA">VENEZOLANA</option>
+                                                <option value="COLOMBIANA">COLOMBIANA</option>
+                                                <option value="PERUANA" selected>PERUANA</option>
+                                                <option value="OTROS">OTROS</option>
+                                        ';
+                                    }else {
+                                        echo '<option value="ECUATORIANA">ECUATORIANA</option>
+                                                <option value="VENEZOLANA">VENEZOLANA</option>
+                                                <option value="COLOMBIANA">COLOMBIANA</option>
+                                                <option value="PERUANA">PERUANA</option>
+                                                <option value="OTROS" selected>OTROS</option>
+                                        ';
+                                    }
+                                ?>
+                            
+                            </select>
                         </div>
                         <div class="col-md-4 mb-3">
                             <label for="genero">Género:</label>
-                            <input type="text" id="genero" name="genero" value="<?= $datos->genero; ?>" class="form-control" placeholder="Género" aria-label="genero">
+                            <select name="genero" class="form-control" id="genero" aria-label="genero">
+                                <?php
+                                    if ($datos->genero == "MASCULINO") {
+                                        echo '<option value="MASCULINO" selected>MASCULINO</option>
+                                                <option value="FEMENINO">FEMENINO</option>
+                                                <option value="OTRO">OTRO</option>
+                                        ';
+                                    }elseif ($datos->genero == "FEMENINO") {
+                                        echo '<option value="MASCULINO">MASCULINO</option>
+                                                <option value="FEMENINO" selected>FEMENINO</option>
+                                                <option value="OTRO">OTRO</option>
+                                        ';
+                                    }elseif ($datos->genero == "OTRO") {
+                                        echo '<option value="MASCULINO">MASCULINO</option>
+                                                <option value="FEMENINO">FEMENINO</option>
+                                                <option value="OTRO" selected>OTRO</option>
+                                        ';
+                                    }else {
+                                        echo '<option value="MASCULINO">MASCULINO</option>
+                                                <option value="FEMENINO">FEMENINO</option>
+                                                <option value="OTRO" selected>OTRO</option>
+                                                <option value="NULL" selected>Registrar dato</option>
+                                        ';
+                                    }
+                                ?>
+                            
+                            </select>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-4 mb-3">
                             <label for="discapacidad">Discapacidad:</label>
-                            <input type="text" id="discapacidad" name="discapacidad" value="<?= $datos->discapacidad; ?>" class="form-control" placeholder="Discapacidad" aria-label="discapacidad">
+                            <select 
+                                class="form-select" 
+                                aria-label="Default select example" 
+                                name="discapacidad" 
+                                id="discapacidad"  
+                            >
+                                <option value="SI">SI</option>
+                                <option value="NO" selected>NO</option>
+                            </select>
                         </div>
                         <div class="col-md-4 mb-3">
                             <label for="tipo">Tipo de discapacidad:</label>
@@ -121,27 +195,27 @@
                             <div class="form-check">
                                 <?php
                                     if ($datos->cuart_egb == 1) {
-                                        echo '<input class="form-check-input" type="checkbox" name="cuart_egb" value="1" id="defaultCheck1" checked>1ro EGB';
+                                        echo '<input class="form-check-input" type="checkbox" name="cuart_egb" value="1" id="defaultCheck1" checked>4to EGB';
                                     }else{
-                                        echo '<input class="form-check-input" type="checkbox" name="cuart_egb" value="1" id="defaultCheck1">1ro EGB';
+                                        echo '<input class="form-check-input" type="checkbox" name="cuart_egb" value="1" id="defaultCheck1">4to EGB';
                                     }
                                 ?>
                             </div>
                             <div class="form-check">
                                 <?php
                                     if ($datos->quin_egb == 1) {
-                                        echo '<input class="form-check-input" type="checkbox" name="quin_egb" value="1" id="defaultCheck1" checked>1ro EGB';
+                                        echo '<input class="form-check-input" type="checkbox" name="quin_egb" value="1" id="defaultCheck1" checked>5to EGB';
                                     }else{
-                                        echo '<input class="form-check-input" type="checkbox" name="quin_egb" value="1" id="defaultCheck1">1ro EGB';
+                                        echo '<input class="form-check-input" type="checkbox" name="quin_egb" value="1" id="defaultCheck1">5to EGB';
                                     }
                                 ?>
                             </div>
                             <div class="form-check">
                                 <?php
                                     if ($datos->sex_egb == 1) {
-                                        echo '<input class="form-check-input" type="checkbox" name="sex_egb" value="1" id="defaultCheck1" checked>1ro EGB';
+                                        echo '<input class="form-check-input" type="checkbox" name="sex_egb" value="1" id="defaultCheck1" checked>6to EGB';
                                     }else{
-                                        echo '<input class="form-check-input" type="checkbox" name="sex_egb" value="1" id="defaultCheck1">1ro EGB';
+                                        echo '<input class="form-check-input" type="checkbox" name="sex_egb" value="1" id="defaultCheck1">6to EGB';
                                     }
                                 ?>
                             </div>
@@ -151,63 +225,63 @@
                             <div class="form-check">
                                 <?php
                                     if ($datos->sept_egb == 1) {
-                                        echo '<input class="form-check-input" type="checkbox" name="sept_egb" value="1" id="defaultCheck1" checked>1ro EGB';
+                                        echo '<input class="form-check-input" type="checkbox" name="sept_egb" value="1" id="defaultCheck1" checked>7mo EGB';
                                     }else{
-                                        echo '<input class="form-check-input" type="checkbox" name="sept_egb" value="1" id="defaultCheck1">1ro EGB';
+                                        echo '<input class="form-check-input" type="checkbox" name="sept_egb" value="1" id="defaultCheck1">7mo EGB';
                                     }
                                 ?>
                             </div>
                             <div class="form-check">
                                 <?php
                                     if ($datos->oct_egb == 1) {
-                                        echo '<input class="form-check-input" type="checkbox" name="oct_egb" value="1" id="defaultCheck1" checked>1ro EGB';
+                                        echo '<input class="form-check-input" type="checkbox" name="oct_egb" value="1" id="defaultCheck1" checked>8vo EGB';
                                     }else{
-                                        echo '<input class="form-check-input" type="checkbox" name="oct_egb" value="1" id="defaultCheck1">1ro EGB';
+                                        echo '<input class="form-check-input" type="checkbox" name="oct_egb" value="1" id="defaultCheck1">8vo EGB';
                                     }
                                 ?>
                             </div>
                             <div class="form-check">
                                 <?php
                                     if ($datos->nov_egb == 1) {
-                                        echo '<input class="form-check-input" type="checkbox" name="nov_egb" value="1" id="defaultCheck1" checked>1ro EGB';
+                                        echo '<input class="form-check-input" type="checkbox" name="nov_egb" value="1" id="defaultCheck1" checked>9no EGB';
                                     }else{
-                                        echo '<input class="form-check-input" type="checkbox" name="nov_egb" value="1" id="defaultCheck1">1ro EGB';
+                                        echo '<input class="form-check-input" type="checkbox" name="nov_egb" value="1" id="defaultCheck1">9no EGB';
                                     }
                                 ?>
                             </div>
                             <div class="form-check">
                                 <?php
                                     if ($datos->dec_egb == 1) {
-                                        echo '<input class="form-check-input" type="checkbox" name="dec_egb" value="1" id="defaultCheck1" checked>1ro EGB';
+                                        echo '<input class="form-check-input" type="checkbox" name="dec_egb" value="1" id="defaultCheck1" checked>10mo EGB';
                                     }else{
-                                        echo '<input class="form-check-input" type="checkbox" name="dec_egb" value="1" id="defaultCheck1">1ro EGB';
+                                        echo '<input class="form-check-input" type="checkbox" name="dec_egb" value="1" id="defaultCheck1">10mo EGB';
                                     }
                                 ?>
                             </div>
                             <div class="form-check">
                                 <?php
                                     if ($datos->pri_bach == 1) {
-                                        echo '<input class="form-check-input" type="checkbox" name="pri_bach" value="1" id="defaultCheck1" checked>1ro EGB';
+                                        echo '<input class="form-check-input" type="checkbox" name="pri_bach" value="1" id="defaultCheck1" checked>1ro bach';
                                     }else{
-                                        echo '<input class="form-check-input" type="checkbox" name="pri_bach" value="1" id="defaultCheck1">1ro EGB';
+                                        echo '<input class="form-check-input" type="checkbox" name="pri_bach" value="1" id="defaultCheck1">1ro bach';
                                     }
                                 ?>
                             </div>
                             <div class="form-check">
                                 <?php
                                     if ($datos->seg_bach == 1) {
-                                        echo '<input class="form-check-input" type="checkbox" name="seg_bach" value="1" id="defaultCheck1" checked>1ro EGB';
+                                        echo '<input class="form-check-input" type="checkbox" name="seg_bach" value="1" id="defaultCheck1" checked>2do bach';
                                     }else{
-                                        echo '<input class="form-check-input" type="checkbox" name="seg_bach" value="1" id="defaultCheck1">1ro EGB';
+                                        echo '<input class="form-check-input" type="checkbox" name="seg_bach" value="1" id="defaultCheck1">2do bach';
                                     }
                                 ?>
                             </div>
                             <div class="form-check">
                                 <?php
                                     if ($datos->ter_bach == 1) {
-                                        echo '<input class="form-check-input" type="checkbox" name="ter_bach" value="1" id="defaultCheck1" checked>1ro EGB';
+                                        echo '<input class="form-check-input" type="checkbox" name="ter_bach" value="1" id="defaultCheck1" checked>3ro Bach';
                                     }else{
-                                        echo '<input class="form-check-input" type="checkbox" name="ter_bach" value="1" id="defaultCheck1">1ro EGB';
+                                        echo '<input class="form-check-input" type="checkbox" name="ter_bach" value="1" id="defaultCheck1">3ro Bach';
                                     }
                                 ?>
                             </div>
