@@ -83,7 +83,9 @@ $routes->post('prod3_update', 'Prod3::update');
 $routes->get('prod-3-arte/(:num)', 'Prod3::prod_3_arte/$1');
 $routes->get('prod-3-lenguaje/(:num)', 'Prod3::prod_3_lenguaje/$1');
 $routes->get('prod-3-ciudadania/(:num)', 'Prod3::prod_3_ciudadania/$1');
-$routes->post('prod3-process-update', 'Prod3::prod3_process_update');
+$routes->get('prod-3-otros/(:num)', 'Prod3::prod_3_otros/$1');
+$routes->post('prod3-otros-update', 'Prod3::prod3_otros_update');
+$routes->post('prod3-arte-update', 'Prod3::prod3_arte_update');
 
 //NAP
 $routes->post('cargar-nap2', 'CargarInformacion::cargar_nap2');

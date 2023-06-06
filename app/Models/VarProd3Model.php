@@ -63,7 +63,7 @@ class VarProd3Model extends Model {
     public function _getPro3Process($id) {
         $result = NULL;
         $builder = $this->db->table($this->table);
-        $builder->select('*')->where('id_prod_3 ', $id);
+        $builder->select('*')->where('id_prod_3', $id);
         $query = $builder->get();
         if ($query->getResult() != null) {
             foreach ($query->getResult() as $row) {

@@ -9,8 +9,8 @@
 </style>
 <main class="container-md px-2 mb-4">
     <div class="container-fluid px-0">
-        <h4 class="mt-4" id="titulo-nombre"><?= esc($title).' - Expresión Artística de: '.$datos->nombre; ?></h4>
-        <form action="<?php echo base_url().'/prod3-process-update';?>" method="post">
+        <h4 class="mt-4" id="titulo-nombre"><?= esc($title).' - Arte y Expresión de: '.$datos->nombre; ?></h4>
+        <form action="<?php echo base_url().'/prod3-arte-update';?>" method="post">
             <?= session()->getFlashdata('error'); ?>
             <?= csrf_field(); ?>
 
@@ -19,23 +19,23 @@
                     <div class="row">
                         <h4 class="mt-3"><?= esc ('TALLERES'); ?></h4>
                         <div class="col-md-2 mb-2">
-                            <label for="taller_1">Docente y Autoestima:</label>
+                            <label for="docente_autoestima">Docente y Autoestima:</label>
                             <div class="col-sm-8">
                                 <select 
                                     class="form-select" 
                                     aria-label="Default select example" 
-                                    name="taller_1" 
-                                    id="taller_1"  
+                                    name="docente_autoestima" 
+                                    id="docente_autoestima"  
                                 >
                                 <?php
-                                    if ($var_pro3 != NULL) {
-                                        if ($var_pro3->taller_1 == '1') {
+                                    if ($prod3_arte != NULL) {
+                                        if ($prod3_arte->docente_autoestima == '1') {
                                             echo '<option value="1" selected>SI</option>
                                                     <option value="0">NO</option>';
-                                        }elseif ($var_pro3->taller_1 == '0') {
+                                        }elseif ($prod3_arte->docente_autoestima == '0') {
                                             echo '<option value="1">SI</option>
                                                     <option value="0" selected>NO</option>';
-                                        }elseif ($var_pro3->taller_1 == NULL) {
+                                        }elseif ($prod3_arte->docente_autoestima == NULL) {
                                             echo '<option value="NULL" selected>Registrar</option>
                                                     <option value="1">SI</option>
                                                     <option value="0">NO</option>';
@@ -52,23 +52,23 @@
                             </div>
                         </div>
                         <div class="col-md-2 mb-2">
-                            <label for="taller_2">Arte y sus usos:</label>
+                            <label for="arte_usos">Arte y sus usos:</label>
                             <div class="col-sm-8">
                                 <select 
                                     class="form-select" 
                                     aria-label="Default select example" 
-                                    name="taller_2" 
+                                    name="arte_usos" 
                                     id=""  
                                 >
                                 <?php
-                                    if ($var_pro3 != NULL) {
-                                        if ($var_pro3->taller_2 == '1') {
+                                    if ($prod3_arte != NULL) {
+                                        if ($prod3_arte->arte_usos == '1') {
                                             echo '<option value="1" selected>SI</option>
                                                     <option value="0">NO</option>';
-                                        }elseif ($var_pro3->taller_2 == '0') {
+                                        }elseif ($prod3_arte->arte_usos == '0') {
                                             echo '<option value="1">SI</option>
                                                     <option value="0" selected>NO</option>';
-                                        }elseif ($var_pro3->taller_2 == NULL) {
+                                        }elseif ($prod3_arte->arte_usos == NULL) {
                                             echo '<option value="NULL" selected>Registrar</option>
                                                     <option value="1">SI</option>
                                                     <option value="0">NO</option>';
@@ -85,23 +85,23 @@
                             </div>
                         </div>
                         <div class="col-md-2 mb-2">
-                            <label for="taller_3">Creatividad:</label>
+                            <label for="creatividad">Creatividad:</label>
                             <div class="col-sm-8">
                                 <select 
                                     class="form-select" 
                                     aria-label="Default select example" 
-                                    name="taller_3" 
+                                    name="creatividad" 
                                     id=""  
                                 >
                                 <?php
-                                    if ($var_pro3 != NULL) {
-                                        if ($var_pro3->taller_3 == '1') {
+                                    if ($prod3_arte != NULL) {
+                                        if ($prod3_arte->creatividad == '1') {
                                             echo '<option value="1" selected>SI</option>
                                                     <option value="0">NO</option>';
-                                        }elseif ($var_pro3->taller_3 == '0') {
+                                        }elseif ($prod3_arte->creatividad == '0') {
                                             echo '<option value="1">SI</option>
                                                     <option value="0" selected>NO</option>';
-                                        }elseif ($var_pro3->taller_3 == NULL) {
+                                        }elseif ($prod3_arte->creatividad == NULL) {
                                             echo '<option value="NULL" selected>Registrar</option>
                                                     <option value="1">SI</option>
                                                     <option value="0">NO</option>';
@@ -118,23 +118,23 @@
                             </div>
                         </div>
                         <div class="col-md-2 mb-2">
-                            <label for="taller_4">Etapas de desarrollo artístico en los niños:</label>
+                            <label for="etapas">Etapas de desarrollo artístico en los niños:</label>
                             <div class="col-sm-8">
                                 <select 
                                     class="form-select" 
                                     aria-label="Default select example" 
-                                    name="taller_4" 
+                                    name="etapas" 
                                     id=""  
                                 >
                                 <?php
-                                    if ($var_pro3 != NULL) {
-                                        if ($var_pro3->taller_4 == '1') {
+                                    if ($prod3_arte != NULL) {
+                                        if ($prod3_arte->etapas == '1') {
                                             echo '<option value="1" selected>SI</option>
                                                     <option value="0">NO</option>';
-                                        }elseif ($var_pro3->taller_4 == '0') {
+                                        }elseif ($prod3_arte->etapas == '0') {
                                             echo '<option value="1">SI</option>
                                                     <option value="0" selected>NO</option>';
-                                        }elseif ($var_pro3->taller_4 == NULL) {
+                                        }elseif ($prod3_arte->etapas == NULL) {
                                             echo '<option value="NULL" selected>Registrar</option>
                                                     <option value="1">SI</option>
                                                     <option value="0">NO</option>';
@@ -151,23 +151,23 @@
                             </div>
                         </div>
                         <div class="col-md-2 mb-2">
-                            <label for="taller_5">Clase de arte: Autorretrato:</label>
+                            <label for="autorretrato_taller">Clase de arte: Autorretrato:</label>
                             <div class="col-sm-8">
                                 <select 
                                     class="form-select" 
                                     aria-label="Default select example" 
-                                    name="taller_5" 
+                                    name="autorretrato_taller" 
                                     id=""  
                                 >
                                 <?php
-                                    if ($var_pro3 != NULL) {
-                                        if ($var_pro3->taller_5 == '1') {
+                                    if ($prod3_arte != NULL) {
+                                        if ($prod3_arte->autorretrato_taller == '1') {
                                             echo '<option value="1" selected>SI</option>
                                                     <option value="0">NO</option>';
-                                        }elseif ($var_pro3->taller_5 == '0') {
+                                        }elseif ($prod3_arte->autorretrato_taller == '0') {
                                             echo '<option value="1">SI</option>
                                                     <option value="0" selected>NO</option>';
-                                        }elseif ($var_pro3->taller_5 == NULL) {
+                                        }elseif ($prod3_arte->autorretrato_taller == NULL) {
                                             echo '<option value="NULL" selected>Registrar</option>
                                                     <option value="1">SI</option>
                                                     <option value="0">NO</option>';
@@ -184,56 +184,23 @@
                             </div>
                         </div>
                         <div class="col-md-2 mb-2">
-                            <label for="taller_6">Incluir el arte en nuestras clases:</label>
+                            <label for="incluir_clases">Incluir el arte en nuestras clases:</label>
                             <div class="col-sm-8">
                                 <select 
                                     class="form-select" 
                                     aria-label="Default select example" 
-                                    name="taller_6" 
+                                    name="incluir_clases" 
                                     id=""  
                                 >
                                 <?php
-                                    if ($var_pro3 != NULL) {
-                                        if ($var_pro3->taller_6 == '1') {
+                                    if ($prod3_arte != NULL) {
+                                        if ($prod3_arte->incluir_clases == '1') {
                                             echo '<option value="1" selected>SI</option>
                                                     <option value="0">NO</option>';
-                                        }elseif ($var_pro3->taller_6 == '0') {
+                                        }elseif ($prod3_arte->incluir_clases == '0') {
                                             echo '<option value="1">SI</option>
                                                     <option value="0" selected>NO</option>';
-                                        }elseif ($var_pro3->taller_6 == NULL) {
-                                            echo '<option value="NULL" selected>Registrar</option>
-                                                    <option value="1">SI</option>
-                                                    <option value="0">NO</option>';
-                                        }
-                                    }else{
-                                        echo '<option value="NULL" selected>Registrar</option>
-                                                    <option value="1">SI</option>
-                                                    <option value="0">NO</option>';
-                                    }
-                                    
-                                ?>
-                                </select>
-                                <p id="error-message"><?= session('errors.idmetodo_pago');?> </p>
-                            </div>
-                        </div>
-                        <div class="col-md-2 mb-2">
-                            <label for="taller_7">Taller 7:</label>
-                            <div class="col-sm-8">
-                                <select 
-                                    class="form-select" 
-                                    aria-label="Default select example" 
-                                    name="taller_7" 
-                                    id=""  
-                                >
-                                <?php
-                                    if ($var_pro3 != NULL) {
-                                        if ($var_pro3->taller_7 == '1') {
-                                            echo '<option value="1" selected>SI</option>
-                                                    <option value="0">NO</option>';
-                                        }elseif ($var_pro3->taller_7 == '0') {
-                                            echo '<option value="1">SI</option>
-                                                    <option value="0" selected>NO</option>';
-                                        }elseif ($var_pro3->taller_7 == NULL) {
+                                        }elseif ($prod3_arte->incluir_clases == NULL) {
                                             echo '<option value="NULL" selected>Registrar</option>
                                                     <option value="1">SI</option>
                                                     <option value="0">NO</option>';
@@ -258,23 +225,23 @@
                     <div class="row">
                         <h4 class="mt-3"><?= esc ('CLASES DEMOSTRATIVAS'); ?></h4>
                         <div class="col-md-2 mb-2">
-                            <label for="clase_1">Autorretrato:</label>
+                            <label for="autorretrato_clase">Autorretrato:</label>
                             <div class="col-sm-8">
                                 <select 
                                     class="form-select" 
                                     aria-label="Default select example" 
-                                    name="clase_1" 
-                                    id="clase_1"  
+                                    name="autorretrato_clase" 
+                                    id="autorretrato_clase"  
                                 >
                                 <?php
-                                    if ($var_pro3 != NULL) {
-                                        if ($var_pro3->clase_1 == '1') {
+                                    if ($prod3_arte != NULL) {
+                                        if ($prod3_arte->autorretrato_clase == '1') {
                                             echo '<option value="1" selected>SI</option>
                                                     <option value="0">NO</option>';
-                                        }elseif ($var_pro3->clase_1 == '0') {
+                                        }elseif ($prod3_arte->autorretrato_clase == '0') {
                                             echo '<option value="1">SI</option>
                                                     <option value="0" selected>NO</option>';
-                                        }elseif ($var_pro3->clase_1 == NULL) {
+                                        }elseif ($prod3_arte->autorretrato_clase == NULL) {
                                             echo '<option value="NULL" selected>Registrar</option>
                                                     <option value="1">SI</option>
                                                     <option value="0">NO</option>';
@@ -291,23 +258,23 @@
                             </div>
                         </div>
                         <div class="col-md-2 mb-2">
-                            <label for="clase_2">Emociones:</label>
+                            <label for="emociones">Emociones:</label>
                             <div class="col-sm-8">
                                 <select 
                                     class="form-select" 
                                     aria-label="Default select example" 
-                                    name="clase_2" 
+                                    name="emociones" 
                                     id=""  
                                 >
                                 <?php
-                                    if ($var_pro3 != NULL) {
-                                        if ($var_pro3->clase_2 == '1') {
+                                    if ($prod3_arte != NULL) {
+                                        if ($prod3_arte->emociones == '1') {
                                             echo '<option value="1" selected>SI</option>
                                                     <option value="0">NO</option>';
-                                        }elseif ($var_pro3->clase_2 == '0') {
+                                        }elseif ($prod3_arte->emociones == '0') {
                                             echo '<option value="1">SI</option>
                                                     <option value="0" selected>NO</option>';
-                                        }elseif ($var_pro3->clase_2 == NULL) {
+                                        }elseif ($prod3_arte->emociones == NULL) {
                                             echo '<option value="NULL" selected>Registrar</option>
                                                     <option value="1">SI</option>
                                                     <option value="0">NO</option>';
@@ -324,23 +291,23 @@
                             </div>
                         </div>
                         <div class="col-md-2 mb-2">
-                            <label for="clase_3">La familia:</label>
+                            <label for="familia">La familia:</label>
                             <div class="col-sm-8">
                                 <select 
                                     class="form-select" 
                                     aria-label="Default select example" 
-                                    name="clase_3" 
+                                    name="familia" 
                                     id=""  
                                 >
                                 <?php
-                                    if ($var_pro3 != NULL) {
-                                        if ($var_pro3->clase_3 == '1') {
+                                    if ($prod3_arte != NULL) {
+                                        if ($prod3_arte->familia == '1') {
                                             echo '<option value="1" selected>SI</option>
                                                     <option value="0">NO</option>';
-                                        }elseif ($var_pro3->clase_3 == '0') {
+                                        }elseif ($prod3_arte->familia == '0') {
                                             echo '<option value="1">SI</option>
                                                     <option value="0" selected>NO</option>';
-                                        }elseif ($var_pro3->clase_3 == NULL) {
+                                        }elseif ($prod3_arte->familia == NULL) {
                                             echo '<option value="NULL" selected>Registrar</option>
                                                     <option value="1">SI</option>
                                                     <option value="0">NO</option>';
@@ -357,89 +324,23 @@
                             </div>
                         </div>
                         <div class="col-md-2 mb-2">
-                            <label for="clase_4">La camiseta:</label>
+                            <label for="camiseta">La camiseta:</label>
                             <div class="col-sm-8">
                                 <select 
                                     class="form-select" 
                                     aria-label="Default select example" 
-                                    name="clase_4" 
+                                    name="camiseta" 
                                     id=""  
                                 >
                                 <?php
-                                    if ($var_pro3 != NULL) {
-                                        if ($var_pro3->clase_4 == '1') {
+                                    if ($prod3_arte != NULL) {
+                                        if ($prod3_arte->camiseta == '1') {
                                             echo '<option value="1" selected>SI</option>
                                                     <option value="0">NO</option>';
-                                        }elseif ($var_pro3->clase_4 == '0') {
+                                        }elseif ($prod3_arte->camiseta == '0') {
                                             echo '<option value="1">SI</option>
                                                     <option value="0" selected>NO</option>';
-                                        }elseif ($var_pro3->clase_4 == NULL) {
-                                            echo '<option value="NULL" selected>Registrar</option>
-                                                    <option value="1">SI</option>
-                                                    <option value="0">NO</option>';
-                                        }
-                                    }else{
-                                        echo '<option value="NULL" selected>Registrar</option>
-                                                    <option value="1">SI</option>
-                                                    <option value="0">NO</option>';
-                                    }
-                                    
-                                ?>
-                                </select>
-                                <p id="error-message"><?= session('errors.idmetodo_pago');?> </p>
-                            </div>
-                        </div>
-                        <div class="col-md-2 mb-2">
-                            <label for="clase_5">Clase 5:</label>
-                            <div class="col-sm-8">
-                                <select 
-                                    class="form-select" 
-                                    aria-label="Default select example" 
-                                    name="clase_5" 
-                                    id=""  
-                                >
-                                <?php
-                                    if ($var_pro3 != NULL) {
-                                        if ($var_pro3->clase_5 == '1') {
-                                            echo '<option value="1" selected>SI</option>
-                                                    <option value="0">NO</option>';
-                                        }elseif ($var_pro3->clase_5 == '0') {
-                                            echo '<option value="1">SI</option>
-                                                    <option value="0" selected>NO</option>';
-                                        }elseif ($var_pro3->clase_5 == NULL) {
-                                            echo '<option value="NULL" selected>Registrar</option>
-                                                    <option value="1">SI</option>
-                                                    <option value="0">NO</option>';
-                                        }
-                                    }else{
-                                        echo '<option value="NULL" selected>Registrar</option>
-                                                    <option value="1">SI</option>
-                                                    <option value="0">NO</option>';
-                                    }
-                                    
-                                ?>
-                                </select>
-                                <p id="error-message"><?= session('errors.idmetodo_pago');?> </p>
-                            </div>
-                        </div>
-                        <div class="col-md-2 mb-2">
-                            <label for="clase_6">Clase 6:</label>
-                            <div class="col-sm-8">
-                                <select 
-                                    class="form-select" 
-                                    aria-label="Default select example" 
-                                    name="clase_6" 
-                                    id=""  
-                                >
-                                <?php
-                                    if ($var_pro3 != NULL) {
-                                        if ($var_pro3->clase_6 == '1') {
-                                            echo '<option value="1" selected>SI</option>
-                                                    <option value="0">NO</option>';
-                                        }elseif ($var_pro3->clase_6 == '0') {
-                                            echo '<option value="1">SI</option>
-                                                    <option value="0" selected>NO</option>';
-                                        }elseif ($var_pro3->clase_6 == NULL) {
+                                        }elseif ($prod3_arte->camiseta == NULL) {
                                             echo '<option value="NULL" selected>Registrar</option>
                                                     <option value="1">SI</option>
                                                     <option value="0">NO</option>';
@@ -458,118 +359,6 @@
                     </div>
                 </div>
             </div>
-
-            <div class="card mb-4">
-                <div class="card-body">
-                    <div class="row">
-                        <h4 class="mt-3"><?= esc ('OTROS'); ?></h4>
-                        <div class="col-md-2 mb-2">
-                            <label for="otros">Otros:</label>
-                            <div class="col-sm-8">
-                                <?php
-                                    if (isset($var_pro3->otros) && $var_pro3->otros != null && $var_pro3->otros != '') {
-                                        echo '<textarea name="otros" id="otros" cols="30" rows="3">'.$var_pro3->otros.'</textarea>';
-                                    }else{
-                                        echo '<textarea name="otros" id="otros" cols="30" rows="3"></textarea>';
-                                    }
-                                ?>
-                            </div>
-                        </div>
-                        <div class="col-md-2 mb-2">
-                            <label for="total_otros_temas">Total otros temas:</label>
-                            <div class="col-sm-8">
-                                <?php
-                                    if (isset($var_pro3->total_otros_temas) && $var_pro3->total_otros_temas != null && $var_pro3->total_otros_temas != '') {
-                                        echo '<input type="number" id="total_otros_temas" name="total_otros_temas" value="'.$var_pro3->total_otros_temas.'" class="form-control" placeholder="" aria-label="total_otros_temas">';
-                                    }else{
-                                        echo '<input type="number" id="total_otros_temas" name="total_otros_temas" value="" class="form-control" placeholder="" aria-label="total_otros_temas">';
-                                    }
-                                ?>
-                                
-                            </div>
-                        </div>
-                        <div class="col-md-2 mb-2">
-                            <label for="grupo_interaprendizaje">Grupo Inter - aprendizaje:</label>
-                            <div class="col-sm-8">
-                                <select 
-                                    class="form-select" 
-                                    aria-label="Default select example" 
-                                    name="grupo_interaprendizaje" 
-                                    id=""  
-                                >
-                                <?php
-                                    if ($var_pro3 != NULL) {
-                                        if ($var_pro3->grupo_interaprendizaje == '1') {
-                                            echo '<option value="1" selected>SI</option>
-                                                    <option value="0">NO</option>';
-                                        }elseif ($var_pro3->grupo_interaprendizaje == '0') {
-                                            echo '<option value="1">SI</option>
-                                                    <option value="0" selected>NO</option>';
-                                        }elseif ($var_pro3->grupo_interaprendizaje == NULL) {
-                                            echo '<option value="NULL" selected>Registrar</option>
-                                                    <option value="1">SI</option>
-                                                    <option value="0">NO</option>';
-                                        }
-                                    }else{
-                                        echo '<option value="NULL" selected>Registrar</option>
-                                                    <option value="1">SI</option>
-                                                    <option value="0">NO</option>';
-                                    }
-                                    
-                                ?>
-                                </select>
-                                <p id="error-message"><?= session('errors.idmetodo_pago');?> </p>
-                            </div>
-                        </div>
-                        <div class="col-md-2 mb-2">
-                            <label for="encuentro_intercultural">Encuentro intercultural:</label>
-                            <div class="col-sm-8">
-                                <select 
-                                    class="form-select" 
-                                    aria-label="Default select example" 
-                                    name="encuentro_intercultural" 
-                                    id=""  
-                                >
-                                <?php
-                                    if ($var_pro3 != NULL) {
-                                        if ($var_pro3->encuentro_intercultural == '1') {
-                                            echo '<option value="1" selected>SI</option>
-                                                    <option value="0">NO</option>';
-                                        }elseif ($var_pro3->encuentro_intercultural == '0') {
-                                            echo '<option value="1">SI</option>
-                                                    <option value="0" selected>NO</option>';
-                                        }elseif ($var_pro3->encuentro_intercultural == NULL) {
-                                            echo '<option value="NULL" selected>Registrar</option>
-                                                    <option value="1">SI</option>
-                                                    <option value="0">NO</option>';
-                                        }
-                                    }else{
-                                        echo '<option value="NULL" selected>Registrar</option>
-                                                    <option value="1">SI</option>
-                                                    <option value="0">NO</option>';
-                                    }
-                                    
-                                ?>
-                                </select>
-                                <p id="error-message"><?= session('errors.idmetodo_pago');?> </p>
-                            </div>
-                        </div>
-                        <div class="col-md-2 mb-2">
-                            <label for="fecha_encuentro">Fecha del encuentro:</label>
-                            <div class="col-sm-8">
-                                <?php
-                                    if (isset($var_pro3->fecha_encuentro) && $var_pro3->fecha_encuentro != null && $var_pro3->fecha_encuentro != '') {
-                                        echo '<input type="date" id="fecha_encuentro" name="fecha_encuentro" value="'.$var_pro3->fecha_encuentro.'" class="form-control" aria-label="fecha_encuentro">';
-                                    }else{
-                                        echo '<input type="date" id="fecha_encuentro" name="fecha_encuentro" value=""  class="form-control" aria-label="fecha_encuentro">';
-                                    }
-                                ?>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
             <?= form_hidden('id', $id);  ?>
             <button type="submit" class="btn btn-info mb-3">Actualizar</button>
         </form>

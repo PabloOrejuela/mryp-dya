@@ -31,6 +31,8 @@ use App\Models\EvalMateP1Model;
 use App\Models\EvalMateElementalP1Model;
 use App\Models\EvalMateFinalP1Model;
 use App\Models\EvalMateFinalElementalP1Model;
+use App\Models\OtrosProd3Model;
+use App\Models\ArteProd3Model;
 
 
 
@@ -105,6 +107,8 @@ abstract class BaseController extends Controller {
         $this->evalMateFinalP1 = new EvalMateFinalP1Model($this->db);
         $this->evalMateFinalElemP1 = new EvalMateFinalElementalP1Model($this->db);
         $this->varProd3Model = new VarProd3Model($this->db);
+        $this->otrosProd3Model = new OtrosProd3Model($this->db);
+        $this->arteProd3Model = new ArteProd3Model($this->db);
 
         // E.g.: $this->session = \Config\Services::session();
         $this->session = \Config\Services::session();

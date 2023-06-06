@@ -110,7 +110,7 @@ class Prod3 extends BaseController {
 
         if ($data['is_logged'] == 1 && $data['componente_3'] == 1) {
 
-            $data['componente_3'] = $this->prod3Model->findAll();
+            $data['componente_3'] = $this->prod3Model->_getMisRegistros($this->session->idusuario);
 
             $data['title']='MYRP - DYA';
             $data['main_content']='componente3/prod3_process_view';
@@ -131,7 +131,7 @@ class Prod3 extends BaseController {
         if ($data['is_logged'] == 1 && $data['componente_3'] == 1) {
             
             $data['id'] = $id;
-            $data['var_pro3'] = $this->varProd3Model->find($id);
+            $data['prod3_arte'] = $this->arteProd3Model->_getProd3Arte($id);
             $data['datos'] = $this->prod3Model->find($id);
 
             //echo '<pre>'.var_export($data['datos'], true).'</pre>';exit;
@@ -186,6 +186,28 @@ class Prod3 extends BaseController {
 
             $data['title']='MYRP - DYA';
             $data['main_content']='componente3/prod3_edit_ciudadania_view';
+            return view('includes/template', $data);
+        }else{
+
+            $this->logout();
+        }
+    }
+
+    public function prod_3_otros($id) {
+        $data['idrol'] = $this->session->idrol;
+        $data['id'] = $this->session->idusuario;
+        $data['is_logged'] = $this->session->is_logged;
+        $data['nombre'] = $this->session->nombre;
+        $data['componente_3'] = $this->session->componente_3;
+
+        if ($data['is_logged'] == 1 && $data['componente_3'] == 1) {
+            
+            $data['id'] = $id;
+            $data['prod3_otros'] = $this->otrosProd3Model->_getProd3Otros($id);
+            $data['datos'] = $this->prod3Model->find($id);
+
+            $data['title']='MYRP - DYA';
+            $data['main_content']='componente3/prod3_edit_otros_view';
             return view('includes/template', $data);
         }else{
 
@@ -264,6 +286,7 @@ class Prod3 extends BaseController {
         }
     }
 
+    /*PABLO LUEGO DEBO BORRAR ESTA FUNCION PUES HA SIDO RREEMPLAZADA */
     public function prod3_process_update() {
         $data['idrol'] = $this->session->idrol;
         $data['id'] = $this->session->idusuario;
@@ -303,6 +326,83 @@ class Prod3 extends BaseController {
             }else{
                 //Grabo
                 $this->varProd3Model->_save($proceso);
+            }
+            
+            return redirect()->to('prod_3_process');
+        }else{
+
+            $this->logout();
+        }
+    }
+    /* -------- */
+
+    public function prod3_arte_update() {
+        $data['idrol'] = $this->session->idrol;
+        $data['id'] = $this->session->idusuario;
+        $data['is_logged'] = $this->session->is_logged;
+        $data['nombre'] = $this->session->nombre;
+        $data['componente_3'] = $this->session->componente_3;
+
+        if ($data['is_logged'] == 1 && $data['componente_3'] == 1) {
+
+            $proceso = array(
+                'docente_autoestima' => $this->request->getPostGet('docente_autoestima'),
+                'arte_usos' => $this->request->getPostGet('arte_usos'),
+                'creatividad' => $this->request->getPostGet('creatividad'),
+                'etapas' => $this->request->getPostGet('etapas'),
+                'autorretrato_taller' => $this->request->getPostGet('autorretrato_taller'),
+                'incluir_clases' => $this->request->getPostGet('incluir_clases'),
+                'autorretrato_clase' => $this->request->getPostGet('autorretrato_clase'),
+                'emociones' => $this->request->getPostGet('emociones'),
+                'familia' => $this->request->getPostGet('familia'),
+                'camiseta' => $this->request->getPostGet('camiseta'),
+                'id_prod_3' => $this->request->getPostGet('id'),
+            );
+
+            $hay = $this->arteProd3Model->_getProd3Arte($proceso['id_prod_3']);
+            //echo '<pre>'.var_export($proceso, true).'</pre>';exit;
+            
+            if ($hay) {
+                //Actualizo
+                $this->arteProd3Model->_update($proceso);
+            }else{
+                //Grabo
+                $this->arteProd3Model->_save($proceso);
+            }
+            
+            return redirect()->to('prod_3_process');
+        }else{
+
+            $this->logout();
+        }
+    }
+
+    public function prod3_otros_update() {
+        $data['idrol'] = $this->session->idrol;
+        $data['id'] = $this->session->idusuario;
+        $data['is_logged'] = $this->session->is_logged;
+        $data['nombre'] = $this->session->nombre;
+        $data['componente_3'] = $this->session->componente_3;
+
+        if ($data['is_logged'] == 1 && $data['componente_3'] == 1) {
+
+            $proceso = array(
+                'id' => $this->request->getPostGet('id'),
+                'otros' => $this->request->getPostGet('otros'),
+                'total_otros_temas' => $this->request->getPostGet('total_otros_temas'),
+                'grupo_interaprendizaje' => $this->request->getPostGet('grupo_interaprendizaje'),
+                'encuentro_intercultural' => $this->request->getPostGet('encuentro_intercultural'),
+                'fecha_encuentro' => $this->request->getPostGet('fecha_encuentro')
+            );
+
+            $hay = $this->otrosProd3Model->_getProd3Otros($proceso['id']);
+            
+            if ($hay) {
+                //Actualizo
+                $this->otrosProd3Model->_update($proceso);
+            }else{
+                //Grabo
+                $this->otrosProd3Model->_save($proceso);
             }
             
             return redirect()->to('prod_3_process');

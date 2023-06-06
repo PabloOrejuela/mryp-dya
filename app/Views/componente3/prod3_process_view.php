@@ -12,21 +12,30 @@
                     <thead>
                         <th>No.</th>
                         <th>Nombre</th>
-                        <th>Documento</th>
                         <th>Amie</th>
+                        <th>Centro Educativo</th>
+                        <th>Provincia</th>
                         <th>E. Arística</th>
                         <th>Lenguaje</th>
                         <th>Ciudadanía</th>
+                        <th>Otros</th>
                     </thead>
                     <tbody>
                     <?php
+                        //Llamo al modelo
+                        use App\Models\CentroEducativoModel;
+                        $this->centroEducativoModel = new CentroEducativoModel();
+
                         if (isset($componente_3) && $componente_3 != NULL) {
                             foreach ($componente_3 as $key => $value) {
+                                $centro_educativo = $this->centroEducativoModel->find($value->amie);
+                                $provincia = $this->centroEducativoModel->_getProvinciaCentro($centro_educativo->idparroquia);
                                 echo '<tr>
                                     <td>'.$value->id.'</td>
                                     <td>'.$value->nombre.'</td>
-                                    <td>'.$value->documento.'</td>
                                     <td>'.$value->amie.'</td>
+                                    <td>'.$centro_educativo->nombre.'</td>
+                                    <td>'.$provincia->provincia.'</td>
                                     <td>
                                         <div class="contenedor">
                                             <a type="button" id="btn-register" href="'.site_url().'prod-3-arte/'.$value->id.'" class="edit">
@@ -45,6 +54,13 @@
                                         <div class="contenedor">
                                             <a type="button" id="btn-register" href="'.site_url().'prod-3-ciudadania/'.$value->id.'" class="edit">
                                                 <img src="'.site_url().'public/images/ciudadania.png" height="25" >
+                                            </a>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="contenedor">
+                                            <a type="button" id="btn-register" href="'.site_url().'prod-3-otros/'.$value->id.'" class="edit">
+                                                <img src="'.site_url().'public/images/test.png" height="25" >
                                             </a>
                                         </div>
                                     </td>
