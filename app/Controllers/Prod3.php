@@ -145,6 +145,19 @@ class Prod3 extends BaseController {
         }
     }
 
+    /**
+     *
+     * Selecciona AMIE e ingresa Información
+     *
+     * @param Type void
+     * @return type void
+     * @throws conditon FALSE
+     **/
+    public function prod_3_otros_procesos() {
+
+        echo 'Otros Procesos';
+    }
+
     public function prod_3_lenguaje($id) {
         $data['idrol'] = $this->session->idrol;
         $data['id'] = $this->session->idusuario;
@@ -155,7 +168,7 @@ class Prod3 extends BaseController {
         if ($data['is_logged'] == 1 && $data['componente_3'] == 1) {
             
             $data['id'] = $id;
-            $data['var_pro3'] = $this->varProd3Model->find($id);
+            $data['prod3_lenguaje'] = $this->lenguaProd3Model->_getProd3lengua($id);
             $data['datos'] = $this->prod3Model->find($id);
 
             //echo '<pre>'.var_export($data['datos'], true).'</pre>';exit;
@@ -179,7 +192,7 @@ class Prod3 extends BaseController {
         if ($data['is_logged'] == 1 && $data['componente_3'] == 1) {
             
             $data['id'] = $id;
-            $data['var_pro3'] = $this->varProd3Model->find($id);
+            $data['prod3_ciudad'] = $this->ciudadProd3Model->_getProd3Ciudad($id);
             $data['datos'] = $this->prod3Model->find($id);
 
             //echo '<pre>'.var_export($data['datos'], true).'</pre>';exit;
@@ -336,6 +349,59 @@ class Prod3 extends BaseController {
     }
     /* -------- */
 
+
+    public function prod3_lengua_update() {
+        $data['idrol'] = $this->session->idrol;
+        $data['id'] = $this->session->idusuario;
+        $data['is_logged'] = $this->session->is_logged;
+        $data['nombre'] = $this->session->nombre;
+        $data['componente_3'] = $this->session->componente_3;
+
+        if ($data['is_logged'] == 1 && $data['componente_3'] == 1) {
+
+            $proceso = array(
+                'enfoque_sociocultural' => $this->request->getPostGet('enfoque_sociocultural'),
+                'exp_dialectales' => $this->request->getPostGet('exp_dialectales'),
+                'exp_oral' => $this->request->getPostGet('exp_oral'),
+                'comp_lectora' => $this->request->getPostGet('comp_lectora'),
+                'prod_textos' => $this->request->getPostGet('prod_textos'),
+                'extrategia_prod_text' => $this->request->getPostGet('extrategia_prod_text'),
+                'zapatos' => $this->request->getPostGet('zapatos'),
+                'noticia' => $this->request->getPostGet('noticia'),
+                'carta' => $this->request->getPostGet('carta'),
+                'ninia_abeja' => $this->request->getPostGet('ninia_abeja'),
+                'cuento' => $this->request->getPostGet('cuento'),
+                'cuerdas' => $this->request->getPostGet('cuerdas'),
+                'refranes' => $this->request->getPostGet('refranes'),
+                'juegos' => $this->request->getPostGet('juegos'),
+                'derechos_humanos' => $this->request->getPostGet('derechos_humanos'),
+                'noticiero' => $this->request->getPostGet('noticiero'),
+                'discurso' => $this->request->getPostGet('discurso'),
+                'influencers' => $this->request->getPostGet('influencers'),
+                'inferencias' => $this->request->getPostGet('inferencias'),
+                'elefante' => $this->request->getPostGet('elefante'),
+                'pitch' => $this->request->getPostGet('pitch'),
+                'id_prod_3' => $this->request->getPostGet('id_prod_3'),
+            );
+
+            $hay = $this->lenguaProd3Model->_getProd3lengua($proceso['id_prod_3']);
+            //echo '<pre>'.var_export($proceso, true).'</pre>';exit;
+            
+            if ($hay) {
+                //Actualizo
+                $this->lenguaProd3Model->_update($proceso);
+            }else{
+                //Grabo
+                $this->lenguaProd3Model->_save($proceso);
+            }
+            
+            return redirect()->to('prod_3_process');
+        }else{
+
+            $this->logout();
+        }
+    }
+
     public function prod3_arte_update() {
         $data['idrol'] = $this->session->idrol;
         $data['id'] = $this->session->idusuario;
@@ -356,7 +422,7 @@ class Prod3 extends BaseController {
                 'emociones' => $this->request->getPostGet('emociones'),
                 'familia' => $this->request->getPostGet('familia'),
                 'camiseta' => $this->request->getPostGet('camiseta'),
-                'id_prod_3' => $this->request->getPostGet('id'),
+                'id_prod_3' => $this->request->getPostGet('id_prod_3'),
             );
 
             $hay = $this->arteProd3Model->_getProd3Arte($proceso['id_prod_3']);
@@ -377,6 +443,43 @@ class Prod3 extends BaseController {
         }
     }
 
+    public function prod3_ciudad_update() {
+        $data['idrol'] = $this->session->idrol;
+        $data['id'] = $this->session->idusuario;
+        $data['is_logged'] = $this->session->is_logged;
+        $data['nombre'] = $this->session->nombre;
+        $data['componente_3'] = $this->session->componente_3;
+
+        if ($data['is_logged'] == 1 && $data['componente_3'] == 1) {
+
+            $proceso = array(
+                'interculturalidad' => $this->request->getPostGet('interculturalidad'),
+                'masculinidad' => $this->request->getPostGet('masculinidad'),
+                'sexo_genero' => $this->request->getPostGet('sexo_genero'),
+                'violencia_genero' => $this->request->getPostGet('violencia_genero'),
+                'diversidad_estetica' => $this->request->getPostGet('diversidad_estetica'),
+                'diversidad_neuro' => $this->request->getPostGet('diversidad_neuro'),
+                'id_prod_3' => $this->request->getPostGet('id_prod_3'),
+            );
+
+            $hay = $this->ciudadProd3Model->_getProd3Ciudad($proceso['id_prod_3']);
+            //echo '<pre>'.var_export($proceso, true).'</pre>';exit;
+            
+            if ($hay) {
+                //Actualizo
+                $this->ciudadProd3Model->_update($proceso);
+            }else{
+                //Grabo
+                $this->ciudadProd3Model->_save($proceso);
+            }
+            
+            return redirect()->to('prod_3_process');
+        }else{
+
+            $this->logout();
+        }
+    }
+
     public function prod3_otros_update() {
         $data['idrol'] = $this->session->idrol;
         $data['id'] = $this->session->idusuario;
@@ -387,7 +490,7 @@ class Prod3 extends BaseController {
         if ($data['is_logged'] == 1 && $data['componente_3'] == 1) {
 
             $proceso = array(
-                'id' => $this->request->getPostGet('id'),
+                'id_prod_3' => $this->request->getPostGet('id_prod_3'),
                 'otros' => $this->request->getPostGet('otros'),
                 'total_otros_temas' => $this->request->getPostGet('total_otros_temas'),
                 'grupo_interaprendizaje' => $this->request->getPostGet('grupo_interaprendizaje'),
@@ -395,7 +498,7 @@ class Prod3 extends BaseController {
                 'fecha_encuentro' => $this->request->getPostGet('fecha_encuentro')
             );
 
-            $hay = $this->otrosProd3Model->_getProd3Otros($proceso['id']);
+            $hay = $this->otrosProd3Model->_getProd3Otros($proceso['id_prod_3']);
             
             if ($hay) {
                 //Actualizo

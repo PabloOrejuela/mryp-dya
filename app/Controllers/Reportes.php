@@ -26,6 +26,13 @@ class Reportes extends BaseController {
         }   
     }
 
+    function ciudades_select(){
+        $provincia = $this->request->getPostGet('idprovincia');
+        $data['ciudades'] = $this->ciudadesModel->_obtenCiudades($provincia);
+        //$data['ciudades'] = $this->ciudadModel->findAll();
+        echo view('ciudades_select', $data);
+    }
+
     public function reporte_asistencia_p1() {
         $data['idrol'] = $this->session->idrol;
         $data['id'] = $this->session->idusuario;
@@ -183,6 +190,30 @@ class Reportes extends BaseController {
 
             $data['title']='MYRP - DYA';
             $data['main_content']='reportes/prod1_reportes_diagnostico_view';
+            return view('includes/template_reportes', $data);
+        }else{
+
+            $this->logout();
+        }
+    }
+
+    public function reporte_diagnostico_dinamico() {
+        $data['idrol'] = $this->session->idrol;
+        $data['id'] = $this->session->idusuario;
+        $data['is_logged'] = $this->session->is_logged;
+        $data['nombre'] = $this->session->nombre;
+        $data['componente_1'] = $this->session->componente_1;
+        $data['reportes'] = $this->session->reportes;
+
+        if ($data['is_logged'] == 1 && $data['componente_1'] == 1 && $data['reportes'] == 1) {
+
+            $data['provincias'] = $this->provinciaModel->findAll();
+            $data['ciudades'] = $this->ciudadesModel->_obtenCiudades(17);
+
+           //echo '<pre>'.var_export($data['ciudades'], true).'</pre>';exit;
+
+            $data['title']='MYRP - DYA';
+            $data['main_content']='reportes/prod1_reporte-diagnostico-dinamico';
             return view('includes/template_reportes', $data);
         }else{
 

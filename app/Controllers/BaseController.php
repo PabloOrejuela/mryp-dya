@@ -33,7 +33,9 @@ use App\Models\EvalMateFinalP1Model;
 use App\Models\EvalMateFinalElementalP1Model;
 use App\Models\OtrosProd3Model;
 use App\Models\ArteProd3Model;
-
+use App\Models\LenguaProd3Model;
+use App\Models\CiudadProd3Model;
+use App\Models\ProvinciaModel;
 
 
 
@@ -109,6 +111,9 @@ abstract class BaseController extends Controller {
         $this->varProd3Model = new VarProd3Model($this->db);
         $this->otrosProd3Model = new OtrosProd3Model($this->db);
         $this->arteProd3Model = new ArteProd3Model($this->db);
+        $this->lenguaProd3Model = new LenguaProd3Model($this->db);
+        $this->ciudadProd3Model = new CiudadProd3Model($this->db);
+        $this->provinciaModel = new ProvinciaModel($this->db);
 
         // E.g.: $this->session = \Config\Services::session();
         $this->session = \Config\Services::session();

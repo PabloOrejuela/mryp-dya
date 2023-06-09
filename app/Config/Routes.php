@@ -19,7 +19,7 @@ $routes->set404Override();
 // where controller filters or CSRF protection are bypassed.
 // If you don't want to define all routes, please use the Auto Routing (Improved).
 // Set `$autoRoutesImproved` to true in `app/Config/Feature.php` and set the following to true.
-// $routes->setAutoRoute(false);
+$routes->setAutoRoute(false);
 
 /*
  * --------------------------------------------------------------------
@@ -33,6 +33,7 @@ $routes->get('/', 'Inicio::login');
 $routes->post('validate_login', 'Inicio::validate_login');
 $routes->get('generate_pdf', 'Inicio::generate_pdf');
 $routes->get('inicio', 'Inicio::index');
+$routes->post('reportes/ciudades_select', 'Reportes::ciudades_select');
 
 $routes->get('cargar_info_view', 'CargarInformacion::index');
 $routes->get('cargar_info_extra_view', 'CargarInformacion::carga_extra');
@@ -86,6 +87,9 @@ $routes->get('prod-3-ciudadania/(:num)', 'Prod3::prod_3_ciudadania/$1');
 $routes->get('prod-3-otros/(:num)', 'Prod3::prod_3_otros/$1');
 $routes->post('prod3-otros-update', 'Prod3::prod3_otros_update');
 $routes->post('prod3-arte-update', 'Prod3::prod3_arte_update');
+$routes->post('prod3-lengua-update', 'Prod3::prod3_lengua_update');
+$routes->post('prod3-ciudad-update', 'Prod3::prod3_ciudad_update');
+$routes->get('prod-3-otros-procesos', 'Prod3::prod_3_otros_procesos');
 
 //NAP
 $routes->post('cargar-nap2', 'CargarInformacion::cargar_nap2');
@@ -117,6 +121,10 @@ $routes->get('reporte-analisis-pruebadiagnostico-p1', 'Reportes::reporte_analisi
 $routes->post('recibe-eval-prueba-diagnostico-tab', 'Reportes::recibe_eval_prueba_diagnostico_tab');
 $routes->get('reporte-destrezas-p1', 'Reportes::reporte_destrezas_p1');
 $routes->post('recibe-reporte-destrezas-p1-tab', 'Reportes::recibe_reporte_destrezas_p1_tab');
+
+//REPORTES DIMANICOS
+$routes->get('reporte-diagnostico-dinamico', 'Reportes::reporte_diagnostico_dinamico');
+
 
 /*
  * --------------------------------------------------------------------

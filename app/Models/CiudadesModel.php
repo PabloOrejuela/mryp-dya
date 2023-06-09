@@ -11,7 +11,7 @@ class CiudadesModel extends Model {
     protected $primaryKey       = 'idciudades';
     protected $useAutoIncrement = true;
     protected $insertID         = 0;
-    protected $returnType       = 'object';
+    protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
     protected $allowedFields    = [
@@ -62,5 +62,19 @@ class CiudadesModel extends Model {
         $builder->set('ciudad', $ciudad['ciudad']);
         $builder->set('idprovincias', $ciudad['idprovincias']);
         $builder->insert();
+    }
+
+    public function _obtenCiudades($provincia) {
+        $result = NULL;
+        $builder = $this->db->table($this->table);
+        $builder->select('*')->where('idprovincias', $provincia);
+        $query = $builder->get();
+        if ($query->getResult() != null) {
+            foreach ($query->getResult() as $row) {
+                $result[] = $row;
+            }
+        }
+        //echo $this->db->getLastQuery();
+        return $result;
     }
 }

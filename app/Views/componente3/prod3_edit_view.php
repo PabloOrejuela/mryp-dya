@@ -17,11 +17,11 @@
                             <input type="text" id="amie" name="amie" value="<?= $datos->amie; ?>" class="form-control" placeholder="" aria-label="amie" disabled>
                         </div>
                         <div class="col-md-4 mb-3">
-                            <label for="nombre">nombre:</label>
+                            <label for="nombre">Nombre:</label>
                             <input type="text" id="nombre" name="nombre" value="<?= $datos->nombre; ?>" class="form-control" placeholder="" aria-label="nombre">
                         </div>
                         <div class="col-md-4 mb-3">
-                            <label for="documento">Documento:</label>
+                            <label for="documento">Documento de identidad:</label>
                             <input type="text" id="documento" name="documento" value="<?= $datos->documento; ?>" class="form-control" placeholder="" aria-label="documento">
                         </div>
                     </div>

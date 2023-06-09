@@ -68,7 +68,7 @@ class OtrosProd3Model extends Model {
         $builder->set('fecha_encuentro', $datos['fecha_encuentro']);
         $builder->set('total_otros_temas', $datos['total_otros_temas']);
         $builder->set('otros', $datos['otros']);
-        $builder->where('id_prod_3 ', $datos['id']);
+        $builder->where('id_prod_3 ', $datos['id_prod_3']);
         $builder->update();
     }
 
@@ -86,7 +86,7 @@ class OtrosProd3Model extends Model {
         $builder->set('fecha_encuentro', $datos['fecha_encuentro']);
         $builder->set('total_otros_temas', $datos['total_otros_temas']);
         $builder->set('otros', $datos['otros']);
-        $builder->set('id_prod_3', $datos['id']);
+        $builder->set('id_prod_3', $datos['id_prod_3']);
         $builder->insert();
     }
 }

@@ -15,7 +15,7 @@
                         <th>Amie</th>
                         <th>Centro Educativo</th>
                         <th>Provincia</th>
-                        <th>E. Arística</th>
+                        <th>Exp. Arística</th>
                         <th>Lenguaje</th>
                         <th>Ciudadanía</th>
                         <th>Otros</th>

@@ -70,6 +70,7 @@ class UsuarioModel extends Model {
             descargar_info,
             cargar_info,
             reportes,
+            reportes_dinamico,
             componente_2,
             componente_3,
             componente_4'

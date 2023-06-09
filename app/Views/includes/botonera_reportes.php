@@ -21,17 +21,22 @@
             <li><a class="dropdown-item" href="#"></a></li>
           </ul>
         </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle disabled" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Reportes dinámicos
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="#">Reporte de asistencia</a></li>
-            <li><a class="dropdown-item" href="#">Reporte de Diagnostico docente</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#">Something else here</a></li>
-          </ul>
-        </li>
+        <?php 
+          if ($this->session->reportes_dinamico == 1) {
+            echo '
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Reportes dinámicos
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li><a class="dropdown-item" href="'.site_url().'reporte-diagnostico-dinamico">Reporte de Diagnostico docente</a></li>
+                <li><a class="dropdown-item" href="'.site_url().'reporte-final-dinamico">Reporte de Diagnostico Final</a></li>
+              </ul>
+            </li>
+            ';
+          }
+        ?>
+        
       </ul>
     </div>
   </div>

@@ -46,6 +46,7 @@
                                             <p class="card-text">Acompañamiento Pedagógico </p>
                                             <a href="'.site_url().'prod_3" class="btn btn-info mb-2">Ver y editar información de registro</a>
                                             <a href="'.site_url().'prod_3_process" class="btn btn-info mb-2">Editar variables de Proceso</a>
+                                            <a href="'.site_url().'prod-3-otros-procesos" class="btn btn-info mb-2">Editar Biblioteca y Encuentro</a>
                                     </div>
                                 </div>';
                         }

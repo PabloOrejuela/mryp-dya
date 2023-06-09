@@ -16,12 +16,21 @@ class Inicio extends BaseController {
 
         if ($data['is_logged'] == 1) {
 
+            $data['provincias'] = $this->provinciaModel->findAll();
+
             $data['title']='MYRP - DYA';
             $data['main_content']='inicio';
             return view('includes/template', $data);
         }else{
             $this->logout();
         }
+    }
+
+    function ciudades_select(){
+        $provincia = $this->request->getPostGet('idprovincia');
+        $data['ciudades'] = $this->ciudadesModel->_obtenCiudades($provincia);
+        //$data['ciudades'] = $this->ciudadModel->findAll();
+        echo view('ciudades_select', $data);
     }
 
     public function login(){
@@ -61,6 +70,7 @@ class Inicio extends BaseController {
                     'editar' => $usuario->editar,
                     'cargar_info' => $usuario->cargar_info,
                     'reportes' => $usuario->reportes,
+                    'reportes_dinamico' => $usuario->reportes_dinamico,
                     'ver_info' => $usuario->ver_info,
                     'descargar_info' => $usuario->descargar_info,
                     'componente_1' => $usuario->componente_1,
