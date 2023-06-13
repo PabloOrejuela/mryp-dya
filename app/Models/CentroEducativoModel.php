@@ -109,6 +109,26 @@ class CentroEducativoModel extends Model {
         return $result;
     }
 
+    public function _obtenCentrosCiudad($ciudad) {
+        //PABLO hay que buscar la manera de que solo salgan los centros que tengan regiustros en el producto
+        $result = NULL;
+        $builder = $this->db->table($this->table);
+        $builder->select('*');
+        
+        $builder->where('idciudades', $ciudad);
+        // $builder->join('producto_1', 'producto_1.amie = centro_educativo.amie');
+        // $builder->distinct();
+        $builder->orderBy('nombre');
+        $query = $builder->get();
+        if ($query->getResult() != null) {
+            foreach ($query->getResult() as $row) {
+                $result[] = $row;
+            }
+        }
+        //echo $this->db->getLastQuery();
+        return $result;
+    }
+
     public function _getProvinciaCentro($idparroquia) {
         $result = NULL;
         $builder = $this->db->table('parroquias');

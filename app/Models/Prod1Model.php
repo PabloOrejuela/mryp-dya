@@ -105,6 +105,60 @@ class Prod1Model extends Model {
         return $result;
     }
 
+    public function _getRegistrosReporte($object) {
+        $result = NULL;
+        $builder = $this->db->table($this->table);
+
+        foreach ($object['centros'] as $key => $value) {
+            
+            $builder->select('*');
+            $builder->where('amie', $value);
+            if ($object['nivel'] == 1){
+                $builder->where('anio_egb >=', 1);
+                $builder->where('anio_egb <=', 4);
+            }elseif ($object['nivel'] == 2) {
+                $builder->where('anio_egb >=', 5);
+                $builder->where('anio_egb <=', 7);
+            }elseif ($object['nivel'] == 3) {
+                $builder->where('anio_egb >=', 8);
+                $builder->where('anio_egb <=', 10);
+            }elseif ($object['nivel'] == 4) {
+                $builder->where('anio_egb >=', 11);
+                $builder->where('anio_egb <=', 14);
+            }
+            
+            //$builder->join('eval_final', 'eval_final.idprod = producto_1.id');
+            //$builder->orderBy('apellidos');
+            $query = $builder->get();
+            if ($query->getResult() != null) {
+                foreach ($query->getResult() as $row) {
+                    if ($row->id != NULL && $row != '') {
+                        $result[] = $row;
+                    }
+                }
+            }
+        }       
+        
+        //echo $this->db->getLastQuery();
+        return $result;
+    }
+
+    public function _getEdadMax($object) {
+        $result = NULL;
+        $builder = $this->db->table($this->table);
+            
+        $builder->selectMax('edad');
+        $query = $builder->get();
+        if ($query->getResult() != null) {
+            foreach ($query->getResult() as $row) {
+                $result[] = $row->edad;
+            }
+        }     
+        
+        //echo $this->db->getLastQuery();
+        return $result;
+    }
+
     public function _getRegistrosAdmin($amie, $cohorte) {
         $result = NULL;
         $builder = $this->db->table($this->table);

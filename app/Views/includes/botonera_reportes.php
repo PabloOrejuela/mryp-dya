@@ -29,8 +29,8 @@
                 Reportes dinámicos
               </a>
               <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <li><a class="dropdown-item" href="'.site_url().'reporte-diagnostico-dinamico">Reporte de Diagnostico docente</a></li>
-                <li><a class="dropdown-item" href="'.site_url().'reporte-final-dinamico">Reporte de Diagnostico Final</a></li>
+                <li><a class="dropdown-item" href="'.site_url().'reporte-diagnostico-dinamico-form">Reporte de Diagnostico docente</a></li>
+                <li><a class="dropdown-item" href="'.site_url().'reporte-final-dinamico-form">Reporte de análisis Final</a></li>
               </ul>
             </li>
             ';

@@ -17,6 +17,9 @@ class Reportes extends BaseController {
 
             $data['componentes'] = array('1','2','3','4','5');
 
+            // $data['centros'] = $this->centroEducativoModel->_obtenCentrosCiudad(1);
+            // echo '<pre>'.var_export($data['centros'] , true).'</pre>';exit;
+
             $data['title']='MYRP - DYA';
             $data['main_content']='reportes/selecciona_componente';
             return view('includes/template', $data);
@@ -31,6 +34,13 @@ class Reportes extends BaseController {
         $data['ciudades'] = $this->ciudadesModel->_obtenCiudades($provincia);
         //$data['ciudades'] = $this->ciudadModel->findAll();
         echo view('ciudades_select', $data);
+    }
+
+    function centros_ciudades_select(){
+        $ciudad = $this->request->getPostGet('idciudades');
+        $data['centros'] = $this->centroEducativoModel->_obtenCentrosCiudad($ciudad);
+        //$data['ciudades'] = $this->ciudadModel->findAll();
+        echo view('centros_ciudades_view', $data);
     }
 
     public function reporte_asistencia_p1() {
@@ -197,7 +207,7 @@ class Reportes extends BaseController {
         }
     }
 
-    public function reporte_diagnostico_dinamico() {
+    public function reporte_diagnostico_dinamico_form() {
         $data['idrol'] = $this->session->idrol;
         $data['id'] = $this->session->idusuario;
         $data['is_logged'] = $this->session->is_logged;
@@ -208,16 +218,140 @@ class Reportes extends BaseController {
         if ($data['is_logged'] == 1 && $data['componente_1'] == 1 && $data['reportes'] == 1) {
 
             $data['provincias'] = $this->provinciaModel->findAll();
-            $data['ciudades'] = $this->ciudadesModel->_obtenCiudades(17);
-
-           //echo '<pre>'.var_export($data['ciudades'], true).'</pre>';exit;
+           
 
             $data['title']='MYRP - DYA';
-            $data['main_content']='reportes/prod1_reporte-diagnostico-dinamico';
+            $data['main_content']='reportes/prod1_reporte_diagnostico_dinamico_form';
             return view('includes/template_reportes', $data);
         }else{
 
             $this->logout();
+        }
+    }
+
+    public function reporte_diagnostico_dinamico() {
+        // Ahora las imprimimos como JSON para pasarlas a AJAX, pero las agrupamos
+
+        if ($this->session->reportes != NULL && $this->session->reportes == '1') {
+
+            if ($this->request->getPostGet('provincia') == NULL || $this->request->getPostGet('ciudad') == NULL) {
+
+                return redirect()->to('reporte-diagnostico-dinamico-form');
+
+            }else{
+                $data['provincia'] = $this->request->getPostGet('provincia');
+                $data['ciudad'] = $this->request->getPostGet('ciudad');
+                $data['centros'] = $this->request->getPostGet('centros');
+                $data['nivel'] = $this->request->getPostGet('nivel');
+    
+                //Variables
+                $data['masculino'] = 0;
+                $data['femenino'] = 0;
+                $data['sin_genero'] = 0;
+    
+    
+                //TRAIGO LOS REGISTROS
+                $data['registros'] = $this->prod1Model->_getRegistrosReporte($data);
+                
+                //Traigo datos por género
+                if ($data['registros'] != NULL) {
+                    foreach ($data['registros'] as $key => $value) {
+                    
+                        if ($value->genero == 'MASCULINO') {
+                            $data['masculino']++;
+                        }elseif ($value->genero == 'FEMENINO') {
+                            $data['femenino']++;
+                        }else{
+                            $data['sin_genero']++;
+                        }
+                    }
+
+                    $data['total'] = count($data['registros']);
+                    $data['edad_max'] = $this->prod1Model->_getEdadMax($data['registros']);
+                    
+                }
+
+                $data['provincias'] = $this->provinciaModel->findAll();
+
+                $data['title']='MYRP - DYA';
+                $data['main_content']='reportes/prod1_reporte_diagnostico_dinamico';
+                return view('includes/template_reportes', $data);
+
+            }
+        }
+    }
+
+    public function reporte_final_dinamico_form() {
+        $data['idrol'] = $this->session->idrol;
+        $data['id'] = $this->session->idusuario;
+        $data['is_logged'] = $this->session->is_logged;
+        $data['nombre'] = $this->session->nombre;
+        $data['componente_1'] = $this->session->componente_1;
+        $data['reportes'] = $this->session->reportes;
+
+        if ($data['is_logged'] == 1 && $data['componente_1'] == 1 && $data['reportes'] == 1) {
+
+            $data['provincias'] = $this->provinciaModel->findAll();
+           
+
+            $data['title']='MYRP - DYA';
+            $data['main_content']='reportes/prod1_reporte_final_dinamico_form';
+            return view('includes/template_reportes', $data);
+        }else{
+
+            $this->logout();
+        }
+    }
+
+    public function reporte_final_dinamico() {
+        // Ahora las imprimimos como JSON para pasarlas a AJAX, pero las agrupamos
+
+        if ($this->session->reportes != NULL && $this->session->reportes == '1') {
+
+            if ($this->request->getPostGet('provincia') == NULL || $this->request->getPostGet('ciudad') == NULL) {
+
+                return redirect()->to('reporte-diagnostico-dinamico-form');
+
+            }else{
+                $data['provincia'] = $this->request->getPostGet('provincia');
+                $data['ciudad'] = $this->request->getPostGet('ciudad');
+                $data['centros'] = $this->request->getPostGet('centros');
+                $data['nivel'] = $this->request->getPostGet('nivel');
+    
+                //Variables
+                $data['masculino'] = 0;
+                $data['femenino'] = 0;
+                $data['sin_genero'] = 0;
+    
+    
+                //TRAIGO LOS REGISTROS
+                $data['registros'] = $this->prod1Model->_getRegistrosReporte($data);
+                
+                //Traigo datos por género
+                if ($data['registros'] != NULL) {
+                    foreach ($data['registros'] as $key => $value) {
+                    
+                        if ($value->genero == 'MASCULINO') {
+                            $data['masculino']++;
+                        }elseif ($value->genero == 'FEMENINO') {
+                            $data['femenino']++;
+                        }else{
+                            $data['sin_genero']++;
+                        }
+                    }
+
+                    $data['total'] = count($data['registros']);
+                    $data['edad_max'] = $this->prod1Model->_getEdadMax($data['registros']);
+                    
+                }
+
+                $data['provincias'] = $this->provinciaModel->findAll();
+
+                $data['title']='MYRP - DYA';
+                $data['main_content']='reportes/prod1_reporte_diagnostico_dinamico';
+                return view('includes/template_reportes', $data);
+
+            }
         }
     }
 

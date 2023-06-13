@@ -34,6 +34,7 @@ $routes->post('validate_login', 'Inicio::validate_login');
 $routes->get('generate_pdf', 'Inicio::generate_pdf');
 $routes->get('inicio', 'Inicio::index');
 $routes->post('reportes/ciudades_select', 'Reportes::ciudades_select');
+$routes->post('reportes/centros_ciudades_select', 'Reportes::centros_ciudades_select');
 
 $routes->get('cargar_info_view', 'CargarInformacion::index');
 $routes->get('cargar_info_extra_view', 'CargarInformacion::carga_extra');
@@ -123,7 +124,10 @@ $routes->get('reporte-destrezas-p1', 'Reportes::reporte_destrezas_p1');
 $routes->post('recibe-reporte-destrezas-p1-tab', 'Reportes::recibe_reporte_destrezas_p1_tab');
 
 //REPORTES DIMANICOS
-$routes->get('reporte-diagnostico-dinamico', 'Reportes::reporte_diagnostico_dinamico');
+$routes->get('reporte-diagnostico-dinamico-form', 'Reportes::reporte_diagnostico_dinamico_form');
+$routes->post('reporte-diagnostico-dinamico', 'Reportes::reporte_diagnostico_dinamico');
+$routes->get('reporte-final-dinamico-form', 'Reportes::reporte_final_dinamico_form');
+$routes->post('reporte-final-dinamico', 'Reportes::reporte_final_dinamico');
 
 
 /*

@@ -299,57 +299,6 @@ class Prod3 extends BaseController {
         }
     }
 
-    /*PABLO LUEGO DEBO BORRAR ESTA FUNCION PUES HA SIDO RREEMPLAZADA */
-    public function prod3_process_update() {
-        $data['idrol'] = $this->session->idrol;
-        $data['id'] = $this->session->idusuario;
-        $data['is_logged'] = $this->session->is_logged;
-        $data['nombre'] = $this->session->nombre;
-        $data['componente_3'] = $this->session->componente_3;
-
-        if ($data['is_logged'] == 1 && $data['componente_3'] == 1) {
-
-            $proceso = array(
-                'id' => $this->request->getPostGet('id'),
-                'taller_1' => $this->request->getPostGet('taller_1'),
-                'taller_2' => $this->request->getPostGet('taller_2'),
-                'taller_3' => $this->request->getPostGet('taller_3'),
-                'taller_4' => $this->request->getPostGet('taller_4'),
-                'taller_5' => $this->request->getPostGet('taller_5'),
-                'taller_6' => $this->request->getPostGet('taller_6'),
-                'taller_7' => $this->request->getPostGet('taller_7'),
-                'clase_1' => $this->request->getPostGet('clase_1'),
-                'clase_2' => $this->request->getPostGet('clase_2'),
-                'clase_3' => $this->request->getPostGet('clase_3'),
-                'clase_4' => $this->request->getPostGet('clase_4'),
-                'clase_5' => $this->request->getPostGet('clase_5'),
-                'clase_6' => $this->request->getPostGet('clase_6'),
-                'otros' => $this->request->getPostGet('otros'),
-                'total_otros_temas' => $this->request->getPostGet('total_otros_temas'),
-                'grupo_interaprendizaje' => $this->request->getPostGet('grupo_interaprendizaje'),
-                'encuentro_intercultural' => $this->request->getPostGet('encuentro_intercultural'),
-                'fecha_encuentro' => $this->request->getPostGet('fecha_encuentro')
-            );
-
-            $hay = $this->varProd3Model->_getPro3Process($proceso['id']);
-            //echo '<pre>'.var_export($hay, true).'</pre>';exit;
-            if ($hay) {
-                //Actualizo
-                $this->varProd3Model->_update($proceso);
-            }else{
-                //Grabo
-                $this->varProd3Model->_save($proceso);
-            }
-            
-            return redirect()->to('prod_3_process');
-        }else{
-
-            $this->logout();
-        }
-    }
-    /* -------- */
-
-
     public function prod3_lengua_update() {
         $data['idrol'] = $this->session->idrol;
         $data['id'] = $this->session->idusuario;
