@@ -11,7 +11,12 @@
                             <?php
                                 
                                 foreach ($provincias as $key => $value) {
-                                    echo '<option value="'.$value->idprovincias.'">'.$value->provincia.'</option>';
+                                    if ($value->idprovincias == $provincia) {
+                                        echo '<option value="'.$value->idprovincias.'" selected>'.$value->provincia.'</option>';
+                                    }else{
+                                        echo '<option value="'.$value->idprovincias.'">'.$value->provincia.'</option>';
+                                    }
+                                    
                                 }
                             ?>
                         </select>
@@ -63,10 +68,12 @@
             </div>
             <section>
                 <h4 style="text-align:center">ANALISIS DE LA PRUEBA DE DIAGNÓSTICO DOCENTE</h4>
+                <h5 style="text-align:center"><?= $ciudad_obj['ciudad'].' - Nivel: '.$nivel; ?></h5>
                 <div class="col-md-12" style="font-size:0.7em;text-align:center;">
                     <div class="contenedor mb-3 mt-3">
                         
                         <?php
+                        
                             use App\Models\DiagnosticoDocenteP1Model;
                             use App\Models\DiagnosticoMyrpP1Model;
                             use App\Models\EvalMateP1Model;

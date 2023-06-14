@@ -110,7 +110,6 @@ class CentroEducativoModel extends Model {
     }
 
     public function _obtenCentrosCiudad($ciudad) {
-        //PABLO hay que buscar la manera de que solo salgan los centros que tengan regiustros en el producto
         $result = NULL;
         $builder = $this->db->table($this->table);
         $builder->select('*');

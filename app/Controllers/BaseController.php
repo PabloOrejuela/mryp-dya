@@ -36,6 +36,7 @@ use App\Models\ArteProd3Model;
 use App\Models\LenguaProd3Model;
 use App\Models\CiudadProd3Model;
 use App\Models\ProvinciaModel;
+use App\Models\CentrosProvProd1ViewModel;
 
 
 
@@ -114,6 +115,7 @@ abstract class BaseController extends Controller {
         $this->lenguaProd3Model = new LenguaProd3Model($this->db);
         $this->ciudadProd3Model = new CiudadProd3Model($this->db);
         $this->provinciaModel = new ProvinciaModel($this->db);
+        $this->centrosProvProd1ViewModel = new CentrosProvProd1ViewModel($this->db);
 
         // E.g.: $this->session = \Config\Services::session();
         $this->session = \Config\Services::session();

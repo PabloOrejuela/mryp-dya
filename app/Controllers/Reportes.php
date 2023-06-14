@@ -17,8 +17,8 @@ class Reportes extends BaseController {
 
             $data['componentes'] = array('1','2','3','4','5');
 
-            // $data['centros'] = $this->centroEducativoModel->_obtenCentrosCiudad(1);
-            // echo '<pre>'.var_export($data['centros'] , true).'</pre>';exit;
+            // $data['ciudades'] = $this->centrosProvProd1ViewModel->_obtenCiudades(4);
+            // echo '<pre>'.var_export($data['ciudades'] , true).'</pre>';exit;
 
             $data['title']='MYRP - DYA';
             $data['main_content']='reportes/selecciona_componente';
@@ -31,14 +31,14 @@ class Reportes extends BaseController {
 
     function ciudades_select(){
         $provincia = $this->request->getPostGet('idprovincia');
-        $data['ciudades'] = $this->ciudadesModel->_obtenCiudades($provincia);
+        $data['ciudades'] = $this->centrosProvProd1ViewModel->_obtenCiudades($provincia);
         //$data['ciudades'] = $this->ciudadModel->findAll();
         echo view('ciudades_select', $data);
     }
 
     function centros_ciudades_select(){
         $ciudad = $this->request->getPostGet('idciudades');
-        $data['centros'] = $this->centroEducativoModel->_obtenCentrosCiudad($ciudad);
+        $data['centros'] = $this->centrosProvProd1ViewModel->_obtenCentrosCiudad($ciudad);
         //$data['ciudades'] = $this->ciudadModel->findAll();
         echo view('centros_ciudades_view', $data);
     }
@@ -217,8 +217,7 @@ class Reportes extends BaseController {
 
         if ($data['is_logged'] == 1 && $data['componente_1'] == 1 && $data['reportes'] == 1) {
 
-            $data['provincias'] = $this->provinciaModel->findAll();
-           
+            $data['provincias'] = $this->centrosProvProd1ViewModel->_getProvincias();
 
             $data['title']='MYRP - DYA';
             $data['main_content']='reportes/prod1_reporte_diagnostico_dinamico_form';
@@ -243,12 +242,13 @@ class Reportes extends BaseController {
                 $data['ciudad'] = $this->request->getPostGet('ciudad');
                 $data['centros'] = $this->request->getPostGet('centros');
                 $data['nivel'] = $this->request->getPostGet('nivel');
+
+                $data['ciudad_obj'] = $this->ciudadesModel->find($data['ciudad']);
     
                 //Variables
                 $data['masculino'] = 0;
                 $data['femenino'] = 0;
                 $data['sin_genero'] = 0;
-    
     
                 //TRAIGO LOS REGISTROS
                 $data['registros'] = $this->prod1Model->_getRegistrosReporte($data);
@@ -270,8 +270,8 @@ class Reportes extends BaseController {
                     $data['edad_max'] = $this->prod1Model->_getEdadMax($data['registros']);
                     
                 }
-
-                $data['provincias'] = $this->provinciaModel->findAll();
+                //PABLO revisar por que sale siempre 100% de problemas en escritura
+                $data['provincias'] = $this->centrosProvProd1ViewModel->_getProvincias();
 
                 $data['title']='MYRP - DYA';
                 $data['main_content']='reportes/prod1_reporte_diagnostico_dinamico';
@@ -291,8 +291,7 @@ class Reportes extends BaseController {
 
         if ($data['is_logged'] == 1 && $data['componente_1'] == 1 && $data['reportes'] == 1) {
 
-            $data['provincias'] = $this->provinciaModel->findAll();
-           
+            $data['provincias'] = $this->centrosProvProd1ViewModel->_getProvincias();
 
             $data['title']='MYRP - DYA';
             $data['main_content']='reportes/prod1_reporte_final_dinamico_form';
@@ -317,6 +316,8 @@ class Reportes extends BaseController {
                 $data['ciudad'] = $this->request->getPostGet('ciudad');
                 $data['centros'] = $this->request->getPostGet('centros');
                 $data['nivel'] = $this->request->getPostGet('nivel');
+
+                $data['ciudad_obj'] = $this->ciudadesModel->find($data['ciudad']);
     
                 //Variables
                 $data['masculino'] = 0;
@@ -348,7 +349,7 @@ class Reportes extends BaseController {
                 $data['provincias'] = $this->provinciaModel->findAll();
 
                 $data['title']='MYRP - DYA';
-                $data['main_content']='reportes/prod1_reporte_diagnostico_dinamico';
+                $data['main_content']='reportes/prod1_reporte_final_dinamico';
                 return view('includes/template_reportes', $data);
 
             }
