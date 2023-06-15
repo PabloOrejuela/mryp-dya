@@ -1,6 +1,6 @@
 <main class="container">
     <div class="container-fluid px-4">
-        <h3 class="mt-4"><?= esc($title).' - REPORTE DIAGNOSTICO'; ?></h3>
+        <h3 class="mt-4"><?= esc($title).' - REPORTE DIAGNOSTICO DINAMICO'; ?></h3>
         <div class="card mb-8">
             <div class="card-body" id="card-reportes">
                 <form action="<?php echo base_url().'/reporte-diagnostico-dinamico';?>" method="post">
@@ -68,7 +68,38 @@
             </div>
             <section>
                 <h4 style="text-align:center">ANALISIS DE LA PRUEBA DE DIAGNÓSTICO DOCENTE</h4>
-                <h5 style="text-align:center"><?= $ciudad_obj['ciudad'].' - Nivel: '.$nivel; ?></h5>
+                <h5 style="text-align:center">
+                    <?php 
+                        if (isset($nivel)) {
+                            if ($nivel == 0) {
+                                echo $ciudad_obj['ciudad'].' - Todos los niveles';
+                            }elseif ($nivel == 1) {
+                                echo $ciudad_obj['ciudad'].' - Nivel 1 (3do EGB - 4to EGB)';
+                            }elseif ($nivel == 2) {
+                                echo $ciudad_obj['ciudad'].' - Nivel 2 (5to EGB - 7mo EGB)'; 
+                            }elseif ($nivel == 3) {
+                                echo $ciudad_obj['ciudad'].' - Nivel 3 (8vo EGB - 10mo EGB)'; 
+                            }elseif ($nivel == 4) {
+                                echo $ciudad_obj['ciudad'].' - Nivel 4 (10mo EGB - 3ero BACH)';
+                            }
+                        }
+                        
+                    ?>
+                </h5>
+                <h5 style="text-align:center">
+                    <?php 
+                        if (isset($cohorte)) {
+                            if ($cohorte == 1) {
+                                echo 'Cohorte: PRIMERA COHORTE'; 
+                            }elseif ($cohorte == 2) {
+                                echo 'Cohorte: SEGUNDA COHORTE'; 
+                            }elseif ($cohorte == 0) {
+                                echo 'Cohorte: AMBAS COHORTES'; 
+                            }
+                        }
+                        
+                    ?>
+                </h5>
                 <div class="col-md-12" style="font-size:0.7em;text-align:center;">
                     <div class="contenedor mb-3 mt-3">
                         

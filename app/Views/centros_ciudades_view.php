@@ -34,6 +34,18 @@
         </select>
       </div>
     </div>
+    <div class="col-md-4 mt-6">
+      <div class="container-md mt-3"> 
+        <p>
+            <label>COHORTE</label>
+        </p>
+        <select class="form-select form-select-sm" aria-label=".form-select-sm example" name="cohorte">
+          <option value="0" selected>--AMBAS COHORTES--</option>
+          <option value="1">PRIMERA COHORTE</option>
+          <option value="2">SEGUNDA COHORTE</option>
+        </select>
+      </div>
+    </div>
   </div>
 </div>
 

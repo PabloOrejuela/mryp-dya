@@ -109,36 +109,44 @@ class Prod1Model extends Model {
         $result = NULL;
         $builder = $this->db->table($this->table);
 
-        foreach ($object['centros'] as $key => $value) {
+        if (isset($object['centros']) && $object['centros'] != NULL) {
+            foreach ($object['centros'] as $key => $value) {
             
-            $builder->select('*');
-            $builder->where('amie', $value);
-            if ($object['nivel'] == 1){
-                $builder->where('anio_egb >=', 1);
-                $builder->where('anio_egb <=', 4);
-            }elseif ($object['nivel'] == 2) {
-                $builder->where('anio_egb >=', 5);
-                $builder->where('anio_egb <=', 7);
-            }elseif ($object['nivel'] == 3) {
-                $builder->where('anio_egb >=', 8);
-                $builder->where('anio_egb <=', 10);
-            }elseif ($object['nivel'] == 4) {
-                $builder->where('anio_egb >=', 11);
-                $builder->where('anio_egb <=', 14);
-            }
-            
-            //$builder->join('eval_final', 'eval_final.idprod = producto_1.id');
-            //$builder->orderBy('apellidos');
-            $query = $builder->get();
-            if ($query->getResult() != null) {
-                foreach ($query->getResult() as $row) {
-                    if ($row->id != NULL && $row != '') {
-                        $result[] = $row;
+                $builder->select('*');
+                $builder->where('amie', $value);
+                if ($object['nivel'] == 1){
+                    $builder->where('anio_egb >=', 1);
+                    $builder->where('anio_egb <=', 4);
+                }elseif ($object['nivel'] == 2) {
+                    $builder->where('anio_egb >=', 5);
+                    $builder->where('anio_egb <=', 7);
+                }elseif ($object['nivel'] == 3) {
+                    $builder->where('anio_egb >=', 8);
+                    $builder->where('anio_egb <=', 10);
+                }elseif ($object['nivel'] == 4) {
+                    $builder->where('anio_egb >=', 11);
+                    $builder->where('anio_egb <=', 14);
+                }
+    
+                if ($object['cohorte'] == 1){
+                    $builder->where('cohorte', 'PRIMERA COHORTE');
+                }elseif ($object['cohorte'] == 2) {
+                    $builder->where('cohorte', 'SEGUNDA COHORTE');
+                }
+                
+                //$builder->join('eval_final', 'eval_final.idprod = producto_1.id');
+                //$builder->orderBy('apellidos');
+                $query = $builder->get();
+                if ($query->getResult() != null) {
+                    foreach ($query->getResult() as $row) {
+                        if ($row->id != NULL && $row != '') {
+                            $result[] = $row;
+                        }
                     }
                 }
-            }
-        }       
-        
+            } 
+        }
+              
         //echo $this->db->getLastQuery();
         return $result;
     }

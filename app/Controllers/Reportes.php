@@ -242,6 +242,7 @@ class Reportes extends BaseController {
                 $data['ciudad'] = $this->request->getPostGet('ciudad');
                 $data['centros'] = $this->request->getPostGet('centros');
                 $data['nivel'] = $this->request->getPostGet('nivel');
+                $data['cohorte'] = $this->request->getPostGet('cohorte');
 
                 $data['ciudad_obj'] = $this->ciudadesModel->find($data['ciudad']);
     
@@ -269,6 +270,12 @@ class Reportes extends BaseController {
                     $data['total'] = count($data['registros']);
                     $data['edad_max'] = $this->prod1Model->_getEdadMax($data['registros']);
                     
+                }else{
+                    $data['total'] = 0;
+                    $data['edad_max'] = 0;
+
+                    //PABLO poner un mensaje de que no hubo datos
+                    return redirect()->to('reporte-diagnostico-dinamico-form');
                 }
                 //PABLO revisar por que sale siempre 100% de problemas en escritura
                 $data['provincias'] = $this->centrosProvProd1ViewModel->_getProvincias();
@@ -309,13 +316,14 @@ class Reportes extends BaseController {
 
             if ($this->request->getPostGet('provincia') == NULL || $this->request->getPostGet('ciudad') == NULL) {
 
-                return redirect()->to('reporte-diagnostico-dinamico-form');
+                return redirect()->to('reporte-final-dinamico-form');
 
             }else{
                 $data['provincia'] = $this->request->getPostGet('provincia');
                 $data['ciudad'] = $this->request->getPostGet('ciudad');
                 $data['centros'] = $this->request->getPostGet('centros');
                 $data['nivel'] = $this->request->getPostGet('nivel');
+                $data['cohorte'] = $this->request->getPostGet('cohorte');
 
                 $data['ciudad_obj'] = $this->ciudadesModel->find($data['ciudad']);
     
@@ -344,9 +352,15 @@ class Reportes extends BaseController {
                     $data['total'] = count($data['registros']);
                     $data['edad_max'] = $this->prod1Model->_getEdadMax($data['registros']);
                     
+                }else{
+                    $data['total'] = 0;
+                    $data['edad_max'] = 0;
+
+                    //PABLO poner un mensaje de que no hubo datos
+                    return redirect()->to('reporte-final-dinamico-form');
                 }
 
-                $data['provincias'] = $this->provinciaModel->findAll();
+                $data['provincias'] = $this->centrosProvProd1ViewModel->_getProvincias();
 
                 $data['title']='MYRP - DYA';
                 $data['main_content']='reportes/prod1_reporte_final_dinamico';

@@ -30,10 +30,9 @@
             <div class="card-header">
                 <i class="fa-solid fa-cash-register"></i>
                 <?= esc("ANÁLISIS DE LA PRUEBA FINAL CON LA INTERVENCIÓN DEL PROGRAMA"); ?>
-                
             </div>
             <div class="card-body" id="card-reportes"> 
-                <form action="<?php echo base_url().'/recibe-eval-prueba-final-tab';?>" method="post" id="form">
+                <form action="<?php echo base_url().'/reporte-final-dinamico';?>" method="post" id="form">
                     <input type="hidden" class="txt_csrfname" name="<?= csrf_token() ?>" value="<?= csrf_hash() ?>" />
                     <section>
                         <select name="provincia" id="provincia" class="form-select" style="width: 40%">
@@ -86,12 +85,42 @@
                             </tbody>
                         </table>
                     </div>
-                    
-                    <button type="submit" class="btn btn-success">Generar reporte</button>
                 </form>
             </div>
         <section>
             <h4>ANÁLISIS DE LA PRUEBA FINAL CON LA INTERVENCIÓN DEL PROGRAMA</h4>
+            <h5 style="text-align:center">
+                    <?php 
+                        if (isset($nivel)) {
+                            if ($nivel == 0) {
+                                echo $ciudad_obj['ciudad'].' - Todos los niveles';
+                            }elseif ($nivel == 1) {
+                                echo $ciudad_obj['ciudad'].' - Nivel 1 (3do EGB - 4to EGB)';
+                            }elseif ($nivel == 2) {
+                                echo $ciudad_obj['ciudad'].' - Nivel 2 (5to EGB - 7mo EGB)'; 
+                            }elseif ($nivel == 3) {
+                                echo $ciudad_obj['ciudad'].' - Nivel 3 (8vo EGB - 10mo EGB)'; 
+                            }elseif ($nivel == 4) {
+                                echo $ciudad_obj['ciudad'].' - Nivel 4 (10mo EGB - 3ero BACH)';
+                            }
+                        }
+                        
+                    ?>
+                </h5>
+                <h5 style="text-align:center">
+                    <?php 
+                        if (isset($cohorte)) {
+                            if ($cohorte == 1) {
+                                echo 'Cohorte: PRIMERA COHORTE'; 
+                            }elseif ($cohorte == 2) {
+                                echo 'Cohorte: SEGUNDA COHORTE'; 
+                            }elseif ($cohorte == 0) {
+                                echo 'Cohorte: AMBAS COHORTES'; 
+                            }
+                        }
+                        
+                    ?>
+                </h5>
             <div class="col-md-12" style="font-size:0.7em;text-align:center;" >
                 <div class="contenedor mb-3 mt-3">
                     <?php
@@ -475,9 +504,31 @@
                         $chart_data_2 =  json_encode($respuesta_2); 
                     ?>
                 </div>
-                <div class="col-md-6"><canvas id="myChart"></canvas></div>
-                <div class="col-md-6"><canvas id="myChart_1"></canvas></div>
-                <div class="col-md-6"><canvas id="myChart_2"></canvas></div> 
+                <section>
+                    <div class="col-md-6"><canvas id="myChart"></canvas></div>
+                    <div class="col-md-6"><canvas id="myChart_1"></canvas></div>
+                    <div class="col-md-6"><canvas id="myChart_2"></canvas></div> 
+                </section>
+                <section>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <table class="table table-striped table-bordered " style="text-align:center;">
+                                <thead>
+                                    <th>TOTAL</th>
+                                    <th>CANT NIÑOS</th>
+                                    <th>CANT NIÑAS</th>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><?= $total; ?></td>
+                                        <td><?= $masculino; ?></td>
+                                        <td><?= $femenino; ?></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
             </div>
         </section>
     </div>
