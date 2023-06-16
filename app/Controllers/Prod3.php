@@ -267,6 +267,8 @@ class Prod3 extends BaseController {
                 'documento' => strtoupper($this->request->getPostGet('documento')),
                 'nacionalidad' => strtoupper($this->request->getPostGet('nacionalidad')),                
                 'genero' => strtoupper($this->request->getPostGet('genero')),
+                'etnia' => strtoupper($this->request->getPostGet('etnia')),
+                'edad' => strtoupper($this->request->getPostGet('edad')),
                 'discapacidad' => strtoupper($this->request->getPostGet('discapacidad')),
                 'tipo' => strtoupper($this->request->getPostGet('tipo')),
                 'email' => strtoupper($this->request->getPostGet('email')),

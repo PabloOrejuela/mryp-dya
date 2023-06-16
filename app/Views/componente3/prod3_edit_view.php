@@ -100,6 +100,59 @@
                             
                             </select>
                         </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="etnia">Etnia:</label>
+                            <select name="etnia" class="form-control" id="etnia" aria-label="etnia">
+                                <?php
+                                    if ($datos->etnia == "1") {
+                                        echo '<option value="1" selected>MESTIZA</option>
+                                                <option value="2">AFRODESCENDIENTE</option>
+                                                <option value="3">INDIGENA</option>
+                                                <option value="4">BLANCA</option>
+                                                <option value="5">OTRA</option>
+                                        ';
+                                    }elseif ($datos->etnia == "2") {
+                                        echo '<option value="1">MESTIZA</option>
+                                                <option value="2" selected>AFRODESCENDIENTE</option>
+                                                <option value="3">INDIGENA</option>
+                                                <option value="4">BLANCA</option>
+                                                <option value="5">OTRA</option>
+                                        ';
+                                        
+                                    }elseif ($datos->etnia == "3") {
+                                        echo '<option value="1">MESTIZA</option>
+                                                <option value="2">AFRODESCENDIENTE</option>
+                                                <option value="3" selected>INDIGENA</option>
+                                                <option value="4">BLANCA</option>
+                                                <option value="5">OTRA</option>
+                                        ';
+                                    }elseif ($datos->etnia == "4") {
+                                        echo '<option value="1">MESTIZA</option>
+                                                <option value="2">AFRODESCENDIENTE</option>
+                                                <option value="3">INDIGENA</option>
+                                                <option value="4" selected>BLANCA</option>
+                                                <option value="5">OTRA</option>
+                                        ';
+                                    }elseif ($datos->etnia == "5") {
+                                        echo '<option value="1">MESTIZA</option>
+                                                <option value="2">AFRODESCENDIENTE</option>
+                                                <option value="3">INDIGENA</option>
+                                                <option value="4">BLANCA</option>
+                                                <option value="5" selected>OTRA</option>
+                                        ';
+                                    }else {
+                                        echo '<option value="1">MESTIZA</option>
+                                                <option value="2">AFRODESCENDIENTE</option>
+                                                <option value="3">INDIGENA</option>
+                                                <option value="4">BLANCA</option>
+                                                <option value="5">OTRA</option>
+                                                <option value="0" selected>--REGISTRAR DATO--</option>
+                                        ';
+                                    }
+                                ?>
+                            
+                            </select>
+                        </div>
                     </div>
                     <div class="row">
                         <div class="col-md-4 mb-3">
@@ -117,6 +170,10 @@
                         <div class="col-md-4 mb-3">
                             <label for="tipo">Tipo de discapacidad:</label>
                             <input type="text" id="tipo" name="tipo" value="<?= $datos->tipo; ?>" class="form-control" placeholder="" aria-label="tipo">
+                        </div>
+                        <div class="col-md-2 mb-3">
+                            <label for="edad">EDAD:</label>
+                            <input type="text" id="edad" name="edad" value="<?= $datos->edad; ?>" class="form-control" placeholder="" aria-label="edad">
                         </div>
                     </div>
                     <div class="row">
