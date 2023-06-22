@@ -40,6 +40,7 @@ $routes->get('cargar_info_view', 'CargarInformacion::index');
 $routes->get('cargar_info_extra_view', 'CargarInformacion::carga_extra');
 $routes->post('cargar-centro-educativo', 'CargarInformacion::cargar_centro_educativo');
 $routes->get('subirExcel_view/(:num)', 'CargarInformacion::frm_subir_excel/$1');
+$routes->get('logout', 'Inicio::logout');
 
 //Producto 1
 $routes->get('prod_1', 'Prod1::index');
@@ -99,13 +100,32 @@ $routes->post('cargar-nap4', 'CargarInformacion::cargar_nap4');
 $routes->post('cargar-nap5', 'CargarInformacion::cargar_nap5');
 $routes->post('cargar-nap6', 'CargarInformacion::cargar_nap6');
 
+//NAP2
+$routes->get('prod-2-menu', 'Prod2::index');
+$routes->get('prod2-nap2-menu', 'Prod2::nap2_procesos_grid');
+$routes->get('nap2-reg-procesos-form/(:num)', 'Prod2::nap2_reg_procesos_form/$1');
+$routes->post('nap2-process-update', 'Prod2::nap2_process_update');
 
-$routes->post('getExcelC1', 'CargarInformacion::getExcelC1');
-$routes->post('getExcelC2', 'CargarInformacion::getExcelC2');
-$routes->post('getExcelC3', 'CargarInformacion::getExcelC3');
-$routes->post('getExcelC4', 'CargarInformacion::getExcelC4');
+//NAP3
+$routes->get('prod2-nap3-menu', 'Prod2::nap3_procesos_grid');
+$routes->get('nap3-reg-procesos-form/(:num)', 'Prod2::nap3_reg_procesos_form/$1');
+$routes->post('nap3-process-update', 'Prod2::nap3_process_update');
 
-$routes->get('logout', 'Inicio::logout');
+//NAP4
+$routes->get('prod2-nap4-menu', 'Prod2::nap4_procesos_grid');
+$routes->get('nap4-reg-procesos-form/(:num)', 'Prod2::nap4_reg_procesos_form/$1');
+$routes->post('nap4-process-update', 'Prod2::nap4_process_update');
+
+//NAP5
+$routes->get('prod2-nap5-menu', 'Prod2::nap5_procesos_grid');
+$routes->get('nap5-reg-procesos-form/(:num)', 'Prod2::nap5_reg_procesos_form/$1');
+$routes->post('nap5-process-update', 'Prod2::nap5_process_update');
+
+//NAP6
+$routes->get('prod2-nap6-menu', 'Prod2::nap6_procesos_grid');
+$routes->get('nap6-reg-procesos-form/(:num)', 'Prod2::nap6_reg_procesos_form/$1');
+$routes->post('nap6-process-update', 'Prod2::nap6_process_update');
+
 
 //REPORTES ESTÁTICOS
 $routes->get('reportes-view', 'Reportes::index');

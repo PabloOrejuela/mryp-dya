@@ -48,6 +48,12 @@
                                     
                                 ?>
                                 </select>
+                                <?php
+                                    $dato['meses'] = $meses;
+                                    $dato['valor'] = $prod3_arte->docente_autoestima_mes;
+                                    $dato['campo'] = 'docente_autoestima_mes';
+                                    echo view('componente3/select_meses', $dato); 
+                                ?>
                                 <p id="error-message"><?= session('errors.idmetodo_pago');?> </p>
                             </div>
                         </div>
@@ -81,6 +87,12 @@
                                     
                                 ?>
                                 </select>
+                                <?php
+                                    $dato['meses'] = $meses;
+                                    $dato['valor'] = $prod3_arte->arte_usos_mes;
+                                    $dato['campo'] = 'arte_usos_mes';
+                                    echo view('componente3/select_meses', $dato); 
+                                ?>
                                 <p id="error-message"><?= session('errors.idmetodo_pago');?> </p>
                             </div>
                         </div>
@@ -114,6 +126,12 @@
                                     
                                 ?>
                                 </select>
+                                <?php
+                                    $dato['meses'] = $meses;
+                                    $dato['valor'] = $prod3_arte->creatividad_mes;
+                                    $dato['campo'] = 'creatividad_mes';
+                                    echo view('componente3/select_meses', $dato); 
+                                ?>
                                 <p id="error-message"><?= session('errors.idmetodo_pago');?> </p>
                             </div>
                         </div>
@@ -147,6 +165,12 @@
                                     
                                 ?>
                                 </select>
+                                <?php
+                                    $dato['meses'] = $meses;
+                                    $dato['valor'] = $prod3_arte->etapas_mes;
+                                    $dato['campo'] = 'etapas_mes';
+                                    echo view('componente3/select_meses', $dato); 
+                                ?>
                                 <p id="error-message"><?= session('errors.idmetodo_pago');?> </p>
                             </div>
                         </div>
@@ -180,6 +204,12 @@
                                     
                                 ?>
                                 </select>
+                                <?php
+                                    $dato['meses'] = $meses;
+                                    $dato['valor'] = $prod3_arte->autorretrato_taller_mes;
+                                    $dato['campo'] = 'autorretrato_taller_mes';
+                                    echo view('componente3/select_meses', $dato); 
+                                ?>
                                 <p id="error-message"><?= session('errors.idmetodo_pago');?> </p>
                             </div>
                         </div>
@@ -213,6 +243,12 @@
                                     
                                 ?>
                                 </select>
+                                <?php
+                                    $dato['meses'] = $meses;
+                                    $dato['valor'] = $prod3_arte->incluir_clases_mes;
+                                    $dato['campo'] = 'incluir_clases_mes';
+                                    echo view('componente3/select_meses', $dato); 
+                                ?>
                                 <p id="error-message"><?= session('errors.idmetodo_pago');?> </p>
                             </div>
                         </div>
@@ -254,6 +290,12 @@
                                     
                                 ?>
                                 </select>
+                                <?php
+                                    $dato['meses'] = $meses;
+                                    $dato['valor'] = $prod3_arte->autorretrato_clase_mes;
+                                    $dato['campo'] = 'autorretrato_clase_mes';
+                                    echo view('componente3/select_meses', $dato); 
+                                ?>
                                 <p id="error-message"><?= session('errors.idmetodo_pago');?> </p>
                             </div>
                         </div>
@@ -287,6 +329,12 @@
                                     
                                 ?>
                                 </select>
+                                <?php
+                                    $dato['meses'] = $meses;
+                                    $dato['valor'] = $prod3_arte->emociones_mes;
+                                    $dato['campo'] = 'emociones_mes';
+                                    echo view('componente3/select_meses', $dato); 
+                                ?>
                                 <p id="error-message"><?= session('errors.idmetodo_pago');?> </p>
                             </div>
                         </div>
@@ -320,6 +368,12 @@
                                     
                                 ?>
                                 </select>
+                                <?php
+                                    $dato['meses'] = $meses;
+                                    $dato['valor'] = $prod3_arte->familia_mes;
+                                    $dato['campo'] = 'familia_mes';
+                                    echo view('componente3/select_meses', $dato); 
+                                ?>
                                 <p id="error-message"><?= session('errors.idmetodo_pago');?> </p>
                             </div>
                         </div>
@@ -353,6 +407,12 @@
                                     
                                 ?>
                                 </select>
+                                <?php
+                                    $dato['meses'] = $meses;
+                                    $dato['valor'] = $prod3_arte->camiseta_mes;
+                                    $dato['campo'] = 'camiseta_mes';
+                                    echo view('componente3/select_meses', $dato); 
+                                ?>
                                 <p id="error-message"><?= session('errors.idmetodo_pago');?> </p>
                             </div>
                         </div>

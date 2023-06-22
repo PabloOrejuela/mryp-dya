@@ -7,7 +7,7 @@ use CodeIgniter\Model;
 class Nap4Model extends Model {
 
     protected $DBGroup          = 'default';
-    protected $table            = 'nap4';
+    protected $table            = 'nap4_mineduc_est_pres';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $insertID         = 0;
@@ -16,12 +16,7 @@ class Nap4Model extends Model {
     protected $protectFields    = true;
     protected $allowedFields    = [
         'amie',
-        'regimen',
-        'doc_tutor',
-        'docente_tutor',
-        'email_tutor',
-        'telf_tutor',
-        'etnia_tutor',
+        'anio_lectivo',
         'documento',
         'apellidos',
         'nombres',
@@ -30,8 +25,15 @@ class Nap4Model extends Model {
         'genero',
         'fecha_nac',
         'edad',
+        'nivel',
         'discapacidad',
         'tipo_discapacidad',
+        'institucion',
+        'doc_tutor',
+        'docente_tutor',
+        'email_tutor',
+        'telf_tutor',
+        'etnia_tutor',
         'documento_rep',
         'representante',
         'parentesto_rep',
@@ -39,6 +41,7 @@ class Nap4Model extends Model {
         'direccion_rep',
         'contacto_telf',
         'email',
+        'observaciones',
     ];
 
     // Dates

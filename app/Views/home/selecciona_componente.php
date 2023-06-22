@@ -31,9 +31,7 @@
                                     <div class="card-body" >
                                         <h5 class="card-title">Componente 2</h5>
                                             <p class="card-text">Servicio educativo NAP </p>
-                                            <a href="'.site_url().'prod_2" class="btn btn-info mb-2">Ver y editar información de registro</a>
-                                            <a href="'.site_url().'prod_2_process" class="btn btn-info mb-2">Ver y editar variables de Proceso</a>
-                                            <a href="'.site_url().'prod-2-asistencia" class="btn btn-info mb-2">Registrar asistencia</a>
+                                            <a href="'.site_url().'prod-2-menu" class="btn btn-info mb-2">Ir al menu NAP</a>
                                     </div>
                                 </div>';
                         }

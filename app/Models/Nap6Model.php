@@ -7,7 +7,7 @@ use CodeIgniter\Model;
 class Nap6Model extends Model {
 
     protected $DBGroup          = 'default';
-    protected $table            = 'nap6';
+    protected $table            = 'nap6_mineduc_est_virt';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $insertID         = 0;
@@ -16,6 +16,8 @@ class Nap6Model extends Model {
     protected $protectFields    = true;
     protected $allowedFields    = [
         'amie',
+        'anio_lectivo',
+        'subnivel',
         'documento',
         'nombres_est',
         'apellidos_est',
@@ -24,21 +26,18 @@ class Nap6Model extends Model {
         'genero',
         'fecha_nac',
         'edad',
+        'nivel',
         'discapacidad',
         'tipo_discapacidad',
-        'cedula_tutor',
-        'apellido_doc_tutor',
-        'nombre_doc_tutor',
-        'email_tutor',
-        'celular_tutor',
-        'etnia_tutor',
+        'institucion',
         'documento_rep',
         'representante',
         'parentesto_rep',
         'nacionalidad_rep',
         'direccion_rep',
         'contacto_telf',
-        'email'
+        'email',
+        'observaciones'
     ];
 
     // Dates

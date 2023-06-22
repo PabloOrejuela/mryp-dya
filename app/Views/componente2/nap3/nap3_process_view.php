@@ -1,0 +1,71 @@
+<main class="container px-2">
+    <div class="container-fluid px-0">
+        <h3 class="mt-4"><?= esc($title).' - DOCENTES DYA'; ?></h3>
+                    
+        <div class="card mb-4">
+            <div class="card-header">
+                <i class="fa-solid fa-cash-register"></i>
+                <?= esc("Componente 2 - Ingreso y edición de variables de Proceso"); ?>
+            </div>
+            <div class="card-body"> 
+                <table class="table table-bordered table-striped table-hover" id="table">
+                    <thead>
+                        <th>No.</th>
+                        <th>Nombre</th>
+                        <th>Amie</th>
+                        <th>Documento</th>
+                        <th>Registro de procesos</th>
+                    </thead>
+                    <tbody>
+                    <?php
+                        if (isset($nap3) && $nap3 != NULL) {
+                            foreach ($nap3 as $key => $value) {
+                                echo '<tr>
+                                        <td>'.$value->idnap3 .'</td>
+                                        <td>'.$value->nombres.' '.$value->apellidos.'</td>
+                                        <td>'.$value->amie.'</td>
+                                        <td>'.$value->documento.'</td>
+                                        <td>
+                                            <div class="contenedor">
+                                                <a type="button" id="btn-register" href="'.site_url().'nap3-reg-procesos-form/'.$value->idnap3.'" class="edit">
+                                                    <img src="'.site_url().'public/images/test.png" >
+                                                </a>
+                                            </div>
+                                        </td>
+                                    </tr>';
+                            }
+                        }
+                        
+                    ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</main>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#table').DataTable({
+                language: {
+                    processing: 'Procesando...',
+                    lengthMenu: 'Mostrando _MENU_ registros por página',
+                    zeroRecords: 'No hay registros',
+                    info: 'Mostrando _PAGE_ de _PAGES_',
+                    infoEmpty: 'No hay registros disponibles',
+                    infoFiltered: '(filtrando de _MAX_ total registros)',
+                    search: 'Buscar',
+                    paginate: {
+                    first:      "Primero",
+                    previous:   "Anterior",
+                    next:       "Siguiente",
+                    last:       "Último"
+                        },
+                        aria: {
+                            sortAscending:  ": activar para ordenar ascendentemente",
+                            sortDescending: ": activar para ordenar descendentemente"
+                        }
+                },
+            });
+        });
+    </script>

@@ -16,22 +16,30 @@ class ArteProd3Model extends Model {
     protected $protectFields    = true;
     protected $allowedFields    = [
         'docente_autoestima',
+        'docente_autoestima_mes',
         'arte_usos',
+        'arte_usos_mes',
         'creatividad',
+        'creatividad_mes',
         'etapas',
+        'etapas_mes',
         'autorretrato_taller',
+        'autorretrato_taller_mes',
         'incluir_clases',
+        'incluir_clases_mes',
         'autorretrato_clase',
+        'autorretrato_clase_mes',
         'emociones',
+        'emociones_mes',
         'familia',
+        'familia_mes',
         'camiseta',
+        'camiseta_mes',
         'id_prod_3',
-        'created_at',
-        'updated_at',
     ];
 
     // Dates
-    protected $useTimestamps = false;
+    protected $useTimestamps = true;
     protected $dateFormat    = 'datetime';
     protected $createdField  = 'created_at';
     protected $updatedField  = 'updated_at';
@@ -73,32 +81,62 @@ class ArteProd3Model extends Model {
         if ($datos['docente_autoestima'] != 'NULL') {
             $builder->set('docente_autoestima', $datos['docente_autoestima']);
         }
+        if ($datos['docente_autoestima_mes'] != 'NULL') {
+            $builder->set('docente_autoestima_mes', $datos['docente_autoestima_mes']);
+        }
         if ($datos['arte_usos'] != 'NULL') {
             $builder->set('arte_usos', $datos['arte_usos']);
+        }
+        if ($datos['arte_usos_mes'] != 'NULL') {
+            $builder->set('arte_usos_mes', $datos['arte_usos_mes']);
         }
         if ($datos['creatividad'] != 'NULL') {
             $builder->set('creatividad', $datos['creatividad']);
         }
+        if ($datos['creatividad_mes'] != 'NULL') {
+            $builder->set('creatividad_mes', $datos['creatividad_mes']);
+        }
         if ($datos['etapas'] != 'NULL') {
             $builder->set('etapas', $datos['etapas']);
+        }
+        if ($datos['etapas_mes'] != 'NULL') {
+            $builder->set('etapas_mes', $datos['etapas_mes']);
         }
         if ($datos['autorretrato_taller'] != 'NULL') {
             $builder->set('autorretrato_taller', $datos['autorretrato_taller']);
         }
+        if ($datos['autorretrato_taller_mes'] != 'NULL') {
+            $builder->set('autorretrato_taller_mes', $datos['autorretrato_taller_mes']);
+        }
         if ($datos['incluir_clases'] != 'NULL') {
             $builder->set('incluir_clases', $datos['incluir_clases']);
+        }
+        if ($datos['incluir_clases_mes'] != 'NULL') {
+            $builder->set('incluir_clases_mes', $datos['incluir_clases_mes']);
         }
         if ($datos['autorretrato_clase'] != 'NULL') {
             $builder->set('autorretrato_clase', $datos['autorretrato_clase']);
         }
+        if ($datos['autorretrato_clase_mes'] != 'NULL') {
+            $builder->set('autorretrato_clase_mes', $datos['autorretrato_clase_mes']);
+        }
         if ($datos['emociones'] != 'NULL') {
             $builder->set('emociones', $datos['emociones']);
+        }
+        if ($datos['emociones_mes'] != 'NULL') {
+            $builder->set('emociones_mes', $datos['emociones_mes']);
         }
         if ($datos['familia'] != 'NULL') {
             $builder->set('familia', $datos['familia']);
         }
+        if ($datos['familia_mes'] != 'NULL') {
+            $builder->set('familia_mes', $datos['familia_mes']);
+        }
         if ($datos['camiseta'] != 'NULL') {
             $builder->set('camiseta', $datos['camiseta']);
+        }
+        if ($datos['camiseta_mes'] != 'NULL') {
+            $builder->set('camiseta_mes', $datos['camiseta_mes']);
         }
         $builder->where('id_prod_3', $datos['id_prod_3']);
         $builder->update();
@@ -110,32 +148,62 @@ class ArteProd3Model extends Model {
         if ($datos['docente_autoestima'] != 'NULL') {
             $builder->set('docente_autoestima', $datos['docente_autoestima']);
         }
+        if ($datos['docente_autoestima_mes'] != 'NULL') {
+            $builder->set('docente_autoestima_mes', $datos['docente_autoestima_mes']);
+        }
         if ($datos['arte_usos'] != 'NULL') {
             $builder->set('arte_usos', $datos['arte_usos']);
+        }
+        if ($datos['arte_usos_mes'] != 'NULL') {
+            $builder->set('arte_usos_mes', $datos['arte_usos_mes']);
         }
         if ($datos['creatividad'] != 'NULL') {
             $builder->set('creatividad', $datos['creatividad']);
         }
+        if ($datos['creatividad_mes'] != 'NULL') {
+            $builder->set('creatividad_mes', $datos['creatividad_mes']);
+        }
         if ($datos['etapas'] != 'NULL') {
             $builder->set('etapas', $datos['etapas']);
+        }
+        if ($datos['etapas_mes'] != 'NULL') {
+            $builder->set('etapas_mes', $datos['etapas_mes']);
         }
         if ($datos['autorretrato_taller'] != 'NULL') {
             $builder->set('autorretrato_taller', $datos['autorretrato_taller']);
         }
+        if ($datos['autorretrato_taller_mes'] != 'NULL') {
+            $builder->set('autorretrato_taller_mes', $datos['autorretrato_taller_mes']);
+        }
         if ($datos['incluir_clases'] != 'NULL') {
             $builder->set('incluir_clases', $datos['incluir_clases']);
+        }
+        if ($datos['incluir_clases_mes'] != 'NULL') {
+            $builder->set('incluir_clases_mes', $datos['incluir_clases_mes']);
         }
         if ($datos['autorretrato_clase'] != 'NULL') {
             $builder->set('autorretrato_clase', $datos['autorretrato_clase']);
         }
+        if ($datos['autorretrato_clase_mes'] != 'NULL') {
+            $builder->set('autorretrato_clase_mes', $datos['autorretrato_clase_mes']);
+        }
         if ($datos['emociones'] != 'NULL') {
             $builder->set('emociones', $datos['emociones']);
+        }
+        if ($datos['emociones_mes'] != 'NULL') {
+            $builder->set('emociones_mes', $datos['emociones_mes']);
         }
         if ($datos['familia'] != 'NULL') {
             $builder->set('familia', $datos['familia']);
         }
+        if ($datos['familia_mes'] != 'NULL') {
+            $builder->set('familia_mes', $datos['familia_mes']);
+        }
         if ($datos['camiseta'] != 'NULL') {
             $builder->set('camiseta', $datos['camiseta']);
+        }
+        if ($datos['camiseta_mes'] != 'NULL') {
+            $builder->set('camiseta_mes', $datos['camiseta_mes']);
         }
         $builder->set('id_prod_3', $datos['id_prod_3']);
         

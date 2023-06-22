@@ -4,10 +4,10 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class Nap2Model extends Model {
+class Nap6ProcessResult extends Model {
 
     protected $DBGroup          = 'default';
-    protected $table            = 'nap2_est_dya';
+    protected $table            = 'nap6_process_result';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $insertID         = 0;
@@ -15,26 +15,7 @@ class Nap2Model extends Model {
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
     protected $allowedFields    = [
-        'amie',
-        'fecha_inicio',
-        'fecha_fin',
-        'nombres',
-        'apellidos',
-        'documento',
-        'nacionalidad',                
-        'etnia',
-        'fecha_nac',
-        'edad',
-        'genero',
-        'discapacidad',
-        'tipo_discapacidad',
-        'representante',
-        'documento_rep',
-        'parentesto_rep',
-        'nacionalidad_rep',
-        'direccion_rep',
-        'contacto_telf',
-        'email'                
+        'edu_regular', 'nivel', 'institucion', 'idnap6'
     ];
 
     // Dates
@@ -61,27 +42,53 @@ class Nap2Model extends Model {
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
 
-    /**
-     *
-     * Esta función trae los registros que tienen a
-     * tutor de apoyo y tutor de apoyo 2
-     *
-     * @param Type $var El código amie del CE
-     * @return array
-     **/
-    public function _getMisRegistros($nombre) {
+    public function _getNap6Process($id) {
         $result = NULL;
         $builder = $this->db->table($this->table);
-        $builder->select('*');
-        $builder->where('tutor_apoyo', $nombre);
-        $builder->orderBy('id');
+        $builder->select('*')->where('idnap6', $id);
         $query = $builder->get();
         if ($query->getResult() != null) {
             foreach ($query->getResult() as $row) {
-                $result[] = $row;
+                $result = $row;
             }
         }
         //echo $this->db->getLastQuery();
         return $result;
+    }
+
+    public function _update($datos) {
+        $builder = $this->db->table($this->table);
+        if ($datos['edu_regular'] != 'NULL') {
+            $builder->set('edu_regular', $datos['edu_regular']);
+        }
+
+        if ($datos['nivel'] != 'NULL') {
+            $builder->set('nivel', $datos['nivel']);
+        }
+
+        if ($datos['institucion'] != 'NULL') {
+            $builder->set('institucion', $datos['institucion']);
+        }
+
+        $builder->where('idnap6', $datos['idnap6']);
+        $builder->update();
+    }
+
+    public function _save($datos) {
+        $builder = $this->db->table($this->table);
+        if ($datos['edu_regular'] != 'NULL') {
+            $builder->set('edu_regular', $datos['edu_regular']);
+        }
+
+        if ($datos['nivel'] != 'NULL') {
+            $builder->set('nivel', $datos['nivel']);
+        }
+
+        if ($datos['institucion'] != 'NULL') {
+            $builder->set('institucion', $datos['institucion']);
+        }
+        
+        $builder->set('idnap6', $datos['idnap6']);
+        $builder->insert();
     }
 }

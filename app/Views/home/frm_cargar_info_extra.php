@@ -26,7 +26,7 @@
                         </div>
                     </form>
                 </div>
-            </div> -->
+            </div> 
             <div class="card mb-4">
                 <div class="card-header">
                     <i class="fa-solid fa-cash-register"></i>
@@ -51,7 +51,7 @@
                         </div>
                     </form>
                 </div>
-            </div>
+            </div> -->
             <div class="card mb-4">
                 <div class="card-header">
                     <i class="fa-solid fa-cash-register"></i>
@@ -77,7 +77,7 @@
                     </form>
                 </div>
             </div>
-            <div class="card mb-4">
+            <!--<div class="card mb-4">
                 <div class="card-header">
                     <i class="fa-solid fa-cash-register"></i>
                     <?= esc("Cargar NAP3"); ?>
@@ -102,7 +102,7 @@
                     </form>
                 </div>
             </div>
-            <div class="card mb-4">
+            <!--<div class="card mb-4">
                 <div class="card-header">
                     <i class="fa-solid fa-cash-register"></i>
                     <?= esc("Cargar NAP 4"); ?>
@@ -152,7 +152,7 @@
                     </form>
                 </div>
             </div>
-            <div class="card mb-4">
+             <div class="card mb-4">
                 <div class="card-header">
                     <i class="fa-solid fa-cash-register"></i>
                     <?= esc("Cargar NAP 6"); ?>
@@ -201,6 +201,6 @@
                         </div>
                     </form>
                 </div>
-            </div>
+            </div>-->
         </div>
     </main>

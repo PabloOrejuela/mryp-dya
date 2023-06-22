@@ -184,29 +184,14 @@ class CargarInformacion extends BaseController {
                 
                 foreach ($sheet->getRowIterator(4) as $row) {
                 
-                    $amie = trim($sheet->getCell('B'.$row->getRowIndex()));
-                    
-                    $centro = array(
-                        'amie' => trim($sheet->getCell('B'.$row->getRowIndex())),
-                        'idparroquia' => trim($sheet->getCell('E'.$row->getRowIndex())),
-                        'nombre' => trim($sheet->getCell('C'.$row->getRowIndex())),
-                    );
-                    
-                    //Verifico si existe
-                    $exist = $this->centroEducativoModel->find($centro['amie']);
-                    //echo '<pre>'.var_export($exist, true).'</pre>';
-                    if (!isset($exist) || $exist == NULL) {
-                        //muestro los datos o los grabo en base de datos
-                        //echo 'No existe';
-                        $this->centroEducativoModel->save($centro);
-                    }
+                    $amie = trim($sheet->getCell('F'.$row->getRowIndex()));
 
                     $anio_actual = date('Y');
                     
-                     if (trim($sheet->getCell('L'.$row->getRowIndex())) != '') {
+                     if (trim($sheet->getCell('P'.$row->getRowIndex())) != '') {
 
-                         $fecha_nac = date("Y-m-d", strtotime(trim($sheet->getCell('L'.$row->getRowIndex()))));
-                         $anio_nac = date("Y", strtotime(trim($sheet->getCell('L'.$row->getRowIndex()))));
+                         $fecha_nac = date("Y-m-d", strtotime(trim($sheet->getCell('P'.$row->getRowIndex()))));
+                         $anio_nac = date("Y", strtotime(trim($sheet->getCell('P'.$row->getRowIndex()))));
                          //$fecha_nac = \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject(trim($sheet->getCell('N'.$row->getRowIndex())))->format('Y-m-d');
 
                          $edad = $anio_actual - $anio_nac;
@@ -215,30 +200,32 @@ class CargarInformacion extends BaseController {
                          $edad = 0;
                      }
                      
-                     //echo '<pre>'.var_export(trim($sheet->getCell('A'.$row->getRowIndex())).' - '.$amie.' - '.$fecha_nac.' - '.$edad, true).'</pre>';
-                    
-                
-                    //echo '<pre>'.var_export($centro, true).'</pre>';exit;
                     $prod = array(
                          'num'=> trim($sheet->getCell('A'.$row->getRowIndex())),
-                         'amie' => trim($sheet->getCell('B'.$row->getRowIndex())),
-                         'nombres' => trim($sheet->getCell('H'.$row->getRowIndex())),
-                         'apellidos' => trim($sheet->getCell('G'.$row->getRowIndex())),
-                         'documento' => trim($sheet->getCell('F'.$row->getRowIndex())),
-                         'nacionalidad' => trim($sheet->getCell('I'.$row->getRowIndex())),
-                         'etnia' => trim($sheet->getCell('J'.$row->getRowIndex())),
+                         'amie' => trim($sheet->getCell('F'.$row->getRowIndex())),
+                         'anio_lectivo' => trim($sheet->getCell('H'.$row->getRowIndex())),
+                         'documento' => trim($sheet->getCell('J'.$row->getRowIndex())),
+                         'nombres' => trim($sheet->getCell('K'.$row->getRowIndex())),
+                         'apellidos' => trim($sheet->getCell('L'.$row->getRowIndex())),
+                         'nacionalidad' => trim($sheet->getCell('M'.$row->getRowIndex())),
+                         'etnia' => trim($sheet->getCell('N'.$row->getRowIndex())),
+                         'genero' => trim($sheet->getCell('O'.$row->getRowIndex())),
                          'fecha_nac' => $fecha_nac,
                          'edad' => $edad,
-                         'genero' => trim($sheet->getCell('K'.$row->getRowIndex())),
-                         'discapacidad' => trim($sheet->getCell('N'.$row->getRowIndex())),
-                         'tipo_discapacidad' => trim($sheet->getCell('O'.$row->getRowIndex())),
-                         'representante' => trim($sheet->getCell('Q'.$row->getRowIndex())),
-                         'documento_rep' => trim($sheet->getCell('P'.$row->getRowIndex())),
-                         'parentesto_rep' => trim($sheet->getCell('R'.$row->getRowIndex())),
-                         'nacionalidad_rep' => trim($sheet->getCell('S'.$row->getRowIndex())),
-                         'direccion_rep' => trim($sheet->getCell('T'.$row->getRowIndex())),
-                         'contacto_telf' => trim($sheet->getCell('U'.$row->getRowIndex())),
-                         'email' => 'email@email.com',
+                         'rezago_edu' => trim($sheet->getCell('R'.$row->getRowIndex())),
+                         'ingresado_sistema' => trim($sheet->getCell('S'.$row->getRowIndex())),
+                         'nivel' => trim($sheet->getCell('T'.$row->getRowIndex())),
+                         'discapacidad' => trim($sheet->getCell('U'.$row->getRowIndex())),
+                         'tipo_discapacidad' => trim($sheet->getCell('V'.$row->getRowIndex())),
+                         'institucion' => trim($sheet->getCell('W'.$row->getRowIndex())),
+                         
+                         'representante' => trim($sheet->getCell('AZ'.$row->getRowIndex())),
+                         'documento_rep' => trim($sheet->getCell('AY'.$row->getRowIndex())),
+                         'parentesto_rep' => trim($sheet->getCell('BA'.$row->getRowIndex())),
+                         'nacionalidad_rep' => trim($sheet->getCell('BB'.$row->getRowIndex())),
+                         'direccion_rep' => trim($sheet->getCell('BC'.$row->getRowIndex())),
+                         'contacto_telf' => trim($sheet->getCell('BD'.$row->getRowIndex())),
+                         'email' => '',
 
                      );
                     //echo '<pre>'.var_export($prod['num'].' - '.$prod['amie'], true).'</pre>';
@@ -293,22 +280,27 @@ class CargarInformacion extends BaseController {
                 $sheet = $spreadsheet->getSheet(0);
 
                 //Accedo a cada fila extrayendo los datos
-                foreach ($sheet->getRowIterator(4) as $row) {
-
+                foreach ($sheet->getRowIterator(5) as $row) {
+                    $amie = trim($sheet->getCell('F'.$row->getRowIndex()));
                     $docente = array(
-                        'documento' => trim($sheet->getCell('H'.$row->getRowIndex())),
-                        'apellidos' => trim($sheet->getCell('I'.$row->getRowIndex())),
-                        'nombres' => trim($sheet->getCell('J'.$row->getRowIndex())),
-                        'email' => trim($sheet->getCell('K'.$row->getRowIndex())),
-                        'celular' => trim($sheet->getCell('L'.$row->getRowIndex())),
-                        'autoidentificacion' => trim($sheet->getCell('M'.$row->getRowIndex())),
-                        'genero' => trim($sheet->getCell('N'.$row->getRowIndex())),
-                        'discapacidad'=> trim($sheet->getCell('O'.$row->getRowIndex())),
-                        'tipo' => trim($sheet->getCell('P'.$row->getRowIndex())),
-                        'amie' => trim($sheet->getCell('B'.$row->getRowIndex())),
+                        'anio_lectivo' => trim($sheet->getCell('H'.$row->getRowIndex())),
+                        'num_est' => trim($sheet->getCell('J'.$row->getRowIndex())),
+                        'documento' => trim($sheet->getCell('K'.$row->getRowIndex())),
+                        'apellidos' => trim($sheet->getCell('L'.$row->getRowIndex())),
+                        'nombres' => trim($sheet->getCell('M'.$row->getRowIndex())),
+                        'edad' => trim($sheet->getCell('N'.$row->getRowIndex())),
+                        'genero' => trim($sheet->getCell('O'.$row->getRowIndex())),
+                        'autoidentificacion' => trim($sheet->getCell('P'.$row->getRowIndex())),
+                        'titulo_pro' => trim($sheet->getCell('Q'.$row->getRowIndex())),
+                        'email' => trim($sheet->getCell('R'.$row->getRowIndex())),
+                        'celular' => trim($sheet->getCell('S'.$row->getRowIndex())),
+                        'amie' => trim($sheet->getCell('F'.$row->getRowIndex())),
 
                     );
                     
+                    if ($amie == 'END') {
+                        break;
+                    }
                     //Verifico si existe
                     $exist = $this->nap3Model->find($docente['documento']);
                     if (!isset($exist) || $exist == NULL) {
@@ -483,33 +475,17 @@ class CargarInformacion extends BaseController {
 
                 //Accedo a cada fila extrayendo los datos
                 
-                foreach ($sheet->getRowIterator(3) as $row) {
+                foreach ($sheet->getRowIterator(4) as $row) {
                 
-                    $amie = trim($sheet->getCell('B'.$row->getRowIndex()));
+                    $amie = trim($sheet->getCell('F'.$row->getRowIndex()));
                     
-                    $centro = array(
-                        'amie' => trim($sheet->getCell('B'.$row->getRowIndex())),
-                        'idparroquia' => trim($sheet->getCell('F'.$row->getRowIndex())),
-                        'nombre' => trim($sheet->getCell('C'.$row->getRowIndex())),
-                        'regimen' => trim($sheet->getCell('G'.$row->getRowIndex())),
-                    );
-                    
-                    //Verifico si existe
-                    $exist = $this->centroEducativoModel->find($centro['amie']);
-                    //echo '<pre>'.var_export($exist, true).'</pre>';
-                    if (!isset($exist) || $exist == NULL) {
-                        //muestro los datos o los grabo en base de datos
-                        //echo 'No existe';
-                        $this->centroEducativoModel->save($centro);
-                    }
-
                     $anio_actual = date('Y');
                     
                     //Fecha de nacimiento
-                     if (trim($sheet->getCell('T'.$row->getRowIndex())) != '') {
+                     if (trim($sheet->getCell('P'.$row->getRowIndex())) != '') {
 
-                         $fecha_nac = date("Y-m-d", strtotime(trim($sheet->getCell('T'.$row->getRowIndex()))));
-                         $anio_nac = date("Y", strtotime(trim($sheet->getCell('T'.$row->getRowIndex()))));
+                         $fecha_nac = date("Y-m-d", strtotime(trim($sheet->getCell('P'.$row->getRowIndex()))));
+                         $anio_nac = date("Y", strtotime(trim($sheet->getCell('P'.$row->getRowIndex()))));
                          //$fecha_nac = \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject(trim($sheet->getCell('N'.$row->getRowIndex())))->format('Y-m-d');
 
                          $edad = $anio_actual - $anio_nac;
@@ -517,36 +493,33 @@ class CargarInformacion extends BaseController {
                          $fecha_nac = '0000-00-00';
                          $edad = 0;
                      }
-                     
-                     //echo '<pre>'.var_export(trim($sheet->getCell('A'.$row->getRowIndex())).' - '.$amie.' - '.$fecha_nac.' - '.$edad, true).'</pre>';
-                    
-                    //echo '<pre>'.var_export($centro, true).'</pre>';exit;
+
 
                     $prod = array(
                          'num'=> trim($sheet->getCell('A'.$row->getRowIndex())),
-                         'amie' => trim($sheet->getCell('B'.$row->getRowIndex())),
-                         'doc_tutor' => trim($sheet->getCell('H'.$row->getRowIndex())),
-                         'docente_tutor' => trim($sheet->getCell('I'.$row->getRowIndex())).' '.trim($sheet->getCell('J'.$row->getRowIndex())),
-                         'email_tutor' => trim($sheet->getCell('K'.$row->getRowIndex())),
-                         'telf_tutor' => trim($sheet->getCell('L'.$row->getRowIndex())),
-                         'etnia_tutor' => trim($sheet->getCell('M'.$row->getRowIndex())),
-                         'documento' => trim($sheet->getCell('N'.$row->getRowIndex())),
-                         'apellidos' => trim($sheet->getCell('O'.$row->getRowIndex())),
-                         'nombres' => trim($sheet->getCell('P'.$row->getRowIndex())),
-                         'nacionalidad' => trim($sheet->getCell('Q'.$row->getRowIndex())),
-                         'etnia' => trim($sheet->getCell('R'.$row->getRowIndex())),
-                         'genero' => trim($sheet->getCell('S'.$row->getRowIndex())),
+                         'amie' => trim($sheet->getCell('F'.$row->getRowIndex())),
+                         'anio_lectivo' => trim($sheet->getCell('H'.$row->getRowIndex())),
+                         'documento' => trim($sheet->getCell('J'.$row->getRowIndex())),
+                         'apellidos' => trim($sheet->getCell('K'.$row->getRowIndex())),
+                         'nombres' => trim($sheet->getCell('L'.$row->getRowIndex())),
+                         'nacionalidad' => trim($sheet->getCell('M'.$row->getRowIndex())),
+                         'etnia' => trim($sheet->getCell('N'.$row->getRowIndex())),
+                         'genero' => trim($sheet->getCell('O'.$row->getRowIndex())),
                          'fecha_nac' => $fecha_nac,
                          'edad' => $edad,
-                         'discapacidad' => trim($sheet->getCell('V'.$row->getRowIndex())),
-                         'tipo_discapacidad' => trim($sheet->getCell('W'.$row->getRowIndex())),
-                         'documento_rep' => trim($sheet->getCell('X'.$row->getRowIndex())),
-                         'representante' => trim($sheet->getCell('Y'.$row->getRowIndex())),
-                         'parentesto_rep' => trim($sheet->getCell('Z'.$row->getRowIndex())),
-                         'nacionalidad_rep' => trim($sheet->getCell('AA'.$row->getRowIndex())),
-                         'direccion_rep' => trim($sheet->getCell('AB'.$row->getRowIndex())),
-                         'contacto_telf' => trim($sheet->getCell('AC'.$row->getRowIndex())),
-                         'email' => 'email@email.com',
+                         'nivel' => trim($sheet->getCell('R'.$row->getRowIndex())),
+                         'discapacidad' => trim($sheet->getCell('S'.$row->getRowIndex())),
+                         'tipo_discapacidad' => trim($sheet->getCell('T'.$row->getRowIndex())),
+                         'institucion' => trim($sheet->getCell('U'.$row->getRowIndex())),
+                         
+                         'documento_rep' => trim($sheet->getCell('AC'.$row->getRowIndex())),
+                         'representante' => trim($sheet->getCell('AD'.$row->getRowIndex())),
+                         'parentesto_rep' => trim($sheet->getCell('AE'.$row->getRowIndex())),
+                         'nacionalidad_rep' => trim($sheet->getCell('AF'.$row->getRowIndex())),
+                         'direccion_rep' => trim($sheet->getCell('AG'.$row->getRowIndex())),
+                         'contacto_telf' => trim($sheet->getCell('AH'.$row->getRowIndex())),
+                         'observaciones' => trim($sheet->getCell('AI'.$row->getRowIndex())),
+                         'email' => '',
 
                      );
                     //echo '<pre>'.var_export($prod['num'].' - '.$prod['amie'], true).'</pre>';
@@ -600,39 +573,32 @@ class CargarInformacion extends BaseController {
                 $sheet = $spreadsheet->getSheet(0);
 
                 //Accedo a cada fila extrayendo los datos
-                foreach ($sheet->getRowIterator(4) as $row) {
+                foreach ($sheet->getRowIterator(5) as $row) {
 
-                    $amie = trim($sheet->getCell('B'.$row->getRowIndex()));
-                    
-                    $centro = array(
-                        'amie' => trim($sheet->getCell('B'.$row->getRowIndex())),
-                        'idparroquia' => trim($sheet->getCell('E'.$row->getRowIndex())),
-                        'nombre' => trim($sheet->getCell('C'.$row->getRowIndex())),
-                    );
+                    $amie = trim($sheet->getCell('F'.$row->getRowIndex()));
 
-                    //Verifico si existe el CE
-                    $exist_ce = $this->centroEducativoModel->find($centro['amie']);
-
-                    if (!isset($exist_ce) || $exist_ce == NULL) {
-                        //muestro los datos o los grabo en base de datos
-                        $this->centroEducativoModel->save($centro);
-                    }
-                         
                     $nap = array(
-                        'amie' => trim($sheet->getCell('B'.$row->getRowIndex())),
-                        'documento' => trim($sheet->getCell('G'.$row->getRowIndex())),
-                        'apellidos' => trim($sheet->getCell('H'.$row->getRowIndex())),
-                        'nombres' => trim($sheet->getCell('I'.$row->getRowIndex())),
-                        'email' => trim($sheet->getCell('J'.$row->getRowIndex())),
-                        'celular' => trim($sheet->getCell('K'.$row->getRowIndex())),
-                        'autoidentificacion' => trim($sheet->getCell('L'.$row->getRowIndex())),
-                        'genero' => trim($sheet->getCell('M'.$row->getRowIndex())),
+                        'amie' => trim($sheet->getCell('F'.$row->getRowIndex())),
+                        'anio_lectivo' => trim($sheet->getCell('H'.$row->getRowIndex())),
+                        'subnivel' => trim($sheet->getCell('I'.$row->getRowIndex())),
+                        'num_est' => trim($sheet->getCell('J'.$row->getRowIndex())),
+                        'documento' => trim($sheet->getCell('K'.$row->getRowIndex())),
+                        'apellidos' => trim($sheet->getCell('L'.$row->getRowIndex())),
+                        'nombres' => trim($sheet->getCell('M'.$row->getRowIndex())),
+                        'edad' => trim($sheet->getCell('N'.$row->getRowIndex())),
+                        'genero' => trim($sheet->getCell('O'.$row->getRowIndex())),
+                        'autoidentificacion' => trim($sheet->getCell('P'.$row->getRowIndex())),
+                        'titulo_pro' => trim($sheet->getCell('Q'.$row->getRowIndex())),
+                        'celular' => trim($sheet->getCell('R'.$row->getRowIndex())),
+                        'email' => trim($sheet->getCell('S'.$row->getRowIndex())),
+                        'titulo_pro' => trim($sheet->getCell('Q'.$row->getRowIndex())),
                         'discapacidad'=> trim($sheet->getCell('N'.$row->getRowIndex())),
                         'tipo' => trim($sheet->getCell('O'.$row->getRowIndex())),
-                        'subnivel' => trim($sheet->getCell('P'.$row->getRowIndex()))
-
                     );
-                    //echo '<pre>'.var_export($nap, true).'</pre>';exit; 
+
+                    if ($amie == 'END') {
+                        break;
+                    }
                     //Verifico si existe
                     $exist_nap = $this->nap5Model->find($nap['documento']);
                     if (!isset($exist_nap) || $exist_nap == NULL) {
@@ -680,75 +646,16 @@ class CargarInformacion extends BaseController {
                 
                 foreach ($sheet->getRowIterator(4) as $row) {
                 
-                    $amie = trim($sheet->getCell('B'.$row->getRowIndex()));
+                    $amie = trim($sheet->getCell('F'.$row->getRowIndex()));
                     $num = trim($sheet->getCell('A'.$row->getRowIndex()));
-                    $dato = array(
-                        'ciudad' => trim($sheet->getCell('E'.$row->getRowIndex())),
-                        'parroquia' => trim($sheet->getCell('F'.$row->getRowIndex())),
-                        'idprovincias' => trim($sheet->getCell('D'.$row->getRowIndex())), 
-                    );
-                    
-                    //Verifico si existe el cantón
-                    $exist_ciudad = $this->ciudadesModel->_getIdciudades($dato['ciudad']);
-                    //echo '<pre>'.var_export($num.' '.$exist_ciudad->idciudades, true).'</pre>';
-
-                    if (!isset($exist_ciudad) || $exist_ciudad == NULL) {
-                        //muestro los datos o los grabo en base de datos
-                        //echo '<pre>'.var_export($num.' '.$exist_ciudad->idciudades.' NO', true).'</pre>';
-                        $Obj_ciudad = array(
-                            'ciudad' => trim($sheet->getCell('E'.$row->getRowIndex())),
-                            'idprovincias' => trim($sheet->getCell('D'.$row->getRowIndex()))
-                        );
-                        $this->ciudadesModel->_save($Obj_ciudad);
-                    }
-
-                    //obtengo el id de la ciudad
-                    //$idciudades = $this->ciudadesModel->getInsertID();
-                    
-                    $ciudad = $this->ciudadesModel->_getIdciudades(trim($sheet->getCell('E'.$row->getRowIndex())));
-                    
-
-                    //Verifico si existe La parroquia
-                    $exist_parroquia = $this->parroquiasModel->_getIdParroquia(trim($sheet->getCell('F'.$row->getRowIndex())));
-                    //echo '<pre>'.var_export($exist_parroquia, true).'</pre>';
-                    if (!isset($exist_parroquia) || $exist_parroquia == NULL) {
-                        
-                        $parroquia = array(
-                            'cod_parroquia' => '',
-                            'parroquia' => trim($sheet->getCell('F'.$row->getRowIndex())),
-                            'idciudades' => $ciudad->idciudades,
-                        );
-                        //muestro los datos o los grabo en base de datos
-                        $this->parroquiasModel->_save($parroquia);
-                    }
-
-                    //obtengo el id de la parroquia
-                    $parroquia = $this->parroquiasModel->_getIdParroquia($dato['parroquia']);
-
-                    //echo '<pre>'.var_export($exist_parroquia, true).'</pre>';exit;
-                    $centro = array(
-                        'amie' => trim($sheet->getCell('B'.$row->getRowIndex())),
-                        'nombre' => trim($sheet->getCell('C'.$row->getRowIndex())),
-                        'idciudades' => $ciudad->idciudades,
-                        'idparroquia' => $parroquia->id,
-                    );
-
-                    //Verifico si existe el CE
-                    $exist_ce = $this->centroEducativoModel->find($centro['amie']);
-                    
-                    if (!isset($exist_ce) || $exist_ce == NULL) {
-                        //muestro los datos o los grabo en base de datos
-
-                        $this->centroEducativoModel->_save($centro);
-                    }
                                
                     $anio_actual = date('Y');
 
                     //Fecha de nacimniento
-                     if (trim($sheet->getCell('T'.$row->getRowIndex())) != '') {
+                     if (trim($sheet->getCell('P'.$row->getRowIndex())) != '') {
 
-                         $fecha_nac = date("Y-m-d", strtotime(trim($sheet->getCell('T'.$row->getRowIndex()))));
-                         $anio_nac = date("Y", strtotime(trim($sheet->getCell('T'.$row->getRowIndex()))));
+                         $fecha_nac = date("Y-m-d", strtotime(trim($sheet->getCell('P'.$row->getRowIndex()))));
+                         $anio_nac = date("Y", strtotime(trim($sheet->getCell('P'.$row->getRowIndex()))));
                          //$fecha_nac = \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject(trim($sheet->getCell('N'.$row->getRowIndex())))->format('Y-m-d');
 
                          $edad = $anio_actual - $anio_nac;
@@ -757,52 +664,41 @@ class CargarInformacion extends BaseController {
                          $edad = 0;
                      }
                 
-                    //echo '<pre>'.var_export($centro, true).'</pre>';exit;
                     $nap6 = array(
-                        'amie' => trim($sheet->getCell('B'.$row->getRowIndex())),
-                        'documento' => trim($sheet->getCell('N'.$row->getRowIndex())),
-                        'apellidos_est' => trim($sheet->getCell('O'.$row->getRowIndex())),
-                        'nombres_est' => trim($sheet->getCell('P'.$row->getRowIndex())),
-                        'nacionalidad' => trim($sheet->getCell('Q'.$row->getRowIndex())),
-                        'etnia' => trim($sheet->getCell('R'.$row->getRowIndex())),
-                        'genero' => trim($sheet->getCell('S'.$row->getRowIndex())),
+                        'amie' => trim($sheet->getCell('F'.$row->getRowIndex())),
+                        'anio_lectivo' => trim($sheet->getCell('H'.$row->getRowIndex())),
+                        'subnivel' => trim($sheet->getCell('I'.$row->getRowIndex())),
+                        'documento' => trim($sheet->getCell('J'.$row->getRowIndex())),
+                        'apellidos_est' => trim($sheet->getCell('K'.$row->getRowIndex())),
+                        'nombres_est' => trim($sheet->getCell('L'.$row->getRowIndex())),
+                        'nacionalidad' => trim($sheet->getCell('M'.$row->getRowIndex())),
+                        'etnia' => trim($sheet->getCell('N'.$row->getRowIndex())),
+                        'genero' => trim($sheet->getCell('O'.$row->getRowIndex())),
                         'fecha_nac' => trim($sheet->getCell('T'.$row->getRowIndex())),
                         'edad' => $edad,
-                        'discapacidad' => trim($sheet->getCell('V'.$row->getRowIndex())),
-                        'tipo_discapacidad' => trim($sheet->getCell('W'.$row->getRowIndex())),
-
-                        //Docente
-                        'cedula_tutor' => trim($sheet->getCell('H'.$row->getRowIndex())),
-                        'apellido_doc_tutor' => trim($sheet->getCell('I'.$row->getRowIndex())),
-                        'nombre_doc_tutor' => trim($sheet->getCell('J'.$row->getRowIndex())),
-                        'email_tutor' => trim($sheet->getCell('K'.$row->getRowIndex())),
-                        'celular_tutor' => trim($sheet->getCell('L'.$row->getRowIndex())),
-                        'etnia_tutor' => trim($sheet->getCell('M'.$row->getRowIndex())),
-
+                        'nivel' => trim($sheet->getCell('Q'.$row->getRowIndex())),
+                        'discapacidad' => trim($sheet->getCell('S'.$row->getRowIndex())),
+                        'tipo_discapacidad' => trim($sheet->getCell('T'.$row->getRowIndex())),
+                        'institucion' => trim($sheet->getCell('U'.$row->getRowIndex())),
+                        
                         //Representante
-                        'documento_rep' => trim($sheet->getCell('X'.$row->getRowIndex())),
-                        'representante' => trim($sheet->getCell('Y'.$row->getRowIndex())),
-                        'parentesto_rep' => trim($sheet->getCell('Z'.$row->getRowIndex())),
-                        'nacionalidad_rep' => trim($sheet->getCell('AA'.$row->getRowIndex())),
-                        'direccion_rep' => trim($sheet->getCell('AB'.$row->getRowIndex())),
-                        'contacto_telf' => trim($sheet->getCell('AC'.$row->getRowIndex())),
+                        'documento_rep' => trim($sheet->getCell('Y'.$row->getRowIndex())),
+                        'representante' => trim($sheet->getCell('Z'.$row->getRowIndex())),
+                        'parentesto_rep' => trim($sheet->getCell('AA'.$row->getRowIndex())),
+                        'nacionalidad_rep' => trim($sheet->getCell('AB'.$row->getRowIndex())),
+                        'direccion_rep' => trim($sheet->getCell('AC'.$row->getRowIndex())),
+                        'contacto_telf' => trim($sheet->getCell('AD'.$row->getRowIndex())),
                         'email' => '',
+                        'observaciones' => trim($sheet->getCell('AE'.$row->getRowIndex())),
 
-                     );
-                    //echo '<pre>'.var_export($prod['num'].' - '.$prod['amie'], true).'</pre>';
+                    );
+
+                    if ($amie == 'END') {
+                        break;
+                    }
                     //Verifico si existe
-                    $this->nap6Model->insert($nap6);
-                    // $exist_nap6 = $this->nap6Model->find($nap6['documento']);
-                    // if (!isset($exist_nap6) || $exist_nap6 == NULL) {
-                    //     //muestro los datos o los grabo en base de datos
-                    //     $this->nap6Model->save($nap6);
-                    // } 
-                    // if ($amie == 'END') {
-                    //     break;
-                    // }
-                    
+                    $this->nap6Model->insert($nap6);   
                 }
-                
                 return redirect()->to('cargar_info_extra_view');
             }
         } 

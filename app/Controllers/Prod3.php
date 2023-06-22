@@ -133,8 +133,7 @@ class Prod3 extends BaseController {
             $data['id'] = $id;
             $data['prod3_arte'] = $this->arteProd3Model->_getProd3Arte($id);
             $data['datos'] = $this->prod3Model->find($id);
-
-            //echo '<pre>'.var_export($data['datos'], true).'</pre>';exit;
+            $data['meses'] = MESES;
 
             $data['title']='MYRP - DYA';
             $data['main_content']='componente3/prod3_edit_arte_view';
@@ -364,15 +363,25 @@ class Prod3 extends BaseController {
 
             $proceso = array(
                 'docente_autoestima' => $this->request->getPostGet('docente_autoestima'),
+                'docente_autoestima_mes' => $this->request->getPostGet('docente_autoestima_mes'),
                 'arte_usos' => $this->request->getPostGet('arte_usos'),
+                'arte_usos_mes' => $this->request->getPostGet('arte_usos_mes'),
                 'creatividad' => $this->request->getPostGet('creatividad'),
+                'creatividad_mes' => $this->request->getPostGet('creatividad_mes'),
                 'etapas' => $this->request->getPostGet('etapas'),
+                'etapas_mes' => $this->request->getPostGet('etapas_mes'),
                 'autorretrato_taller' => $this->request->getPostGet('autorretrato_taller'),
+                'autorretrato_taller_mes' => $this->request->getPostGet('autorretrato_taller_mes'),
                 'incluir_clases' => $this->request->getPostGet('incluir_clases'),
+                'incluir_clases_mes' => $this->request->getPostGet('incluir_clases_mes'),
                 'autorretrato_clase' => $this->request->getPostGet('autorretrato_clase'),
+                'autorretrato_clase_mes' => $this->request->getPostGet('autorretrato_clase_mes'),
                 'emociones' => $this->request->getPostGet('emociones'),
+                'emociones_mes' => $this->request->getPostGet('emociones_mes'),
                 'familia' => $this->request->getPostGet('familia'),
+                'familia_mes' => $this->request->getPostGet('familia_mes'),
                 'camiseta' => $this->request->getPostGet('camiseta'),
+                'camiseta_mes' => $this->request->getPostGet('camiseta_mes'),
                 'id_prod_3' => $this->request->getPostGet('id_prod_3'),
             );
 

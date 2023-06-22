@@ -7,7 +7,7 @@ use CodeIgniter\Model;
 class Nap5Model extends Model {
 
     protected $DBGroup          = 'default';
-    protected $table            = 'nap5';
+    protected $table            = 'nap5_mineduc_doc_pres';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $insertID         = 0;
@@ -16,12 +16,16 @@ class Nap5Model extends Model {
     protected $protectFields    = true;
     protected $allowedFields    = [
         'amie',
+        'anio_lectivo',
+        'num_est',
         'documento',
         'apellidos',
         'nombres',
+        'edad',
         'email',
         'celular',
         'autoidentificacion',
+        'titulo_pro',
         'genero',
         'discapacidad',
         'tipo',

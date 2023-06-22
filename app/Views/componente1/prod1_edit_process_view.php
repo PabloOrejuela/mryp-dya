@@ -32,7 +32,7 @@
                                             value="'.$asistencia->dias_atencion.'" 
                                             class="form-control number"
                                             aria-label="dias_atencion">';
-                                    }else {echo 29;
+                                    }else {
                                         echo '<input 
                                             type="text" 
                                             id="number" 

@@ -92,3 +92,19 @@ define('EVENT_PRIORITY_NORMAL', 100);
  * @deprecated Use \CodeIgniter\Events\Events::PRIORITY_HIGH instead.
  */
 define('EVENT_PRIORITY_HIGH', 10);
+
+/** DECLARO UNA COSTANTE DE LOS MESES DEL AÑO PARA SER USADA EN TODA LA APP **/
+define("MESES", [
+    1 => "ENERO", 
+    2 => "FEBRERO", 
+    3 => "MARZO", 
+    4 => "ABRIL", 
+    5 => "MAYO", 
+    6 => "JUNIO", 
+    7 => "JULIO", 
+    8 => "AGOSTO", 
+    9 => "SEPTIEMBRE", 
+    10 => "OCTUBRE", 
+    11 => "NOVIEMBRE", 
+    12 => "DICIEMBRE"
+]);
