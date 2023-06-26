@@ -1,14 +1,12 @@
 <style>
-    .form-control{
-        font-size: 0.8em;
-    }
     #titulo-nombre{
         color: rgb(106, 145, 40);
     }
 </style>
 <main class="container-md px-2 mb-4">
     <div class="container-fluid px-0">
-        <h4 class="mt-4" id="titulo-nombre"><?= esc($title).' : '.$est->apellidos.' '.$est->nombres ; ?></h4>
+        <h3 class="mt-4" id="titulo-nombre"><?= esc($title).' | Estudiantes DYA'; ?></h3>
+        <h4 class="mt-4" id="titulo-nombre"><?= 'NOMBRE: '.$est->apellidos.' '.$est->nombres ; ?></h4>
         <div class="card mb-4">
             <div class="card-body">
                 <h3 class="mt-3"><?= esc ('PROCESO'); ?></h3>
@@ -50,21 +48,30 @@
                                 ?>
                         </div>
                     </div>
+                    <!-- ASISTENCIA -->
                     <div class="row">
                         <div class="col-md-4 mb-3">
                             <label for="asistencia_oct">% ASISTENCIA OCT:</label>
                             <?php
                                 if ($datos != NULL) {
                                     if ($datos->asistencia_oct != NULL && isset($datos->asistencia_oct) && $datos->asistencia_oct != '' ) {
-                                        echo '<input type="text" id="asistencia_oct" name="asistencia_oct" value="'.$datos->asistencia_oct.'" class="form-control number" aria-label="asistencia_oct">';
+                                        echo '<input 
+                                                type="text" 
+                                                id="asistencia_oct" 
+                                                name="asistencia_oct" 
+                                                value="'.$datos->asistencia_oct.'" 
+                                                class="form-control number asistencia" 
+                                                onchange="sumar();"  
+                                                aria-label="asistencia_oct">';
                                     }else {
                                         echo '<input 
                                             type="text" 
                                             id="number" 
                                             name="asistencia_oct" 
                                             value="NULL" 
-                                            class="form-control number" 
-                                            placeholder="0" 
+                                            class="form-control number asistencia"
+                                            placeholder="0"
+                                            onchange="sumar();" 
                                             aria-label="asistencia_oct">';
                                     }
                                     
@@ -74,8 +81,9 @@
                                             id="number" 
                                             name="asistencia_oct" 
                                             value="0" 
-                                            class="form-control number" 
-                                            placeholder="0" 
+                                            class="form-control number asistencia"
+                                            placeholder="0"
+                                            onchange="sumar();" 
                                             aria-label="asistencia_oct">';
                                 }
 
@@ -86,13 +94,13 @@
                             <?php
                                 if ($datos != NULL) {
                                     if ($datos->asistencia_nov != NULL && isset($datos->asistencia_nov) && $datos->asistencia_nov != '' ) {
-                                        echo '<input type="text" id="asistencia_nov" name="asistencia_nov" value="'.$datos->asistencia_nov.'" class="form-control number" aria-label="asistencia_nov">';
+                                        echo '<input type="text" id="asistencia_nov" name="asistencia_nov" value="'.$datos->asistencia_nov.'" class="form-control number asistencia" onchange="sumar();"  aria-label="asistencia_nov">';
                                     }else {
-                                        echo '<input type="text" id="number" name="asistencia_nov" value="0" class="form-control number" placeholder="0" aria-label="asistencia_nov">';
+                                        echo '<input type="text" id="number" name="asistencia_nov" value="0" class="form-control number asistencia" placeholder="0" onchange="sumar();"  aria-label="asistencia_nov">';
                                     }
                                     
                                 }else{
-                                    echo '<input type="text" id="number" name="asistencia_nov" value="0" class="form-control number" placeholder="0" aria-label="asistencia_nov">';
+                                    echo '<input type="text" id="number" name="asistencia_nov" value="0" class="form-control number asistencia" placeholder="0" onchange="sumar();"  aria-label="asistencia_nov">';
                                 }
 
                             ?>
@@ -104,13 +112,13 @@
                             <?php
                                 if ($datos != NULL) {
                                     if ($datos->asistencia_dic != NULL && isset($datos->asistencia_dic) && $datos->asistencia_dic != '' ) {
-                                        echo '<input type="text" id="asistencia_dic" name="asistencia_dic" value="'.$datos->asistencia_dic.'" class="form-control number" aria-label="asistencia_dic">';
+                                        echo '<input type="text" id="asistencia_dic" name="asistencia_dic" value="'.$datos->asistencia_dic.'" class="form-control number asistencia" onchange="sumar();"  aria-label="asistencia_dic">';
                                     }else {
-                                        echo '<input type="text" id="number" name="asistencia_dic" value="0" class="form-control number" placeholder="0" aria-label="asistencia_dic">';
+                                        echo '<input type="text" id="number" name="asistencia_dic" value="0" class="form-control number asistencia" placeholder="0" onchange="sumar();"  aria-label="asistencia_dic">';
                                     }
                                     
                                 }else{
-                                    echo '<input type="text" id="number" name="asistencia_dic" value="0" class="form-control number" placeholder="0" aria-label="asistencia_dic">';
+                                    echo '<input type="text" id="number" name="asistencia_dic" value="0" class="form-control number asistencia" placeholder="0" onchange="sumar();"  aria-label="asistencia_dic">';
                                 }
 
                             ?>
@@ -120,13 +128,13 @@
                             <?php
                                 if ($datos != NULL) {
                                     if ($datos->asistencia_ene != NULL && isset($datos->asistencia_ene) && $datos->asistencia_ene != '' ) {
-                                        echo '<input type="text" id="asistencia_ene" name="asistencia_ene" value="'.$datos->asistencia_ene.'" class="form-control number" aria-label="asistencia_ene">';
+                                        echo '<input type="text" id="asistencia_ene" name="asistencia_ene" value="'.$datos->asistencia_ene.'" class="form-control number asistencia" onchange="sumar();"  aria-label="asistencia_ene">';
                                     }else {
-                                        echo '<input type="text" id="number" name="asistencia_ene" value="0" class="form-control number" placeholder="0" aria-label="asistencia_ene">';
+                                        echo '<input type="text" id="number" name="asistencia_ene" value="0" class="form-control number asistencia" placeholder="0" onchange="sumar();"  aria-label="asistencia_ene">';
                                     }
                                     
                                 }else{
-                                    echo '<input type="text" id="number" name="asistencia_ene" value="0" class="form-control number" placeholder="0" aria-label="asistencia_ene">';
+                                    echo '<input type="text" id="number" name="asistencia_ene" value="0" class="form-control number asistencia" placeholder="0" onchange="sumar();"  aria-label="asistencia_ene">';
                                 }
 
                             ?>
@@ -138,13 +146,13 @@
                             <?php
                                 if ($datos != NULL) {
                                     if ($datos->asistencia_feb != NULL && isset($datos->asistencia_feb) && $datos->asistencia_feb != '' ) {
-                                        echo '<input type="text" id="asistencia_feb" name="asistencia_feb" value="'.$datos->asistencia_feb.'" class="form-control number" aria-label="asistencia_feb">';
+                                        echo '<input type="text" id="asistencia_feb" name="asistencia_feb" value="'.$datos->asistencia_feb.'" class="form-control number asistencia" onchange="sumar();"  aria-label="asistencia_feb">';
                                     }else {
-                                        echo '<input type="text" id="number" name="asistencia_feb" value="0" class="form-control number" placeholder="0" aria-label="asistencia_feb">';
+                                        echo '<input type="text" id="number" name="asistencia_feb" value="0" class="form-control number asistencia" placeholder="0" onchange="sumar();"  aria-label="asistencia_feb">';
                                     }
                                     
                                 }else{
-                                    echo '<input type="text" id="number" name="asistencia_feb" value="0" class="form-control number" placeholder="0" aria-label="asistencia_feb">';
+                                    echo '<input type="text" id="number" name="asistencia_feb" value="0" class="form-control number asistencia" placeholder="0" onchange="sumar();"  aria-label="asistencia_feb">';
                                 }
 
                             ?>
@@ -154,13 +162,13 @@
                             <?php
                                 if ($datos != NULL) {
                                     if ($datos->asistencia_mar != NULL && isset($datos->asistencia_mar) && $datos->asistencia_mar != '' ) {
-                                        echo '<input type="text" id="asistencia_mar" name="asistencia_mar" value="'.$datos->asistencia_mar.'" class="form-control number" aria-label="asistencia_mar">';
+                                        echo '<input type="text" id="asistencia_mar" name="asistencia_mar" value="'.$datos->asistencia_mar.'" class="form-control number asistencia" placeholder="0" onchange="sumar();"  aria-label="asistencia_mar">';
                                     }else {
-                                        echo '<input type="text" id="number" name="asistencia_mar" value="0" class="form-control number" placeholder="0" aria-label="asistencia_mar">';
+                                        echo '<input type="text" id="number" name="asistencia_mar" value="0" class="form-control number asistencia" placeholder="0" onchange="sumar();"  aria-label="asistencia_mar">';
                                     }
                                     
                                 }else{
-                                    echo '<input type="text" id="number" name="asistencia_mar" value="0" class="form-control number" placeholder="0" aria-label="asistencia_mar">';
+                                    echo '<input type="text" id="number" name="asistencia_mar" value="0" class="form-control number asistencia" placeholder="0" onchange="sumar();"   aria-label="asistencia_mar">';
                                 }
 
                             ?>
@@ -172,49 +180,54 @@
                             <?php
                                 if ($datos != NULL) {
                                     if ($datos->asistencia_abr != NULL && isset($datos->asistencia_abr) && $datos->asistencia_abr != '' ) {
-                                        echo '<input type="text" id="asistencia_abr" name="asistencia_abr" value="'.$datos->asistencia_abr.'" class="form-control number" aria-label="asistencia_abr">';
+                                        echo '<input type="text" id="asistencia_abr" name="asistencia_abr" value="'.$datos->asistencia_abr.'" class="form-control number asistencia" onchange="sumar();"  aria-label="asistencia_abr">';
                                     }else {
-                                        echo '<input type="text" id="number" name="asistencia_abr" value="0" class="form-control number" placeholder="0" aria-label="asistencia_abr">';
+                                        echo '<input type="text" id="number" name="asistencia_abr" value="0" class="form-control number asistencia" placeholder="0" onchange="sumar();"  aria-label="asistencia_abr">';
                                     }
                                     
                                 }else{
-                                    echo '<input type="text" id="number" name="asistencia_abr" value="0" class="form-control number" placeholder="0" aria-label="asistencia_abr">';
+                                    echo '<input type="text" id="number" name="asistencia_abr" value="0" class="form-control number asistencia" placeholder="0" onchange="sumar();"  aria-label="asistencia_abr">';
                                 }
 
                             ?>
                         </div>
                         <div class="col-md-4 mb-3">
-                            <label for="asistencia_may">% ASISTENCIA MAY:</label>
                             <?php
-                                if ($datos != NULL) {
-                                    if ($datos->asistencia_may != NULL && isset($datos->asistencia_may) && $datos->asistencia_may != '' ) {
-                                        echo '<input type="text" id="asistencia_may" name="asistencia_may" value="'.$datos->asistencia_may.'" class="form-control number" aria-label="asistencia_may">';
-                                    }else {
-                                        echo '<input type="text" id="number" name="asistencia_may" value="0" class="form-control number" placeholder="0" aria-label="asistencia_may">';
-                                    }
+                                
+                                if ($datos->regimen == 'SIERRA') {
+                                    echo '<label for="asistencia_may">% ASISTENCIA MAY:</label>';
+                                            if ($datos != NULL) {
+                                                if ($datos->asistencia_may != NULL && isset($datos->asistencia_may) && $datos->asistencia_may != '' ) {
+                                                    echo '<input type="text" id="asistencia_may" name="asistencia_may" value="'.$datos->asistencia_may.'" class="form-control number asistencia" onchange="sumar();"  aria-label="asistencia_may">';
+                                                }else {
+                                                    echo '<input type="text" id="number" name="asistencia_may" value="0" class="form-control number asistencia" placeholder="0" onchange="sumar();"  aria-label="asistencia_may">';
+                                                }
+                                                
+                                            }else{
+                                                echo '<input type="text" id="number" name="asistencia_may" value="0" class="form-control number asistencia" placeholder="0" onchange="sumar();"  aria-label="asistencia_may">';
+                                            }
                                     
-                                }else{
-                                    echo '<input type="text" id="number" name="asistencia_may" value="0" class="form-control number" placeholder="0" aria-label="asistencia_may">';
                                 }
-
                             ?>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-4 mb-3">
-                            <label for="asistencia_jun">% ASISTENCIA JUN:</label>
                             <?php
-                                if ($datos != NULL) {
-                                    if ($datos->asistencia_jun != NULL && isset($datos->asistencia_jun) && $datos->asistencia_jun != '' ) {
-                                        echo '<input type="text" id="asistencia_jun" name="asistencia_jun" value="'.$datos->asistencia_jun.'" class="form-control number" aria-label="asistencia_jun">';
-                                    }else {
-                                        echo '<input type="text" id="number" name="asistencia_jun" value="0" class="form-control number" placeholder="0" aria-label="asistencia_jun">';
-                                    }
-                                    
-                                }else{
-                                    echo '<input type="text" id="number" name="asistencia_jun" value="0" class="form-control number" placeholder="0" aria-label="asistencia_jun">';
+                                
+                                if ($datos->regimen == 'SIERRA') {
+                                    echo '<label for="asistencia_jun">% ASISTENCIA JUN:</label>';
+                                        if ($datos != NULL) {
+                                            if ($datos->asistencia_jun != NULL && isset($datos->asistencia_jun) && $datos->asistencia_jun != '' ) {
+                                                echo '<input type="text" id="asistencia_jun" name="asistencia_jun" value="'.$datos->asistencia_jun.'" class="form-control number asistencia" onchange="sumar();"  aria-label="asistencia_jun">';
+                                            }else {
+                                                echo '<input type="text" id="number" name="asistencia_jun" value="0" class="form-control number asistencia" placeholder="0" onchange="sumar();"  aria-label="asistencia_jun">';
+                                            }
+                                            
+                                        }else{
+                                            echo '<input type="text" id="number" name="asistencia_jun" value="0" class="form-control number asistencia" placeholder="0" onchange="sumar();"  aria-label="asistencia_jun">';
+                                        }
                                 }
-
                             ?>
                         </div>
                         <div class="col-md-4 mb-3">
@@ -222,13 +235,13 @@
                             <?php
                                 if ($datos != NULL) {
                                     if ($datos->asistencia_total != NULL && isset($datos->asistencia_total) && $datos->asistencia_total != '' ) {
-                                        echo '<input type="text" id="asistencia_total" name="asistencia_total" value="'.$datos->asistencia_total.'" class="form-control number" aria-label="asistencia_total">';
+                                        echo '<input type="text" id="asistencia_total" name="asistencia_total" value="'.$datos->asistencia_total.'" class="form-control number"  aria-label="asistencia_total">';
                                     }else {
-                                        echo '<input type="text" id="number" name="asistencia_total" value="0" class="form-control number" placeholder="0" aria-label="asistencia_total">';
+                                        echo '<input type="text" id="number" name="asistencia_total" value="0" class="form-control number" placeholder="0"  aria-label="asistencia_total">';
                                     }
                                     
                                 }else{
-                                    echo '<input type="text" id="number" name="asistencia_total" value="0" class="form-control number" placeholder="0" aria-label="asistencia_total">';
+                                    echo '<input type="text" id="number" name="asistencia_total" value="0" class="form-control number" placeholder="0"  aria-label="asistencia_total">';
                                 }
 
                             ?>
@@ -240,13 +253,13 @@
                             <?php
                                 if ($datos != NULL) {
                                     if ($datos->rendimiento_quim_1 != NULL && isset($datos->rendimiento_quim_1) && $datos->rendimiento_quim_1 != '' ) {
-                                        echo '<input type="text" id="rendimiento_quim_1" name="rendimiento_quim_1" value="'.$datos->rendimiento_quim_1.'" class="form-control number" step=".01" aria-label="rendimiento_quim_1">';
+                                        echo '<input type="text" id="rendimiento_quim_1" name="rendimiento_quim_1" value="'.$datos->rendimiento_quim_1.'" class="form-control number quimestre" onchange="promedioQuimestral();" step=".01" aria-label="rendimiento_quim_1">';
                                     }else {
-                                        echo '<input type="text" name="rendimiento_quim_1" value="0" class="form-control number" placeholder="0" step=".01" aria-label="rendimiento_quim_1">';
+                                        echo '<input type="text" name="rendimiento_quim_1" value="0" class="form-control number quimestre" placeholder="0" onchange="promedioQuimestral();" step=".01" aria-label="rendimiento_quim_1">';
                                     }
                                     
                                 }else{
-                                    echo '<input type="text" id="number" name="rendimiento_quim_1" value="0" class="form-control number" placeholder="0" step=".01" aria-label="rendimiento_quim_1">';
+                                    echo '<input type="text" id="number" name="rendimiento_quim_1" value="0" class="form-control number quimestre" placeholder="0" onchange="promedioQuimestral();" step=".01" aria-label="rendimiento_quim_1">';
                                 }
 
                             ?>
@@ -256,13 +269,13 @@
                             <?php
                                 if ($datos != NULL) {
                                     if ($datos->rendimiento_quim_2 != NULL && isset($datos->rendimiento_quim_2) && $datos->rendimiento_quim_2 != '' ) {
-                                        echo '<input type="text"  id="rendimiento_quim_2" name="rendimiento_quim_2" value="'.$datos->rendimiento_quim_2.'" class="form-control number" step=".01" aria-label="rendimiento_quim_2">';
+                                        echo '<input type="text"  id="rendimiento_quim_2" name="rendimiento_quim_2" value="'.$datos->rendimiento_quim_2.'" class="form-control number quimestre" onchange="promedioQuimestral();" step=".01" aria-label="rendimiento_quim_2">';
                                     }else {
-                                        echo '<input type="text" name="rendimiento_quim_2" value="0" class="form-control number" placeholder="0" step=".01" aria-label="rendimiento_quim_2">';
+                                        echo '<input type="text" name="rendimiento_quim_2" value="0" class="form-control number quimestre" placeholder="0" onchange="promedioQuimestral();" step=".01" aria-label="rendimiento_quim_2">';
                                     }
                                     
                                 }else{
-                                    echo '<input type="text" id="number" name="rendimiento_quim_2" value="0" class="form-control number" placeholder="0" step=".01" aria-label="rendimiento_quim_2">';
+                                    echo '<input type="text" id="number" name="rendimiento_quim_2" value="0" class="form-control number quimestre" placeholder="0" onchange="promedioQuimestral();" step=".01" aria-label="rendimiento_quim_2">';
                                 }
 
                             ?>
@@ -669,11 +682,46 @@
     </div>
 </main>
 <script>
+
     $(document).ready(function(){
         jQuery('.number').keypress(function(tecla){
             if(tecla.charCode < 48 || tecla.charCode > 57){
-                return false;
+                //console.log(tecla.charCode);
+                if (tecla.charCode == 46) {
+                    return true;
+                }else{
+                    return false;
+                }
             }
         });
     });
+    
+    function sumar(){
+        const regimen = JSON.parse(`<?php echo $region; ?>`);
+        const total = document.getElementById('asistencia_total');
+        let subtotal = 0;
+        [ ...document.getElementsByClassName( "asistencia" ) ].forEach( function ( element ) {
+            if(element.value !== '') {
+            subtotal += parseFloat(element.value);
+            }
+        });
+        if (regimen == "SIERRA") {
+            total.value = (subtotal/9).toFixed(2);
+        }else{
+            total.value = (subtotal/7).toFixed(2);
+        }
+        
+    }
+
+    function promedioQuimestral(){
+        const promedio = document.getElementById('prom_final');
+        var subtotal = 0;
+        [ ...document.getElementsByClassName( "quimestre" ) ].forEach( function ( element ) {
+            if(element.value !== '') {
+            subtotal += parseFloat(element.value);
+            }
+        });
+        
+        promedio.value = (subtotal/2).toFixed(2);
+    }
 </script>

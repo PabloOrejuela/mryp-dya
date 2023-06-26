@@ -21,6 +21,7 @@
                                             <a href="'.site_url().'prod2-nap4-menu" class="btn btn-info mb-2">NAP 4 - Estudiantes MINEDUC Presencial</a>
                                             <a href="'.site_url().'prod2-nap5-menu" class="btn btn-info mb-2">NAP 5 - Docentes MINEDUC Presencial</a>
                                             <a href="'.site_url().'prod2-nap6-menu" class="btn btn-info mb-2">NAP 6 - Estudiantes MINEDUC Virtual</a>
+                                            <a href="'.site_url().'prod2-nap7-menu" class="btn btn-info mb-2">NAP 7 - Docentes MINEDUC Virtual</a>
                                     </div>
                                 </div>';
                         }

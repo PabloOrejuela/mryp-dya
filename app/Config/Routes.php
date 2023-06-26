@@ -103,6 +103,7 @@ $routes->post('cargar-nap6', 'CargarInformacion::cargar_nap6');
 //NAP2
 $routes->get('prod-2-menu', 'Prod2::index');
 $routes->get('prod2-nap2-menu', 'Prod2::nap2_procesos_grid');
+$routes->get('prod2-nap2-frm-edit/(:num)', 'Prod2::prod2_nap2_frm_edit/$1');
 $routes->get('nap2-reg-procesos-form/(:num)', 'Prod2::nap2_reg_procesos_form/$1');
 $routes->post('nap2-process-update', 'Prod2::nap2_process_update');
 
@@ -125,6 +126,11 @@ $routes->post('nap5-process-update', 'Prod2::nap5_process_update');
 $routes->get('prod2-nap6-menu', 'Prod2::nap6_procesos_grid');
 $routes->get('nap6-reg-procesos-form/(:num)', 'Prod2::nap6_reg_procesos_form/$1');
 $routes->post('nap6-process-update', 'Prod2::nap6_process_update');
+
+//NAP7
+$routes->get('prod2-nap7-menu', 'Prod2::nap7_procesos_grid');
+$routes->get('nap7-reg-procesos-form/(:num)', 'Prod2::nap7_reg_procesos_form/$1');
+$routes->post('nap7-process-update', 'Prod2::nap7_process_update');
 
 
 //REPORTES ESTÁTICOS

@@ -36,6 +36,34 @@ class Prod2 extends BaseController {
         
     }
 
+    public function prod2_nap2_frm_edit($id) {
+        $data['idrol'] = $this->session->idrol;
+        $data['id'] = $this->session->idusuario;
+        $data['is_logged'] = $this->session->is_logged;
+        $data['nombre'] = $this->session->nombre;
+        $data['componente_2'] = $this->session->componente_2;
+
+        if ($data['is_logged'] == 1 && $data['componente_2'] == 1) {
+            
+            if ($this->session->idrol == 2) {
+                $data['centros'] = $this->nap2Model->_getMisAmie($this->session->nombre);
+            }else{
+                $data['centros'] = $this->nap2Model->_getCentrosEducativos();
+            }
+            
+            $data['datos'] = $this->nap2Model->find($id);
+
+            //echo '<pre>'.var_export($data['centros'], true).'</pre>';exit;
+
+            $data['title']='MYRP - NAP2 | Estudiantes DYA ';
+            $data['main_content']='componente2/nap2/prod2_edit_view';
+            return view('includes/template', $data);
+        }else{
+
+            $this->logout();
+        }
+    }
+
     public function nap2_procesos_grid() {
         $data['idrol'] = $this->session->idrol;
         $data['id'] = $this->session->idusuario;
@@ -49,9 +77,9 @@ class Prod2 extends BaseController {
                 //PABLO hacer el filtro por Profesor del NAP
                 $data['nap2'] = $this->nap2Model->_getMisRegistrosNap2($data['nombre']);
             }else{
-                $data['nap2'] = $this->nap2Model->findAll();
+                $data['nap2'] = $this->nap2Model->_getRegistrosNap2();
             }
-            //echo '<pre>'.var_export($data['nap2'], true).'</pre>';exit;
+            
             $data['title']='MYRP - DYA';
             $data['main_content']='componente2/nap2/nap2_process_view';
             return view('includes/template', $data);
@@ -73,6 +101,7 @@ class Prod2 extends BaseController {
             $data['datos'] = $this->nap2ProcessResult->_getNap2Process($idest);
             $data['est'] = $this->nap2Model->find($idest);
             $data['cursos'] = $this->cursoModel->findAll();
+            $data['region'] = json_encode($data['datos']->regimen);
 
             $data['title']='MYRP - DYA';
             $data['main_content']='componente2/nap2/edit_process_view';
@@ -152,7 +181,7 @@ class Prod2 extends BaseController {
                 //PABLO hacer el filtro por Profesor del NAP
                 $data['nap3'] = $this->nap3Model->_getMisRegistrosNap3($data['nombre']);
             }else{
-                $data['nap3'] = $this->nap3Model->findAll();
+                $data['nap3'] = $this->nap3Model->_getRegistrosNap3();
             }
             //echo '<pre>'.var_export($data['nap2'], true).'</pre>';exit;
             $data['title']='MYRP - DYA';
@@ -268,7 +297,7 @@ class Prod2 extends BaseController {
                 //PABLO hacer el filtro por Profesor del NAP
                 $data['nap4'] = $this->nap4Model->_getMisRegistrosNap4($data['nombre']);
             }else{
-                $data['nap4'] = $this->nap4Model->findAll();
+                $data['nap4'] = $this->nap4Model->_getRegistrosNap4();
             }
             //echo '<pre>'.var_export($data['nap2'], true).'</pre>';exit;
             $data['title']='MYRP - DYA';
@@ -352,7 +381,7 @@ class Prod2 extends BaseController {
                 //PABLO hacer el filtro por Profesor del NAP
                 $data['nap5'] = $this->nap5Model->_getMisRegistrosNap5($data['nombre']);
             }else{
-                $data['nap5'] = $this->nap5Model->findAll();
+                $data['nap5'] = $this->nap5Model->_getRegistrosNap5();
             }
             //echo '<pre>'.var_export($data['nap2'], true).'</pre>';exit;
             $data['title']='MYRP - DYA';
@@ -461,7 +490,7 @@ class Prod2 extends BaseController {
                 //PABLO hacer el filtro por Profesor del NAP
                 $data['nap6'] = $this->nap6Model->_getMisRegistrosNap6($data['nombre']);
             }else{
-                $data['nap6'] = $this->nap6Model->findAll();
+                $data['nap6'] = $this->nap6Model->_getRegistrosNap6();
             }
             //echo '<pre>'.var_export($data['nap2'], true).'</pre>';exit;
             $data['title']='MYRP - DYA';
@@ -521,6 +550,31 @@ class Prod2 extends BaseController {
             }
 
             return redirect()->to('prod2-nap6-menu');
+        }else{
+
+            $this->logout();
+        }
+    }
+
+    public function nap7_procesos_grid() {
+        $data['idrol'] = $this->session->idrol;
+        $data['id'] = $this->session->idusuario;
+        $data['is_logged'] = $this->session->is_logged;
+        $data['nombre'] = $this->session->nombre;
+        $data['componente_2'] = $this->session->componente_2;
+
+        if ($data['is_logged'] == 1 && $data['componente_2'] == 1) {
+
+            if ($this->session->idrol == 2) {
+                //PABLO hacer el filtro por Profesor del NAP
+                $data['nap7'] = $this->nap7Model->_getMisRegistrosNap7($data['nombre']);
+            }else{
+                $data['nap7'] = $this->nap7Model->_getRegistrosNap7();
+            }
+            //echo '<pre>'.var_export($data['nap2'], true).'</pre>';exit;
+            $data['title']='MYRP - DYA';
+            $data['main_content']='componente2/nap7/nap7_process_view';
+            return view('includes/template', $data);
         }else{
 
             $this->logout();

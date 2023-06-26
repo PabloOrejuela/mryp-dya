@@ -1,6 +1,6 @@
 <main class="container px-2">
     <div class="container-fluid px-0">
-        <h3 class="mt-4"><?= esc($title).' - Estudientes MINEDUC Virtual'; ?></h3>
+        <h3 class="mt-4"><?= esc($title).' - Docentes MINEDUC Virtual'; ?></h3>
                     
         <div class="card mb-4">
             <div class="card-header">
@@ -20,8 +20,8 @@
                     </thead>
                     <tbody>
                     <?php
-                        if (isset($nap6) && $nap6 != NULL) {
-                            foreach ($nap6 as $key => $value) {
+                        if (isset($nap7) && $nap7 != NULL) {
+                            foreach ($nap7 as $key => $value) {
                                 echo '<tr>
                                         <td>'.$value->id.'</td>
                                         <td>'.$value->nombres_est.' '.$value->apellidos_est.'</td>

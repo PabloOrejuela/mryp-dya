@@ -13,6 +13,8 @@
                         <th>No.</th>
                         <th>Nombre</th>
                         <th>Amie</th>
+                        <th>Centro educativo</th>
+                        <th>Régimen</th>
                         <th>Documento</th>
                         <th>Registro de procesos</th>
                     </thead>
@@ -24,6 +26,8 @@
                                         <td>'.$value->idnap3 .'</td>
                                         <td>'.$value->nombres.' '.$value->apellidos.'</td>
                                         <td>'.$value->amie.'</td>
+                                        <td>'.$value->nombre.'</td>
+                                        <td>'.$value->regimen.'</td>
                                         <td>'.$value->documento.'</td>
                                         <td>
                                             <div class="contenedor">

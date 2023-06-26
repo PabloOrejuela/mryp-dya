@@ -4,45 +4,17 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class Nap4Model extends Model {
+class Nap7Model extends Model {
 
     protected $DBGroup          = 'default';
-    protected $table            = 'nap4_mineduc_est_pres';
+    protected $table            = 'nap7_mineduc_doc_virt';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $insertID         = 0;
     protected $returnType       = 'object';
     protected $useSoftDeletes   = false;
-    protected $protectFields    = true;
-    protected $allowedFields    = [
-        'amie',
-        'anio_lectivo',
-        'documento',
-        'apellidos',
-        'nombres',
-        'nacionalidad',
-        'etnia',
-        'genero',
-        'fecha_nac',
-        'edad',
-        'nivel',
-        'discapacidad',
-        'tipo_discapacidad',
-        'institucion',
-        'doc_tutor',
-        'docente_tutor',
-        'email_tutor',
-        'telf_tutor',
-        'etnia_tutor',
-        'documento_rep',
-        'representante',
-        'parentesto_rep',
-        'nacionalidad_rep',
-        'direccion_rep',
-        'contacto_telf',
-        'email',
-        'observaciones',
-    ];
+    protected $protectFields    = false;
+    protected $allowedFields    = [];
 
     // Dates
     protected $useTimestamps = false;
@@ -70,12 +42,12 @@ class Nap4Model extends Model {
 
     /**
      *
-     * Esta función trae los registros que tienen el NAP 4 sin filtrar por Técnico
+     * Esta función trae los registros que tienen el NAP 7 sin filtrar por Técnico
      *
      * @param Type $var El código amie del CE
      * @return array
      **/
-    public function _getRegistrosNap4() {
+    public function _getRegistrosNap7() {
         $result = NULL;
         $builder = $this->db->table($this->table);
         $builder->select('*');

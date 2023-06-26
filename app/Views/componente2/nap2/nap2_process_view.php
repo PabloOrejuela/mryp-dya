@@ -13,6 +13,8 @@
                         <th>No.</th>
                         <th>Nombre</th>
                         <th>Amie</th>
+                        <th>Centro educativo</th>
+                        <th>Régimen</th>
                         <th>Documento</th>
                         <th>Registro de procesos</th>
                     </thead>
@@ -22,8 +24,10 @@
                             foreach ($nap2 as $key => $value) {
                                 echo '<tr>
                                         <td>'.$value->id.'</td>
-                                        <td>'.$value->nombres.' '.$value->apellidos.'</td>
+                                        <td><a href="'.site_url().'prod2-nap2-frm-edit/'.$value->id.'">'.$value->nombres.' '.$value->apellidos.'</a></td>
                                         <td>'.$value->amie.'</td>
+                                        <td>'.$value->nombre.'</td>
+                                        <td>'.$value->regimen.'</td>
                                         <td>'.$value->documento.'</td>
                                         <td>
                                             <div class="contenedor">

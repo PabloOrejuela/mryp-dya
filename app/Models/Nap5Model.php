@@ -55,4 +55,27 @@ class Nap5Model extends Model {
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
+
+    /**
+     *
+     * Esta función trae los registros que tienen el NAP 5 sin filtrar por Técnico
+     *
+     * @param Type $var El código amie del CE
+     * @return array
+     **/
+    public function _getRegistrosNap5() {
+        $result = NULL;
+        $builder = $this->db->table($this->table);
+        $builder->select('*');
+        $builder->join('centro_educativo','centro_educativo.amie = '.$this->table.'.amie');
+        $builder->orderBy('id');
+        $query = $builder->get();
+        if ($query->getResult() != null) {
+            foreach ($query->getResult() as $row) {
+                $result[] = $row;
+            }
+        }
+        //echo $this->db->getLastQuery();
+        return $result;
+    }
 }

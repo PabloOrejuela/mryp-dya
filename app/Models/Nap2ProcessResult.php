@@ -43,7 +43,10 @@ class Nap2ProcessResult extends Model {
     public function _getNap2Process($id) {
         $result = NULL;
         $builder = $this->db->table($this->table);
-        $builder->select('*')->where('idestudiante', $id);
+        $builder->select('*');
+        $builder->join('nap2_est_dya','nap2_est_dya.id = '.$this->table.'.idestudiante');
+        $builder->join('centro_educativo','centro_educativo.amie = nap2_est_dya.amie');
+        $builder->where('idestudiante', $id);
         $query = $builder->get();
         if ($query->getResult() != null) {
             foreach ($query->getResult() as $row) {

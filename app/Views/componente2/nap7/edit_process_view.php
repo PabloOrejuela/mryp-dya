@@ -1,12 +1,15 @@
 <style>
+    .form-control{
+        font-size: 0.8em;
+    }
     #titulo-nombre{
         color: rgb(106, 145, 40);
     }
 </style>
 <main class="container-md px-2 mb-4">
     <div class="container-fluid px-0">
-        <h3 class="mt-4" id="titulo-nombre"><?= esc($title).' | Estudientes MINEDUC Virtual'; ?></h3>
-        <h4 class="mt-4" id="titulo-nombre"><?= 'NOMBRE: '.$est->apellidos_est.' '.$est->nombres_est ; ?></h4>
+        <h3 class="mt-4" id="titulo-nombre"><?= esc($title).' | Docentes MINEDUC Virtual'; ?></h3>
+        <h4 class="mt-4" id="titulo-nombre"><?= 'NOMBRE: '.$est->apellidos.' '.$est->nombres ; ?></h4>
         <div class="card mb-4">
             <div class="card-body">
                 <h5 class="mt-3"><?= esc ('RESULTADO'); ?></h5>

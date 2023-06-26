@@ -84,4 +84,46 @@ class Nap2Model extends Model {
         //echo $this->db->getLastQuery();
         return $result;
     }
+
+    public function _getCentrosEducativos() {
+        $result = NULL;
+        $builder = $this->db->table($this->table);
+        $builder->select('nap2_est_dya.amie as amie, nombre');
+        $builder->distinct();
+        $builder->join('centro_educativo', 'centro_educativo.amie = nap2_est_dya.amie');
+        $builder->orderBy('nombre');
+        $query = $builder->get();
+        if ($query->getResult() != null) {
+            foreach ($query->getResult() as $row) {
+                if ($row->amie != NULL && $row != '') {
+                    $result[] = $row;
+                }
+            }
+        }
+        //echo $this->db->getLastQuery();
+        return $result;
+    }
+
+    /**
+     *
+     * Esta función trae los registros que tienen el NAP 2 sin filtrar por Técnico
+     *
+     * @param Type $var El código amie del CE
+     * @return array
+     **/
+    public function _getRegistrosNap2() {
+        $result = NULL;
+        $builder = $this->db->table($this->table);
+        $builder->select('*');
+        $builder->join('centro_educativo','centro_educativo.amie = '.$this->table.'.amie');
+        $builder->orderBy('id');
+        $query = $builder->get();
+        if ($query->getResult() != null) {
+            foreach ($query->getResult() as $row) {
+                $result[] = $row;
+            }
+        }
+        //echo $this->db->getLastQuery();
+        return $result;
+    }
 }

@@ -1,14 +1,12 @@
 <style>
-    .form-control{
-        font-size: 0.8em;
-    }
     #titulo-nombre{
         color: rgb(106, 145, 40);
     }
 </style>
 <main class="container-md px-2 mb-4">
     <div class="container-fluid px-0">
-        <h4 class="mt-4" id="titulo-nombre"><?= esc($title).' : '.$est->apellidos.' '.$est->nombres ; ?></h4>
+        <h3 class="mt-4" id="titulo-nombre"><?= esc($title).' | Docentes DYA'; ?></h3>
+        <h4 class="mt-4" id="titulo-nombre"><?= 'NOMBRE: '.$est->apellidos.' '.$est->nombres ; ?></h4>
         <div class="card mb-4">
             <div class="card-body">
                 <h3 class="mt-3"><?= esc ('ACOMPAÑAMIENTOS Y CAPACITACIONES'); ?></h3>
