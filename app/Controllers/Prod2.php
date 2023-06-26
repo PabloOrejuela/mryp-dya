@@ -605,4 +605,18 @@ class Prod2 extends BaseController {
             $this->logout();
         }
     }
+
+    public function logout(){
+        //destruyo la session  y salgo
+        $this->session->destroy();
+
+        $user = [
+            'id' => $this->session->idusuario,
+            'is_logged' => 0
+        ];
+        
+        $this->usuarioModel->_updateLoggin($user);
+        
+        return redirect()->to('/');
+    }
 }

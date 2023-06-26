@@ -85,4 +85,12 @@ class UsuarioModel extends Model {
         //echo $this->db->getLastQuery();
         return $result;
     }
+
+    function _updateLoggin($usuario){
+        $result = NULL;
+        $builder = $this->db->table('usuarios');
+        $builder->set('is_logged', $usuario['is_logged']);
+        $builder->where('id', $usuario['id']);
+        $builder->update();
+    }
 }

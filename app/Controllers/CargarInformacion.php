@@ -840,14 +840,14 @@ class CargarInformacion extends BaseController {
 
     public function logout(){
         //destruyo la session  y salgo
-        $data['idusuario'] = $this->session->idusuario;
         $this->session->destroy();
 
         $user = [
-            'is_logged' => 1
+            'id' => $this->session->idusuario,
+            'is_logged' => 0
         ];
         
-        $this->usuarioModel->update($usuario->id, $user);
+        $this->usuarioModel->_updateLoggin($user);
         
         return redirect()->to('/');
     }
