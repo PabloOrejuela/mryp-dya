@@ -99,6 +99,7 @@ $routes->post('cargar-nap3', 'CargarInformacion::cargar_nap3');
 $routes->post('cargar-nap4', 'CargarInformacion::cargar_nap4');
 $routes->post('cargar-nap5', 'CargarInformacion::cargar_nap5');
 $routes->post('cargar-nap6', 'CargarInformacion::cargar_nap6');
+$routes->post('cargar-nap7', 'CargarInformacion::cargar_nap7');
 
 //NAP2
 $routes->get('prod-2-menu', 'Prod2::index');

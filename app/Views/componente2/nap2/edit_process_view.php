@@ -6,7 +6,7 @@
 <main class="container-md px-2 mb-4">
     <div class="container-fluid px-0">
         <h3 class="mt-4" id="titulo-nombre"><?= esc($title).' | Estudiantes DYA'; ?></h3>
-        <h4 class="mt-4" id="titulo-nombre"><?= 'NOMBRE: '.$est->apellidos.' '.$est->nombres ; ?></h4>
+        <h4 class="mt-4" id="titulo-nombre"><?= 'NOMBRE: '.$est->apellidos.' '.$est->nombres.' - REGIMEN: '.$centro_educativo->regimen; ?></h4>
         <div class="card mb-4">
             <div class="card-body">
                 <h3 class="mt-3"><?= esc ('PROCESO'); ?></h3>
@@ -192,22 +192,22 @@
                             ?>
                         </div>
                         <div class="col-md-4 mb-3">
-                            <?php
+                            <?php 
                                 
-                                if ($datos->regimen == 'SIERRA') {
-                                    echo '<label for="asistencia_may">% ASISTENCIA MAY:</label>';
-                                            if ($datos != NULL) {
-                                                if ($datos->asistencia_may != NULL && isset($datos->asistencia_may) && $datos->asistencia_may != '' ) {
-                                                    echo '<input type="text" id="asistencia_may" name="asistencia_may" value="'.$datos->asistencia_may.'" class="form-control number asistencia" onchange="sumar();"  aria-label="asistencia_may">';
-                                                }else {
-                                                    echo '<input type="text" id="number" name="asistencia_may" value="0" class="form-control number asistencia" placeholder="0" onchange="sumar();"  aria-label="asistencia_may">';
-                                                }
-                                                
-                                            }else{
+                                if ($centro_educativo->regimen == 'SIERRA') {
+                                    if ($datos != NULL) {
+                                        echo '<label for="asistencia_may">% ASISTENCIA MAY:</label>';
+                                            if ($datos->asistencia_may != NULL && isset($datos->asistencia_may) && $datos->asistencia_may != '' ) {
+                                                echo '<input type="text" id="asistencia_may" name="asistencia_may" value="'.$datos->asistencia_may.'" class="form-control number asistencia" onchange="sumar();"  aria-label="asistencia_may">';
+                                            }else {
                                                 echo '<input type="text" id="number" name="asistencia_may" value="0" class="form-control number asistencia" placeholder="0" onchange="sumar();"  aria-label="asistencia_may">';
                                             }
-                                    
+                                    }else {
+                                        echo '<label for="asistencia_may">% ASISTENCIA MAY:</label>';
+                                        echo '<input type="text" id="number" name="asistencia_may" value="0" class="form-control number asistencia" placeholder="0" onchange="sumar();"  aria-label="asistencia_may">';
+                                    }
                                 }
+                                
                             ?>
                         </div>
                     </div>
@@ -215,18 +215,18 @@
                         <div class="col-md-4 mb-3">
                             <?php
                                 
-                                if ($datos->regimen == 'SIERRA') {
-                                    echo '<label for="asistencia_jun">% ASISTENCIA JUN:</label>';
-                                        if ($datos != NULL) {
+                                if ($centro_educativo->regimen == 'SIERRA') {
+                                    if ($datos != NULL) {
+                                        echo '<label for="asistencia_jun">% ASISTENCIA JUN:</label>';
                                             if ($datos->asistencia_jun != NULL && isset($datos->asistencia_jun) && $datos->asistencia_jun != '' ) {
                                                 echo '<input type="text" id="asistencia_jun" name="asistencia_jun" value="'.$datos->asistencia_jun.'" class="form-control number asistencia" onchange="sumar();"  aria-label="asistencia_jun">';
                                             }else {
                                                 echo '<input type="text" id="number" name="asistencia_jun" value="0" class="form-control number asistencia" placeholder="0" onchange="sumar();"  aria-label="asistencia_jun">';
                                             }
-                                            
-                                        }else{
-                                            echo '<input type="text" id="number" name="asistencia_jun" value="0" class="form-control number asistencia" placeholder="0" onchange="sumar();"  aria-label="asistencia_jun">';
-                                        }
+                                    }else {
+                                        echo '<label for="asistencia_jun">% ASISTENCIA JUN:</label>';
+                                        echo '<input type="text" id="number" name="asistencia_jun" value="0" class="form-control number asistencia" placeholder="0" onchange="sumar();"  aria-label="asistencia_jun">';
+                                    }
                                 }
                             ?>
                         </div>
@@ -671,7 +671,7 @@
                             ?>
                         </div>
                     </div>
-                    <?= form_hidden('id', $idest);  ?>
+                    <?= form_hidden('id', $id);  ?>
                     <button type="submit" class="btn btn-info mb-3">Actualizar</button>  
                 </form>         
             </div>

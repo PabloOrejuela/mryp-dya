@@ -704,6 +704,66 @@ class CargarInformacion extends BaseController {
         } 
     }
 
+    public function cargar_nap7(){
+        
+        //Creo la ruta
+        $ruta = './public/excel/';
+        
+        //Recibo el archivo excel
+        $file = $this->request->getFile('hoja');
+
+        //Verifico que sea válido
+        if (!$file->isValid()) {
+            return redirect()->to('cargar_info_extra_view');
+        }else{
+            //obtengo el nombre del archivo
+            $nameFile = $file->getName();
+
+            //Muevo el archjivo del temporal a la carpeta
+            $file->move($ruta);
+
+            //Verifico que se haya movido
+            if ($file->hasMoved()) {
+                //Creo qel reader
+                $reader = new XlsxReader();
+                //$reader = new \PhpOffice\PhpSpreadsheet\Reader\Xls();
+                $reader->setReadDataOnly(true);
+
+                //leo el archivo
+                $spreadsheet = $reader->load($ruta.$nameFile);
+
+                //Determino la pestaña 
+                $sheet = $spreadsheet->getSheet(0);
+
+                //Accedo a cada fila extrayendo los datos
+                foreach ($sheet->getRowIterator(5) as $row) {
+                
+                    $amie = trim($sheet->getCell('F'.$row->getRowIndex()));
+                    $num = trim($sheet->getCell('A'.$row->getRowIndex()));
+                
+                    $nap7 = array(
+                        'amie' => trim($sheet->getCell('F'.$row->getRowIndex())),
+                        'documento' => trim($sheet->getCell('k'.$row->getRowIndex())),
+                        'apellidos' => trim($sheet->getCell('L'.$row->getRowIndex())),
+                        'nombres' => trim($sheet->getCell('M'.$row->getRowIndex())),
+                        'genero' => trim($sheet->getCell('N'.$row->getRowIndex())),
+                        'autoidentificacion' => trim($sheet->getCell('O'.$row->getRowIndex())),
+                        'titulo_pro' => trim($sheet->getCell('P'.$row->getRowIndex())),
+                        'celular' => trim($sheet->getCell('Q'.$row->getRowIndex())),
+                        'email' => trim($sheet->getCell('R'.$row->getRowIndex())),
+                    );
+
+                    if ($amie == 'END') {
+                        break;
+                    }
+                    //INSERTO
+                    $this->nap7Model->insert($nap7);   
+                }
+                return redirect()->to('cargar_info_extra_view');
+            }
+        } 
+    }
+
     public function cargar_prod_3(){
         
         //Creo la ruta

@@ -24,14 +24,14 @@
                             foreach ($nap7 as $key => $value) {
                                 echo '<tr>
                                         <td>'.$value->id.'</td>
-                                        <td>'.$value->nombres_est.' '.$value->apellidos_est.'</td>
+                                        <td>'.$value->nombres.' '.$value->apellidos.'</td>
                                         <td>'.$value->amie.'</td>
                                         <td>'.$value->nombre.'</td>
                                         <td>'.$value->regimen.'</td>
                                         <td>'.$value->documento.'</td>
                                         <td>
                                             <div class="contenedor">
-                                                <a type="button" id="btn-register" href="'.site_url().'nap6-reg-procesos-form/'.$value->id.'" class="edit">
+                                                <a type="button" id="btn-register" href="'./*site_url().'nap7-reg-procesos-form/'.$value->id.*/'" class="edit">
                                                     <img src="'.site_url().'public/images/test.png" >
                                                 </a>
                                             </div>

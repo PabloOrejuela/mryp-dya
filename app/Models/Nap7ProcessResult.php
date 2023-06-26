@@ -39,4 +39,54 @@ class Nap7ProcessResult extends Model {
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
+
+    public function _getNap7Process($id) {
+        $result = NULL;
+        $builder = $this->db->table($this->table);
+        $builder->select('*')->where('idnap7', $id);
+        $query = $builder->get();
+        if ($query->getResult() != null) {
+            foreach ($query->getResult() as $row) {
+                $result = $row;
+            }
+        }
+        //echo $this->db->getLastQuery();
+        return $result;
+    }
+
+    public function _update($datos) {
+        $builder = $this->db->table($this->table);
+        if ($datos['edu_regular'] != 'NULL') {
+            $builder->set('edu_regular', $datos['edu_regular']);
+        }
+
+        if ($datos['nivel'] != 'NULL') {
+            $builder->set('nivel', $datos['nivel']);
+        }
+
+        if ($datos['institucion'] != 'NULL') {
+            $builder->set('institucion', $datos['institucion']);
+        }
+
+        $builder->where('idnap6', $datos['idnap6']);
+        $builder->update();
+    }
+
+    public function _save($datos) {
+        $builder = $this->db->table($this->table);
+        if ($datos['edu_regular'] != 'NULL') {
+            $builder->set('edu_regular', $datos['edu_regular']);
+        }
+
+        if ($datos['nivel'] != 'NULL') {
+            $builder->set('nivel', $datos['nivel']);
+        }
+
+        if ($datos['institucion'] != 'NULL') {
+            $builder->set('institucion', $datos['institucion']);
+        }
+        
+        $builder->set('idnap6', $datos['idnap6']);
+        $builder->insert();
+    }
 }

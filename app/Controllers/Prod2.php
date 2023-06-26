@@ -89,7 +89,7 @@ class Prod2 extends BaseController {
         }
     }
 
-    public function nap2_reg_procesos_form($idest) {
+    public function nap2_reg_procesos_form($id) {
         $data['idrol'] = $this->session->idrol;
         $data['id'] = $this->session->idusuario;
         $data['is_logged'] = $this->session->is_logged;
@@ -97,11 +97,13 @@ class Prod2 extends BaseController {
 
         if ($data['is_logged'] == 1) {
             
-            $data['idest'] = $idest;
-            $data['datos'] = $this->nap2ProcessResult->_getNap2Process($idest);
-            $data['est'] = $this->nap2Model->find($idest);
+            $data['id'] = $id;
+            $data['datos'] = $this->nap2ProcessResult->_getNap2Process($id);
+            $data['est'] = $this->nap2Model->find($id);
+            $data['centro_educativo'] = $this->centroEducativoModel->find($data['est']->amie);
             $data['cursos'] = $this->cursoModel->findAll();
-            $data['region'] = json_encode($data['datos']->regimen);
+            $data['region'] = json_encode($data['centro_educativo']->regimen);
+    
 
             $data['title']='MYRP - DYA';
             $data['main_content']='componente2/nap2/edit_process_view';
@@ -574,6 +576,29 @@ class Prod2 extends BaseController {
             //echo '<pre>'.var_export($data['nap2'], true).'</pre>';exit;
             $data['title']='MYRP - DYA';
             $data['main_content']='componente2/nap7/nap7_process_view';
+            return view('includes/template', $data);
+        }else{
+
+            $this->logout();
+        }
+    }
+
+    public function nap7_reg_procesos_form($id) {
+        $data['idrol'] = $this->session->idrol;
+        $data['id'] = $this->session->idusuario;
+        $data['is_logged'] = $this->session->is_logged;
+        $data['nombre'] = $this->session->nombre;
+
+        if ($data['is_logged'] == 1) {
+            
+            $data['id'] = $id;
+            $data['datos'] = $this->nap7ProcessResult->_getNap7Process($id);
+            $data['docente'] = $this->nap7Model->find($id);
+            $data['cursos'] = $this->cursoModel->findAll();
+
+
+            $data['title']='MYRP - DYA';
+            $data['main_content']='componente2/nap7/edit_process_view';
             return view('includes/template', $data);
         }else{
 

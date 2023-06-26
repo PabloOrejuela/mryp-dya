@@ -9,7 +9,7 @@
 <main class="container-md px-2 mb-4">
     <div class="container-fluid px-0">
         <h3 class="mt-4" id="titulo-nombre"><?= esc($title).' | Docentes MINEDUC Virtual'; ?></h3>
-        <h4 class="mt-4" id="titulo-nombre"><?= 'NOMBRE: '.$est->apellidos.' '.$est->nombres ; ?></h4>
+        <h4 class="mt-4" id="titulo-nombre"><?= 'NOMBRE: '.$docente->apellidos.' '.$docente->nombres ; ?></h4>
         <div class="card mb-4">
             <div class="card-body">
                 <h5 class="mt-3"><?= esc ('RESULTADO'); ?></h5>
@@ -95,7 +95,7 @@
                         </div>
                     </div>
     
-                    <?= form_hidden('id', $idest);  ?>
+                    <?= form_hidden('id', $id);  ?>
                     <button type="submit" class="btn btn-info mb-3">Actualizar</button>  
                 </form>         
             </div>
