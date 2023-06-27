@@ -117,4 +117,23 @@ class Prod3Model extends Model {
         //echo $this->db->getLastQuery();
         return $result;
     }
+
+    public function _getCentrosEducativosProd3() {
+        $result = NULL;
+        $builder = $this->db->table($this->table);
+        $builder->select('producto_3.amie as amie, centro_educativo.nombre as Centro');
+        $builder->distinct();
+        $builder->join('centro_educativo', 'centro_educativo.amie = producto_3.amie');
+        $builder->orderBy('Centro');
+        $query = $builder->get();
+        if ($query->getResult() != null) {
+            foreach ($query->getResult() as $row) {
+                if ($row->amie != NULL && $row != '') {
+                    $result[] = $row;
+                }
+            }
+        }
+        //echo $this->db->getLastQuery();
+        return $result;
+    }
 }

@@ -154,7 +154,26 @@ class Prod3 extends BaseController {
      **/
     public function prod_3_otros_procesos() {
 
-        echo 'Otros Procesos';
+        $data['idrol'] = $this->session->idrol;
+        $data['id'] = $this->session->idusuario;
+        $data['is_logged'] = $this->session->is_logged;
+        $data['nombre'] = $this->session->nombre;
+        $data['componente_3'] = $this->session->componente_3;
+
+        if ($data['is_logged'] == 1 && $data['componente_3'] == 1) {
+            
+            $data['centros'] = $this->prod3Model->_getCentrosEducativosProd3();
+            //$data['prod3_otros'] = $this->otrosProd3Model->_getProd3Otros($id);
+            //$data['datos'] = $this->prod3Model->find($id);
+            $data['meses'] = MESES;
+
+            $data['title']='MYRP - DYA';
+            $data['main_content']='componente3/prod3_edit_otros_procesos_view';
+            return view('includes/template', $data);
+        }else{
+
+            $this->logout();
+        }
     }
 
     public function prod_3_lenguaje($id) {
@@ -169,8 +188,9 @@ class Prod3 extends BaseController {
             $data['id'] = $id;
             $data['prod3_lenguaje'] = $this->lenguaProd3Model->_getProd3lengua($id);
             $data['datos'] = $this->prod3Model->find($id);
+            $data['meses'] = MESES;
 
-            //echo '<pre>'.var_export($data['datos'], true).'</pre>';exit;
+            //echo '<pre>'.var_export($data['meses'], true).'</pre>';exit;
 
             $data['title']='MYRP - DYA';
             $data['main_content']='componente3/prod3_edit_lenguaje_view';
@@ -193,6 +213,7 @@ class Prod3 extends BaseController {
             $data['id'] = $id;
             $data['prod3_ciudad'] = $this->ciudadProd3Model->_getProd3Ciudad($id);
             $data['datos'] = $this->prod3Model->find($id);
+            $data['meses'] = MESES;
 
             //echo '<pre>'.var_export($data['datos'], true).'</pre>';exit;
 
@@ -217,6 +238,7 @@ class Prod3 extends BaseController {
             $data['id'] = $id;
             $data['prod3_otros'] = $this->otrosProd3Model->_getProd3Otros($id);
             $data['datos'] = $this->prod3Model->find($id);
+            $data['meses'] = MESES;
 
             $data['title']='MYRP - DYA';
             $data['main_content']='componente3/prod3_edit_otros_view';
@@ -311,26 +333,47 @@ class Prod3 extends BaseController {
 
             $proceso = array(
                 'enfoque_sociocultural' => $this->request->getPostGet('enfoque_sociocultural'),
+                'enfoque_sociocultural_mes' => $this->request->getPostGet('enfoque_sociocultural_mes'),
                 'exp_dialectales' => $this->request->getPostGet('exp_dialectales'),
+                'exp_dialectales_mes' => $this->request->getPostGet('exp_dialectales_mes'),
                 'exp_oral' => $this->request->getPostGet('exp_oral'),
+                'exp_oral_mes' => $this->request->getPostGet('exp_oral_mes'),
                 'comp_lectora' => $this->request->getPostGet('comp_lectora'),
+                'comp_lectora_mes' => $this->request->getPostGet('comp_lectora_mes'),
                 'prod_textos' => $this->request->getPostGet('prod_textos'),
+                'prod_textos_mes' => $this->request->getPostGet('prod_textos_mes'),
                 'extrategia_prod_text' => $this->request->getPostGet('extrategia_prod_text'),
+                'extrategia_prod_text_mes' => $this->request->getPostGet('extrategia_prod_text_mes'),
                 'zapatos' => $this->request->getPostGet('zapatos'),
+                'zapatos_mes' => $this->request->getPostGet('zapatos_mes'),
                 'noticia' => $this->request->getPostGet('noticia'),
+                'noticia_mes' => $this->request->getPostGet('noticia_mes'),
                 'carta' => $this->request->getPostGet('carta'),
+                'carta_mes' => $this->request->getPostGet('carta_mes'),
                 'ninia_abeja' => $this->request->getPostGet('ninia_abeja'),
+                'ninia_abeja_mes' => $this->request->getPostGet('ninia_abeja_mes'),
                 'cuento' => $this->request->getPostGet('cuento'),
+                'cuento_mes' => $this->request->getPostGet('cuento_mes'),
                 'cuerdas' => $this->request->getPostGet('cuerdas'),
+                'cuerdas_mes' => $this->request->getPostGet('cuerdas_mes'),
                 'refranes' => $this->request->getPostGet('refranes'),
+                'refranes_mes' => $this->request->getPostGet('refranes_mes'),
                 'juegos' => $this->request->getPostGet('juegos'),
+                'juegos_mes' => $this->request->getPostGet('juegos_mes'),
                 'derechos_humanos' => $this->request->getPostGet('derechos_humanos'),
+                'derechos_humanos_mes' => $this->request->getPostGet('derechos_humanos_mes'),
                 'noticiero' => $this->request->getPostGet('noticiero'),
+                'noticiero_mes' => $this->request->getPostGet('noticiero_mes'),
                 'discurso' => $this->request->getPostGet('discurso'),
+                'discurso_mes' => $this->request->getPostGet('discurso_mes'),
                 'influencers' => $this->request->getPostGet('influencers'),
+                'influencers_mes' => $this->request->getPostGet('influencers_mes'),
                 'inferencias' => $this->request->getPostGet('inferencias'),
+                'inferencias_mes' => $this->request->getPostGet('inferencias_mes'),
                 'elefante' => $this->request->getPostGet('elefante'),
+                'elefante_mes' => $this->request->getPostGet('elefante_mes'),
                 'pitch' => $this->request->getPostGet('pitch'),
+                'pitch_mes' => $this->request->getPostGet('pitch_mes'),
                 'id_prod_3' => $this->request->getPostGet('id_prod_3'),
             );
 
@@ -419,6 +462,14 @@ class Prod3 extends BaseController {
                 'violencia_genero' => $this->request->getPostGet('violencia_genero'),
                 'diversidad_estetica' => $this->request->getPostGet('diversidad_estetica'),
                 'diversidad_neuro' => $this->request->getPostGet('diversidad_neuro'),
+
+                'interculturalidad_mes' => $this->request->getPostGet('interculturalidad_mes'),
+                'masculinidad_mes' => $this->request->getPostGet('masculinidad_mes'),
+                'sexo_genero_mes' => $this->request->getPostGet('sexo_genero_mes'),
+                'violencia_genero_mes' => $this->request->getPostGet('violencia_genero_mes'),
+                'diversidad_estetica_mes' => $this->request->getPostGet('diversidad_estetica_mes'),
+                'diversidad_neuro_mes' => $this->request->getPostGet('diversidad_neuro_mes'),
+
                 'id_prod_3' => $this->request->getPostGet('id_prod_3'),
             );
 
@@ -451,11 +502,27 @@ class Prod3 extends BaseController {
 
             $proceso = array(
                 'id_prod_3' => $this->request->getPostGet('id_prod_3'),
-                'otros' => $this->request->getPostGet('otros'),
-                'total_otros_temas' => $this->request->getPostGet('total_otros_temas'),
                 'grupo_interaprendizaje' => $this->request->getPostGet('grupo_interaprendizaje'),
-                'encuentro_intercultural' => $this->request->getPostGet('encuentro_intercultural'),
-                'fecha_encuentro' => $this->request->getPostGet('fecha_encuentro')
+                'tema_grupo_inter' => $this->request->getPostGet('tema_grupo_inter'),
+                'fecha_grupo_inter' => $this->request->getPostGet('fecha_grupo_inter'),
+                
+                'tema_1' => $this->request->getPostGet('tema_1'),
+                'tema_2' => $this->request->getPostGet('tema_2'),
+                'tema_3' => $this->request->getPostGet('tema_3'),
+                'tema_4' => $this->request->getPostGet('tema_4'),
+                'tema_5' => $this->request->getPostGet('tema_5'),
+                'tema_6' => $this->request->getPostGet('tema_6'),
+
+                'fecha_tema_1' => $this->request->getPostGet('fecha_tema_1'),
+                'fecha_tema_2' => $this->request->getPostGet('fecha_tema_2'),
+                'fecha_tema_3' => $this->request->getPostGet('fecha_tema_3'),
+                'fecha_tema_4' => $this->request->getPostGet('fecha_tema_4'),
+                'fecha_tema_5' => $this->request->getPostGet('fecha_tema_5'),
+                'fecha_tema_6' => $this->request->getPostGet('fecha_tema_6'),
+
+                
+                'visita_biblioteca_viajera' => $this->request->getPostGet('visita_biblioteca_viajera'),
+                'fecha_visita_biblioteca_viajera' => $this->request->getPostGet('fecha_visita_biblioteca_viajera')
             );
 
             $hay = $this->otrosProd3Model->_getProd3Otros($proceso['id_prod_3']);

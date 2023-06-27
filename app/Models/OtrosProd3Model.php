@@ -62,12 +62,71 @@ class OtrosProd3Model extends Model {
         if ($datos['grupo_interaprendizaje'] != 'NULL') {
             $builder->set('grupo_interaprendizaje', $datos['grupo_interaprendizaje']);
         }
-        if ($datos['encuentro_intercultural'] != 'NULL') {
-            $builder->set('encuentro_intercultural', $datos['encuentro_intercultural']);
+        if ($datos['tema_grupo_inter'] != 'NULL') {
+            $builder->set('tema_grupo_inter', $datos['tema_grupo_inter']);
         }
-        $builder->set('fecha_encuentro', $datos['fecha_encuentro']);
-        $builder->set('total_otros_temas', $datos['total_otros_temas']);
-        $builder->set('otros', $datos['otros']);
+
+        if ($datos['fecha_grupo_inter'] != 'NULL') {
+            $builder->set('fecha_grupo_inter', $datos['fecha_grupo_inter']);
+        }
+
+        if ($datos['tema_1'] != 'NULL') {
+            $builder->set('tema_1', $datos['tema_1']);
+        }
+
+        if ($datos['tema_2'] != 'NULL') {
+            $builder->set('tema_2', $datos['tema_2']);
+        }
+
+        if ($datos['tema_3'] != 'NULL') {
+            $builder->set('tema_3', $datos['tema_3']);
+        }
+
+        if ($datos['tema_4'] != 'NULL') {
+            $builder->set('tema_4', $datos['tema_4']);
+        }
+
+        if ($datos['tema_5'] != 'NULL') {
+            $builder->set('tema_5', $datos['tema_5']);
+        }
+
+        if ($datos['tema_6'] != 'NULL') {
+            $builder->set('tema_6', $datos['tema_6']);
+        }
+
+        if ($datos['fecha_tema_1'] != 'NULL') {
+            $builder->set('fecha_tema_1', $datos['fecha_tema_1']);
+        }
+
+        if ($datos['fecha_tema_2'] != 'NULL') {
+            $builder->set('fecha_tema_2', $datos['fecha_tema_2']);
+        }
+
+        if ($datos['fecha_tema_3'] != 'NULL') {
+            $builder->set('fecha_tema_3', $datos['fecha_tema_3']);
+        }
+
+        if ($datos['fecha_tema_4'] != 'NULL') {
+            $builder->set('fecha_tema_4', $datos['fecha_tema_4']);
+        }
+
+        if ($datos['fecha_tema_5'] != 'NULL') {
+            $builder->set('fecha_tema_5', $datos['fecha_tema_5']);
+        }
+
+        if ($datos['fecha_tema_6'] != 'NULL') {
+            $builder->set('fecha_tema_6', $datos['fecha_tema_6']);
+        }
+
+        if ($datos['visita_biblioteca_viajera'] != 'NULL') {
+            $builder->set('visita_biblioteca_viajera', $datos['visita_biblioteca_viajera']);
+        }
+
+        if ($datos['fecha_visita_biblioteca_viajera'] != 'NULL') {
+            $builder->set('fecha_visita_biblioteca_viajera', $datos['fecha_visita_biblioteca_viajera']);
+        }
+
+
         $builder->where('id_prod_3 ', $datos['id_prod_3']);
         $builder->update();
     }
@@ -79,13 +138,69 @@ class OtrosProd3Model extends Model {
         if ($datos['grupo_interaprendizaje'] != 'NULL') {
             $builder->set('grupo_interaprendizaje', $datos['grupo_interaprendizaje']);
         }
-        if ($datos['encuentro_intercultural'] != 'NULL') {
-            $builder->set('encuentro_intercultural', $datos['encuentro_intercultural']);
+        if ($datos['tema_grupo_inter'] != 'NULL') {
+            $builder->set('tema_grupo_inter', $datos['tema_grupo_inter']);
         }
 
-        $builder->set('fecha_encuentro', $datos['fecha_encuentro']);
-        $builder->set('total_otros_temas', $datos['total_otros_temas']);
-        $builder->set('otros', $datos['otros']);
+        if ($datos['fecha_grupo_inter'] != 'NULL') {
+            $builder->set('fecha_grupo_inter', $datos['fecha_grupo_inter']);
+        }
+
+        if ($datos['tema_1'] != 'NULL') {
+            $builder->set('tema_1', $datos['tema_1']);
+        }
+
+        if ($datos['tema_2'] != 'NULL') {
+            $builder->set('tema_2', $datos['tema_2']);
+        }
+
+        if ($datos['tema_3'] != 'NULL') {
+            $builder->set('tema_3', $datos['tema_3']);
+        }
+
+        if ($datos['tema_4'] != 'NULL') {
+            $builder->set('tema_4', $datos['tema_4']);
+        }
+
+        if ($datos['tema_5'] != 'NULL') {
+            $builder->set('tema_5', $datos['tema_5']);
+        }
+
+        if ($datos['tema_6'] != 'NULL') {
+            $builder->set('tema_6', $datos['tema_6']);
+        }
+
+        if ($datos['fecha_tema_1'] != 'NULL') {
+            $builder->set('fecha_tema_1', $datos['fecha_tema_1']);
+        }
+
+        if ($datos['fecha_tema_2'] != 'NULL') {
+            $builder->set('fecha_tema_2', $datos['fecha_tema_2']);
+        }
+
+        if ($datos['fecha_tema_3'] != 'NULL') {
+            $builder->set('fecha_tema_3', $datos['fecha_tema_3']);
+        }
+
+        if ($datos['fecha_tema_4'] != 'NULL') {
+            $builder->set('fecha_tema_4', $datos['fecha_tema_4']);
+        }
+
+        if ($datos['fecha_tema_5'] != 'NULL') {
+            $builder->set('fecha_tema_5', $datos['fecha_tema_5']);
+        }
+
+        if ($datos['fecha_tema_6'] != 'NULL') {
+            $builder->set('fecha_tema_6', $datos['fecha_tema_6']);
+        }
+
+        if ($datos['visita_biblioteca_viajera'] != 'NULL') {
+            $builder->set('visita_biblioteca_viajera', $datos['visita_biblioteca_viajera']);
+        }
+
+        if ($datos['fecha_visita_biblioteca_viajera'] != 'NULL') {
+            $builder->set('fecha_visita_biblioteca_viajera', $datos['fecha_visita_biblioteca_viajera']);
+        }
         $builder->set('id_prod_3', $datos['id_prod_3']);
         $builder->insert();
     }

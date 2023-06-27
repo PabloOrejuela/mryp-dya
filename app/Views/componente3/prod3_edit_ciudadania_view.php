@@ -48,6 +48,17 @@
                                     
                                 ?>
                                 </select>
+                                <?php
+                                    if ($prod3_ciudad != NULL) {
+                                        $dato['meses'] = $meses;
+                                        $dato['valor'] = $prod3_ciudad->interculturalidad_mes;
+                                        $dato['campo'] = 'interculturalidad_mes';
+                                        echo view('componente3/select_meses', $dato);
+                                    }else{
+                                        $dato['campo'] = 'interculturalidad_mes';
+                                        echo view('componente3/select_meses_1', $dato);
+                                    }
+                                ?>
                                 <p id="error-message"><?= session('errors.idmetodo_pago');?> </p>
                             </div>
                         </div>
@@ -81,6 +92,17 @@
                                     
                                 ?>
                                 </select>
+                                <?php
+                                    if ($prod3_ciudad != NULL) {
+                                        $dato['meses'] = $meses;
+                                        $dato['valor'] = $prod3_ciudad->masculinidad_mes;
+                                        $dato['campo'] = 'masculinidad_mes';
+                                        echo view('componente3/select_meses', $dato);
+                                    }else{
+                                        $dato['campo'] = 'masculinidad_mes';
+                                        echo view('componente3/select_meses_1', $dato);
+                                    }
+                                ?>
                                 <p id="error-message"><?= session('errors.idmetodo_pago');?> </p>
                             </div>
                         </div>
@@ -114,6 +136,17 @@
                                     
                                 ?>
                                 </select>
+                                <?php
+                                    if ($prod3_ciudad != NULL) {
+                                        $dato['meses'] = $meses;
+                                        $dato['valor'] = $prod3_ciudad->sexo_genero_mes;
+                                        $dato['campo'] = 'sexo_genero_mes';
+                                        echo view('componente3/select_meses', $dato);
+                                    }else{
+                                        $dato['campo'] = 'sexo_genero_mes';
+                                        echo view('componente3/select_meses_1', $dato);
+                                    }
+                                ?>
                                 <p id="error-message"><?= session('errors.idmetodo_pago');?> </p>
                             </div>
                         </div>
@@ -147,6 +180,17 @@
                                     
                                 ?>
                                 </select>
+                                <?php
+                                    if ($prod3_ciudad != NULL) {
+                                        $dato['meses'] = $meses;
+                                        $dato['valor'] = $prod3_ciudad->violencia_genero_mes;
+                                        $dato['campo'] = 'violencia_genero_mes';
+                                        echo view('componente3/select_meses', $dato);
+                                    }else{
+                                        $dato['campo'] = 'violencia_genero_mes';
+                                        echo view('componente3/select_meses_1', $dato);
+                                    }
+                                ?>
                                 <p id="error-message"><?= session('errors.idmetodo_pago');?> </p>
                             </div>
                         </div>
@@ -187,6 +231,17 @@
                                     
                                 ?>
                                 </select>
+                                <?php
+                                    if ($prod3_ciudad != NULL) {
+                                        $dato['meses'] = $meses;
+                                        $dato['valor'] = $prod3_ciudad->diversidad_estetica_mes;
+                                        $dato['campo'] = 'diversidad_estetica_mes';
+                                        echo view('componente3/select_meses', $dato);
+                                    }else{
+                                        $dato['campo'] = 'diversidad_estetica_mes';
+                                        echo view('componente3/select_meses_1', $dato);
+                                    }
+                                ?>
                                 <p id="error-message"><?= session('errors.idmetodo_pago');?> </p>
                             </div>
                         </div>
@@ -220,6 +275,17 @@
                                     
                                 ?>
                                 </select>
+                                <?php
+                                    if ($prod3_ciudad != NULL) {
+                                        $dato['meses'] = $meses;
+                                        $dato['valor'] = $prod3_ciudad->diversidad_neuro_mes;
+                                        $dato['campo'] = 'diversidad_neuro_mes';
+                                        echo view('componente3/select_meses', $dato);
+                                    }else{
+                                        $dato['campo'] = 'diversidad_neuro_mes';
+                                        echo view('componente3/select_meses_1', $dato);
+                                    }
+                                ?>
                                 <p id="error-message"><?= session('errors.idmetodo_pago');?> </p>
                             </div>
                         </div>
@@ -230,6 +296,7 @@
             <button type="submit" class="btn btn-info mb-3">Actualizar</button>
         </form>
         <button onclick="history.back()" class="btn btn-success mb-3">Regresar</button>
+        <a class="btn btn-success mb-3" href="<?php echo site_url().'prod_3_process'; ?>">Ir al menú del Componente 3</a>
     </div>
     
 </main>

@@ -48,6 +48,17 @@
                                     
                                 ?>
                                 </select>
+                                <?php
+                                    if ($prod3_lenguaje != NULL) {
+                                        $dato['meses'] = $meses;
+                                        $dato['valor'] = $prod3_lenguaje->enfoque_sociocultural_mes;
+                                        $dato['campo'] = 'enfoque_sociocultural_mes';
+                                        echo view('componente3/select_meses', $dato);
+                                    }else{
+                                        $dato['campo'] = 'enfoque_sociocultural_mes';
+                                        echo view('componente3/select_meses_1', $dato);
+                                    }
+                                ?>
                                 <p id="error-message"><?= session('errors.idmetodo_pago');?> </p>
                             </div>
                         </div>
@@ -81,6 +92,17 @@
                                     
                                 ?>
                                 </select>
+                                <?php
+                                    if ($prod3_lenguaje != NULL) {
+                                        $dato['meses'] = $meses;
+                                        $dato['valor'] = $prod3_lenguaje->exp_dialectales_mes;
+                                        $dato['campo'] = 'exp_dialectales_mes';
+                                        echo view('componente3/select_meses', $dato);
+                                    }else{
+                                        $dato['campo'] = 'exp_dialectales_mes';
+                                        echo view('componente3/select_meses_1', $dato);
+                                    }
+                                ?>
                                 <p id="error-message"><?= session('errors.idmetodo_pago');?> </p>
                             </div>
                         </div>
@@ -114,6 +136,17 @@
                                     
                                 ?>
                                 </select>
+                                <?php
+                                    if ($prod3_lenguaje != NULL) {
+                                        $dato['meses'] = $meses;
+                                        $dato['valor'] = $prod3_lenguaje->exp_oral_mes;
+                                        $dato['campo'] = 'exp_oral_mes';
+                                        echo view('componente3/select_meses', $dato);
+                                    }else{
+                                        $dato['campo'] = 'exp_oral_mes';
+                                        echo view('componente3/select_meses_1', $dato);
+                                    }
+                                ?>
                                 <p id="error-message"><?= session('errors.idmetodo_pago');?> </p>
                             </div>
                         </div>
@@ -147,6 +180,17 @@
                                     
                                 ?>
                                 </select>
+                                <?php
+                                    if ($prod3_lenguaje != NULL) {
+                                        $dato['meses'] = $meses;
+                                        $dato['valor'] = $prod3_lenguaje->comp_lectora_mes;
+                                        $dato['campo'] = 'comp_lectora_mes';
+                                        echo view('componente3/select_meses', $dato);
+                                    }else{
+                                        $dato['campo'] = 'comp_lectora_mes';
+                                        echo view('componente3/select_meses_1', $dato);
+                                    }
+                                ?>
                                 <p id="error-message"><?= session('errors.idmetodo_pago');?> </p>
                             </div>
                         </div>
@@ -180,6 +224,17 @@
                                     
                                 ?>
                                 </select>
+                                <?php
+                                    if ($prod3_lenguaje != NULL) {
+                                        $dato['meses'] = $meses;
+                                        $dato['valor'] = $prod3_lenguaje->prod_textos_mes;
+                                        $dato['campo'] = 'prod_textos_mes';
+                                        echo view('componente3/select_meses', $dato);
+                                    }else{
+                                        $dato['campo'] = 'prod_textos_mes';
+                                        echo view('componente3/select_meses_1', $dato);
+                                    }
+                                ?>
                                 <p id="error-message"><?= session('errors.idmetodo_pago');?> </p>
                             </div>
                         </div>
@@ -213,6 +268,17 @@
                                     
                                 ?>
                                 </select>
+                                <?php
+                                    if ($prod3_lenguaje != NULL) {
+                                        $dato['meses'] = $meses;
+                                        $dato['valor'] = $prod3_lenguaje->extrategia_prod_text_mes;
+                                        $dato['campo'] = 'extrategia_prod_text_mes';
+                                        echo view('componente3/select_meses', $dato);
+                                    }else{
+                                        $dato['campo'] = 'extrategia_prod_text_mes';
+                                        echo view('componente3/select_meses_1', $dato);
+                                    }
+                                ?>
                                 <p id="error-message"><?= session('errors.idmetodo_pago');?> </p>
                             </div>
                         </div>
@@ -254,6 +320,17 @@
                                     
                                 ?>
                                 </select>
+                                <?php
+                                    if ($prod3_lenguaje != NULL) {
+                                        $dato['meses'] = $meses;
+                                        $dato['valor'] = $prod3_lenguaje->zapatos_mes;
+                                        $dato['campo'] = 'zapatos_mes';
+                                        echo view('componente3/select_meses', $dato);
+                                    }else{
+                                        $dato['campo'] = 'zapatos_mes';
+                                        echo view('componente3/select_meses_1', $dato);
+                                    }
+                                ?>
                                 <p id="error-message"><?= session('errors.idmetodo_pago');?> </p>
                             </div>
                         </div>
@@ -287,6 +364,17 @@
                                     
                                 ?>
                                 </select>
+                                <?php
+                                    if ($prod3_lenguaje != NULL) {
+                                        $dato['meses'] = $meses;
+                                        $dato['valor'] = $prod3_lenguaje->noticia_mes;
+                                        $dato['campo'] = 'noticia_mes';
+                                        echo view('componente3/select_meses', $dato);
+                                    }else{
+                                        $dato['campo'] = 'noticia_mes';
+                                        echo view('componente3/select_meses_1', $dato);
+                                    }
+                                ?>
                                 <p id="error-message"><?= session('errors.idmetodo_pago');?> </p>
                             </div>
                         </div>
@@ -320,6 +408,17 @@
                                     
                                 ?>
                                 </select>
+                                <?php
+                                    if ($prod3_lenguaje != NULL) {
+                                        $dato['meses'] = $meses;
+                                        $dato['valor'] = $prod3_lenguaje->carta_mes;
+                                        $dato['campo'] = 'carta_mes';
+                                        echo view('componente3/select_meses', $dato);
+                                    }else{
+                                        $dato['campo'] = 'carta_mes';
+                                        echo view('componente3/select_meses_1', $dato);
+                                    }
+                                ?>
                                 <p id="error-message"><?= session('errors.idmetodo_pago');?> </p>
                             </div>
                         </div>
@@ -353,6 +452,17 @@
                                     
                                 ?>
                                 </select>
+                                <?php
+                                    if ($prod3_lenguaje != NULL) {
+                                        $dato['meses'] = $meses;
+                                        $dato['valor'] = $prod3_lenguaje->ninia_abeja_mes;
+                                        $dato['campo'] = 'ninia_abeja_mes';
+                                        echo view('componente3/select_meses', $dato);
+                                    }else{
+                                        $dato['campo'] = 'ninia_abeja_mes';
+                                        echo view('componente3/select_meses_1', $dato);
+                                    }
+                                ?>
                                 <p id="error-message"><?= session('errors.idmetodo_pago');?> </p>
                             </div>
                         </div>
@@ -386,6 +496,17 @@
                                     
                                 ?>
                                 </select>
+                                <?php
+                                    if ($prod3_lenguaje != NULL) {
+                                        $dato['meses'] = $meses;
+                                        $dato['valor'] = $prod3_lenguaje->cuento_mes;
+                                        $dato['campo'] = 'cuento_mes';
+                                        echo view('componente3/select_meses', $dato);
+                                    }else{
+                                        $dato['campo'] = 'cuento_mes';
+                                        echo view('componente3/select_meses_1', $dato);
+                                    }
+                                ?>
                                 <p id="error-message"><?= session('errors.idmetodo_pago');?> </p>
                             </div>
                         </div>
@@ -419,6 +540,17 @@
                                     
                                 ?>
                                 </select>
+                                <?php
+                                    if ($prod3_lenguaje != NULL) {
+                                        $dato['meses'] = $meses;
+                                        $dato['valor'] = $prod3_lenguaje->cuerdas_mes;
+                                        $dato['campo'] = 'cuerdas_mes';
+                                        echo view('componente3/select_meses', $dato);
+                                    }else{
+                                        $dato['campo'] = 'cuerdas_mes';
+                                        echo view('componente3/select_meses_1', $dato);
+                                    }
+                                ?>
                                 <p id="error-message"><?= session('errors.idmetodo_pago');?> </p>
                             </div>
                         </div>
@@ -458,6 +590,17 @@
                                     
                                 ?>
                                 </select>
+                                <?php
+                                    if ($prod3_lenguaje != NULL) {
+                                        $dato['meses'] = $meses;
+                                        $dato['valor'] = $prod3_lenguaje->refranes_mes;
+                                        $dato['campo'] = 'refranes_mes';
+                                        echo view('componente3/select_meses', $dato);
+                                    }else{
+                                        $dato['campo'] = 'refranes_mes';
+                                        echo view('componente3/select_meses_1', $dato);
+                                    }
+                                ?>
                                 <p id="error-message"><?= session('errors.idmetodo_pago');?> </p>
                             </div>
                         </div>
@@ -491,6 +634,17 @@
                                     
                                 ?>
                                 </select>
+                                <?php
+                                    if ($prod3_lenguaje != NULL) {
+                                        $dato['meses'] = $meses;
+                                        $dato['valor'] = $prod3_lenguaje->juegos_mes;
+                                        $dato['campo'] = 'juegos_mes';
+                                        echo view('componente3/select_meses', $dato);
+                                    }else{
+                                        $dato['campo'] = 'juegos_mes';
+                                        echo view('componente3/select_meses_1', $dato);
+                                    }
+                                ?>
                                 <p id="error-message"><?= session('errors.idmetodo_pago');?> </p>
                             </div>
                         </div>
@@ -524,6 +678,17 @@
                                     
                                 ?>
                                 </select>
+                                <?php
+                                    if ($prod3_lenguaje != NULL) {
+                                        $dato['meses'] = $meses;
+                                        $dato['valor'] = $prod3_lenguaje->derechos_humanos_mes;
+                                        $dato['campo'] = 'derechos_humanos_mes';
+                                        echo view('componente3/select_meses', $dato);
+                                    }else{
+                                        $dato['campo'] = 'derechos_humanos_mes';
+                                        echo view('componente3/select_meses_1', $dato);
+                                    }
+                                ?>
                                 <p id="error-message"><?= session('errors.idmetodo_pago');?> </p>
                             </div>
                         </div>
@@ -557,6 +722,17 @@
                                     
                                 ?>
                                 </select>
+                                <?php
+                                    if ($prod3_lenguaje != NULL) {
+                                        $dato['meses'] = $meses;
+                                        $dato['valor'] = $prod3_lenguaje->noticiero_mes;
+                                        $dato['campo'] = 'noticiero_mes';
+                                        echo view('componente3/select_meses', $dato);
+                                    }else{
+                                        $dato['campo'] = 'noticiero_mes';
+                                        echo view('componente3/select_meses_1', $dato);
+                                    }
+                                ?>
                                 <p id="error-message"><?= session('errors.idmetodo_pago');?> </p>
                             </div>
                         </div>
@@ -590,6 +766,17 @@
                                     
                                 ?>
                                 </select>
+                                <?php
+                                    if ($prod3_lenguaje != NULL) {
+                                        $dato['meses'] = $meses;
+                                        $dato['valor'] = $prod3_lenguaje->discurso_mes;
+                                        $dato['campo'] = 'discurso_mes';
+                                        echo view('componente3/select_meses', $dato);
+                                    }else{
+                                        $dato['campo'] = 'discurso_mes';
+                                        echo view('componente3/select_meses_1', $dato);
+                                    }
+                                ?>
                                 <p id="error-message"><?= session('errors.idmetodo_pago');?> </p>
                             </div>
                         </div>
@@ -623,6 +810,17 @@
                                     
                                 ?>
                                 </select>
+                                <?php
+                                    if ($prod3_lenguaje != NULL) {
+                                        $dato['meses'] = $meses;
+                                        $dato['valor'] = $prod3_lenguaje->influencers_mes;
+                                        $dato['campo'] = 'influencers_mes';
+                                        echo view('componente3/select_meses', $dato);
+                                    }else{
+                                        $dato['campo'] = 'influencers_mes';
+                                        echo view('componente3/select_meses_1', $dato);
+                                    }
+                                ?>
                                 <p id="error-message"><?= session('errors.idmetodo_pago');?> </p>
                             </div>
                         </div>
@@ -662,6 +860,17 @@
                                     
                                 ?>
                                 </select>
+                                <?php
+                                    if ($prod3_lenguaje != NULL) {
+                                        $dato['meses'] = $meses;
+                                        $dato['valor'] = $prod3_lenguaje->inferencias_mes;
+                                        $dato['campo'] = 'inferencias_mes';
+                                        echo view('componente3/select_meses', $dato);
+                                    }else{
+                                        $dato['campo'] = 'inferencias_mes';
+                                        echo view('componente3/select_meses_1', $dato);
+                                    }
+                                ?>
                                 <p id="error-message"><?= session('errors.idmetodo_pago');?> </p>
                             </div>
                         </div>
@@ -695,6 +904,17 @@
                                     
                                 ?>
                                 </select>
+                                <?php
+                                    if ($prod3_lenguaje != NULL) {
+                                        $dato['meses'] = $meses;
+                                        $dato['valor'] = $prod3_lenguaje->elefante_mes;
+                                        $dato['campo'] = 'elefante_mes';
+                                        echo view('componente3/select_meses', $dato);
+                                    }else{
+                                        $dato['campo'] = 'elefante_mes';
+                                        echo view('componente3/select_meses_1', $dato);
+                                    }
+                                ?>
                                 <p id="error-message"><?= session('errors.idmetodo_pago');?> </p>
                             </div>
                         </div>
@@ -728,6 +948,17 @@
                                     
                                 ?>
                                 </select>
+                                <?php
+                                    if ($prod3_lenguaje != NULL) {
+                                        $dato['meses'] = $meses;
+                                        $dato['valor'] = $prod3_lenguaje->pitch_mes;
+                                        $dato['campo'] = 'pitch_mes';
+                                        echo view('componente3/select_meses', $dato);
+                                    }else{
+                                        $dato['campo'] = 'pitch_mes';
+                                        echo view('componente3/select_meses_1', $dato);
+                                    }
+                                ?>
                                 <p id="error-message"><?= session('errors.idmetodo_pago');?> </p>
                             </div>
                         </div>
@@ -739,16 +970,7 @@
             <button type="submit" class="btn btn-info mb-3">Actualizar</button>
         </form>
         <button onclick="history.back()" class="btn btn-success mb-3">Regresar</button>
+        <a class="btn btn-success mb-3" href="<?php echo site_url().'prod_3_process'; ?>">Ir al menú del Componente 3</a>
     </div>
     
 </main>
-<script>
-    $(document).ready(function(){
-
-        jQuery('.number').keypress(function(tecla){
-            if(tecla.charCode < 48 || tecla.charCode > 57){
-                return false;
-            }
-        });
-    });
-</script>

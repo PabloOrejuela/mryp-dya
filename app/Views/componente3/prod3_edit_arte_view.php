@@ -49,10 +49,15 @@
                                 ?>
                                 </select>
                                 <?php
-                                    $dato['meses'] = $meses;
-                                    $dato['valor'] = $prod3_arte->docente_autoestima_mes;
-                                    $dato['campo'] = 'docente_autoestima_mes';
-                                    echo view('componente3/select_meses', $dato); 
+                                    if ($prod3_arte != NULL) {
+                                        $dato['meses'] = $meses;
+                                        $dato['valor'] = $prod3_arte->docente_autoestima_mes;
+                                        $dato['campo'] = 'docente_autoestima_mes';
+                                        echo view('componente3/select_meses', $dato);
+                                    }else{
+                                        $dato['campo'] = 'docente_autoestima_mes';
+                                        echo view('componente3/select_meses_1', $dato);
+                                    }
                                 ?>
                                 <p id="error-message"><?= session('errors.idmetodo_pago');?> </p>
                             </div>
@@ -85,13 +90,18 @@
                                                     <option value="0">NO</option>';
                                     }
                                     
-                                ?>
+                                ?> 
                                 </select>
                                 <?php
-                                    $dato['meses'] = $meses;
-                                    $dato['valor'] = $prod3_arte->arte_usos_mes;
-                                    $dato['campo'] = 'arte_usos_mes';
-                                    echo view('componente3/select_meses', $dato); 
+                                    if ($prod3_arte != NULL) {
+                                        $dato['meses'] = $meses;
+                                        $dato['valor'] = $prod3_arte->arte_usos_mes;
+                                        $dato['campo'] = 'arte_usos_mes';
+                                        echo view('componente3/select_meses', $dato); 
+                                    }else{
+                                        $dato['campo'] = 'arte_usos_mes';
+                                        echo view('componente3/select_meses_1', $dato); 
+                                    }
                                 ?>
                                 <p id="error-message"><?= session('errors.idmetodo_pago');?> </p>
                             </div>
@@ -126,11 +136,16 @@
                                     
                                 ?>
                                 </select>
-                                <?php
-                                    $dato['meses'] = $meses;
-                                    $dato['valor'] = $prod3_arte->creatividad_mes;
-                                    $dato['campo'] = 'creatividad_mes';
-                                    echo view('componente3/select_meses', $dato); 
+                                <?php   
+                                    if ($prod3_arte != NULL) {
+                                        $dato['meses'] = $meses;
+                                        $dato['valor'] = $prod3_arte->creatividad_mes;
+                                        $dato['campo'] = 'creatividad_mes';
+                                        echo view('componente3/select_meses', $dato); 
+                                    }else{
+                                        $dato['campo'] = 'creatividad_mes';
+                                        echo view('componente3/select_meses_1', $dato); 
+                                    }
                                 ?>
                                 <p id="error-message"><?= session('errors.idmetodo_pago');?> </p>
                             </div>
@@ -166,10 +181,15 @@
                                 ?>
                                 </select>
                                 <?php
-                                    $dato['meses'] = $meses;
-                                    $dato['valor'] = $prod3_arte->etapas_mes;
-                                    $dato['campo'] = 'etapas_mes';
-                                    echo view('componente3/select_meses', $dato); 
+                                    if ($prod3_arte != NULL) {
+                                        $dato['valor'] = $prod3_arte->etapas_mes;
+                                        $dato['campo'] = 'etapas_mes';
+                                        $dato['meses'] = $meses;
+                                        echo view('componente3/select_meses', $dato); 
+                                    }else{
+                                        $dato['campo'] = 'etapas_mes';
+                                        echo view('componente3/select_meses_1', $dato); 
+                                    }
                                 ?>
                                 <p id="error-message"><?= session('errors.idmetodo_pago');?> </p>
                             </div>
@@ -205,10 +225,15 @@
                                 ?>
                                 </select>
                                 <?php
-                                    $dato['meses'] = $meses;
-                                    $dato['valor'] = $prod3_arte->autorretrato_taller_mes;
-                                    $dato['campo'] = 'autorretrato_taller_mes';
-                                    echo view('componente3/select_meses', $dato); 
+                                    if ($prod3_arte != NULL) {
+                                        $dato['meses'] = $meses;
+                                        $dato['valor'] = $prod3_arte->autorretrato_taller_mes;
+                                        $dato['campo'] = 'autorretrato_taller_mes';
+                                        echo view('componente3/select_meses', $dato); 
+                                    }else{
+                                        $dato['campo'] = 'autorretrato_taller_mes';
+                                        echo view('componente3/select_meses_1', $dato); 
+                                    }
                                 ?>
                                 <p id="error-message"><?= session('errors.idmetodo_pago');?> </p>
                             </div>
@@ -244,10 +269,15 @@
                                 ?>
                                 </select>
                                 <?php
-                                    $dato['meses'] = $meses;
-                                    $dato['valor'] = $prod3_arte->incluir_clases_mes;
-                                    $dato['campo'] = 'incluir_clases_mes';
-                                    echo view('componente3/select_meses', $dato); 
+                                    if ($prod3_arte != NULL) {
+                                        $dato['meses'] = $meses;
+                                        $dato['valor'] = $prod3_arte->incluir_clases_mes;
+                                        $dato['campo'] = 'incluir_clases_mes';
+                                        echo view('componente3/select_meses', $dato);
+                                    }else{
+                                        $dato['campo'] = 'incluir_clases_mes';
+                                        echo view('componente3/select_meses_1', $dato);
+                                    }
                                 ?>
                                 <p id="error-message"><?= session('errors.idmetodo_pago');?> </p>
                             </div>
@@ -291,10 +321,15 @@
                                 ?>
                                 </select>
                                 <?php
-                                    $dato['meses'] = $meses;
-                                    $dato['valor'] = $prod3_arte->autorretrato_clase_mes;
-                                    $dato['campo'] = 'autorretrato_clase_mes';
-                                    echo view('componente3/select_meses', $dato); 
+                                    if ($prod3_arte != NULL) {
+                                        $dato['meses'] = $meses;
+                                        $dato['valor'] = $prod3_arte->autorretrato_clase_mes;
+                                        $dato['campo'] = 'autorretrato_clase_mes';
+                                        echo view('componente3/select_meses', $dato); 
+                                    }else{
+                                        $dato['campo'] = 'autorretrato_clase_mes';
+                                        echo view('componente3/select_meses_1', $dato); 
+                                    }
                                 ?>
                                 <p id="error-message"><?= session('errors.idmetodo_pago');?> </p>
                             </div>
@@ -330,10 +365,15 @@
                                 ?>
                                 </select>
                                 <?php
-                                    $dato['meses'] = $meses;
-                                    $dato['valor'] = $prod3_arte->emociones_mes;
-                                    $dato['campo'] = 'emociones_mes';
-                                    echo view('componente3/select_meses', $dato); 
+                                    if ($prod3_arte != NULL) {
+                                        $dato['meses'] = $meses;
+                                        $dato['valor'] = $prod3_arte->emociones_mes;
+                                        $dato['campo'] = 'emociones_mes';
+                                        echo view('componente3/select_meses', $dato); 
+                                    }else{
+                                        $dato['campo'] = 'emociones_mes';
+                                        echo view('componente3/select_meses_1', $dato); 
+                                    }
                                 ?>
                                 <p id="error-message"><?= session('errors.idmetodo_pago');?> </p>
                             </div>
@@ -369,10 +409,15 @@
                                 ?>
                                 </select>
                                 <?php
-                                    $dato['meses'] = $meses;
-                                    $dato['valor'] = $prod3_arte->familia_mes;
-                                    $dato['campo'] = 'familia_mes';
-                                    echo view('componente3/select_meses', $dato); 
+                                    if ($prod3_arte != NULL) {
+                                        $dato['meses'] = $meses;
+                                        $dato['valor'] = $prod3_arte->familia_mes;
+                                        $dato['campo'] = 'familia_mes';
+                                        echo view('componente3/select_meses', $dato); 
+                                    }else{
+                                        $dato['campo'] = 'familia_mes';
+                                        echo view('componente3/select_meses_1', $dato); 
+                                    }
                                 ?>
                                 <p id="error-message"><?= session('errors.idmetodo_pago');?> </p>
                             </div>
@@ -408,10 +453,15 @@
                                 ?>
                                 </select>
                                 <?php
-                                    $dato['meses'] = $meses;
-                                    $dato['valor'] = $prod3_arte->camiseta_mes;
-                                    $dato['campo'] = 'camiseta_mes';
-                                    echo view('componente3/select_meses', $dato); 
+                                    if ($prod3_arte != NULL) {
+                                        $dato['meses'] = $meses;
+                                        $dato['valor'] = $prod3_arte->camiseta_mes;
+                                        $dato['campo'] = 'camiseta_mes';
+                                        echo view('componente3/select_meses', $dato);
+                                    }else{
+                                        $dato['campo'] = 'camiseta_mes';
+                                        echo view('componente3/select_meses_1', $dato);
+                                    }
                                 ?>
                                 <p id="error-message"><?= session('errors.idmetodo_pago');?> </p>
                             </div>
@@ -423,16 +473,6 @@
             <button type="submit" class="btn btn-info mb-3">Actualizar</button>
         </form>
         <button onclick="history.back()" class="btn btn-success mb-3">Regresar</button>
+        <a class="btn btn-success mb-3" href="<?php echo site_url().'prod_3_process'; ?>">Ir al menú del Componente 3</a>
     </div>
-    
 </main>
-<script>
-    $(document).ready(function(){
-
-        jQuery('.number').keypress(function(tecla){
-            if(tecla.charCode < 48 || tecla.charCode > 57){
-                return false;
-            }
-        });
-    });
-</script>
