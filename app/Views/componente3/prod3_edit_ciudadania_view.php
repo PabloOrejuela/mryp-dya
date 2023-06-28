@@ -19,7 +19,7 @@
                     <div class="row">
                         <h4 class="mt-3"><?= esc ('TALLERES'); ?></h4>
                         <div class="col-md-3 mb-2">
-                            <label for="interculturalidad">Interculturalidad y ciudadanía:</label>
+                            <label for="interculturalidad">Ciudadanía y diversidad 1:</label>
                             <div class="col-sm-8">
                                 <select 
                                     class="form-select" 
@@ -63,7 +63,7 @@
                             </div>
                         </div>
                         <div class="col-md-3 mb-2">
-                            <label for="masculinidad">Masculinidades y ciudadanía:</label>
+                            <label for="masculinidad">Ciudadanía y diversidad 2:</label>
                             <div class="col-sm-8">
                                 <select 
                                     class="form-select" 
@@ -283,6 +283,102 @@
                                         echo view('componente3/select_meses', $dato);
                                     }else{
                                         $dato['campo'] = 'diversidad_neuro_mes';
+                                        echo view('componente3/select_meses_1', $dato);
+                                    }
+                                ?>
+                                <p id="error-message"><?= session('errors.idmetodo_pago');?> </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card mb-4 mt-2">
+                <div class="card-body">
+                    <div class="row">
+                        <h4 class="mt-3"><?= esc ('Clases'); ?></h4>
+                        <div class="col-md-3 mb-2">
+                            <label for="interculturalidad">El Racismo:</label>
+                            <div class="col-sm-8">
+                                <select 
+                                    class="form-select" 
+                                    aria-label="Default select example" 
+                                    name="interculturalidad" 
+                                    id="interculturalidad"  
+                                >
+                                <?php
+                                    if ($prod3_ciudad != NULL) {
+                                        if ($prod3_ciudad->interculturalidad == '1') {
+                                            echo '<option value="1" selected>SI</option>
+                                                    <option value="0">NO</option>';
+                                        }elseif ($prod3_ciudad->interculturalidad == '0') {
+                                            echo '<option value="1">SI</option>
+                                                    <option value="0" selected>NO</option>';
+                                        }elseif ($prod3_ciudad->interculturalidad == NULL) {
+                                            echo '<option value="NULL" selected>Registrar</option>
+                                                    <option value="1">SI</option>
+                                                    <option value="0">NO</option>';
+                                        }
+                                    }else{
+                                        echo '<option value="NULL" selected>Registrar</option>
+                                                    <option value="1">SI</option>
+                                                    <option value="0">NO</option>';
+                                    }
+                                    
+                                ?>
+                                </select>
+                                <?php
+                                    if ($prod3_ciudad != NULL) {
+                                        $dato['meses'] = $meses;
+                                        $dato['valor'] = $prod3_ciudad->interculturalidad_mes;
+                                        $dato['campo'] = 'interculturalidad_mes';
+                                        echo view('componente3/select_meses', $dato);
+                                    }else{
+                                        $dato['campo'] = 'interculturalidad_mes';
+                                        echo view('componente3/select_meses_1', $dato);
+                                    }
+                                ?>
+                                <p id="error-message"><?= session('errors.idmetodo_pago');?> </p>
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-2">
+                            <label for="masculinidad">El rechazo y la discriminación:</label>
+                            <div class="col-sm-8">
+                                <select 
+                                    class="form-select" 
+                                    aria-label="Default select example" 
+                                    name="masculinidad" 
+                                    id=""  
+                                >
+                                <?php
+                                    if ($prod3_ciudad != NULL) {
+                                        if ($prod3_ciudad->masculinidad == '1') {
+                                            echo '<option value="1" selected>SI</option>
+                                                    <option value="0">NO</option>';
+                                        }elseif ($prod3_ciudad->masculinidad == '0') {
+                                            echo '<option value="1">SI</option>
+                                                    <option value="0" selected>NO</option>';
+                                        }elseif ($prod3_ciudad->masculinidad == NULL) {
+                                            echo '<option value="NULL" selected>Registrar</option>
+                                                    <option value="1">SI</option>
+                                                    <option value="0">NO</option>';
+                                        }
+                                    }else{
+                                        echo '<option value="NULL" selected>Registrar</option>
+                                                    <option value="1">SI</option>
+                                                    <option value="0">NO</option>';
+                                    }
+                                    
+                                ?>
+                                </select>
+                                <?php
+                                    if ($prod3_ciudad != NULL) {
+                                        $dato['meses'] = $meses;
+                                        $dato['valor'] = $prod3_ciudad->masculinidad_mes;
+                                        $dato['campo'] = 'masculinidad_mes';
+                                        echo view('componente3/select_meses', $dato);
+                                    }else{
+                                        $dato['campo'] = 'masculinidad_mes';
                                         echo view('componente3/select_meses_1', $dato);
                                     }
                                 ?>

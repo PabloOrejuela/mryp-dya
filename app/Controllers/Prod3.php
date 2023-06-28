@@ -91,8 +91,8 @@ class Prod3 extends BaseController {
 
         if ($data['is_logged'] == 1 && $data['componente_3'] == 1) {
             $id = $id;
-
-            $this->prod3Model->delete($id);
+            //PABLO está deshabilitado por seguridad
+            //$this->prod3Model->delete($id);
 
             return redirect()->to('prod_3');
         }else{
@@ -163,7 +163,7 @@ class Prod3 extends BaseController {
         if ($data['is_logged'] == 1 && $data['componente_3'] == 1) {
             
             $data['centros'] = $this->prod3Model->_getCentrosEducativosProd3();
-            //$data['prod3_otros'] = $this->otrosProd3Model->_getProd3Otros($id);
+            $data['prod3_otros'] = $this->prod3BibliotecaEncuentroModel->findAll();
             //$data['datos'] = $this->prod3Model->find($id);
             $data['meses'] = MESES;
 

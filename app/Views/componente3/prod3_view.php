@@ -25,7 +25,6 @@
                         <th>Amie</th>
                         <th>Centro educativo</th>
                         <th>Provincia</th>
-                        <th>Borrar registro</th>
                     </thead>
                     <tbody>
                     <?php
@@ -44,14 +43,7 @@
                                     <td>'.$value->documento.'</td>
                                     <td>'.$value->amie.'</td>
                                     <td>'.$centro_educativo->nombre.'</td>
-                                    <td>'.$provincia->provincia.'</td>
-                                    <td>
-                                        <div class="contenedor">
-                                            <a type="button" id="btn-register" href="'.site_url().'prod-3-delete/'.$value->id.'" class="edit">
-                                                <img src="'.site_url().'public/images/delete.png" height="25">
-                                            </a>
-                                        </div>
-                                    </td>';
+                                    <td>'.$provincia->provincia.'</td>';
                             }
                         }
                         
