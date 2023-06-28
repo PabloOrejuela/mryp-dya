@@ -35,7 +35,7 @@ class Inicio extends BaseController {
 
     public function login(){
         $this->session->destroy();
-
+        $data['mensaje'] = $this->session->getFlashdata('mensaje');
         $data['title']='Acceso al sistema:';
         $data['main_content']='home/login';
         return view('includes/template_login', $data);
@@ -56,37 +56,42 @@ class Inicio extends BaseController {
         }else{ 
 
             $usuario = $this->usuarioModel->_getUsuario($data);
-            //echo '<pre>'.var_export($usuario, true).'</pre>';exit;
             if (isset($usuario) && $usuario != NULL) {
                 //valido el login y pongo el id en sesion
-                
-                $sessiondata = [
-                    'is_logged' => 1,
-                    'idusuario' => $usuario->id,
-                    'nombre' => $usuario->nombre,
-                    'idrol' => $usuario->idrol,
-                    'rol' => $usuario->rol,
-                    'centro_educativo' => $usuario->centro_educativo,
-                    'editar' => $usuario->editar,
-                    'cargar_info' => $usuario->cargar_info,
-                    'reportes' => $usuario->reportes,
-                    'reportes_dinamico' => $usuario->reportes_dinamico,
-                    'ver_info' => $usuario->ver_info,
-                    'descargar_info' => $usuario->descargar_info,
-                    'componente_1' => $usuario->componente_1,
-                    'componente_2' => $usuario->componente_2,
-                    'componente_3' => $usuario->componente_3,
-                    'componente_4' => $usuario->componente_4,
-                ];
 
-                $user = [
-                    'is_logged' => 1
-                ];
-                
-                $this->usuarioModel->update($usuario->id, $user);
-                $this->session->set($sessiondata);
-
-                return redirect()->to('inicio');
+                if ($usuario->is_logged == 1) {
+                    $mensaje = 'Ya está logueado en otro PC. por favor cierre la otra sesión y vuelva a intentarlo';
+                    $this->session->setFlashdata('mensaje', $mensaje);
+                    return redirect()->to('/');
+                }else{
+                    $sessiondata = [
+                        'is_logged' => 1,
+                        'idusuario' => $usuario->id,
+                        'nombre' => $usuario->nombre,
+                        'idrol' => $usuario->idrol,
+                        'rol' => $usuario->rol,
+                        'centro_educativo' => $usuario->centro_educativo,
+                        'editar' => $usuario->editar,
+                        'cargar_info' => $usuario->cargar_info,
+                        'reportes' => $usuario->reportes,
+                        'reportes_dinamico' => $usuario->reportes_dinamico,
+                        'ver_info' => $usuario->ver_info,
+                        'descargar_info' => $usuario->descargar_info,
+                        'componente_1' => $usuario->componente_1,
+                        'componente_2' => $usuario->componente_2,
+                        'componente_3' => $usuario->componente_3,
+                        'componente_4' => $usuario->componente_4,
+                    ];
+    
+                    $user = [
+                        'is_logged' => 1
+                    ];
+                    
+                    $this->usuarioModel->update($usuario->id, $user);
+                    $this->session->set($sessiondata);
+    
+                    return redirect()->to('inicio');
+                }
             }else{
                 return redirect()->to('/');
             }

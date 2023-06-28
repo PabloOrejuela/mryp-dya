@@ -1,13 +1,13 @@
 <!-- FOOTER: DEBUG INFO + COPYRIGHTS -->
 
 <footer id="footer">
-    <div class="environment">
+    <!-- <div class="environment">
 
         <p>Page rendered in {elapsed_time} seconds</p>
 
-        <p>Environment: <?= ENVIRONMENT ?></p>
+        <p>Environment: <?php //echo ENVIRONMENT ?></p>
 
-    </div>
+    </div> -->
 
     <div class="copyrights">
 

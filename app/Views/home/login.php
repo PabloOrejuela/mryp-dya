@@ -1,6 +1,6 @@
     <section id="login">
         <div id="wrap">
-            <div class="row g-2">
+            <div class="row g-2mb-3">
                 <div class="col-12 mt-3">
                     <div class="p-3 border bg-light" id="form-login">
                     <?= session()->getFlashdata('error'); ?>
@@ -25,8 +25,10 @@
                             <div class="mb-2">
                                 <button type="submit" class="btn btn-secondary" value="Enviar" id="btn-login">Enviar</button>
                             </div>
+                            <div class="mb-2">
+                                <p id="warning-message" class="warning-login"><?= $mensaje;?> </p>
+                            </div>
                         </form>
-                        <p></p>
                     </div>
                 </div>
             </div>
