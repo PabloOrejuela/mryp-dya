@@ -237,11 +237,11 @@
                                     if ($datos->asistencia_total != NULL && isset($datos->asistencia_total) && $datos->asistencia_total != '' ) {
                                         echo '<input type="text" id="asistencia_total" name="asistencia_total" value="'.$datos->asistencia_total.'" class="form-control number"  aria-label="asistencia_total">';
                                     }else {
-                                        echo '<input type="text" id="number" name="asistencia_total" value="0" class="form-control number" placeholder="0"  aria-label="asistencia_total">';
+                                        echo '<input type="text" id="asistencia_total" name="asistencia_total" value="0" class="form-control number" placeholder="0"  aria-label="asistencia_total">';
                                     }
                                     
                                 }else{
-                                    echo '<input type="text" id="number" name="asistencia_total" value="0" class="form-control number" placeholder="0"  aria-label="asistencia_total">';
+                                    echo '<input type="text" id="asistencia_total" name="asistencia_total" value="0"  class="form-control number" placeholder="0"  aria-label="asistencia_total">';
                                 }
 
                             ?>
@@ -583,11 +583,11 @@
                                     if ($datos->prom_final != NULL && isset($datos->prom_final) && $datos->prom_final != '' ) {
                                         echo '<input type="text" id="prom_final" name="prom_final" value="'.$datos->prom_final.'" class="form-control number" step=".01" aria-label="prom_final">';
                                     }else {
-                                        echo '<input type="text" name="prom_final" value="0" class="form-control number" placeholder="0" step=".01" aria-label="prom_final">';
+                                        echo '<input type="text" id="prom_final" name="prom_final" value="0" class="form-control number" placeholder="0" step=".01" aria-label="prom_final">';
                                     }
                                     
                                 }else{
-                                    echo '<input type="text" id="number" name="prom_final" value="0" class="form-control number" placeholder="0" step=".01" aria-label="prom_final">';
+                                    echo '<input type="text" id="prom_final" name="prom_final" value="0" class="form-control number" placeholder="0" step=".01" aria-label="prom_final">';
                                 }
 
                             ?>
@@ -698,16 +698,19 @@
     
     function sumar(){
         const regimen = JSON.parse(`<?php echo $region; ?>`);
-        const total = document.getElementById('asistencia_total');
+        
+        var total = document.getElementById('asistencia_total');
         let subtotal = 0;
+        
         [ ...document.getElementsByClassName( "asistencia" ) ].forEach( function ( element ) {
             if(element.value !== '') {
-            subtotal += parseFloat(element.value);
+                subtotal += parseFloat(element.value);
             }
         });
+        
         if (regimen == "SIERRA") {
             total.value = (subtotal/9).toFixed(2);
-        }else{
+        }else if(regimen == "COSTA"){
             total.value = (subtotal/7).toFixed(2);
         }
         
