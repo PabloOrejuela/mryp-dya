@@ -87,8 +87,9 @@ class UsuarioModel extends Model {
     }
 
     function _updateLoggin($usuario){
+        //echo '<pre>'.var_export($usuario, true).'</pre>';exit;
         $result = NULL;
-        $builder = $this->db->table('usuarios');
+        $builder = $this->db->table($this->table);
         $builder->set('is_logged', $usuario['is_logged']);
         $builder->where('id', $usuario['id']);
         $builder->update();

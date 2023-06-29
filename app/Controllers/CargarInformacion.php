@@ -29,8 +29,7 @@ class CargarInformacion extends BaseController {
             return view('includes/template', $data);
         }else{
 
-            $this->logout();
-            return redirect()->to('/');
+            return redirect()->to('logout');
         }
         
     }
@@ -49,8 +48,7 @@ class CargarInformacion extends BaseController {
             return view('includes/template', $data);
         }else{
 
-            $this->logout();
-            return redirect()->to('/');
+            return redirect()->to('logout');
         }
         
     }
@@ -70,8 +68,7 @@ class CargarInformacion extends BaseController {
             $data['main_content']='home/frm_subirExcel';
             return view('includes/template', $data);
         }else{
-            $this->logout();
-            return redirect()->to('/');
+            return redirect()->to('logout');
         }
     }
 
@@ -839,18 +836,5 @@ class CargarInformacion extends BaseController {
                 return redirect()->to('cargar_info_extra_view');
             }
         } 
-    }
-
-    public function logout(){
-        //destruyo la session  y salgo
-        
-        $user = [
-            'id' => $this->session->idusuario,
-            'is_logged' => 0
-        ];
-        
-        $this->usuarioModel->_updateLoggin($user);
-        $this->session->destroy();
-        return redirect()->to('/');
     }
 }

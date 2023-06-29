@@ -1,3 +1,12 @@
+<style>
+    .card-img-top{
+        width: 100%;
+    }
+    #card-componente{
+        float: left;
+        margin: 3px;
+    }
+</style>
 <main class="container">
     <div class="container-fluid px-4">
         <h3 class="mt-4"><?= esc($title); ?></h3>
@@ -11,7 +20,7 @@
                     <!--- <img src="..." class="card-img-top" alt="..."> -->
                     <?php  
                         if ($this->session->componente_2 == 1) {
-                            echo '<div class="card" style="width: 25rem;" id="card-componente">
+                            echo '<div class="card col-md-6"  id="card-componente">
                                 <img src="'.site_url().'public/images/card-02.jpg" class="card-img-top" alt="card2">
                                     <div class="card-body" >
                                         <h5 class="card-title">Componente 2</h5>

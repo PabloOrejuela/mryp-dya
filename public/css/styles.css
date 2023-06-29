@@ -214,6 +214,7 @@ footer .copyrights {
 #card-componente{
     float: left;
     margin: 3px;
+    width: 30%;
 }
 
 #txt-descripcion{

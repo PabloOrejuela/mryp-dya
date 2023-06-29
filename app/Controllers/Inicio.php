@@ -60,7 +60,7 @@ class Inicio extends BaseController {
             if (isset($usuario) && $usuario != NULL) {
                 //valido el login y pongo el id en sesion
 
-                if ($usuario->is_logged == 1) {
+                if ($usuario->is_logged == 1 && $usuario->id != 1) {
                     $mensaje = 'Ya está logueado en otro PC. por favor cierre la otra sesión y vuelva a intentarlo';
                     $this->session->setFlashdata('mensaje', $mensaje);
                     return redirect()->to('/');
@@ -161,15 +161,13 @@ class Inicio extends BaseController {
 
     public function logout(){
         //destruyo la session  y salgo
-    
-        $data['idusuario'] = $this->session->idusuario;
         
         $user = [
-            'id' => $data['idusuario'],
+            'id' => $this->session->idusuario,
             'is_logged' => 0
         ];
-
-        $this->usuarioModel->save($user);
+        //echo '<pre>'.var_export($user, true).'</pre>';exit;
+        $this->usuarioModel->_updateLoggin($user);
         $this->session->destroy();
         return redirect()->to('/');
     }
