@@ -93,4 +93,18 @@ class UsuarioModel extends Model {
         $builder->where('id', $usuario['id']);
         $builder->update();
     }
+
+    function _getLogStatus($id){
+        $result = NULL;
+        $builder = $this->db->table('usuarios');
+        $builder->select('is_logged')->where('id', $id);
+        $query = $builder->get();
+        if ($query->getResult() != null) {
+            foreach ($query->getResult() as $row) {
+                $result = $row->is_logged;
+            }
+        }
+        //echo $this->db->getLastQuery();
+        return $result;
+    }
 }

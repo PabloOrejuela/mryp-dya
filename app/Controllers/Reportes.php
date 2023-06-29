@@ -9,7 +9,7 @@ class Reportes extends BaseController {
     public function index(){
         $data['idrol'] = $this->session->idrol;
         $data['id'] = $this->session->idusuario;
-        $data['is_logged'] = $this->session->is_logged;
+        $data['is_logged'] = $this->usuarioModel->_getLogStatus($data['id']);
         $data['nombre'] = $this->session->nombre;
         $data['reportes'] = $this->session->reportes;
 
@@ -26,6 +26,7 @@ class Reportes extends BaseController {
         }else{
 
             $this->logout();
+            return redirect()->to('/');
         }   
     }
 
@@ -46,7 +47,7 @@ class Reportes extends BaseController {
     public function reporte_asistencia_p1() {
         $data['idrol'] = $this->session->idrol;
         $data['id'] = $this->session->idusuario;
-        $data['is_logged'] = $this->session->is_logged;
+        $data['is_logged'] = $this->usuarioModel->_getLogStatus($data['id']);
         $data['nombre'] = $this->session->nombre;
         $data['componente_1'] = $this->session->componente_1;
         $data['reportes'] = $this->session->reportes;
@@ -80,13 +81,14 @@ class Reportes extends BaseController {
         }else{
 
             $this->logout();
+            return redirect()->to('/');
         }
     }
 
     public function reporte_analisis_pruebafinal_p1() {
         $data['idrol'] = $this->session->idrol;
         $data['id'] = $this->session->idusuario;
-        $data['is_logged'] = $this->session->is_logged;
+        $data['is_logged'] = $this->usuarioModel->_getLogStatus($data['id']);
         $data['nombre'] = $this->session->nombre;
         $data['componente_1'] = $this->session->componente_1;
         $data['reportes'] = $this->session->reportes;
@@ -122,13 +124,14 @@ class Reportes extends BaseController {
         }else{
 
             $this->logout();
+            return redirect()->to('/');
         }
     }
 
     public function reporte_analisis_pruebadiagnostico_p1() {
         $data['idrol'] = $this->session->idrol;
         $data['id'] = $this->session->idusuario;
-        $data['is_logged'] = $this->session->is_logged;
+        $data['is_logged'] = $this->usuarioModel->_getLogStatus($data['id']);
         $data['nombre'] = $this->session->nombre;
         $data['componente_1'] = $this->session->componente_1;
         $data['reportes'] = $this->session->reportes;
@@ -163,13 +166,14 @@ class Reportes extends BaseController {
         }else{
 
             $this->logout();
+            return redirect()->to('/');
         }
     }
 
     public function reporte_diagnostico_p1() {
         $data['idrol'] = $this->session->idrol;
         $data['id'] = $this->session->idusuario;
-        $data['is_logged'] = $this->session->is_logged;
+        $data['is_logged'] = $this->usuarioModel->_getLogStatus($data['id']);
         $data['nombre'] = $this->session->nombre;
         $data['componente_1'] = $this->session->componente_1;
         $data['reportes'] = $this->session->reportes;
@@ -204,13 +208,14 @@ class Reportes extends BaseController {
         }else{
 
             $this->logout();
+            return redirect()->to('/');
         }
     }
 
     public function reporte_diagnostico_dinamico_form() {
         $data['idrol'] = $this->session->idrol;
         $data['id'] = $this->session->idusuario;
-        $data['is_logged'] = $this->session->is_logged;
+        $data['is_logged'] = $this->usuarioModel->_getLogStatus($data['id']);
         $data['nombre'] = $this->session->nombre;
         $data['componente_1'] = $this->session->componente_1;
         $data['reportes'] = $this->session->reportes;
@@ -225,6 +230,7 @@ class Reportes extends BaseController {
         }else{
 
             $this->logout();
+            return redirect()->to('/');
         }
     }
 
@@ -291,7 +297,7 @@ class Reportes extends BaseController {
     public function reporte_final_dinamico_form() {
         $data['idrol'] = $this->session->idrol;
         $data['id'] = $this->session->idusuario;
-        $data['is_logged'] = $this->session->is_logged;
+        $data['is_logged'] = $this->usuarioModel->_getLogStatus($data['id']);
         $data['nombre'] = $this->session->nombre;
         $data['componente_1'] = $this->session->componente_1;
         $data['reportes'] = $this->session->reportes;
@@ -306,6 +312,7 @@ class Reportes extends BaseController {
         }else{
 
             $this->logout();
+            return redirect()->to('/');
         }
     }
 
@@ -373,7 +380,7 @@ class Reportes extends BaseController {
     public function reporte_destrezas_p1() {
         $data['idrol'] = $this->session->idrol;
         $data['id'] = $this->session->idusuario;
-        $data['is_logged'] = $this->session->is_logged;
+        $data['is_logged'] = $this->usuarioModel->_getLogStatus($data['id']);
         $data['nombre'] = $this->session->nombre;
         $data['componente_1'] = $this->session->componente_1;
         $data['reportes'] = $this->session->reportes;
@@ -404,13 +411,14 @@ class Reportes extends BaseController {
         }else{
 
             $this->logout();
+            return redirect()->to('/');
         }
     }
 
     public function reporte_despistaje_mat_p1() {
         $data['idrol'] = $this->session->idrol;
         $data['id'] = $this->session->idusuario;
-        $data['is_logged'] = $this->session->is_logged;
+        $data['is_logged'] = $this->usuarioModel->_getLogStatus($data['id']);
         $data['nombre'] = $this->session->nombre;
         $data['componente_1'] = $this->session->componente_1;
         $data['reportes'] = $this->session->reportes;
@@ -444,6 +452,7 @@ class Reportes extends BaseController {
         }else{
 
             $this->logout();
+            return redirect()->to('/');
         }
     }
 
@@ -647,8 +656,6 @@ class Reportes extends BaseController {
             $data['main_content']='reportes/prod1_reportes_diagnostico_view';
             return view('includes/template_reportes', $data);
         }
- 
-        
     }
 
     public function recibe_reporte_destrezas_p1_tab() {
@@ -723,9 +730,7 @@ class Reportes extends BaseController {
             $data['title']='MYRP - DYA';
             $data['main_content']='reportes/prod1_reportes_diagnostico_view';
             return view('includes/template_reportes', $data);
-        }
- 
-        
+        } 
     }
 
     public function recibe_despistaje_mat_tab() {
@@ -931,8 +936,6 @@ class Reportes extends BaseController {
             $data['main_content']='reportes/prod1_reportes_despistaje_mat_view';
             return view('includes/template_reportes', $data);
         }
- 
-        
     }
 
     public function recibe_tab() {
@@ -973,15 +976,14 @@ class Reportes extends BaseController {
 
     public function logout(){
         //destruyo la session  y salgo
-        $data['idusuario'] = $this->session->idusuario;
-        $this->session->destroy();
 
         $user = [
-            'is_logged' => 1
+            'id' => $this->session->idusuario,
+            'is_logged' => 0
         ];
         
-        $this->usuarioModel->update($data['idusuario'], $user);
-        
+        $this->usuarioModel->save($user);
+        $this->session->destroy();
         return redirect()->to('/');
     }
 }

@@ -17,7 +17,7 @@ class CargarInformacion extends BaseController {
     public function index(){
         $data['idrol'] = $this->session->idrol;
         $data['id'] = $this->session->idusuario;
-        $data['is_logged'] = $this->session->is_logged;
+        $data['is_logged'] = $this->usuarioModel->_getLogStatus($data['id']);
         $data['nombre'] = $this->session->nombre;
 
         if ($data['is_logged'] == 1) {
@@ -30,6 +30,7 @@ class CargarInformacion extends BaseController {
         }else{
 
             $this->logout();
+            return redirect()->to('/');
         }
         
     }
@@ -37,7 +38,7 @@ class CargarInformacion extends BaseController {
     public function carga_extra(){
         $data['idrol'] = $this->session->idrol;
         $data['id'] = $this->session->idusuario;
-        $data['is_logged'] = $this->session->is_logged;
+        $data['is_logged'] = $this->usuarioModel->_getLogStatus($data['id']);
         $data['nombre'] = $this->session->nombre;
 
         if ($data['is_logged'] == 1) {
@@ -49,6 +50,7 @@ class CargarInformacion extends BaseController {
         }else{
 
             $this->logout();
+            return redirect()->to('/');
         }
         
     }
@@ -69,6 +71,7 @@ class CargarInformacion extends BaseController {
             return view('includes/template', $data);
         }else{
             $this->logout();
+            return redirect()->to('/');
         }
     }
 
@@ -840,15 +843,14 @@ class CargarInformacion extends BaseController {
 
     public function logout(){
         //destruyo la session  y salgo
-        $this->session->destroy();
-
+        
         $user = [
             'id' => $this->session->idusuario,
             'is_logged' => 0
         ];
         
         $this->usuarioModel->_updateLoggin($user);
-        
+        $this->session->destroy();
         return redirect()->to('/');
     }
 }

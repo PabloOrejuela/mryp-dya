@@ -12,7 +12,7 @@ class Prod2 extends BaseController {
     public function index() {
         $data['idrol'] = $this->session->idrol;
         $data['id'] = $this->session->idusuario;
-        $data['is_logged'] = $this->session->is_logged;
+        $data['is_logged'] = $this->usuarioModel->_getLogStatus($data['id']);
         $data['nombre'] = $this->session->nombre;
         $data['componente_2'] = $this->session->componente_2;
 
@@ -32,6 +32,7 @@ class Prod2 extends BaseController {
         }else{
 
             $this->logout();
+            return redirect()->to('/');
         }
         
     }
@@ -39,7 +40,7 @@ class Prod2 extends BaseController {
     public function prod2_nap2_frm_edit($id) {
         $data['idrol'] = $this->session->idrol;
         $data['id'] = $this->session->idusuario;
-        $data['is_logged'] = $this->session->is_logged;
+        $data['is_logged'] = $this->usuarioModel->_getLogStatus($data['id']);
         $data['nombre'] = $this->session->nombre;
         $data['componente_2'] = $this->session->componente_2;
 
@@ -61,13 +62,14 @@ class Prod2 extends BaseController {
         }else{
 
             $this->logout();
+            return redirect()->to('/');
         }
     }
 
     public function nap2_procesos_grid() {
         $data['idrol'] = $this->session->idrol;
         $data['id'] = $this->session->idusuario;
-        $data['is_logged'] = $this->session->is_logged;
+        $data['is_logged'] = $this->usuarioModel->_getLogStatus($data['id']);
         $data['nombre'] = $this->session->nombre;
         $data['componente_2'] = $this->session->componente_2;
 
@@ -86,13 +88,14 @@ class Prod2 extends BaseController {
         }else{
 
             $this->logout();
+            return redirect()->to('/');
         }
     }
 
     public function nap2_reg_procesos_form($id) {
         $data['idrol'] = $this->session->idrol;
         $data['id'] = $this->session->idusuario;
-        $data['is_logged'] = $this->session->is_logged;
+        $data['is_logged'] = $this->usuarioModel->_getLogStatus($data['id']);
         $data['nombre'] = $this->session->nombre;
 
         if ($data['is_logged'] == 1) {
@@ -111,13 +114,14 @@ class Prod2 extends BaseController {
         }else{
 
             $this->logout();
+            return redirect()->to('/');
         }
     }
 
     public function nap2_process_update() {
         $data['idrol'] = $this->session->idrol;
         $data['id'] = $this->session->idusuario;
-        $data['is_logged'] = $this->session->is_logged;
+        $data['is_logged'] = $this->usuarioModel->_getLogStatus($data['id']);
         $data['nombre'] = $this->session->nombre;
 
         if ($data['is_logged'] == 1) {
@@ -167,13 +171,14 @@ class Prod2 extends BaseController {
         }else{
 
             $this->logout();
+            return redirect()->to('/');
         }
     }
 
     public function nap3_procesos_grid() {
         $data['idrol'] = $this->session->idrol;
         $data['id'] = $this->session->idusuario;
-        $data['is_logged'] = $this->session->is_logged;
+        $data['is_logged'] = $this->usuarioModel->_getLogStatus($data['id']);
         $data['nombre'] = $this->session->nombre;
         $data['componente_2'] = $this->session->componente_2;
 
@@ -192,13 +197,14 @@ class Prod2 extends BaseController {
         }else{
 
             $this->logout();
+            return redirect()->to('/');
         }
     }
 
     public function nap3_reg_procesos_form($idest) {
         $data['idrol'] = $this->session->idrol;
         $data['id'] = $this->session->idusuario;
-        $data['is_logged'] = $this->session->is_logged;
+        $data['is_logged'] = $this->usuarioModel->_getLogStatus($data['id']);
         $data['nombre'] = $this->session->nombre;
 
         if ($data['is_logged'] == 1) {
@@ -214,13 +220,14 @@ class Prod2 extends BaseController {
         }else{
 
             $this->logout();
+            return redirect()->to('/');
         }
     }
 
     public function nap3_process_update() {
         $data['idrol'] = $this->session->idrol;
         $data['id'] = $this->session->idusuario;
-        $data['is_logged'] = $this->session->is_logged;
+        $data['is_logged'] = $this->usuarioModel->_getLogStatus($data['id']);
         $data['nombre'] = $this->session->nombre;
 
         if ($data['is_logged'] == 1) {
@@ -283,13 +290,14 @@ class Prod2 extends BaseController {
         }else{
 
             $this->logout();
+            return redirect()->to('/');
         }
     }
 
     public function nap4_procesos_grid() {
         $data['idrol'] = $this->session->idrol;
         $data['id'] = $this->session->idusuario;
-        $data['is_logged'] = $this->session->is_logged;
+        $data['is_logged'] = $this->usuarioModel->_getLogStatus($data['id']);
         $data['nombre'] = $this->session->nombre;
         $data['componente_2'] = $this->session->componente_2;
 
@@ -308,13 +316,14 @@ class Prod2 extends BaseController {
         }else{
 
             $this->logout();
+            return redirect()->to('/');
         }
     }
 
     public function nap4_reg_procesos_form($idest) {
         $data['idrol'] = $this->session->idrol;
         $data['id'] = $this->session->idusuario;
-        $data['is_logged'] = $this->session->is_logged;
+        $data['is_logged'] = $this->usuarioModel->_getLogStatus($data['id']);
         $data['nombre'] = $this->session->nombre;
 
         if ($data['is_logged'] == 1) {
@@ -331,13 +340,14 @@ class Prod2 extends BaseController {
         }else{
 
             $this->logout();
+            return redirect()->to('/');
         }
     }
 
     public function nap4_process_update() {
         $data['idrol'] = $this->session->idrol;
         $data['id'] = $this->session->idusuario;
-        $data['is_logged'] = $this->session->is_logged;
+        $data['is_logged'] = $this->usuarioModel->_getLogStatus($data['id']);
         $data['nombre'] = $this->session->nombre;
 
         if ($data['is_logged'] == 1) {
@@ -367,13 +377,14 @@ class Prod2 extends BaseController {
         }else{
 
             $this->logout();
+            return redirect()->to('/');
         }
     }
 
     public function nap5_procesos_grid() {
         $data['idrol'] = $this->session->idrol;
         $data['id'] = $this->session->idusuario;
-        $data['is_logged'] = $this->session->is_logged;
+        $data['is_logged'] = $this->usuarioModel->_getLogStatus($data['id']);
         $data['nombre'] = $this->session->nombre;
         $data['componente_2'] = $this->session->componente_2;
 
@@ -392,13 +403,14 @@ class Prod2 extends BaseController {
         }else{
 
             $this->logout();
+            return redirect()->to('/');
         }
     }
 
     public function nap5_reg_procesos_form($idest) {
         $data['idrol'] = $this->session->idrol;
         $data['id'] = $this->session->idusuario;
-        $data['is_logged'] = $this->session->is_logged;
+        $data['is_logged'] = $this->usuarioModel->_getLogStatus($data['id']);
         $data['nombre'] = $this->session->nombre;
 
         if ($data['is_logged'] == 1) {
@@ -415,13 +427,14 @@ class Prod2 extends BaseController {
         }else{
 
             $this->logout();
+            return redirect()->to('/');
         }
     }
 
     public function nap5_process_update() {
         $data['idrol'] = $this->session->idrol;
         $data['id'] = $this->session->idusuario;
-        $data['is_logged'] = $this->session->is_logged;
+        $data['is_logged'] = $this->usuarioModel->_getLogStatus($data['id']);
         $data['nombre'] = $this->session->nombre;
 
         if ($data['is_logged'] == 1) {
@@ -476,13 +489,14 @@ class Prod2 extends BaseController {
         }else{
 
             $this->logout();
+            return redirect()->to('/');
         }
     }
 
     public function nap6_procesos_grid() {
         $data['idrol'] = $this->session->idrol;
         $data['id'] = $this->session->idusuario;
-        $data['is_logged'] = $this->session->is_logged;
+        $data['is_logged'] = $this->usuarioModel->_getLogStatus($data['id']);
         $data['nombre'] = $this->session->nombre;
         $data['componente_2'] = $this->session->componente_2;
 
@@ -501,13 +515,14 @@ class Prod2 extends BaseController {
         }else{
 
             $this->logout();
+            return redirect()->to('/');
         }
     }
 
     public function nap6_reg_procesos_form($idest) {
         $data['idrol'] = $this->session->idrol;
         $data['id'] = $this->session->idusuario;
-        $data['is_logged'] = $this->session->is_logged;
+        $data['is_logged'] = $this->usuarioModel->_getLogStatus($data['id']);
         $data['nombre'] = $this->session->nombre;
 
         if ($data['is_logged'] == 1) {
@@ -524,13 +539,14 @@ class Prod2 extends BaseController {
         }else{
 
             $this->logout();
+            return redirect()->to('/');
         }
     }
 
     public function nap6_process_update() {
         $data['idrol'] = $this->session->idrol;
         $data['id'] = $this->session->idusuario;
-        $data['is_logged'] = $this->session->is_logged;
+        $data['is_logged'] = $this->usuarioModel->_getLogStatus($data['id']);
         $data['nombre'] = $this->session->nombre;
 
         if ($data['is_logged'] == 1) {
@@ -555,13 +571,14 @@ class Prod2 extends BaseController {
         }else{
 
             $this->logout();
+            return redirect()->to('/');
         }
     }
 
     public function nap7_procesos_grid() {
         $data['idrol'] = $this->session->idrol;
         $data['id'] = $this->session->idusuario;
-        $data['is_logged'] = $this->session->is_logged;
+        $data['is_logged'] = $this->usuarioModel->_getLogStatus($data['id']);
         $data['nombre'] = $this->session->nombre;
         $data['componente_2'] = $this->session->componente_2;
 
@@ -580,13 +597,14 @@ class Prod2 extends BaseController {
         }else{
 
             $this->logout();
+            return redirect()->to('/');
         }
     }
 
     public function nap7_reg_procesos_form($id) {
         $data['idrol'] = $this->session->idrol;
         $data['id'] = $this->session->idusuario;
-        $data['is_logged'] = $this->session->is_logged;
+        $data['is_logged'] = $this->usuarioModel->_getLogStatus($data['id']);
         $data['nombre'] = $this->session->nombre;
 
         if ($data['is_logged'] == 1) {
@@ -603,20 +621,20 @@ class Prod2 extends BaseController {
         }else{
 
             $this->logout();
+            return redirect()->to('/');
         }
     }
 
     public function logout(){
         //destruyo la session  y salgo
-        $this->session->destroy();
 
         $user = [
             'id' => $this->session->idusuario,
             'is_logged' => 0
         ];
         
-        $this->usuarioModel->_updateLoggin($user);
-        
+        $this->usuarioModel->save($user);
+        $this->session->destroy();
         return redirect()->to('/');
     }
 }

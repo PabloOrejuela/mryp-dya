@@ -12,7 +12,7 @@ class Prod1 extends BaseController {
     public function index() {
         $data['idrol'] = $this->session->idrol;
         $data['id'] = $this->session->idusuario;
-        $data['is_logged'] = $this->session->is_logged;
+        $data['is_logged'] = $this->usuarioModel->_getLogStatus($data['id']);
         $data['nombre'] = $this->session->nombre;
         $data['componente_1'] = $this->session->componente_1;
 
@@ -40,7 +40,7 @@ class Prod1 extends BaseController {
     public function frm_edit($id) {
         $data['idrol'] = $this->session->idrol;
         $data['id'] = $this->session->idusuario;
-        $data['is_logged'] = $this->session->is_logged;
+        $data['is_logged'] = $this->usuarioModel->_getLogStatus($data['id']);
         $data['nombre'] = $this->session->nombre;
 
         if ($data['is_logged'] == 1) {
@@ -67,7 +67,7 @@ class Prod1 extends BaseController {
     public function prod_1_create() {
         $data['idrol'] = $this->session->idrol;
         $data['id'] = $this->session->idusuario;
-        $data['is_logged'] = $this->session->is_logged;
+        $data['is_logged'] = $this->usuarioModel->_getLogStatus($data['id']);
         $data['nombre'] = $this->session->nombre;
 
         if ($data['is_logged'] == 1) {
@@ -96,7 +96,7 @@ class Prod1 extends BaseController {
     public function prod_1_new() {
         $data['idrol'] = $this->session->idrol;
         $data['id'] = $this->session->idusuario;
-        $data['is_logged'] = $this->session->is_logged;
+        $data['is_logged'] = $this->usuarioModel->_getLogStatus($data['id']);
         $data['nombre'] = $this->session->nombre;
 
         if ($data['is_logged'] == 1) {
@@ -137,7 +137,7 @@ class Prod1 extends BaseController {
     public function update() {
         $data['idrol'] = $this->session->idrol;
         $data['id'] = $this->session->idusuario;
-        $data['is_logged'] = $this->session->is_logged;
+        $data['is_logged'] = $this->usuarioModel->_getLogStatus($data['id']);
         $data['nombre'] = $this->session->nombre;
 
         if ($data['is_logged'] == 1) {
@@ -178,7 +178,7 @@ class Prod1 extends BaseController {
     public function prod_1_delete($id) {
         $data['idrol'] = $this->session->idrol;
         $data['id'] = $this->session->idusuario;
-        $data['is_logged'] = $this->session->is_logged;
+        $data['is_logged'] = $this->usuarioModel->_getLogStatus($data['id']);
         $data['nombre'] = $this->session->nombre;
 
         if ($data['is_logged'] == 1) {
@@ -195,7 +195,7 @@ class Prod1 extends BaseController {
     public function prod1_asistencia_centro_update() {
         $data['idrol'] = $this->session->idrol;
         $data['id'] = $this->session->idusuario;
-        $data['is_logged'] = $this->session->is_logged;
+        $data['is_logged'] = $this->usuarioModel->_getLogStatus($data['id']);
         $data['nombre'] = $this->session->nombre;
 
         if ($data['is_logged'] == 1) {
@@ -252,7 +252,7 @@ class Prod1 extends BaseController {
     public function diagnostico_update() {
         $data['idrol'] = $this->session->idrol;
         $data['id'] = $this->session->idusuario;
-        $data['is_logged'] = $this->session->is_logged;
+        $data['is_logged'] = $this->usuarioModel->_getLogStatus($data['id']);
         $data['nombre'] = $this->session->nombre;
 
         if ($data['is_logged'] == 1) {
@@ -319,7 +319,7 @@ class Prod1 extends BaseController {
     public function eval_final_update() {
         $data['idrol'] = $this->session->idrol;
         $data['id'] = $this->session->idusuario;
-        $data['is_logged'] = $this->session->is_logged;
+        $data['is_logged'] = $this->usuarioModel->_getLogStatus($data['id']);
         $data['nombre'] = $this->session->nombre;
 
         if ($data['is_logged'] == 1) {
@@ -365,7 +365,7 @@ class Prod1 extends BaseController {
     public function eval_Mate_update() {
         $data['idrol'] = $this->session->idrol;
         $data['id'] = $this->session->idusuario;
-        $data['is_logged'] = $this->session->is_logged;
+        $data['is_logged'] = $this->usuarioModel->_getLogStatus($data['id']);
         $data['nombre'] = $this->session->nombre;
 
         if ($data['is_logged'] == 1) {
@@ -415,7 +415,7 @@ class Prod1 extends BaseController {
     public function eval_mateFinal_update() {
         $data['idrol'] = $this->session->idrol;
         $data['id'] = $this->session->idusuario;
-        $data['is_logged'] = $this->session->is_logged;
+        $data['is_logged'] = $this->usuarioModel->_getLogStatus($data['id']);
         $data['nombre'] = $this->session->nombre;
 
         if ($data['is_logged'] == 1) {
@@ -465,7 +465,7 @@ class Prod1 extends BaseController {
     public function eval_mateElem_update() {
         $data['idrol'] = $this->session->idrol;
         $data['id'] = $this->session->idusuario;
-        $data['is_logged'] = $this->session->is_logged;
+        $data['is_logged'] = $this->usuarioModel->_getLogStatus($data['id']);
         $data['nombre'] = $this->session->nombre;
 
         if ($data['is_logged'] == 1) {
@@ -515,7 +515,7 @@ class Prod1 extends BaseController {
     public function eval_mateFinalElem_update() {
         $data['idrol'] = $this->session->idrol;
         $data['id'] = $this->session->idusuario;
-        $data['is_logged'] = $this->session->is_logged;
+        $data['is_logged'] = $this->usuarioModel->_getLogStatus($data['id']);
         $data['nombre'] = $this->session->nombre;
 
         if ($data['is_logged'] == 1) {
@@ -565,7 +565,7 @@ class Prod1 extends BaseController {
     public function prod_1_reg_proceso($amie) {
         $data['idrol'] = $this->session->idrol;
         $data['id'] = $this->session->idusuario;
-        $data['is_logged'] = $this->session->is_logged;
+        $data['is_logged'] = $this->usuarioModel->_getLogStatus($data['id']);
         $data['nombre'] = $this->session->nombre;
         $data['componente_1'] = $this->session->componente_1;
 
@@ -589,7 +589,7 @@ class Prod1 extends BaseController {
     public function prod_1_form_elije_eval_mate($idprod) {
         $data['idrol'] = $this->session->idrol;
         $data['id'] = $this->session->idusuario;
-        $data['is_logged'] = $this->session->is_logged;
+        $data['is_logged'] = $this->usuarioModel->_getLogStatus($data['id']);
         $data['nombre'] = $this->session->nombre;
 
         if ($data['is_logged'] == 1) {
@@ -612,7 +612,7 @@ class Prod1 extends BaseController {
     public function prod_1_form_elije_eval_mate_final($idprod) {
         $data['idrol'] = $this->session->idrol;
         $data['id'] = $this->session->idusuario;
-        $data['is_logged'] = $this->session->is_logged;
+        $data['is_logged'] = $this->usuarioModel->_getLogStatus($data['id']);
         $data['nombre'] = $this->session->nombre;
 
         if ($data['is_logged'] == 1) {
@@ -636,7 +636,7 @@ class Prod1 extends BaseController {
     public function prod1_elije_evalMate() {
         $data['idrol'] = $this->session->idrol;
         $data['id'] = $this->session->idusuario;
-        $data['is_logged'] = $this->session->is_logged;
+        $data['is_logged'] = $this->usuarioModel->_getLogStatus($data['id']);
         $data['nombre'] = $this->session->nombre;
 
         if ($data['is_logged'] == 1) {
@@ -680,7 +680,7 @@ class Prod1 extends BaseController {
     public function prod1_elije_evalMateFinal() {
         $data['idrol'] = $this->session->idrol;
         $data['id'] = $this->session->idusuario;
-        $data['is_logged'] = $this->session->is_logged;
+        $data['is_logged'] = $this->usuarioModel->_getLogStatus($data['id']);
         $data['nombre'] = $this->session->nombre;
 
         if ($data['is_logged'] == 1) {
@@ -722,7 +722,7 @@ class Prod1 extends BaseController {
     public function prod_1_reg_eval_final($idprod) {
         $data['idrol'] = $this->session->idrol;
         $data['id'] = $this->session->idusuario;
-        $data['is_logged'] = $this->session->is_logged;
+        $data['is_logged'] = $this->usuarioModel->_getLogStatus($data['id']);
         $data['nombre'] = $this->session->nombre;
 
         if ($data['is_logged'] == 1) {
@@ -745,7 +745,7 @@ class Prod1 extends BaseController {
     public function prod_1_reg_eval_mate() {
         $data['idrol'] = $this->session->idrol;
         $data['id'] = $this->session->idusuario;
-        $data['is_logged'] = $this->session->is_logged;
+        $data['is_logged'] = $this->usuarioModel->_getLogStatus($data['id']);
         $data['nombre'] = $this->session->nombre;
 
         if ($data['is_logged'] == 1) {
@@ -776,7 +776,7 @@ class Prod1 extends BaseController {
     public function prod_1_reg_eval_mate_final($idprod) {
         $data['idrol'] = $this->session->idrol;
         $data['id'] = $this->session->idusuario;
-        $data['is_logged'] = $this->session->is_logged;
+        $data['is_logged'] = $this->usuarioModel->_getLogStatus($data['id']);
         $data['nombre'] = $this->session->nombre;
 
         if ($data['is_logged'] == 1) {
@@ -807,7 +807,7 @@ class Prod1 extends BaseController {
     public function prod_1_reg_diagnostico($idprod) {
         $data['idrol'] = $this->session->idrol;
         $data['id'] = $this->session->idusuario;
-        $data['is_logged'] = $this->session->is_logged;
+        $data['is_logged'] = $this->usuarioModel->_getLogStatus($data['id']);
         $data['nombre'] = $this->session->nombre;
 
         if ($data['is_logged'] == 1) {
@@ -832,7 +832,7 @@ class Prod1 extends BaseController {
     public function frm_procesos() {
         $data['idrol'] = $this->session->idrol;
         $data['id'] = $this->session->idusuario;
-        $data['is_logged'] = $this->session->is_logged;
+        $data['is_logged'] = $this->usuarioModel->_getLogStatus($data['id']);
         $data['nombre'] = $this->session->nombre;
         $data['componente_1'] = $this->session->componente_1;
 
@@ -856,7 +856,7 @@ class Prod1 extends BaseController {
     public function prod_1_asistencia() {
         $data['idrol'] = $this->session->idrol;
         $data['id'] = $this->session->idusuario;
-        $data['is_logged'] = $this->session->is_logged;
+        $data['is_logged'] = $this->usuarioModel->_getLogStatus($data['id']);
         $data['nombre'] = $this->session->nombre;
         $data['componente_1'] = $this->session->componente_1;
 
@@ -902,7 +902,7 @@ class Prod1 extends BaseController {
     public function prod_1_asistencia_form() {
         $data['idrol'] = $this->session->idrol;
         $data['id'] = $this->session->idusuario;
-        $data['is_logged'] = $this->session->is_logged;
+        $data['is_logged'] = $this->usuarioModel->_getLogStatus($data['id']);
         $data['nombre'] = $this->session->nombre;
         $data['componente_1'] = $this->session->componente_1;
 
@@ -1052,15 +1052,15 @@ class Prod1 extends BaseController {
 
     public function logout(){
         //destruyo la session  y salgo
-        $this->session->destroy();
+        
 
         $user = [
             'id' => $this->session->idusuario,
             'is_logged' => 0
         ];
         
-        $this->usuarioModel->_updateLoggin($user);
-        
+        $this->usuarioModel->save($user);
+        $this->session->destroy();
         return redirect()->to('/');
     }
 }

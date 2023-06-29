@@ -298,23 +298,23 @@
                     <div class="row">
                         <h4 class="mt-3"><?= esc ('Clases'); ?></h4>
                         <div class="col-md-3 mb-2">
-                            <label for="interculturalidad">El Racismo:</label>
+                            <label for="racismo_clase_ciu">El Racismo:</label>
                             <div class="col-sm-8">
                                 <select 
                                     class="form-select" 
                                     aria-label="Default select example" 
-                                    name="interculturalidad" 
-                                    id="interculturalidad"  
+                                    name="racismo_clase_ciu" 
+                                    id="racismo_clase_ciu"  
                                 >
                                 <?php
                                     if ($prod3_ciudad != NULL) {
-                                        if ($prod3_ciudad->interculturalidad == '1') {
+                                        if ($prod3_ciudad->racismo_clase_ciu == '1') {
                                             echo '<option value="1" selected>SI</option>
                                                     <option value="0">NO</option>';
-                                        }elseif ($prod3_ciudad->interculturalidad == '0') {
+                                        }elseif ($prod3_ciudad->racismo_clase_ciu == '0') {
                                             echo '<option value="1">SI</option>
                                                     <option value="0" selected>NO</option>';
-                                        }elseif ($prod3_ciudad->interculturalidad == NULL) {
+                                        }elseif ($prod3_ciudad->racismo_clase_ciu == NULL) {
                                             echo '<option value="NULL" selected>Registrar</option>
                                                     <option value="1">SI</option>
                                                     <option value="0">NO</option>';
@@ -330,11 +330,11 @@
                                 <?php
                                     if ($prod3_ciudad != NULL) {
                                         $dato['meses'] = $meses;
-                                        $dato['valor'] = $prod3_ciudad->interculturalidad_mes;
-                                        $dato['campo'] = 'interculturalidad_mes';
+                                        $dato['valor'] = $prod3_ciudad->racismo_clase_ciu_mes;
+                                        $dato['campo'] = 'racismo_clase_ciu_mes';
                                         echo view('componente3/select_meses', $dato);
                                     }else{
-                                        $dato['campo'] = 'interculturalidad_mes';
+                                        $dato['campo'] = 'racismo_clase_ciu_mes';
                                         echo view('componente3/select_meses_1', $dato);
                                     }
                                 ?>
@@ -342,23 +342,23 @@
                             </div>
                         </div>
                         <div class="col-md-3 mb-2">
-                            <label for="masculinidad">El rechazo y la discriminación:</label>
+                            <label for="rechazo_clase_ciu">El rechazo y la discriminación:</label>
                             <div class="col-sm-8">
                                 <select 
                                     class="form-select" 
                                     aria-label="Default select example" 
-                                    name="masculinidad" 
+                                    name="rechazo_clase_ciu" 
                                     id=""  
                                 >
                                 <?php
                                     if ($prod3_ciudad != NULL) {
-                                        if ($prod3_ciudad->masculinidad == '1') {
+                                        if ($prod3_ciudad->rechazo_clase_ciu == '1') {
                                             echo '<option value="1" selected>SI</option>
                                                     <option value="0">NO</option>';
-                                        }elseif ($prod3_ciudad->masculinidad == '0') {
+                                        }elseif ($prod3_ciudad->rechazo_clase_ciu == '0') {
                                             echo '<option value="1">SI</option>
                                                     <option value="0" selected>NO</option>';
-                                        }elseif ($prod3_ciudad->masculinidad == NULL) {
+                                        }elseif ($prod3_ciudad->rechazo_clase_ciu == NULL) {
                                             echo '<option value="NULL" selected>Registrar</option>
                                                     <option value="1">SI</option>
                                                     <option value="0">NO</option>';
@@ -374,11 +374,11 @@
                                 <?php
                                     if ($prod3_ciudad != NULL) {
                                         $dato['meses'] = $meses;
-                                        $dato['valor'] = $prod3_ciudad->masculinidad_mes;
-                                        $dato['campo'] = 'masculinidad_mes';
+                                        $dato['valor'] = $prod3_ciudad->rechazo_clase_ciu_mes;
+                                        $dato['campo'] = 'rechazo_clase_ciu_mes';
                                         echo view('componente3/select_meses', $dato);
                                     }else{
-                                        $dato['campo'] = 'masculinidad_mes';
+                                        $dato['campo'] = 'rechazo_clase_ciu_mes';
                                         echo view('componente3/select_meses_1', $dato);
                                     }
                                 ?>

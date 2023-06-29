@@ -88,6 +88,41 @@ class CiudadProd3Model extends Model {
         if ($datos['diversidad_neuro'] != 'NULL') {
             $builder->set('diversidad_neuro', $datos['diversidad_neuro']);
         }
+
+        if ($datos['interculturalidad_mes'] != 'NULL') {
+            $builder->set('interculturalidad_mes', $datos['interculturalidad_mes']);
+        }
+        if ($datos['masculinidad_mes'] != 'NULL') {
+            $builder->set('masculinidad_mes', $datos['masculinidad_mes']);
+        }
+        if ($datos['sexo_genero_mes'] != 'NULL') {
+            $builder->set('sexo_genero_mes', $datos['sexo_genero_mes']);
+        }
+        if ($datos['violencia_genero_mes'] != 'NULL') {
+            $builder->set('violencia_genero_mes', $datos['violencia_genero_mes']);
+        }
+        if ($datos['diversidad_estetica_mes'] != 'NULL') {
+            $builder->set('diversidad_estetica_mes', $datos['diversidad_estetica_mes']);
+        }
+        if ($datos['diversidad_neuro_mes'] != 'NULL') {
+            $builder->set('diversidad_neuro_mes', $datos['diversidad_neuro_mes']);
+        }
+
+        if ($datos['racismo_clase_ciu'] != 'NULL') {
+            $builder->set('racismo_clase_ciu', $datos['racismo_clase_ciu']);
+        }
+        if ($datos['rechazo_clase_ciu'] != 'NULL') {
+            $builder->set('rechazo_clase_ciu', $datos['rechazo_clase_ciu']);
+        }
+
+        if ($datos['racismo_clase_ciu_mes'] != 'NULL') {
+            $builder->set('racismo_clase_ciu_mes', $datos['racismo_clase_ciu_mes']);
+        }
+        if ($datos['rechazo_clase_ciu_mes'] != 'NULL') {
+            $builder->set('rechazo_clase_ciu_mes', $datos['rechazo_clase_ciu_mes']);
+        }
+
+
         $builder->where('id_prod_3', $datos['id_prod_3']);
         $builder->update();
     }
@@ -113,8 +148,41 @@ class CiudadProd3Model extends Model {
         if ($datos['diversidad_neuro'] != 'NULL') {
             $builder->set('diversidad_neuro', $datos['diversidad_neuro']);
         }
+
+        if ($datos['interculturalidad_mes'] != 'NULL') {
+            $builder->set('interculturalidad_mes', $datos['interculturalidad_mes']);
+        }
+        if ($datos['masculinidad_mes'] != 'NULL') {
+            $builder->set('masculinidad_mes', $datos['masculinidad_mes']);
+        }
+        if ($datos['sexo_genero_mes'] != 'NULL') {
+            $builder->set('sexo_genero_mes', $datos['sexo_genero_mes']);
+        }
+        if ($datos['violencia_genero_mes'] != 'NULL') {
+            $builder->set('violencia_genero_mes', $datos['violencia_genero_mes']);
+        }
+        if ($datos['diversidad_estetica_mes'] != 'NULL') {
+            $builder->set('diversidad_estetica_mes', $datos['diversidad_estetica_mes']);
+        }
+        if ($datos['diversidad_neuro_mes'] != 'NULL') {
+            $builder->set('diversidad_neuro_mes', $datos['diversidad_neuro_mes']);
+        }
+
+        if ($datos['racismo_clase_ciu'] != 'NULL') {
+            $builder->set('racismo_clase_ciu', $datos['racismo_clase_ciu']);
+        }
+        if ($datos['rechazo_clase_ciu'] != 'NULL') {
+            $builder->set('rechazo_clase_ciu', $datos['rechazo_clase_ciu']);
+        }
+
+        if ($datos['racismo_clase_ciu_mes'] != 'NULL') {
+            $builder->set('racismo_clase_ciu_mes', $datos['racismo_clase_ciu_mes']);
+        }
+        if ($datos['rechazo_clase_ciu_mes'] != 'NULL') {
+            $builder->set('rechazo_clase_ciu_mes', $datos['rechazo_clase_ciu_mes']);
+        }
+
         $builder->set('id_prod_3', $datos['id_prod_3']);
-        
         $builder->insert();
     }
 }

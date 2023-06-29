@@ -144,6 +144,72 @@ class LenguaProd3Model extends Model {
         if ($datos['pitch'] != 'NULL') {
             $builder->set('pitch', $datos['pitch']);
         }
+
+        if ($datos['enfoque_sociocultural_mes'] != 'NULL') {
+            $builder->set('enfoque_sociocultural_mes', $datos['enfoque_sociocultural_mes']);
+        }
+        if ($datos['exp_dialectales_mes'] != 'NULL') {
+            $builder->set('exp_dialectales_mes', $datos['exp_dialectales_mes']);
+        }
+        if ($datos['exp_oral_mes'] != 'NULL') {
+            $builder->set('exp_oral_mes', $datos['exp_oral_mes']);
+        }
+        if ($datos['comp_lectora_mes'] != 'NULL') {
+            $builder->set('comp_lectora_mes', $datos['comp_lectora_mes']);
+        }
+        if ($datos['prod_textos_mes'] != 'NULL') {
+            $builder->set('prod_textos_mes', $datos['prod_textos_mes']);
+        }
+        if ($datos['extrategia_prod_text_mes'] != 'NULL') {
+            $builder->set('extrategia_prod_text_mes', $datos['extrategia_prod_text_mes']);
+        }
+        if ($datos['zapatos_mes'] != 'NULL') {
+            $builder->set('zapatos_mes', $datos['zapatos_mes']);
+        }
+        if ($datos['noticia_mes'] != 'NULL') {
+            $builder->set('noticia_mes', $datos['noticia_mes']);
+        }
+        if ($datos['carta_mes'] != 'NULL') {
+            $builder->set('carta_mes', $datos['carta_mes']);
+        }
+        if ($datos['ninia_abeja_mes'] != 'NULL') {
+            $builder->set('ninia_abeja_mes', $datos['ninia_abeja_mes']);
+        }
+        if ($datos['cuento_mes'] != 'NULL') {
+            $builder->set('cuento_mes', $datos['cuento_mes']);
+        }
+        if ($datos['cuerdas_mes'] != 'NULL') {
+            $builder->set('cuerdas_mes', $datos['cuerdas_mes']);
+        }
+        if ($datos['refranes_mes'] != 'NULL') {
+            $builder->set('refranes_mes', $datos['refranes_mes']);
+        }
+        if ($datos['juegos_mes'] != 'NULL') {
+            $builder->set('juegos_mes', $datos['juegos_mes']);
+        }
+        if ($datos['derechos_humanos_mes'] != 'NULL') {
+            $builder->set('derechos_humanos_mes', $datos['derechos_humanos_mes']);
+        }
+        if ($datos['noticiero_mes'] != 'NULL') {
+            $builder->set('noticiero_mes', $datos['noticiero_mes']);
+        }
+        if ($datos['discurso_mes'] != 'NULL') {
+            $builder->set('discurso_mes', $datos['discurso_mes']);
+        }
+        if ($datos['influencers_mes'] != 'NULL') {
+            $builder->set('influencers_mes', $datos['influencers_mes']);
+        }
+        if ($datos['inferencias_mes'] != 'NULL') {
+            $builder->set('inferencias_mes', $datos['inferencias_mes']);
+        }
+        if ($datos['elefante_mes'] != 'NULL') {
+            $builder->set('elefante_mes', $datos['elefante_mes']);
+        }
+        if ($datos['pitch_mes'] != 'NULL') {
+            $builder->set('pitch_mes', $datos['pitch_mes']);
+        }
+
+
         $builder->where('id_prod_3', $datos['id_prod_3']);
         $builder->update();
     }
@@ -214,8 +280,72 @@ class LenguaProd3Model extends Model {
         if ($datos['pitch'] != 'NULL') {
             $builder->set('pitch', $datos['pitch']);
         }
+
+        if ($datos['enfoque_sociocultural_mes'] != 'NULL') {
+            $builder->set('enfoque_sociocultural_mes', $datos['enfoque_sociocultural_mes']);
+        }
+        if ($datos['exp_dialectales_mes'] != 'NULL') {
+            $builder->set('exp_dialectales_mes', $datos['exp_dialectales_mes']);
+        }
+        if ($datos['exp_oral_mes'] != 'NULL') {
+            $builder->set('exp_oral_mes', $datos['exp_oral_mes']);
+        }
+        if ($datos['comp_lectora_mes'] != 'NULL') {
+            $builder->set('comp_lectora_mes', $datos['comp_lectora_mes']);
+        }
+        if ($datos['prod_textos_mes'] != 'NULL') {
+            $builder->set('prod_textos_mes', $datos['prod_textos_mes']);
+        }
+        if ($datos['extrategia_prod_text_mes'] != 'NULL') {
+            $builder->set('extrategia_prod_text_mes', $datos['extrategia_prod_text_mes']);
+        }
+        if ($datos['zapatos_mes'] != 'NULL') {
+            $builder->set('zapatos_mes', $datos['zapatos_mes']);
+        }
+        if ($datos['noticia_mes'] != 'NULL') {
+            $builder->set('noticia_mes', $datos['noticia_mes']);
+        }
+        if ($datos['carta_mes'] != 'NULL') {
+            $builder->set('carta_mes', $datos['carta_mes']);
+        }
+        if ($datos['ninia_abeja_mes'] != 'NULL') {
+            $builder->set('ninia_abeja_mes', $datos['ninia_abeja_mes']);
+        }
+        if ($datos['cuento_mes'] != 'NULL') {
+            $builder->set('cuento_mes', $datos['cuento_mes']);
+        }
+        if ($datos['cuerdas_mes'] != 'NULL') {
+            $builder->set('cuerdas_mes', $datos['cuerdas_mes']);
+        }
+        if ($datos['refranes_mes'] != 'NULL') {
+            $builder->set('refranes_mes', $datos['refranes_mes']);
+        }
+        if ($datos['juegos_mes'] != 'NULL') {
+            $builder->set('juegos_mes', $datos['juegos_mes']);
+        }
+        if ($datos['derechos_humanos_mes'] != 'NULL') {
+            $builder->set('derechos_humanos_mes', $datos['derechos_humanos_mes']);
+        }
+        if ($datos['noticiero_mes'] != 'NULL') {
+            $builder->set('noticiero_mes', $datos['noticiero_mes']);
+        }
+        if ($datos['discurso_mes'] != 'NULL') {
+            $builder->set('discurso_mes', $datos['discurso_mes']);
+        }
+        if ($datos['influencers_mes'] != 'NULL') {
+            $builder->set('influencers_mes', $datos['influencers_mes']);
+        }
+        if ($datos['inferencias_mes'] != 'NULL') {
+            $builder->set('inferencias_mes', $datos['inferencias_mes']);
+        }
+        if ($datos['elefante_mes'] != 'NULL') {
+            $builder->set('elefante_mes', $datos['elefante_mes']);
+        }
+        if ($datos['pitch_mes'] != 'NULL') {
+            $builder->set('pitch_mes', $datos['pitch_mes']);
+        }
+
         $builder->set('id_prod_3', $datos['id_prod_3']);
-        
         $builder->insert();
     }
 

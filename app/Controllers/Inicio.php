@@ -11,11 +11,11 @@ class Inicio extends BaseController {
         //echo '<pre>'.var_export($this->session->idusuario, true).'</pre>';
         $data['idrol'] = $this->session->idrol;
         $data['id'] = $this->session->idusuario;
-        $data['is_logged'] = $this->session->is_logged;
+        $data['is_logged'] = $this->usuarioModel->_getLogStatus($data['id']);
         $data['nombre'] = $this->session->nombre;
 
         if ($data['is_logged'] == 1) {
-
+            //echo '<pre>'.var_export($data, true).'</pre>';exit;
             $data['provincias'] = $this->provinciaModel->findAll();
 
             $data['title']='MYRP - DYA';
@@ -23,6 +23,7 @@ class Inicio extends BaseController {
             return view('includes/template', $data);
         }else{
             $this->logout();
+            return redirect()->to('/');
         }
     }
 
@@ -65,7 +66,7 @@ class Inicio extends BaseController {
                     return redirect()->to('/');
                 }else{
                     $sessiondata = [
-                        'is_logged' => 1,
+                        //'is_logged' => 1,
                         'idusuario' => $usuario->id,
                         'nombre' => $usuario->nombre,
                         'idrol' => $usuario->idrol,
@@ -84,6 +85,7 @@ class Inicio extends BaseController {
                     ];
     
                     $user = [
+                        'id' => $usuario->id,
                         'is_logged' => 1
                     ];
                     
@@ -93,6 +95,7 @@ class Inicio extends BaseController {
                     return redirect()->to('inicio');
                 }
             }else{
+                $this->logout();
                 return redirect()->to('/');
             }
         }
@@ -158,15 +161,14 @@ class Inicio extends BaseController {
 
     public function logout(){
         //destruyo la session  y salgo
-        //echo '<pre>'.var_export($this->session->idusuario, true).'</pre>';
-        
+    
         $data['idusuario'] = $this->session->idusuario;
         
         $user = [
             'id' => $data['idusuario'],
             'is_logged' => 0
         ];
-        //echo '<pre>'.var_export($user, true).'</pre>';
+
         $this->usuarioModel->save($user);
         $this->session->destroy();
         return redirect()->to('/');

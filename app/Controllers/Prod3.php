@@ -9,7 +9,7 @@ class Prod3 extends BaseController {
     public function index() {
         $data['idrol'] = $this->session->idrol;
         $data['id'] = $this->session->idusuario;
-        $data['is_logged'] = $this->session->is_logged;
+        $data['is_logged'] = $this->usuarioModel->_getLogStatus($data['id']);
         $data['nombre'] = $this->session->nombre;
         $data['componente_3'] = $this->session->componente_3;
 
@@ -29,7 +29,7 @@ class Prod3 extends BaseController {
     public function prod_3_create() {
         $data['idrol'] = $this->session->idrol;
         $data['id'] = $this->session->idusuario;
-        $data['is_logged'] = $this->session->is_logged;
+        $data['is_logged'] = $this->usuarioModel->_getLogStatus($data['id']);
         $data['nombre'] = $this->session->nombre;
         $data['componente_3'] = $this->session->componente_3;
 
@@ -53,7 +53,7 @@ class Prod3 extends BaseController {
     public function prod_3_new() {
         $data['idrol'] = $this->session->idrol;
         $data['id'] = $this->session->idusuario;
-        $data['is_logged'] = $this->session->is_logged;
+        $data['is_logged'] = $this->usuarioModel->_getLogStatus($data['id']);
         $data['nombre'] = $this->session->nombre;
         $data['componente_3'] = $this->session->componente_3;
 
@@ -85,7 +85,7 @@ class Prod3 extends BaseController {
     public function prod_3_delete($id) {
         $data['idrol'] = $this->session->idrol;
         $data['id'] = $this->session->idusuario;
-        $data['is_logged'] = $this->session->is_logged;
+        $data['is_logged'] = $this->usuarioModel->_getLogStatus($data['id']);
         $data['nombre'] = $this->session->nombre;
         $data['componente_3'] = $this->session->componente_3;
 
@@ -104,7 +104,7 @@ class Prod3 extends BaseController {
     public function frm_procesos_prod_3() {
         $data['idrol'] = $this->session->idrol;
         $data['id'] = $this->session->idusuario;
-        $data['is_logged'] = $this->session->is_logged;
+        $data['is_logged'] = $this->usuarioModel->_getLogStatus($data['id']);
         $data['nombre'] = $this->session->nombre;
         $data['componente_3'] = $this->session->componente_3;
 
@@ -124,7 +124,7 @@ class Prod3 extends BaseController {
     public function prod_3_arte($id) {
         $data['idrol'] = $this->session->idrol;
         $data['id'] = $this->session->idusuario;
-        $data['is_logged'] = $this->session->is_logged;
+        $data['is_logged'] = $this->usuarioModel->_getLogStatus($data['id']);
         $data['nombre'] = $this->session->nombre;
         $data['componente_3'] = $this->session->componente_3;
 
@@ -156,7 +156,7 @@ class Prod3 extends BaseController {
 
         $data['idrol'] = $this->session->idrol;
         $data['id'] = $this->session->idusuario;
-        $data['is_logged'] = $this->session->is_logged;
+        $data['is_logged'] = $this->usuarioModel->_getLogStatus($data['id']);
         $data['nombre'] = $this->session->nombre;
         $data['componente_3'] = $this->session->componente_3;
 
@@ -179,7 +179,7 @@ class Prod3 extends BaseController {
     public function prod_3_lenguaje($id) {
         $data['idrol'] = $this->session->idrol;
         $data['id'] = $this->session->idusuario;
-        $data['is_logged'] = $this->session->is_logged;
+        $data['is_logged'] = $this->usuarioModel->_getLogStatus($data['id']);
         $data['nombre'] = $this->session->nombre;
         $data['componente_3'] = $this->session->componente_3;
 
@@ -204,7 +204,7 @@ class Prod3 extends BaseController {
     public function prod_3_ciudadania($id) {
         $data['idrol'] = $this->session->idrol;
         $data['id'] = $this->session->idusuario;
-        $data['is_logged'] = $this->session->is_logged;
+        $data['is_logged'] = $this->usuarioModel->_getLogStatus($data['id']);
         $data['nombre'] = $this->session->nombre;
         $data['componente_3'] = $this->session->componente_3;
 
@@ -229,7 +229,7 @@ class Prod3 extends BaseController {
     public function prod_3_otros($id) {
         $data['idrol'] = $this->session->idrol;
         $data['id'] = $this->session->idusuario;
-        $data['is_logged'] = $this->session->is_logged;
+        $data['is_logged'] = $this->usuarioModel->_getLogStatus($data['id']);
         $data['nombre'] = $this->session->nombre;
         $data['componente_3'] = $this->session->componente_3;
 
@@ -252,7 +252,7 @@ class Prod3 extends BaseController {
     public function frm_edit($id) {
         $data['idrol'] = $this->session->idrol;
         $data['id'] = $this->session->idusuario;
-        $data['is_logged'] = $this->session->is_logged;
+        $data['is_logged'] = $this->usuarioModel->_getLogStatus($data['id']);
         $data['nombre'] = $this->session->nombre;
         $data['componente_3'] = $this->session->componente_3;
 
@@ -275,7 +275,7 @@ class Prod3 extends BaseController {
     public function update() {
         $data['idrol'] = $this->session->idrol;
         $data['id'] = $this->session->idusuario;
-        $data['is_logged'] = $this->session->is_logged;
+        $data['is_logged'] = $this->usuarioModel->_getLogStatus($data['id']);
         $data['nombre'] = $this->session->nombre;
         $data['componente_3'] = $this->session->componente_3;
 
@@ -325,7 +325,7 @@ class Prod3 extends BaseController {
     public function prod3_lengua_update() {
         $data['idrol'] = $this->session->idrol;
         $data['id'] = $this->session->idusuario;
-        $data['is_logged'] = $this->session->is_logged;
+        $data['is_logged'] = $this->usuarioModel->_getLogStatus($data['id']);
         $data['nombre'] = $this->session->nombre;
         $data['componente_3'] = $this->session->componente_3;
 
@@ -398,7 +398,7 @@ class Prod3 extends BaseController {
     public function prod3_arte_update() {
         $data['idrol'] = $this->session->idrol;
         $data['id'] = $this->session->idusuario;
-        $data['is_logged'] = $this->session->is_logged;
+        $data['is_logged'] = $this->usuarioModel->_getLogStatus($data['id']);
         $data['nombre'] = $this->session->nombre;
         $data['componente_3'] = $this->session->componente_3;
 
@@ -449,7 +449,7 @@ class Prod3 extends BaseController {
     public function prod3_ciudad_update() {
         $data['idrol'] = $this->session->idrol;
         $data['id'] = $this->session->idusuario;
-        $data['is_logged'] = $this->session->is_logged;
+        $data['is_logged'] = $this->usuarioModel->_getLogStatus($data['id']);
         $data['nombre'] = $this->session->nombre;
         $data['componente_3'] = $this->session->componente_3;
 
@@ -469,6 +469,12 @@ class Prod3 extends BaseController {
                 'violencia_genero_mes' => $this->request->getPostGet('violencia_genero_mes'),
                 'diversidad_estetica_mes' => $this->request->getPostGet('diversidad_estetica_mes'),
                 'diversidad_neuro_mes' => $this->request->getPostGet('diversidad_neuro_mes'),
+                
+                'racismo_clase_ciu' => $this->request->getPostGet('racismo_clase_ciu'),
+                'rechazo_clase_ciu' => $this->request->getPostGet('rechazo_clase_ciu'),
+
+                'racismo_clase_ciu_mes' => $this->request->getPostGet('racismo_clase_ciu_mes'),
+                'rechazo_clase_ciu_mes' => $this->request->getPostGet('rechazo_clase_ciu_mes'),
 
                 'id_prod_3' => $this->request->getPostGet('id_prod_3'),
             );
@@ -494,7 +500,7 @@ class Prod3 extends BaseController {
     public function prod3_otros_update() {
         $data['idrol'] = $this->session->idrol;
         $data['id'] = $this->session->idusuario;
-        $data['is_logged'] = $this->session->is_logged;
+        $data['is_logged'] = $this->usuarioModel->_getLogStatus($data['id']);
         $data['nombre'] = $this->session->nombre;
         $data['componente_3'] = $this->session->componente_3;
 
@@ -544,15 +550,14 @@ class Prod3 extends BaseController {
 
     public function logout(){
         //destruyo la session  y salgo
-        $data['idusuario'] = $this->session->idusuario;
-        $this->session->destroy();
 
         $user = [
-            'is_logged' => 1
+            'id' => $this->session->idusuario,
+            'is_logged' => 0
         ];
         
-        $this->usuarioModel->update($usuario->id, $user);
-        
+        $this->usuarioModel->save($user);
+        $this->session->destroy();
         return redirect()->to('/');
     }
 }
