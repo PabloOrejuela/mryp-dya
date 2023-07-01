@@ -23,6 +23,7 @@ class UsuarioModel extends Model {
         'cedula',
         'idrol',
         'is_logged',
+        'ip'
     ];
 
     // Dates
@@ -73,7 +74,8 @@ class UsuarioModel extends Model {
             reportes_dinamico,
             componente_2,
             componente_3,
-            componente_4'
+            componente_4,ip'
+
         )->where('user', $usuario['user'])->where('password', md5($usuario['password']));
         $builder->join('roles', 'roles.id=usuarios.idrol');
         $query = $builder->get();
@@ -107,5 +109,14 @@ class UsuarioModel extends Model {
         }
         //echo $this->db->getLastQuery();
         return $result;
+    }
+
+    function _closeSession($usuario){
+        $result = NULL;
+        $builder = $this->db->table($this->table);
+        $builder->set('is_logged', 0);
+        $builder->set('ip', NULL);
+        $builder->where('id', $usuario['id']);
+        $builder->update();
     }
 }

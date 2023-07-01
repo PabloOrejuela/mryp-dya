@@ -40,7 +40,9 @@ class Prod3Model extends Model {
         'seg_bach',
         'ter_bach',
         'especialidad',
-        'funcion'
+        'funcion',
+        'edad',
+        'etnia'
     ];
 
     // Dates

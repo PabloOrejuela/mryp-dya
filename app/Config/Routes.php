@@ -35,6 +35,7 @@ $routes->get('generate_pdf', 'Inicio::generate_pdf');
 $routes->get('inicio', 'Inicio::index');
 $routes->post('reportes/ciudades_select', 'Reportes::ciudades_select');
 $routes->post('reportes/centros_ciudades_select', 'Reportes::centros_ciudades_select');
+$routes->get('sessions-close/(:num)', 'Inicio::cerrar_sesiones/$1');
 
 $routes->get('cargar_info_view', 'CargarInformacion::index');
 $routes->get('cargar_info_extra_view', 'CargarInformacion::carga_extra');
@@ -110,6 +111,7 @@ $routes->post('nap2-process-update', 'Prod2::nap2_process_update');
 
 //NAP3
 $routes->get('prod2-nap3-menu', 'Prod2::nap3_procesos_grid');
+$routes->post('prod3_update', 'Prod3::update');
 $routes->get('nap3-reg-procesos-form/(:num)', 'Prod2::nap3_reg_procesos_form/$1');
 $routes->post('nap3-process-update', 'Prod2::nap3_process_update');
 

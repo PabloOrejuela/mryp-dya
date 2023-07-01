@@ -292,7 +292,7 @@ class Prod3 extends BaseController {
                 'edad' => strtoupper($this->request->getPostGet('edad')),
                 'discapacidad' => strtoupper($this->request->getPostGet('discapacidad')),
                 'tipo' => strtoupper($this->request->getPostGet('tipo')),
-                'email' => strtoupper($this->request->getPostGet('email')),
+                'email' => $this->request->getPostGet('email'),
                 'celular' => strtoupper($this->request->getPostGet('celular')),
                 'inicial_1' => strtoupper($this->request->getPostGet('inicial_1')),
                 'inicial_2' => strtoupper($this->request->getPostGet('inicial_2')),
@@ -312,7 +312,7 @@ class Prod3 extends BaseController {
                 'especialidad' => strtoupper($this->request->getPostGet('especialidad')),
                 'funcion' => strtoupper($this->request->getPostGet('funcion'))
             );
-            //echo '<pre>'.var_export($producto_3, true).'</pre>';exit;
+            
             $this->prod3Model->update($id, $producto_3);
 
             return redirect()->to('prod_3');
