@@ -10,7 +10,7 @@
         <div class="card mb-4">
             <div class="card-body">
                 <h5 class="mt-3"><?= esc ('ASISTENCIA A CAPACITACIONES VIRTUALES'); ?></h5>
-                <form action="<?php echo base_url().'/nap5-process-update';?>" method="post">
+                <form action="<?php echo base_url().'/nap7-process-update';?>" method="post">
                     <?= session()->getFlashdata('error'); ?>
                     <?= csrf_field(); ?>
                     <div class="row">

@@ -625,6 +625,61 @@ class Prod2 extends BaseController {
         }
     }
 
+    public function nap7_process_update() {
+        $data['idrol'] = $this->session->idrol;
+        $data['id'] = $this->session->idusuario;
+        $data['is_logged'] = $this->usuarioModel->_getLogStatus($data['id']);
+        $data['nombre'] = $this->session->nombre;
+
+        if ($data['is_logged'] == 1) {
+
+            $process = array(
+                'idnap7' => $this->request->getPostGet('id'),
+                'lineamiento_nap' => strtoupper($this->request->getPostGet('lineamiento_nap')),
+                'avance_curricular' => strtoupper($this->request->getPostGet('avance_curricular')),
+                'curriculo_competencias' => strtoupper($this->request->getPostGet('curriculo_competencias')),
+                'plan_microcurricular_erca' => strtoupper($this->request->getPostGet('plan_microcurricular_erca')),
+                'conciencia_linguistica' => strtoupper($this->request->getPostGet('conciencia_linguistica')),
+                'destrezas_desempeño' => strtoupper($this->request->getPostGet('destrezas_desempeño')),
+                'produccion_textos' => strtoupper($this->request->getPostGet('produccion_textos')),
+                'eval_metacognitiva' => strtoupper($this->request->getPostGet('eval_metacognitiva')),
+                'estrategias_didacticas' => strtoupper($this->request->getPostGet('estrategias_didacticas')),
+                'plan_microcurricular' => strtoupper($this->request->getPostGet('plan_microcurricular')),
+                'eval_promo_est' => strtoupper($this->request->getPostGet('eval_promo_est')),
+                'innova_aula' => strtoupper($this->request->getPostGet('innova_aula')),
+                'const_infor_aprendizaje' => strtoupper($this->request->getPostGet('const_infor_aprendizaje')),
+                'tecnico_virtual' => strtoupper($this->request->getPostGet('tecnico_virtual')),
+                'induccion' => strtoupper($this->request->getPostGet('induccion')),
+                'curriculo_mate' => strtoupper($this->request->getPostGet('curriculo_mate')),
+                'congre_curriculo_mate' => strtoupper($this->request->getPostGet('congre_curriculo_mate')),
+                'crea_edu_mate_vida' => strtoupper($this->request->getPostGet('crea_edu_mate_vida')),
+                'habil_mate_trad_actual' => strtoupper($this->request->getPostGet('habil_mate_trad_actual')),
+                'habil_mate_nivel_sup' => strtoupper($this->request->getPostGet('habil_mate_nivel_sup')),
+                'aprendizaje_activo' => strtoupper($this->request->getPostGet('aprendizaje_activo')),
+                'metodologia_activa' => strtoupper($this->request->getPostGet('metodologia_activa')),
+                'didactica_modela' => strtoupper($this->request->getPostGet('didactica_modela')),
+                'trabajo_final' => strtoupper($this->request->getPostGet('trabajo_final')),
+                'resultado_curso' => strtoupper($this->request->getPostGet('resultado_curso')),
+                'observaciones' => strtoupper($this->request->getPostGet('observaciones')),
+            );
+
+            $hay = $this->nap7ProcessResult->_getNap7Process($process['idnap7']);
+            if ($hay) {
+                //Actualizo
+                $this->nap7ProcessResult->_update($process);
+            }else{
+                //Grabo
+                $this->nap7ProcessResult->_save($process);
+            }
+
+            return redirect()->to('prod2-nap7-menu');
+        }else{
+
+            $this->logout();
+            return redirect()->to('/');
+        }
+    }
+
     public function logout(){
         //destruyo la session  y salgo
 
