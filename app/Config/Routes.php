@@ -93,6 +93,7 @@ $routes->post('prod3-arte-update', 'Prod3::prod3_arte_update');
 $routes->post('prod3-lengua-update', 'Prod3::prod3_lengua_update');
 $routes->post('prod3-ciudad-update', 'Prod3::prod3_ciudad_update');
 $routes->get('prod-3-otros-procesos', 'Prod3::prod_3_otros_procesos');
+$routes->get('prod3-form-biblioteca/(:any)', 'Prod3::prod3_form_biblioteca/$1');
 
 //NAP
 $routes->post('cargar-nap2', 'CargarInformacion::cargar_nap2');
@@ -114,6 +115,7 @@ $routes->get('prod2-nap3-menu', 'Prod2::nap3_procesos_grid');
 $routes->post('prod3_update', 'Prod3::update');
 $routes->get('nap3-reg-procesos-form/(:num)', 'Prod2::nap3_reg_procesos_form/$1');
 $routes->post('nap3-process-update', 'Prod2::nap3_process_update');
+$routes->post('prod3-biblioteca-update', 'Prod3::prod3_biblioteca_update');
 
 //NAP4
 $routes->get('prod2-nap4-menu', 'Prod2::nap4_procesos_grid');

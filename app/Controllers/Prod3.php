@@ -4,7 +4,9 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController;
 
+
 class Prod3 extends BaseController {
+    
 
     public function index() {
         $data['idrol'] = $this->session->idrol;
@@ -163,9 +165,40 @@ class Prod3 extends BaseController {
         if ($data['is_logged'] == 1 && $data['componente_3'] == 1) {
             
             $data['centros'] = $this->prod3Model->_getCentrosEducativosProd3();
-            $data['prod3_otros'] = $this->prod3BibliotecaEncuentroModel->findAll();
+            //$data['prod3_otros'] = $this->prod3BibliotecaEncuentroModel->findAll();
             //$data['datos'] = $this->prod3Model->find($id);
             $data['meses'] = MESES;
+
+            $data['title']='MYRP - DYA';
+            $data['main_content']='componente3/prod3_otros_process_view';
+            return view('includes/template', $data);
+        }else{
+
+            $this->logout();
+        }
+    }
+
+    /**
+     *
+     * Selecciona AMIE e ingresa Información
+     *
+     * @param Type void
+     * @return type void
+     * @throws conditon FALSE
+     **/
+    public function prod3_form_biblioteca($amie) {
+
+        $data['idrol'] = $this->session->idrol;
+        $data['id'] = $this->session->idusuario;
+        $data['is_logged'] = $this->usuarioModel->_getLogStatus($data['id']);
+        $data['nombre'] = $this->session->nombre;
+        $data['componente_3'] = $this->session->componente_3;
+
+        if ($data['is_logged'] == 1 && $data['componente_3'] == 1) {
+            
+            $data['centro'] = $this->centroEducativoModel->find($amie);
+            $data['meses'] = MESES;
+            $data['datos'] = $this->prod3BibliotecaEncuentroModel->_getProd3BibliotecaEncuentro($amie);
 
             $data['title']='MYRP - DYA';
             $data['main_content']='componente3/prod3_edit_otros_procesos_view';
@@ -542,6 +575,193 @@ class Prod3 extends BaseController {
             }
             
             return redirect()->to('prod_3_process');
+        }else{
+
+            $this->logout();
+        }
+    }
+
+    public function prod3_biblioteca_update() {
+        $data['idrol'] = $this->session->idrol;
+        $data['id'] = $this->session->idusuario;
+        $data['is_logged'] = $this->usuarioModel->_getLogStatus($data['id']);
+        $data['nombre'] = $this->session->nombre;
+        $data['componente_3'] = $this->session->componente_3;
+
+        if ($data['is_logged'] == 1 && $data['componente_3'] == 1) {
+
+            //Creo la ruta
+            $amie = $this->request->getPostGet('amie');
+            $ruta = './public/images/evidencias/'.$amie.'/';
+            
+            //Recibo el archivo expo_trabajos_evidencia
+            $expo_trabajos_evidencia_file = $this->request->getFile('expo_trabajos_evidencia');
+            $expoTrabajoName = '';
+
+             //Verifico que sea válido
+            if (!$expo_trabajos_evidencia_file->isValid()) {
+                //SI NO ES VÁLIDO PASO VACÍO AL NOMBRE
+                $expoTrabajoName = '';
+
+            }else{
+                //AQUI DEBERÍA CORRER LA VALIDACION de tipo, verificar si ya hay una imagen borrarla y cargar la nueva, etc
+
+                //Muevo el archjivo del temporal a la carpeta
+                $expoTrabajoName = $amie."_expo_trabajo.jpg";
+                $expo_trabajos_evidencia_file->move($ruta, $expoTrabajoName, true);
+
+                $this->image->withFile($ruta.$expoTrabajoName)
+                    ->convert(IMAGETYPE_JPEG)
+                    ->save($ruta.$expoTrabajoName);
+
+                if ($expo_trabajos_evidencia_file->hasMoved()) {
+
+                    //Si se copió al server obtengo el nombre del archivo, lo renombro y mando el nombre para que sea guardado
+                    $expoTrabajoName = $expoTrabajoName;
+                }else{
+                    //Si NO se copió le asigno vacío al nombre
+                    $expoTrabajoName = '';
+                }
+            }
+
+            //Recibo el archivo exp_oral_evidencia
+            $exp_oral_evidencia_file = $this->request->getFile('exp_oral_evidencia');
+            $exp_oral_evidenciaName = '';
+            if (!$exp_oral_evidencia_file->isValid()) {
+                //SI NO ES VÁLIDO PASO VACÍO AL NOMBRE
+                $$exp_oral_evidenciaName = '';
+
+            }else{
+                //AQUI DEBERÍA CORRER LA VALIDACION de tipo, verificar si ya hay una imagen borrarla y cargar la nueva, etc
+                
+                //Muevo el archjivo del temporal a la carpeta
+                $exp_oral_evidenciaName = $amie."_expo_oral.jpg";
+                $exp_oral_evidencia_file->move($ruta, $exp_oral_evidenciaName, true);
+                
+
+                $this->image->withFile($ruta.$exp_oral_evidenciaName)
+                    ->convert(IMAGETYPE_JPEG)
+                    ->save($ruta.$exp_oral_evidenciaName);
+
+                if ($exp_oral_evidencia_file->hasMoved()) {
+                    //Si se copió al server obtengo el nombre del archivo, lo renombro y mando el nombre para que sea guardado
+                    $exp_oral_evidenciaName = $exp_oral_evidenciaName;
+                }else{
+                    //Si NO se copió le asigno vacío al nombre
+                    $exp_oral_evidenciaName = '';
+                }
+            }
+
+            //Recibo el archivo exp_escr_grafica_evidencia
+            $exp_escr_grafica_evidencia_file = $this->request->getFile('exp_escr_grafica_evidencia');
+            if (!$exp_escr_grafica_evidencia_file->isValid()) {
+
+                //SI NO ES VÁLIDO PASO VACÍO AL NOMBRE
+                $exp_escr_grafica_evidenciaName = '';
+
+            }else{
+                //AQUI DEBERÍA CORRER LA VALIDACION de tipo, verificar si ya hay una imagen borrarla y cargar la nueva, etc
+
+                $exp_escr_grafica_evidenciaName = $amie."_exp_escr_grafica.jpg";
+                $exp_escr_grafica_evidencia_file->move($ruta, $exp_escr_grafica_evidenciaName, true);
+                
+
+                $this->image->withFile($ruta.$exp_escr_grafica_evidenciaName)
+                    ->convert(IMAGETYPE_JPEG)
+                    ->save($ruta.$exp_escr_grafica_evidenciaName);
+
+                if ($exp_escr_grafica_evidencia_file->hasMoved()) {
+                    //Si se copió al server obtengo el nombre del archivo, lo renombro y mando el nombre para que sea guardado
+                    $exp_escr_grafica_evidenciaName = $exp_escr_grafica_evidenciaName;
+                }else{
+                    //Si NO se copió le asigno vacío al nombre
+                    $exp_escr_grafica_evidenciaName = '';
+                }
+            }
+
+            //Recibo el archivo part_docentes_evidencia
+            $part_docentes_evidencia_file = $this->request->getFile('part_docentes_evidencia');
+            if (!$part_docentes_evidencia_file->isValid()) {
+
+                //SI NO ES VÁLIDO PASO VACÍO AL NOMBRE
+                $part_docentes_evidenciaName = '';
+
+            }else{
+                //AQUI DEBERÍA CORRER LA VALIDACION de tipo, verificar si ya hay una imagen borrarla y cargar la nueva, etc
+
+                //Muevo el archjivo del temporal a la carpeta
+                $part_docentes_evidenciaName = $amie."_part_docentes_evidencia.jpg";
+                $part_docentes_evidencia_file->move($ruta, $part_docentes_evidenciaName, true);
+                
+
+                $this->image->withFile($ruta.$part_docentes_evidenciaName)
+                    ->convert(IMAGETYPE_JPEG)
+                    ->save($ruta.$part_docentes_evidenciaName);
+
+                if ($part_docentes_evidencia_file->hasMoved()) {
+                    //Si se copió al server obtengo el nombre del archivo, lo renombro y mando el nombre para que sea guardado
+                    $part_docentes_evidenciaName = $part_docentes_evidenciaName;
+                }else{
+                    //Si NO se copió le asigno vacío al nombre
+                    $part_docentes_evidenciaName = '';
+                }
+            }
+
+            //Recibo el archivo part_docentes_evidencia
+            $part_padres_evidencia_file = $this->request->getFile('part_padres_evidencia');
+            if (!$part_padres_evidencia_file->isValid()) {
+
+                //SI NO ES VÁLIDO PASO VACÍO AL NOMBRE
+                $part_padres_evidenciaName = '';
+
+            }else{
+                //AQUI DEBERÍA CORRER LA VALIDACION de tipo, verificar si ya hay una imagen borrarla y cargar la nueva, etc
+
+                //Muevo el archjivo del temporal a la carpeta
+                $part_padres_evidenciaName = $amie."_part_padres_evidencia.jpg";
+                $part_padres_evidencia_file->move($ruta, $part_padres_evidenciaName, true);
+
+                $this->image->withFile($ruta.$part_padres_evidenciaName)
+                    ->convert(IMAGETYPE_JPEG)
+                    ->save($ruta.$part_padres_evidenciaName);
+
+                if ($part_padres_evidencia_file->hasMoved()) {
+                    //Si se copió al server obtengo el nombre del archivo, lo renombro y mando el nombre para que sea guardado
+                    $part_padres_evidenciaName = $part_padres_evidenciaName;
+                }else{
+                    //Si NO se copió le asigno vacío al nombre
+                    $part_padres_evidenciaName = '';
+                }
+            }
+
+            $proceso = array(
+                'amie' => $this->request->getPostGet('amie'),
+                'entrega_biblioteca_viajera' => $this->request->getPostGet('entrega_biblioteca_viajera'),
+                'encuentro_intercultural' => $this->request->getPostGet('encuentro_intercultural'),
+                'fecha_encuentro' => $this->request->getPostGet('fecha_encuentro'),
+                'expo_trabajos' => $this->request->getPostGet('expo_trabajos'),
+                'expo_trabajos_evidencia' => $expoTrabajoName,
+                'exp_oral' => $this->request->getPostGet('exp_oral'),
+                'exp_oral_evidencia' => $exp_oral_evidenciaName,
+                'exp_escr_grafica' => $this->request->getPostGet('exp_escr_grafica'),
+                'exp_escr_grafica_evidencia' => $exp_escr_grafica_evidenciaName,
+                'part_docentes' => $this->request->getPostGet('part_docentes'),
+                'part_docentes_evidencia' => $part_docentes_evidenciaName,
+                'part_padres' => $this->request->getPostGet('part_padres'),
+                'part_padres_evidencia' => $part_padres_evidenciaName,
+            );
+
+            $hay = $this->prod3BibliotecaEncuentroModel->_getProd3BibliotecaEncuentro($proceso['amie']);
+
+            if ($hay) {
+                //Actualizo
+                $this->prod3BibliotecaEncuentroModel->_update($proceso);
+            }else{
+                //Grabo
+                $this->prod3BibliotecaEncuentroModel->_save($proceso);
+            }
+            
+            return redirect()->to('prod-3-otros-procesos');
         }else{
 
             $this->logout();
