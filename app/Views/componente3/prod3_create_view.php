@@ -41,7 +41,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-sm-8S mb-3">
+                <div class="col-sm-8 mb-3">
                     <label for="lectura">Centro educativo *:</label>
                     <select 
                         class="form-select" 
@@ -52,7 +52,7 @@
                     <option value="NULL" selected>Registrar dato</option>
                     <?php
                         foreach ($centros as $key => $ce) {
-                            echo '<option value="'.$ce->amie.'">'.$ce->nombre.'</option>';
+                            echo '<option value="'.$ce->amie.'">'.$ce->amie.' - '.$ce->nombre.'</option>';
                         }
                         
                     ?>

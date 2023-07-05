@@ -797,35 +797,22 @@ class CargarInformacion extends BaseController {
 
                 //Accedo a cada fila extrayendo los datos
                 foreach ($sheet->getRowIterator(3) as $row) {
-                    
                     $amie = trim($sheet->getCell('B'.$row->getRowIndex()));
-
-                    //echo '<pre>'.var_export($exist_parroquia, true).'</pre>';exit;
-                    $centro = array(
-                        'amie' => trim($sheet->getCell('B'.$row->getRowIndex())),
-                        'nombre' => trim($sheet->getCell('E'.$row->getRowIndex())),
-                        'idciudades' => trim($sheet->getCell('D'.$row->getRowIndex())),
-                        'idparroquia' => '',
-                    );
-
-                    //Verifico si existe el CE
-                    $exist_ce = $this->centroEducativoModel->find($centro['amie']);
                     
-                    if (!isset($exist_ce) || $exist_ce == NULL) {
-                        //muestro los datos o los grabo en base de datos
-
-                        $this->centroEducativoModel->_save($centro);
-                    }
-                
-                    //echo '<pre>'.var_export($centro, true).'</pre>';exit;
                     $prod3 = array(
                         'amie' => trim($sheet->getCell('B'.$row->getRowIndex())),
                         'nombre' => trim($sheet->getCell('F'.$row->getRowIndex())).' '.trim($sheet->getCell('G'.$row->getRowIndex())),
                         'documento' => trim($sheet->getCell('H'.$row->getRowIndex())),
-                        'nacionalidad' => trim($sheet->getCell('I'.$row->getRowIndex())),                
+                        'nacionalidad' => trim($sheet->getCell('I'.$row->getRowIndex())),             
                         'genero' => trim($sheet->getCell('J'.$row->getRowIndex())),
-                        'discapacidad' => trim($sheet->getCell('K'.$row->getRowIndex())),
-                        'tipo' => trim($sheet->getCell('L'.$row->getRowIndex())),
+                        'edad' => trim($sheet->getCell('K'.$row->getRowIndex())),
+                        'etnia' => trim($sheet->getCell('L'.$row->getRowIndex())),
+                        'discapacidad' => trim($sheet->getCell('M'.$row->getRowIndex())),
+                        'tipo' => trim($sheet->getCell('N'.$row->getRowIndex())),
+                        'especialidad' => trim($sheet->getCell('O'.$row->getRowIndex())),
+                        'celular' => trim($sheet->getCell('p'.$row->getRowIndex())),
+                        'email' => trim($sheet->getCell('Q'.$row->getRowIndex())),
+                        'funcion' => trim($sheet->getCell('R'.$row->getRowIndex())),
                      );
 
                     $this->prod3Model->insert($prod3);

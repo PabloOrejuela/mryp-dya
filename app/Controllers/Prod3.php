@@ -37,7 +37,7 @@ class Prod3 extends BaseController {
 
         if ($data['is_logged'] == 1 && $data['componente_3'] == 1) {
             //$this->session->set('form_error', "Los campos con asterisco son obligatorios");
-            $data['centros'] = $this->prod3Model->_getMisAmie($this->session->idusuario);
+            $data['centros'] = $this->usuariosCentrosProd3Model->_getAmiesUsuarioProd3($this->session->idusuario);
             $data['cursos'] = $this->cursoModel->findAll();
             $data['mensaje'] = $this->session->form_error;
             
@@ -164,7 +164,8 @@ class Prod3 extends BaseController {
 
         if ($data['is_logged'] == 1 && $data['componente_3'] == 1) {
             
-            $data['centros'] = $this->prod3Model->_getCentrosEducativosProd3();
+            //$data['centros'] = $this->prod3Model->_getCentrosEducativosProd3();
+            $data['centros'] = $this->usuariosCentrosProd3Model->_getAmiesUsuarioProd3($this->session->idusuario);
             //$data['prod3_otros'] = $this->prod3BibliotecaEncuentroModel->findAll();
             //$data['datos'] = $this->prod3Model->find($id);
             $data['meses'] = MESES;

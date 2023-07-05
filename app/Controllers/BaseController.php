@@ -45,6 +45,7 @@ use App\Models\CiudadProd3Model;
 use App\Models\ProvinciaModel;
 use App\Models\CentrosProvProd1ViewModel;
 use App\Models\Prod3BibliotecaEncuentroModel;
+use App\Models\UsuariosCentrosProd3Model;
 
 
 
@@ -132,6 +133,7 @@ abstract class BaseController extends Controller {
         $this->provinciaModel = new ProvinciaModel($this->db);
         $this->prod3BibliotecaEncuentroModel = new Prod3BibliotecaEncuentroModel($this->db);
         $this->centrosProvProd1ViewModel = new CentrosProvProd1ViewModel($this->db);
+        $this->usuariosCentrosProd3Model = new UsuariosCentrosProd3Model($this->db);
 
         // E.g.: $this->session = \Config\Services::session();
         $this->session = \Config\Services::session();

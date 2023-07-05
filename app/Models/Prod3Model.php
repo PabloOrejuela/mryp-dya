@@ -96,8 +96,7 @@ class Prod3Model extends Model {
 
     /**
      *
-     * Esta función trae los Centros educativos cuyos registros tienen a
-     * tutor de apoyo y tutor de apoyo 2
+     * Esta función trae los Centros educativos que están bajo un ID del Prod 3
      *
      * @param Type $var El código amie del CE
      * @return array
@@ -116,7 +115,7 @@ class Prod3Model extends Model {
                 $result[] = $row;
             }
         }
-        //echo $this->db->getLastQuery();
+        echo $this->db->getLastQuery();
         return $result;
     }
 

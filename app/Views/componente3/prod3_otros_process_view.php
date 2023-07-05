@@ -26,7 +26,7 @@
                                 $provincia = $this->centroEducativoModel->_getProvinciaCentro($value->idparroquia);
                                 echo '<tr>
                                     <td>'.$value->amie.'</td>
-                                    <td>'.$value->Centro.'</td>
+                                    <td>'.$value->nombre.'</td>
                                     <td>'.$value->amie.'</td>
                                     <td>
                                         <div class="contenedor">
