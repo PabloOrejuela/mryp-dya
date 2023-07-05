@@ -103,12 +103,15 @@ $routes->post('cargar-nap5', 'CargarInformacion::cargar_nap5');
 $routes->post('cargar-nap6', 'CargarInformacion::cargar_nap6');
 $routes->post('cargar-nap7', 'CargarInformacion::cargar_nap7');
 
+$routes->get('corrije_cedulas', 'Prod2::corrijeCedulas');
+
 //NAP2
 $routes->get('prod-2-menu', 'Prod2::index');
 $routes->get('prod2-nap2-menu', 'Prod2::nap2_procesos_grid');
 $routes->get('prod2-nap2-frm-edit/(:num)', 'Prod2::prod2_nap2_frm_edit/$1');
 $routes->get('nap2-reg-procesos-form/(:num)', 'Prod2::nap2_reg_procesos_form/$1');
 $routes->post('nap2-process-update', 'Prod2::nap2_process_update');
+$routes->post('prod2-nap2-update', 'Prod2::prod2_nap2_update');
 
 //NAP3
 $routes->get('prod2-nap3-menu', 'Prod2::nap3_procesos_grid');

@@ -126,4 +126,152 @@ class Nap2Model extends Model {
         //echo $this->db->getLastQuery();
         return $result;
     }
+
+    public function _update($datos) {
+        $builder = $this->db->table($this->table);
+        if ($datos['nombres'] != 'NULL') {
+            $builder->set('nombres', $datos['nombres']);
+        }
+
+        if ($datos['apellidos'] != 'NULL') {
+            $builder->set('apellidos', $datos['apellidos']);
+        }
+
+        if ($datos['documento'] != 'NULL') {
+            $builder->set('documento', $datos['documento']);
+        }
+
+        if ($datos['nacionalidad'] != 'NULL') {
+            $builder->set('nacionalidad', $datos['nacionalidad']);
+        }
+
+        if ($datos['etnia'] != 'NULL') {
+            $builder->set('etnia', $datos['etnia']);
+        }
+
+        if ($datos['fecha_nac'] != 'NULL') {
+            $builder->set('fecha_nac', $datos['fecha_nac']);
+        }
+
+        if ($datos['edad'] != 'NULL') {
+            $builder->set('edad', $datos['edad']);
+        }
+
+        if ($datos['genero'] != 'NULL') {
+            $builder->set('genero', $datos['genero']);
+        }
+
+        if ($datos['discapacidad'] != 'NULL') {
+            $builder->set('discapacidad', $datos['discapacidad']);
+        }
+
+        if ($datos['tipo_discapacidad'] != 'NULL') {
+            $builder->set('tipo_discapacidad', $datos['tipo_discapacidad']);
+        }
+
+        if ($datos['representante'] != 'NULL') {
+            $builder->set('representante', $datos['representante']);
+        }
+
+        if ($datos['documento_rep'] != 'NULL') {
+            $builder->set('documento_rep', $datos['documento_rep']);
+        }
+
+        if ($datos['parentesto_rep'] != 'NULL') {
+            $builder->set('parentesto_rep', $datos['parentesto_rep']);
+        }
+
+        if ($datos['nacionalidad_rep'] != 'NULL') {
+            $builder->set('nacionalidad_rep', $datos['nacionalidad_rep']);
+        }
+
+        if ($datos['direccion_rep'] != 'NULL') {
+            $builder->set('direccion_rep', $datos['direccion_rep']);
+        }
+
+        if ($datos['contacto_telf'] != 'NULL') {
+            $builder->set('contacto_telf', $datos['contacto_telf']);
+        }
+
+        if ($datos['email'] != 'NULL') {
+            $builder->set('email', $datos['email']);
+        }
+        
+        $builder->where('id', $datos['id']);
+        $builder->update();
+    }
+
+    public function _save($datos) {
+        $builder = $this->db->table($this->table);
+        if ($datos['nombres'] != 'NULL') {
+            $builder->set('nombres', $datos['nombres']);
+        }
+
+        if ($datos['apellidos'] != 'NULL') {
+            $builder->set('apellidos', $datos['apellidos']);
+        }
+
+        if ($datos['documento'] != 'NULL') {
+            $builder->set('documento', $datos['documento']);
+        }
+
+        if ($datos['nacionalidad'] != 'NULL') {
+            $builder->set('nacionalidad', $datos['nacionalidad']);
+        }
+
+        if ($datos['etnia'] != 'NULL') {
+            $builder->set('etnia', $datos['etnia']);
+        }
+
+        if ($datos['fecha_nac'] != 'NULL') {
+            $builder->set('fecha_nac', $datos['fecha_nac']);
+        }
+
+        if ($datos['edad'] != 'NULL') {
+            $builder->set('edad', $datos['edad']);
+        }
+
+        if ($datos['genero'] != 'NULL') {
+            $builder->set('genero', $datos['genero']);
+        }
+
+        if ($datos['discapacidad'] != 'NULL') {
+            $builder->set('discapacidad', $datos['discapacidad']);
+        }
+
+        if ($datos['tipo_discapacidad'] != 'NULL') {
+            $builder->set('tipo_discapacidad', $datos['tipo_discapacidad']);
+        }
+
+        if ($datos['representante'] != 'NULL') {
+            $builder->set('representante', $datos['representante']);
+        }
+
+        if ($datos['documento_rep'] != 'NULL') {
+            $builder->set('documento_rep', $datos['documento_rep']);
+        }
+
+        if ($datos['parentesto_rep'] != 'NULL') {
+            $builder->set('parentesto_rep', $datos['parentesto_rep']);
+        }
+
+        if ($datos['nacionalidad_rep'] != 'NULL') {
+            $builder->set('nacionalidad_rep', $datos['nacionalidad_rep']);
+        }
+
+        if ($datos['direccion_rep'] != 'NULL') {
+            $builder->set('direccion_rep', $datos['direccion_rep']);
+        }
+
+        if ($datos['contacto_telf'] != 'NULL') {
+            $builder->set('contacto_telf', $datos['contacto_telf']);
+        }
+
+        if ($datos['email'] != 'NULL') {
+            $builder->set('email', $datos['email']);
+        }
+
+        $builder->set('id', $datos['id']);
+        $builder->insert();
+    }
 }

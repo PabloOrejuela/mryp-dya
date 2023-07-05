@@ -7,4 +7,5 @@
     <li>Implementada la funcionalñidad de cerrar otra sesión cuando no deja acceder por que ya está logueado</li>
     <li>Terminado de implementar el menú NAP 7 procesos</li>
     <li>Implementado el form de Biblioteca por AMIE</li>
+    <li>Implementado la edición del registro NAP 2</li>
 </ul>        

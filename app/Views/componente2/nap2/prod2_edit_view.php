@@ -148,7 +148,7 @@
                     </select>
                 </div>
                 <div class="col-md-4 mb-3">
-                    <label for="genero">Fecha de nacimiento:</label>
+                    <label for="fecha_nac">Fecha de nacimiento:</label>
                     <input type="date" id="fecha_nac" name="fecha_nac" value="<?= date('Y-m-d', strtotime($datos->fecha_nac)); ?>" class="form-control" placeholder="fecha_nac" aria-label="fecha_nac">
                 </div>
             </div>
@@ -159,7 +159,26 @@
                 </div>
                 <div class="col-md-4 mb-3">
                     <label for="genero">Género:</label>
-                    <input type="text" id="genero" name="genero" value="<?= $datos->genero; ?>" class="form-control" placeholder="Género" aria-label="genero">
+                    <select name="genero" class="form-control" id="genero" aria-label="genero">
+                        <?php
+                            if ($datos->genero == "FEMENINO") {
+                                echo '<option value="FEMENINO" selected>FEMENINO</option>
+                                        <option value="MASCULINO">MASCULINO</option>
+                                ';
+                            }elseif ($datos->genero == "MASCULINO") {
+                                echo '<option value="FEMENINO">FEMENINO</option>
+                                        <option value="MASCULINO" selected>MASCULINO</option>
+                                ';
+                            }else {
+                                echo '<option value="FEMENINO">FEMENINO</option>
+                                        <option value="MASCULINO">MASCULINO</option>
+                                        <option value="NULL">--Registrar--</option>
+                                ';
+                            }
+                        ?>
+                        
+                        
+                    </select>
                 </div>
             </div>
             <div class="row">
@@ -174,7 +193,6 @@
             </div>
             <div class="row">
                 <div class="col-md-4 mb-3">
-                    <label for="amie">Técnico:</label>
                     
                 </div>
                 <div class="col-md-4 mb-3">

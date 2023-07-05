@@ -24,7 +24,7 @@
                             foreach ($nap7 as $key => $value) {
                                 echo '<tr>
                                         <td>'.$value->id.'</td>
-                                        <td>'.$value->nombres.' '.$value->apellidos.'</td>
+                                        <td>'.strtoupper($value->nombres.' '.$value->apellidos).'</td>
                                         <td>'.$value->amie.'</td>
                                         <td>'.$value->nombre.'</td>
                                         <td>'.$value->regimen.'</td>

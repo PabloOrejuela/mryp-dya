@@ -92,6 +92,54 @@ class Prod2 extends BaseController {
         }
     }
 
+    public function prod2_nap2_update() {
+        $data['idrol'] = $this->session->idrol;
+        $data['id'] = $this->session->idusuario;
+        $data['is_logged'] = $this->usuarioModel->_getLogStatus($data['id']);
+        $data['nombre'] = $this->session->nombre;
+        $data['componente_2'] = $this->session->componente_2;
+
+        if ($data['is_logged'] == 1 && $data['componente_2'] == 1) {
+
+            $process = array(
+                'id' => $this->request->getPostGet('id'),
+                'nombres' => strtoupper($this->request->getPostGet('nombres')),
+                'apellidos' => strtoupper($this->request->getPostGet('apellidos')),
+                'documento' => strtoupper($this->request->getPostGet('documento')),
+                'nacionalidad' => strtoupper($this->request->getPostGet('nacionalidad')),
+                'etnia' => strtoupper($this->request->getPostGet('etnia')),
+                'fecha_nac' => strtoupper($this->request->getPostGet('fecha_nac')),
+                'edad' => strtoupper($this->request->getPostGet('edad')),
+                'genero' => strtoupper($this->request->getPostGet('genero')),
+                'discapacidad' => strtoupper($this->request->getPostGet('discapacidad')),
+                'tipo_discapacidad' => strtoupper($this->request->getPostGet('tipo_discapacidad')),
+                'representante' => strtoupper($this->request->getPostGet('representante')),
+                'documento_rep' => strtoupper($this->request->getPostGet('documento_rep')),
+                'parentesto_rep' => strtoupper($this->request->getPostGet('parentesto_rep')),
+                'nacionalidad_rep' => strtoupper($this->request->getPostGet('nacionalidad_rep')),
+                'direccion_rep' => strtoupper($this->request->getPostGet('direccion_rep')),
+                'contacto_telf' => strtoupper($this->request->getPostGet('contacto_telf')),
+                'email' => $this->request->getPostGet('email'),
+
+            );
+
+            $hay = $this->nap2Model->find($process['id']);
+            if ($hay) {
+                //Actualizo
+                $this->nap2Model->_update($process);
+            }else{
+                //Grabo
+                $this->nap2Model->_save($process);
+            }
+
+            return redirect()->to('prod2-nap2-menu');
+        }else{
+
+            $this->logout();
+            return redirect()->to('/');
+        }
+    }
+
     public function nap2_reg_procesos_form($id) {
         $data['idrol'] = $this->session->idrol;
         $data['id'] = $this->session->idusuario;
@@ -677,6 +725,30 @@ class Prod2 extends BaseController {
 
             $this->logout();
             return redirect()->to('/');
+        }
+    }
+
+    public function corrijeCedulas() {
+        $data['idrol'] = $this->session->idrol;
+        $data['id'] = $this->session->idusuario;
+        $data['is_logged'] = $this->usuarioModel->_getLogStatus($data['id']);
+        $data['nombre'] = $this->session->nombre;
+
+        if ($data['is_logged'] == 1 && $this->session->idrol ==1 ) {
+            $num = 0;
+            $docentes = $this->nap7Model->findAll();
+            foreach ($docentes as $key => $value) {
+                
+                if (strlen($value->documento) < 10) {
+                    $id = $value->id;
+                    $obj = [
+                        'documento' => '0'.$value->documento,
+                    ];
+                    
+                    $this->nap7Model->update($id, $obj);
+                }
+            }
+            return redirect()->to('prod2-nap7-menu');
         }
     }
 
