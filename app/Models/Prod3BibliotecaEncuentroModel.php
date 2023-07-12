@@ -57,8 +57,28 @@ class Prod3BibliotecaEncuentroModel extends Model {
 
     public function _update($datos) {
         $builder = $this->db->table($this->table);
-        if ($datos['entrega_biblioteca_viajera'] != 'NULL') {
-            $builder->set('entrega_biblioteca_viajera', $datos['entrega_biblioteca_viajera']);
+        if ($datos['primera_visita'] != 'NULL') {
+            $builder->set('primera_visita', $datos['primera_visita']);
+        }
+
+        if ($datos['fecha_primera_visita'] != 'NULL') {
+            $builder->set('fecha_primera_visita', $datos['fecha_primera_visita']);
+        }
+
+        if ($datos['segunda_visita'] != 'NULL') {
+            $builder->set('segunda_visita', $datos['segunda_visita']);
+        }
+
+        if ($datos['fecha_segunda_visita'] != 'NULL') {
+            $builder->set('fecha_segunda_visita', $datos['fecha_segunda_visita']);
+        }
+
+        if ($datos['tercera_visita'] != 'NULL') {
+            $builder->set('tercera_visita', $datos['tercera_visita']);
+        }
+
+        if ($datos['fecha_tercera_visita'] != 'NULL') {
+            $builder->set('fecha_tercera_visita', $datos['fecha_tercera_visita']);
         }
 
         if ($datos['encuentro_intercultural'] != 'NULL') {
@@ -115,8 +135,28 @@ class Prod3BibliotecaEncuentroModel extends Model {
 
     public function _save($datos) {
         $builder = $this->db->table($this->table);
-        if ($datos['entrega_biblioteca_viajera'] != 'NULL') {
-            $builder->set('entrega_biblioteca_viajera', $datos['entrega_biblioteca_viajera']);
+        if ($datos['primera_visita'] != 'NULL') {
+            $builder->set('primera_visita', $datos['primera_visita']);
+        }
+
+        if ($datos['fecha_primera_visita'] != 'NULL') {
+            $builder->set('fecha_primera_visita', $datos['fecha_primera_visita']);
+        }
+
+        if ($datos['segunda_visita'] != 'NULL') {
+            $builder->set('segunda_visita', $datos['segunda_visita']);
+        }
+
+        if ($datos['fecha_segunda_visita'] != 'NULL') {
+            $builder->set('fecha_segunda_visita', $datos['fecha_segunda_visita']);
+        }
+
+        if ($datos['tercera_visita'] != 'NULL') {
+            $builder->set('tercera_visita', $datos['tercera_visita']);
+        }
+
+        if ($datos['fecha_tercera_visita'] != 'NULL') {
+            $builder->set('fecha_tercera_visita', $datos['fecha_tercera_visita']);
         }
 
         if ($datos['encuentro_intercultural'] != 'NULL') {

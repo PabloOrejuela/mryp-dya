@@ -50,9 +50,11 @@ class UsuariosCentrosProd3Model extends Model {
     public function _getAmiesUsuarioProd3($id) {
         $result = NULL;
         $builder = $this->db->table($this->table);
-        $builder->select('idusuario, usuarios_centros_prod3.amie as amie, centro_educativo.nombre as nombre, idparroquia');
+        $builder->select('idusuario, usuarios_centros_prod3.amie as amie, centro_educativo.nombre as nombre, idparroquia, provincia');
         $builder->where('usuarios_centros_prod3.idusuario', $id);
         $builder->join('centro_educativo', 'centro_educativo.amie = usuarios_centros_prod3.amie');
+        $builder->join('ciudades', 'ciudades.idciudades = centro_educativo.idciudades');
+        $builder->join('provincias', 'provincias.idprovincias = ciudades.idprovincias');
         $query = $builder->get();
         if ($query->getResult() != null) {
             foreach ($query->getResult() as $row) {

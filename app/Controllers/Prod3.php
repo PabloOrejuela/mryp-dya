@@ -566,7 +566,7 @@ class Prod3 extends BaseController {
             );
 
             $hay = $this->otrosProd3Model->_getProd3Otros($proceso['id_prod_3']);
-            
+
             if ($hay) {
                 //Actualizo
                 $this->otrosProd3Model->_update($proceso);
@@ -737,7 +737,13 @@ class Prod3 extends BaseController {
 
             $proceso = array(
                 'amie' => $this->request->getPostGet('amie'),
-                'entrega_biblioteca_viajera' => $this->request->getPostGet('entrega_biblioteca_viajera'),
+                'primera_visita' => $this->request->getPostGet('primera_visita'),
+                'fecha_primera_visita' => $this->request->getPostGet('fecha_primera_visita'),
+                'segunda_visita' => $this->request->getPostGet('segunda_visita'),
+                'fecha_segunda_visita' => $this->request->getPostGet('fecha_segunda_visita'),
+                'tercera_visita' => $this->request->getPostGet('tercera_visita'),
+                'fecha_tercera_visita' => $this->request->getPostGet('fecha_tercera_visita'),
+
                 'encuentro_intercultural' => $this->request->getPostGet('encuentro_intercultural'),
                 'fecha_encuentro' => $this->request->getPostGet('fecha_encuentro'),
                 'expo_trabajos' => $this->request->getPostGet('expo_trabajos'),

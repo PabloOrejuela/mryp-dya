@@ -140,6 +140,9 @@ $routes->get('prod2-nap7-menu', 'Prod2::nap7_procesos_grid');
 $routes->get('nap7-reg-procesos-form/(:num)', 'Prod2::nap7_reg_procesos_form/$1');
 $routes->post('nap7-process-update', 'Prod2::nap7_process_update');
 
+//PRODUCTO 4
+$routes->post('cargar-prod-4', 'CargarInformacion::cargar_prod_4');
+
 
 //REPORTES ESTÁTICOS
 $routes->get('reportes-view', 'Reportes::index');

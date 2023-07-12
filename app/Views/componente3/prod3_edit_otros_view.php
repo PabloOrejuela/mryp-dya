@@ -1,15 +1,6 @@
-<style>
-    .form-control{
-        font-size: 0.8em;
-    }
-    .form-select{font-size: 0.9em;}
-    #titulo-nombre{
-        color: rgb(106, 145, 40);
-    }
-</style>
 <main class="container-md px-2 mb-4">
     <div class="container-fluid px-0">
-        <h4 class="mt-4" id="titulo-nombre"><?= esc($title).' - Cuidadanía de: '.$datos->nombre; ?></h4>
+        <h4 class="mt-4" id="titulo-nombre"><?= esc($title).' - '.$datos->nombre; ?></h4>
         <form action="<?php echo base_url().'/prod3-otros-update';?>" method="post">
             <?= session()->getFlashdata('error'); ?>
             <?= csrf_field(); ?>
@@ -55,9 +46,9 @@
                                 <div class="col-sm-8 mb-3">
                                     <?php
                                         if (isset($prod3_otros->tema_grupo_inter) && $prod3_otros->tema_grupo_inter != null && $prod3_otros->tema_grupo_inter != '') {
-                                            echo '<input type="number" id="tema_grupo_inter" name="tema_grupo_inter" value="'.$prod3_otros->tema_grupo_inter.'" class="form-control" placeholder="" aria-label="tema_grupo_inter">';
+                                            echo '<input type="text" id="tema_grupo_inter" name="tema_grupo_inter" value="'.$prod3_otros->tema_grupo_inter.'" class="form-control" placeholder="" aria-label="tema_grupo_inter">';
                                         }else{
-                                            echo '<input type="number" id="tema_grupo_inter" name="tema_grupo_inter" value="" class="form-control" placeholder="" aria-label="tema_grupo_inter">';
+                                            echo '<input type="text" id="tema_grupo_inter" name="tema_grupo_inter" value="" class="form-control" placeholder="" aria-label="tema_grupo_inter">';
                                         }
                                     ?>
                                 
@@ -91,9 +82,9 @@
                                     <td>
                                         <?php
                                             if (isset($prod3_otros->tema_1) && $prod3_otros->tema_1 != null && $prod3_otros->tema_1 != '') {
-                                                echo '<input type="number" id="tema_1" name="tema_1" value="'.$prod3_otros->tema_1.'" class="form-control" placeholder="" aria-label="tema_1">';
+                                                echo '<input type="text" id="tema_1" name="tema_1" value="'.$prod3_otros->tema_1.'" class="form-control" placeholder="" aria-label="tema_1">';
                                             }else{
-                                                echo '<input type="number" id="tema_1" name="tema_1" value="" class="form-control" placeholder="" aria-label="tema_1">';
+                                                echo '<input type="text" id="tema_1" name="tema_1" value="" class="form-control" placeholder="" aria-label="tema_1">';
                                                 
                                             }
                                         ?>
@@ -113,9 +104,9 @@
                                     <td>
                                         <?php
                                             if (isset($prod3_otros->tema_2) && $prod3_otros->tema_2 != null && $prod3_otros->tema_2 != '') {
-                                                echo '<input type="number" id="tema_2" name="tema_2" value="'.$prod3_otros->tema_2.'" class="form-control" placeholder="" aria-label="tema_2">';
+                                                echo '<input type="text" id="tema_2" name="tema_2" value="'.$prod3_otros->tema_2.'" class="form-control" placeholder="" aria-label="tema_2">';
                                             }else{
-                                                echo '<input type="number" id="tema_2" name="tema_2" value="" class="form-control" placeholder="" aria-label="tema_2">';
+                                                echo '<input type="text" id="tema_2" name="tema_2" value="" class="form-control" placeholder="" aria-label="tema_2">';
                                                 
                                             }
                                         ?>
@@ -135,9 +126,9 @@
                                     <td>
                                         <?php
                                             if (isset($prod3_otros->tema_3) && $prod3_otros->tema_3 != null && $prod3_otros->tema_3 != '') {
-                                                echo '<input type="number" id="tema_3" name="tema_3" value="'.$prod3_otros->tema_3.'" class="form-control" placeholder="" aria-label="tema_3">';
+                                                echo '<input type="text" id="tema_3" name="tema_3" value="'.$prod3_otros->tema_3.'" class="form-control" placeholder="" aria-label="tema_3">';
                                             }else{
-                                                echo '<input type="number" id="tema_3" name="tema_3" value="" class="form-control" placeholder="" aria-label="tema_3">';
+                                                echo '<input type="text" id="tema_3" name="tema_3" value="" class="form-control" placeholder="" aria-label="tema_3">';
                                                 
                                             }
                                         ?>
@@ -157,9 +148,9 @@
                                     <td>
                                         <?php
                                             if (isset($prod3_otros->tema_4) && $prod3_otros->tema_4 != null && $prod3_otros->tema_4 != '') {
-                                                echo '<input type="number" id="tema_4" name="tema_4" value="'.$prod3_otros->tema_4.'" class="form-control" placeholder="" aria-label="tema_4">';
+                                                echo '<input type="text" id="tema_4" name="tema_4" value="'.$prod3_otros->tema_4.'" class="form-control" placeholder="" aria-label="tema_4">';
                                             }else{
-                                                echo '<input type="number" id="tema_4" name="tema_4" value="" class="form-control" placeholder="" aria-label="tema_4">';
+                                                echo '<input type="text" id="tema_4" name="tema_4" value="" class="form-control" placeholder="" aria-label="tema_4">';
                                                 
                                             }
                                         ?>
@@ -179,9 +170,9 @@
                                     <td>
                                         <?php
                                             if (isset($prod3_otros->tema_5) && $prod3_otros->tema_5 != null && $prod3_otros->tema_5 != '') {
-                                                echo '<input type="number" id="tema_5" name="tema_5" value="'.$prod3_otros->tema_5.'" class="form-control" placeholder="" aria-label="tema_5">';
+                                                echo '<input type="text" id="tema_5" name="tema_5" value="'.$prod3_otros->tema_5.'" class="form-control" placeholder="" aria-label="tema_5">';
                                             }else{
-                                                echo '<input type="number" id="tema_5" name="tema_5" value="" class="form-control" placeholder="" aria-label="tema_5">';
+                                                echo '<input type="text" id="tema_5" name="tema_5" value="" class="form-control" placeholder="" aria-label="tema_5">';
                                                 
                                             }
                                         ?>
@@ -201,9 +192,9 @@
                                     <td>
                                         <?php
                                             if (isset($prod3_otros->tema_6) && $prod3_otros->tema_6 != null && $prod3_otros->tema_6 != '') {
-                                                echo '<input type="number" id="tema_6" name="tema_6" value="'.$prod3_otros->tema_6.'" class="form-control" placeholder="" aria-label="tema_6">';
+                                                echo '<input type="text" id="tema_6" name="tema_6" value="'.$prod3_otros->tema_6.'" class="form-control" placeholder="" aria-label="tema_6">';
                                             }else{
-                                                echo '<input type="number" id="tema_6" name="tema_6" value="" class="form-control" placeholder="" aria-label="tema_6">';
+                                                echo '<input type="text" id="tema_6" name="tema_6" value="" class="form-control" placeholder="" aria-label="tema_6">';
                                                 
                                             }
                                         ?>

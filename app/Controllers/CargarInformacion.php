@@ -810,13 +810,87 @@ class CargarInformacion extends BaseController {
                         'discapacidad' => trim($sheet->getCell('M'.$row->getRowIndex())),
                         'tipo' => trim($sheet->getCell('N'.$row->getRowIndex())),
                         'especialidad' => trim($sheet->getCell('O'.$row->getRowIndex())),
-                        'celular' => trim($sheet->getCell('p'.$row->getRowIndex())),
+                        'celular' => trim($sheet->getCell('P'.$row->getRowIndex())),
                         'email' => trim($sheet->getCell('Q'.$row->getRowIndex())),
                         'funcion' => trim($sheet->getCell('R'.$row->getRowIndex())),
                      );
 
                     $this->prod3Model->insert($prod3);
                     if ($amie == 'END') {
+                        break;
+                    }
+                }
+                return redirect()->to('cargar_info_extra_view');
+            }
+        } 
+    }
+
+    public function cargar_prod_4(){
+        
+        //Creo la ruta
+        $ruta = './public/excel/';
+        
+        //Recibo el archivo excel
+        $file = $this->request->getFile('hoja');
+
+        //Verifico que sea válido
+        if (!$file->isValid()) {
+            return redirect()->to('cargar_info_extra_view');
+        }else{
+            //obtengo el nombre del archivo
+            $nameFile = $file->getName();
+
+            //Muevo el archjivo del temporal a la carpeta
+            $file->move($ruta);
+
+            //Verifico que se haya movido
+            if ($file->hasMoved()) {
+                //Creo qel reader
+                $reader = new XlsxReader();
+                //$reader = new \PhpOffice\PhpSpreadsheet\Reader\Xls();
+                $reader->setReadDataOnly(true);
+
+                //leo el archivo
+                $spreadsheet = $reader->load($ruta.$nameFile);
+
+                //Determino la pestaña 
+                $sheet = $spreadsheet->getSheet(0);
+
+                //Accedo a cada fila extrayendo los datos
+                foreach ($sheet->getRowIterator(3) as $row) {
+                    $idcentro4 = trim($sheet->getCell('B'.$row->getRowIndex()));
+                    
+                    $prod4 = array(
+                        'idcentro4' => trim($sheet->getCell('B'.$row->getRowIndex())),
+                        'cohorte' => trim($sheet->getCell('C'.$row->getRowIndex())),
+                        'fecha_inicio' => date("Y-m-d", strtotime(trim($sheet->getCell('D'.$row->getRowIndex())))),
+                        'fecha_fin' => date("Y-m-d", strtotime(trim($sheet->getCell('E'.$row->getRowIndex())))),
+                        'apellidos' => strtoupper(trim($sheet->getCell('F'.$row->getRowIndex()))),
+                        'documento' => trim($sheet->getCell('G'.$row->getRowIndex())),
+                        'nacionalidad' => strtoupper(trim($sheet->getCell('H'.$row->getRowIndex()))),  
+                        'fecha_nac' => date("Y-m-d", strtotime(trim($sheet->getCell('I'.$row->getRowIndex())))),
+                        'edad' => trim($sheet->getCell('J'.$row->getRowIndex())),
+                        'discapacidad' => trim($sheet->getCell('K'.$row->getRowIndex())),    
+                        'tipo_discapacidad' => trim($sheet->getCell('L'.$row->getRowIndex())),
+                        'genero' => strtoupper(trim($sheet->getCell('M'.$row->getRowIndex()))),
+                        'barrio' => trim($sheet->getCell('N'.$row->getRowIndex())),
+                        'contacto_telf' => trim($sheet->getCell('O'.$row->getRowIndex())),
+                        'email' => trim($sheet->getCell('P'.$row->getRowIndex())),
+                        'num_hijos' => trim($sheet->getCell('Q'.$row->getRowIndex())),
+                        'edad_hijo_1' => trim($sheet->getCell('R'.$row->getRowIndex())),
+                        'edad_hijo_2' => trim($sheet->getCell('S'.$row->getRowIndex())),
+                        'edad_hijo_3' => trim($sheet->getCell('T'.$row->getRowIndex())),
+                        'estudia' => trim($sheet->getCell('U'.$row->getRowIndex())),
+                        'tiempo_sin_estudiar' => trim($sheet->getCell('V'.$row->getRowIndex())),
+                        'institucion' => strtoupper(trim($sheet->getCell('W'.$row->getRowIndex()))),
+                        'anio_egb' => trim($sheet->getCell('X'.$row->getRowIndex())),
+                        'embarazada' => trim($sheet->getCell('Y'.$row->getRowIndex())),
+                        'semanas' => trim($sheet->getCell('Z'.$row->getRowIndex())),
+                        'controles' => trim($sheet->getCell('AA'.$row->getRowIndex())),
+                     );
+
+                    $this->prod4Model->insert($prod4);
+                    if ($idcentro4 == 'END') {
                         break;
                     }
                 }

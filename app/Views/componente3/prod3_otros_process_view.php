@@ -13,6 +13,7 @@
                         <th>No.</th>
                         <th>Amie</th>
                         <th>Centro Educativo</th>
+                        <th>Provincia</th>
                         <th>Editar Datos</th>
                     </thead>
                     <tbody>
@@ -20,14 +21,16 @@
                         //Llamo al modelo
                         use App\Models\CentroEducativoModel;
                         $this->centroEducativoModel = new CentroEducativoModel();
+                        $num = 1;
                         
                         if (isset($centros) && $centros != NULL) {
                             foreach ($centros as $key => $value) {
                                 $provincia = $this->centroEducativoModel->_getProvinciaCentro($value->idparroquia);
                                 echo '<tr>
+                                    <td>'.$num.'</td>
                                     <td>'.$value->amie.'</td>
                                     <td>'.$value->nombre.'</td>
-                                    <td>'.$value->amie.'</td>
+                                    <td>'.$value->provincia.'</td>
                                     <td>
                                         <div class="contenedor">
                                             <a type="button" id="btn-register" href="'.site_url().'prod3-form-biblioteca/'.$value->amie.'" class="edit">
@@ -36,6 +39,7 @@
                                         </div>
                                     </td>
                                     </tr>';
+                                    $num++;
                             }
                         }
                         

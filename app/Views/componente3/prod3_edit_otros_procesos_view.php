@@ -1,3 +1,8 @@
+<style>
+    #amie{
+        font-size: 0.9em;
+    }
+</style>
 <main class="container-md px-2 mb-2">
     <div class="container-fluid px-0">
         
@@ -26,39 +31,157 @@
 
             <div class="card-body" id="datos">   
                 <div class="row">
-                    <div class="col-sm-12">
-                        <label for="biblioteca_viajera_num">Entrega Biblioteca viajera</label>
-                        
-                        <div class="col-sm-2 mb-3">
+                    <h3 for="biblioteca_viajera_num">Entrega Biblioteca viajera</h3>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 mb-2">
+                        <label for="primera_visita">1. Primera visita:</label>
+                        <div class="col-sm-8">
                             <select 
                                 class="form-select" 
                                 aria-label="Default select example" 
-                                name="entrega_biblioteca_viajera" 
-                                id="entrega_biblioteca_viajera"  
+                                name="primera_visita" 
+                                id=""  
                             >
-                                <?php
-                                    if ($datos != NULL) {
-                                        if ($datos->entrega_biblioteca_viajera == '1') {
-                                            echo '<option value="1" selected>SI</option>
-                                                    <option value="0">NO</option>';
-                                        }elseif ($datos->entrega_biblioteca_viajera == '0') {
-                                            echo '<option value="1">SI</option>
-                                                    <option value="0" selected>NO</option>';
-                                        }elseif ($datos->entrega_biblioteca_viajera == NULL) {
-                                            echo '<option value="NULL" selected>Registrar</option>
-                                                    <option value="1">SI</option>
-                                                    <option value="0">NO</option>';
-                                        }
-                                    }else{
+                            
+                            <?php
+                                if ($datos != NULL) {
+                                    if ($datos->primera_visita == '1') {
+                                        echo '<option value="1" selected>SI</option>
+                                                <option value="0">NO</option>';
+                                    }elseif ($datos->primera_visita == '0') {
+                                        echo '<option value="1">SI</option>
+                                                <option value="0" selected>NO</option>';
+                                    }elseif ($datos->primera_visita == NULL) {
                                         echo '<option value="NULL" selected>Registrar</option>
-                                                    <option value="1">SI</option>
-                                                    <option value="0">NO</option>';
+                                                <option value="1">SI</option>
+                                                <option value="0">NO</option>';
                                     }
-                                ?>
+                                }else{
+                                    echo '<option value="NULL" selected>Registrar</option>
+                                                <option value="1">SI</option>
+                                                <option value="0">NO</option>';
+                                }
+                                
+                            ?>
                             </select>
-                        
+                            <p id="error-message"><?= session('errors.idmetodo_pago');?> </p>
                         </div>
                     </div>
+                    <div class="col-md-4 mb-2">
+                        <label for="fecha_primera_visita">Fecha primera visita:</label>
+                        <div class="col-sm-8">
+                            <?php
+                                if (isset($datos->fecha_primera_visita) && $datos->fecha_primera_visita != null && $datos->fecha_primera_visita != '') {
+                                    echo '<input type="date" id="fecha_primera_visita" name="fecha_primera_visita" value="'.$datos->fecha_primera_visita.'" class="form-control" aria-label="fecha_primera_visita">';
+                                }else{
+                                    echo '<input type="date" id="fecha_primera_visita" name="fecha_primera_visita" value=""  class="form-control" aria-label="fecha_primera_visita">';
+                                }
+                            ?>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 mb-2">
+                        <label for="segunda_visita">2. Segunda visita:</label>
+                        <div class="col-sm-8">
+                            <select 
+                                class="form-select" 
+                                aria-label="Default select example" 
+                                name="segunda_visita" 
+                                id=""  
+                            >
+                            
+                            <?php
+                                if ($datos != NULL) {
+                                    if ($datos->segunda_visita == '1') {
+                                        echo '<option value="1" selected>SI</option>
+                                                <option value="0">NO</option>';
+                                    }elseif ($datos->segunda_visita == '0') {
+                                        echo '<option value="1">SI</option>
+                                                <option value="0" selected>NO</option>';
+                                    }elseif ($datos->segunda_visita == NULL) {
+                                        echo '<option value="NULL" selected>Registrar</option>
+                                                <option value="1">SI</option>
+                                                <option value="0">NO</option>';
+                                    }
+                                }else{
+                                    echo '<option value="NULL" selected>Registrar</option>
+                                                <option value="1">SI</option>
+                                                <option value="0">NO</option>';
+                                }
+                                
+                            ?>
+                            </select>
+                            <p id="error-message"><?= session('errors.idmetodo_pago');?> </p>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-2">
+                        <label for="fecha_segunda_visita">Fecha segunda visita:</label>
+                        <div class="col-sm-8">
+                            <?php
+                                if (isset($datos->fecha_segunda_visita) && $datos->fecha_segunda_visita != null && $datos->fecha_segunda_visita != '') {
+                                    echo '<input type="date" id="fecha_segunda_visita" name="fecha_segunda_visita" value="'.$datos->fecha_segunda_visita.'" class="form-control" aria-label="fecha_segunda_visita">';
+                                }else{
+                                    echo '<input type="date" id="fecha_segunda_visita" name="fecha_segunda_visita" value=""  class="form-control" aria-label="fecha_segunda_visita">';
+                                }
+                            ?>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 mb-2">
+                        <label for="tercera_visita">3. Tercera visita:</label>
+                        <div class="col-sm-8">
+                            <select 
+                                class="form-select" 
+                                aria-label="Default select example" 
+                                name="tercera_visita" 
+                                id=""  
+                            >
+                            
+                            <?php
+                                if ($datos != NULL) {
+                                    if ($datos->tercera_visita == '1') {
+                                        echo '<option value="1" selected>SI</option>
+                                                <option value="0">NO</option>';
+                                    }elseif ($datos->tercera_visita == '0') {
+                                        echo '<option value="1">SI</option>
+                                                <option value="0" selected>NO</option>';
+                                    }elseif ($datos->tercera_visita == NULL) {
+                                        echo '<option value="NULL" selected>Registrar</option>
+                                                <option value="1">SI</option>
+                                                <option value="0">NO</option>';
+                                    }
+                                }else{
+                                    echo '<option value="NULL" selected>Registrar</option>
+                                                <option value="1">SI</option>
+                                                <option value="0">NO</option>';
+                                }
+                                
+                            ?>
+                            </select>
+                            <p id="error-message"><?= session('errors.idmetodo_pago');?> </p>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-2">
+                        <label for="fecha_tercera_visita">Fecha segunda visita:</label>
+                        <div class="col-sm-8">
+                            <?php
+                                if (isset($datos->fecha_tercera_visita) && $datos->fecha_tercera_visita != null && $datos->fecha_tercera_visita != '') {
+                                    echo '<input type="date" id="fecha_tercera_visita" name="fecha_tercera_visita" value="'.$datos->fecha_tercera_visita.'" class="form-control" aria-label="fecha_tercera_visita">';
+                                }else{
+                                    echo '<input type="date" id="fecha_tercera_visita" name="fecha_tercera_visita" value=""  class="form-control" aria-label="fecha_tercera_visita">';
+                                }
+                            ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-body mt-2 mb-3"> 
+                <div class="row">
+                    <h3 for="encuentro_intercultural">Encuentro intercultural:</h3>
                     <div class="col-md-4 mb-2">
                         <label for="encuentro_intercultural">Encuentro intercultural:</label>
                         <div class="col-sm-8">
@@ -105,11 +228,7 @@
                             ?>
                         </div>
                     </div>
-                </div>
-                
-            </div>
-
-            <div class="card-body mt-2 mb-3">   
+                </div>  
                 <div class="row">
                     <div class="col-md-12 mb-2">
                         <label for="expo_trabajos">Actividades:</label>

@@ -29,6 +29,7 @@ use App\Models\CiudadesModel;
 use App\Models\ParroquiasModel;
 use App\Models\Prod1Model;
 use App\Models\Prod3Model;
+use App\Models\Prod4Model;
 use App\Models\VarProd3Model;
 use App\Models\DiagnosticoDocenteP1Model;
 use App\Models\DiagnosticoMyrpP1Model;
@@ -117,6 +118,7 @@ abstract class BaseController extends Controller {
         $this->parroquiasModel = new ParroquiasModel($this->db);
         $this->prod1Model = new Prod1Model($this->db);
         $this->prod3Model = new Prod3Model($this->db);
+        $this->prod4Model = new Prod4Model($this->db);
         $this->diagDocenteP1 = new DiagnosticoDocenteP1Model($this->db);
         $this->diagMyrpP1 = new DiagnosticoMyrpP1Model($this->db);
         $this->asistenciaP1 = new AsistenciaP1Model($this->db);
