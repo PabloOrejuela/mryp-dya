@@ -357,13 +357,61 @@ class Prod2 extends BaseController {
                 $data['centros'] = $this->nap2Model->_getCentrosEducativos();
             }
             
-            $data['datos'] = $this->nap2Model->find($id);
+            $data['datos'] = $this->nap4Model->find($id);
 
             //echo '<pre>'.var_export($data['centros'], true).'</pre>';exit;
 
-            $data['title']='MYRP - NAP2 | Estudiantes DYA ';
-            $data['main_content']='componente2/nap2/prod2_edit_view';
+            $data['title']='MYRP - NAP4 | Estudiantes MINEDUC Presencial ';
+            $data['main_content']='componente2/nap4/prod2_nap4_edit_view';
             return view('includes/template', $data);
+        }else{
+
+            $this->logout();
+            return redirect()->to('/');
+        }
+    }
+
+    public function prod2_nap4_update() {
+        $data['idrol'] = $this->session->idrol;
+        $data['id'] = $this->session->idusuario;
+        $data['is_logged'] = $this->usuarioModel->_getLogStatus($data['id']);
+        $data['nombre'] = $this->session->nombre;
+        $data['componente_2'] = $this->session->componente_2;
+
+        if ($data['is_logged'] == 1 && $data['componente_2'] == 1) {
+
+            $process = array(
+                'id' => $this->request->getPostGet('id'),
+                'nombres' => strtoupper($this->request->getPostGet('nombres')),
+                'apellidos' => strtoupper($this->request->getPostGet('apellidos')),
+                'documento' => strtoupper($this->request->getPostGet('documento')),
+                'nacionalidad' => strtoupper($this->request->getPostGet('nacionalidad')),
+                'etnia' => strtoupper($this->request->getPostGet('etnia')),
+                'fecha_nac' => strtoupper($this->request->getPostGet('fecha_nac')),
+                'edad' => strtoupper($this->request->getPostGet('edad')),
+                'genero' => strtoupper($this->request->getPostGet('genero')),
+                'discapacidad' => strtoupper($this->request->getPostGet('discapacidad')),
+                'tipo_discapacidad' => strtoupper($this->request->getPostGet('tipo_discapacidad')),
+                'representante' => strtoupper($this->request->getPostGet('representante')),
+                'documento_rep' => strtoupper($this->request->getPostGet('documento_rep')),
+                'parentesto_rep' => strtoupper($this->request->getPostGet('parentesto_rep')),
+                'nacionalidad_rep' => strtoupper($this->request->getPostGet('nacionalidad_rep')),
+                'direccion_rep' => strtoupper($this->request->getPostGet('direccion_rep')),
+                'contacto_telf' => strtoupper($this->request->getPostGet('contacto_telf')),
+                'email' => $this->request->getPostGet('email'),
+
+            );
+
+            $hay = $this->nap4Model->find($process['id']);
+            if ($hay) {
+                //Actualizo
+                $this->nap4Model->_update($process);
+            }else{
+                //Grabo
+                $this->nap4Model->_save($process);
+            }
+
+            return redirect()->to('prod2-nap4-menu');
         }else{
 
             $this->logout();
@@ -387,7 +435,7 @@ class Prod2 extends BaseController {
                 $data['nap4'] = $this->nap4Model->_getRegistrosNap4();
             }
             //echo '<pre>'.var_export($data['nap2'], true).'</pre>';exit;
-            $data['title']='MYRP - DYA';
+            $data['title']='MYRP - NAP4 ';
             $data['main_content']='componente2/nap4/nap4_process_view';
             return view('includes/template', $data);
         }else{
@@ -411,7 +459,7 @@ class Prod2 extends BaseController {
             $data['cursos'] = $this->cursoModel->findAll();
 
 
-            $data['title']='MYRP - DYA';
+            $data['title']='MYRP - NAP4 ';
             $data['main_content']='componente2/nap4/edit_process_view';
             return view('includes/template', $data);
         }else{
@@ -474,7 +522,7 @@ class Prod2 extends BaseController {
                 $data['nap5'] = $this->nap5Model->_getRegistrosNap5();
             }
             //echo '<pre>'.var_export($data['nap2'], true).'</pre>';exit;
-            $data['title']='MYRP - DYA';
+            $data['title']='MYRP - NAP5 ';
             $data['main_content']='componente2/nap5/nap5_process_view';
             return view('includes/template', $data);
         }else{
@@ -498,7 +546,7 @@ class Prod2 extends BaseController {
             $data['cursos'] = $this->cursoModel->findAll();
 
 
-            $data['title']='MYRP - DYA';
+            $data['title']='MYRP - NAP5 ';
             $data['main_content']='componente2/nap5/edit_process_view';
             return view('includes/template', $data);
         }else{
@@ -586,7 +634,7 @@ class Prod2 extends BaseController {
                 $data['nap6'] = $this->nap6Model->_getRegistrosNap6();
             }
             //echo '<pre>'.var_export($data['nap2'], true).'</pre>';exit;
-            $data['title']='MYRP - DYA';
+            $data['title']='MYRP - NAP6 ';
             $data['main_content']='componente2/nap6/nap6_process_view';
             return view('includes/template', $data);
         }else{
@@ -610,7 +658,7 @@ class Prod2 extends BaseController {
             $data['cursos'] = $this->cursoModel->findAll();
 
 
-            $data['title']='MYRP - DYA';
+            $data['title']='MYRP - NAP6 ';
             $data['main_content']='componente2/nap6/edit_process_view';
             return view('includes/template', $data);
         }else{
@@ -668,7 +716,7 @@ class Prod2 extends BaseController {
                 $data['nap7'] = $this->nap7Model->_getRegistrosNap7();
             }
             //echo '<pre>'.var_export($data['nap2'], true).'</pre>';exit;
-            $data['title']='MYRP - DYA';
+            $data['title']='MYRP - NAP7 ';
             $data['main_content']='componente2/nap7/nap7_process_view';
             return view('includes/template', $data);
         }else{
@@ -692,7 +740,7 @@ class Prod2 extends BaseController {
             $data['cursos'] = $this->cursoModel->findAll();
 
 
-            $data['title']='MYRP - DYA';
+            $data['title']='MYRP - NAP7 ';
             $data['main_content']='componente2/nap7/edit_process_view';
             return view('includes/template', $data);
         }else{
