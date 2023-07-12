@@ -136,6 +136,8 @@ $routes->post('nap5-process-update', 'Prod2::nap5_process_update');
 $routes->get('prod2-nap6-menu', 'Prod2::nap6_procesos_grid');
 $routes->get('nap6-reg-procesos-form/(:num)', 'Prod2::nap6_reg_procesos_form/$1');
 $routes->post('nap6-process-update', 'Prod2::nap6_process_update');
+$routes->get('prod2-nap6-frm-edit/(:num)', 'Prod2::prod2_nap6_frm_edit/$1');
+$routes->post('prod2-nap6-update', 'Prod2::prod2_nap6_update');
 
 //NAP7
 $routes->get('prod2-nap7-menu', 'Prod2::nap7_procesos_grid');

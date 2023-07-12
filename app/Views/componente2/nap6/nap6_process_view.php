@@ -24,7 +24,9 @@
                             foreach ($nap6 as $key => $value) {
                                 echo '<tr>
                                         <td>'.$value->id.'</td>
-                                        <td>'.$value->nombres_est.' '.$value->apellidos_est.'</td>
+                                        <td>
+                                            <a href="'.site_url().'prod2-nap6-frm-edit/'.$value->id.'">'.strtoupper($value->nombres_est.' '.$value->apellidos_est).'</a>
+                                        </td>
                                         <td>'.$value->amie.'</td>
                                         <td>'.$value->nombre.'</td>
                                         <td>'.$value->regimen.'</td>

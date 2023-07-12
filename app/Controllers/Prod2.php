@@ -618,6 +618,83 @@ class Prod2 extends BaseController {
         }
     }
 
+    public function prod2_nap6_frm_edit($id) {
+        $data['idrol'] = $this->session->idrol;
+        $data['id'] = $this->session->idusuario;
+        $data['is_logged'] = $this->usuarioModel->_getLogStatus($data['id']);
+        $data['nombre'] = $this->session->nombre;
+        $data['componente_2'] = $this->session->componente_2;
+
+        if ($data['is_logged'] == 1 && $data['componente_2'] == 1) {
+            
+            if ($this->session->idrol == 2) {
+                $data['centros'] = $this->nap2Model->_getMisAmie($this->session->nombre);
+            }else{
+                $data['centros'] = $this->nap2Model->_getCentrosEducativos();
+            }
+            
+            $data['datos'] = $this->nap6Model->find($id);
+
+            //echo '<pre>'.var_export($data['datos'], true).'</pre>';exit;
+
+            $data['title']='MYRP - NAP6 Estudiantes MINEDUC Virtual';
+            $data['main_content']='componente2/nap6/prod2_nap6_edit_view';
+            return view('includes/template', $data);
+        }else{
+
+            $this->logout();
+            return redirect()->to('/');
+        }
+    }
+
+    public function prod2_nap6_update() {
+        $data['idrol'] = $this->session->idrol;
+        $data['id'] = $this->session->idusuario;
+        $data['is_logged'] = $this->usuarioModel->_getLogStatus($data['id']);
+        $data['nombre'] = $this->session->nombre;
+        $data['componente_2'] = $this->session->componente_2;
+
+        if ($data['is_logged'] == 1 && $data['componente_2'] == 1) {
+
+            $process = array(
+                'id' => $this->request->getPostGet('id'),
+                'nombres_est' => strtoupper($this->request->getPostGet('nombres_est')),
+                'apellidos_est' => strtoupper($this->request->getPostGet('apellidos_est')),
+                'documento' => strtoupper($this->request->getPostGet('documento')),
+                'nacionalidad' => strtoupper($this->request->getPostGet('nacionalidad')),
+                'etnia' => strtoupper($this->request->getPostGet('etnia')),
+                'fecha_nac' => strtoupper($this->request->getPostGet('fecha_nac')),
+                'edad' => strtoupper($this->request->getPostGet('edad')),
+                'genero' => strtoupper($this->request->getPostGet('genero')),
+                'discapacidad' => strtoupper($this->request->getPostGet('discapacidad')),
+                'tipo_discapacidad' => strtoupper($this->request->getPostGet('tipo_discapacidad')),
+                'representante' => strtoupper($this->request->getPostGet('representante')),
+                'documento_rep' => strtoupper($this->request->getPostGet('documento_rep')),
+                'parentesto_rep' => strtoupper($this->request->getPostGet('parentesto_rep')),
+                'nacionalidad_rep' => strtoupper($this->request->getPostGet('nacionalidad_rep')),
+                'direccion_rep' => strtoupper($this->request->getPostGet('direccion_rep')),
+                'contacto_telf' => strtoupper($this->request->getPostGet('contacto_telf')),
+                'email' => $this->request->getPostGet('email'),
+
+            );
+
+            $hay = $this->nap6Model->find($process['id']);
+            if ($hay) {
+                //Actualizo
+                $this->nap6Model->_update($process);
+            }else{
+                //Grabo
+                $this->nap6Model->_save($process);
+            }
+
+            return redirect()->to('prod2-nap6-menu');
+        }else{
+
+            $this->logout();
+            return redirect()->to('/');
+        }
+    }
+
     public function nap6_procesos_grid() {
         $data['idrol'] = $this->session->idrol;
         $data['id'] = $this->session->idusuario;
