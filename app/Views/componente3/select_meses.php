@@ -186,7 +186,7 @@
                         <option value="12" selected>Diciembre</option>
                         <option value="0" >MES</option>
                         ';
-            }elseif ($valor == 0) {
+            }elseif ($valor == 0 || $valor == '0000-00-00') {
                 echo '<option value="1">Enero</option>
                         <option value="2">Febrero</option>
                         <option value="3">Marzo</option>

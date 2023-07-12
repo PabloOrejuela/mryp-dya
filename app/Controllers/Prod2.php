@@ -342,6 +342,35 @@ class Prod2 extends BaseController {
         }
     }
 
+    public function prod2_nap4_frm_edit($id) {
+        $data['idrol'] = $this->session->idrol;
+        $data['id'] = $this->session->idusuario;
+        $data['is_logged'] = $this->usuarioModel->_getLogStatus($data['id']);
+        $data['nombre'] = $this->session->nombre;
+        $data['componente_2'] = $this->session->componente_2;
+
+        if ($data['is_logged'] == 1 && $data['componente_2'] == 1) {
+            
+            if ($this->session->idrol == 2) {
+                $data['centros'] = $this->nap2Model->_getMisAmie($this->session->nombre);
+            }else{
+                $data['centros'] = $this->nap2Model->_getCentrosEducativos();
+            }
+            
+            $data['datos'] = $this->nap2Model->find($id);
+
+            //echo '<pre>'.var_export($data['centros'], true).'</pre>';exit;
+
+            $data['title']='MYRP - NAP2 | Estudiantes DYA ';
+            $data['main_content']='componente2/nap2/prod2_edit_view';
+            return view('includes/template', $data);
+        }else{
+
+            $this->logout();
+            return redirect()->to('/');
+        }
+    }
+
     public function nap4_procesos_grid() {
         $data['idrol'] = $this->session->idrol;
         $data['id'] = $this->session->idusuario;
@@ -736,22 +765,22 @@ class Prod2 extends BaseController {
 
         if ($data['is_logged'] == 1 && $this->session->idrol ==1 ) {
             $num = 0;
-            $docentes = $this->nap7Model->findAll();
-            foreach ($docentes as $key => $value) {
+            $registro = $this->nap2Model->findAll();
+            foreach ($registro as $key => $value) {
                 
-                if (strlen($value->documento) < 10) {
+                if (strlen($value->documento) == 9) {
                     $id = $value->id;
                     $obj = [
                         'documento' => '0'.$value->documento,
                     ];
                     
-                    $this->nap7Model->update($id, $obj);
+                    //$this->nap7Model->update($id, $obj);
                 }
             }
             return redirect()->to('prod2-nap7-menu');
         }
     }
-
+    
     public function logout(){
         //destruyo la session  y salgo
 

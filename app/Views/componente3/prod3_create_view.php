@@ -1,11 +1,4 @@
-<style>
-    .form-control{
-        font-size: 0.9em;
-    }
-    #error{
-        color:red;
-    }
-</style>
+
 <main class="container-sm px-2 mb-5">
     <div class="container-fluid px-0">
         <h4 class="mt-4"><?= esc($title); ?></h4>

@@ -41,7 +41,7 @@ class Prod3 extends BaseController {
             $data['cursos'] = $this->cursoModel->findAll();
             $data['mensaje'] = $this->session->form_error;
             
-            //echo '<pre>'.var_export($data['datos'], true).'</pre>';exit;
+            //echo '<pre>'.var_export($data['centros'], true).'</pre>';exit;
 
             $data['title']='MYRP - DYA';
             $data['main_content']='componente3/prod3_create_view';
