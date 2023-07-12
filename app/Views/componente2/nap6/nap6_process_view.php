@@ -1,6 +1,6 @@
 <main class="container px-2">
     <div class="container-fluid px-0">
-        <h3 class="mt-4"><?= esc($title).' - Estudientes MINEDUC Virtual'; ?></h3>
+        <h3 class="mt-4"><?= esc($title).' - Estudiantes MINEDUC Virtual'; ?></h3>
                     
         <div class="card mb-4">
             <div class="card-header">

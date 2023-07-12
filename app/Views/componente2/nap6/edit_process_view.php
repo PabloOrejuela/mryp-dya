@@ -5,7 +5,7 @@
 </style>
 <main class="container-md px-2 mb-4">
     <div class="container-fluid px-0">
-        <h3 class="mt-4" id="titulo-nombre"><?= esc($title).' | Estudientes MINEDUC Virtual'; ?></h3>
+        <h3 class="mt-4" id="titulo-nombre"><?= esc($title).' | Estudiantes MINEDUC Virtual'; ?></h3>
         <h4 class="mt-4" id="titulo-nombre"><?= 'NOMBRE: '.$est->apellidos_est.' '.$est->nombres_est ; ?></h4>
         <div class="card mb-4">
             <div class="card-body">

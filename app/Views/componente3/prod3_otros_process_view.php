@@ -13,7 +13,6 @@
                         <th>No.</th>
                         <th>Amie</th>
                         <th>Centro Educativo</th>
-                        <th>Provincia</th>
                         <th>Editar Datos</th>
                     </thead>
                     <tbody>
@@ -25,13 +24,10 @@
                         
                         if (isset($centros) && $centros != NULL) {
                             foreach ($centros as $key => $value) {
-                                $centro_educativo = $this->centroEducativoModel->find($value->amie);
-                                $provincia = $this->centroEducativoModel->_getProvinciaCentro($centro_educativo->idparroquia);
                                 echo '<tr>
                                     <td>'.$num.'</td>
                                     <td>'.$value->amie.'</td>
                                     <td>'.$value->nombre.'</td>
-                                    <td>'.$provincia.'</td>
                                     <td>
                                         <div class="contenedor">
                                             <a type="button" id="btn-register" href="'.site_url().'prod3-form-biblioteca/'.$value->amie.'" class="edit">
