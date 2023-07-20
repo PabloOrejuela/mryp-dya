@@ -76,6 +76,42 @@ class ArteProd3Model extends Model {
         return $result;
     }
 
+    public function _getTotalTalleresArte($id) {
+        $total = 0;
+        $builder = $this->db->table($this->table);
+        $builder->select('docente_autoestima,arte_usos,creatividad,etapas,autorretrato_taller,incluir_clases')->where('id_prod_3', $id);
+        $query = $builder->get();
+        if ($query->getResult() != null) {
+            foreach ($query->getResult() as $row) {
+                if ($row->docente_autoestima == 1) {
+                    $total += 1;
+                }
+
+                if ($row->arte_usos == 1) {
+                    $total += 1;
+                }
+
+                if ($row->creatividad == 1) {
+                    $total += 1;
+                }
+
+                if ($row->etapas == 1) {
+                    $total += 1;
+                }
+
+                if ($row->autorretrato_taller == 1) {
+                    $total += 1;
+                }
+
+                if ($row->incluir_clases == 1) {
+                    $total += 1;
+                }
+            }
+        }
+        //echo $this->db->getLastQuery();
+        return $total;
+    }
+
     public function _update($datos) {
         $builder = $this->db->table($this->table);
         if ($datos['docente_autoestima'] != 'NULL') {
@@ -209,4 +245,6 @@ class ArteProd3Model extends Model {
         
         $builder->insert();
     }
+
+
 }

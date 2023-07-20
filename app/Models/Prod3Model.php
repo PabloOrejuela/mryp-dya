@@ -94,6 +94,7 @@ class Prod3Model extends Model {
         return $result;
     }
 
+
     /**
      *
      * Esta función trae los Centros educativos que están bajo un ID del Prod 3
@@ -115,7 +116,7 @@ class Prod3Model extends Model {
                 $result[] = $row;
             }
         }
-        echo $this->db->getLastQuery();
+        //echo $this->db->getLastQuery();
         return $result;
     }
 
@@ -132,6 +133,49 @@ class Prod3Model extends Model {
                 if ($row->amie != NULL && $row != '') {
                     $result[] = $row;
                 }
+            }
+        }
+        //echo $this->db->getLastQuery();
+        return $result;
+    }
+
+    public function _getCentrosEducativosProd3All() {
+        $result = NULL;
+        $builder = $this->db->table($this->table);
+        $builder->select('producto_3.amie as amie, centro_educativo.nombre as Centro, idparroquia,centro_educativo.nombre as nombre');
+        $builder->distinct();
+        $builder->join('centro_educativo', 'centro_educativo.amie = producto_3.amie');
+        $builder->orderBy('Centro');
+        $query = $builder->get();
+        if ($query->getResult() != null) {
+            foreach ($query->getResult() as $row) {
+                if ($row->amie != NULL && $row != '') {
+                    $result[] = $row;
+                }
+            }
+        }
+        //echo $this->db->getLastQuery();
+        return $result;
+    }
+
+    /**
+     *
+     * Esta función trae los registros dado un amie
+     *
+     * @param Type $var El código amie del CE
+     * @return array
+     **/
+    public function _getRegistrosAmie($amie) {
+        $result = NULL;
+        $builder = $this->db->table($this->table);
+        $builder->select('id, amie, nombre, documento');
+        //$builder->join('usuarios_centros_prod3', 'usuarios_centros_prod3.amie = producto_3.amie');
+        $builder->where('producto_3.amie', $amie);
+        $builder->orderBy('nombre', 'asc');
+        $query = $builder->get();
+        if ($query->getResult() != null) {
+            foreach ($query->getResult() as $row) {
+                $result[] = $row;
             }
         }
         //echo $this->db->getLastQuery();

@@ -74,6 +74,7 @@ class UsuarioModel extends Model {
             reportes_dinamico,
             componente_2,
             componente_3,
+            prod3_biblioteca,
             componente_4,ip'
 
         )->where('user', $usuario['user'])->where('password', md5($usuario['password']));

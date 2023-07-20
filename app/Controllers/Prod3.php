@@ -165,7 +165,12 @@ class Prod3 extends BaseController {
         if ($data['is_logged'] == 1 && $data['componente_3'] == 1) {
             
             //$data['centros'] = $this->prod3Model->_getCentrosEducativosProd3();
-            $data['centros'] = $this->usuariosCentrosProd3Model->_getAmiesUsuarioProd3($this->session->idusuario);
+            if ($this->session->idusuario == 1 && $this->session->componente_3 == 1) {
+                $data['centros'] = $this->prod3Model->_getCentrosEducativosProd3All();
+            }else{
+                $data['centros'] = $this->usuariosCentrosProd3Model->_getAmiesUsuarioProd3($this->session->idusuario);
+            }
+            
             //$data['prod3_otros'] = $this->prod3BibliotecaEncuentroModel->findAll();
             //$data['datos'] = $this->prod3Model->find($id);
             $data['meses'] = MESES;
@@ -594,6 +599,91 @@ class Prod3 extends BaseController {
             //Creo la ruta
             $amie = $this->request->getPostGet('amie');
             $ruta = './public/images/evidencias/'.$amie.'/';
+
+            //Recibo el archivo primera_visita_evidencia
+            $primera_visita_evidencia_file = $this->request->getFile('primera_visita_evidencia');
+            $primera_visita_evidenciaName = '';
+            if (!$primera_visita_evidencia_file->isValid()) {
+                //SI NO ES VÁLIDO PASO VACÍO AL NOMBRE
+                $$primera_visita_evidenciaName = '';
+
+            }else{
+                //AQUI DEBERÍA CORRER LA VALIDACION de tipo, verificar si ya hay una imagen borrarla y cargar la nueva, etc
+                
+                //Muevo el archjivo del temporal a la carpeta
+                $primera_visita_evidenciaName = $amie."_primera_visita.jpg";
+                $primera_visita_evidencia_file->move($ruta, $primera_visita_evidenciaName, true);
+                
+
+                $this->image->withFile($ruta.$primera_visita_evidenciaName)
+                    ->convert(IMAGETYPE_JPEG)
+                    ->save($ruta.$primera_visita_evidenciaName);
+
+                if ($primera_visita_evidencia_file->hasMoved()) {
+                    //Si se copió al server obtengo el nombre del archivo, lo renombro y mando el nombre para que sea guardado
+                    $primera_visita_evidenciaName = $primera_visita_evidenciaName;
+                }else{
+                    //Si NO se copió le asigno vacío al nombre
+                    $primera_visita_evidenciaName = '';
+                }
+            }
+
+
+            //Recibo el archivo segunda_visita_evidencia
+            $segunda_visita_evidencia_file = $this->request->getFile('segunda_visita_evidencia');
+            $segunda_visita_evidenciaName = '';
+            if (!$segunda_visita_evidencia_file->isValid()) {
+                //SI NO ES VÁLIDO PASO VACÍO AL NOMBRE
+                $$segunda_visita_evidenciaName = '';
+
+            }else{
+                //AQUI DEBERÍA CORRER LA VALIDACION de tipo, verificar si ya hay una imagen borrarla y cargar la nueva, etc
+                
+                //Muevo el archjivo del temporal a la carpeta
+                $segunda_visita_evidenciaName = $amie."_segunda_visita.jpg";
+                $segunda_visita_evidencia_file->move($ruta, $segunda_visita_evidenciaName, true);
+                
+
+                $this->image->withFile($ruta.$segunda_visita_evidenciaName)
+                    ->convert(IMAGETYPE_JPEG)
+                    ->save($ruta.$segunda_visita_evidenciaName);
+
+                if ($segunda_visita_evidencia_file->hasMoved()) {
+                    //Si se copió al server obtengo el nombre del archivo, lo renombro y mando el nombre para que sea guardado
+                    $segunda_visita_evidenciaName = $segunda_visita_evidenciaName;
+                }else{
+                    //Si NO se copió le asigno vacío al nombre
+                    $segunda_visita_evidenciaName = '';
+                }
+            }
+
+            //Recibo el archivo tercera_visita_evidencia
+            $tercera_visita_evidencia_file = $this->request->getFile('tercera_visita_evidencia');
+            $tercera_visita_evidenciaName = '';
+            if (!$tercera_visita_evidencia_file->isValid()) {
+                //SI NO ES VÁLIDO PASO VACÍO AL NOMBRE
+                $$tercera_visita_evidenciaName = '';
+
+            }else{
+                //AQUI DEBERÍA CORRER LA VALIDACION de tipo, verificar si ya hay una imagen borrarla y cargar la nueva, etc
+                
+                //Muevo el archjivo del temporal a la carpeta
+                $tercera_visita_evidenciaName = $amie."_tercera_visita.jpg";
+                $tercera_visita_evidencia_file->move($ruta, $tercera_visita_evidenciaName, true);
+                
+
+                $this->image->withFile($ruta.$tercera_visita_evidenciaName)
+                    ->convert(IMAGETYPE_JPEG)
+                    ->save($ruta.$tercera_visita_evidenciaName);
+
+                if ($tercera_visita_evidencia_file->hasMoved()) {
+                    //Si se copió al server obtengo el nombre del archivo, lo renombro y mando el nombre para que sea guardado
+                    $tercera_visita_evidenciaName = $tercera_visita_evidenciaName;
+                }else{
+                    //Si NO se copió le asigno vacío al nombre
+                    $tercera_visita_evidenciaName = '';
+                }
+            }
             
             //Recibo el archivo expo_trabajos_evidencia
             $expo_trabajos_evidencia_file = $this->request->getFile('expo_trabajos_evidencia');
@@ -739,10 +829,13 @@ class Prod3 extends BaseController {
                 'amie' => $this->request->getPostGet('amie'),
                 'primera_visita' => $this->request->getPostGet('primera_visita'),
                 'fecha_primera_visita' => $this->request->getPostGet('fecha_primera_visita'),
+                'primera_visita_evidencia' => $primera_visita_evidenciaName,
                 'segunda_visita' => $this->request->getPostGet('segunda_visita'),
                 'fecha_segunda_visita' => $this->request->getPostGet('fecha_segunda_visita'),
+                'segunda_visita_evidencia' => $segunda_visita_evidenciaName,
                 'tercera_visita' => $this->request->getPostGet('tercera_visita'),
                 'fecha_tercera_visita' => $this->request->getPostGet('fecha_tercera_visita'),
+                'tercera_visita_evidencia' => $tercera_visita_evidenciaName,
 
                 'encuentro_intercultural' => $this->request->getPostGet('encuentro_intercultural'),
                 'fecha_encuentro' => $this->request->getPostGet('fecha_encuentro'),

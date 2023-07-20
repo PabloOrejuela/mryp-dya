@@ -85,6 +85,7 @@ class Inicio extends BaseController {
                         'componente_1' => $usuario->componente_1,
                         'componente_2' => $usuario->componente_2,
                         'componente_3' => $usuario->componente_3,
+                        'prod3_biblioteca' => $usuario->prod3_biblioteca,
                         'componente_4' => $usuario->componente_4,
                     ];
     

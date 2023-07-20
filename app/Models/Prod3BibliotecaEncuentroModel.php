@@ -65,6 +65,10 @@ class Prod3BibliotecaEncuentroModel extends Model {
             $builder->set('fecha_primera_visita', $datos['fecha_primera_visita']);
         }
 
+        if ($datos['primera_visita_evidencia'] != 'NULL' && $datos['primera_visita_evidencia'] != '') {
+            $builder->set('primera_visita_evidencia', $datos['primera_visita_evidencia']);
+        }
+
         if ($datos['segunda_visita'] != 'NULL') {
             $builder->set('segunda_visita', $datos['segunda_visita']);
         }
@@ -73,12 +77,20 @@ class Prod3BibliotecaEncuentroModel extends Model {
             $builder->set('fecha_segunda_visita', $datos['fecha_segunda_visita']);
         }
 
+        if ($datos['segunda_visita_evidencia'] != 'NULL' && $datos['segunda_visita_evidencia'] != '') {
+            $builder->set('segunda_visita_evidencia', $datos['segunda_visita_evidencia']);
+        }
+
         if ($datos['tercera_visita'] != 'NULL') {
             $builder->set('tercera_visita', $datos['tercera_visita']);
         }
 
         if ($datos['fecha_tercera_visita'] != 'NULL') {
             $builder->set('fecha_tercera_visita', $datos['fecha_tercera_visita']);
+        }
+
+        if ($datos['tercera_visita_evidencia'] != 'NULL' && $datos['tercera_visita_evidencia'] != '') {
+            $builder->set('tercera_visita_evidencia', $datos['tercera_visita_evidencia']);
         }
 
         if ($datos['encuentro_intercultural'] != 'NULL') {
@@ -143,6 +155,10 @@ class Prod3BibliotecaEncuentroModel extends Model {
             $builder->set('fecha_primera_visita', $datos['fecha_primera_visita']);
         }
 
+        if ($datos['primera_visita_evidencia'] != 'NULL' && $datos['primera_visita_evidencia'] != '') {
+            $builder->set('primera_visita_evidencia', $datos['primera_visita_evidencia']);
+        }
+
         if ($datos['segunda_visita'] != 'NULL') {
             $builder->set('segunda_visita', $datos['segunda_visita']);
         }
@@ -151,12 +167,20 @@ class Prod3BibliotecaEncuentroModel extends Model {
             $builder->set('fecha_segunda_visita', $datos['fecha_segunda_visita']);
         }
 
+        if ($datos['segunda_visita_evidencia'] != 'NULL' && $datos['segunda_visita_evidencia'] != '') {
+            $builder->set('segunda_visita_evidencia', $datos['segunda_visita_evidencia']);
+        }
+
         if ($datos['tercera_visita'] != 'NULL') {
             $builder->set('tercera_visita', $datos['tercera_visita']);
         }
 
         if ($datos['fecha_tercera_visita'] != 'NULL') {
             $builder->set('fecha_tercera_visita', $datos['fecha_tercera_visita']);
+        }
+
+        if ($datos['tercera_visita_evidencia'] != 'NULL' && $datos['tercera_visita_evidencia'] != '') {
+            $builder->set('tercera_visita_evidencia', $datos['tercera_visita_evidencia']);
         }
 
         if ($datos['encuentro_intercultural'] != 'NULL') {

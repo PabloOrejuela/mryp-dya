@@ -4,10 +4,10 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class Prod4Model extends Model {
+class Prod3CentroCertificadosModel extends Model {
 
     protected $DBGroup          = 'default';
-    protected $table            = 'producto_4';
+    protected $table            = 'prod3_centro_certificados';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $insertID         = 0;
@@ -40,27 +40,26 @@ class Prod4Model extends Model {
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
 
-    /**
+     /**
      *
-     * Esta función trae los registros del usuario
+     * Esta función trae los requisitos del Amie
      *
      * @param Type $var El código amie del CE
-     * @return array
+     * @return object
      **/
-    public function _getMisRegistros($id) {
+    public function _getRequisitos($amie) {
         $result = NULL;
         $builder = $this->db->table($this->table);
-        $builder->select('producto_4.id as id, apellidos, nombres, documento');
-        //$builder->join('usuarios_centros_prod3', 'usuarios_centros_prod3.amie = producto_4.amie');
-        //$builder->where('usuarios_centros_prod3.idusuario', $id);
-        $builder->orderBy('id');
+        $builder->select('*');
+        $builder->where('amie', $amie);
         $query = $builder->get();
         if ($query->getResult() != null) {
             foreach ($query->getResult() as $row) {
-                $result[] = $row;
+                $result = $row;
             }
         }
         //echo $this->db->getLastQuery();
         return $result;
     }
+
 }

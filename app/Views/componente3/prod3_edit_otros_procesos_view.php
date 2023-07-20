@@ -34,7 +34,7 @@
                     <h3 for="biblioteca_viajera_num">Entrega Biblioteca viajera</h3>
                 </div>
                 <div class="row">
-                    <div class="col-md-4 mb-2">
+                    <div class="col-md-4">
                         <label for="primera_visita">1. Primera visita:</label>
                         <div class="col-sm-8">
                             <select 
@@ -68,7 +68,7 @@
                             <p id="error-message"><?= session('errors.idmetodo_pago');?> </p>
                         </div>
                     </div>
-                    <div class="col-md-4 mb-2">
+                    <div class="col-md-4">
                         <label for="fecha_primera_visita">Fecha primera visita:</label>
                         <div class="col-sm-8">
                             <?php
@@ -80,9 +80,29 @@
                             ?>
                         </div>
                     </div>
+                    <div class="container mb-3">
+                        <div class="col-sm-4 mb-1">
+                            <h5> </h5>
+                        </div>
+                        <div class="col-sm-6 mb-1">
+                            <label>Subir evidencia primera visita</label>
+                            <?php
+                                
+                                if (isset($datos->primera_visita_evidencia) && $datos->primera_visita_evidencia != null && $datos->primera_visita_evidencia != '') {
+                                    echo '<input class="form-control form-control-sm" type="file" name="primera_visita_evidencia" id="primera_visita_evidencia_file">';
+                                    echo '<div class="col-sm-5 mb-3 mt-1"><a href="'.site_url().'public/images/evidencias/'.$centro->amie.'/'.$datos->primera_visita_evidencia.'" target="_blank">Evidencia de la primera visita';
+                                    echo '<img class="img-thumbnail" src="'.site_url().'public/images/evidencias/'.$centro->amie.'/'.$datos->primera_visita_evidencia.'" alt="Evidencia de Exposición de trabajos" width="100" download="true"></a></div>';
+                                }else{
+                                    echo '<input class="form-control form-control-sm" type="file" name="primera_visita_evidencia" id="primera_visita_evidencia_file" value="Subir imagen">';
+                                }
+                            ?>
+                        </div>
+                        <p id="error-message"><?= session('errors.cargar_info');?></p>
+                    </div>
                 </div>
+                <hr>
                 <div class="row">
-                    <div class="col-md-4 mb-2">
+                    <div class="col-md-4">
                         <label for="segunda_visita">2. Segunda visita:</label>
                         <div class="col-sm-8">
                             <select 
@@ -116,7 +136,7 @@
                             <p id="error-message"><?= session('errors.idmetodo_pago');?> </p>
                         </div>
                     </div>
-                    <div class="col-md-4 mb-2">
+                    <div class="col-md-4">
                         <label for="fecha_segunda_visita">Fecha segunda visita:</label>
                         <div class="col-sm-8">
                             <?php
@@ -128,7 +148,27 @@
                             ?>
                         </div>
                     </div>
+                    <div class="container mb-3">
+                        <div class="col-sm-4 mb-1">
+                            <h5> </h5>
+                        </div>
+                        <div class="col-sm-6 mb-1">
+                            <label>Subir evidencia segunda visita</label>
+                            <?php
+                                
+                                if (isset($datos->segunda_visita_evidencia) && $datos->segunda_visita_evidencia != null && $datos->segunda_visita_evidencia != '') {
+                                    echo '<input class="form-control form-control-sm" type="file" name="segunda_visita_evidencia" id="segunda_visita_evidencia_file">';
+                                    echo '<div class="col-sm-5 mb-3 mt-1"><a href="'.site_url().'public/images/evidencias/'.$centro->amie.'/'.$datos->segunda_visita_evidencia.'" target="_blank">Evidencia de la segunda visita';
+                                    echo '<img class="img-thumbnail" src="'.site_url().'public/images/evidencias/'.$centro->amie.'/'.$datos->segunda_visita_evidencia.'" alt="Evidencia de Exposición de trabajos" width="100" download="true"></a></div>';
+                                }else{
+                                    echo '<input class="form-control form-control-sm" type="file" name="segunda_visita_evidencia" id="segunda_visita_evidencia_file" value="Subir imagen">';
+                                }
+                            ?>
+                        </div>
+                        <p id="error-message"><?= session('errors.cargar_info');?></p>
+                    </div>
                 </div>
+                <hr>
                 <div class="row">
                     <div class="col-md-4 mb-2">
                         <label for="tercera_visita">3. Tercera visita:</label>
@@ -175,6 +215,25 @@
                                 }
                             ?>
                         </div>
+                    </div>
+                    <div class="container mb-3">
+                        <div class="col-sm-4 mb-1">
+                            <h5> </h5>
+                        </div>
+                        <div class="col-sm-6 mb-1">
+                            <label>Subir evidencia tercera visita</label>
+                            <?php
+                                
+                                if (isset($datos->tercera_visita_evidencia) && $datos->tercera_visita_evidencia != null && $datos->tercera_visita_evidencia != '') {
+                                    echo '<input class="form-control form-control-sm" type="file" name="tercera_visita_evidencia" id="tercera_visita_evidencia_file">';
+                                    echo '<div class="col-sm-5 mb-3 mt-1"><a href="'.site_url().'public/images/evidencias/'.$centro->amie.'/'.$datos->tercera_visita_evidencia.'" target="_blank">Evidencia de la tercera visita';
+                                    echo '<img class="img-thumbnail" src="'.site_url().'public/images/evidencias/'.$centro->amie.'/'.$datos->tercera_visita_evidencia.'" alt="Evidencia de Exposición de trabajos" width="100" download="true"></a></div>';
+                                }else{
+                                    echo '<input class="form-control form-control-sm" type="file" name="tercera_visita_evidencia" id="tercera_visita_evidencia_file" value="Subir imagen">';
+                                }
+                            ?>
+                        </div>
+                        <p id="error-message"><?= session('errors.cargar_info');?></p>
                     </div>
                 </div>
             </div>

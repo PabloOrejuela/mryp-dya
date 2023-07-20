@@ -43,9 +43,12 @@
                                         <h5 class="card-title">Componente 3</h5>
                                             <p class="card-text">Acompañamiento Pedagógico </p>
                                             <a href="'.site_url().'prod_3" class="btn btn-info mb-2">Ver y editar información de registro</a>
-                                            <a href="'.site_url().'prod_3_process" class="btn btn-info mb-2">Editar variables de Proceso</a>
-                                            <a href="'.site_url().'prod-3-otros-procesos" class="btn btn-info mb-2">Editar Biblioteca y Encuentro</a>
-                                    </div>
+                                            <a href="'.site_url().'prod_3_process" class="btn btn-info mb-2">Editar variables de Proceso</a>';
+                                            if ($this->session->prod3_biblioteca == 1) {
+                                                echo '<a href="'.site_url().'prod-3-otros-procesos" class="btn btn-info mb-2">Editar Biblioteca y Encuentro</a>';
+                                            }
+                                
+                            echo    '</div>
                                 </div>';
                         }
 
@@ -55,9 +58,7 @@
                                     <div class="card-body" >
                                         <h5 class="card-title">Componente 4</h5>
                                             <p class="card-text">Apoyo escolar a adolescentes madres y embarazadas</p>
-                                            <a href="'.site_url().'prod_4" class="btn btn-info mb-2">Ver y editar información de registro</a>
-                                            <a href="'.site_url().'prod_4_process" class="btn btn-info mb-2">Ver y editar variables de Proceso</a>
-                                            <a href="'.site_url().'prod-4-asistencia" class="btn btn-info mb-2">Registrar asistencia</a>
+                                            <a href="'.site_url().'prod_4" class="btn btn-info mb-2">Ver y editar información de registro y procesos</a>
                                     </div>
                                 </div>';
                         }

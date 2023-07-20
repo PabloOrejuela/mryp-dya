@@ -39,7 +39,7 @@
                                     <div class="card-body" >
                                         <h5 class="card-title">Componente 3</h5>
                                             <p class="card-text">Programa de Acompañamiento Pedagógico</p>
-                                            <a href="'.site_url().'prod_3" class="btn btn-info mb-2 disabled">REPORTES</a>
+                                            <a href="'.site_url().'prod3-reporte-certificados" class="btn btn-info mb-2" target="_blank">APRUEBA CERTIFICADOS</a>
                                     </div>
                                 </div>';
                         }

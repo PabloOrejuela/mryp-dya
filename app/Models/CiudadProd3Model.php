@@ -13,7 +13,7 @@ class CiudadProd3Model extends Model {
     protected $insertID         = 0;
     protected $returnType       = 'object';
     protected $useSoftDeletes   = false;
-    protected $protectFields    = true;
+    protected $protectFields    = false;
     protected $allowedFields    = [
         'interculturalidad',
         'masculinidad',
@@ -66,6 +66,42 @@ class CiudadProd3Model extends Model {
         }
         //echo $this->db->getLastQuery();
         return $result;
+    }
+
+    public function _getTotalTalleresCiudad($id) {
+        $total = 0;
+        $builder = $this->db->table($this->table);
+        $builder->select('interculturalidad,masculinidad,sexo_genero,violencia_genero,diversidad_estetica,diversidad_neuro')->where('id_prod_3', $id);
+        $query = $builder->get();
+        if ($query->getResult() != null) {
+            foreach ($query->getResult() as $row) {
+                if ($row->interculturalidad == 1) {
+                    $total += 1;
+                }
+
+                if ($row->masculinidad == 1) {
+                    $total += 1;
+                }
+
+                if ($row->sexo_genero == 1) {
+                    $total += 1;
+                }
+
+                if ($row->violencia_genero == 1) {
+                    $total += 1;
+                }
+
+                if ($row->diversidad_estetica == 1) {
+                    $total += 1;
+                }
+
+                if ($row->diversidad_neuro == 1) {
+                    $total += 1;
+                }
+            }
+        }
+        //echo $this->db->getLastQuery();
+        return $total;
     }
 
     public function _update($datos) {

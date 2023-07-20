@@ -96,6 +96,9 @@ $routes->get('prod-3-otros-procesos', 'Prod3::prod_3_otros_procesos');
 $routes->get('prod3-form-biblioteca/(:any)', 'Prod3::prod3_form_biblioteca/$1');
 $routes->post('prod3-biblioteca-update', 'Prod3::prod3_biblioteca_update');
 
+//Reportes Prod 3
+$routes->get('prod3-reporte-certificados', 'ReportesProd3::prod3_reporte_certificados');
+
 //NAP
 $routes->post('cargar-nap2', 'CargarInformacion::cargar_nap2');
 $routes->post('cargar-nap3', 'CargarInformacion::cargar_nap3');
@@ -146,6 +149,10 @@ $routes->post('nap7-process-update', 'Prod2::nap7_process_update');
 
 //PRODUCTO 4
 $routes->post('cargar-prod-4', 'CargarInformacion::cargar_prod_4');
+$routes->get('prod_4', 'Prod4::index');
+$routes->get('prod_4_edit/(:num)', 'Prod4::frm_edit/$1');
+$routes->post('prod4_update', 'Prod4::update');
+$routes->get('prod4_process', 'Prod4::frm_procesos');
 
 
 //REPORTES ESTÁTICOS
