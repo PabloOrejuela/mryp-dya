@@ -1059,7 +1059,7 @@ class Prod1 extends BaseController {
             'is_logged' => 0
         ];
         
-        $this->usuarioModel->save($user);
+        $this->usuarioModel->_updateLoggin($user);
         $this->session->destroy();
         return redirect()->to('/');
     }

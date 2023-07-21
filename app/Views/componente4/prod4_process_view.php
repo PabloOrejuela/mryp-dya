@@ -1,4 +1,11 @@
-<main class="container px-2">
+<style>
+    .contenedor{
+        margin-left:30px;
+        margin-right:30px;
+        font-size: 0.8em;
+    }
+</style>
+<main class="contenedor px-2">
     <div class="container-fluid px-0">
         <h3 class="mt-4"><?= esc($title); ?></h3>
                     
@@ -13,7 +20,7 @@
                 </a>
             </div> 
             <div class="card-body"> 
-                <table class="table table-bordered table-striped table-hover" id="table">
+                <table class="table table-responsive table-stripped table-hovered" id="table">
                     <thead>
                         <th>No.</th>
                         <th>Nombre</th>
@@ -38,49 +45,49 @@
                                     <td>'.$value->documento.'</td>
                                     <td>
                                         <div class="contenedor">
-                                            <a type="button" id="btn-register" href="'.site_url().'prod-1-reg-diagnostico/'.$value->id.'" class="edit">
+                                            <a type="button" id="btn-register" href="'.site_url().'prod4-reg-lengua/'.$value->id.'" class="edit">
                                                 <img src="'.site_url().'public/images/test.png" >
                                             </a>
                                         </div>
                                     </td>
                                     <td>
                                         <div class="contenedor">
-                                            <a type="button" id="btn-register" href="'.site_url().'prod-1-reg-eval-final/'.$value->id.'" class="edit">
+                                            <a type="button" id="btn-register" href="'.site_url().'prod4-reg-mate/'.$value->id.'" class="edit">
                                                 <img src="'.site_url().'public/images/eval-mate.png" >
                                             </a>
                                         </div>
                                     </td>
                                     <td>
                                         <div class="contenedor">
-                                            <a type="button" id="btn-register" href="'.site_url().'prod-1-reg-eval-final/'.$value->id.'" class="edit">
+                                            <a type="button" id="btn-register" href="'.site_url().'prod4-reg-psico/'.$value->id.'" class="edit">
                                                 <img src="'.site_url().'public/images/psico.png" >
                                             </a>
                                         </div>
                                     </td>
                                     <td>
                                         <div class="contenedor">
-                                            <a type="button" id="btn-register" href="'.site_url().'prod-1-reg-eval-final/'.$value->id.'" class="edit">
+                                            <a type="button" id="btn-register" href="'.site_url().'prod4-reg-pedagogica/'.$value->id.'" class="edit">
                                                 <img src="'.site_url().'public/images/pedagogicas.png" >
                                             </a>
                                         </div>
                                     </td>
                                     <td>
                                         <div class="contenedor">
-                                            <a type="button" id="btn-register" href="'.site_url().'prod-1-form-tipo-eval-mate/'.$value->id.'" class="edit">
+                                            <a type="button" id="btn-register" href="'.site_url().'prod4-reg-otros/'.$value->id.'" class="edit">
                                                 <img src="'.site_url().'public/images/reg-process.png" >
                                             </a>
                                         </div>
                                     </td>
                                     <td>
                                         <div class="contenedor">
-                                            <a type="button" id="btn-register" href="'.site_url().'prod-1-form-tipo-eval-mate/'.$value->id.'" class="edit">
+                                            <a type="button" id="btn-register" href="'.site_url().'prod4-reg-atenciones/'.$value->id.'" class="edit">
                                                 <img src="'.site_url().'public/images/atenciones.png" >
                                             </a>
                                         </div>
                                     </td>
                                     <td>
                                         <div class="contenedor">
-                                            <a type="button" id="btn-register" href="'.site_url().'prod-1-form-tipo-eval-mate-final/'.$value->id.'" class="edit">
+                                            <a type="button" id="btn-register" href="'.site_url().'prod4-reg-resultados/'.$value->id.'" class="edit">
                                                 <img src="'.site_url().'public/images/resultados.png" >
                                             </a>
                                         </div>

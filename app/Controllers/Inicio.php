@@ -178,7 +178,7 @@ class Inicio extends BaseController {
         return redirect()->to('/');
     }
 
-    public function cerrar_sesiones($id){echo $id;
+    public function cerrar_sesiones($id){
         //destruyo la session  y salgo
         $user = [
             'id' => $id,

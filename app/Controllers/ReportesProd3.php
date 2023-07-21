@@ -8,7 +8,7 @@ use TCPDF;
 class ReportesProd3 extends BaseController {
 
     public function index() {
-        
+        $this->prod3_reporte_certificados();
     }
 
     public function prod3_reporte_certificados() {
@@ -17,11 +17,12 @@ class ReportesProd3 extends BaseController {
         $data['is_logged'] = $this->usuarioModel->_getLogStatus($data['id']);
         $data['nombre'] = $this->session->nombre;
         $data['componente_3'] = $this->session->componente_3;
-
+        //echo $this->session->idusuario;
         if ($data['is_logged'] == 1 && $data['componente_3'] == 1) {
             
             $data['componente_3'] = $this->prod3Model->_getMisRegistros($this->session->idusuario);
             $centros = $this->prod3Model->_getMisAmie($this->session->idusuario);
+            //echo '<pre>'.var_export($centros, true).'</pre>';exit;
 
             $this->RepCertificadoPdf($data['componente_3'], $centros);
 
@@ -78,34 +79,36 @@ class ReportesProd3 extends BaseController {
             $num = 1;
             $docentes = $this->prod3Model->_getRegistrosAmie($value->amie);
             $requisitos_certificado = $this->prod3CentroCertificadosModel->_getRequisitos($value->amie);
-            //echo '<pre>'.var_export($requisitos_certificado, true).'</pre>';exit;
-            $html .= '<h4>Centro: '.$value->nombre.'</h4>';
 
-            $html .= '<table id="table-docentes" style="border: 1px solid #000;margin-bottom: 50px;margin-top 30px;">
-            <tr>
-                <td style="border: 1px solid #000;text-align:center;width:10%;background-color:#d3eaf2;">No.</td>
-                <td style="border: 1px solid #000;width:50%;background-color:#d3eaf2;">Docente</td>
-                <td style="border: 1px solid #000;text-align:center;width:25%;background-color:#d3eaf2;">Talleres recibidos</td>
-                <td style="border: 1px solid #000;text-align:center;width:15%;background-color:#d3eaf2;">Horas</td>
-            </tr>';
-
-            foreach ($docentes as $key => $docente) {
-                $horas = 0;
-                $cant_talleres = $this->calcula_talleres($docente->id);
+            //echo '<pre>'.var_export($requisitos_certificado, true).'</pre>';
                 
-                if ($cant_talleres >= $requisitos_certificado->minimo) {
-                    $html .= '<tr>
-                        <td style="border: 1px solid #000;font-weight:none;text-align:center;width:10%;">'.$num.'</td>
-                        <td style="border: 1px solid #000;font-weight:none;font-size:0.8em;width:50%;">'.$docente->nombre.'</td>
-                        <td style="border: 1px solid #000;font-weight:none;text-align:center;width:25%;">'.$cant_talleres.' talleres</td>
-                        <td style="border: 1px solid #000;font-weight:none;text-align:center;width:15%;">'.$requisitos_certificado->horas.' horas</td>
-                    </tr>';
-                    $num++;
+            if ($requisitos_certificado != NULL) {
+                $html .= '<h4>Centro: '.$value->amie.'-'.$value->nombre.'</h4>';
+                $html .= '<table id="table-docentes" style="border: 1px solid #000;margin-bottom: 50px;margin-top 30px;">
+                <tr>
+                    <td style="border: 1px solid #000;text-align:center;width:10%;background-color:#d3eaf2;">No.</td>
+                    <td style="border: 1px solid #000;width:50%;background-color:#d3eaf2;">Docente</td>
+                    <td style="border: 1px solid #000;text-align:center;width:25%;background-color:#d3eaf2;">Talleres recibidos</td>
+                    <td style="border: 1px solid #000;text-align:center;width:15%;background-color:#d3eaf2;">Horas</td>
+                </tr>';
+                foreach ($docentes as $key => $docente) {
+                    $horas = 0;
+                    $cant_talleres = $this->calcula_talleres($docente->id);
+
+                    if ($cant_talleres >= $requisitos_certificado->minimo) {
+                        //echo $docente->id.' '.$docente->nombre.' '.$cant_talleres.' '.$requisitos_certificado->minimo.'<br>';
+                        $html .= '<tr>
+                            <td style="border: 1px solid #000;font-weight:none;text-align:center;width:10%;">'.$num.'</td>
+                            <td style="border: 1px solid #000;font-weight:none;font-size:0.8em;width:50%;">'.$docente->nombre.'</td>
+                            <td style="border: 1px solid #000;font-weight:none;text-align:center;width:25%;">'.$cant_talleres.' talleres</td>
+                            <td style="border: 1px solid #000;font-weight:none;text-align:center;width:15%;">'.$requisitos_certificado->horas.' horas</td>
+                        </tr>';
+                        $num++;
+                    }
                 }
+                $html .= '</table>';
+                $html .= '<br pagebreak="true"/>';
             }
-            
-		    $html .= '</table>';
-            $html .= '<br pagebreak="true"/>';
         }
 
 		
@@ -121,7 +124,7 @@ class ReportesProd3 extends BaseController {
 		$pdf->lastPage();
 
 		//Close and output PDF document
-		$pdf->Output("PDF de prueba-".md5(time()).'.pdf', 'I');
+		$pdf->Output("Reporte Certificados-".$this->session->nombre.'.pdf', 'I');
 	}
 
     /**
@@ -142,6 +145,7 @@ class ReportesProd3 extends BaseController {
         //Calcula talleres ciudadania
         $talleres_ciudad = $this->ciudadProd3Model->_getTotalTalleresCiudad($id);
         
+        //echo $talleres_arte + $talleres_lengua + $talleres_ciudad;exit;
         return $talleres_arte + $talleres_lengua + $talleres_ciudad;
     }
 }
