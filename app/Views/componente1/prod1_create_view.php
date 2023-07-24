@@ -36,7 +36,7 @@
 
             <div class="row">
                 <div class="col-sm-4 mb-3">
-                    <label for="lectura">Año EGB *:</label>
+                    <label for="anio_egb">Año EGB *:</label>
                     <select 
                         class="form-select" 
                         aria-label="Default select example" 

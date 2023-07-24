@@ -79,6 +79,21 @@ class CentroEducativoModel extends Model {
         $builder->insert();
     }
 
+    public function _getCentrosList() {
+        $result = NULL;
+        $builder = $this->db->table($this->table);
+        $builder->select('amie, nombre');
+        $builder->orderBy('nombre');
+        $query = $builder->get();
+        if ($query->getResult() != null) {
+            foreach ($query->getResult() as $row) {
+                $result[] = $row;
+            }
+        }
+        //echo $this->db->getLastQuery();
+        return $result;
+    }
+
     public function _getCentros() {
         $result = NULL;
         $builder = $this->db->table($this->table);

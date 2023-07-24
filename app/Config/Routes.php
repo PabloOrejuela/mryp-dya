@@ -153,6 +153,20 @@ $routes->get('prod_4', 'Prod4::index');
 $routes->get('prod_4_edit/(:num)', 'Prod4::frm_edit/$1');
 $routes->post('prod4_update', 'Prod4::update');
 $routes->get('prod4_process', 'Prod4::frm_procesos');
+$routes->get('prod4-reg-lengua/(:num)', 'Prod4::prod4_reg_lengua/$1');
+$routes->post('prod4-lengua-update', 'Prod4::prod4_lengua_update');
+$routes->get('prod4-reg-mate/(:num)', 'Prod4::prod4_reg_mate/$1');
+$routes->post('prod4-mate-update', 'Prod4::prod4_mate_update');
+$routes->get('prod4-reg-psico/(:num)', 'Prod4::prod4_reg_psico/$1');
+$routes->post('prod4-psico-update', 'Prod4::prod4_psico_update');
+$routes->get('prod4-reg-pedagogica/(:num)', 'Prod4::prod4_reg_pedagogica/$1');
+$routes->post('prod4-pedagogica-update', 'Prod4::prod4_pedagogica_update');
+$routes->get('prod4-reg-otros/(:num)', 'Prod4::prod4_reg_otros/$1');
+$routes->post('prod4-otros-update', 'Prod4::prod4_otros_update');
+$routes->get('prod4-reg-atenciones/(:num)', 'Prod4::prod4_reg_atenciones/$1');
+$routes->post('prod4-atenciones-update', 'Prod4::prod4_atenciones_update');
+$routes->get('prod4-reg-resultados/(:num)', 'Prod4::prod4_reg_resultados/$1');
+$routes->post('prod4-resultados-update', 'Prod4::prod4_resultados_update');
 
 
 //REPORTES ESTÁTICOS

@@ -146,7 +146,25 @@
                         </div>
                         <div class="col-md-3 mb-3">
                             <label for="anio_egb">Ultimo grado aprobado:</label>
-                            <input type="text" id="anio_egb" name="anio_egb" value="<?= $datos->anio_egb; ?>" class="form-control" placeholder="anio_egb" aria-label="anio_egb">
+                            <select 
+                                class="form-select" 
+                                aria-label="Default select example" 
+                                name="anio_egb" 
+                                id="anio_egb"  
+                            >
+                            <option value="NULL" selected>Registrar dato</option>
+                                <?php
+                                    foreach ($cursos as $key => $c) {
+                                        if ($datos->anio_egb == $c->id) {
+                                            echo '<option value="'.$c->id.'" selected>'.$c->curso.'</option>';
+                                        }else{
+                                            echo '<option value="'.$c->id.'">'.$c->curso.'</option>';
+                                        }
+                                        
+                                    }
+                                    
+                                ?>
+                            </select>
                         </div>
                     </div>
                     <div class="row">
@@ -196,7 +214,7 @@
             </div>
             
             <?= form_hidden('id', $datos->id);  ?>
-            <button type="submit" class="btn btn-info mb-3">Actualizar</button>
+            <button type="submit" class="btn btn-info mb-3">Guardar</button>
         </form>
         <button onclick="history.back()" class="btn btn-success mb-3">Regresar</button>
     </div>

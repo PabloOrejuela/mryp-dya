@@ -48,7 +48,13 @@ use App\Models\CentrosProvProd1ViewModel;
 use App\Models\Prod3BibliotecaEncuentroModel;
 use App\Models\UsuariosCentrosProd3Model;
 use App\Models\Prod3CentroCertificadosModel;
-
+use App\Models\Prod4LenguaModel;
+use App\Models\Prod4MateModel;
+use App\Models\Prod4PsicoModel;
+use App\Models\Prod4PedagogicaModel;
+use App\Models\Prod4OtrosModel;
+use App\Models\Prod4AtencionesModel;
+use App\Models\Prod4ResultadosModel;
 
 
 
@@ -138,6 +144,13 @@ abstract class BaseController extends Controller {
         $this->centrosProvProd1ViewModel = new CentrosProvProd1ViewModel($this->db);
         $this->usuariosCentrosProd3Model = new UsuariosCentrosProd3Model($this->db);
         $this->prod3CentroCertificadosModel = new Prod3CentroCertificadosModel($this->db);
+        $this->prod4LenguaModel = new Prod4LenguaModel($this->db);
+        $this->prod4MateModel = new Prod4MateModel($this->db);
+        $this->prod4PsicoModel = new Prod4PsicoModel($this->db);
+        $this->prod4PedagogicaModel = new Prod4PedagogicaModel($this->db);
+        $this->prod4OtrosModel = new Prod4OtrosModel($this->db);
+        $this->prod4AtencionesModel = new Prod4AtencionesModel($this->db);
+        $this->prod4ResultadosModel = new Prod4ResultadosModel($this->db);
 
         // E.g.: $this->session = \Config\Services::session();
         $this->session = \Config\Services::session();
