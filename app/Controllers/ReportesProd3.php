@@ -78,8 +78,9 @@ class ReportesProd3 extends BaseController {
         foreach ($centros as $key => $value) {
             $num = 1;
             $docentes = $this->prod3Model->_getRegistrosAmie($value->amie);
+            //$docentes = $this->prod3Model->_getRegistrosAmie('17H01403');
             $requisitos_certificado = $this->prod3CentroCertificadosModel->_getRequisitos($value->amie);
-
+            //$requisitos_certificado = $this->prod3CentroCertificadosModel->_getRequisitos('17H01403');
             //echo '<pre>'.var_export($requisitos_certificado, true).'</pre>';
                 
             if ($requisitos_certificado != NULL) {
@@ -91,10 +92,11 @@ class ReportesProd3 extends BaseController {
                     <td style="border: 1px solid #000;text-align:center;width:25%;background-color:#d3eaf2;">Talleres recibidos</td>
                     <td style="border: 1px solid #000;text-align:center;width:15%;background-color:#d3eaf2;">Horas</td>
                 </tr>';
+                
                 foreach ($docentes as $key => $docente) {
                     $horas = 0;
                     $cant_talleres = $this->calcula_talleres($docente->id);
-
+                    
                     if ($cant_talleres >= $requisitos_certificado->minimo) {
                         //echo $docente->id.' '.$docente->nombre.' '.$cant_talleres.' '.$requisitos_certificado->minimo.'<br>';
                         $html .= '<tr>
@@ -144,8 +146,8 @@ class ReportesProd3 extends BaseController {
 
         //Calcula talleres ciudadania
         $talleres_ciudad = $this->ciudadProd3Model->_getTotalTalleresCiudad($id);
-        
-        //echo $talleres_arte + $talleres_lengua + $talleres_ciudad;exit;
+
+        //echo $talleres_arte + $talleres_lengua + $talleres_ciudad;
         return $talleres_arte + $talleres_lengua + $talleres_ciudad;
     }
 }

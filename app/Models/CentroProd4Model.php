@@ -4,17 +4,19 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class Prod4Model extends Model {
+class CentroProd4Model extends Model {
 
     protected $DBGroup          = 'default';
-    protected $table            = 'producto_4';
+    protected $table            = 'centro_prod_4';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $insertID         = 0;
     protected $returnType       = 'object';
     protected $useSoftDeletes   = false;
-    protected $protectFields    = false;
-    protected $allowedFields    = [];
+    protected $protectFields    = true;
+    protected $allowedFields    = [
+        'centro','tecnico','idciudades'
+    ];
 
     // Dates
     protected $useTimestamps = false;
@@ -42,18 +44,18 @@ class Prod4Model extends Model {
 
     /**
      *
-     * Esta función trae los registros del usuario
+     * Esta función trae los Centros educativos que están bajo un ID del Prod 4
      *
      * @param Type $var El código amie del CE
      * @return array
      **/
-    public function _getMisRegistros($id) {
+    public function _getAmiesUsuarioProd4($id) {
         $result = NULL;
         $builder = $this->db->table($this->table);
-        $builder->select('producto_4.id as id, nombres, documento, cohorte');
-        $builder->join('centro_prod_4', 'centro_prod_4.id = producto_4.idcentro4');
+        $builder->select('tecnico, centro, id, idciudades, ciudad');
         $builder->where('centro_prod_4.tecnico', $id);
-        $builder->orderBy('id');
+        $builder->join('ciudades', 'ciudades.idciudades = centro_prod_4.idciudades');
+        // $builder->join('provincias', 'provincias.idprovincias = ciudades.idprovincias');
         $query = $builder->get();
         if ($query->getResult() != null) {
             foreach ($query->getResult() as $row) {

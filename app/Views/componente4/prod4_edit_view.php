@@ -12,10 +12,6 @@
                             <input type="text" id="nombres" name="nombres" value="<?= $datos->nombres; ?>" class="form-control" placeholder="" aria-label="nombres">
                         </div>
                         <div class="col-md-4 mb-3">
-                            <label for="apellidos">Apellidos:</label>
-                            <input type="text" id="apellidos" name="apellidos" value="<?= $datos->apellidos; ?>" class="form-control" placeholder="" aria-label="apellidos">
-                        </div>
-                        <div class="col-md-4 mb-3">
                             <label for="documento">Documento de identidad:</label>
                             <input type="text" id="documento" name="documento" value="<?= $datos->documento; ?>" class="form-control" placeholder="" aria-label="documento">
                         </div>
@@ -109,11 +105,11 @@
                     <div class="row">
                         <div class="col-md-4 mb-3">
                             <label for="discapacidad">Discapacidad:</label>
-                            <input type="text" id="discapacidad" name="discapacidad" value="<?= $datos->discapacidad; ?>" class="form-control" placeholder="discapacidad" aria-label="discapacidad">
+                            <input type="text" id="discapacidad" name="discapacidad" value="<?= $datos->discapacidad; ?>" class="form-control" placeholder="" aria-label="discapacidad">
                         </div>
                         <div class="col-md-4 mb-3">
                             <label for="tipo_discapacidad">Tipo de discapacidad:</label>
-                            <input type="text" id="tipo_discapacidad" name="tipo_discapacidad" value="<?= $datos->tipo_discapacidad; ?>" class="form-control" placeholder="tipo_discapacidad" aria-label="tipo_discapacidad">
+                            <input type="text" id="tipo_discapacidad" name="tipo_discapacidad" value="<?= $datos->tipo_discapacidad; ?>" class="form-control" placeholder="" aria-label="tipo_discapacidad">
                         </div>
                     </div>
                     <div class="row">

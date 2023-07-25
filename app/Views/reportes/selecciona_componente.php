@@ -48,8 +48,8 @@
                             echo '<div class="card" style="width: 12rem;" id="card-componente">
                                     <img src="'.site_url().'public/images/card-04.jpg" class="card-img-top" alt="card4">
                                     <div class="card-body" >
-                                        <h5 class="card-title">Programa de Apoyo Escolar a Madres Adolescentes</h5>
-                                            <p class="card-text">Algún texto que desccriba el componente 4</p>';
+                                        <h5 class="card-title">Componente 4</h5>
+                                            <p class="card-text">Programa de Apoyo Escolar a Madres Adolescentes</p>';
                                             //<a href="'.site_url().'subirExcel_view/4" class="btn btn-secondary" disabled>Cargar información</a>
                                             echo '
                                     </div>

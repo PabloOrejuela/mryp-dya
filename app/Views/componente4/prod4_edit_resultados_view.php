@@ -215,12 +215,12 @@
                         id="anio_egb"  
                     >
                     <option value="NULL" selected>Registrar dato</option>
-                    <?php
-                        foreach ($cursos as $key => $c) {
-                            echo '<option value="'.$c->id.'">'.$c->curso.'</option>';
-                        }
-                        
-                    ?>
+                        <?php
+                            foreach ($cursos as $key => $c) {
+                                echo '<option value="'.$c->id.'">'.$c->curso.'</option>';
+                            }
+                            
+                        ?>
                     </select>
                 </div>
             </div>
@@ -270,7 +270,6 @@
             <button type="submit" class="btn btn-info mb-3">Guardar</button>
         </form>
         <button onclick="history.back()" class="btn btn-success mb-3">Regresar</button>
-        <a class="btn btn-success mb-3" href="<?php echo site_url().'prod_3_process'; ?>">Ir al menú del Componente 3</a>
     </div>
     
 </main>

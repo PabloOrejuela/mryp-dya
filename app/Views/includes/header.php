@@ -22,6 +22,7 @@
     <!--DATATABLES -->
     <link href="https://cdn.datatables.net/v/bs5/dt-1.13.4/af-2.5.3/cr-1.6.2/r-2.4.1/datatables.min.css" rel="stylesheet"/>
     <script src="https://cdn.datatables.net/v/bs5/dt-1.13.4/af-2.5.3/cr-1.6.2/r-2.4.1/datatables.min.js"></script>
+    <script src="<?= site_url(); ?>public/js/datatables.js" ></script>
 
     
     <?php $this->session = session(); ?>

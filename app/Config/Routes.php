@@ -148,6 +148,9 @@ $routes->get('nap7-reg-procesos-form/(:num)', 'Prod2::nap7_reg_procesos_form/$1'
 $routes->post('nap7-process-update', 'Prod2::nap7_process_update');
 
 //PRODUCTO 4
+$routes->get('prod-4-create', 'Prod4::prod_4_create');
+//PABLO crear este form
+$routes->post('prod-4-new', 'Prod4::prod_4_new');
 $routes->post('cargar-prod-4', 'CargarInformacion::cargar_prod_4');
 $routes->get('prod_4', 'Prod4::index');
 $routes->get('prod_4_edit/(:num)', 'Prod4::frm_edit/$1');

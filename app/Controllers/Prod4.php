@@ -15,8 +15,8 @@ class Prod4 extends BaseController {
 
         if ($data['is_logged'] == 1 && $data['componente_4'] == 1) {
             $this->session->set('form_error', "");
-            if ($this->session->idrol == 2) {
-                $data['componente_4'] = $this->prod4Model->_getMisRegistros($data['nombre']);
+            if ($this->session->idrol == 8) {
+                $data['componente_4'] = $this->prod4Model->_getMisRegistros($this->session->idusuario);
             }else{
                 $data['componente_4'] = $this->prod4Model->findAll();
             }
@@ -68,7 +68,6 @@ class Prod4 extends BaseController {
                 //'amie' => strtoupper($this->request->getPostGet('amie')),
                 'id' => strtoupper($this->request->getPostGet('id')),
                 'nombres' => strtoupper($this->request->getPostGet('nombres')),
-                'apellidos' => strtoupper($this->request->getPostGet('apellidos')),
                 'documento' => strtoupper($this->request->getPostGet('documento')),
                 'nacionalidad' => strtoupper($this->request->getPostGet('nacionalidad')),                
                 'genero' => strtoupper($this->request->getPostGet('genero')),
@@ -103,6 +102,30 @@ class Prod4 extends BaseController {
         }
     }
 
+    public function prod_4_create() {
+        $data['idrol'] = $this->session->idrol;
+        $data['id'] = $this->session->idusuario;
+        $data['is_logged'] = $this->usuarioModel->_getLogStatus($data['id']);
+        $data['nombre'] = $this->session->nombre;
+        $data['componente_4'] = $this->session->componente_4;
+
+        if ($data['is_logged'] == 1 && $data['componente_4'] == 1) {
+            //$this->session->set('form_error', "Los campos con asterisco son obligatorios");
+            $data['centros'] = $this->centroProd4Model->_getAmiesUsuarioProd3($this->session->idusuario);
+            $data['cursos'] = $this->cursoModel->findAll();
+            $data['mensaje'] = $this->session->form_error;
+            
+            //echo '<pre>'.var_export($data['centros'], true).'</pre>';exit;
+
+            $data['title']='MYRP - DYA';
+            $data['main_content']='componente3/prod3_create_view';
+            return view('includes/template', $data);
+        }else{
+
+            $this->logout();
+        }
+    }
+
     public function frm_procesos() {
         $data['idrol'] = $this->session->idrol;
         $data['id'] = $this->session->idusuario;
@@ -112,8 +135,8 @@ class Prod4 extends BaseController {
 
         if ($data['is_logged'] == 1 && $data['componente_4'] == 1) {
 
-            if ($this->session->idrol == 2) {
-                $data['componente_4'] = $this->prod4Model->_getMisRegistros($data['nombre']);
+            if ($this->session->idrol == 8) {
+                $data['componente_4'] = $this->prod4Model->_getMisRegistros($this->session->idusuario);
             }else{
                 $data['componente_4'] = $this->prod4Model->findAll();
             }

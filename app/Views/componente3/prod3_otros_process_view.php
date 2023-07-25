@@ -8,7 +8,7 @@
                 <?= esc("Componente 3 - Ingreso y edición de - Biblioteca viajera y otras actividades"); ?>
             </div>
             <div class="card-body"> 
-                <table class="table table-bordered table-striped table-hover" id="table">
+                <table class="table table-bordered table-striped table-hover" id="datatablesSimple">
                     <thead>
                         <th>No.</th>
                         <th>Amie</th>
@@ -47,29 +47,3 @@
         </div>
     </div>
 </main>
-
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $('#table').DataTable({
-                language: {
-                    processing: 'Procesando...',
-                    lengthMenu: 'Mostrando _MENU_ registros por página',
-                    zeroRecords: 'No hay registros',
-                    info: 'Mostrando _PAGE_ de _PAGES_',
-                    infoEmpty: 'No hay registros disponibles',
-                    infoFiltered: '(filtrando de _MAX_ total registros)',
-                    search: 'Buscar',
-                    paginate: {
-                    first:      "Primero",
-                    previous:   "Anterior",
-                    next:       "Siguiente",
-                    last:       "Último"
-                        },
-                        aria: {
-                            sortAscending:  ": activar para ordenar ascendentemente",
-                            sortDescending: ": activar para ordenar descendentemente"
-                        }
-                },
-            });
-        });
-    </script>
