@@ -17,6 +17,7 @@
                         <th>Régimen</th>
                         <th>Documento</th>
                         <th>Registro de procesos</th>
+                        <th>Eliminar</th>
                     </thead>
                     <tbody>
                     <?php
@@ -37,8 +38,22 @@
                                                     <img src="'.site_url().'public/images/test.png" >
                                                 </a>
                                             </div>
-                                        </td>
-                                    </tr>';
+                                        </td>';
+                                if ($idrol == 1) {
+                                    echo '<td>
+                                            <div class="contenedor">
+                                                <a type="button" id="btn-register" href="'.site_url().'prod2-nap6-delete/'.$value->id.'" class="edit">
+                                                    <img src="'.site_url().'public/images/delete.png" >
+                                                </a>
+                                            </div>
+                                        </td>';
+                                }else{
+                                    echo '<td>
+                                            <div class="contenedor"></div>
+                                        </td>';
+                                }
+                                
+                                echo '</tr>';
                             }
                         }
                         

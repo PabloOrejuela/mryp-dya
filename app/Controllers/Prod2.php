@@ -726,6 +726,7 @@ class Prod2 extends BaseController {
         $data['id'] = $this->session->idusuario;
         $data['is_logged'] = $this->usuarioModel->_getLogStatus($data['id']);
         $data['nombre'] = $this->session->nombre;
+        $data['componente_2'] = $this->session->componente_2;
 
         if ($data['is_logged'] == 1) {
             
@@ -750,6 +751,7 @@ class Prod2 extends BaseController {
         $data['id'] = $this->session->idusuario;
         $data['is_logged'] = $this->usuarioModel->_getLogStatus($data['id']);
         $data['nombre'] = $this->session->nombre;
+        $data['componente_2'] = $this->session->componente_2;
 
         if ($data['is_logged'] == 1) {
 
@@ -774,6 +776,24 @@ class Prod2 extends BaseController {
 
             $this->logout();
             return redirect()->to('/');
+        }
+    }
+
+    public function prod2_nap6_delete($id) {
+        $data['idrol'] = $this->session->idrol;
+        $data['id'] = $this->session->idusuario;
+        $data['is_logged'] = $this->usuarioModel->_getLogStatus($data['id']);
+        $data['nombre'] = $this->session->nombre;
+        $data['componente_2'] = $this->session->componente_2;
+
+        if ($data['is_logged'] == 1 && $data['componente_2'] == 1) {
+            $id = $id;
+            $this->nap6Model->delete($id);
+
+            return redirect()->to('prod2-nap6-menu');
+        }else{
+
+            $this->logout();
         }
     }
 
