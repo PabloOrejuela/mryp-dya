@@ -341,6 +341,7 @@ class Prod4 extends BaseController {
             
             $data['id'] = $id;
             $data['datos'] = $this->prod4PedagogicaModel->_getProd4Pedagogica($id);
+            $data['oyente'] = $this->prod4OyenteModel->find($id);
             $data['est'] = $this->prod4Model->find($id);
             //$data['meses'] = MESES;
 
@@ -375,8 +376,20 @@ class Prod4 extends BaseController {
 
             );
 
+            $oyente = array(
+                'idProd4' => $this->request->getPostGet('idProd4'),
+                'cohorte_1' => $this->request->getPostGet('cohorte_1'),
+                'cohorte_2' => $this->request->getPostGet('cohorte_2'),
+                'cohorte_3' => $this->request->getPostGet('cohorte_3'),
+                'cohorte_4' => $this->request->getPostGet('cohorte_4'),
+                'cohorte_5' => $this->request->getPostGet('cohorte_5'),
+                'cohorte_6' => $this->request->getPostGet('cohorte_6'),
+
+            );
+
             $hay = $this->prod4PedagogicaModel->_getProd4Pedagogica($proceso['idProd4']);
-            //echo '<pre>'.var_export($proceso, true).'</pre>';exit;
+            $hayOyente = $this->prod4OyenteModel->_getProd4Oyente($oyente['idProd4']);
+            //echo '<pre>'.var_export($hayOyente, true).'</pre>';exit;
             
             if ($hay) {
                 //Actualizo
@@ -384,6 +397,14 @@ class Prod4 extends BaseController {
             }else{
                 //Grabo
                 $this->prod4PedagogicaModel->_save($proceso);
+            }
+
+            if ($hayOyente) {
+                //Actualizo
+                $this->prod4OyenteModel->_update($oyente);
+            }else{
+                //Grabo
+                $this->prod4OyenteModel->_save($oyente);
             }
             
             return redirect()->to('prod4_process');

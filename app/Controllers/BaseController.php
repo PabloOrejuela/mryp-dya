@@ -56,6 +56,7 @@ use App\Models\Prod4OtrosModel;
 use App\Models\Prod4AtencionesModel;
 use App\Models\Prod4ResultadosModel;
 use App\Models\CentroProd4Model;
+use App\Models\Prod4OyenteModel;
 
 
 
@@ -153,6 +154,7 @@ abstract class BaseController extends Controller {
         $this->prod4AtencionesModel = new Prod4AtencionesModel($this->db);
         $this->prod4ResultadosModel = new Prod4ResultadosModel($this->db);
         $this->centroProd4Model = new CentroProd4Model($this->db);
+        $this->prod4OyenteModel = new Prod4OyenteModel($this->db);
 
         // E.g.: $this->session = \Config\Services::session();
         $this->session = \Config\Services::session();

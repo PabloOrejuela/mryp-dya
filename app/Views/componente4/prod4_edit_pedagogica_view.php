@@ -141,6 +141,66 @@
                     ?>
                 </div>
             </div>
+            <div class="row">
+                <div class="col-md-2 mb-3">
+                    <label for="funcion">OYENTE:</label>
+                    <div class="form-check">
+                        <?php
+                            if (isset($oyente) && $oyente->cohorte_1 == 1) {
+                                echo '<input class="form-check-input" type="checkbox" name="cohorte_1" value="1" id="defaultCheck1" checked>Cohorte 1';
+                            }else{
+                                echo '<input class="form-check-input" type="checkbox" name="cohorte_1" value="1" id="defaultCheck1">Cohorte 1';
+                            }
+                        ?>
+                        
+                    </div>
+                    <div class="form-check">
+                        <?php
+                            if (isset($oyente) && $oyente->cohorte_2 == 1) {
+                                echo '<input class="form-check-input" type="checkbox" name="cohorte_2" value="1" id="defaultCheck1" checked>Cohorte 2';
+                            }else{
+                                echo '<input class="form-check-input" type="checkbox" name="cohorte_2" value="1" id="defaultCheck1">Cohorte 2';
+                            }
+                        ?>
+                    </div>
+                    <div class="form-check">
+                        <?php
+                            if (isset($oyente) && $oyente->cohorte_3 == 1) {
+                                echo '<input class="form-check-input" type="checkbox" name="cohorte_3" value="1" id="defaultCheck1" checked>Cohorte 3';
+                            }else{
+                                echo '<input class="form-check-input" type="checkbox" name="cohorte_3" value="1" id="defaultCheck1">Cohorte 3';
+                            }
+                        ?>
+                    </div>
+                    <div class="form-check">
+                        <?php
+                            if (isset($oyente) && $oyente->cohorte_4 == 1) {
+                                echo '<input class="form-check-input" type="checkbox" name="cohorte_4" value="1" id="defaultCheck1" checked>Cohorte 4';
+                            }else{
+                                echo '<input class="form-check-input" type="checkbox" name="cohorte_4" value="1" id="defaultCheck1">Cohorte 4';
+                            }
+                        ?>
+                    </div>
+                    <div class="form-check">
+                        <?php
+                            if (isset($oyente) && $oyente->cohorte_5 == 1) {
+                                echo '<input class="form-check-input" type="checkbox" name="cohorte_5" value="1" id="defaultCheck1" checked>Cohorte 5';
+                            }else{
+                                echo '<input class="form-check-input" type="checkbox" name="cohorte_5" value="1" id="defaultCheck1">Cohorte 5';
+                            }
+                        ?>
+                    </div>
+                    <div class="form-check">
+                        <?php
+                            if (isset($oyente) && $oyente->cohorte_6 == 1) {
+                                echo '<input class="form-check-input" type="checkbox" name="cohorte_6" value="1" id="defaultCheck1" checked>Cohorte 6';
+                            }else{
+                                echo '<input class="form-check-input" type="checkbox" name="cohorte_6" value="1" id="defaultCheck1">Cohorte 6';
+                            }
+                        ?>
+                    </div>
+                </div>
+            </div>
 
             
             <?= form_hidden('idProd4', $id);  ?>
