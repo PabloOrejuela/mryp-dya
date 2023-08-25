@@ -8,7 +8,7 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-4 mb-3">
-                            <label for="nombres">nombres:</label>
+                            <label for="nombres">Nombres:</label>
                             <input type="text" id="nombres" name="nombres" value="<?= $datos->nombres; ?>" class="form-control" placeholder="" aria-label="nombres">
                         </div>
                         <div class="col-md-4 mb-3">

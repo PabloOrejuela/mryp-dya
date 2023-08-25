@@ -15,11 +15,8 @@ class Prod4 extends BaseController {
 
         if ($data['is_logged'] == 1 && $data['componente_4'] == 1) {
             $this->session->set('form_error', "");
-            if ($this->session->idrol == 8) {
-                $data['componente_4'] = $this->prod4Model->_getMisRegistros($this->session->idusuario);
-            }else{
-                $data['componente_4'] = $this->prod4Model->findAll();
-            }
+
+            $data['componente_4'] = $this->prod4Model->_getAllRegistros();
 
             $data['title']='MYRP - DYA';
             $data['main_content']='componente4/prod4_process_view';
@@ -135,12 +132,7 @@ class Prod4 extends BaseController {
 
         if ($data['is_logged'] == 1 && $data['componente_4'] == 1) {
 
-            if ($this->session->idrol == 8) {
-                $data['componente_4'] = $this->prod4Model->_getMisRegistros($this->session->idusuario);
-            }else{
-                $data['componente_4'] = $this->prod4Model->findAll();
-            }
-
+            $data['componente_4'] = $this->prod4Model->_getAllRegistros();
             $data['title']='MYRP - DYA';
             $data['main_content']='componente4/prod4_process_view';
             return view('includes/template', $data);
@@ -538,7 +530,7 @@ class Prod4 extends BaseController {
             $data['id'] = $id;
             $data['datos'] = $this->prod4ResultadosModel->_getProd4Resultados($id);
             $data['est'] = $this->prod4Model->find($id);
-            $data['centros'] = $this->centroEducativoModel->_getCentrosList();
+            $data['centros'] = $this->prod4ResultadosModel->_getCentrosList();
             $data['cursos'] = $this->cursoModel->findAll();
             //$data['meses'] = MESES;
 
@@ -569,6 +561,7 @@ class Prod4 extends BaseController {
                 'observacion' => strtoupper($this->request->getPostGet('observacion')),
                 'amie' => $this->request->getPostGet('amie'),
                 'anio_egb' => $this->request->getPostGet('anio_egb'),
+                'estado' => $this->request->getPostGet('estado'),
                 'modalidad' => $this->request->getPostGet('modalidad'),
 
             );

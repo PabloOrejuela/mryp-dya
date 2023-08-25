@@ -63,4 +63,27 @@ class Prod4Model extends Model {
         //echo $this->db->getLastQuery();
         return $result;
     }
+
+    /**
+     *
+     * Esta función trae todos los registros
+     *
+     * @param Type $var El código amie del CE
+     * @return array
+     **/
+    public function _getAllRegistros() {
+        $result = NULL;
+        $builder = $this->db->table($this->table);
+        $builder->select('producto_4.id as id, cohorte, nombres, documento, estado');
+        $builder->join('prod4_process_resultado', 'prod4_process_resultado.idProd4 = producto_4.id');
+        $builder->orderBy('id');
+        $query = $builder->get();
+        if ($query->getResult() != null) {
+            foreach ($query->getResult() as $row) {
+                $result[] = $row;
+            }
+        }
+        //echo $this->db->getLastQuery();
+        return $result;
+    }
 }

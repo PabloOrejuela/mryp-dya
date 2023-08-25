@@ -20,6 +20,7 @@
                         <th>Nombre</th>
                         <th>Cohorte</th>
                         <th>Documento</th>
+                        <th>Estado</th>
                         <th>Lengua</th>
                         <th>Matemática</th>
                         <th>Psicoemocional</th>
@@ -32,12 +33,24 @@
                     <?php
                         if (isset($componente_4) && $componente_4 != NULL) {
                             foreach ($componente_4 as $key => $value) {
+                                
                                 echo '<tr>
                                     <td>'.$value->id.'</td>
                                     <td><a href="'.site_url().'prod_4_edit/'.$value->id.'">'.$value->nombres.'</a></td>
                                     <td>'.$value->cohorte.'</td>
-                                    <td>'.$value->documento.'</td>
-                                    <td>
+                                    <td>'.$value->documento.'</td>';
+                                    if ($value->estado == 1) {
+                                        echo '<td>Activa</td>';
+                                    }else if($value->estado == 2){
+                                        echo '<td>No participó</td>';
+                                    }else if($value->estado == 3){
+                                        echo '<td>Retirada</td>';
+                                    }else if($value->estado == 4){
+                                        echo '<td>Finalizada</td>';
+                                    }else{
+                                        echo '<td>Sin estado</td>';
+                                    }
+                                echo '<td>
                                         <div class="contenedor">
                                             <a type="button" id="btn-register" href="'.site_url().'prod4-reg-lengua/'.$value->id.'" class="edit">
                                                 <img src="'.site_url().'public/images/test.png" >

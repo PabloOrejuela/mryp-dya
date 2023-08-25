@@ -71,6 +71,9 @@ class Prod4ResultadosModel extends Model {
         if ($datos['anio_egb'] != 'NULL') {
             $builder->set('anio_egb', $datos['anio_egb']);
         }
+        if ($datos['estado'] != 'NULL') {
+            $builder->set('estado', $datos['estado']);
+        }
         if ($datos['modalidad'] != 'NULL') {
             $builder->set('modalidad', $datos['modalidad']);
         }
@@ -98,6 +101,9 @@ class Prod4ResultadosModel extends Model {
         if ($datos['anio_egb'] != 'NULL') {
             $builder->set('anio_egb', $datos['anio_egb']);
         }
+        if ($datos['estado'] != 'NULL') {
+            $builder->set('estado', $datos['estado']);
+        }
         if ($datos['modalidad'] != 'NULL') {
             $builder->set('modalidad', $datos['modalidad']);
         }
@@ -105,5 +111,20 @@ class Prod4ResultadosModel extends Model {
         
         $builder->set('idProd4', $datos['idProd4']);
         $builder->insert();
+    }
+
+    public function _getCentrosList() {
+        $result = NULL;
+        $builder = $this->db->table('centro_educativo');
+        $builder->select('amie, nombre');
+        $builder->orderBy('amie');
+        $query = $builder->get();
+        if ($query->getResult() != null) {
+            foreach ($query->getResult() as $row) {
+                $result[] = $row;
+            }
+        }
+        //echo $this->db->getLastQuery();
+        return $result;
     }
 }

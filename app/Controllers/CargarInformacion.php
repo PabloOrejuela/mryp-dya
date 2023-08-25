@@ -674,9 +674,9 @@ class CargarInformacion extends BaseController {
                         'nacionalidad' => trim($sheet->getCell('M'.$row->getRowIndex())),
                         'etnia' => trim($sheet->getCell('N'.$row->getRowIndex())),
                         'genero' => trim($sheet->getCell('O'.$row->getRowIndex())),
-                        'fecha_nac' => trim($sheet->getCell('T'.$row->getRowIndex())),
+                        'fecha_nac' => trim($sheet->getCell('P'.$row->getRowIndex())),
                         'edad' => $edad,
-                        'nivel' => trim($sheet->getCell('Q'.$row->getRowIndex())),
+                        'nivel' => trim($sheet->getCell('R'.$row->getRowIndex())),
                         'discapacidad' => trim($sheet->getCell('S'.$row->getRowIndex())),
                         'tipo_discapacidad' => trim($sheet->getCell('T'.$row->getRowIndex())),
                         'institucion' => trim($sheet->getCell('U'.$row->getRowIndex())),
@@ -693,7 +693,7 @@ class CargarInformacion extends BaseController {
 
                     );
 
-                    if ($amie == 'END') {
+                    if ($num == 'END') {
                         break;
                     }
                     //Verifico si existe
@@ -738,7 +738,6 @@ class CargarInformacion extends BaseController {
                 //Accedo a cada fila extrayendo los datos
                 foreach ($sheet->getRowIterator(5) as $row) {
                 
-                    $amie = trim($sheet->getCell('F'.$row->getRowIndex()));
                     $num = trim($sheet->getCell('A'.$row->getRowIndex()));
                 
                     $nap7 = array(
@@ -753,7 +752,7 @@ class CargarInformacion extends BaseController {
                         'email' => trim($sheet->getCell('R'.$row->getRowIndex())),
                     );
 
-                    if ($amie == 'END') {
+                    if ($num == 'END') {
                         break;
                     }
                     //INSERTO

@@ -6,6 +6,57 @@
             <?= csrf_field(); ?>
             <div class="row">
                 <div class="col-md-3 mb-3">
+                    <label for="estado">ESTADO:</label>
+                    <select name="estado" class="form-control" id="estado" aria-label="estado">
+                        <?php
+                            if ($datos != NULL && isset($datos)) {
+                                if ($datos->estado  == "1") {
+                                    echo '<option value="1" selected>Activa</option>
+                                            <option value="2">No participó</option>
+                                            <option value="3">Retirada</option>
+                                            <option value="4">Finalizada</option>
+                                    ';
+                                }elseif ($datos->estado  == "2") {
+                                    echo '<option value="1">Activa</option>
+                                            <option value="2" selected>No participó</option>
+                                            <option value="3">Retirada</option>
+                                            <option value="4">Finalizada</option>
+                                    ';
+                                }elseif ($datos->estado  == "3") {
+                                    echo '<option value="1">Activa</option>
+                                            <option value="2">No participó</option>
+                                            <option value="3" selected>Retirada</option>
+                                            <option value="4">Finalizada</option>
+                                    ';
+                                }elseif ($datos->estado  == "4") {
+                                    echo '<option value="1">Activa</option>
+                                            <option value="2">No participó</option>
+                                            <option value="3">Retirada</option>
+                                            <option value="4" selected>Finalizada</option>
+                                    ';
+                                }else {
+                                    echo '<option value="1">Activa</option>
+                                            <option value="2">No participó</option>
+                                            <option value="3">Retirada</option>
+                                            <option value="4">Finalizada</option>
+                                            <option value="NULL" selected>-- Registrar datos --</option>
+                                    ';
+                                }
+                            }else{
+                                echo '<option value="1">Activa</option>
+                                        <option value="2">No participó</option>
+                                        <option value="3">Retirada</option>
+                                        <option value="4">Finalizada</option>
+                                        <option value="NULL" selected>-- Registrar datos --</option>
+                                ';
+                            }
+                        ?>
+                    
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3 mb-3">
                     <label for="reinsercion">REINSERCIÓN:</label>
                     <select name="reinsercion" class="form-control" id="reinsercion" aria-label="reinsercion">
                         <?php
@@ -172,7 +223,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-3 mb-3">
+                <div class="col-md-5 mb-3">
                 <label for="amie">CENTRO EDUCATIVO:</label>
                     
                     <select 
