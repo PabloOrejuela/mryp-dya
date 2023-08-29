@@ -59,18 +59,53 @@ class Prod4PedagogicaModel extends Model {
         if ($datos['leng_prescencial'] != 'NULL') {
             $builder->set('leng_prescencial', $datos['leng_prescencial']);
         }
+        if ($datos['leng_prescencial_in'] != 'NULL') {
+            $builder->set('leng_prescencial_in', $datos['leng_prescencial_in']);
+        }
+        if ($datos['leng_prescencial_in_motivo'] != 'NULL') {
+            $builder->set('leng_prescencial_in_motivo', $datos['leng_prescencial_in_motivo']);
+        }
+        
         if ($datos['leng_distancia'] != 'NULL') {
             $builder->set('leng_distancia', $datos['leng_distancia']);
         }
+        if ($datos['leng_distancia_in'] != 'NULL') {
+            $builder->set('leng_distancia_in', $datos['leng_distancia_in']);
+        }
+        if ($datos['leng_distancia_in_motivo'] != 'NULL') {
+            $builder->set('leng_distancia_in_motivo', $datos['leng_distancia_in_motivo']);
+        }
+
         if ($datos['mate_prescencial'] != 'NULL') {
             $builder->set('mate_prescencial', $datos['mate_prescencial']);
         }
+        if ($datos['mate_prescencial_in'] != 'NULL') {
+            $builder->set('mate_prescencial_in', $datos['mate_prescencial_in']);
+        }
+        if ($datos['mate_prescencial_in_motivo'] != 'NULL') {
+            $builder->set('mate_prescencial_in_motivo', $datos['mate_prescencial_in_motivo']);
+        }
+
         if ($datos['mate_distancia'] != 'NULL') {
             $builder->set('mate_distancia', $datos['mate_distancia']);
         }
+        if ($datos['mate_distancia_in'] != 'NULL') {
+            $builder->set('mate_distancia_in', $datos['mate_distancia_in']);
+        }
+        if ($datos['mate_distancia_in_motivo'] != 'NULL') {
+            $builder->set('mate_distancia_in_motivo', $datos['mate_distancia_in_motivo']);
+        }
+
         if ($datos['psicoemocionales'] != 'NULL') {
             $builder->set('psicoemocionales', $datos['psicoemocionales']);
         }
+        if ($datos['psicoemocionales_in'] != 'NULL') {
+            $builder->set('psicoemocionales_in', $datos['psicoemocionales_in']);
+        }
+        if ($datos['psicoemocionales_in_motivo'] != 'NULL') {
+            $builder->set('psicoemocionales_in_motivo', $datos['psicoemocionales_in_motivo']);
+        }
+
         if ($datos['resultado'] != 'NULL') {
             $builder->set('resultado', $datos['resultado']);
         }
@@ -86,18 +121,53 @@ class Prod4PedagogicaModel extends Model {
         if ($datos['leng_prescencial'] != 'NULL') {
             $builder->set('leng_prescencial', $datos['leng_prescencial']);
         }
+        if ($datos['leng_prescencial_in'] != 'NULL') {
+            $builder->set('leng_prescencial_in', $datos['leng_prescencial_in']);
+        }
+        if ($datos['leng_prescencial_in_motivo'] != 'NULL') {
+            $builder->set('leng_prescencial_in_motivo', $datos['leng_prescencial_in_motivo']);
+        }
+        
         if ($datos['leng_distancia'] != 'NULL') {
             $builder->set('leng_distancia', $datos['leng_distancia']);
         }
+        if ($datos['leng_distancia_in'] != 'NULL') {
+            $builder->set('leng_distancia_in', $datos['leng_distancia_in']);
+        }
+        if ($datos['leng_distancia_in_motivo'] != 'NULL') {
+            $builder->set('leng_distancia_in_motivo', $datos['leng_distancia_in_motivo']);
+        }
+
         if ($datos['mate_prescencial'] != 'NULL') {
             $builder->set('mate_prescencial', $datos['mate_prescencial']);
         }
+        if ($datos['mate_prescencial_in'] != 'NULL') {
+            $builder->set('mate_prescencial_in', $datos['mate_prescencial_in']);
+        }
+        if ($datos['mate_prescencial_in_motivo'] != 'NULL') {
+            $builder->set('mate_prescencial_in_motivo', $datos['mate_prescencial_in_motivo']);
+        }
+
         if ($datos['mate_distancia'] != 'NULL') {
             $builder->set('mate_distancia', $datos['mate_distancia']);
         }
+        if ($datos['mate_distancia_in'] != 'NULL') {
+            $builder->set('mate_distancia_in', $datos['mate_distancia_in']);
+        }
+        if ($datos['mate_distancia_in_motivo'] != 'NULL') {
+            $builder->set('mate_distancia_in_motivo', $datos['mate_distancia_in_motivo']);
+        }
+
         if ($datos['psicoemocionales'] != 'NULL') {
             $builder->set('psicoemocionales', $datos['psicoemocionales']);
         }
+        if ($datos['psicoemocionales_in'] != 'NULL') {
+            $builder->set('psicoemocionales_in', $datos['psicoemocionales_in']);
+        }
+        if ($datos['psicoemocionales_in_motivo'] != 'NULL') {
+            $builder->set('psicoemocionales_in_motivo', $datos['psicoemocionales_in_motivo']);
+        }
+        
         if ($datos['resultado'] != 'NULL') {
             $builder->set('resultado', $datos['resultado']);
         }

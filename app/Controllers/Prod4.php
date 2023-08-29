@@ -368,10 +368,20 @@ class Prod4 extends BaseController {
             $proceso = array(
                 'idProd4' => $this->request->getPostGet('idProd4'),
                 'leng_prescencial' => $this->request->getPostGet('leng_prescencial'),
+                'leng_prescencial_in' => $this->request->getPostGet('leng_prescencial_in'),
+                'leng_prescencial_in_motivo' => $this->request->getPostGet('leng_prescencial_in_motivo'),
                 'leng_distancia' => $this->request->getPostGet('leng_distancia'),
+                'leng_distancia_in' => $this->request->getPostGet('leng_distancia_in'),
+                'leng_distancia_in_motivo' => $this->request->getPostGet('leng_distancia_in_motivo'),
                 'mate_prescencial' => $this->request->getPostGet('mate_prescencial'),
                 'mate_distancia' => $this->request->getPostGet('mate_distancia'),
                 'psicoemocionales' => $this->request->getPostGet('psicoemocionales'),
+                'mate_prescencial_in' => $this->request->getPostGet('mate_prescencial_in'),
+                'mate_distancia_in' => $this->request->getPostGet('mate_distancia_in'),
+                'psicoemocionales_in' => $this->request->getPostGet('psicoemocionales_in'),
+                'mate_prescencial_in_motivo' => $this->request->getPostGet('mate_prescencial_in_motivo'),
+                'mate_distancia_in_motivo' => $this->request->getPostGet('mate_distancia_in_motivo'),
+                'psicoemocionales_in_motivo' => $this->request->getPostGet('psicoemocionales_in_motivo'),
                 'resultado' => $this->request->getPostGet('resultado'),
 
             );
@@ -389,7 +399,7 @@ class Prod4 extends BaseController {
 
             $hay = $this->prod4PedagogicaModel->_getProd4Pedagogica($proceso['idProd4']);
             $hayOyente = $this->prod4OyenteModel->_getProd4Oyente($oyente['idProd4']);
-            //echo '<pre>'.var_export($hayOyente, true).'</pre>';exit;
+            //echo '<pre>'.var_export($proceso, true).'</pre>';exit;
             
             if ($hay) {
                 //Actualizo
