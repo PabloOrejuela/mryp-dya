@@ -47,8 +47,18 @@
                                         if ($datos->nivel == $value->id) {
                                             echo '<option value="'.$value->id.'" selected>'.$value->curso.'</option>';
                                             
+                                            
                                         }else{
-                                            echo '<option value="'.$value->id.'">'.$value->curso.'</option>';
+                                            
+                                            if ($value->id == '11') {
+                                                echo '<option value="'.$value->id.'">1ro BACH</option>';
+                                            }else if ($value->id == '12') {
+                                                echo '<option value="'.$value->id.'">2do BACH</option>';
+                                            }else if ($value->id == '13') {
+                                                echo '<option value="'.$value->id.'">3ero BACH</option>';
+                                            }else{
+                                                echo '<option value="'.$value->id.'">'.$value->curso.'</option>';
+                                            }
                                         }
                                         if ($value->id >= 13) {
                                             break;
