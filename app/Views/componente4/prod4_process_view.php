@@ -1,8 +1,8 @@
 <style>
     .contenedor{
-        margin-left:30px;
-        margin-right:30px;
-        font-size: 0.8em;
+        margin-left:20px;
+        margin-right:20px;
+        font-size: 0.75em;
     }
 </style>
 <main class="contenedor px-2">
@@ -53,49 +53,49 @@
                                 echo '<td>
                                         <div class="contenedor">
                                             <a type="button" id="btn-register" href="'.site_url().'prod4-reg-lengua/'.$value->id.'" class="edit">
-                                                <img src="'.site_url().'public/images/test.png" >
+                                                <img src="'.site_url().'public/images/test.png" width="30">
                                             </a>
                                         </div>
                                     </td>
                                     <td>
                                         <div class="contenedor">
                                             <a type="button" id="btn-register" href="'.site_url().'prod4-reg-mate/'.$value->id.'" class="edit">
-                                                <img src="'.site_url().'public/images/eval-mate.png" >
+                                                <img src="'.site_url().'public/images/eval-mate.png" width="30" >
                                             </a>
                                         </div>
                                     </td>
                                     <td>
                                         <div class="contenedor">
                                             <a type="button" id="btn-register" href="'.site_url().'prod4-reg-psico/'.$value->id.'" class="edit">
-                                                <img src="'.site_url().'public/images/psico.png" >
+                                                <img src="'.site_url().'public/images/psico.png" width="30" >
                                             </a>
                                         </div>
                                     </td>
                                     <td>
                                         <div class="contenedor">
                                             <a type="button" id="btn-register" href="'.site_url().'prod4-reg-pedagogica/'.$value->id.'" class="edit">
-                                                <img src="'.site_url().'public/images/pedagogicas.png" >
+                                                <img src="'.site_url().'public/images/pedagogicas.png" width="30" >
                                             </a>
                                         </div>
                                     </td>
                                     <td>
                                         <div class="contenedor">
                                             <a type="button" id="btn-register" href="'.site_url().'prod4-reg-otros/'.$value->id.'" class="edit">
-                                                <img src="'.site_url().'public/images/reg-process.png" >
+                                                <img src="'.site_url().'public/images/reg-process.png" width="30" >
                                             </a>
                                         </div>
                                     </td>
                                     <td>
                                         <div class="contenedor">
                                             <a type="button" id="btn-register" href="'.site_url().'prod4-reg-atenciones/'.$value->id.'" class="edit">
-                                                <img src="'.site_url().'public/images/atenciones.png" >
+                                                <img src="'.site_url().'public/images/atenciones.png" width="30" >
                                             </a>
                                         </div>
                                     </td>
                                     <td>
                                         <div class="contenedor">
                                             <a type="button" id="btn-register" href="'.site_url().'prod4-reg-resultados/'.$value->id.'" class="edit">
-                                                <img src="'.site_url().'public/images/resultados.png" >
+                                                <img src="'.site_url().'public/images/resultados.png" width="30" >
                                             </a>
                                         </div>
                                     </td>

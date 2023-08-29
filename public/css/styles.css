@@ -360,3 +360,7 @@ textarea {
     font-weight: bold;
     font-size: 1em;
 }
+
+#lbl_opcional{
+    color: #124e8e;
+}

@@ -50,7 +50,7 @@
                                         }else{
                                             echo '<option value="'.$value->id.'">'.$value->curso.'</option>';
                                         }
-                                        if ($value->id > 9) {
+                                        if ($value->id >= 13) {
                                             break;
                                         }
                                     }

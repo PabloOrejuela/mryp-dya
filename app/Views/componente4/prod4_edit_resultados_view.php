@@ -222,10 +222,11 @@
                     ?>
                 </div>
             </div>
+            
             <div class="row">
                 <div class="col-md-5 mb-3">
-                <label for="amie">CENTRO EDUCATIVO:</label>
-                    
+
+                    <label for="amie">ELEGIR CENTRO EDUCATIVO:</label>
                     <select 
                         class="form-select" 
                         aria-label="Default select example" 
@@ -254,6 +255,16 @@
                         }
                     ?>
                     </select>
+                    
+                </div>
+            </div>
+            <div class="row">
+                <label for="nuevo-ce" id="lbl_opcional">Registrar un nuevo Centro Educativo (opcional):</label>
+                <div class="col-sm-2 mb-3">
+                    <input class="form-control" type="text" name="nuevo_amie" id="nuevo_amie" placeholder="AMIE">
+                </div>
+                <div class="col-sm-4 mb-3">
+                    <input class="form-control" type="text" name="nuevo_centro_educativo" id="nuevo_centro_educativo" placeholder="NOMBRE">
                 </div>
             </div>
             <div class="row">
