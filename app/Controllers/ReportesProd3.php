@@ -22,7 +22,7 @@ class ReportesProd3 extends BaseController {
             
             $data['componente_3'] = $this->prod3Model->_getMisRegistros($this->session->idusuario);
             $centros = $this->prod3Model->_getMisAmie($this->session->idusuario);
-            //echo '<pre>'.var_export($centros, true).'</pre>';exit;
+            //echo '<pre>'.var_export($data['componente_3'], true).'</pre>';exit;
 
             $this->RepCertificadoPdf($data['componente_3'], $centros);
 
@@ -81,7 +81,7 @@ class ReportesProd3 extends BaseController {
             //$docentes = $this->prod3Model->_getRegistrosAmie('17H01403');
             $requisitos_certificado = $this->prod3CentroCertificadosModel->_getRequisitos($value->amie);
             //$requisitos_certificado = $this->prod3CentroCertificadosModel->_getRequisitos('17H01403');
-            //echo '<pre>'.var_export($requisitos_certificado, true).'</pre>';
+            //echo '<pre>'.var_export($value->amie, true).'</pre>';exit;
                 
             if ($requisitos_certificado != NULL) {
                 $html .= '<h4>Centro: '.$value->amie.'-'.$value->nombre.'</h4>';

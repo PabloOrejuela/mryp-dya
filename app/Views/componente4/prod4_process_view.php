@@ -31,9 +31,12 @@
                     </thead>
                     <tbody>
                     <?php
+                        use App\Models\Prod4ResultadosModel;
+                        $this->prod4ResultadosModel = new Prod4ResultadosModel();
+
                         if (isset($componente_4) && $componente_4 != NULL) {
                             foreach ($componente_4 as $key => $value) {
-                                
+                                $value->estado = $this->prod4ResultadosModel->_getProd4Estado($value->id);
                                 echo '<tr>
                                     <td>'.$value->id.'</td>
                                     <td><a href="'.site_url().'prod_4_edit/'.$value->id.'">'.$value->nombres.'</a></td>

@@ -74,8 +74,8 @@ class Prod4Model extends Model {
     public function _getAllRegistros() {
         $result = NULL;
         $builder = $this->db->table($this->table);
-        $builder->select('producto_4.id as id, cohorte, nombres, documento, estado');
-        $builder->join('prod4_process_resultado', 'prod4_process_resultado.idProd4 = producto_4.id');
+        $builder->select('producto_4.id as id, cohorte, nombres, documento');
+        //$builder->join('prod4_process_resultado', 'prod4_process_resultado.idProd4 = producto_4.id');
         $builder->orderBy('id');
         $query = $builder->get();
         if ($query->getResult() != null) {

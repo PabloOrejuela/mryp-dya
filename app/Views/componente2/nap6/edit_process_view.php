@@ -28,8 +28,6 @@
                                     $dato['campo'] = 'edu_regular';
                                     echo view('componente2/nap3/select-campo-view', $dato); 
                                 }
-
-                                
                             ?>
                         </div>
                         <div class="col-md-5 mb-3">
@@ -47,18 +45,8 @@
                                         if ($datos->nivel == $value->id) {
                                             echo '<option value="'.$value->id.'" selected>'.$value->curso.'</option>';
                                             
-                                            
                                         }else{
-                                            
-                                            if ($value->id == '11') {
-                                                echo '<option value="'.$value->id.'">1ro BACH</option>';
-                                            }else if ($value->id == '12') {
-                                                echo '<option value="'.$value->id.'">2do BACH</option>';
-                                            }else if ($value->id == '13') {
-                                                echo '<option value="'.$value->id.'">3ero BACH</option>';
-                                            }else{
-                                                echo '<option value="'.$value->id.'">'.$value->curso.'</option>';
-                                            }
+                                            echo '<option value="'.$value->id.'">'.$value->curso.'</option>';
                                         }
                                         if ($value->id >= 13) {
                                             break;
@@ -69,13 +57,11 @@
                                     foreach ($cursos as $key => $value) {
                                         echo '<option value="'.$value->id.'">'.$value->curso.'</option>';
 
-                                        if ($value->id > 9) {
+                                        if ($value->id >= 13) {
                                             break;
                                         }
                                     }
-                                    
                                 }
-                                
                             ?>
                             </select>
                         </div>

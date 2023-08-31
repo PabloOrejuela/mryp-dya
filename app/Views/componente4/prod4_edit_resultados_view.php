@@ -1,7 +1,7 @@
 <main class="container-sm px-2 mb-5">
     <div class="container-fluid px-0">
         <h4 class="mt-4" id="titulo-nombre"><?= esc($title).' - Resultados: '.$est->nombres; ?></h4>
-        <form action="<?php echo base_url().'/prod4-resultados-update';?>" method="post">
+        <form action="<?php echo base_url().'/prod4-resultados-update';?>" method="post" name="form-edit">
             <?= session()->getFlashdata('error'); ?>
             <?= csrf_field(); ?>
             <div class="row">
@@ -223,16 +223,18 @@
                 </div>
             </div>
             
+
             <div class="row">
                 <div class="col-md-5 mb-3">
 
-                    <label for="amie">ELEGIR CENTRO EDUCATIVO:</label>
+                    <label for="amie">ELEGIR CENTRO EDUCATIVO (opcional):</label>
                     <select 
                         class="form-select" 
                         aria-label="Default select example" 
                         name="amie"
                         id="amie"  
                     >
+                    <option value="NULL" selected>--Registrar dato--</option>
                     <?php
                         if ($datos) {
                             if ($centros != NULL && isset($centros) ) {
@@ -266,6 +268,36 @@
                 <div class="col-sm-4 mb-3">
                     <input class="form-control" type="text" name="nuevo_centro_educativo" id="nuevo_centro_educativo" placeholder="NOMBRE">
                 </div>
+                <div class="col-sm-3 mb-3">
+                    <select 
+                        class="form-select" 
+                        aria-label="Default select example" 
+                        name="idciudades"
+                        id="idciudades"
+                        required  
+                    >
+                    <?php
+                        if ($datos) {
+                            if ($ciudades != NULL && isset($ciudades) ) {
+                                foreach ($ciudades as $key => $ciudad) {
+                                    if ($ciudad['idciudades'] == $datos->idciudades) {
+                                        echo '<option value="'.$ciudad['idciudades'].'" selected>'.$ciudad['ciudad'].'</option>';
+                                    }else{
+                                        echo '<option value="'.$ciudad['idciudades'].'">'.$ciudad['ciudad'].'</option>';
+                                    }
+                                }
+                            }else{
+                                echo '<option value="NULL" selected>Hubo un errror, no se cargaron los datos</option>';
+                            }
+                        }else{
+                            echo '<option value="NULL" selected>--Elegir una ciudad--</option>';
+                            foreach ($ciudades as $key => $ciudad) {
+                                echo '<option value="'.$ciudad['idciudades'].'">'.$ciudad['ciudad'].'</option>';
+                            }
+                        }
+                    ?>
+                    </select>
+                </div>
             </div>
             <div class="row">
                 <div class="col-md-3 mb-3">
@@ -278,8 +310,20 @@
                     >
                     <option value="NULL" selected>Registrar dato</option>
                         <?php
-                            foreach ($cursos as $key => $c) {
-                                echo '<option value="'.$c->id.'">'.$c->curso.'</option>';
+                            if ($datos) {
+                                foreach ($cursos as $key => $c) {
+                                    echo '<option value="'.$c->id.'">'.$c->curso.'</option>';
+                                    if ($c->id == $datos->anio_egb) {
+                                        echo '<option value="'.$c->id.'" selected>'.$c->curso.'</option>';
+                                    }else{
+                                        echo '<option value="'.$c->id.'">'.$c->curso.'</option>';
+                                    }
+                                }
+                            }else{
+                                echo '<option value="NULL" selected>Registrar dato</option>';
+                                foreach ($cursos as $key => $c) {
+                                    echo '<option value="'.$c->id.'">'.$c->curso.'</option>';
+                                }
                             }
                             
                         ?>

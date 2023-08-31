@@ -17,6 +17,7 @@ class Prod4 extends BaseController {
             $this->session->set('form_error', "");
 
             $data['componente_4'] = $this->prod4Model->_getAllRegistros();
+            //echo '<pre>'.var_export($data['componente_4'], true).'</pre>';exit;
 
             $data['title']='MYRP - DYA';
             $data['main_content']='componente4/prod4_process_view';
@@ -133,6 +134,8 @@ class Prod4 extends BaseController {
         if ($data['is_logged'] == 1 && $data['componente_4'] == 1) {
 
             $data['componente_4'] = $this->prod4Model->_getAllRegistros();
+
+            //echo '<pre>'.var_export($data['componente_4'], true).'</pre>';exit;
             $data['title']='MYRP - DYA';
             $data['main_content']='componente4/prod4_process_view';
             return view('includes/template', $data);
@@ -563,6 +566,7 @@ class Prod4 extends BaseController {
             $data['est'] = $this->prod4Model->find($id);
             $data['centros'] = $this->prod4ResultadosModel->_getCentrosList();
             $data['cursos'] = $this->cursoModel->findAll();
+            $data['ciudades'] = $this->ciudadesModel->findAll();
             //$data['meses'] = MESES;
 
             //echo '<pre>'.var_export($data['centros'], true).'</pre>';exit;
@@ -590,16 +594,37 @@ class Prod4 extends BaseController {
                 'reinsercion' => $this->request->getPostGet('reinsercion'),
                 'motivo' => $this->request->getPostGet('motivo'),
                 'observacion' => strtoupper($this->request->getPostGet('observacion')),
+                
+                'nuevo_amie' => strtoupper($this->request->getPostGet('nuevo_amie')),
+                'nuevo_centro_educativo' => strtoupper($this->request->getPostGet('nuevo_centro_educativo')),
+                'idciudades' => $this->request->getPostGet('idciudades'),
+
                 'amie' => $this->request->getPostGet('amie'),
                 'anio_egb' => $this->request->getPostGet('anio_egb'),
                 'estado' => $this->request->getPostGet('estado'),
                 'modalidad' => $this->request->getPostGet('modalidad'),
 
             );
+            
+            //Verifico si hay ese centro
+            if ($proceso['nuevo_amie'] != '') {
+                $hay_centro = $this->centroEducativoModel->find($proceso['nuevo_amie']);
+                //echo '<pre>'.var_export($proceso, true).'</pre>';exit;
+                if (!isset($hay_centro) || $hay_centro == NULL) {
+                    $data = [
+                        'amie' => $proceso['nuevo_amie'],
+                        'nombre'    => $proceso['nuevo_centro_educativo'],
+                        'idciudades'    => $proceso['idciudades'],
+                    ];
+                    $this->centroEducativoModel->insert($data, false);
+                    $proceso['amie'] = $this->centroEducativoModel->getInsertID();
+                }else{
+                    $proceso['amie'] = $proceso['nuevo_amie'];
+                }
+            }
 
             $hay = $this->prod4ResultadosModel->_getProd4Resultados($proceso['idProd4']);
             //echo '<pre>'.var_export($proceso, true).'</pre>';exit;
-            
             if ($hay) {
                 //Actualizo
                 $this->prod4ResultadosModel->_update($proceso);
