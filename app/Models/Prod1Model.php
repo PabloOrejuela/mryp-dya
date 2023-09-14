@@ -19,6 +19,7 @@ class Prod1Model extends Model {
         'cohorte',
         'fecha_inicio',
         'fecha_fin',
+        'anio_lectivo',
         'nombres',
         'apellidos',
         'documento',

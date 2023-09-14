@@ -3,6 +3,9 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx as XlsxWriter;
+use PhpOffice\PhpSpreadsheet\Reader\Xlsx as XlsxReader;
 
 
 class Prod3 extends BaseController {
@@ -866,6 +869,104 @@ class Prod3 extends BaseController {
 
             $this->logout();
         }
+    }
+
+    public function prod_3_descargar_registros(){
+
+        $registros = $this->prod3Model->_getAllRegistrosExcel();
+        //echo '<pre>'.var_export($registros, true).'</pre>';exit;
+        $fila = 2;
+
+        //Creo la hoja
+        $phpExcel = new Spreadsheet();
+        $phpExcel
+            ->getProperties()
+            ->setCreator("Aquí va el creador, como cadena")
+            ->setLastModifiedBy('Parzibyte') // última vez modificado por
+            ->setTitle('Prod 1 - Registros')
+            ->setSubject('Reportes MYRP')
+            ->setDescription('Reporte con los registros del Producto')
+            ->setKeywords('etiquetas o palabras clave separadas por espacios')
+            ->setCategory('Registros');
+
+        $nombreDelDocumento = "Prod 3 - Registros.xlsx";
+
+        //Selecciono la pestaña
+        $hoja = $phpExcel->getActiveSheet();
+
+        $styleCabecera = [
+            'font' => [
+                'bold' => true,
+            ],
+            'alignment' => [
+                'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
+            ]
+        ];
+
+        $styleFila = [
+            'font' => [
+                'bold' => false,
+            ],
+            'alignment' => [
+                'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT,
+            ]
+        ];
+
+        $phpExcel->getActiveSheet()->getStyle('A1:N1')->applyFromArray($styleCabecera);
+
+        //Edito la info que va a ir en el archivo excel
+        $hoja->setCellValue('A1', "AMIE");
+        $hoja->setCellValue('B1', "CENTRO EDUCATIVO");
+        $hoja->setCellValue('C1', "CIUDAD");
+        $hoja->setCellValue('D1', "PROVINCIA");
+        $hoja->setCellValue('E1', "NOMBRE");
+        $hoja->setCellValue('F1', "DOCUMENTO");
+        $hoja->setCellValue('G1', "NACIONALIDAD");
+        $hoja->setCellValue('H1', "ETNIA");
+        $hoja->setCellValue('I1', "EDAD");
+        $hoja->setCellValue('J1', "GÉNERO");
+        $hoja->setCellValue('K1', "DISCAPACIDAD");
+        $hoja->setCellValue('L1', "TIPO DISCAPACIDAD");
+        $hoja->setCellValue('M1', "TELEFONO");
+        $hoja->setCellValue('N1', "EMAIL");
+
+        foreach ($registros as $key => $value) {
+            $phpExcel->getActiveSheet()->getStyle('A'.$fila.':Z'.$fila)->applyFromArray($styleFila);
+            $hoja->setCellValue('A'.$fila, $value->amie);
+            $hoja->setCellValue('B'.$fila, $value->nombre);
+            $hoja->setCellValue('C'.$fila, $value->ciudad);
+            $hoja->setCellValue('D'.$fila, $value->provincia);
+            $hoja->setCellValue('E'.$fila, $value->nombre);
+            $hoja->setCellValue('F'.$fila, $value->documento);
+            $hoja->setCellValue('G'.$fila, $value->nacionalidad);
+            $hoja->setCellValue('H'.$fila, $value->etnia);
+            $hoja->setCellValue('I'.$fila, $value->edad);
+            $hoja->setCellValue('J'.$fila, $value->genero);
+            $hoja->setCellValue('K'.$fila, $value->discapacidad);
+            $hoja->setCellValue('L'.$fila, $value->tipo);
+            $hoja->setCellValue('M'.$fila, $value->celular);
+            $hoja->setCellValue('N'.$fila, $value->email);
+
+
+            $fila++;
+        }
+
+        //Creo el writter y guardo la hoja
+        
+        $writter = new XlsxWriter($phpExcel, 'Xlsx');
+        
+        //Cabeceras para descarga
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        header('Content-Disposition: attachment;filename="' . $nombreDelDocumento . '"');
+        header('Cache-Control: max-age=0');
+        
+        $r = $writter->save('php://output');exit;
+        if ($r) {
+            return redirect()->to('cargar_info_view');
+        }else{
+            $error = 'Hubo un error u no se pudo descargar';
+            return redirect()->to('cargar_info_view');
+        }        
     }
 
     public function logout(){

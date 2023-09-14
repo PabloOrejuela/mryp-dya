@@ -47,6 +47,10 @@
                                             if ($this->session->prod3_biblioteca == 1) {
                                                 echo '<a href="'.site_url().'prod-3-otros-procesos" class="btn btn-info mb-2">Editar Biblioteca y Encuentro</a>';
                                             }
+
+                                            if ($this->session->descargar_info == 1) {
+                                                echo'<a href="'.site_url().'prod-3-descargar-registros" class="btn btn-info mb-2">Descargar registros (.xlsx)</a>';
+                                            }
                                 
                             echo    '</div>
                                 </div>';
