@@ -192,6 +192,9 @@ class Prod1Model extends Model {
         $builder = $this->db->table($this->table);
         $builder->select('*');
         $builder->join('centro_educativo', 'centro_educativo.amie = producto_1.amie');
+        $builder->join('ciudades', 'ciudades.idciudades = centro_educativo.idciudades');
+        $builder->join('provincias', 'provincias.idprovincias = ciudades.idprovincias');
+        $builder->join('anio_lectivo', 'anio_lectivo.id = producto_1.anio_lectivo');
         $query = $builder->get();
         if ($query->getResult() != null) {
             foreach ($query->getResult() as $row) {

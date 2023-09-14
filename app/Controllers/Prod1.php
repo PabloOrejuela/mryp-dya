@@ -952,8 +952,8 @@ class Prod1 extends BaseController {
     public function prod_1_descargar_registros(){
 
         $registros = $this->prod1Model->_getAllRegistrosExcel();
+        //echo '<pre>'.var_export($registros, true).'</pre>';exit;
         $fila = 2;
-
 
         //Creo la hoja
         $phpExcel = new Spreadsheet();
@@ -961,14 +961,13 @@ class Prod1 extends BaseController {
             ->getProperties()
             ->setCreator("Aquí va el creador, como cadena")
             ->setLastModifiedBy('Parzibyte') // última vez modificado por
-            ->setTitle('Mi primer documento creado con PhpSpreadSheet')
-            ->setSubject('El asunto')
-            ->setDescription('Este documento fue generado para parzibyte.me')
+            ->setTitle('Prod 1 - Registros')
+            ->setSubject('Reportes MYRP')
+            ->setDescription('Reporte con los registros del Prod 1')
             ->setKeywords('etiquetas o palabras clave separadas por espacios')
-            ->setCategory('La categoría'
-        );
+            ->setCategory('Registros');
 
-        $nombreDelDocumento = "Mi primer archivo.xlsx";
+        $nombreDelDocumento = "Prod 1 - Registros.xlsx";
 
         //Selecciono la pestaña
         $hoja = $phpExcel->getActiveSheet();
@@ -996,37 +995,61 @@ class Prod1 extends BaseController {
         //Edito la info que va a ir en el archivo excel
         $hoja->setCellValue('A1', "AMIE");
         $hoja->setCellValue('B1', "CENTRO EDUCATIVO");
-        $hoja->setCellValue('C1', "COHORTE");
-        $hoja->setCellValue('D1', "FECHA INICIO");
-        $hoja->setCellValue('E1', "FECHA FIN");
-        $hoja->setCellValue('F1', "NOMBRES");
-        $hoja->setCellValue('G1', "APELLIDOS");
-        $hoja->setCellValue('H1', "DOCUMENTO");
-        $hoja->setCellValue('I1', "NACIONALIDAD");
-        $hoja->setCellValue('J1', "ETNIA");
-        $hoja->setCellValue('K1', "FECHA NACIMIENTO");
-        $hoja->setCellValue('L1', "EDAD");
-        $hoja->setCellValue('M1', "GÉNERO");
-        $hoja->setCellValue('N1', "DISCAPACIDAD");
-        $hoja->setCellValue('O1', "TIPO DISCAPACIDAD");
+        $hoja->setCellValue('C1', "CIUDAD");
+        $hoja->setCellValue('D1', "PROVINCIA");
+        $hoja->setCellValue('E1', "COHORTE");
+        $hoja->setCellValue('F1', "FECHA INICIO");
+        $hoja->setCellValue('G1', "FECHA FIN");
+        $hoja->setCellValue('H1', "AÑO LECTIVO");
+        $hoja->setCellValue('I1', "NOMBRES");
+        $hoja->setCellValue('J1', "APELLIDOS");
+        $hoja->setCellValue('K1', "DOCUMENTO");
+        $hoja->setCellValue('L1', "NACIONALIDAD");
+        $hoja->setCellValue('M1', "ETNIA");
+        $hoja->setCellValue('N1', "FECHA NACIMIENTO");
+        $hoja->setCellValue('P1', "EDAD");
+        $hoja->setCellValue('P1', "GÉNERO");
+        $hoja->setCellValue('Q1', "DISCAPACIDAD");
+        $hoja->setCellValue('R1', "TIPO DISCAPACIDAD");
+        $hoja->setCellValue('S1', "AÑO EGB");
+        $hoja->setCellValue('T1', "TUTOR APOYO");
+        $hoja->setCellValue('U1', "DOCENTE");
+        $hoja->setCellValue('V1', "REPRESENTANTE");
+        $hoja->setCellValue('W1', "PARENTESTO");
+        $hoja->setCellValue('X1', "NACIONALIDAD");
+        $hoja->setCellValue('V1', "DIRECCION");
+        $hoja->setCellValue('Z1', "CONTACTO");
+        $hoja->setCellValue('AA1', "EMAIL");
 
         foreach ($registros as $key => $value) {
             $phpExcel->getActiveSheet()->getStyle('A'.$fila.':Z'.$fila)->applyFromArray($styleFila);
             $hoja->setCellValue('A'.$fila, $value->amie);
             $hoja->setCellValue('B'.$fila, $value->nombre);
-            $hoja->setCellValue('C'.$fila, $value->cohorte);
-            $hoja->setCellValue('D'.$fila, $value->fecha_inicio);
-            $hoja->setCellValue('E'.$fila, $value->fecha_fin);
-            $hoja->setCellValue('F'.$fila, $value->nombres);
-            $hoja->setCellValue('G'.$fila, $value->apellidos);
-            $hoja->setCellValue('H'.$fila, $value->documento);
-            $hoja->setCellValue('I'.$fila, $value->nacionalidad);
-            $hoja->setCellValue('J'.$fila, $value->etnia);
-            $hoja->setCellValue('K'.$fila, $value->fecha_nac);
-            $hoja->setCellValue('L'.$fila, $value->edad);
-            $hoja->setCellValue('M'.$fila, $value->genero);
-            $hoja->setCellValue('N'.$fila, $value->discapacidad);
-            $hoja->setCellValue('O'.$fila, $value->tipo_discapacidad);
+            $hoja->setCellValue('C'.$fila, $value->ciudad);
+            $hoja->setCellValue('D'.$fila, $value->provincia);
+            $hoja->setCellValue('E'.$fila, $value->cohorte);
+            $hoja->setCellValue('F'.$fila, $value->fecha_inicio);
+            $hoja->setCellValue('G'.$fila, $value->fecha_fin);
+            $hoja->setCellValue('H'.$fila, $value->anio_lectivo);
+            $hoja->setCellValue('I'.$fila, $value->nombres);
+            $hoja->setCellValue('J'.$fila, $value->apellidos);
+            $hoja->setCellValue('K'.$fila, $value->documento);
+            $hoja->setCellValue('L'.$fila, $value->nacionalidad);
+            $hoja->setCellValue('M'.$fila, $value->etnia);
+            $hoja->setCellValue('N'.$fila, $value->fecha_nac);
+            $hoja->setCellValue('O'.$fila, $value->edad);
+            $hoja->setCellValue('P'.$fila, $value->genero);
+            $hoja->setCellValue('Q'.$fila, $value->discapacidad);
+            $hoja->setCellValue('R'.$fila, $value->tipo_discapacidad);
+            $hoja->setCellValue('S'.$fila, $value->anio_egb);
+            $hoja->setCellValue('T'.$fila, $value->tutor_apoyo);
+            $hoja->setCellValue('U'.$fila, $value->docente_tutor);
+            $hoja->setCellValue('V'.$fila, $value->representante);
+            $hoja->setCellValue('W'.$fila, $value->parentesto_rep);
+            $hoja->setCellValue('X'.$fila, $value->nacionalidad_rep);
+            $hoja->setCellValue('Y'.$fila, $value->direccion_rep);
+            $hoja->setCellValue('Z'.$fila, $value->contacto_telf);
+            $hoja->setCellValue('AA'.$fila, $value->email);
 
 
             $fila++;

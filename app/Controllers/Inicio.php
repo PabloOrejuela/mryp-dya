@@ -63,9 +63,17 @@ class Inicio extends BaseController {
                 //valido el login y pongo el id en sesion  && $usuario->id != 1 
                 //echo '<pre>'.var_export($usuario, true).'</pre>';
                 if ($usuario->is_logged == 1 && $usuario->ip != $ip) {
-                    $data['id'] = $usuario->id;
-                    $data['mensaje'] = 'Ya está logueado en otro PC. por favor cierre la otra sesión y vuelva a intentarlo';
-                    $this->session->setFlashdata('mensaje', $data);
+                    //Está logueado así que lo deslogueo
+                    $user = [
+                        'id' => $usuario->id,
+                        'is_logged' => 0,
+                        'ip' => 0
+                    ];
+                    $this->usuarioModel->update($usuario->id, $user);
+
+                    // $data['id'] = $usuario->id;
+                    // $data['mensaje'] = 'Ya está logueado en otro PC. por favor cierre la otra sesión y vuelva a intentarlo';
+                    // $this->session->setFlashdata('mensaje', $data);
                     //$this->session->setFlashdata('id', $usuario->id);
                     return redirect()->to('/');
                 }else{

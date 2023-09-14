@@ -171,7 +171,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="card-body mt-3">
+                <div class="card-body mt-3 mb-3">
                     <div class="row">
                         <div class="col-md-4 mb-3">
                             <label for="num_hijos">Num. hijos:</label>
@@ -213,6 +213,7 @@
             <button type="submit" class="btn btn-info mb-3">Guardar</button>
         </form>
         <button onclick="history.back()" class="btn btn-success mb-3">Regresar</button>
+        <a href="<?= site_url()?>prod4-reporte-individual" class="btn btn-info mb-2" target="_blank">Descargar reporte individual de resultados</a>
     </div>
     
 </main>

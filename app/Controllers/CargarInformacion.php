@@ -796,6 +796,8 @@ class CargarInformacion extends BaseController {
 
                 //Accedo a cada fila extrayendo los datos
                 foreach ($sheet->getRowIterator(3) as $row) {
+
+                    $num = trim($sheet->getCell('A'.$row->getRowIndex()));
                     $amie = trim($sheet->getCell('B'.$row->getRowIndex()));
                     
                     $prod3 = array(
@@ -815,7 +817,7 @@ class CargarInformacion extends BaseController {
                      );
 
                     $this->prod3Model->insert($prod3);
-                    if ($amie == 'END') {
+                    if ($num == 'END') {
                         break;
                     }
                 }

@@ -49,9 +49,8 @@
                                     <img src="'.site_url().'public/images/card-04.jpg" class="card-img-top" alt="card4">
                                     <div class="card-body" >
                                         <h5 class="card-title">Componente 4</h5>
-                                            <p class="card-text">Programa de Apoyo Escolar a Madres Adolescentes</p>';
-                                            //<a href="'.site_url().'subirExcel_view/4" class="btn btn-secondary" disabled>Cargar información</a>
-                                            echo '
+                                            <p class="card-text">Programa de Apoyo Escolar a Madres Adolescentes</p>
+                                            <a href="'.site_url().'prod4-reportes-form" class="btn btn-info mb-2" target="_self">GENERADOR DE REPORTES</a>
                                     </div>
                                 </div>';
                         }
