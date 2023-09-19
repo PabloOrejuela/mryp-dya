@@ -933,7 +933,7 @@ class Prod3 extends BaseController {
         foreach ($registros as $key => $value) {
             $phpExcel->getActiveSheet()->getStyle('A'.$fila.':Z'.$fila)->applyFromArray($styleFila);
             $hoja->setCellValue('A'.$fila, $value->amie);
-            $hoja->setCellValue('B'.$fila, $value->nombre);
+            $hoja->setCellValue('B'.$fila, $value->ce);
             $hoja->setCellValue('C'.$fila, $value->ciudad);
             $hoja->setCellValue('D'.$fila, $value->provincia);
             $hoja->setCellValue('E'.$fila, $value->nombre);

@@ -599,6 +599,18 @@ class Prod2 extends BaseController {
                 'trabajo_final' => strtoupper($this->request->getPostGet('trabajo_final')),
                 'resultado_curso' => strtoupper($this->request->getPostGet('resultado_curso')),
                 'observaciones' => strtoupper($this->request->getPostGet('observaciones')),
+
+                'tic_tecno_digital' => strtoupper($this->request->getPostGet('tic_tecno_digital')),
+                'competencia_digital_docente' => strtoupper($this->request->getPostGet('competencia_digital_docente')),
+                'competencias_informacionales' => strtoupper($this->request->getPostGet('competencias_informacionales')),
+                'gestion_datos' => strtoupper($this->request->getPostGet('gestion_datos')),
+                'educomunicacion' => strtoupper($this->request->getPostGet('educomunicacion')),
+                'herramientas_compartir' => strtoupper($this->request->getPostGet('herramientas_compartir')),
+                'plataformas_web' => strtoupper($this->request->getPostGet('plataformas_web')),
+                'rea_licencias' => strtoupper($this->request->getPostGet('rea_licencias')),
+                'contenido_interactivo' => strtoupper($this->request->getPostGet('contenido_interactivo')),
+                'contenido_audiovisual' => strtoupper($this->request->getPostGet('contenido_audiovisual')),
+                'resultado_curso_2' => strtoupper($this->request->getPostGet('resultado_curso_2')),
             );
 
             $hay = $this->nap5ProcessResult->_getNap5Process($process['idnap5']);

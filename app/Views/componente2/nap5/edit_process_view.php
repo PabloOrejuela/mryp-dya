@@ -651,6 +651,199 @@
                         </div>
                     </div>
 
+                    <h5 class="mt-3"><?= esc ('CAPACITACIONES UNIVERSIDAD ANDINA (MÓDULO 3)'); ?></h5>
+                    <div class="row">
+                        <div class="col-md-5 mb-3">
+                            <label for="tic_tecno_digital">Inducción/ Infraestructura TIC y base tecnológica de la era digital:</label>
+                            <?php
+                                if ($datos != NULL) {
+                                    $dato['valor'] = $datos->tic_tecno_digital;
+                                    $dato['campo'] = 'tic_tecno_digital';
+                                    echo view('componente2/nap3/select-campo-view', $dato); 
+                                    
+                                }else{
+                                    $dato['valor'] = NULL;
+                                    $dato['campo'] = 'tic_tecno_digital';
+                                    echo view('componente2/nap3/select-campo-view', $dato); 
+                                }
+                            ?>
+                        </div>
+                        <div class="col-md-5 mb-3">
+                            <label for="competencia_digital_docente">La competencia digital docente, marcos de referencia:</label>
+                            <?php
+                                if ($datos != NULL) {
+                                    $dato['valor'] = $datos->competencia_digital_docente;
+                                    $dato['campo'] = 'competencia_digital_docente';
+                                    echo view('componente2/nap3/select-campo-view', $dato); 
+                                    
+                                }else{
+                                    $dato['valor'] = NULL;
+                                    $dato['campo'] = 'competencia_digital_docente';
+                                    echo view('componente2/nap3/select-campo-view', $dato); 
+                                }
+                            ?>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-5 mb-3">
+                            <label for="competencias_informacionales">Competencias informacionales: Herramientas de búsqueda en la web:</label>
+                            <?php
+                                if ($datos != NULL) {
+                                    $dato['valor'] = $datos->competencias_informacionales;
+                                    $dato['campo'] = 'competencias_informacionales';
+                                    echo view('componente2/nap3/select-campo-view', $dato); 
+                                    
+                                }else{
+                                    $dato['valor'] = NULL;
+                                    $dato['campo'] = 'competencias_informacionales';
+                                    echo view('componente2/nap3/select-campo-view', $dato); 
+                                }
+                            ?>
+                        </div>
+                        <div class="col-md-5 mb-3">
+                            <label for="gestion_datos">Gestión de datos, información y contenido digital:</label>
+                            <?php
+                                if ($datos != NULL) {
+                                    $dato['valor'] = $datos->gestion_datos;
+                                    $dato['campo'] = 'gestion_datos';
+                                    echo view('componente2/nap3/select-campo-view', $dato); 
+                                    
+                                }else{
+                                    $dato['valor'] = NULL;
+                                    $dato['campo'] = 'gestion_datos';
+                                    echo view('componente2/nap3/select-campo-view', $dato); 
+                                }
+                            ?>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-5 mb-3">
+                            <label for="educomunicacion">Educomunicación:</label>
+                            <?php
+                                if ($datos != NULL) {
+                                    $dato['valor'] = $datos->educomunicacion;
+                                    $dato['campo'] = 'educomunicacion';
+                                    echo view('componente2/nap3/select-campo-view', $dato); 
+                                    
+                                }else{
+                                    $dato['valor'] = NULL;
+                                    $dato['campo'] = 'educomunicacion';
+                                    echo view('componente2/nap3/select-campo-view', $dato); 
+                                }
+                            ?>
+                        </div>
+                        <div class="col-md-5 mb-3">
+                            <label for="herramientas_compartir">Herramientas para compartir y colaborar:</label>
+                            <?php
+                                if ($datos != NULL) {
+                                    $dato['valor'] = $datos->herramientas_compartir;
+                                    $dato['campo'] = 'herramientas_compartir';
+                                    echo view('componente2/nap3/select-campo-view', $dato); 
+                                    
+                                }else{
+                                    $dato['valor'] = NULL;
+                                    $dato['campo'] = 'herramientas_compartir';
+                                    echo view('componente2/nap3/select-campo-view', $dato); 
+                                }
+                            ?>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-5 mb-3">
+                            <label for="plataformas_web">Plataformas web que facilitan el trabajo colaborativo:</label>
+                            <?php
+                                if ($datos != NULL) {
+                                    $dato['valor'] = $datos->plataformas_web;
+                                    $dato['campo'] = 'plataformas_web';
+                                    echo view('componente2/nap3/select-campo-view', $dato); 
+                                    
+                                }else{
+                                    $dato['valor'] = NULL;
+                                    $dato['campo'] = 'plataformas_web';
+                                    echo view('componente2/nap3/select-campo-view', $dato); 
+                                }
+                            ?>
+                        </div>
+                        <div class="col-md-5 mb-3">
+                            <label for="rea_licencias">REA y licencias abiertas:</label>
+                            <?php
+                                if ($datos != NULL) {
+                                    $dato['valor'] = $datos->rea_licencias;
+                                    $dato['campo'] = 'rea_licencias';
+                                    echo view('componente2/nap3/select-campo-view', $dato); 
+                                    
+                                }else{
+                                    $dato['valor'] = NULL;
+                                    $dato['campo'] = 'rea_licencias';
+                                    echo view('componente2/nap3/select-campo-view', $dato); 
+                                }
+                            ?>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-5 mb-3">
+                            <label for="contenido_interactivo">Diseño y creación de contenidos interactivo:</label>
+                            <?php
+                                if ($datos != NULL) {
+                                    $dato['valor'] = $datos->contenido_interactivo;
+                                    $dato['campo'] = 'contenido_interactivo';
+                                    echo view('componente2/nap3/select-campo-view', $dato); 
+                                    
+                                }else{
+                                    $dato['valor'] = NULL;
+                                    $dato['campo'] = 'contenido_interactivo';
+                                    echo view('componente2/nap3/select-campo-view', $dato); 
+                                }
+                            ?>
+                        </div>
+                        <div class="col-md-5 mb-3">
+                            <label for="contenido_audiovisual">Diseño y creación de contenido audiovisual:</label>
+                            <?php
+                                if ($datos != NULL) {
+                                    $dato['valor'] = $datos->contenido_audiovisual;
+                                    $dato['campo'] = 'contenido_audiovisual';
+                                    echo view('componente2/nap3/select-campo-view', $dato); 
+                                    
+                                }else{
+                                    $dato['valor'] = NULL;
+                                    $dato['campo'] = 'contenido_audiovisual';
+                                    echo view('componente2/nap3/select-campo-view', $dato); 
+                                }
+                            ?>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-5 mb-3">
+                            <label for="resultado_curso_2">RESULTADO DEL CURSO (Mod 3):</label>
+                            <select 
+                                class="form-select" 
+                                aria-label="Default select example" 
+                                name="resultado_curso_2"
+                            >
+                            <?php
+                                if ($datos != NULL) {
+                                    if ($datos->resultado_curso_2 == 'APROBADO') {
+                                        echo '<option value="APROBADO" selected>APROBADO</option>
+                                                <option value="REPROBADO">REPROBADO</option>';
+                                    }elseif ($datos->resultado_curso_2 == 'REPROBADO') {
+                                        echo '<option value="APROBADO">APROBADO</option>
+                                                <option value="REPROBADO" selected>REPROBADO</option>';
+                                    }elseif ($datos->resultado_curso_2 == NULL || $datos->resultado_curso_2 == '0') {
+                                        echo '<option value="NULL" selected>Registrar dato</option>
+                                                <option value="APROBADO">APROBADO</option>
+                                                <option value="REPROBADO">REPROBADO</option>';
+                                    }
+                                }else{
+                                    echo '<option value="NULL" selected>Registrar dato</option>
+                                            <option value="APROBADO">APROBADO</option>
+                                            <option value="REPROBADO">REPROBADO</option>';
+                                }
+                                
+                            ?>
+                            </select>
+                        </div>
+                    </div>
+
                     <?= form_hidden('id', $idest);  ?>
                     <button type="submit" class="btn btn-info mb-3">Actualizar</button>  
                 </form>         
