@@ -160,6 +160,40 @@ class Nap7ProcessResult extends Model {
             $builder->set('observaciones', $datos['observaciones']);
         }
 
+        if ($datos['tic_tecno_digital'] != 'NULL') {
+            $builder->set('tic_tecno_digital', $datos['tic_tecno_digital']);
+        }
+        if ($datos['competencia_digital_docente'] != 'NULL') {
+            $builder->set('competencia_digital_docente', $datos['competencia_digital_docente']);
+        }
+        if ($datos['competencias_informacionales'] != 'NULL') {
+            $builder->set('competencias_informacionales', $datos['competencias_informacionales']);
+        }
+        if ($datos['gestion_datos'] != 'NULL') {
+            $builder->set('gestion_datos', $datos['gestion_datos']);
+        }
+        if ($datos['educomunicacion'] != 'NULL') {
+            $builder->set('educomunicacion', $datos['educomunicacion']);
+        }
+        if ($datos['herramientas_compartir'] != 'NULL') {
+            $builder->set('herramientas_compartir', $datos['herramientas_compartir']);
+        }
+        if ($datos['plataformas_web'] != 'NULL') {
+            $builder->set('plataformas_web', $datos['plataformas_web']);
+        }
+        if ($datos['rea_licencias'] != 'NULL') {
+            $builder->set('rea_licencias', $datos['rea_licencias']);
+        }
+        if ($datos['contenido_interactivo'] != 'NULL') {
+            $builder->set('contenido_interactivo', $datos['contenido_interactivo']);
+        }
+        if ($datos['contenido_audiovisual'] != 'NULL') {
+            $builder->set('contenido_audiovisual', $datos['contenido_audiovisual']);
+        }
+        if ($datos['resultado_curso_2'] != 'NULL') {
+            $builder->set('resultado_curso_2', $datos['resultado_curso_2']);
+        }
+
         $builder->where('idnap7', $datos['idnap7']);
         $builder->update();
     }
@@ -268,6 +302,40 @@ class Nap7ProcessResult extends Model {
 
         if ($datos['observaciones'] != 'NULL') {
             $builder->set('observaciones', $datos['observaciones']);
+        }
+
+        if ($datos['tic_tecno_digital'] != 'NULL') {
+            $builder->set('tic_tecno_digital', $datos['tic_tecno_digital']);
+        }
+        if ($datos['competencia_digital_docente'] != 'NULL') {
+            $builder->set('competencia_digital_docente', $datos['competencia_digital_docente']);
+        }
+        if ($datos['competencias_informacionales'] != 'NULL') {
+            $builder->set('competencias_informacionales', $datos['competencias_informacionales']);
+        }
+        if ($datos['gestion_datos'] != 'NULL') {
+            $builder->set('gestion_datos', $datos['gestion_datos']);
+        }
+        if ($datos['educomunicacion'] != 'NULL') {
+            $builder->set('educomunicacion', $datos['educomunicacion']);
+        }
+        if ($datos['herramientas_compartir'] != 'NULL') {
+            $builder->set('herramientas_compartir', $datos['herramientas_compartir']);
+        }
+        if ($datos['plataformas_web'] != 'NULL') {
+            $builder->set('plataformas_web', $datos['plataformas_web']);
+        }
+        if ($datos['rea_licencias'] != 'NULL') {
+            $builder->set('rea_licencias', $datos['rea_licencias']);
+        }
+        if ($datos['contenido_interactivo'] != 'NULL') {
+            $builder->set('contenido_interactivo', $datos['contenido_interactivo']);
+        }
+        if ($datos['contenido_audiovisual'] != 'NULL') {
+            $builder->set('contenido_audiovisual', $datos['contenido_audiovisual']);
+        }
+        if ($datos['resultado_curso_2'] != 'NULL') {
+            $builder->set('resultado_curso_2', $datos['resultado_curso_2']);
         }
         
         $builder->set('idnap7', $datos['idnap7']);
