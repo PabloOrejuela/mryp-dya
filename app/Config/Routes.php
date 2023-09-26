@@ -172,6 +172,7 @@ $routes->post('prod4-atenciones-update', 'Prod4::prod4_atenciones_update');
 $routes->get('prod4-reg-resultados/(:num)', 'Prod4::prod4_reg_resultados/$1');
 $routes->post('prod4-resultados-update', 'Prod4::prod4_resultados_update');
 $routes->get('prod4-reportes-form', 'ReportesProd4::prod4_reportes_form');
+$routes->get('prod4-descargar-registros', 'Prod4::prod4_descargar_registros');
 
 
 //REPORTES ESTÁTICOS

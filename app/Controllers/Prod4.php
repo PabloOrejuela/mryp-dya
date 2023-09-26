@@ -3,6 +3,9 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx as XlsxWriter;
+use PhpOffice\PhpSpreadsheet\Reader\Xlsx as XlsxReader;
 
 class Prod4 extends BaseController {
 
@@ -694,6 +697,128 @@ class Prod4 extends BaseController {
 
             $this->logout();
         }
+    }
+
+    public function prod4_descargar_registros(){
+
+        $registros = $this->prod4Model->_getAllRegistrosExcel();
+        //echo '<pre>'.var_export($registros, true).'</pre>';exit;
+        $fila = 2;
+
+        //Creo la hoja
+        $phpExcel = new Spreadsheet();
+        $phpExcel
+            ->getProperties()
+            ->setCreator("MYRP")
+            ->setLastModifiedBy('Pablo Orejuela') // última vez modificado por
+            ->setTitle('Prod 4 - Registros')
+            ->setSubject('Reportes MYRP')
+            ->setDescription('Reporte con los registros del Producto 4')
+            ->setKeywords('etiquetas o palabras clave separadas por espacios')
+            ->setCategory('Registros');
+
+        $nombreDelDocumento = "Prod 4 - Registros.xlsx";
+
+        //Selecciono la pestaña
+        $hoja = $phpExcel->getActiveSheet();
+
+        $styleCabecera = [
+            'font' => [
+                'bold' => true,
+            ],
+            'alignment' => [
+                'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
+            ]
+        ];
+
+        $styleFila = [
+            'font' => [
+                'bold' => false,
+            ],
+            'alignment' => [
+                'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT,
+            ]
+        ];
+
+        $phpExcel->getActiveSheet()->getStyle('A1:N1')->applyFromArray($styleCabecera);
+
+        //Edito la info que va a ir en el archivo excel
+        $hoja->setCellValue('A1', "CENTRO");
+        $hoja->setCellValue('B1', "CIUDAD");
+        $hoja->setCellValue('C1', "PROVINCIA");
+        $hoja->setCellValue('D1', "COHORTE");
+        $hoja->setCellValue('E1', "NOMBRES");
+        $hoja->setCellValue('F1', "DOCUMENTO");
+        $hoja->setCellValue('G1', "NACIONALIDAD");
+        $hoja->setCellValue('H1', "FECHA NACIMIENTO");
+        $hoja->setCellValue('I1', "EDAD");
+        $hoja->setCellValue('J1', "GÉNERO");
+        $hoja->setCellValue('K1', "DISCAPACIDAD");
+        $hoja->setCellValue('L1', "TIPO DISCAPACIDAD");
+        $hoja->setCellValue('M1', "BARRIO");
+        $hoja->setCellValue('N1', "TELÉFONO");
+        $hoja->setCellValue('O1', "EMAIL");
+        $hoja->setCellValue('P1', "NUM HIJOS");
+        $hoja->setCellValue('Q1', "EDAD HIJO 1");
+        $hoja->setCellValue('R1', "EDAD HIJO 2");
+        $hoja->setCellValue('S1', "EDAD HIJO 3");
+        $hoja->setCellValue('T1', "ESTUDIA");
+        $hoja->setCellValue('U1', "TIEMPO SIN ESTUDIAR");
+        $hoja->setCellValue('V1', "INSTITUCIÓN");
+        $hoja->setCellValue('W1', "AÑO EGB");
+        $hoja->setCellValue('X1', "EMBARAZADA");
+        $hoja->setCellValue('Y1', "SEMANAS");
+        $hoja->setCellValue('Z1', "CONTROLES");
+
+
+        foreach ($registros as $key => $value) {
+            $phpExcel->getActiveSheet()->getStyle('A'.$fila.':Z'.$fila)->applyFromArray($styleFila);
+            $hoja->setCellValue('A'.$fila, $value->ce);
+            $hoja->setCellValue('B'.$fila, $value->ciudad);
+            $hoja->setCellValue('C'.$fila, $value->provincia);
+            $hoja->setCellValue('D'.$fila, $value->cohorte);
+            $hoja->setCellValue('E'.$fila, $value->nombres);
+            $hoja->setCellValue('F'.$fila, $value->documento);
+            $hoja->setCellValue('G'.$fila, $value->nacionalidad);
+            $hoja->setCellValue('H'.$fila, $value->fecha_nac);
+            $hoja->setCellValue('I'.$fila, $value->edad);
+            $hoja->setCellValue('J'.$fila, $value->genero);
+            $hoja->setCellValue('K'.$fila, $value->discapacidad);
+            $hoja->setCellValue('L'.$fila, $value->tipo_discapacidad);
+            $hoja->setCellValue('M'.$fila, $value->barrio);
+            $hoja->setCellValue('N'.$fila, $value->contacto_telf);
+            $hoja->setCellValue('O'.$fila, $value->email);
+            $hoja->setCellValue('P'.$fila, $value->num_hijos);
+            $hoja->setCellValue('Q'.$fila, $value->edad_hijo_1);
+            $hoja->setCellValue('R'.$fila, $value->edad_hijo_2);
+            $hoja->setCellValue('S'.$fila, $value->edad_hijo_3);
+            $hoja->setCellValue('T'.$fila, $value->estudia);
+            $hoja->setCellValue('U'.$fila, $value->tiempo_sin_estudiar);
+            $hoja->setCellValue('V'.$fila, $value->institucion);
+            $hoja->setCellValue('W'.$fila, $value->anio_egb);
+            $hoja->setCellValue('X'.$fila, $value->embarazada);
+            $hoja->setCellValue('Y'.$fila, $value->semanas);
+            $hoja->setCellValue('Z'.$fila, $value->controles);
+
+
+            $fila++;
+        }
+        //Creo el writter y guardo la hoja
+            
+        $writter = new XlsxWriter($phpExcel, 'Xlsx');
+            
+        //Cabeceras para descarga
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        header('Content-Disposition: attachment;filename="' . $nombreDelDocumento . '"');
+        header('Cache-Control: max-age=0');
+        
+        $r = $writter->save('php://output');exit;
+        if ($r) {
+            return redirect()->to('cargar_info_view');
+        }else{
+            $error = 'Hubo un error u no se pudo descargar';
+            return redirect()->to('cargar_info_view');
+        }        
     }
 
     public function logout(){

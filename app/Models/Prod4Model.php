@@ -86,4 +86,30 @@ class Prod4Model extends Model {
         //echo $this->db->getLastQuery();
         return $result;
     }
+
+    public function _getAllRegistrosExcel() {
+        $result = NULL;
+        $builder = $this->db->table($this->table);
+        $builder->select(
+            $this->table.'.id as id, cohorte,ciudad,provincia,
+            edad,fecha_nac,edad,discapacidad,tipo_discapacidad,barrio,num_hijos,edad_hijo_1,edad_hijo_2,edad_hijo_3,
+            centro_prod_4.centro as ce,ciudad,'.$this->table.'.nombres as nombres,estudia,tiempo_sin_estudiar,institucion,anio_egb,
+            documento,nacionalidad,genero,contacto_telf,email,embarazada,semanas,controles'
+        );
+        $builder->join('centro_prod_4', 'centro_prod_4.id = '.$this->table.'.idcentro4');
+        $builder->join('ciudades', 'ciudades.idciudades = centro_prod_4.idciudades');
+        $builder->join('provincias', 'provincias.idprovincias = ciudades.idprovincias');
+        //$builder->join('anio_lectivo', 'anio_lectivo.id = producto_1.anio_lectivo');
+        $query = $builder->get();
+        if ($query->getResult() != null) {
+            foreach ($query->getResult() as $row) {
+                if ($row->id != NULL && $row != '') {
+                    $result[] = $row;
+                }
+            }
+        }
+        //echo $this->db->getLastQuery();
+        return $result;
+    }
+
 }

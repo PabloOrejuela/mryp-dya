@@ -20,7 +20,7 @@
                                             <a href="'.site_url().'prod_1_process" class="btn btn-info mb-2">Ver y editar variables de Proceso</a>
                                             <a href="'.site_url().'prod-1-asistencia" class="btn btn-info mb-2">Registrar asistencia</a>';
                                             if ($this->session->descargar_info == 1) {
-                                                echo'<a href="'.site_url().'prod-1-descargar-registros" class="btn btn-info mb-2">Descargar registros (.xlsx)</a>';
+                                                echo'<a href="'.site_url().'prod-1-descargar-registros" class="btn btn-info mb-2">Descargar registros P1 (.xlsx)</a>';
                                             }
                             echo'   </div>
                                 </div>';
@@ -49,7 +49,7 @@
                                             }
 
                                             if ($this->session->descargar_info == 1) {
-                                                echo'<a href="'.site_url().'prod-3-descargar-registros" class="btn btn-info mb-2">Descargar registros (.xlsx)</a>';
+                                                echo'<a href="'.site_url().'prod-3-descargar-registros" class="btn btn-info mb-2">Descargar registros P3 (.xlsx)</a>';
                                             }
                                 
                             echo    '</div>
@@ -62,8 +62,11 @@
                                     <div class="card-body" >
                                         <h5 class="card-title">Componente 4</h5>
                                             <p class="card-text">Apoyo escolar a adolescentes madres y embarazadas</p>
-                                            <a href="'.site_url().'prod_4" class="btn btn-info mb-2">Ver y editar información de registro y procesos</a>
-                                    </div>
+                                            <a href="'.site_url().'prod_4" class="btn btn-info mb-2">Ver y editar información de registro y procesos</a>';
+                                            if ($this->session->descargar_info == 1) {
+                                                echo'<a href="'.site_url().'prod4-descargar-registros" class="btn btn-info mb-2">Descargar registros P4 (.xlsx)</a>';
+                                            }
+                            echo        '</div>
                                 </div>';
                         }
 

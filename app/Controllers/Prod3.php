@@ -881,11 +881,11 @@ class Prod3 extends BaseController {
         $phpExcel = new Spreadsheet();
         $phpExcel
             ->getProperties()
-            ->setCreator("Aquí va el creador, como cadena")
-            ->setLastModifiedBy('Parzibyte') // última vez modificado por
-            ->setTitle('Prod 1 - Registros')
+            ->setCreator("MYRP")
+            ->setLastModifiedBy('Pablo Orejuela') // última vez modificado por
+            ->setTitle('Prod 3 - Registros')
             ->setSubject('Reportes MYRP')
-            ->setDescription('Reporte con los registros del Producto')
+            ->setDescription('Reporte con los registros del Producto 3')
             ->setKeywords('etiquetas o palabras clave separadas por espacios')
             ->setCategory('Registros');
 
