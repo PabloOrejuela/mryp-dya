@@ -7,11 +7,16 @@
 </style>
 <main class="contenedor px-2">
     <div class="container-fluid px-0">
-        <h3 class="mt-4"><?= esc($title); ?></h3>
-                    
+        <h3 class="mt-4"><?= esc($title); ?></h3>            
         <div class="card mb-4">
             <div class="card-header">
                 <?php echo '<span id="titulo-componente">Componente 4 - Click en el NOMBRE para ver y editar datos del registro</span>'; ?>
+            </div>
+            <div class="card-header">
+                <a type="button" id="btn-register" href="<?= site_url().'prod-4-create/'; ?>" class="edit">
+                    <img src="<?= site_url().'public/images/new.png'; ?>" >
+                    <span id="title-link">Crear un nuevo registro prod 4</span>
+                </a>
             </div>
             <div class="card-body"> 
                 <table class="table table-responsive table-stripped table-hovered" id="datatablesSimple">

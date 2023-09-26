@@ -40,8 +40,9 @@ class Prod4 extends BaseController {
             $data['datos'] = $this->prod4Model->find($id);
             $data['cursos'] = $this->cursoModel->findAll();
             $data['centros'] = $this->centroEducativoModel->_getCentrosList();
+            $data['cohortes'] = $this->cohorteModel->findAll();
 
-            //echo '<pre>'.var_export($data['datos'], true).'</pre>';exit;
+            //echo '<pre>'.var_export($data['cohortes'], true).'</pre>';exit;
 
             $data['title']='MYRP - DYA';
             $data['main_content']='componente4/prod4_edit_view';
@@ -69,6 +70,7 @@ class Prod4 extends BaseController {
                 'documento' => strtoupper($this->request->getPostGet('documento')),
                 'nacionalidad' => strtoupper($this->request->getPostGet('nacionalidad')),                
                 'genero' => strtoupper($this->request->getPostGet('genero')),
+                'cohorte' => strtoupper($this->request->getPostGet('cohorte')),
                 'fecha_nac' => strtoupper($this->request->getPostGet('fecha_nac')),
                 'edad' => strtoupper($this->request->getPostGet('edad')),
                 'discapacidad' => strtoupper($this->request->getPostGet('discapacidad')),
@@ -109,15 +111,69 @@ class Prod4 extends BaseController {
 
         if ($data['is_logged'] == 1 && $data['componente_4'] == 1) {
             //$this->session->set('form_error', "Los campos con asterisco son obligatorios");
-            $data['centros'] = $this->centroProd4Model->_getAmiesUsuarioProd3($this->session->idusuario);
+            $data['centros'] = $this->centroProd4Model->findAll();
             $data['cursos'] = $this->cursoModel->findAll();
-            $data['mensaje'] = $this->session->form_error;
+            $data['cohortes'] = $this->cohorteModel->findAll();
             
             //echo '<pre>'.var_export($data['centros'], true).'</pre>';exit;
 
             $data['title']='MYRP - DYA';
-            $data['main_content']='componente3/prod3_create_view';
+            $data['main_content']='componente4/prod4_create_view';
             return view('includes/template', $data);
+        }else{
+
+            $this->logout();
+        }
+    }
+
+    public function prod_4_new() {
+        $data['idrol'] = $this->session->idrol;
+        $data['id'] = $this->session->idusuario;
+        $data['is_logged'] = $this->usuarioModel->_getLogStatus($data['id']);
+        $data['nombre'] = $this->session->nombre;
+        $data['componente_4'] = $this->session->componente_4;
+
+        if ($data['is_logged'] == 1 && $data['componente_4'] == 1) {
+
+            $producto_4 = array(
+                'idcentro4' => $this->request->getPostGet('idcentro4'),
+                'nombres' => strtoupper($this->request->getPostGet('nombres')),
+                'documento' => strtoupper($this->request->getPostGet('documento')),
+                'nacionalidad' => strtoupper($this->request->getPostGet('nacionalidad')),                
+                'genero' => strtoupper($this->request->getPostGet('genero')),
+                'cohorte' => strtoupper($this->request->getPostGet('cohorte')),
+                'fecha_nac' => strtoupper($this->request->getPostGet('fecha_nac')),
+                'edad' => strtoupper($this->request->getPostGet('edad')),
+                'discapacidad' => strtoupper($this->request->getPostGet('discapacidad')),
+                'tipo_discapacidad' => strtoupper($this->request->getPostGet('tipo_discapacidad')),
+                'barrio' => $this->request->getPostGet('barrio'),
+                'contacto_telf' => $this->request->getPostGet('contacto_telf'),
+                'email' => $this->request->getPostGet('email'),
+                'estudia' => strtoupper($this->request->getPostGet('estudia')),
+                'tiempo_sin_estudiar' => strtoupper($this->request->getPostGet('tiempo_sin_estudiar')),
+                'anio_egb' => strtoupper($this->request->getPostGet('anio_egb')),
+                'institucion' => strtoupper($this->request->getPostGet('institucion')),
+
+                'num_hijos' => strtoupper($this->request->getPostGet('num_hijos')),
+                'edad_hijo_1' => strtoupper($this->request->getPostGet('edad_hijo_1')),
+                'edad_hijo_2' => strtoupper($this->request->getPostGet('edad_hijo_2')),
+                'edad_hijo_3' => strtoupper($this->request->getPostGet('edad_hijo_3')),
+                'embarazada' => strtoupper($this->request->getPostGet('embarazada')),
+                'semanas' => strtoupper($this->request->getPostGet('semanas')),
+                'controles' => strtoupper($this->request->getPostGet('controles')),
+            );
+
+            //echo '<pre>'.var_export($idcentro4, true).'</pre>';exit;
+            $this->validation->setRuleGroup('prod4Create');
+            if (!$this->validation->withRequest($this->request)->run()) {
+                //Depuración
+                return redirect()->back()->withInput()->with('errors', $this->validation->getErrors());
+            }else{ 
+
+                $this->prod4Model->insert($producto_4);
+                return redirect()->to('prod_4');
+            }
+
         }else{
 
             $this->logout();
@@ -137,7 +193,7 @@ class Prod4 extends BaseController {
 
             //echo '<pre>'.var_export($data['componente_4'], true).'</pre>';exit;
             $data['title']='MYRP - DYA';
-            $data['main_content']='componente4/prod4_process_view';
+            $data['main_content']='componente4/prod4_process_view2';
             return view('includes/template', $data);
         }else{
 

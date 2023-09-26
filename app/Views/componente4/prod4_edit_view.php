@@ -94,6 +94,24 @@
                     </div>
                     <div class="row">
                         <div class="col-md-4 mb-3">
+                            <label for="cohorte">Cohorte:</label>
+                            <select name="cohorte" class="form-control" id="cohorte" aria-label="cohorte">
+                                <option value="NULL">--Seleccione una opción--</option>
+                                <?php
+                                    foreach ($cohortes as $key => $value) {
+                                        if ($datos->cohorte == $value->id) {
+                                            echo '<option value="'.$value->id.'" selected>'.$value->cohorte.'</option>';
+                                        }else {
+                                            echo '<option value="'.$value->id.'">'.$value->cohorte.'</option>';
+                                        }
+                                    }
+                                    
+                                ?>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
                             <label for="fecha_nac">Fecha de nacimiento:</label>
                             <input type="date" id="fecha_nac" name="fecha_nac" value="<?= date('Y-m-d', strtotime($datos->fecha_nac)); ?>" class="form-control" placeholder="fecha_nac" aria-label="fecha_nac">
                         </div>

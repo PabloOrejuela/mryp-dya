@@ -44,8 +44,12 @@
                     >
                     <option value="NULL" selected>Registrar dato</option>
                     <?php
-                        foreach ($centros as $key => $ce) {
-                            echo '<option value="'.$ce->amie.'">'.$ce->amie.' - '.$ce->nombre.'</option>';
+                        if (isset($centros) && $centros != NULL) {
+                            foreach ($centros as $key => $ce) {
+                                echo '<option value="'.$ce->amie.'">'.$ce->amie.' - '.$ce->nombre.'</option>';
+                            }
+                        }else{
+                            echo '<option value="NULL">El usuario no tiene Centros educativos relacionados</option>';
                         }
                         
                     ?>

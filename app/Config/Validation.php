@@ -8,8 +8,8 @@ use CodeIgniter\Validation\StrictRules\FileRules;
 use CodeIgniter\Validation\StrictRules\FormatRules;
 use CodeIgniter\Validation\StrictRules\Rules;
 
-class Validation extends BaseConfig
-{
+class Validation extends BaseConfig {
+
     // --------------------------------------------------------------------
     // Setup
     // --------------------------------------------------------------------
@@ -75,6 +75,24 @@ class Validation extends BaseConfig
         'tipo_prueba' => [
             'required' => 'Es obligatorio elegir un tipo de prueba',
             'greater_than' => 'Es obligatorio elegir un tipo de prueba',
+        ]
+    ];
+
+    public $prod4Create= [
+        'nombres' => 'required',
+        'idcentro4' => 'required',
+        'cohorte' => 'required',
+    ];
+
+    public $prod4Create_errors = [
+        'nombres' => [
+            'required' => 'El campo NOMBRES es obligatorio',
+        ],
+        'idcentro4' => [
+            'required' => 'El campo CENTRO es obligatorio',
+        ],
+        'cohorte' => [
+            'required' => 'El campo COHORTE es obligatorio',
         ]
     ];
 }

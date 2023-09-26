@@ -57,7 +57,7 @@ use App\Models\Prod4AtencionesModel;
 use App\Models\Prod4ResultadosModel;
 use App\Models\CentroProd4Model;
 use App\Models\Prod4OyenteModel;
-
+use App\Models\CohorteModel;
 
 
 /**
@@ -88,7 +88,7 @@ abstract class BaseController extends Controller {
      *
      * @var array
      */
-    protected $helpers = ['form', 'url', 'html'];
+    protected $helpers = ['form', 'url', 'html',];
 
     /**
      * Be sure to declare properties for any property fetch you initialized.
@@ -155,6 +155,7 @@ abstract class BaseController extends Controller {
         $this->prod4ResultadosModel = new Prod4ResultadosModel($this->db);
         $this->centroProd4Model = new CentroProd4Model($this->db);
         $this->prod4OyenteModel = new Prod4OyenteModel($this->db);
+        $this->cohorteModel = new CohorteModel($this->db);
 
         // E.g.: $this->session = \Config\Services::session();
         $this->session = \Config\Services::session();
