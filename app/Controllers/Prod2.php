@@ -824,7 +824,7 @@ class Prod2 extends BaseController {
             }else{
                 $data['nap7'] = $this->nap7Model->_getRegistrosNap7();
             }
-            //echo '<pre>'.var_export($data['nap2'], true).'</pre>';exit;
+            //echo '<pre>'.var_export($data['nap7'], true).'</pre>';exit;
             $data['title']='MYRP - NAP7 ';
             $data['main_content']='componente2/nap7/nap7_process_view';
             return view('includes/template', $data);

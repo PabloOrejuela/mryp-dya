@@ -27,6 +27,34 @@ class Inicio extends BaseController {
         }
     }
 
+    public function corrije_regimen_centro(){
+        $costa = array(
+            7,8,9,12,13,20,23,24
+        );
+
+        $sierra = array(
+            1,2,3,4,5,6,10,11,14,15,16,17,18,19,21,22
+        );
+
+        $centros = $this->centroEducativoModel->_getCentroRegionNull();
+        if (isset($centros) && $centros != NULL) {
+            foreach ($centros as $key => $value) {
+                if (in_array($value->idprovincias, $costa)) {
+                    //echo $value->idprovincias."COSTA<br>";
+                    //Grabo el regimen COSTA
+                    $this->centroEducativoModel->_updateRegimen($value, "COSTA");
+                }else if(in_array($value->idprovincias, $sierra)){
+                    //echo $value->idprovincias.'SIERRA <br>';
+                    //Grabo el regimen SIERRA
+                    $this->centroEducativoModel->_updateRegimen($value, "SIERRA");
+                }
+            }
+        }
+        
+        echo 'Actualizados los regimen';
+        //echo '<pre>'.var_export($centros, true).'</pre>';  
+    }
+
     function ciudades_select(){
         $provincia = $this->request->getPostGet('idprovincia');
         $data['ciudades'] = $this->ciudadesModel->_obtenCiudades($provincia);
@@ -70,44 +98,39 @@ class Inicio extends BaseController {
                         'ip' => 0
                     ];
                     $this->usuarioModel->update($usuario->id, $user);
-
-                    // $data['id'] = $usuario->id;
-                    // $data['mensaje'] = 'Ya está logueado en otro PC. por favor cierre la otra sesión y vuelva a intentarlo';
-                    // $this->session->setFlashdata('mensaje', $data);
-                    //$this->session->setFlashdata('id', $usuario->id);
-                    return redirect()->to('/');
-                }else{
-                    $sessiondata = [
-                        //'is_logged' => 1,
-                        'idusuario' => $usuario->id,
-                        'nombre' => $usuario->nombre,
-                        'idrol' => $usuario->idrol,
-                        'rol' => $usuario->rol,
-                        'centro_educativo' => $usuario->centro_educativo,
-                        'editar' => $usuario->editar,
-                        'cargar_info' => $usuario->cargar_info,
-                        'reportes' => $usuario->reportes,
-                        'reportes_dinamico' => $usuario->reportes_dinamico,
-                        'ver_info' => $usuario->ver_info,
-                        'descargar_info' => $usuario->descargar_info,
-                        'componente_1' => $usuario->componente_1,
-                        'componente_2' => $usuario->componente_2,
-                        'componente_3' => $usuario->componente_3,
-                        'prod3_biblioteca' => $usuario->prod3_biblioteca,
-                        'componente_4' => $usuario->componente_4,
-                    ];
-    
-                    $user = [
-                        'id' => $usuario->id,
-                        'is_logged' => 1,
-                        'ip' => $ip
-                    ];
-                    
-                    $this->usuarioModel->update($usuario->id, $user);
-                    $this->session->set($sessiondata);
-    
-                    return redirect()->to('inicio');
                 }
+
+                $sessiondata = [
+                    //'is_logged' => 1,
+                    'idusuario' => $usuario->id,
+                    'nombre' => $usuario->nombre,
+                    'idrol' => $usuario->idrol,
+                    'rol' => $usuario->rol,
+                    'centro_educativo' => $usuario->centro_educativo,
+                    'editar' => $usuario->editar,
+                    'cargar_info' => $usuario->cargar_info,
+                    'reportes' => $usuario->reportes,
+                    'reportes_dinamico' => $usuario->reportes_dinamico,
+                    'ver_info' => $usuario->ver_info,
+                    'descargar_info' => $usuario->descargar_info,
+                    'componente_1' => $usuario->componente_1,
+                    'componente_2' => $usuario->componente_2,
+                    'componente_3' => $usuario->componente_3,
+                    'prod3_biblioteca' => $usuario->prod3_biblioteca,
+                    'componente_4' => $usuario->componente_4,
+                ];
+        
+                $user = [
+                    'id' => $usuario->id,
+                    'is_logged' => 1,
+                    'ip' => $ip
+                ];
+                
+                $this->usuarioModel->update($usuario->id, $user);
+                $this->session->set($sessiondata);
+        
+                return redirect()->to('inicio');
+
             }else{
                 $this->logout();
                 return redirect()->to('/');

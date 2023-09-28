@@ -36,6 +36,7 @@ $routes->get('inicio', 'Inicio::index');
 $routes->post('reportes/ciudades_select', 'Reportes::ciudades_select');
 $routes->post('reportes/centros_ciudades_select', 'Reportes::centros_ciudades_select');
 $routes->get('sessions-close/(:num)', 'Inicio::cerrar_sesiones/$1');
+$routes->get('corrije-regimen', 'Inicio::corrije_regimen_centro');
 
 $routes->get('cargar_info_view', 'CargarInformacion::index');
 $routes->get('cargar_info_extra_view', 'CargarInformacion::carga_extra');
