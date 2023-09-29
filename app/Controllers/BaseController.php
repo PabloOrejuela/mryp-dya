@@ -25,6 +25,7 @@ use App\Models\Nap6Model;
 use App\Models\Nap6ProcessResult;
 use App\Models\Nap7Model;
 use App\Models\Nap7ProcessResult;
+use App\Models\Nap7ProcessResultSierra;
 use App\Models\CiudadesModel;
 use App\Models\ParroquiasModel;
 use App\Models\Prod1Model;
@@ -123,6 +124,7 @@ abstract class BaseController extends Controller {
         $this->nap6ProcessResult  = new Nap6ProcessResult($this->db);
         $this->nap7Model = new Nap7Model($this->db);
         $this->nap7ProcessResult  = new Nap7ProcessResult($this->db);
+        $this->nap7ProcessResultSierra  = new Nap7ProcessResultSierra($this->db);
         $this->ciudadesModel = new CiudadesModel($this->db);
         $this->parroquiasModel = new ParroquiasModel($this->db);
         $this->prod1Model = new Prod1Model($this->db);

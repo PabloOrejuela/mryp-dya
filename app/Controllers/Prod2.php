@@ -835,7 +835,7 @@ class Prod2 extends BaseController {
         }
     }
 
-    public function nap7_reg_procesos_form($id) {
+    public function nap7_reg_procesos_form($id, $regimen) {
         $data['idrol'] = $this->session->idrol;
         $data['id'] = $this->session->idusuario;
         $data['is_logged'] = $this->usuarioModel->_getLogStatus($data['id']);
@@ -844,13 +844,21 @@ class Prod2 extends BaseController {
         if ($data['is_logged'] == 1) {
             
             $data['id'] = $id;
-            $data['datos'] = $this->nap7ProcessResult->_getNap7Process($id);
+            
             $data['docente'] = $this->nap7Model->find($id);
             $data['cursos'] = $this->cursoModel->findAll();
 
+            //echo '<pre>'.var_export($regimen, true).'</pre>';exit;
 
             $data['title']='MYRP - NAP7 ';
-            $data['main_content']='componente2/nap7/edit_process_view';
+            if ($regimen == 'COSTA') {
+                $data['datos'] = $this->nap7ProcessResult->_getNap7Process($id);
+                $data['main_content']='componente2/nap7/edit_process_view';
+            }else if($regimen == 'SIERRA'){
+                $data['datos'] = $this->nap7ProcessResultSierra->_getNap7Process($id);
+                $data['main_content']='componente2/nap7/edit_process_sierra_view';
+            }
+            
             return view('includes/template', $data);
         }else{
 
@@ -925,6 +933,75 @@ class Prod2 extends BaseController {
             return redirect()->to('/');
         }
     }
+
+    public function nap7_process_sierra_update() {
+        $data['idrol'] = $this->session->idrol;
+        $data['id'] = $this->session->idusuario;
+        $data['is_logged'] = $this->usuarioModel->_getLogStatus($data['id']);
+        $data['nombre'] = $this->session->nombre;
+
+        if ($data['is_logged'] == 1) {
+
+            $process = array(
+                'idnap7' => $this->request->getPostGet('id'),
+                'lineamiento_rubrica' => strtoupper($this->request->getPostGet('lineamiento_rubrica')),
+                'estrategia_didactica' => strtoupper($this->request->getPostGet('estrategia_didactica')),
+                'curriculo_competencias' => strtoupper($this->request->getPostGet('curriculo_competencias')),
+                'innova_aula' => strtoupper($this->request->getPostGet('innova_aula')),
+                'comple_inova_aula' => strtoupper($this->request->getPostGet('comple_inova_aula')),
+                'tec_instrument_eval' => strtoupper($this->request->getPostGet('tec_instrument_eval')),
+                'pract_instr_eval' => strtoupper($this->request->getPostGet('pract_instr_eval')),
+                'valor_arte_educa' => strtoupper($this->request->getPostGet('valor_arte_educa')),
+                'disciplina_positiva' => strtoupper($this->request->getPostGet('disciplina_positiva')),
+                'retro_lineamiento_instr' => strtoupper($this->request->getPostGet('retro_lineamiento_instr')),
+                'eval_prom_final' => strtoupper($this->request->getPostGet('eval_prom_final')),
+                'infor_apren_cierre' => strtoupper($this->request->getPostGet('infor_apren_cierre')),
+                'tecnico_virtual' => strtoupper($this->request->getPostGet('tecnico_virtual')),
+        
+                'induccion' => strtoupper($this->request->getPostGet('induccion')),
+                'curriculo_mate' => strtoupper($this->request->getPostGet('curriculo_mate')),
+                'congre_curriculo_mate' => strtoupper($this->request->getPostGet('congre_curriculo_mate')),
+                'crea_edu_mate_vida' => strtoupper($this->request->getPostGet('crea_edu_mate_vida')),
+                'habil_mate_trad_actual' => strtoupper($this->request->getPostGet('habil_mate_trad_actual')),
+                'habil_mate_nivel_sup' => strtoupper($this->request->getPostGet('habil_mate_nivel_sup')),
+                'aprendizaje_activo' => strtoupper($this->request->getPostGet('aprendizaje_activo')),
+                'metodologia_activa' => strtoupper($this->request->getPostGet('metodologia_activa')),
+                'didactica_modela' => strtoupper($this->request->getPostGet('didactica_modela')),
+                'trabajo_final' => strtoupper($this->request->getPostGet('trabajo_final')),
+                'resultado_curso' => strtoupper($this->request->getPostGet('resultado_curso')),
+                'observaciones' => strtoupper($this->request->getPostGet('observaciones')),
+
+                'tic_tecno_digital' => strtoupper($this->request->getPostGet('tic_tecno_digital')),
+                'competencia_digital_docente' => strtoupper($this->request->getPostGet('competencia_digital_docente')),
+                'competencias_informacionales' => strtoupper($this->request->getPostGet('competencias_informacionales')),
+                'gestion_datos' => strtoupper($this->request->getPostGet('gestion_datos')),
+                'educomunicacion' => strtoupper($this->request->getPostGet('educomunicacion')),
+                'herramientas_compartir' => strtoupper($this->request->getPostGet('herramientas_compartir')),
+                'plataformas_web' => strtoupper($this->request->getPostGet('plataformas_web')),
+                'rea_licencias' => strtoupper($this->request->getPostGet('rea_licencias')),
+                'contenido_interactivo' => strtoupper($this->request->getPostGet('contenido_interactivo')),
+                'contenido_audiovisual' => strtoupper($this->request->getPostGet('contenido_audiovisual')),
+                'resultado_curso_2' => strtoupper($this->request->getPostGet('resultado_curso_2')),
+            );
+
+            $hay = $this->nap7ProcessResultSierra->_getNap7Process($process['idnap7']);
+            //echo '<pre>'.var_export($hay, true).'</pre>';exit;
+            if ($hay) {
+                //Actualizo
+                $this->nap7ProcessResultSierra->_update($process);
+            }else{
+                //Grabo
+                $this->nap7ProcessResultSierra->_save($process);
+            }
+
+            return redirect()->to('prod2-nap7-menu');
+        }else{
+
+            $this->logout();
+            return redirect()->to('/');
+        }
+    }
+
 
     public function corrijeCedulas() {
         $data['idrol'] = $this->session->idrol;

@@ -147,8 +147,9 @@ $routes->get('prod2-nap6-delete/(:num)', 'Prod2::prod2_nap6_delete/$1');
 
 //NAP7
 $routes->get('prod2-nap7-menu', 'Prod2::nap7_procesos_grid');
-$routes->get('nap7-reg-procesos-form/(:num)', 'Prod2::nap7_reg_procesos_form/$1');
+$routes->get('nap7-reg-procesos-form/(:num)/(:any)', 'Prod2::nap7_reg_procesos_form/$1/$2');
 $routes->post('nap7-process-update', 'Prod2::nap7_process_update');
+$routes->post('nap7-process-sierra-update', 'Prod2::nap7_process_sierra_update');
 
 //PRODUCTO 4
 $routes->get('prod-4-create', 'Prod4::prod_4_create');

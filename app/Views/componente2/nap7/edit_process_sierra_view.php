@@ -5,27 +5,28 @@
 </style>
 <main class="container-md px-2 mb-4">
     <div class="container-fluid px-0">
-        <h3 class="mt-4" id="titulo-nombre"><?= esc($title).' | Docentes MINEDUC Virtual - COSTA'; ?></h3>
+        <h3 class="mt-4" id="titulo-nombre"><?= esc($title).' | Docentes MINEDUC Virtual - Sierra'; ?></h3>
         <h4 class="mt-4" id="titulo-nombre"><?= 'NOMBRE: '.$docente->apellidos.' '.$docente->nombres ; ?></h4>
         <div class="card mb-4">
             <div class="card-body">
                 <h5 class="mt-3"><?= esc ('ASISTENCIA A CAPACITACIONES VIRTUALES'); ?></h5>
-                <form action="<?php echo base_url().'/nap7-process-update';?>" method="post">
+                <form action="<?php echo base_url().'/nap7-process-sierra-update';?>" method="post">
                     <?= session()->getFlashdata('error'); ?>
                     <?= csrf_field(); ?>
                     <div class="row">
                         <div class="col-md-5 mb-3">
-                            <label for="lineamiento_nap">INDUCCIÓN LINEAMIENTOS NAP:</label>
+                            <label for="lineamiento_rubrica">Lineamientos para elaborar la rúbrica de evaluación con énfasis en Reflexión Metacognitiva
+:</label>
                             <?php
 
                                 if ($datos != NULL) {
-                                    $dato['valor'] = $datos->lineamiento_nap;
-                                    $dato['campo'] = 'lineamiento_nap';
+                                    $dato['valor'] = $datos->lineamiento_rubrica;
+                                    $dato['campo'] = 'lineamiento_rubrica';
                                     echo view('componente2/nap3/select-campo-view', $dato); 
                                     
                                 }else{
                                     $dato['valor'] = NULL;
-                                    $dato['campo'] = 'lineamiento_nap';
+                                    $dato['campo'] = 'lineamiento_rubrica';
                                     echo view('componente2/nap3/select-campo-view', $dato); 
                                 }
 
@@ -33,17 +34,17 @@
                             ?>
                         </div>
                         <div class="col-md-5 mb-3">
-                            <label for="avance_curricular">AVANCE CURRICULAR NAP:</label>
+                            <label for="estrategia_didactica">Estrategias didácticas:</label>
                             <?php
 
                                 if ($datos != NULL) {
-                                    $dato['valor'] = $datos->avance_curricular;
-                                    $dato['campo'] = 'avance_curricular';
+                                    $dato['valor'] = $datos->estrategia_didactica;
+                                    $dato['campo'] = 'estrategia_didactica';
                                     echo view('componente2/nap3/select-campo-view', $dato); 
                                     
                                 }else{
                                     $dato['valor'] = NULL;
-                                    $dato['campo'] = 'avance_curricular';
+                                    $dato['campo'] = 'estrategia_didactica';
                                     echo view('componente2/nap3/select-campo-view', $dato); 
                                 }
 
@@ -53,7 +54,7 @@
                     </div>
                     <div class="row">
                         <div class="col-md-5 mb-3">
-                            <label for="curriculo_competencias">CURRICULO PRIORIZADO CON ENFASIS EN COMPETENCIAS:</label>
+                            <label for="curriculo_competencias">Práctica de planificación micro curricular utilizando el currículo priorizado con énfasis en competencias:</label>
                             <?php
                                 if ($datos != NULL) {
                                     $dato['valor'] = $datos->curriculo_competencias;
@@ -68,147 +69,7 @@
                             ?>
                         </div>
                         <div class="col-md-5 mb-3">
-                            <label for="plan_microcurricular_erca">PLANIFICACIÓN MICROCURRICULAR ERCA:</label>
-                            <?php
-
-                                if ($datos != NULL) {
-                                    $dato['valor'] = $datos->plan_microcurricular_erca;
-                                    $dato['campo'] = 'plan_microcurricular_erca';
-                                    echo view('componente2/nap3/select-campo-view', $dato); 
-                                    
-                                }else{
-                                    $dato['valor'] = NULL;
-                                    $dato['campo'] = 'plan_microcurricular_erca';
-                                    echo view('componente2/nap3/select-campo-view', $dato); 
-                                }
-
-                                
-                            ?>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-5 mb-3">
-                            <label for="conciencia_linguistica">DESARROLLO DE LA CONCIENCIA LINGÜÍSTICA:</label>
-                            <?php
-                                if ($datos != NULL) {
-                                    $dato['valor'] = $datos->conciencia_linguistica;
-                                    $dato['campo'] = 'conciencia_linguistica';
-                                    echo view('componente2/nap3/select-campo-view', $dato); 
-                                    
-                                }else{
-                                    $dato['valor'] = NULL;
-                                    $dato['campo'] = 'conciencia_linguistica';
-                                    echo view('componente2/nap3/select-campo-view', $dato); 
-                                }
-                            ?>
-                        </div>
-                        <div class="col-md-5 mb-3">
-                            <label for="destrezas_desempeño">DESTREZAS CON CRITERIO DE DESEMPEÑO:</label>
-                            <?php
-
-                                if ($datos != NULL) {
-                                    $dato['valor'] = $datos->destrezas_desempeño;
-                                    $dato['campo'] = 'destrezas_desempeño';
-                                    echo view('componente2/nap3/select-campo-view', $dato); 
-                                    
-                                }else{
-                                    $dato['valor'] = NULL;
-                                    $dato['campo'] = 'destrezas_desempeño';
-                                    echo view('componente2/nap3/select-campo-view', $dato); 
-                                }
-
-                                
-                            ?>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-5 mb-3">
-                            <label for="produccion_textos">PRODUCCIÓN DE TEXTOS:</label>
-                            <?php
-                                if ($datos != NULL) {
-                                    $dato['valor'] = $datos->produccion_textos;
-                                    $dato['campo'] = 'produccion_textos';
-                                    echo view('componente2/nap3/select-campo-view', $dato); 
-                                    
-                                }else{
-                                    $dato['valor'] = NULL;
-                                    $dato['campo'] = 'produccion_textos';
-                                    echo view('componente2/nap3/select-campo-view', $dato); 
-                                }
-                            ?>
-                        </div>
-                        <div class="col-md-5 mb-3">
-                            <label for="eval_metacognitiva">LINEAMIENTOS ELABORAR RÚBRICA DE EVALUACIÓN CON ÉNFASIS REFLEXIÓN METACOGNITIVA:</label>
-                            <?php
-
-                                if ($datos != NULL) {
-                                    $dato['valor'] = $datos->eval_metacognitiva;
-                                    $dato['campo'] = 'eval_metacognitiva';
-                                    echo view('componente2/nap3/select-campo-view', $dato); 
-                                    
-                                }else{
-                                    $dato['valor'] = NULL;
-                                    $dato['campo'] = 'eval_metacognitiva';
-                                    echo view('componente2/nap3/select-campo-view', $dato); 
-                                }
-
-                                
-                            ?>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-5 mb-3">
-                            <label for="estrategias_didacticas">ESTRATEGIAS DIDÁCTICAS:</label>
-                            <?php
-                                if ($datos != NULL) {
-                                    $dato['valor'] = $datos->estrategias_didacticas;
-                                    $dato['campo'] = 'estrategias_didacticas';
-                                    echo view('componente2/nap3/select-campo-view', $dato); 
-                                    
-                                }else{
-                                    $dato['valor'] = NULL;
-                                    $dato['campo'] = 'estrategias_didacticas';
-                                    echo view('componente2/nap3/select-campo-view', $dato); 
-                                }
-                            ?>
-                        </div>
-                        <div class="col-md-5 mb-3">
-                            <label for="plan_microcurricular">PRÁCTICA DE PLANIFICACIÓN MICRO CURRICULAR:</label>
-                            <?php
-
-                                if ($datos != NULL) {
-                                    $dato['valor'] = $datos->plan_microcurricular;
-                                    $dato['campo'] = 'plan_microcurricular';
-                                    echo view('componente2/nap3/select-campo-view', $dato); 
-                                    
-                                }else{
-                                    $dato['valor'] = NULL;
-                                    $dato['campo'] = 'plan_microcurricular';
-                                    echo view('componente2/nap3/select-campo-view', $dato); 
-                                }
-
-                                
-                            ?>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-5 mb-3">
-                            <label for="eval_promo_est">EVALUACIÓN Y PROMOCIÓN DE ESTUDIANTES NAP:</label>
-                            <?php
-                                if ($datos != NULL) {
-                                    $dato['valor'] = $datos->eval_promo_est;
-                                    $dato['campo'] = 'eval_promo_est';
-                                    echo view('componente2/nap3/select-campo-view', $dato); 
-                                    
-                                }else{
-                                    $dato['valor'] = NULL;
-                                    $dato['campo'] = 'eval_promo_est';
-                                    echo view('componente2/nap3/select-campo-view', $dato); 
-                                }
-                            ?>
-                        </div>
-                        <div class="col-md-5 mb-3">
-                            <label for="innova_aula">INNOVACIÓN EN EL AULA:</label>
+                            <label for="innova_aula">Innovación en el aula:</label>
                             <?php
 
                                 if ($datos != NULL) {
@@ -228,20 +89,145 @@
                     </div>
                     <div class="row">
                         <div class="col-md-5 mb-3">
-                            <label for="const_infor_aprendizaje">CONSTRUCCIÓN INFORMES APRENDIZAJE POR ASIGNATURAS Y POR CASOS:</label>
+                            <label for="comple_inova_aula">Complemento de Innovación en el aula:</label>
                             <?php
                                 if ($datos != NULL) {
-                                    $dato['valor'] = $datos->const_infor_aprendizaje;
-                                    $dato['campo'] = 'const_infor_aprendizaje';
+                                    $dato['valor'] = $datos->comple_inova_aula;
+                                    $dato['campo'] = 'comple_inova_aula';
                                     echo view('componente2/nap3/select-campo-view', $dato); 
                                     
                                 }else{
                                     $dato['valor'] = NULL;
-                                    $dato['campo'] = 'const_infor_aprendizaje';
+                                    $dato['campo'] = 'comple_inova_aula';
                                     echo view('componente2/nap3/select-campo-view', $dato); 
                                 }
                             ?>
                         </div>
+                        <div class="col-md-5 mb-3">
+                            <label for="tec_instrument_eval">Técnicas e instrumentos de evaluación:</label>
+                            <?php
+
+                                if ($datos != NULL) {
+                                    $dato['valor'] = $datos->tec_instrument_eval;
+                                    $dato['campo'] = 'tec_instrument_eval';
+                                    echo view('componente2/nap3/select-campo-view', $dato); 
+                                    
+                                }else{
+                                    $dato['valor'] = NULL;
+                                    $dato['campo'] = 'tec_instrument_eval';
+                                    echo view('componente2/nap3/select-campo-view', $dato); 
+                                }
+
+                                
+                            ?>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-5 mb-3">
+                            <label for="pract_instr_eval">Práctica de planificación e instrumentos de evaluación:</label>
+                            <?php
+                                if ($datos != NULL) {
+                                    $dato['valor'] = $datos->pract_instr_eval;
+                                    $dato['campo'] = 'pract_instr_eval';
+                                    echo view('componente2/nap3/select-campo-view', $dato); 
+                                    
+                                }else{
+                                    $dato['valor'] = NULL;
+                                    $dato['campo'] = 'pract_instr_eval';
+                                    echo view('componente2/nap3/select-campo-view', $dato); 
+                                }
+                            ?>
+                        </div>
+                        <div class="col-md-5 mb-3">
+                            <label for="valor_arte_educa">El valor del arte en la educación:</label>
+                            <?php
+
+                                if ($datos != NULL) {
+                                    $dato['valor'] = $datos->valor_arte_educa;
+                                    $dato['campo'] = 'valor_arte_educa';
+                                    echo view('componente2/nap3/select-campo-view', $dato); 
+                                    
+                                }else{
+                                    $dato['valor'] = NULL;
+                                    $dato['campo'] = 'valor_arte_educa';
+                                    echo view('componente2/nap3/select-campo-view', $dato); 
+                                }
+
+                                
+                            ?>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-5 mb-3">
+                            <label for="disciplina_positiva">Disciplina positiva:</label>
+                            <?php
+                                if ($datos != NULL) {
+                                    $dato['valor'] = $datos->disciplina_positiva;
+                                    $dato['campo'] = 'disciplina_positiva';
+                                    echo view('componente2/nap3/select-campo-view', $dato); 
+                                    
+                                }else{
+                                    $dato['valor'] = NULL;
+                                    $dato['campo'] = 'disciplina_positiva';
+                                    echo view('componente2/nap3/select-campo-view', $dato); 
+                                }
+                            ?>
+                        </div>
+                        <div class="col-md-5 mb-3">
+                            <label for="retro_lineamiento_instr">Retroalimentación sobre lineamientos de elaboración de instrumentos de evaluación con reflexión metacognitiva:</label>
+                            <?php
+
+                                if ($datos != NULL) {
+                                    $dato['valor'] = $datos->retro_lineamiento_instr;
+                                    $dato['campo'] = 'retro_lineamiento_instr';
+                                    echo view('componente2/nap3/select-campo-view', $dato); 
+                                    
+                                }else{
+                                    $dato['valor'] = NULL;
+                                    $dato['campo'] = 'retro_lineamiento_instr';
+                                    echo view('componente2/nap3/select-campo-view', $dato); 
+                                }
+
+                                
+                            ?>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-5 mb-3">
+                            <label for="eval_prom_final">Elaboración de promedios finales:</label>
+                            <?php
+                                if ($datos != NULL) {
+                                    $dato['valor'] = $datos->eval_prom_final;
+                                    $dato['campo'] = 'eval_prom_final';
+                                    echo view('componente2/nap3/select-campo-view', $dato); 
+                                    
+                                }else{
+                                    $dato['valor'] = NULL;
+                                    $dato['campo'] = 'eval_prom_final';
+                                    echo view('componente2/nap3/select-campo-view', $dato); 
+                                }
+                            ?>
+                        </div>
+                        <div class="col-md-5 mb-3">
+                            <label for="infor_apren_cierre">Revisión de informes de aprendizaje cierre de las capacitaciones:</label>
+                            <?php
+
+                                if ($datos != NULL) {
+                                    $dato['valor'] = $datos->infor_apren_cierre;
+                                    $dato['campo'] = 'infor_apren_cierre';
+                                    echo view('componente2/nap3/select-campo-view', $dato); 
+                                    
+                                }else{
+                                    $dato['valor'] = NULL;
+                                    $dato['campo'] = 'infor_apren_cierre';
+                                    echo view('componente2/nap3/select-campo-view', $dato); 
+                                }
+
+                                
+                            ?>
+                        </div>
+                    </div>
+                    <div class="row">
                         <div class="col-md-5 mb-3">
                         <label for="tecnico_virtual">TÉCNICO VIRTUAL:</label>
                                <select 
