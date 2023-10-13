@@ -844,7 +844,7 @@
                         </div>
                     </div>
 
-                    <?= form_hidden('id', $id);  ?>
+                    <?= form_hidden('id', $idest);  ?>
                     <button type="submit" class="btn btn-info mb-3">Actualizar</button>  
                 </form>         
             </div>

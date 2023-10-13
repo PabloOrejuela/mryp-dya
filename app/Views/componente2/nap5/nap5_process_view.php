@@ -31,7 +31,7 @@
                                         <td>'.$value->documento.'</td>
                                         <td>
                                             <div class="contenedor">
-                                                <a type="button" id="btn-register" href="'.site_url().'nap5-reg-procesos-form/'.$value->id.'" class="edit">
+                                                <a type="button" id="btn-register" href="'.site_url().'nap5-reg-procesos-form/'.$value->id.'/'.$value->regimen.'" class="edit">
                                                     <img src="'.site_url().'public/images/test.png" >
                                                 </a>
                                             </div>

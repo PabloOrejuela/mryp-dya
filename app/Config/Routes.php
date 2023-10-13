@@ -134,8 +134,9 @@ $routes->post('prod2-nap4-update', 'Prod2::prod2_nap4_update');
 
 //NAP5
 $routes->get('prod2-nap5-menu', 'Prod2::nap5_procesos_grid');
-$routes->get('nap5-reg-procesos-form/(:num)', 'Prod2::nap5_reg_procesos_form/$1');
+$routes->get('nap5-reg-procesos-form/(:num)/(:any)', 'Prod2::nap5_reg_procesos_form/$1/$2');
 $routes->post('nap5-process-update', 'Prod2::nap5_process_update');
+$routes->post('nap5-process-sierra-update', 'Prod2::nap5_process_sierra_update');
 
 //NAP6
 $routes->get('prod2-nap6-menu', 'Prod2::nap6_procesos_grid');

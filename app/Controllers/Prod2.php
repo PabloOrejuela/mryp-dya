@@ -532,7 +532,7 @@ class Prod2 extends BaseController {
         }
     }
 
-    public function nap5_reg_procesos_form($idest) {
+    public function nap5_reg_procesos_form($id, $regimen) {
         $data['idrol'] = $this->session->idrol;
         $data['id'] = $this->session->idusuario;
         $data['is_logged'] = $this->usuarioModel->_getLogStatus($data['id']);
@@ -540,14 +540,19 @@ class Prod2 extends BaseController {
 
         if ($data['is_logged'] == 1) {
             
-            $data['idest'] = $idest;
-            $data['datos'] = $this->nap5ProcessResult->_getNap5Process($idest);
-            $data['est'] = $this->nap5Model->find($idest);
+            $data['id'] = $id;
+            $data['est'] = $this->nap5Model->find($id);
             $data['cursos'] = $this->cursoModel->findAll();
 
-
             $data['title']='MYRP - NAP5 ';
-            $data['main_content']='componente2/nap5/edit_process_view';
+
+            if ($regimen == 'COSTA') {
+                $data['datos'] = $this->nap5ProcessResult->_getNap5Process($id);
+                $data['main_content']='componente2/nap5/edit_process_view';
+            }else if($regimen == 'SIERRA'){
+                $data['datos'] = $this->nap5ProcessResultSierra->_getNap5Process($id);
+                $data['main_content']='componente2/nap5/edit_process_sierra_view';
+            }
             return view('includes/template', $data);
         }else{
 
@@ -844,7 +849,6 @@ class Prod2 extends BaseController {
         if ($data['is_logged'] == 1) {
             
             $data['id'] = $id;
-            
             $data['docente'] = $this->nap7Model->find($id);
             $data['cursos'] = $this->cursoModel->findAll();
 
