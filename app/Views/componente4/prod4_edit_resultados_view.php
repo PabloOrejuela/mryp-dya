@@ -283,7 +283,7 @@
                                     if ($ciudad['idciudades'] == $datos->idciudades) {
                                         echo '<option value="'.$ciudad['idciudades'].'" selected>'.$ciudad['ciudad'].'</option>';
                                     }else{
-                                        echo '<option value="'.$ciudad['idciudades'].'">'.$ciudad['ciudad'].'</option>';
+                                        echo '<option value="'.$ciudad->idciudades.'">'.$ciudad->ciudad.'</option>';
                                     }
                                 }
                             }else{
@@ -292,7 +292,7 @@
                         }else{
                             echo '<option value="NULL" selected>--Elegir una ciudad--</option>';
                             foreach ($ciudades as $key => $ciudad) {
-                                echo '<option value="'.$ciudad['idciudades'].'">'.$ciudad['ciudad'].'</option>';
+                                echo '<option value="'.$ciudad->idciudades.'">'.$ciudad->ciudad.'</option>';
                             }
                         }
                     ?>

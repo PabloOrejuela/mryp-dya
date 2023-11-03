@@ -196,6 +196,104 @@ class Inicio extends BaseController {
 		$pdf->Output("PDF de prueba-".md5(time()).'.pdf', 'I');
 	}
 
+    public function form_nuevo_anio(){
+    
+        //echo '<pre>'.var_export($this->session->idusuario, true).'</pre>';
+        $data['idrol'] = $this->session->idrol;
+        $data['id'] = $this->session->idusuario;
+        $data['is_logged'] = $this->usuarioModel->_getLogStatus($data['id']);
+        $data['nombre'] = $this->session->nombre;
+
+        if ($data['is_logged'] == 1 && $this->session->editar == 1) {
+            //echo '<pre>'.var_export($data, true).'</pre>';exit;
+            $data['anios_lectivos'] = $this->anioLectivoModel->findAll();
+            $data['ultimo_anio'] = $this->anioLectivoModel->_getlast();
+            $data['anio1']  = substr($data['ultimo_anio'], 0, 4);
+            $data['anio2']  = substr($data['ultimo_anio'], -4, 4);
+
+            //echo '<pre>'.var_export($data['anio2'], true).'</pre>';exit;
+
+            $data['title']='MYRP - DYA';
+            $data['main_content']='home/frm-anio-crear';
+            return view('includes/template', $data);
+        }else{
+            $this->logout();
+            return redirect()->to('/');
+        }
+    }
+
+    public function anio_lectivo_insert() {
+        $data['idrol'] = $this->session->idrol;
+        $data['id'] = $this->session->idusuario;
+        $data['is_logged'] = $this->usuarioModel->_getLogStatus($data['id']);
+        $data['nombre'] = $this->session->nombre;
+        $data['componente_4'] = $this->session->componente_4;
+
+        if ($data['is_logged'] == 1 && $data['componente_4'] == 1) {
+
+            $anio = array(
+                'anio_lectivo_desde' => $this->request->getPostGet('anio_lectivo_desde'),
+                'anio_lectivo_hasta' => $this->request->getPostGet('anio_lectivo_hasta'),
+            );
+
+            //echo '<pre>'.var_export($anio, true).'</pre>';exit;
+            
+            $this->anioLectivoModel->_insert($anio);
+            
+            return redirect()->to('form-nuevo-anio');
+        }else{
+
+            $this->logout();
+        }
+    }
+
+    public function form_nueva_cohorte(){
+    
+        //echo '<pre>'.var_export($this->session->idusuario, true).'</pre>';
+        $data['idrol'] = $this->session->idrol;
+        $data['id'] = $this->session->idusuario;
+        $data['is_logged'] = $this->usuarioModel->_getLogStatus($data['id']);
+        $data['nombre'] = $this->session->nombre;
+
+        if ($data['is_logged'] == 1 && $this->session->editar == 1) {
+            //echo '<pre>'.var_export($data, true).'</pre>';exit;
+            $data['cohortes'] = $this->cohorteModel->findAll();
+
+            //echo '<pre>'.var_export($data['anio2'], true).'</pre>';exit;
+
+            $data['title']='MYRP - DYA';
+            $data['main_content']='home/frm-cohorte-crear';
+            return view('includes/template', $data);
+        }else{
+            $this->logout();
+            return redirect()->to('/');
+        }
+    }
+
+    public function cohorte_insert() {
+        $data['idrol'] = $this->session->idrol;
+        $data['id'] = $this->session->idusuario;
+        $data['is_logged'] = $this->usuarioModel->_getLogStatus($data['id']);
+        $data['nombre'] = $this->session->nombre;
+        $data['componente_4'] = $this->session->componente_4;
+
+        if ($data['is_logged'] == 1 && $data['componente_4'] == 1) {
+
+            $cohorte = array(
+                'cohorte' => strtoupper($this->request->getPostGet('cohorte')),
+            );
+
+            //echo '<pre>'.var_export($cohorte, true).'</pre>';exit;
+            
+            $this->cohorteModel->insert($cohorte);
+            
+            return redirect()->to('form-nueva-cohorte');
+        }else{
+
+            $this->logout();
+        }
+    }
+
     public function logout(){
         //destruyo la session  y salgo
         

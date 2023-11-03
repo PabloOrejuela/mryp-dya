@@ -44,6 +44,12 @@ $routes->post('cargar-centro-educativo', 'CargarInformacion::cargar_centro_educa
 $routes->get('subirExcel_view/(:num)', 'CargarInformacion::frm_subir_excel/$1');
 $routes->get('logout', 'Inicio::logout');
 
+//Administración
+$routes->get('form-nuevo-anio', 'Inicio::form_nuevo_anio');
+$routes->post('anio-lectivo-insert', 'Inicio::anio_lectivo_insert');
+$routes->get('form-nueva-cohorte', 'Inicio::form_nueva_cohorte');
+$routes->post('cohorte-insert', 'Inicio::cohorte_insert');
+
 //Producto 1
 $routes->get('prod_1', 'Prod1::index');
 $routes->get('prod-1-create', 'Prod1::prod_1_create');
@@ -175,6 +181,7 @@ $routes->post('prod4-atenciones-update', 'Prod4::prod4_atenciones_update');
 $routes->get('prod4-reg-resultados/(:num)', 'Prod4::prod4_reg_resultados/$1');
 $routes->post('prod4-resultados-update', 'Prod4::prod4_resultados_update');
 $routes->get('prod4-reportes-form', 'ReportesProd4::prod4_reportes_form');
+$routes->post('prod4-reporte', 'ReportesProd4::prod4_reporte');
 $routes->get('prod4-descargar-registros', 'Prod4::prod4_descargar_registros');
 
 

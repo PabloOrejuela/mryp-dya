@@ -177,8 +177,8 @@
                             <label for="embarazada">Embarazada:</label>
                             <select name="embarazada" class="form-control" id="embarazada" aria-label="embarazada">
                                 <option value="NULL" selected>-Seleccionar-</option>
-                                <option value="MASCULINO">SI</option>
-                                <option value="FEMENINO">NO</option>
+                                <option value="SI">SI</option>
+                                <option value="NO">NO</option>
                             </select>
                         </div>
                         <div class="col-md-2 mb-3">

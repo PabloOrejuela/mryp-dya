@@ -4,10 +4,10 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class CohorteModel extends Model {
+class AnioLectivoModel extends Model {
 
     protected $DBGroup          = 'default';
-    protected $table            = 'cohortes';
+    protected $table            = 'anio_lectivo';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $insertID         = 0;
@@ -39,4 +39,27 @@ class CohorteModel extends Model {
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
+
+    //Devuelve el ultimo año registrado como cadena
+    public function _getLast() {
+        $result = NULL;
+        $builder = $this->db->table($this->table);
+        $builder->select('*');
+        $builder->orderBy('id', 'asc');
+        $query = $builder->get();
+        if ($query->getResult() != null) {
+            foreach ($query->getResult() as $row) {
+                $result = $row->anio_lectivo;
+            }
+        }
+        //echo $this->db->getLastQuery();
+        return $result;
+    }
+
+    public function _insert($anio) {
+        $builder = $this->db->table($this->table);
+        //echo '<pre>'.var_export($ciudad, true).'</pre>';exit;
+        $builder->set('anio_lectivo', $anio['anio_lectivo_desde'].' - '.$anio['anio_lectivo_hasta']);
+        $builder->insert();
+    }
 }

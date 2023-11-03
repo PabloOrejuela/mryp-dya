@@ -59,6 +59,7 @@ use App\Models\Prod4ResultadosModel;
 use App\Models\CentroProd4Model;
 use App\Models\Prod4OyenteModel;
 use App\Models\CohorteModel;
+use App\Models\AnioLectivoModel;
 
 
 /**
@@ -158,6 +159,7 @@ abstract class BaseController extends Controller {
         $this->centroProd4Model = new CentroProd4Model($this->db);
         $this->prod4OyenteModel = new Prod4OyenteModel($this->db);
         $this->cohorteModel = new CohorteModel($this->db);
+        $this->anioLectivoModel = new AnioLectivoModel($this->db);
 
         // E.g.: $this->session = \Config\Services::session();
         $this->session = \Config\Services::session();

@@ -46,7 +46,7 @@ class Prod4 extends BaseController {
             $data['centros'] = $this->centroEducativoModel->_getCentrosList();
             $data['cohortes'] = $this->cohorteModel->findAll();
 
-            //echo '<pre>'.var_export($data['cohortes'], true).'</pre>';exit;
+            //echo '<pre>'.var_export($data['datos'], true).'</pre>';exit;
 
             $data['title']='MYRP - DYA';
             $data['main_content']='componente4/prod4_edit_view';

@@ -11,7 +11,7 @@ class CiudadesModel extends Model {
     protected $primaryKey       = 'idciudades';
     protected $useAutoIncrement = true;
     protected $insertID         = 0;
-    protected $returnType       = 'array';
+    protected $returnType       = 'object';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
     protected $allowedFields    = [
@@ -68,6 +68,37 @@ class CiudadesModel extends Model {
         $result = NULL;
         $builder = $this->db->table($this->table);
         $builder->select('*')->where('idprovincias', $provincia);
+        $query = $builder->get();
+        if ($query->getResult() != null) {
+            foreach ($query->getResult() as $row) {
+                $result[] = $row;
+            }
+        }
+        //echo $this->db->getLastQuery();
+        return $result;
+    }
+
+    public function _getCiudades() {
+        $result = NULL;
+        $builder = $this->db->table($this->table);
+        $builder->select('*');
+        $builder->orderBy('ciudad', 'asc');
+        $query = $builder->get();
+        if ($query->getResult() != null) {
+            foreach ($query->getResult() as $row) {
+                $result[] = $row;
+            }
+        }
+        //echo $this->db->getLastQuery();
+        return $result;
+    }
+
+    public function _getCiudadesProd4() {
+        $result = NULL;
+        $builder = $this->db->table($this->table);
+        $builder->select('*');
+        $builder->join('centro_prod_4', 'centro_prod_4.idciudades = '.$this->table.'.idciudades');
+        $builder->orderBy('ciudad', 'asc');
         $query = $builder->get();
         if ($query->getResult() != null) {
             foreach ($query->getResult() as $row) {
