@@ -7,6 +7,12 @@
                 <i class="fa-solid fa-cash-register"></i>
                 <?= esc("Componente 2 - Ingreso y edición de variables de Proceso"); ?>
             </div>
+            <div class="card-header">
+                <a type="button" id="btn-register" href="<?= site_url().'nap7-create/'; ?>" class="edit">
+                    <img src="<?= site_url().'public/images/new.png'; ?>" >
+                    <span id="title-link">Registrar un nuevo docente</span>
+                </a>
+            </div> 
             <div class="card-body"> 
                 <table class="table table-bordered table-striped table-hover" id="table">
                     <thead>

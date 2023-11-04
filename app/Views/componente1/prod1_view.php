@@ -10,7 +10,8 @@
         <div class="card mb-4">
             <div class="card-header">
                 <?php echo '<span id="titulo-componente">Componente 1 - Click en el NOMBRE para ver y editar datos del registro</span>'; ?>
-            </div><div class="card-header">
+            </div>
+            <div class="card-header">
                 <a type="button" id="btn-register" href="<?= site_url().'prod-1-create/'; ?>" class="edit">
                     <img src="<?= site_url().'public/images/new.png'; ?>" >
                     <span id="title-link">Registrar un nuevo estudiante</span>

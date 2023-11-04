@@ -120,6 +120,8 @@ $routes->get('corrije_cedulas', 'Prod2::corrijeCedulas');
 //NAP2
 $routes->get('prod-2-menu', 'Prod2::index');
 $routes->get('prod2-nap2-menu', 'Prod2::nap2_procesos_grid');
+$routes->get('nap2-create', 'Prod2::nap2_create');
+$routes->post('nap2-insert', 'Prod2::nap2_insert');
 $routes->get('prod2-nap2-frm-edit/(:num)', 'Prod2::prod2_nap2_frm_edit/$1');
 $routes->get('nap2-reg-procesos-form/(:num)', 'Prod2::nap2_reg_procesos_form/$1');
 $routes->post('nap2-process-update', 'Prod2::nap2_process_update');

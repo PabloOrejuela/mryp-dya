@@ -1,7 +1,11 @@
 <body>
 <?php //$this->session = session(); ?>
 <!-- HEADER: MENU + HEROE SECTION -->
-
+<style>
+    #btn-dropdown{
+        color: rgba(0, 0, 0, .5);
+    }
+</style>
 <header>
 
     <div class="menu dropdown">
@@ -26,7 +30,7 @@
 
                 if ($this->session->editar == 1) {
                     echo '<li class="menu-item hidden">
-                            <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" id="btn-dropdown" aria-expanded="false">
                                 Administración
                             </button>
                             <ul class="dropdown-menu hidden" id="menu">

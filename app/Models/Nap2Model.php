@@ -203,6 +203,14 @@ class Nap2Model extends Model {
 
     public function _save($datos) {
         $builder = $this->db->table($this->table);
+        if ($datos['amie'] != 'NULL') {
+            $builder->set('amie', $datos['amie']);
+        }
+
+        if ($datos['anio_lectivo'] != 'NULL') {
+            $builder->set('anio_lectivo', $datos['anio_lectivo']);
+        }
+
         if ($datos['nombres'] != 'NULL') {
             $builder->set('nombres', $datos['nombres']);
         }
@@ -223,6 +231,10 @@ class Nap2Model extends Model {
             $builder->set('etnia', $datos['etnia']);
         }
 
+        if ($datos['genero'] != 'NULL') {
+            $builder->set('genero', $datos['genero']);
+        }
+
         if ($datos['fecha_nac'] != 'NULL') {
             $builder->set('fecha_nac', $datos['fecha_nac']);
         }
@@ -231,8 +243,8 @@ class Nap2Model extends Model {
             $builder->set('edad', $datos['edad']);
         }
 
-        if ($datos['genero'] != 'NULL') {
-            $builder->set('genero', $datos['genero']);
+        if ($datos['ingresado_sistema'] != 'NULL') {
+            $builder->set('ingresado_sistema', $datos['ingresado_sistema']);
         }
 
         if ($datos['discapacidad'] != 'NULL') {
@@ -243,12 +255,12 @@ class Nap2Model extends Model {
             $builder->set('tipo_discapacidad', $datos['tipo_discapacidad']);
         }
 
-        if ($datos['representante'] != 'NULL') {
-            $builder->set('representante', $datos['representante']);
-        }
-
         if ($datos['documento_rep'] != 'NULL') {
             $builder->set('documento_rep', $datos['documento_rep']);
+        }
+
+        if ($datos['representante'] != 'NULL') {
+            $builder->set('representante', $datos['representante']);
         }
 
         if ($datos['parentesto_rep'] != 'NULL') {
@@ -271,7 +283,6 @@ class Nap2Model extends Model {
             $builder->set('email', $datos['email']);
         }
 
-        $builder->set('id', $datos['id']);
         $builder->insert();
     }
 }

@@ -66,6 +66,74 @@ class Prod2 extends BaseController {
         }
     }
 
+    public function nap2_create() {
+        $data['idrol'] = $this->session->idrol;
+        $data['id'] = $this->session->idusuario;
+        $data['is_logged'] = $this->usuarioModel->_getLogStatus($data['id']);
+        $data['nombre'] = $this->session->nombre;
+        $data['componente_2'] = $this->session->componente_2;
+
+        if ($data['is_logged'] == 1 && $data['componente_2'] == 1) {
+            
+            $data['centros'] = $this->centroEducativoModel->_getCentrosList();
+            $data['anios_lectivos'] = $this->anioLectivoModel->findAll();
+            $data['cohortes'] = $this->cohorteModel->findAll();
+            //echo '<pre>'.var_export($data['centros'], true).'</pre>';exit;
+
+            $data['title']='MYRP - NAP2 | Estudiantes DYA ';
+            $data['main_content']='componente2/nap2/nap2_create_view';
+            return view('includes/template', $data);
+        }else{
+
+            $this->logout();
+            return redirect()->to('/');
+        }
+    }
+
+    public function nap2_insert() {
+        $data['idrol'] = $this->session->idrol;
+        $data['id'] = $this->session->idusuario;
+        $data['is_logged'] = $this->usuarioModel->_getLogStatus($data['id']);
+        $data['nombre'] = $this->session->nombre;
+
+        if ($data['is_logged'] == 1) {
+
+            $process = array(
+                'nombres' => strtoupper($this->request->getPostGet('nombres')),
+                'apellidos' => strtoupper($this->request->getPostGet('apellidos')),
+                'documento' => strtoupper($this->request->getPostGet('documento')),
+                'nacionalidad' => $this->request->getPostGet('nacionalidad'),
+                'etnia' => $this->request->getPostGet('etnia'),
+                'fecha_nac' => $this->request->getPostGet('fecha_nac'),
+                'edad' => strtoupper($this->request->getPostGet('edad')),
+                'genero' => $this->request->getPostGet('genero'),
+                'discapacidad' => $this->request->getPostGet('discapacidad'),
+                'tipo_discapacidad' => $this->request->getPostGet('tipo_discapacidad'),
+                'ingresado_sistema' => $this->request->getPostGet('ingresado_sistema'),
+                'anio_lectivo' => $this->request->getPostGet('anio_lectivo'),
+                'amie' => $this->request->getPostGet('amie'),
+
+                //Representante
+                'representante' => strtoupper($this->request->getPostGet('representante')),
+                'documento_rep' => $this->request->getPostGet('documento_rep'),
+                'parentesto_rep' => strtoupper($this->request->getPostGet('parentesto_rep')),
+                'nacionalidad_rep' => $this->request->getPostGet('nacionalidad_rep'),
+                'direccion_rep' => strtoupper($this->request->getPostGet('direccion_rep')),
+                'contacto_telf' => strtoupper($this->request->getPostGet('contacto_telf')),
+                'email' => $this->request->getPostGet('email'),
+                
+            );
+
+            $this->nap2Model->_save($process);
+
+            return redirect()->to('prod2-nap2-menu');
+        }else{
+
+            $this->logout();
+            return redirect()->to('/');
+        }
+    }
+
     public function nap2_procesos_grid() {
         $data['idrol'] = $this->session->idrol;
         $data['id'] = $this->session->idusuario;
