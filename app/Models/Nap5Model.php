@@ -78,4 +78,25 @@ class Nap5Model extends Model {
         //echo $this->db->getLastQuery();
         return $result;
     }
+
+    public function _getAllRegistrosExcel() {
+        $result = NULL;
+        $builder = $this->db->table($this->table);
+        $builder->select($this->table.'.id as id,edad,centro_educativo.amie as amie,centro_educativo.nombre as ce, num_est,titulo_pro,genero,discapacidad,tipo,
+                        anio_lectivo,ciudad,provincia,'.$this->table.'.nombres as nombres,'.$this->table.'.apellidos as apellidos, documento,email, celular,autoidentificacion');
+        $builder->join('centro_educativo', 'centro_educativo.amie = '.$this->table.'.amie');
+        $builder->join('ciudades', 'ciudades.idciudades = centro_educativo.idciudades');
+        $builder->join('provincias', 'provincias.idprovincias = ciudades.idprovincias');
+        //$builder->join('anio_lectivo', 'anio_lectivo.id = producto_1.anio_lectivo');
+        $query = $builder->get();
+        if ($query->getResult() != null) {
+            foreach ($query->getResult() as $row) {
+                if ($row->id != NULL && $row != '') {
+                    $result[] = $row;
+                }
+            }
+        }
+        //echo $this->db->getLastQuery();
+        return $result;
+    }
 }

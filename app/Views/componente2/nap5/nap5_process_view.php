@@ -1,6 +1,6 @@
 <main class="container px-2">
     <div class="container-fluid px-0">
-        <h3 class="mt-4"><?= esc($title).' - Docentes MINEDUC Presencial'; ?></h3>
+        <h3 class="mt-4"><?= esc($title).' - NAP 5 Docentes MINEDUC Presencial'; ?></h3>
                     
         <div class="card mb-4">
             <div class="card-header">
@@ -12,6 +12,11 @@
                     <img src="<?= site_url().'public/images/new.png'; ?>" >
                     <span id="title-link">Registrar un nuevo docente</span>
                 </a>
+                <?php
+                    if ($this->session->descargar_info == 1) {
+                        echo'<a href="'.site_url().'nap5-descargar-registros" class="btn btn-info" id="btn-descarga-registros">Descargar registros NAP 5 (.xlsx)</a>';
+                    }
+                ?>
             </div> 
             <div class="card-body"> 
                 <table class="table table-bordered table-striped table-hover" id="table">

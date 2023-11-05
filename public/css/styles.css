@@ -364,3 +364,9 @@ textarea {
 #lbl_opcional{
     color: #124e8e;
 }
+
+#btn-descarga-registros{
+    position: absolute;
+    right: 20px;
+    font-size: 0.8em;
+}

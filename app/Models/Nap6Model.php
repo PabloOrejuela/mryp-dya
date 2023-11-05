@@ -234,4 +234,52 @@ class Nap6Model extends Model {
         $builder->set('id', $datos['id']);
         $builder->insert();
     }
+
+    public function _getAllRegistrosExcel() {
+        $result = NULL;
+        $builder = $this->db->table($this->table);
+        $builder->select(
+                $this->table.'.id as id,
+                centro_educativo.amie as amie,
+                centro_educativo.nombre as ce, 
+                anio_lectivo, 
+                subnivel,
+                documento, 
+                ciudad,
+                provincia,
+                '.$this->table.'.nombres_est as nombres,
+                '.$this->table.'.apellidos_est as apellidos, 
+                nacionalidad,
+                etnia.etnia as etnia,
+                genero,
+                fecha_nac,
+                edad,
+                nivel,
+                discapacidad,
+                tipo_discapacidad,
+                documento_rep,
+                representante,
+                parentesto_rep,
+                nacionalidad_rep,
+                direccion_rep,
+                contacto_telf,
+                email,
+                observaciones'
+        );
+        $builder->join('centro_educativo', 'centro_educativo.amie = '.$this->table.'.amie');
+        $builder->join('ciudades', 'ciudades.idciudades = centro_educativo.idciudades');
+        $builder->join('provincias', 'provincias.idprovincias = ciudades.idprovincias');
+        $builder->join('etnia', 'etnia.id = '.$this->table.'.etnia','left');
+        //$builder->join('anio_lectivo', 'anio_lectivo.id = producto_1.anio_lectivo');
+        $query = $builder->get();
+        if ($query->getResult() != null) {
+            foreach ($query->getResult() as $row) {
+                if ($row->id != NULL && $row != '') {
+                    $result[] = $row;
+                }
+            }
+        }
+        //echo $this->db->getLastQuery();
+        return $result;
+    }
 }

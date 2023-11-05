@@ -1,17 +1,22 @@
 <main class="container px-2">
     <div class="container-fluid px-0">
-        <h3 class="mt-4"><?= esc($title).' - Docentes MINEDUC Virtual'; ?></h3>
+        <h3 class="mt-4"><?= esc($title).' - NAP 7 Docentes MINEDUC Virtual'; ?></h3>
                     
         <div class="card mb-4">
             <div class="card-header">
                 <i class="fa-solid fa-cash-register"></i>
-                <?= esc("Componente 2 - Ingreso y edición de variables de Proceso"); ?>
+                <?= esc("Componente 2 - Ingreso y edición de variables de Proceso"); ?> 
             </div>
             <div class="card-header">
                 <a type="button" id="btn-register" href="<?= site_url().'nap7-create/'; ?>" class="edit">
                     <img src="<?= site_url().'public/images/new.png'; ?>" >
                     <span id="title-link">Registrar un nuevo docente</span>
                 </a>
+                <?php
+                    if ($this->session->descargar_info == 1) {
+                        echo'<a href="'.site_url().'nap7-descargar-registros" class="btn btn-info" id="btn-descarga-registros">Descargar registros NAP 7 (.xlsx)</a>';
+                    }
+                ?>
             </div> 
             <div class="card-body"> 
                 <table class="table table-bordered table-striped table-hover" id="table">

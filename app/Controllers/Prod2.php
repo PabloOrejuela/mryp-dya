@@ -3,6 +3,9 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx as XlsxWriter;
+use PhpOffice\PhpSpreadsheet\Reader\Xlsx as XlsxReader;
 
 class Prod2 extends BaseController {
 
@@ -503,7 +506,7 @@ class Prod2 extends BaseController {
                 $data['nap4'] = $this->nap4Model->_getRegistrosNap4();
             }
             //echo '<pre>'.var_export($data['nap2'], true).'</pre>';exit;
-            $data['title']='MYRP - NAP4 ';
+            $data['title']='MYRP';
             $data['main_content']='componente2/nap4/nap4_process_view';
             return view('includes/template', $data);
         }else{
@@ -590,7 +593,7 @@ class Prod2 extends BaseController {
                 $data['nap5'] = $this->nap5Model->_getRegistrosNap5();
             }
             //echo '<pre>'.var_export($data['nap2'], true).'</pre>';exit;
-            $data['title']='MYRP - NAP5 ';
+            $data['title']='MYRP';
             $data['main_content']='componente2/nap5/nap5_process_view';
             return view('includes/template', $data);
         }else{
@@ -796,7 +799,7 @@ class Prod2 extends BaseController {
                 $data['nap6'] = $this->nap6Model->_getRegistrosNap6();
             }
             //echo '<pre>'.var_export($data['nap2'], true).'</pre>';exit;
-            $data['title']='MYRP - NAP6 ';
+            $data['title']='MYRP';
             $data['main_content']='componente2/nap6/nap6_process_view';
             return view('includes/template', $data);
         }else{
@@ -898,7 +901,7 @@ class Prod2 extends BaseController {
                 $data['nap7'] = $this->nap7Model->_getRegistrosNap7();
             }
             //echo '<pre>'.var_export($data['nap7'], true).'</pre>';exit;
-            $data['title']='MYRP - NAP7 ';
+            $data['title']='MYRP';
             $data['main_content']='componente2/nap7/nap7_process_view';
             return view('includes/template', $data);
         }else{
@@ -1097,6 +1100,658 @@ class Prod2 extends BaseController {
             }
             return redirect()->to('prod2-nap7-menu');
         }
+    }
+
+    public function nap2_descargar_registros(){
+
+        $registros = $this->nap2Model->_getAllRegistrosExcel();
+        //echo '<pre>'.var_export($registros, true).'</pre>';exit;
+        $fila = 2;
+
+        //Creo la hoja
+        $phpExcel = new Spreadsheet();
+        $phpExcel
+            ->getProperties()
+            ->setCreator("MYRP")
+            ->setLastModifiedBy('Pablo Orejuela') // última vez modificado por
+            ->setTitle('NAP 2 - Estudiantes DYA Registros')
+            ->setSubject('Reportes MYRP')
+            ->setDescription('Reporte con los registros del NAP 2 Estudiantes DYA')
+            ->setKeywords('etiquetas o palabras clave separadas por espacios')
+            ->setCategory('Registros');
+
+        $nombreDelDocumento = "NAP 2 - Estudiantes DYA Registros.xlsx";
+
+        //Selecciono la pestaña
+        $hoja = $phpExcel->getActiveSheet();
+
+        $styleCabecera = [
+            'font' => [
+                'bold' => true,
+            ],
+            'alignment' => [
+                'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
+            ]
+        ];
+
+        $styleFila = [
+            'font' => [
+                'bold' => false,
+            ],
+            'alignment' => [
+                'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT,
+            ]
+        ];
+
+        $phpExcel->getActiveSheet()->getStyle('A1:Z1')->applyFromArray($styleCabecera);
+
+        //Edito la info que va a ir en el archivo excel
+        $hoja->setCellValue('A1', "AMIE");
+        $hoja->setCellValue('B1', "CENTRO EDUCATIVO");
+        $hoja->setCellValue('C1', "AÑO LECTIVO");
+        $hoja->setCellValue('D1', "CIUDAD");
+        $hoja->setCellValue('E1', "PROVINCIA");
+        $hoja->setCellValue('F1', "NOMBRE");
+        $hoja->setCellValue('G1', "DOCUMENTO");
+        $hoja->setCellValue('H1', "NACIONALIDAD");
+        $hoja->setCellValue('I1', "ETNIA");
+        $hoja->setCellValue('J1', "F NACIMIENTO");
+        $hoja->setCellValue('K1', "EDAD");
+        $hoja->setCellValue('L1', "GÉNERO");
+        $hoja->setCellValue('M1', "DISCAPACIDAD");
+        $hoja->setCellValue('N1', "TIPO DISCAPACIDAD");
+        $hoja->setCellValue('O1', "REPRESENTANTE");
+        $hoja->setCellValue('P1', "DOC REPRESENTANTE");
+        $hoja->setCellValue('Q1', "PARENTESCO");
+        $hoja->setCellValue('R1', "NAC REPRESENTANTE");
+        $hoja->setCellValue('S1', "DIR REPRESENTANTE");
+        $hoja->setCellValue('T1', "CONTACTO");
+        $hoja->setCellValue('U1', "EMAIL");
+
+        foreach ($registros as $key => $value) {
+            $phpExcel->getActiveSheet()->getStyle('A'.$fila.':Z'.$fila)->applyFromArray($styleFila);
+            $hoja->setCellValue('A'.$fila, $value->amie);
+            $hoja->setCellValue('B'.$fila, $value->ce);
+            $hoja->setCellValue('C'.$fila, $value->anio_lectivo);
+            $hoja->setCellValue('D'.$fila, $value->ciudad);
+            $hoja->setCellValue('E'.$fila, $value->provincia);
+            $hoja->setCellValue('F'.$fila, $value->nombres.' '.$value->apellidos);
+            $hoja->setCellValue('G'.$fila, $value->documento);
+            $hoja->setCellValue('H'.$fila, $value->nacionalidad);
+            $hoja->setCellValue('I'.$fila, $value->etnia);
+            $hoja->setCellValue('J'.$fila, $value->fecha_nac);
+            $hoja->setCellValue('K'.$fila, $value->edad);
+            $hoja->setCellValue('L'.$fila, $value->genero);
+            $hoja->setCellValue('M'.$fila, $value->discapacidad);
+            $hoja->setCellValue('N'.$fila, $value->tipo_discapacidad);
+            $hoja->setCellValue('O'.$fila, $value->representante);
+            $hoja->setCellValue('P'.$fila, $value->documento_rep);
+            $hoja->setCellValue('Q'.$fila, $value->parentesto_rep);
+            $hoja->setCellValue('R'.$fila, $value->nacionalidad_rep);
+            $hoja->setCellValue('S'.$fila, $value->direccion_rep);
+            $hoja->setCellValue('T'.$fila, $value->contacto_telf);
+            $hoja->setCellValue('U'.$fila, $value->email);
+            
+
+            $fila++;
+        }
+
+        //Creo el writter y guardo la hoja
+        
+        $writter = new XlsxWriter($phpExcel, 'Xlsx');
+        
+        //Cabeceras para descarga
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        header('Content-Disposition: attachment;filename="' . $nombreDelDocumento . '"');
+        header('Cache-Control: max-age=0');
+        
+        $r = $writter->save('php://output');exit;
+        if ($r) {
+            return redirect()->to('cargar_info_view');
+        }else{
+            $error = 'Hubo un error u no se pudo descargar';
+            return redirect()->to('cargar_info_view');
+        }        
+    }
+
+    public function nap3_descargar_registros(){
+
+        $registros = $this->nap3Model->_getAllRegistrosExcel();
+        //echo '<pre>'.var_export($registros, true).'</pre>';exit;
+        $fila = 2;
+
+        //Creo la hoja
+        $phpExcel = new Spreadsheet();
+        $phpExcel
+            ->getProperties()
+            ->setCreator("MYRP")
+            ->setLastModifiedBy('Pablo Orejuela') // última vez modificado por
+            ->setTitle('NAP 3 - DOCENTES DYA Registros')
+            ->setSubject('Reportes MYRP')
+            ->setDescription('Reporte con los registros del NAP 3 DOCENTES DYA')
+            ->setKeywords('etiquetas o palabras clave separadas por espacios')
+            ->setCategory('Registros');
+
+        $nombreDelDocumento = "NAP 3 - DOCENTES DYA Registros.xlsx";
+
+        //Selecciono la pestaña
+        $hoja = $phpExcel->getActiveSheet();
+
+        $styleCabecera = [
+            'font' => [
+                'bold' => true,
+            ],
+            'alignment' => [
+                'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
+            ]
+        ];
+
+        $styleFila = [
+            'font' => [
+                'bold' => false,
+            ],
+            'alignment' => [
+                'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT,
+            ]
+        ];
+
+        $phpExcel->getActiveSheet()->getStyle('A1:Z1')->applyFromArray($styleCabecera);
+
+        //Edito la info que va a ir en el archivo excel
+        $hoja->setCellValue('A1', "AMIE");
+        $hoja->setCellValue('B1', "CENTRO EDUCATIVO");
+        $hoja->setCellValue('C1', "AÑO LECTIVO");
+        $hoja->setCellValue('D1', "CIUDAD");
+        $hoja->setCellValue('E1', "PROVINCIA");
+        $hoja->setCellValue('F1', "NUM ESTUDIANTES");
+        $hoja->setCellValue('G1', "NOMBRE");
+        $hoja->setCellValue('H1', "DOCUMENTO");
+        $hoja->setCellValue('I1', "TITULO PROFESIONAL");
+        $hoja->setCellValue('J1', "EDAD");
+        $hoja->setCellValue('K1', "GÉNERO");
+        $hoja->setCellValue('L1', "AUTOIDENTIFICACION");
+        $hoja->setCellValue('M1', "DISCAPACIDAD");
+        $hoja->setCellValue('N1', "TIPO DISCAPACIDAD");
+        $hoja->setCellValue('O1', "CONTACTO");
+        $hoja->setCellValue('P1', "EMAIL");
+
+        foreach ($registros as $key => $value) {
+            $phpExcel->getActiveSheet()->getStyle('A'.$fila.':Z'.$fila)->applyFromArray($styleFila);
+            $hoja->setCellValue('A'.$fila, $value->amie);
+            $hoja->setCellValue('B'.$fila, $value->ce);
+            $hoja->setCellValue('C'.$fila, $value->anio_lectivo);
+            $hoja->setCellValue('D'.$fila, $value->ciudad);
+            $hoja->setCellValue('E'.$fila, $value->provincia);
+            $hoja->setCellValue('F'.$fila, $value->num_est);
+            $hoja->setCellValue('G'.$fila, $value->nombres.' '.$value->apellidos);
+            $hoja->setCellValue('H'.$fila, $value->documento);
+            $hoja->setCellValue('I'.$fila, $value->titulo_pro);
+            $hoja->setCellValue('J'.$fila, $value->edad);
+            $hoja->setCellValue('K'.$fila, $value->genero);
+            $hoja->setCellValue('L'.$fila, $value->autoidentificacion);
+            $hoja->setCellValue('M'.$fila, $value->discapacidad);
+            $hoja->setCellValue('N'.$fila, $value->tipo);
+            $hoja->setCellValue('O'.$fila, $value->celular);
+            $hoja->setCellValue('P'.$fila, $value->email);
+            
+
+            $fila++;
+        }
+
+        //Creo el writter y guardo la hoja
+        
+        $writter = new XlsxWriter($phpExcel, 'Xlsx');
+        
+        //Cabeceras para descarga
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        header('Content-Disposition: attachment;filename="' . $nombreDelDocumento . '"');
+        header('Cache-Control: max-age=0');
+        
+        $r = $writter->save('php://output');exit;
+        if ($r) {
+            return redirect()->to('cargar_info_view');
+        }else{
+            $error = 'Hubo un error u no se pudo descargar';
+            return redirect()->to('cargar_info_view');
+        }        
+    }
+
+    public function nap4_descargar_registros(){
+
+        $registros = $this->nap4Model->_getAllRegistrosExcel();
+        //echo '<pre>'.var_export($registros, true).'</pre>';exit;
+        $fila = 2;
+
+        //Creo la hoja
+        $phpExcel = new Spreadsheet();
+        $phpExcel
+            ->getProperties()
+            ->setCreator("MYRP")
+            ->setLastModifiedBy('Pablo Orejuela') // última vez modificado por
+            ->setTitle('NAP 4 - Estudiantes MINEDUC Presencial Registros')
+            ->setSubject('Reportes MYRP')
+            ->setDescription('Reporte con los registros del NAP 4 Estudiantes MINEDUC Presencial')
+            ->setKeywords('etiquetas o palabras clave separadas por espacios')
+            ->setCategory('Registros');
+
+        $nombreDelDocumento = "NAP 4 - Estudiantes MINEDUC Presencial Registros.xlsx";
+
+        //Selecciono la pestaña
+        $hoja = $phpExcel->getActiveSheet();
+
+        $styleCabecera = [
+            'font' => [
+                'bold' => true,
+            ],
+            'alignment' => [
+                'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
+            ]
+        ];
+
+        $styleFila = [
+            'font' => [
+                'bold' => false,
+            ],
+            'alignment' => [
+                'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT,
+            ]
+        ];
+
+        $phpExcel->getActiveSheet()->getStyle('A1:Z1')->applyFromArray($styleCabecera);
+
+        //Edito la info que va a ir en el archivo excel
+        $hoja->setCellValue('A1', "AMIE");
+        $hoja->setCellValue('B1', "CENTRO EDUCATIVO");
+        $hoja->setCellValue('C1', "AÑO LECTIVO");
+        $hoja->setCellValue('D1', "CIUDAD");
+        $hoja->setCellValue('E1', "PROVINCIA");
+        $hoja->setCellValue('F1', "NOMBRE");
+        $hoja->setCellValue('G1', "DOCUMENTO");
+        $hoja->setCellValue('H1', "NACIONALIDAD");
+        $hoja->setCellValue('I1', "ETNIA");
+        $hoja->setCellValue('J1', "F NACIMIENTO");
+        $hoja->setCellValue('K1', "EDAD");
+        $hoja->setCellValue('L1', "GÉNERO");
+        $hoja->setCellValue('M1', "DISCAPACIDAD");
+        $hoja->setCellValue('N1', "TIPO DISCAPACIDAD");
+        $hoja->setCellValue('O1', "REPRESENTANTE");
+        $hoja->setCellValue('P1', "DOC REPRESENTANTE");
+        $hoja->setCellValue('Q1', "PARENTESCO");
+        $hoja->setCellValue('R1', "NAC REPRESENTANTE");
+        $hoja->setCellValue('S1', "DIR REPRESENTANTE");
+        $hoja->setCellValue('T1', "CONTACTO");
+        $hoja->setCellValue('U1', "EMAIL");
+        $hoja->setCellValue('V1', "DOCENTE TUTOR");
+        $hoja->setCellValue('W1', "DOCUMENTO TUTOR");
+        $hoja->setCellValue('X1', "EMAIL TUTOR");
+        $hoja->setCellValue('Y1', "TELF TUTOR");
+        $hoja->setCellValue('Z1', "ETNIA TUTOR");
+
+        foreach ($registros as $key => $value) {
+            $phpExcel->getActiveSheet()->getStyle('A'.$fila.':Z'.$fila)->applyFromArray($styleFila);
+            $hoja->setCellValue('A'.$fila, $value->amie);
+            $hoja->setCellValue('B'.$fila, $value->ce);
+            $hoja->setCellValue('C'.$fila, $value->anio_lectivo);
+            $hoja->setCellValue('D'.$fila, $value->ciudad);
+            $hoja->setCellValue('E'.$fila, $value->provincia);
+            $hoja->setCellValue('F'.$fila, $value->nombres.' '.$value->apellidos);
+            $hoja->setCellValue('G'.$fila, $value->documento);
+            $hoja->setCellValue('H'.$fila, $value->nacionalidad);
+            $hoja->setCellValue('I'.$fila, $value->etnia);
+            $hoja->setCellValue('J'.$fila, $value->fecha_nac);
+            $hoja->setCellValue('K'.$fila, $value->edad);
+            $hoja->setCellValue('L'.$fila, $value->genero);
+            $hoja->setCellValue('M'.$fila, $value->discapacidad);
+            $hoja->setCellValue('N'.$fila, $value->tipo_discapacidad);
+            $hoja->setCellValue('O'.$fila, $value->representante);
+            $hoja->setCellValue('P'.$fila, $value->documento_rep);
+            $hoja->setCellValue('Q'.$fila, $value->parentesto_rep);
+            $hoja->setCellValue('R'.$fila, $value->nacionalidad_rep);
+            $hoja->setCellValue('S'.$fila, $value->direccion_rep);
+            $hoja->setCellValue('T'.$fila, $value->contacto_telf);
+            $hoja->setCellValue('U'.$fila, $value->email);
+            $hoja->setCellValue('V'.$fila, $value->docente_tutor);
+            $hoja->setCellValue('W'.$fila, $value->doc_tutor);
+            $hoja->setCellValue('X'.$fila, $value->email_tutor);
+            $hoja->setCellValue('Y'.$fila, $value->telf_tutor);
+            $hoja->setCellValue('Z'.$fila, $value->etnia_tutor);
+            
+
+            $fila++;
+        }
+
+        //Creo el writter y guardo la hoja
+        
+        $writter = new XlsxWriter($phpExcel, 'Xlsx');
+        
+        //Cabeceras para descarga
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        header('Content-Disposition: attachment;filename="' . $nombreDelDocumento . '"');
+        header('Cache-Control: max-age=0');
+        
+        $r = $writter->save('php://output');exit;
+        if ($r) {
+            return redirect()->to('cargar_info_view');
+        }else{
+            $error = 'Hubo un error u no se pudo descargar';
+            return redirect()->to('cargar_info_view');
+        }        
+    }
+
+    public function nap5_descargar_registros(){
+
+        $registros = $this->nap5Model->_getAllRegistrosExcel();
+        //echo '<pre>'.var_export($registros, true).'</pre>';exit;
+        $fila = 2;
+
+        //Creo la hoja
+        $phpExcel = new Spreadsheet();
+        $phpExcel
+            ->getProperties()
+            ->setCreator("MYRP")
+            ->setLastModifiedBy('Pablo Orejuela') // última vez modificado por
+            ->setTitle('NAP 5 - Docentes MINEDUC Presencial Registros')
+            ->setSubject('Reportes MYRP')
+            ->setDescription('Reporte con los registros del NAP 5 Docentes MINEDUC Presencial')
+            ->setKeywords('etiquetas o palabras clave separadas por espacios')
+            ->setCategory('Registros');
+
+        $nombreDelDocumento = "NAP 5 - Docentes MINEDUC Presencial Registros.xlsx";
+
+        //Selecciono la pestaña
+        $hoja = $phpExcel->getActiveSheet();
+
+        $styleCabecera = [
+            'font' => [
+                'bold' => true,
+            ],
+            'alignment' => [
+                'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
+            ]
+        ];
+
+        $styleFila = [
+            'font' => [
+                'bold' => false,
+            ],
+            'alignment' => [
+                'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT,
+            ]
+        ];
+
+        $phpExcel->getActiveSheet()->getStyle('A1:Z1')->applyFromArray($styleCabecera);
+
+        //Edito la info que va a ir en el archivo excel
+        $hoja->setCellValue('A1', "AMIE");
+        $hoja->setCellValue('B1', "CENTRO EDUCATIVO");
+        $hoja->setCellValue('C1', "AÑO LECTIVO");
+        $hoja->setCellValue('D1', "CIUDAD");
+        $hoja->setCellValue('E1', "PROVINCIA");
+        $hoja->setCellValue('F1', "NUM ESTUDIANTES");
+        $hoja->setCellValue('G1', "NOMBRE");
+        $hoja->setCellValue('H1', "DOCUMENTO");
+        $hoja->setCellValue('I1', "TITULO PROFESIONAL");
+        $hoja->setCellValue('J1', "EDAD");
+        $hoja->setCellValue('K1', "GÉNERO");
+        $hoja->setCellValue('L1', "AUTOIDENTIFICACION");
+        $hoja->setCellValue('M1', "DISCAPACIDAD");
+        $hoja->setCellValue('N1', "TIPO DISCAPACIDAD");
+        $hoja->setCellValue('O1', "CONTACTO");
+        $hoja->setCellValue('P1', "EMAIL");
+
+        foreach ($registros as $key => $value) {
+            $phpExcel->getActiveSheet()->getStyle('A'.$fila.':Z'.$fila)->applyFromArray($styleFila);
+            $hoja->setCellValue('A'.$fila, $value->amie);
+            $hoja->setCellValue('B'.$fila, $value->ce);
+            $hoja->setCellValue('C'.$fila, $value->anio_lectivo);
+            $hoja->setCellValue('D'.$fila, $value->ciudad);
+            $hoja->setCellValue('E'.$fila, $value->provincia);
+            $hoja->setCellValue('F'.$fila, $value->num_est);
+            $hoja->setCellValue('G'.$fila, $value->nombres.' '.$value->apellidos);
+            $hoja->setCellValue('H'.$fila, $value->documento);
+            $hoja->setCellValue('I'.$fila, $value->titulo_pro);
+            $hoja->setCellValue('J'.$fila, $value->edad);
+            $hoja->setCellValue('K'.$fila, $value->genero);
+            $hoja->setCellValue('L'.$fila, $value->autoidentificacion);
+            $hoja->setCellValue('M'.$fila, $value->discapacidad);
+            $hoja->setCellValue('N'.$fila, $value->tipo);
+            $hoja->setCellValue('O'.$fila, $value->celular);
+            $hoja->setCellValue('P'.$fila, $value->email);
+            
+
+            $fila++;
+        }
+
+        //Creo el writter y guardo la hoja
+        
+        $writter = new XlsxWriter($phpExcel, 'Xlsx');
+        
+        //Cabeceras para descarga
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        header('Content-Disposition: attachment;filename="' . $nombreDelDocumento . '"');
+        header('Cache-Control: max-age=0');
+        
+        $r = $writter->save('php://output');exit;
+        if ($r) {
+            return redirect()->to('cargar_info_view');
+        }else{
+            $error = 'Hubo un error u no se pudo descargar';
+            return redirect()->to('cargar_info_view');
+        }        
+    }
+
+    public function nap6_descargar_registros(){
+
+        $registros = $this->nap6Model->_getAllRegistrosExcel();
+        //echo '<pre>'.var_export($registros, true).'</pre>';exit;
+        $fila = 2;
+
+        //Creo la hoja
+        $phpExcel = new Spreadsheet();
+        $phpExcel
+            ->getProperties()
+            ->setCreator("MYRP")
+            ->setLastModifiedBy('Pablo Orejuela') // última vez modificado por
+            ->setTitle('NAP 6 - Estudiantes MINEDUC Virtual Registros')
+            ->setSubject('Reportes MYRP')
+            ->setDescription('Reporte con los registros del NAP 6 Estudiantes MINEDUC Virtual')
+            ->setKeywords('etiquetas o palabras clave separadas por espacios')
+            ->setCategory('Registros');
+
+        $nombreDelDocumento = "NAP 6 - Estudiantes MINEDUC Virtual Registros.xlsx";
+
+        //Selecciono la pestaña
+        $hoja = $phpExcel->getActiveSheet();
+
+        $styleCabecera = [
+            'font' => [
+                'bold' => true,
+            ],
+            'alignment' => [
+                'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
+            ]
+        ];
+
+        $styleFila = [
+            'font' => [
+                'bold' => false,
+            ],
+            'alignment' => [
+                'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT,
+            ]
+        ];
+
+        $phpExcel->getActiveSheet()->getStyle('A1:Z1')->applyFromArray($styleCabecera);
+
+        //Edito la info que va a ir en el archivo excel
+        $hoja->setCellValue('A1', "AMIE");
+        $hoja->setCellValue('B1', "CENTRO EDUCATIVO");
+        $hoja->setCellValue('C1', "AÑO LECTIVO");
+        $hoja->setCellValue('D1', "CIUDAD");
+        $hoja->setCellValue('E1', "PROVINCIA");
+        $hoja->setCellValue('F1', "NIVEL");
+        $hoja->setCellValue('G1', "SUBNIVEL");
+        $hoja->setCellValue('H1', "NOMBRE");
+        $hoja->setCellValue('I1', "DOCUMENTO");
+        $hoja->setCellValue('J1', "NACIONALIDAD");
+        $hoja->setCellValue('K1', "ETNIA");
+        $hoja->setCellValue('L1', "F NACIMIENTO");
+        $hoja->setCellValue('M1', "EDAD");
+        $hoja->setCellValue('N1', "GÉNERO");
+        $hoja->setCellValue('O1', "DISCAPACIDAD");
+        $hoja->setCellValue('P1', "TIPO DISCAPACIDAD");
+        $hoja->setCellValue('Q1', "REPRESENTANTE");
+        $hoja->setCellValue('R1', "DOC REPRESENTANTE");
+        $hoja->setCellValue('S1', "PARENTESCO");
+        $hoja->setCellValue('T1', "NAC REPRESENTANTE");
+        $hoja->setCellValue('U1', "DIR REPRESENTANTE");
+        $hoja->setCellValue('V1', "CONTACTO");
+        $hoja->setCellValue('W1', "EMAIL");
+        $hoja->setCellValue('X1', "OBSERVACIONES");
+
+        foreach ($registros as $key => $value) {
+            $phpExcel->getActiveSheet()->getStyle('A'.$fila.':Z'.$fila)->applyFromArray($styleFila);
+            $hoja->setCellValue('A'.$fila, $value->amie);
+            $hoja->setCellValue('B'.$fila, $value->ce);
+            $hoja->setCellValue('C'.$fila, $value->anio_lectivo);
+            $hoja->setCellValue('D'.$fila, $value->ciudad);
+            $hoja->setCellValue('E'.$fila, $value->provincia);
+            $hoja->setCellValue('F'.$fila, $value->nivel);
+            $hoja->setCellValue('G'.$fila, $value->subnivel);
+            $hoja->setCellValue('H'.$fila, $value->nombres.' '.$value->apellidos);
+            $hoja->setCellValue('I'.$fila, $value->documento);
+            $hoja->setCellValue('J'.$fila, $value->nacionalidad);
+            $hoja->setCellValue('K'.$fila, $value->etnia);
+            $hoja->setCellValue('L'.$fila, $value->fecha_nac);
+            $hoja->setCellValue('M'.$fila, $value->edad);
+            $hoja->setCellValue('N'.$fila, $value->genero);
+            $hoja->setCellValue('O'.$fila, $value->discapacidad);
+            $hoja->setCellValue('P'.$fila, $value->tipo_discapacidad);
+            $hoja->setCellValue('Q'.$fila, $value->representante);
+            $hoja->setCellValue('R'.$fila, $value->documento_rep);
+            $hoja->setCellValue('S'.$fila, $value->parentesto_rep);
+            $hoja->setCellValue('T'.$fila, $value->nacionalidad_rep);
+            $hoja->setCellValue('U'.$fila, $value->direccion_rep);
+            $hoja->setCellValue('V'.$fila, $value->contacto_telf);
+            $hoja->setCellValue('W'.$fila, $value->email);
+            $hoja->setCellValue('X'.$fila, $value->observaciones);
+            
+
+            $fila++;
+        }
+
+        //Creo el writter y guardo la hoja
+        
+        $writter = new XlsxWriter($phpExcel, 'Xlsx');
+        
+        //Cabeceras para descarga
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        header('Content-Disposition: attachment;filename="' . $nombreDelDocumento . '"');
+        header('Cache-Control: max-age=0');
+        
+        $r = $writter->save('php://output');exit;
+        if ($r) {
+            return redirect()->to('cargar_info_view');
+        }else{
+            $error = 'Hubo un error u no se pudo descargar';
+            return redirect()->to('cargar_info_view');
+        }        
+    }
+
+    public function nap7_descargar_registros(){
+
+        $registros = $this->nap7Model->_getAllRegistrosExcel();
+        //echo '<pre>'.var_export($registros, true).'</pre>';exit;
+        $fila = 2;
+
+        //Creo la hoja
+        $phpExcel = new Spreadsheet();
+        $phpExcel
+            ->getProperties()
+            ->setCreator("MYRP")
+            ->setLastModifiedBy('Pablo Orejuela') // última vez modificado por
+            ->setTitle('NAP 7 - Docentes MINEDUC Virtual Registros')
+            ->setSubject('Reportes MYRP')
+            ->setDescription('Reporte con los registros del NAP 7 Docentes MINEDUC Virtual')
+            ->setKeywords('etiquetas o palabras clave separadas por espacios')
+            ->setCategory('Registros');
+
+        $nombreDelDocumento = "NAP 7 - Docentes MINEDUC Virtual Registros.xlsx";
+
+        //Selecciono la pestaña
+        $hoja = $phpExcel->getActiveSheet();
+
+        $styleCabecera = [
+            'font' => [
+                'bold' => true,
+            ],
+            'alignment' => [
+                'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
+            ]
+        ];
+
+        $styleFila = [
+            'font' => [
+                'bold' => false,
+            ],
+            'alignment' => [
+                'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT,
+            ]
+        ];
+
+        $phpExcel->getActiveSheet()->getStyle('A1:Z1')->applyFromArray($styleCabecera);
+
+        //Edito la info que va a ir en el archivo excel
+        $hoja->setCellValue('A1', "AMIE");
+        $hoja->setCellValue('B1', "CENTRO EDUCATIVO");
+        $hoja->setCellValue('C1', "AÑO LECTIVO");
+        $hoja->setCellValue('D1', "CIUDAD");
+        $hoja->setCellValue('E1', "PROVINCIA");
+        $hoja->setCellValue('G1', "NOMBRE");
+        $hoja->setCellValue('H1', "DOCUMENTO");
+        $hoja->setCellValue('I1', "TITULO PROFESIONAL");
+        $hoja->setCellValue('J1', "EDAD");
+        $hoja->setCellValue('K1', "GÉNERO");
+        $hoja->setCellValue('L1', "AUTOIDENTIFICACION");
+        $hoja->setCellValue('O1', "CONTACTO");
+        $hoja->setCellValue('P1', "EMAIL");
+
+        foreach ($registros as $key => $value) {
+            $phpExcel->getActiveSheet()->getStyle('A'.$fila.':Z'.$fila)->applyFromArray($styleFila);
+            $hoja->setCellValue('A'.$fila, $value->amie);
+            $hoja->setCellValue('B'.$fila, $value->ce);
+            $hoja->setCellValue('C'.$fila, $value->anio_lectivo);
+            $hoja->setCellValue('D'.$fila, $value->ciudad);
+            $hoja->setCellValue('E'.$fila, $value->provincia);
+            $hoja->setCellValue('G'.$fila, $value->nombres.' '.$value->apellidos);
+            $hoja->setCellValue('H'.$fila, $value->documento);
+            $hoja->setCellValue('I'.$fila, $value->titulo_pro);
+            $hoja->setCellValue('J'.$fila, $value->edad);
+            $hoja->setCellValue('K'.$fila, $value->genero);
+            $hoja->setCellValue('L'.$fila, $value->autoidentificacion);
+            $hoja->setCellValue('O'.$fila, $value->celular);
+            $hoja->setCellValue('P'.$fila, $value->email);
+            
+
+            $fila++;
+        }
+
+        //Creo el writter y guardo la hoja
+        
+        $writter = new XlsxWriter($phpExcel, 'Xlsx');
+        
+        //Cabeceras para descarga
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        header('Content-Disposition: attachment;filename="' . $nombreDelDocumento . '"');
+        header('Cache-Control: max-age=0');
+        
+        $r = $writter->save('php://output');exit;
+        if ($r) {
+            return redirect()->to('cargar_info_view');
+        }else{
+            $error = 'Hubo un error u no se pudo descargar';
+            return redirect()->to('cargar_info_view');
+        }        
     }
     
     public function logout(){

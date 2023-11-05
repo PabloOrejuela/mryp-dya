@@ -126,12 +126,14 @@ $routes->get('prod2-nap2-frm-edit/(:num)', 'Prod2::prod2_nap2_frm_edit/$1');
 $routes->get('nap2-reg-procesos-form/(:num)', 'Prod2::nap2_reg_procesos_form/$1');
 $routes->post('nap2-process-update', 'Prod2::nap2_process_update');
 $routes->post('prod2-nap2-update', 'Prod2::prod2_nap2_update');
+$routes->get('nap2-descargar-registros', 'Prod2::nap2_descargar_registros');
 
 //NAP3
 $routes->get('prod2-nap3-menu', 'Prod2::nap3_procesos_grid');
 $routes->post('prod3_update', 'Prod3::update');
 $routes->get('nap3-reg-procesos-form/(:num)', 'Prod2::nap3_reg_procesos_form/$1');
 $routes->post('nap3-process-update', 'Prod2::nap3_process_update');
+$routes->get('nap3-descargar-registros', 'Prod2::nap3_descargar_registros');
 
 //NAP4
 $routes->get('prod2-nap4-menu', 'Prod2::nap4_procesos_grid');
@@ -139,12 +141,14 @@ $routes->get('nap4-reg-procesos-form/(:num)', 'Prod2::nap4_reg_procesos_form/$1'
 $routes->post('nap4-process-update', 'Prod2::nap4_process_update');
 $routes->get('prod2-nap4-frm-edit/(:num)', 'Prod2::prod2_nap4_frm_edit/$1');
 $routes->post('prod2-nap4-update', 'Prod2::prod2_nap4_update');
+$routes->get('nap4-descargar-registros', 'Prod2::nap4_descargar_registros');
 
 //NAP5
 $routes->get('prod2-nap5-menu', 'Prod2::nap5_procesos_grid');
 $routes->get('nap5-reg-procesos-form/(:num)/(:any)', 'Prod2::nap5_reg_procesos_form/$1/$2');
 $routes->post('nap5-process-update', 'Prod2::nap5_process_update');
 $routes->post('nap5-process-sierra-update', 'Prod2::nap5_process_sierra_update');
+$routes->get('nap5-descargar-registros', 'Prod2::nap5_descargar_registros');
 
 //NAP6
 $routes->get('prod2-nap6-menu', 'Prod2::nap6_procesos_grid');
@@ -153,12 +157,14 @@ $routes->post('nap6-process-update', 'Prod2::nap6_process_update');
 $routes->get('prod2-nap6-frm-edit/(:num)', 'Prod2::prod2_nap6_frm_edit/$1');
 $routes->post('prod2-nap6-update', 'Prod2::prod2_nap6_update');
 $routes->get('prod2-nap6-delete/(:num)', 'Prod2::prod2_nap6_delete/$1');
+$routes->get('nap6-descargar-registros', 'Prod2::nap6_descargar_registros');
 
 //NAP7
 $routes->get('prod2-nap7-menu', 'Prod2::nap7_procesos_grid');
 $routes->get('nap7-reg-procesos-form/(:num)/(:any)', 'Prod2::nap7_reg_procesos_form/$1/$2');
 $routes->post('nap7-process-update', 'Prod2::nap7_process_update');
 $routes->post('nap7-process-sierra-update', 'Prod2::nap7_process_sierra_update');
+$routes->get('nap7-descargar-registros', 'Prod2::nap7_descargar_registros');
 
 //PRODUCTO 4
 $routes->get('prod-4-create', 'Prod4::prod_4_create');

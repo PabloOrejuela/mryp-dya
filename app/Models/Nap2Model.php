@@ -285,4 +285,27 @@ class Nap2Model extends Model {
 
         $builder->insert();
     }
+
+    public function _getAllRegistrosExcel() {
+        $result = NULL;
+        $builder = $this->db->table($this->table);
+        $builder->select($this->table.'.id as id,edad,centro_educativo.amie as amie,centro_educativo.nombre as ce, anio_lectivo, fecha_nac, representante,documento_rep,
+                        ciudad,provincia,'.$this->table.'.nombres as nombres,'.$this->table.'.apellidos as apellidos, documento,nacionalidad,parentesto_rep,nacionalidad_rep,
+                        direccion_rep,etnia.etnia as etnia, genero,discapacidad,tipo_discapacidad,contacto_telf,email');
+        $builder->join('centro_educativo', 'centro_educativo.amie = '.$this->table.'.amie');
+        $builder->join('ciudades', 'ciudades.idciudades = centro_educativo.idciudades');
+        $builder->join('provincias', 'provincias.idprovincias = ciudades.idprovincias');
+        $builder->join('etnia', 'etnia.id = '.$this->table.'.etnia','left');
+        //$builder->join('anio_lectivo', 'anio_lectivo.id = producto_1.anio_lectivo');
+        $query = $builder->get();
+        if ($query->getResult() != null) {
+            foreach ($query->getResult() as $row) {
+                if ($row->id != NULL && $row != '') {
+                    $result[] = $row;
+                }
+            }
+        }
+        //echo $this->db->getLastQuery();
+        return $result;
+    }
 }
