@@ -95,4 +95,48 @@ class Validation extends BaseConfig {
             'required' => 'El campo COHORTE es obligatorio',
         ]
     ];
+
+    public $nap2Create= [
+        'nombres' => 'required',
+        'apellidos' => 'required',
+        'amie' => 'required',
+        'anio_lectivo' => 'greater_than[0]',
+    ];
+
+    public $nap2Create_errors = [
+        'nombres' => [
+            'required' => 'El campo NOMBRES es obligatorio',
+        ],
+        'apellidos' => [
+            'required' => 'El campo APELLIDOS es obligatorio',
+        ],
+        'amie' => [
+            'greater_than' => 'El campo CENTRO EDUCATIVO es obligatorio',
+        ],
+        'anio_lectivo' => [
+            'greater_than' => 'El campo AÑO LECTIVO es obligatorio',
+        ]
+    ];
+
+    public $nap3Create= [
+        'nombres' => 'required',
+        'apellidos' => 'required',
+        'amie' => 'required',
+        'anio_lectivo' => 'greater_than[0]',
+    ];
+
+    public $nap3Create_errors = [
+        'nombres' => [
+            'required' => 'El campo NOMBRES es obligatorio',
+        ],
+        'apellidos' => [
+            'required' => 'El campo APELLIDOS es obligatorio',
+        ],
+        'amie' => [
+            'greater_than' => 'El campo CENTRO EDUCATIVO es obligatorio',
+        ],
+        'anio_lectivo' => [
+            'greater_than' => 'El campo AÑO LECTIVO es obligatorio',
+        ]
+    ];
 }

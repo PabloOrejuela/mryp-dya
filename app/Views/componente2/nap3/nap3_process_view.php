@@ -34,8 +34,8 @@
                         if (isset($nap3) && $nap3 != NULL) {
                             foreach ($nap3 as $key => $value) {
                                 echo '<tr>
-                                        <td>'.$value->idnap3 .'</td>
-                                        <td>'.$value->nombres.' '.$value->apellidos.'</td>
+                                        <td>'.strtoupper($value->idnap3).'</td>
+                                        <td><a href="'.site_url().'nap3-frm-edit/'.$value->idnap3.'">'.strtoupper($value->nombres.' '.$value->apellidos).'</a></td>
                                         <td>'.$value->amie.'</td>
                                         <td>'.$value->nombre.'</td>
                                         <td>'.$value->regimen.'</td>

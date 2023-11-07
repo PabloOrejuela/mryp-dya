@@ -122,10 +122,10 @@ $routes->get('prod-2-menu', 'Prod2::index');
 $routes->get('prod2-nap2-menu', 'Prod2::nap2_procesos_grid');
 $routes->get('nap2-create', 'Prod2::nap2_create');
 $routes->post('nap2-insert', 'Prod2::nap2_insert');
-$routes->get('prod2-nap2-frm-edit/(:num)', 'Prod2::prod2_nap2_frm_edit/$1');
+$routes->get('nap2-frm-edit/(:num)', 'Prod2::nap2_frm_edit/$1');
 $routes->get('nap2-reg-procesos-form/(:num)', 'Prod2::nap2_reg_procesos_form/$1');
 $routes->post('nap2-process-update', 'Prod2::nap2_process_update');
-$routes->post('prod2-nap2-update', 'Prod2::prod2_nap2_update');
+$routes->post('nap2-update', 'Prod2::nap2_update');
 $routes->get('nap2-descargar-registros', 'Prod2::nap2_descargar_registros');
 
 //NAP3
@@ -134,6 +134,10 @@ $routes->post('prod3_update', 'Prod3::update');
 $routes->get('nap3-reg-procesos-form/(:num)', 'Prod2::nap3_reg_procesos_form/$1');
 $routes->post('nap3-process-update', 'Prod2::nap3_process_update');
 $routes->get('nap3-descargar-registros', 'Prod2::nap3_descargar_registros');
+$routes->get('nap3-create', 'Prod2::nap3_create');
+$routes->post('nap3-insert', 'Prod2::nap3_insert');
+$routes->post('nap3-update', 'Prod2::nap3_update');
+$routes->get('nap3-frm-edit/(:num)', 'Prod2::nap3_frm_edit/$1');
 
 //NAP4
 $routes->get('prod2-nap4-menu', 'Prod2::nap4_procesos_grid');

@@ -87,10 +87,10 @@ class Nap2Model extends Model {
 
     public function _getCentrosEducativos() {
         $result = NULL;
-        $builder = $this->db->table($this->table);
+        $builder = $this->db->table('centro_educativo');
         $builder->select('nap2_est_dya.amie as amie, nombre');
         $builder->distinct();
-        $builder->join('centro_educativo', 'centro_educativo.amie = nap2_est_dya.amie');
+        $builder->join($this->table, 'centro_educativo.amie = '.$this->table.'.amie');
         $builder->orderBy('nombre');
         $query = $builder->get();
         if ($query->getResult() != null) {
@@ -129,6 +129,14 @@ class Nap2Model extends Model {
 
     public function _update($datos) {
         $builder = $this->db->table($this->table);
+        if ($datos['amie'] != 'NULL') {
+            $builder->set('amie', $datos['amie']);
+        }
+
+        if ($datos['anio_lectivo'] != 'NULL') {
+            $builder->set('anio_lectivo', $datos['anio_lectivo']);
+        }
+
         if ($datos['nombres'] != 'NULL') {
             $builder->set('nombres', $datos['nombres']);
         }
@@ -149,6 +157,10 @@ class Nap2Model extends Model {
             $builder->set('etnia', $datos['etnia']);
         }
 
+        if ($datos['genero'] != 'NULL') {
+            $builder->set('genero', $datos['genero']);
+        }
+
         if ($datos['fecha_nac'] != 'NULL') {
             $builder->set('fecha_nac', $datos['fecha_nac']);
         }
@@ -157,8 +169,8 @@ class Nap2Model extends Model {
             $builder->set('edad', $datos['edad']);
         }
 
-        if ($datos['genero'] != 'NULL') {
-            $builder->set('genero', $datos['genero']);
+        if ($datos['ingresado_sistema'] != 'NULL') {
+            $builder->set('ingresado_sistema', $datos['ingresado_sistema']);
         }
 
         if ($datos['discapacidad'] != 'NULL') {
@@ -169,12 +181,12 @@ class Nap2Model extends Model {
             $builder->set('tipo_discapacidad', $datos['tipo_discapacidad']);
         }
 
-        if ($datos['representante'] != 'NULL') {
-            $builder->set('representante', $datos['representante']);
-        }
-
         if ($datos['documento_rep'] != 'NULL') {
             $builder->set('documento_rep', $datos['documento_rep']);
+        }
+
+        if ($datos['representante'] != 'NULL') {
+            $builder->set('representante', $datos['representante']);
         }
 
         if ($datos['parentesto_rep'] != 'NULL') {

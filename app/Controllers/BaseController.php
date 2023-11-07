@@ -92,6 +92,26 @@ abstract class BaseController extends Controller {
      */
     protected $helpers = ['form', 'url', 'html',];
 
+    //Declaro variables globales
+    protected $nacionalidad = array(
+        'ECUATORIANA' => 'ECUATORIANA',
+        'VENEZOLANA' => 'VENEZOLANA',
+        'COLOMBIANA' => 'COLOMBIANA',
+        'PERUANA' => 'PERUANA',
+        'OTROS' => 'OTROS',
+    );
+
+    protected $etnia = array(
+        'MESTIZA' => 'MESTIZA',
+        'INDIGENA' => 'INDIGENA',
+        'AFRODECENDIENTE' => 'AFRODECENDIENTE',
+        'AFROECUATORIANA' => 'AFROECUATORIANA',
+        'AFROVENEZOLANA' => 'AFROVENEZOLANA',
+        'BLANCA' => 'BLANCA',
+        'OTROS' => 'OTROS',
+    );
+    
+
     /**
      * Be sure to declare properties for any property fetch you initialized.
      * The creation of dynamic property is deprecated in PHP 8.2.
