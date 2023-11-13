@@ -119,7 +119,7 @@ class Inicio extends BaseController {
                     'prod3_biblioteca' => $usuario->prod3_biblioteca,
                     'componente_4' => $usuario->componente_4,
                 ];
-        
+                //echo '<pre>'.var_export($sessiondata, true).'</pre>';exit;
                 $user = [
                     'id' => $usuario->id,
                     'is_logged' => 1,

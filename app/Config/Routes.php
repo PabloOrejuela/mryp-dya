@@ -146,6 +146,8 @@ $routes->post('nap4-process-update', 'Prod2::nap4_process_update');
 $routes->get('prod2-nap4-frm-edit/(:num)', 'Prod2::prod2_nap4_frm_edit/$1');
 $routes->post('prod2-nap4-update', 'Prod2::prod2_nap4_update');
 $routes->get('nap4-descargar-registros', 'Prod2::nap4_descargar_registros');
+$routes->get('nap4-create', 'Prod2::nap4_create');
+$routes->post('nap4-insert', 'Prod2::nap4_insert');
 
 //NAP5
 $routes->get('prod2-nap5-menu', 'Prod2::nap5_procesos_grid');

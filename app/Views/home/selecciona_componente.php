@@ -4,7 +4,7 @@
         <div class="card mb-4">
             <div class="card-header">
                 <i class="fa-solid fa-cash-register"></i>
-                <?= esc("Cargar información del componente"); ?>
+                <?= esc("Seleccionar componente"); ?>
             </div>
             <div class="card-body"> 
                 

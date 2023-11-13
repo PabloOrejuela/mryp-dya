@@ -6,7 +6,14 @@
         float: left;
         margin: 3px;
     }
-    #btn-nap{
+
+    #btn-dya {
+        background-color: rgb(26, 138, 84, 0.9);
+        text-align:left;
+    }
+
+    #btn-mineduc {
+        background-color: rgb(1, 152, 201, 0.8);
         text-align:left;
     }
 </style>
@@ -16,7 +23,7 @@
         <div class="card mb-4">
             <div class="card-header">
                 <i class="fa-solid fa-cash-register"></i>
-                <?= esc("Cargar información del componente"); ?>
+                <?= esc("Seleccionar componente"); ?>
             </div>
             <div class="card-body"> 
                 
@@ -28,10 +35,10 @@
                                     <div class="card-body" >
                                         <h5 class="card-title">Componente 2</h5>
                                             <p class="card-text">Servicio educativo NAP </p>
-                                            <a href="'.site_url().'prod2-nap2-menu" id="btn-nap" class="btn btn-info mb-2">NAP 2 - Estudiantes DYA</a>
-                                            <a href="'.site_url().'prod2-nap3-menu" id="btn-nap" class="btn btn-info mb-2">NAP 3 - Docentes DYA</a>
-                                            <a href="'.site_url().'prod2-nap4-menu" id="btn-nap" class="btn btn-info mb-2">NAP 4 - Estudiantes MINEDUC Presencial</a>
-                                            <a href="'.site_url().'prod2-nap5-menu" id="btn-nap" class="btn btn-info mb-2">NAP 5 - Docentes MINEDUC Presencial</a>
+                                            <a href="'.site_url().'prod2-nap2-menu" id="btn-dya" class="btn btn-info mb-2">NAP 2 - Estudiantes DYA</a>
+                                            <a href="'.site_url().'prod2-nap3-menu" id="btn-dya" class="btn btn-info mb-2">NAP 3 - Docentes DYA</a>
+                                            <a href="'.site_url().'prod2-nap4-menu" id="btn-mineduc" class="btn btn-info mb-2">NAP 4 - Estudiantes MINEDUC Presencial</a>
+                                            <a href="'.site_url().'prod2-nap5-menu" id="btn-mineduc" class="btn btn-info mb-2">NAP 5 - Docentes MINEDUC Presencial</a>
                                             <a href="'.site_url().'prod2-nap6-menu" id="btn-nap" class="btn btn-info mb-2">NAP 6 - Estudiantes MINEDUC Virtual</a>
                                             <a href="'.site_url().'prod2-nap7-menu" id="btn-nap" class="btn btn-info mb-2">NAP 7 - Docentes MINEDUC Virtual</a>
                                     </div>
