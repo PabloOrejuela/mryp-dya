@@ -19,7 +19,7 @@
                     <p id="error-message"><?= session('errors.nombres');?> </p>
                 </div>
                 <div class="col-md-4 mb-3">
-                    <label for="nacionalidad">Apellidos:</label>
+                    <label for="apellidos">Apellidos:</label>
                     <input type="text" style="text-transform: uppercase" id="apellidos" name="apellidos" value="<?= $datos->apellidos;?>" class="form-control" placeholder="Apellidos" aria-label="apellidos">
                     <p id="error-message"><?= session('errors.apellidos');?> </p>
                 </div>
@@ -54,9 +54,9 @@
                             if ($etnia) {
                                 foreach ($etnia as $key => $value) {
                                     if ($datos->etnia == $value) {
-                                        echo '<option value="'.$key.'" '.set_select('nacionalidad', $key, false).' selected>'.$value.'</option>';
+                                        echo '<option value="'.$key.'" '.set_select('etnia', $key, false).' selected>'.$value.'</option>';
                                     }else{
-                                        echo '<option value="'.$key.'" '.set_select('nacionalidad', $key, false).'>'.$value.'</option>';
+                                        echo '<option value="'.$key.'" '.set_select('etnia', $key, false).'>'.$value.'</option>';
                                     }
                                 }
                             }
@@ -134,9 +134,9 @@
                         if ($anios_lectivos) {
                             foreach ($anios_lectivos as $key => $anio) {
                                 if ($datos->anio_lectivo == $anio->id) {
-                                    echo '<option value="'.$anio->id.'" '.set_select('nacionalidad', $anio->id, false).' selected>'.$anio->anio_lectivo.'</option>';
+                                    echo '<option value="'.$anio->id.'" '.set_select('anio_lectivo', $anio->id, false).' selected>'.$anio->anio_lectivo.'</option>';
                                 }else{
-                                    echo '<option value="'.$anio->id.'" '.set_select('nacionalidad', $anio->id, false).'>'.$anio->anio_lectivo.'</option>';
+                                    echo '<option value="'.$anio->id.'" '.set_select('anio_lectivo', $anio->id, false).'>'.$anio->anio_lectivo.'</option>';
                                 }
                             }
                         }
@@ -159,9 +159,9 @@
                         if ($centros != NULL && isset($centros) ) {
                             foreach ($centros as $key => $ce) {
                                 if ($datos->amie == $ce->amie) {
-                                    echo '<option value="'.$ce->amie.'" '.set_select('amie', $ce->amie, false).' selected>'.$ce->amie.' - '.$ce->nombre.'</option>';
+                                    echo '<option value="'.$ce->amie.'" '.set_select('amie', $ce->amie, false).' selected>'.$ce->amie.' - '.$ce->centro.'</option>';
                                 }else{
-                                    echo '<option value="'.$ce->amie.'" '.set_select('amie', $ce->amie, false).'>'.$ce->amie.' - '.$ce->nombre.'</option>';
+                                    echo '<option value="'.$ce->amie.'" '.set_select('amie', $ce->amie, false).'>'.$ce->amie.' - '.$ce->centro.'</option>';
                                 }
                             }
                         }
@@ -219,6 +219,18 @@
                 <div class="col-md-4 mb-3">
                     <label for="email">Email de contacto:</label>
                     <input type="text" id="email" name="email" value="<?= $datos->email; ?>" class="form-control" placeholder="Email" aria-label="email">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 mb-3">
+                    <label for="observaciones">Observaciones:</label>
+                    <textarea name="observaciones" id="observaciones" cols="30" rows="10"><?php
+                            if ($datos->observaciones) {
+                                echo $datos->observaciones;
+                            }else{
+                                set_value('observaciones'); 
+                            }
+                        ?></textarea>
                 </div>
             </div>
             <?= form_hidden('id', $id); ?>

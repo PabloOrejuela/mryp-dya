@@ -97,6 +97,10 @@ class Nap4Model extends Model {
             $builder->set('nombres', $datos['nombres']);
         }
 
+        if ($datos['amie'] != 'NULL') {
+            $builder->set('amie', $datos['amie']);
+        }
+
         if ($datos['apellidos'] != 'NULL') {
             $builder->set('apellidos', $datos['apellidos']);
         }
@@ -159,6 +163,10 @@ class Nap4Model extends Model {
 
         if ($datos['email'] != 'NULL') {
             $builder->set('email', $datos['email']);
+        }
+
+        if ($datos['observaciones'] != 'NULL') {
+            $builder->set('observaciones', $datos['observaciones']);
         }
         
         $builder->where('id', $datos['id']);
@@ -171,6 +179,10 @@ class Nap4Model extends Model {
             $builder->set('nombres', $datos['nombres']);
         }
 
+        if ($datos['amie'] != 'NULL') {
+            $builder->set('amie', $datos['amie']);
+        }
+
         if ($datos['apellidos'] != 'NULL') {
             $builder->set('apellidos', $datos['apellidos']);
         }
@@ -235,16 +247,20 @@ class Nap4Model extends Model {
             $builder->set('email', $datos['email']);
         }
 
-        $builder->set('id', $datos['id']);
+        if ($datos['observaciones'] != 'NULL') {
+            $builder->set('observaciones', $datos['observaciones']);
+        }
+
         $builder->insert();
     }
 
     public function _getAllRegistrosExcel() {
         $result = NULL;
         $builder = $this->db->table($this->table);
-        $builder->select($this->table.'.id as id,edad,centro_educativo.amie as amie,centro_educativo.nombre as ce, anio_lectivo, fecha_nac, representante,documento_rep,
-                        ciudad,provincia,'.$this->table.'.nombres as nombres,'.$this->table.'.apellidos as apellidos, documento,nacionalidad,parentesto_rep,nacionalidad_rep,
-                        direccion_rep,etnia.etnia as etnia, genero,discapacidad,tipo_discapacidad,contacto_telf,email,docente_tutor,doc_tutor,email_tutor,telf_tutor,etnia_tutor');
+        $builder->select($this->table.'.id as id,edad,centro_educativo.amie as amie,centro_educativo.nombre as ce, anio_lectivo, fecha_nac, 
+                        representante,documento_rep,ciudad,provincia,'.$this->table.'.nombres as nombres,'.$this->table.'.apellidos as apellidos, 
+                        documento,nacionalidad,parentesto_rep,nacionalidad_rep,direccion_rep,etnia.etnia as etnia, genero,discapacidad,
+                        tipo_discapacidad,contacto_telf,email,docente_tutor,doc_tutor,email_tutor,telf_tutor,etnia_tutor,observaciones');
         $builder->join('centro_educativo', 'centro_educativo.amie = '.$this->table.'.amie');
         $builder->join('ciudades', 'ciudades.idciudades = centro_educativo.idciudades');
         $builder->join('provincias', 'provincias.idprovincias = ciudades.idprovincias');

@@ -94,6 +94,50 @@ class Prod3Model extends Model {
         return $result;
     }
 
+    /**
+     *
+     * Esta función trae todos los registros del Prod 3 para coordinadores y admin
+     *
+     * @param Type $var El código amie del CE
+     * @return array
+     **/
+    public function _getAllRegistros() {
+        $result = NULL;
+        $builder = $this->db->table($this->table);
+        $builder->select('producto_3.id as id, producto_3.amie as amie, nombre, documento');
+        $builder->orderBy('id');
+        $query = $builder->get();
+        if ($query->getResult() != null) {
+            foreach ($query->getResult() as $row) {
+                $result[] = $row;
+            }
+        }
+        //echo $this->db->getLastQuery();
+        return $result;
+    }
+
+    /**
+     *
+     * Esta función trae todos los registros del Prod 3 para coordinadores y admin
+     *
+     * @param Type $var El código amie del CE
+     * @return array
+     **/
+    public function _getAllRegistrosCentro($amie) {
+        $result = NULL;
+        $builder = $this->db->table($this->table);
+        $builder->select('producto_3.id as id, producto_3.amie as amie, nombre, documento');
+        $builder->orderBy('id');
+        $query = $builder->get();
+        if ($query->getResult() != null) {
+            foreach ($query->getResult() as $row) {
+                $result[] = $row;
+            }
+        }
+        //echo $this->db->getLastQuery();
+        return $result;
+    }
+
 
     /**
      *
@@ -201,5 +245,12 @@ class Prod3Model extends Model {
         }
         //echo $this->db->getLastQuery();
         return $result;
+    }
+
+    public function _updateCedula($datos) {
+        $builder = $this->db->table($this->table);
+        $builder->set('documento', $datos['documento']);
+        $builder->where('id', $datos['id']);
+        $builder->update();
     }
 }

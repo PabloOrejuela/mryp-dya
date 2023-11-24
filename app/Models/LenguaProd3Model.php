@@ -115,6 +115,48 @@ class LenguaProd3Model extends Model {
         return $total;
     }
 
+    public function _getTalleresLengua($id) {
+        $total['enfoque_sociocultural'] = 0;
+        $total['exp_dialectales'] = 0;
+        $total['exp_oral'] = 0;
+        $total['comp_lectora'] = 0;
+        $total['prod_textos'] = 0;
+        $total['extrategia_prod_text'] = 0;
+
+        $builder = $this->db->table($this->table);
+        $builder->select('enfoque_sociocultural,exp_dialectales,exp_oral,comp_lectora,prod_textos,extrategia_prod_text')->where('id_prod_3', $id);
+        $query = $builder->get();
+        if ($query->getResult() != null) {
+            foreach ($query->getResult() as $row) {
+                if ($row->enfoque_sociocultural == 1) {
+                    $total['enfoque_sociocultural'] += 1;
+                }
+
+                if ($row->exp_dialectales == 1) {
+                    $total['exp_dialectales'] += 1;
+                }
+
+                if ($row->exp_oral == 1) {
+                    $total['exp_oral'] += 1;
+                }
+
+                if ($row->comp_lectora == 1) {
+                    $total['comp_lectora'] += 1;
+                }
+
+                if ($row->prod_textos == 1) {
+                    $total['prod_textos'] += 1;
+                }
+
+                if ($row->extrategia_prod_text == 1) {
+                    $total['extrategia_prod_text'] += 1;
+                }
+            }
+        }
+        //echo $this->db->getLastQuery();
+        return $total;
+    }
+
     public function _update($datos) {
         $builder = $this->db->table($this->table);
         if ($datos['enfoque_sociocultural'] != 'NULL') {

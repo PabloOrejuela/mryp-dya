@@ -29,7 +29,8 @@ class Nap5Model extends Model {
         'genero',
         'discapacidad',
         'tipo',
-        'subnivel'
+        'subnivel',
+        'observaciones'
     ];
 
     // Dates
@@ -82,8 +83,9 @@ class Nap5Model extends Model {
     public function _getAllRegistrosExcel() {
         $result = NULL;
         $builder = $this->db->table($this->table);
-        $builder->select($this->table.'.id as id,edad,centro_educativo.amie as amie,centro_educativo.nombre as ce, num_est,titulo_pro,genero,discapacidad,tipo,
-                        anio_lectivo,ciudad,provincia,'.$this->table.'.nombres as nombres,'.$this->table.'.apellidos as apellidos, documento,email, celular,autoidentificacion');
+        $builder->select($this->table.'.id as id,edad,centro_educativo.amie as amie,centro_educativo.nombre as ce, num_est,titulo_pro,genero,
+                        discapacidad,tipo,anio_lectivo,ciudad,provincia,'.$this->table.'.nombres as nombres,'.$this->table.'.apellidos as apellidos, 
+                        documento,email, celular,autoidentificacion,observaciones');
         $builder->join('centro_educativo', 'centro_educativo.amie = '.$this->table.'.amie');
         $builder->join('ciudades', 'ciudades.idciudades = centro_educativo.idciudades');
         $builder->join('provincias', 'provincias.idprovincias = ciudades.idprovincias');
@@ -98,5 +100,144 @@ class Nap5Model extends Model {
         }
         //echo $this->db->getLastQuery();
         return $result;
+    }
+
+    public function _save($datos) {
+        $builder = $this->db->table($this->table);
+        if ($datos['anio_lectivo'] != 'NULL') {
+            $builder->set('anio_lectivo', $datos['anio_lectivo']);
+        }
+
+        if ($datos['num_est'] != 'NULL') {
+            $builder->set('num_est', $datos['num_est']);
+        }
+
+        if ($datos['documento'] != 'NULL') {
+            $builder->set('documento', $datos['documento']);
+        }
+
+        if ($datos['nombres'] != 'NULL') {
+            $builder->set('nombres', $datos['nombres']);
+        }
+
+        if ($datos['apellidos'] != 'NULL') {
+            $builder->set('apellidos', $datos['apellidos']);
+        }
+
+        if ($datos['edad'] != 'NULL') {
+            $builder->set('edad', $datos['edad']);
+        }
+
+        if ($datos['email'] != 'NULL') {
+            $builder->set('email', $datos['email']);
+        }
+
+        if ($datos['celular'] != 'NULL') {
+            $builder->set('celular', $datos['celular']);
+        }
+        
+        if ($datos['autoidentificacion'] != 'NULL') {
+            $builder->set('autoidentificacion', $datos['autoidentificacion']);
+        }
+
+        if ($datos['titulo_pro'] != 'NULL') {
+            $builder->set('titulo_pro', $datos['titulo_pro']);
+        }
+
+        if ($datos['genero'] != 'NULL') {
+            $builder->set('genero', $datos['genero']);
+        }
+
+        if ($datos['discapacidad'] != 'NULL') {
+            $builder->set('discapacidad', $datos['discapacidad']);
+        }
+
+        if ($datos['tipo'] != 'NULL') {
+            $builder->set('tipo', $datos['tipo']);
+        }
+
+        if ($datos['subnivel'] != 'NULL') {
+            $builder->set('subnivel', $datos['subnivel']);
+        }
+
+        if ($datos['amie'] != 'NULL') {
+            $builder->set('amie', $datos['amie']);
+        }
+
+        if ($datos['observaciones'] != 'NULL') {
+            $builder->set('observaciones', $datos['observaciones']);
+        }
+
+        $builder->insert();
+    }
+
+    public function _update($datos) {
+        $builder = $this->db->table($this->table);
+        if ($datos['anio_lectivo'] != 'NULL') {
+            $builder->set('anio_lectivo', $datos['anio_lectivo']);
+        }
+
+        if ($datos['num_est'] != 'NULL') {
+            $builder->set('num_est', $datos['num_est']);
+        }
+
+        if ($datos['documento'] != 'NULL') {
+            $builder->set('documento', $datos['documento']);
+        }
+
+        if ($datos['nombres'] != 'NULL') {
+            $builder->set('nombres', $datos['nombres']);
+        }
+
+        if ($datos['apellidos'] != 'NULL') {
+            $builder->set('apellidos', $datos['apellidos']);
+        }
+
+        if ($datos['edad'] != 'NULL') {
+            $builder->set('edad', $datos['edad']);
+        }
+
+        if ($datos['email'] != 'NULL') {
+            $builder->set('email', $datos['email']);
+        }
+
+        if ($datos['celular'] != 'NULL') {
+            $builder->set('celular', $datos['celular']);
+        }
+        
+        if ($datos['autoidentificacion'] != 'NULL') {
+            $builder->set('autoidentificacion', $datos['autoidentificacion']);
+        }
+
+        if ($datos['titulo_pro'] != 'NULL') {
+            $builder->set('titulo_pro', $datos['titulo_pro']);
+        }
+
+        if ($datos['genero'] != 'NULL') {
+            $builder->set('genero', $datos['genero']);
+        }
+
+        if ($datos['discapacidad'] != 'NULL') {
+            $builder->set('discapacidad', $datos['discapacidad']);
+        }
+
+        if ($datos['tipo'] != 'NULL') {
+            $builder->set('tipo', $datos['tipo']);
+        }
+
+        if ($datos['subnivel'] != 'NULL') {
+            $builder->set('subnivel', $datos['subnivel']);
+        }
+
+        if ($datos['amie'] != 'NULL') {
+            $builder->set('amie', $datos['amie']);
+        }
+
+        if ($datos['observaciones'] != 'NULL') {
+            $builder->set('observaciones', $datos['observaciones']);
+        }
+        
+        $builder->where('id', $datos['id']);
+        $builder->update();
     }
 }

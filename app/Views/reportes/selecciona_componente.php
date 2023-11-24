@@ -38,8 +38,15 @@
                                     <img src="'.site_url().'public/images/card-03.jpg" class="card-img-top" alt="card3">
                                     <div class="card-body" >
                                         <h5 class="card-title">Componente 3</h5>
-                                            <p class="card-text">Programa de Acompañamiento Pedagógico</p>
-                                            <a href="'.site_url().'prod3-reporte-certificados" class="btn btn-info mb-2" target="_blank">APRUEBA CERTIFICADOS</a>
+                                            <p class="card-text">Programa de Acompañamiento Pedagógico</p>';
+                                        if ($this->session->idrol == 1 || $this->session->idrol == 3 || $this->session->idrol == 10) {
+                                            echo '<a href="'.site_url().'reporte-info-talleres" class="btn btn-info mb-2" target="_blank">Información estadistica Talleres</a>';
+                                            echo '<a href="'.site_url().'reporte-info-biblioteca" class="btn btn-info mb-2" target="_blank">Información estadistica Biblioteca y encuentro</a>';
+                                            echo '<a href="'.site_url().'reporte-info-arte" class="btn btn-info mb-2" target="_blank">Reporte Módulo Exp. Artística</a>';
+                                            echo '<a href="'.site_url().'reporte-info-lengua" class="btn btn-info mb-2" target="_blank">Reporte Módulo Lenguaje</a>';
+                                            echo '<a href="'.site_url().'reporte-info-ciudadania" class="btn btn-info mb-2" target="_blank">Reporte Módulo Ciudadanía</a>';
+                                        }
+                                            echo '<a href="'.site_url().'prod3-reporte-certificados" class="btn btn-info mb-2" target="_blank">APRUEBA CERTIFICADOS</a>
                                     </div>
                                 </div>';
                         }

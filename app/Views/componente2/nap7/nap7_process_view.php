@@ -35,7 +35,10 @@
                             foreach ($nap7 as $key => $value) {
                                 echo '<tr>
                                         <td>'.$value->id.'</td>
-                                        <td>'.strtoupper($value->nombres.' '.$value->apellidos).'</td>
+                                        <td>
+                                            <a href="'.site_url().'nap7-frm-edit/'.$value->id.'">'.strtoupper($value->nombres.' '.$value->apellidos).'</a>
+                                        </td>
+                                        </td>
                                         <td>'.$value->amie.'</td>
                                         <td>'.$value->nombre.'</td>
                                         <td>'.$value->regimen.'</td>

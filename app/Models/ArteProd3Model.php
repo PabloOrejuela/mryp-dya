@@ -112,6 +112,81 @@ class ArteProd3Model extends Model {
         return $total;
     }
 
+    public function _getTalleresArte($id) {
+        $total['docente_autoestima'] = 0;
+        $total['arte_usos'] = 0;
+        $total['creatividad'] = 0;
+        $total['etapas'] = 0;
+        $total['autorretrato_taller'] = 0;
+        $total['incluir_clases'] = 0;
+
+        $builder = $this->db->table($this->table);
+        $builder->select('docente_autoestima,arte_usos,creatividad,etapas,autorretrato_taller,incluir_clases')->where('id_prod_3', $id);
+        $query = $builder->get();
+        if ($query->getResult() != null) {
+            foreach ($query->getResult() as $row) {
+                if ($row->docente_autoestima == 1) {
+                    $total['docente_autoestima'] += 1;
+                }
+
+                if ($row->arte_usos == 1) {
+                    $total['arte_usos'] += 1;
+                }
+
+                if ($row->creatividad == 1) {
+                    $total['creatividad'] += 1;
+                }
+
+                if ($row->etapas == 1) {
+                    $total['etapas'] += 1;
+                }
+
+                if ($row->autorretrato_taller == 1) {
+                    $total['autorretrato_taller'] += 1;
+                }
+
+                if ($row->incluir_clases == 1) {
+                    $total['incluir_clases'] += 1;
+                }
+            }
+        }
+        //echo $this->db->getLastQuery();
+        return $total;
+    }
+
+    public function _getClasesArte($id) {
+        $total['autorretrato_clase'] = 0;
+        $total['emociones'] = 0;
+        $total['familia'] = 0;
+        $total['camiseta'] = 0;
+
+        $builder = $this->db->table($this->table);
+        $builder->select('autorretrato_clase,emociones,familia,camiseta')->where('id_prod_3', $id);
+        $query = $builder->get();
+        if ($query->getResult() != null) {
+            foreach ($query->getResult() as $row) {
+                if ($row->autorretrato_clase == 1) {
+                    $total['autorretrato_clase'] += 1;
+                }
+
+                if ($row->emociones == 1) {
+                    $total['emociones'] += 1;
+                }
+
+                if ($row->familia == 1) {
+                    $total['familia'] += 1;
+                }
+
+                if ($row->camiseta == 1) {
+                    $total['camiseta'] += 1;
+                }
+            }
+        }
+        //echo $this->db->getLastQuery();
+        return $total;
+    }
+
+
     public function _update($datos) {
         $builder = $this->db->table($this->table);
         if ($datos['docente_autoestima'] != 'NULL') {

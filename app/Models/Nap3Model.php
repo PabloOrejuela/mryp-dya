@@ -29,6 +29,7 @@ class Nap3Model extends Model {
         'discapacidad',
         'tipo',
         'amie',
+        'observaciones'
     ];
 
     // Dates
@@ -105,8 +106,9 @@ class Nap3Model extends Model {
     public function _getAllRegistrosExcel() {
         $result = NULL;
         $builder = $this->db->table($this->table);
-        $builder->select($this->table.'.idnap3 as id,edad,centro_educativo.amie as amie,centro_educativo.nombre as ce, num_est,titulo_pro,genero,discapacidad,tipo,
-                        anio_lectivo,ciudad,provincia,'.$this->table.'.nombres as nombres,'.$this->table.'.apellidos as apellidos, documento,email, celular,autoidentificacion');
+        $builder->select($this->table.'.idnap3 as id,edad,centro_educativo.amie as amie,centro_educativo.nombre as ce, num_est,titulo_pro,genero,
+                        discapacidad,tipo,anio_lectivo,ciudad,provincia,'.$this->table.'.nombres as nombres,'.$this->table.'.apellidos as apellidos, 
+                        documento,email, celular,autoidentificacion,observaciones');
         $builder->join('centro_educativo', 'centro_educativo.amie = '.$this->table.'.amie');
         $builder->join('ciudades', 'ciudades.idciudades = centro_educativo.idciudades');
         $builder->join('provincias', 'provincias.idprovincias = ciudades.idprovincias');
@@ -182,6 +184,10 @@ class Nap3Model extends Model {
             $builder->set('email', $datos['email']);
         }
 
+        if ($datos['observaciones'] != 'NULL') {
+            $builder->set('observaciones', $datos['observaciones']);
+        }
+
         $builder->insert();
     }
 
@@ -242,6 +248,10 @@ class Nap3Model extends Model {
 
         if ($datos['email'] != 'NULL') {
             $builder->set('email', $datos['email']);
+        }
+
+        if ($datos['observaciones'] != 'NULL') {
+            $builder->set('observaciones', $datos['observaciones']);
         }
 
         $builder->where('idnap3', $datos['idnap3']);

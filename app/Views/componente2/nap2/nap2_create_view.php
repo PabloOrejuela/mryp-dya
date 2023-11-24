@@ -141,7 +141,7 @@
                         
                         if ($centros != NULL && isset($centros) ) {
                             foreach ($centros as $key => $ce) {
-                                echo '<option value="'.$ce->amie.'" '.set_select('amie', $ce->amie, false).' >'.$ce->amie.' - '.$ce->nombre.'</option>';
+                                echo '<option value="'.$ce->amie.'" '.set_select('amie', $ce->amie, false).' >'.$ce->amie.' - '.$ce->centro.'</option>';
                             }
                         }
                         
@@ -196,6 +196,12 @@
                 <div class="col-md-4 mb-3">
                     <label for="email">Email de contacto:</label>
                     <input type="text" id="email" name="email" value="<?= set_value('contacto_telf'); ?>" class="form-control" placeholder="Email" aria-label="email">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 mb-3">
+                    <label for="observaciones">Observaciones:</label>
+                    <textarea name="observaciones" id="observaciones" cols="30" rows="10"><?= set_value('observaciones'); ?></textarea>
                 </div>
             </div>
             <button type="submit" class="btn btn-info mb-3">Guardar</button>

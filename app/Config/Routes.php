@@ -106,6 +106,11 @@ $routes->get('prod-3-descargar-registros', 'Prod3::prod_3_descargar_registros');
 
 //Reportes Prod 3
 $routes->get('prod3-reporte-certificados', 'ReportesProd3::prod3_reporte_certificados');
+$routes->get('reporte-info-talleres', 'ReportesProd3::reporte_info_talleres');
+$routes->get('reporte-info-biblioteca', 'ReportesProd3::reporte_info_biblioteca');
+$routes->get('reporte-info-arte', 'ReportesProd3::reporte_info_arte');
+$routes->get('reporte-info-lengua', 'ReportesProd3::reporte_info_lengua');
+$routes->get('reporte-info-ciudadania', 'ReportesProd3::reporte_info_ciudadania');
 
 //NAP
 $routes->post('cargar-nap2', 'CargarInformacion::cargar_nap2');
@@ -155,6 +160,10 @@ $routes->get('nap5-reg-procesos-form/(:num)/(:any)', 'Prod2::nap5_reg_procesos_f
 $routes->post('nap5-process-update', 'Prod2::nap5_process_update');
 $routes->post('nap5-process-sierra-update', 'Prod2::nap5_process_sierra_update');
 $routes->get('nap5-descargar-registros', 'Prod2::nap5_descargar_registros');
+$routes->get('nap5-create', 'Prod2::nap5_create');
+$routes->post('nap5-insert', 'Prod2::nap5_insert');
+$routes->get('nap5-frm-edit/(:num)', 'Prod2::nap5_frm_edit/$1');
+$routes->post('nap5-update', 'Prod2::nap5_update');
 
 //NAP6
 $routes->get('prod2-nap6-menu', 'Prod2::nap6_procesos_grid');
@@ -164,6 +173,9 @@ $routes->get('prod2-nap6-frm-edit/(:num)', 'Prod2::prod2_nap6_frm_edit/$1');
 $routes->post('prod2-nap6-update', 'Prod2::prod2_nap6_update');
 $routes->get('prod2-nap6-delete/(:num)', 'Prod2::prod2_nap6_delete/$1');
 $routes->get('nap6-descargar-registros', 'Prod2::nap6_descargar_registros');
+$routes->get('nap6-create', 'Prod2::nap6_create');
+$routes->post('nap6-insert', 'Prod2::nap6_insert');
+$routes->post('nap6-update', 'Prod2::nap6_update');
 
 //NAP7
 $routes->get('prod2-nap7-menu', 'Prod2::nap7_procesos_grid');
@@ -171,6 +183,10 @@ $routes->get('nap7-reg-procesos-form/(:num)/(:any)', 'Prod2::nap7_reg_procesos_f
 $routes->post('nap7-process-update', 'Prod2::nap7_process_update');
 $routes->post('nap7-process-sierra-update', 'Prod2::nap7_process_sierra_update');
 $routes->get('nap7-descargar-registros', 'Prod2::nap7_descargar_registros');
+$routes->get('nap7-frm-edit/(:num)', 'Prod2::nap7_frm_edit/$1');
+$routes->get('nap7-create', 'Prod2::nap7_create');
+$routes->post('nap7-insert', 'Prod2::nap7_insert');
+$routes->post('nap7-update', 'Prod2::nap7_update');
 
 //PRODUCTO 4
 $routes->get('prod-4-create', 'Prod4::prod_4_create');
@@ -220,6 +236,7 @@ $routes->get('reporte-diagnostico-dinamico-form', 'Reportes::reporte_diagnostico
 $routes->post('reporte-diagnostico-dinamico', 'Reportes::reporte_diagnostico_dinamico');
 $routes->get('reporte-final-dinamico-form', 'Reportes::reporte_final_dinamico_form');
 $routes->post('reporte-final-dinamico', 'Reportes::reporte_final_dinamico');
+
 
 
 /*

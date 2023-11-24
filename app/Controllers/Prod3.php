@@ -20,8 +20,15 @@ class Prod3 extends BaseController {
 
         if ($data['is_logged'] == 1 && $data['componente_3'] == 1) {
             $this->session->set('form_error', "");
-            $data['componente_3'] = $this->prod3Model->_getMisRegistros($this->session->idusuario);
 
+            //echo '<pre>'.var_export($data, true).'</pre>';exit;
+            if ($data['idrol'] == 1 || $data['idrol'] == 3 || $data['idrol'] == 10) {
+                $data['componente_3'] = $this->prod3Model->_getAllRegistros();
+            }else if($data['idrol'] == 7){
+                $data['componente_3'] = $this->prod3Model->_getMisRegistros($this->session->idusuario);
+            }
+            //Corrijo las cédulas de todos los registros
+            //$this->corrijeCedulas();
             $data['title']='MYRP - DYA';
             $data['main_content']='componente3/prod3_view';
             return view('includes/template', $data);
@@ -40,7 +47,13 @@ class Prod3 extends BaseController {
 
         if ($data['is_logged'] == 1 && $data['componente_3'] == 1) {
             //$this->session->set('form_error', "Los campos con asterisco son obligatorios");
-            $data['centros'] = $this->usuariosCentrosProd3Model->_getAmiesUsuarioProd3($this->session->idusuario);
+            
+            if ($data['idrol'] == 1 || $data['idrol'] == 3 || $data['idrol'] == 10) {
+                $data['centros'] = $this->usuariosCentrosProd3Model->_getAmiesProd3();
+            }else if($data['idrol'] == 7){
+                $data['centros'] = $this->usuariosCentrosProd3Model->_getAmiesUsuarioProd3($this->session->idusuario);
+            }
+
             $data['cursos'] = $this->cursoModel->findAll();
             $data['mensaje'] = $this->session->form_error;
             
@@ -114,8 +127,12 @@ class Prod3 extends BaseController {
         $data['componente_3'] = $this->session->componente_3;
 
         if ($data['is_logged'] == 1 && $data['componente_3'] == 1) {
-
-            $data['componente_3'] = $this->prod3Model->_getMisRegistros($this->session->idusuario);
+            
+            if ($data['idrol'] == 1 || $data['idrol'] == 3 || $data['idrol'] == 10) {
+                $data['componente_3'] = $this->prod3Model->_getAllRegistros();
+            }else if($data['idrol'] == 7){
+                $data['componente_3'] = $this->prod3Model->_getMisRegistros($this->session->idusuario);
+            }
 
             $data['title']='MYRP - DYA';
             $data['main_content']='componente3/prod3_process_view';
@@ -980,5 +997,31 @@ class Prod3 extends BaseController {
         $this->usuarioModel->_updateLoggin($user);
         $this->session->destroy();
         return redirect()->to('/');
+    }
+
+    public function corrijeCedulas() {
+        $data['idrol'] = $this->session->idrol;
+        $data['id'] = $this->session->idusuario;
+        $data['is_logged'] = $this->usuarioModel->_getLogStatus($data['id']);
+        $data['nombre'] = $this->session->nombre;
+
+        if ($data['is_logged'] == 1 && $this->session->idrol ==1 ) {
+            $num = 0;
+            $registro = $this->prod3Model->findAll();
+            //echo '<pre>'.var_export($registro, true).'</pre>';exit;
+            foreach ($registro as $key => $value) {
+                
+                if (strlen($value->documento) <= 9) {
+                    $id = $value->id;
+                    $obj = [
+                        'id' => $value->id,
+                        'documento' => '0'.$value->documento,
+                    ];
+                    
+                    $this->prod3Model->_updateCedula($obj);
+                }
+            }
+            return redirect()->to('prod_3');
+        }
     }
 }

@@ -43,9 +43,34 @@ class Nap2ProcessResult extends Model {
     public function _getNap2Process($id) {
         $result = NULL;
         $builder = $this->db->table($this->table);
-        $builder->select('*');
+        $builder->select('kit,guias,asistencia_oct,centro,anio_lectivo,nombres,apellidos,documento,
+        asistencia_nov,
+        asistencia_dic,
+        asistencia_ene,
+        asistencia_feb,
+        asistencia_mar,
+        asistencia_abr,
+        asistencia_may,
+        asistencia_jun,
+        asistencia_total,
+        rendimiento_quim_1,
+        rendimiento_quim_2,
+        expediente,
+        examen_ubicacion,
+        resultado_ubicacion,
+        reporte_caso,
+        tipo_caso,
+        fecha_caso,
+        seguimiento,
+        remision_caso,
+        remision_caso_complementario,
+        prom_final,
+        edu_regular,
+        '.$this->table.'.nivel as nivel,
+        institucion_destino,
+        idestudiante');
         $builder->join('nap2_est_dya','nap2_est_dya.id = '.$this->table.'.idestudiante');
-        $builder->join('centro_educativo','centro_educativo.amie = nap2_est_dya.amie');
+        $builder->join('centros_prod_2','centros_prod_2.amie = nap2_est_dya.amie');
         $builder->where('idestudiante', $id);
         $query = $builder->get();
         if ($query->getResult() != null) {

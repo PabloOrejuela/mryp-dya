@@ -187,4 +187,21 @@ class CentroEducativoModel extends Model {
         $builder->where('amie', $centro->amie);
         $builder->update();
     }
+
+    public function _getProvincia($amie) {
+        $result = NULL;
+        $builder = $this->db->table($this->table);
+        $builder->select('amie,ciudad,provincia');
+        $builder->where('amie', $amie);
+        $builder->join('ciudades', 'ciudades.idciudades = '.$this->table.'.idciudades');
+        $builder->join('provincias', 'provincias.idprovincias = ciudades.idprovincias');
+        $query = $builder->get();
+        if ($query->getResult() != null) {
+            foreach ($query->getResult() as $row) {
+                $result = $row;
+            }
+        }
+        //echo $this->db->getLastQuery();
+        return $result;
+    }
 }

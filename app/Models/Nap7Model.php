@@ -67,7 +67,8 @@ class Nap7Model extends Model {
         $result = NULL;
         $builder = $this->db->table($this->table);
         $builder->select($this->table.'.id as id,edad,centro_educativo.amie as amie,centro_educativo.nombre as ce,titulo_pro,genero,
-                        anio_lectivo,ciudad,provincia,'.$this->table.'.nombres as nombres,'.$this->table.'.apellidos as apellidos, documento,email, celular,autoidentificacion');
+                        anio_lectivo,ciudad,provincia,'.$this->table.'.nombres as nombres,'.$this->table.'.apellidos as apellidos, 
+                        documento,email, celular,autoidentificacion,observaciones');
         $builder->join('centro_educativo', 'centro_educativo.amie = '.$this->table.'.amie');
         $builder->join('ciudades', 'ciudades.idciudades = centro_educativo.idciudades');
         $builder->join('provincias', 'provincias.idprovincias = ciudades.idprovincias');
@@ -82,5 +83,112 @@ class Nap7Model extends Model {
         }
         //echo $this->db->getLastQuery();
         return $result;
+    }
+
+    public function _save($datos) {
+        $builder = $this->db->table($this->table);
+        if ($datos['anio_lectivo'] != 'NULL') {
+            $builder->set('anio_lectivo', $datos['anio_lectivo']);
+        }
+
+        if ($datos['documento'] != 'NULL') {
+            $builder->set('documento', $datos['documento']);
+        }
+
+        if ($datos['nombres'] != 'NULL') {
+            $builder->set('nombres', $datos['nombres']);
+        }
+
+        if ($datos['apellidos'] != 'NULL') {
+            $builder->set('apellidos', $datos['apellidos']);
+        }
+
+        if ($datos['edad'] != 'NULL') {
+            $builder->set('edad', $datos['edad']);
+        }
+
+        if ($datos['email'] != 'NULL') {
+            $builder->set('email', $datos['email']);
+        }
+
+        if ($datos['celular'] != 'NULL') {
+            $builder->set('celular', $datos['celular']);
+        }
+        
+        if ($datos['autoidentificacion'] != 'NULL') {
+            $builder->set('autoidentificacion', $datos['autoidentificacion']);
+        }
+
+        if ($datos['titulo_pro'] != 'NULL') {
+            $builder->set('titulo_pro', $datos['titulo_pro']);
+        }
+
+        if ($datos['genero'] != 'NULL') {
+            $builder->set('genero', $datos['genero']);
+        }
+
+        if ($datos['amie'] != 'NULL') {
+            $builder->set('amie', $datos['amie']);
+        }
+
+        if ($datos['observaciones'] != 'NULL') {
+            $builder->set('observaciones', $datos['observaciones']);
+        }
+        
+        $builder->insert();
+    }
+
+    public function _update($datos) {
+        $builder = $this->db->table($this->table);
+        if ($datos['anio_lectivo'] != 'NULL') {
+            $builder->set('anio_lectivo', $datos['anio_lectivo']);
+        }
+
+        if ($datos['documento'] != 'NULL') {
+            $builder->set('documento', $datos['documento']);
+        }
+
+        if ($datos['nombres'] != 'NULL') {
+            $builder->set('nombres', $datos['nombres']);
+        }
+
+        if ($datos['apellidos'] != 'NULL') {
+            $builder->set('apellidos', $datos['apellidos']);
+        }
+
+        if ($datos['edad'] != 'NULL') {
+            $builder->set('edad', $datos['edad']);
+        }
+
+        if ($datos['email'] != 'NULL') {
+            $builder->set('email', $datos['email']);
+        }
+
+        if ($datos['celular'] != 'NULL') {
+            $builder->set('celular', $datos['celular']);
+        }
+        
+        if ($datos['autoidentificacion'] != 'NULL') {
+            $builder->set('autoidentificacion', $datos['autoidentificacion']);
+        }
+
+        if ($datos['titulo_pro'] != 'NULL') {
+            $builder->set('titulo_pro', $datos['titulo_pro']);
+        }
+
+        if ($datos['genero'] != 'NULL') {
+            $builder->set('genero', $datos['genero']);
+        }
+
+        if ($datos['amie'] != 'NULL') {
+            $builder->set('amie', $datos['amie']);
+        }
+
+        if ($datos['observaciones'] != 'NULL') {
+            $builder->set('observaciones', $datos['observaciones']);
+        }
+        
+        $builder->where('id', $datos['id']);
+        $builder->update();
     }
 }

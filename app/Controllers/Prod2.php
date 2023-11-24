@@ -49,14 +49,14 @@ class Prod2 extends BaseController {
 
         if ($data['is_logged'] == 1 && $data['componente_2'] == 1) {
             
-            $data['centros'] = $this->nap2Model->_getCentrosEducativos();
+            $data['centros'] = $this->centroProd2Model->findAll();
             $data['id'] = $id;
             $data['datos'] = $this->nap2Model->find($id);
             $data['anios_lectivos'] = $this->anioLectivoModel->findAll();
             $data['nacionalidad'] = $this->nacionalidad;
             $data['etnia'] = $this->etnia;
 
-            //echo '<pre>'.var_export($data['centros'], true).'</pre>';exit;
+            //echo '<pre>'.var_export($data['datos'], true).'</pre>';exit;
 
             $data['title']='MYRP - NAP2 | Estudiantes DYA ';
             $data['main_content']='componente2/nap2/nap2_edit_view';
@@ -77,7 +77,7 @@ class Prod2 extends BaseController {
 
         if ($data['is_logged'] == 1 && $data['componente_2'] == 1) {
             
-            $data['centros'] = $this->centroEducativoModel->_getCentrosList();
+            $data['centros'] = $this->centroProd2Model->findAll();
             $data['id'] = $id;
             $data['datos'] = $this->nap3Model->find($id);
             $data['anios_lectivos'] = $this->anioLectivoModel->findAll();
@@ -105,7 +105,7 @@ class Prod2 extends BaseController {
 
         if ($data['is_logged'] == 1 && $data['componente_2'] == 1) {
             
-            $data['centros'] = $this->centroEducativoModel->_getCentrosList();
+            $data['centros'] = $this->centroProd2Model->findAll();
             $data['anios_lectivos'] = $this->anioLectivoModel->findAll();
             $data['cohortes'] = $this->cohorteModel->findAll();
             $data['nacionalidad'] = $this->nacionalidad;
@@ -131,7 +131,7 @@ class Prod2 extends BaseController {
 
         if ($data['is_logged'] == 1 && $data['componente_2'] == 1) {
             
-            $data['centros'] = $this->centroEducativoModel->_getCentrosList();
+            $data['centros'] = $this->centroProd2Model->findAll();
             $data['anios_lectivos'] = $this->anioLectivoModel->findAll();
             $data['cohortes'] = $this->cohorteModel->findAll();
             $data['nacionalidad'] = $this->nacionalidad;
@@ -157,7 +157,7 @@ class Prod2 extends BaseController {
 
         if ($data['is_logged'] == 1 && $data['componente_2'] == 1) {
             
-            $data['centros'] = $this->centroEducativoModel->_getCentrosList();
+            $data['centros'] = $this->centroProd2Model->findAll();
             $data['anios_lectivos'] = $this->anioLectivoModel->findAll();
             $data['cohortes'] = $this->cohorteModel->findAll();
             $data['nacionalidad'] = $this->nacionalidad;
@@ -167,6 +167,101 @@ class Prod2 extends BaseController {
             $data['title']='MYRP - NAP 4 Estudiantes MINEDUC Presencial';
             $data['main_content']='componente2/nap4/nap4_create_view';
             return view('includes/template', $data);
+        }else{
+
+            $this->logout();
+            return redirect()->to('/');
+        }
+    }
+
+    public function nap5_create() {
+        $data['idrol'] = $this->session->idrol;
+        $data['id'] = $this->session->idusuario;
+        $data['is_logged'] = $this->usuarioModel->_getLogStatus($data['id']);
+        $data['nombre'] = $this->session->nombre;
+        $data['componente_2'] = $this->session->componente_2;
+
+        if ($data['is_logged'] == 1 && $data['componente_2'] == 1) {
+            
+            $data['centros'] = $this->centroProd2Model->findAll();
+            $data['anios_lectivos'] = $this->anioLectivoModel->findAll();
+            $data['cohortes'] = $this->cohorteModel->findAll();
+            $data['nacionalidad'] = $this->nacionalidad;
+            $data['etnia'] = $this->etnia;
+            //echo '<pre>'.var_export($data['centros'], true).'</pre>';exit;
+
+            $data['title']='MYRP - NAP 5 | Docentes DYA ';
+            $data['main_content']='componente2/nap5/nap5_create_view';
+            return view('includes/template', $data);
+        }else{
+
+            $this->logout();
+            return redirect()->to('/');
+        }
+    }
+
+    public function nap7_create() {
+        $data['idrol'] = $this->session->idrol;
+        $data['id'] = $this->session->idusuario;
+        $data['is_logged'] = $this->usuarioModel->_getLogStatus($data['id']);
+        $data['nombre'] = $this->session->nombre;
+        $data['componente_2'] = $this->session->componente_2;
+
+        if ($data['is_logged'] == 1 && $data['componente_2'] == 1) {
+            
+            $data['centros'] = $this->centroProd2Model->findAll();
+            $data['anios_lectivos'] = $this->anioLectivoModel->findAll();
+            $data['cohortes'] = $this->cohorteModel->findAll();
+            $data['nacionalidad'] = $this->nacionalidad;
+            $data['etnia'] = $this->etnia;
+            //echo '<pre>'.var_export($data['centros'], true).'</pre>';exit;
+
+            $data['title']='MYRP - NAP 7 | Docentes MINEDUC Virtual';
+            $data['main_content']='componente2/nap7/nap7_create_view';
+            return view('includes/template', $data);
+        }else{
+
+            $this->logout();
+            return redirect()->to('/');
+        }
+    }
+
+    public function nap7_insert() {
+        $data['idrol'] = $this->session->idrol;
+        $data['id'] = $this->session->idusuario;
+        $data['is_logged'] = $this->usuarioModel->_getLogStatus($data['id']);
+        $data['nombre'] = $this->session->nombre;
+
+        if ($data['is_logged'] == 1) {
+
+            $process = array(
+                'anio_lectivo' => $this->request->getPostGet('anio_lectivo'),
+                'documento' => strtoupper($this->request->getPostGet('documento')),
+                'apellidos' => strtoupper($this->request->getPostGet('apellidos')),
+                'nombres' => strtoupper($this->request->getPostGet('nombres')),
+                'edad' => strtoupper($this->request->getPostGet('edad')),
+                'email' => $this->request->getPostGet('email'),
+                'celular' => strtoupper($this->request->getPostGet('celular')), 
+                'autoidentificacion' => $this->request->getPostGet('autoidentificacion'), 
+                'titulo_pro' => strtoupper($this->request->getPostGet('titulo_pro')),
+                'genero' => $this->request->getPostGet('genero'),
+                'amie' => $this->request->getPostGet('amie'),
+                'observaciones' => $this->request->getPostGet('observaciones'),
+            );
+            
+            //VALIDACIONES
+            $this->validation->setRuleGroup('nap7Create');
+
+            if (!$this->validation->withRequest($this->request)->run()) {
+                //Depuración
+                //dd($validation->getErrors());
+                return redirect()->back()->withInput()->with('errors', $this->validation->getErrors());
+            }else{
+                //echo '<pre>'.var_export($process, true).'</pre>';exit;
+                $this->nap7Model->_save($process);
+
+                return redirect()->to('prod2-nap7-menu');
+            }
         }else{
 
             $this->logout();
@@ -193,19 +288,15 @@ class Prod2 extends BaseController {
                 'genero' => $this->request->getPostGet('genero'),
                 'discapacidad' => $this->request->getPostGet('discapacidad'),
                 'tipo_discapacidad' => $this->request->getPostGet('tipo_discapacidad'),
-                'ingresado_sistema' => $this->request->getPostGet('ingresado_sistema'),
                 'anio_lectivo' => $this->request->getPostGet('anio_lectivo'),
                 'amie' => $this->request->getPostGet('amie'),
 
                 //Tutor
-
-                'representante' => strtoupper($this->request->getPostGet('representante')),
-                'documento_rep' => $this->request->getPostGet('documento_rep'),
-                'parentesto_rep' => strtoupper($this->request->getPostGet('parentesto_rep')),
-                'nacionalidad_rep' => $this->request->getPostGet('nacionalidad_rep'),
-                'direccion_rep' => strtoupper($this->request->getPostGet('direccion_rep')),
-                'contacto_telf' => strtoupper($this->request->getPostGet('contacto_telf')),
-                'email' => $this->request->getPostGet('email'),
+                'doc_tutor' => strtoupper($this->request->getPostGet('doc_tutor')),
+                'docente_tutor' => $this->request->getPostGet('docente_tutor'),
+                'email_tutor' => strtoupper($this->request->getPostGet('email_tutor')),
+                'telf_tutor' => $this->request->getPostGet('telf_tutor'),
+                'etnia_tutor' => $this->request->getPostGet('etnia_tutor'),
 
                 //Representante
                 'representante' => strtoupper($this->request->getPostGet('representante')),
@@ -219,7 +310,7 @@ class Prod2 extends BaseController {
                 'observaciones' => strtoupper($this->request->getPostGet('observaciones')),
                 
             );
-            echo '<pre>'.var_export($process, true).'</pre>';exit;
+            //echo '<pre>'.var_export($process, true).'</pre>';exit;
             //VALIDACIONES
             $this->validation->setRuleGroup('nap2Create');
 
@@ -229,9 +320,256 @@ class Prod2 extends BaseController {
                 return redirect()->back()->withInput()->with('errors', $this->validation->getErrors());
             }else{
 
-                $this->nap2Model->_save($process);
+                $this->nap4Model->_save($process);
 
-                return redirect()->to('prod2-nap2-menu');
+                return redirect()->to('prod2-nap4-menu');
+            }
+        }else{
+
+            $this->logout();
+            return redirect()->to('/');
+        }
+    }
+
+    public function nap5_insert() {
+        $data['idrol'] = $this->session->idrol;
+        $data['id'] = $this->session->idusuario;
+        $data['is_logged'] = $this->usuarioModel->_getLogStatus($data['id']);
+        $data['nombre'] = $this->session->nombre;
+
+        if ($data['is_logged'] == 1) {
+
+            $process = array(
+                'anio_lectivo' => $this->request->getPostGet('anio_lectivo'),
+                'num_est' => $this->request->getPostGet('num_est'),
+                'documento' => strtoupper($this->request->getPostGet('documento')),
+                'apellidos' => strtoupper($this->request->getPostGet('apellidos')),
+                'nombres' => strtoupper($this->request->getPostGet('nombres')),
+                'edad' => strtoupper($this->request->getPostGet('edad')),
+                'email' => $this->request->getPostGet('email'),
+                'celular' => strtoupper($this->request->getPostGet('celular')), 
+                'autoidentificacion' => $this->request->getPostGet('autoidentificacion'), 
+                'titulo_pro' => strtoupper($this->request->getPostGet('titulo_pro')),
+                'genero' => $this->request->getPostGet('genero'),
+                'discapacidad' => strtoupper($this->request->getPostGet('discapacidad')),
+                'tipo' => strtoupper($this->request->getPostGet('tipo')),
+                'subnivel' => strtoupper($this->request->getPostGet('subnivel')),
+                'amie' => $this->request->getPostGet('amie'),
+                'observaciones' => $this->request->getPostGet('observaciones'),
+            );
+            
+            //VALIDACIONES
+            $this->validation->setRuleGroup('nap5Create');
+
+            if (!$this->validation->withRequest($this->request)->run()) {
+                //Depuración
+                //dd($validation->getErrors());
+                return redirect()->back()->withInput()->with('errors', $this->validation->getErrors());
+            }else{
+                //echo '<pre>'.var_export($process, true).'</pre>';exit;
+                $this->nap5Model->_save($process);
+
+                return redirect()->to('prod2-nap5-menu');
+            }
+        }else{
+
+            $this->logout();
+            return redirect()->to('/');
+        }
+    }
+
+    public function nap5_frm_edit($id) {
+        $data['idrol'] = $this->session->idrol;
+        $data['id'] = $this->session->idusuario;
+        $data['is_logged'] = $this->usuarioModel->_getLogStatus($data['id']);
+        $data['nombre'] = $this->session->nombre;
+        $data['componente_2'] = $this->session->componente_2;
+
+        if ($data['is_logged'] == 1 && $data['componente_2'] == 1) {
+            
+            $data['centros'] = $this->centroProd2Model->findAll();
+            $data['id'] = $id;
+            $data['datos'] = $this->nap5Model->find($id);
+            $data['anios_lectivos'] = $this->anioLectivoModel->findAll();
+            $data['nacionalidad'] = $this->nacionalidad;
+            $data['etnia'] = $this->etnia;
+
+            //echo '<pre>'.var_export($data['etnia'], true).'</pre>';exit;
+
+            $data['title']='MYRP - NAP 5 | Docentes DYA ';
+            $data['main_content']='componente2/nap5/nap5_edit_view';
+            return view('includes/template', $data);
+        }else{
+
+            $this->logout();
+            return redirect()->to('/');
+        }
+    }
+
+    public function nap7_frm_edit($id) {
+        $data['idrol'] = $this->session->idrol;
+        $data['id'] = $this->session->idusuario;
+        $data['is_logged'] = $this->usuarioModel->_getLogStatus($data['id']);
+        $data['nombre'] = $this->session->nombre;
+        $data['componente_2'] = $this->session->componente_2;
+
+        if ($data['is_logged'] == 1 && $data['componente_2'] == 1) {
+            
+            $data['centros'] = $this->centroProd2Model->findAll();
+            $data['id'] = $id;
+            $data['datos'] = $this->nap7Model->find($id);
+            $data['anios_lectivos'] = $this->anioLectivoModel->findAll();
+            $data['nacionalidad'] = $this->nacionalidad;
+            $data['etnia'] = $this->etnia;
+
+            //echo '<pre>'.var_export($data['etnia'], true).'</pre>';exit;
+
+            $data['title']='MYRP - NAP 7 | Docentes MINEDUC Virtual ';
+            $data['main_content']='componente2/nap7/nap7_edit_view';
+            return view('includes/template', $data);
+        }else{
+
+            $this->logout();
+            return redirect()->to('/');
+        }
+    }
+
+    public function nap6_create() {
+        $data['idrol'] = $this->session->idrol;
+        $data['id'] = $this->session->idusuario;
+        $data['is_logged'] = $this->usuarioModel->_getLogStatus($data['id']);
+        $data['nombre'] = $this->session->nombre;
+        $data['componente_2'] = $this->session->componente_2;
+
+        if ($data['is_logged'] == 1 && $data['componente_2'] == 1) {
+            
+            $data['centros'] = $this->centroProd2Model->findAll();
+            $data['anios_lectivos'] = $this->anioLectivoModel->findAll();
+            $data['cohortes'] = $this->cohorteModel->findAll();
+            $data['nacionalidad'] = $this->nacionalidad;
+            $data['etnia'] = $this->etnia;
+            //echo '<pre>'.var_export($data['centros'], true).'</pre>';exit;
+
+            $data['title']='MYRP - NAP 6 Estudiantes MINEDUC Virtual';
+            $data['main_content']='componente2/nap6/nap6_create_view';
+            return view('includes/template', $data);
+        }else{
+
+            $this->logout();
+            return redirect()->to('/');
+        }
+    }
+
+    public function nap6_insert() {
+        $data['idrol'] = $this->session->idrol;
+        $data['id'] = $this->session->idusuario;
+        $data['is_logged'] = $this->usuarioModel->_getLogStatus($data['id']);
+        $data['nombre'] = $this->session->nombre;
+
+        if ($data['is_logged'] == 1) {
+
+            $process = array(
+                'nombres_est' => strtoupper($this->request->getPostGet('nombres')),
+                'apellidos_est' => strtoupper($this->request->getPostGet('apellidos')),
+                'documento' => strtoupper($this->request->getPostGet('documento')),
+                'nacionalidad' => $this->request->getPostGet('nacionalidad'),
+                'etnia' => $this->request->getPostGet('etnia'),
+                'fecha_nac' => $this->request->getPostGet('fecha_nac'),
+                'edad' => $this->request->getPostGet('edad'),
+                'genero' => $this->request->getPostGet('genero'),
+                'discapacidad' => $this->request->getPostGet('discapacidad'),
+                'tipo_discapacidad' => $this->request->getPostGet('tipo_discapacidad'),
+                'anio_lectivo' => $this->request->getPostGet('anio_lectivo'),
+                'amie' => $this->request->getPostGet('amie'),
+
+                //Representante
+                'representante' => strtoupper($this->request->getPostGet('representante')),
+                'documento_rep' => $this->request->getPostGet('documento_rep'),
+                'parentesto_rep' => strtoupper($this->request->getPostGet('parentesto_rep')),
+                'nacionalidad_rep' => $this->request->getPostGet('nacionalidad_rep'),
+                'direccion_rep' => strtoupper($this->request->getPostGet('direccion_rep')),
+                'contacto_telf' => strtoupper($this->request->getPostGet('contacto_telf')),
+                'email' => $this->request->getPostGet('email'),
+
+                'observaciones' => strtoupper($this->request->getPostGet('observaciones')),
+                
+            );
+            //echo '<pre>'.var_export($process, true).'</pre>';exit;
+            //VALIDACIONES
+            $this->validation->setRuleGroup('nap6Create');
+
+            if (!$this->validation->withRequest($this->request)->run()) {
+                //Depuración
+                //dd($validation->getErrors());
+                return redirect()->back()->withInput()->with('errors', $this->validation->getErrors());
+            }else{
+
+                $this->nap6Model->_save($process);
+
+                return redirect()->to('prod2-nap6-menu');
+            }
+        }else{
+
+            $this->logout();
+            return redirect()->to('/');
+        }
+    }
+
+    public function nap6_update() {
+        $data['idrol'] = $this->session->idrol;
+        $data['id'] = $this->session->idusuario;
+        $data['is_logged'] = $this->usuarioModel->_getLogStatus($data['id']);
+        $data['nombre'] = $this->session->nombre;
+
+        if ($data['is_logged'] == 1) {
+
+            $process = array(
+                'id' => $this->request->getPostGet('id'),
+                'nombres_est' => strtoupper($this->request->getPostGet('nombres')),
+                'apellidos_est' => strtoupper($this->request->getPostGet('apellidos')),
+                'documento' => strtoupper($this->request->getPostGet('documento')),
+                'nacionalidad' => $this->request->getPostGet('nacionalidad'),
+                'etnia' => $this->request->getPostGet('etnia'),
+                'fecha_nac' => $this->request->getPostGet('fecha_nac'),
+                'edad' => $this->request->getPostGet('edad'),
+                'genero' => $this->request->getPostGet('genero'),
+                'discapacidad' => $this->request->getPostGet('discapacidad'),
+                'tipo_discapacidad' => $this->request->getPostGet('tipo_discapacidad'),
+                'anio_lectivo' => $this->request->getPostGet('anio_lectivo'),
+                'amie' => $this->request->getPostGet('amie'),
+
+                //Representante
+                'representante' => strtoupper($this->request->getPostGet('representante')),
+                'documento_rep' => $this->request->getPostGet('documento_rep'),
+                'parentesto_rep' => strtoupper($this->request->getPostGet('parentesto_rep')),
+                'nacionalidad_rep' => $this->request->getPostGet('nacionalidad_rep'),
+                'direccion_rep' => strtoupper($this->request->getPostGet('direccion_rep')),
+                'contacto_telf' => strtoupper($this->request->getPostGet('contacto_telf')),
+                'email' => $this->request->getPostGet('email'),
+
+                'observaciones' => strtoupper($this->request->getPostGet('observaciones')),
+                
+            );
+            //echo '<pre>'.var_export($process, true).'</pre>';exit;
+            //VALIDACIONES
+            $this->validation->setRuleGroup('nap6Create');
+
+            if (!$this->validation->withRequest($this->request)->run()) {
+                //Depuración
+                //dd($validation->getErrors());
+                return redirect()->back()->withInput()->with('errors', $this->validation->getErrors());
+            }else{
+
+                $hay = $this->nap6Model->find($process['id']);
+                if ($hay) {
+                    //Actualizo
+                    $this->nap6Model->_update($process);
+                }else{
+                    //Grabo
+                    $this->nap6Model->_save($process);
+                }
+
+                return redirect()->to('prod2-nap6-menu');
             }
         }else{
 
@@ -263,6 +601,7 @@ class Prod2 extends BaseController {
                 'discapacidad' => strtoupper($this->request->getPostGet('discapacidad')),
                 'tipo' => strtoupper($this->request->getPostGet('tipo_discapacidad')),
                 'amie' => $this->request->getPostGet('amie'),
+                'observaciones' => $this->request->getPostGet('observaciones'),
             );
             
             //VALIDACIONES
@@ -309,6 +648,8 @@ class Prod2 extends BaseController {
                 'discapacidad' => strtoupper($this->request->getPostGet('discapacidad')),
                 'tipo' => strtoupper($this->request->getPostGet('tipo_discapacidad')),
                 'amie' => $this->request->getPostGet('amie'),
+                'observaciones' => $this->request->getPostGet('observaciones'),
+
             );
             
             //VALIDACIONES
@@ -330,6 +671,114 @@ class Prod2 extends BaseController {
                 }
 
                 return redirect()->to('prod2-nap3-menu');
+            }
+        }else{
+
+            $this->logout();
+            return redirect()->to('/');
+        }
+    }
+
+    public function nap5_update() {
+        $data['idrol'] = $this->session->idrol;
+        $data['id'] = $this->session->idusuario;
+        $data['is_logged'] = $this->usuarioModel->_getLogStatus($data['id']);
+        $data['nombre'] = $this->session->nombre;
+
+        if ($data['is_logged'] == 1) {
+
+            $process = array(
+                'id' => $this->request->getPostGet('id'),
+                'anio_lectivo' => $this->request->getPostGet('anio_lectivo'),
+                'num_est' => $this->request->getPostGet('num_est'),
+                'documento' => strtoupper($this->request->getPostGet('documento')),
+                'apellidos' => strtoupper($this->request->getPostGet('apellidos')),
+                'nombres' => strtoupper($this->request->getPostGet('nombres')),
+                'edad' => strtoupper($this->request->getPostGet('edad')),
+                'email' => $this->request->getPostGet('email'),
+                'celular' => strtoupper($this->request->getPostGet('celular')), 
+                'autoidentificacion' => $this->request->getPostGet('autoidentificacion'), 
+                'titulo_pro' => strtoupper($this->request->getPostGet('titulo_pro')),
+                'genero' => $this->request->getPostGet('genero'),
+                'discapacidad' => strtoupper($this->request->getPostGet('discapacidad')),
+                'tipo' => strtoupper($this->request->getPostGet('tipo')),
+                'subnivel' => strtoupper($this->request->getPostGet('subnivel')),
+                'amie' => $this->request->getPostGet('amie'),
+                'observaciones' => $this->request->getPostGet('observaciones'),
+
+            );
+            
+            //VALIDACIONES
+            $this->validation->setRuleGroup('nap5Create');
+
+            if (!$this->validation->withRequest($this->request)->run()) {
+                //Depuración
+                //dd($validation->getErrors());
+                return redirect()->back()->withInput()->with('errors', $this->validation->getErrors());
+            }else{
+                //echo '<pre>'.var_export($process, true).'</pre>';exit;
+                $hay = $this->nap5Model->find($process['id']);
+                if ($hay) {
+                    //Actualizo
+                    $this->nap5Model->_update($process);
+                }else{
+                    //Grabo
+                    $this->nap5Model->_save($process);
+                }
+
+                return redirect()->to('prod2-nap5-menu');
+            }
+        }else{
+
+            $this->logout();
+            return redirect()->to('/');
+        }
+    }
+
+    public function nap7_update() {
+        $data['idrol'] = $this->session->idrol;
+        $data['id'] = $this->session->idusuario;
+        $data['is_logged'] = $this->usuarioModel->_getLogStatus($data['id']);
+        $data['nombre'] = $this->session->nombre;
+
+        if ($data['is_logged'] == 1) {
+
+            $process = array(
+                'id' => $this->request->getPostGet('id'),
+                'anio_lectivo' => $this->request->getPostGet('anio_lectivo'),
+                'documento' => strtoupper($this->request->getPostGet('documento')),
+                'apellidos' => strtoupper($this->request->getPostGet('apellidos')),
+                'nombres' => strtoupper($this->request->getPostGet('nombres')),
+                'edad' => strtoupper($this->request->getPostGet('edad')),
+                'email' => $this->request->getPostGet('email'),
+                'celular' => strtoupper($this->request->getPostGet('celular')), 
+                'autoidentificacion' => $this->request->getPostGet('autoidentificacion'), 
+                'titulo_pro' => strtoupper($this->request->getPostGet('titulo_pro')),
+                'genero' => $this->request->getPostGet('genero'),
+                'amie' => $this->request->getPostGet('amie'),
+                'observaciones' => $this->request->getPostGet('observaciones'),
+
+            );
+            
+            //VALIDACIONES
+            $this->validation->setRuleGroup('nap7Create');
+
+            if (!$this->validation->withRequest($this->request)->run()) {
+                //Depuración
+                //dd($validation->getErrors());
+                return redirect()->back()->withInput()->with('errors', $this->validation->getErrors());
+            }else{
+                //echo '<pre>'.var_export($process, true).'</pre>';exit;
+                $hay = $this->nap7Model->find($process['id']);
+                if ($hay) {
+                    //Actualizo
+                    $this->nap7Model->_update($process);
+                }else{
+                    //Grabo
+                    $this->nap7Model->_save($process);
+                }
+
+                return redirect()->to('prod2-nap7-menu');
             }
         }else{
 
@@ -369,6 +818,7 @@ class Prod2 extends BaseController {
                 'direccion_rep' => strtoupper($this->request->getPostGet('direccion_rep')),
                 'contacto_telf' => strtoupper($this->request->getPostGet('contacto_telf')),
                 'email' => $this->request->getPostGet('email'),
+                'observaciones' => $this->request->getPostGet('observaciones'),
                 
             );
             
@@ -415,6 +865,7 @@ class Prod2 extends BaseController {
                 'ingresado_sistema' => $this->request->getPostGet('ingresado_sistema'),
                 'anio_lectivo' => $this->request->getPostGet('anio_lectivo'),
                 'amie' => $this->request->getPostGet('amie'),
+                'observaciones' => $this->request->getPostGet('observaciones'),
 
                 //Representante
                 'representante' => strtoupper($this->request->getPostGet('representante')),
@@ -470,7 +921,7 @@ class Prod2 extends BaseController {
             }else{
                 $data['nap2'] = $this->nap2Model->_getRegistrosNap2();
             }
-            
+            //echo '<pre>'.var_export($data['idrol'], true).'</pre>';exit;
             $data['title']='MYRP - DYA';
             $data['main_content']='componente2/nap2/nap2_process_view';
             return view('includes/template', $data);
@@ -544,7 +995,7 @@ class Prod2 extends BaseController {
             $data['cursos'] = $this->cursoModel->findAll();
             $data['region'] = json_encode($data['centro_educativo']->regimen);
     
-
+            //echo '<pre>'.var_export($data['datos'], true).'</pre>';exit;
             $data['title']='MYRP - DYA';
             $data['main_content']='componente2/nap2/edit_process_view';
             return view('includes/template', $data);
@@ -740,13 +1191,16 @@ class Prod2 extends BaseController {
 
         if ($data['is_logged'] == 1 && $data['componente_2'] == 1) {
             
-            if ($this->session->idrol == 2) {
-                $data['centros'] = $this->nap2Model->_getMisAmie($this->session->nombre);
-            }else{
-                $data['centros'] = $this->nap2Model->_getCentrosEducativos();
-            }
-            
+            // if ($this->session->idrol == 2) {
+            //     $data['centros'] = $this->nap2Model->_getMisAmie($this->session->nombre);
+            // }else{
+            //     $data['centros'] = $this->nap2Model->_getCentrosEducativos();
+            // }
+            $data['centros'] = $this->nap2Model->_getCentrosEducativos();
+            $data['nacionalidad'] = $this->nacionalidad;
+            $data['anios_lectivos'] = $this->anioLectivoModel->findAll();
             $data['datos'] = $this->nap4Model->find($id);
+            $data['etnia'] = $this->etnia;
 
             //echo '<pre>'.var_export($data['centros'], true).'</pre>';exit;
 
@@ -770,25 +1224,38 @@ class Prod2 extends BaseController {
         if ($data['is_logged'] == 1 && $data['componente_2'] == 1) {
 
             $process = array(
-                'id' => $this->request->getPostGet('id'),
+                'id' => strtoupper($this->request->getPostGet('id')),
                 'nombres' => strtoupper($this->request->getPostGet('nombres')),
                 'apellidos' => strtoupper($this->request->getPostGet('apellidos')),
                 'documento' => strtoupper($this->request->getPostGet('documento')),
-                'nacionalidad' => strtoupper($this->request->getPostGet('nacionalidad')),
-                'etnia' => strtoupper($this->request->getPostGet('etnia')),
-                'fecha_nac' => strtoupper($this->request->getPostGet('fecha_nac')),
+                'nacionalidad' => $this->request->getPostGet('nacionalidad'),
+                'etnia' => $this->request->getPostGet('etnia'),
+                'fecha_nac' => $this->request->getPostGet('fecha_nac'),
                 'edad' => strtoupper($this->request->getPostGet('edad')),
-                'genero' => strtoupper($this->request->getPostGet('genero')),
-                'discapacidad' => strtoupper($this->request->getPostGet('discapacidad')),
-                'tipo_discapacidad' => strtoupper($this->request->getPostGet('tipo_discapacidad')),
+                'genero' => $this->request->getPostGet('genero'),
+                'discapacidad' => $this->request->getPostGet('discapacidad'),
+                'tipo_discapacidad' => $this->request->getPostGet('tipo_discapacidad'),
+                'anio_lectivo' => $this->request->getPostGet('anio_lectivo'),
+                'amie' => $this->request->getPostGet('amie'),
+
+                //Tutor
+                'doc_tutor' => strtoupper($this->request->getPostGet('doc_tutor')),
+                'docente_tutor' => $this->request->getPostGet('docente_tutor'),
+                'email_tutor' => strtoupper($this->request->getPostGet('email_tutor')),
+                'telf_tutor' => $this->request->getPostGet('telf_tutor'),
+                'etnia_tutor' => $this->request->getPostGet('etnia_tutor'),
+
+                //Representante
                 'representante' => strtoupper($this->request->getPostGet('representante')),
-                'documento_rep' => strtoupper($this->request->getPostGet('documento_rep')),
+                'documento_rep' => $this->request->getPostGet('documento_rep'),
                 'parentesto_rep' => strtoupper($this->request->getPostGet('parentesto_rep')),
-                'nacionalidad_rep' => strtoupper($this->request->getPostGet('nacionalidad_rep')),
+                'nacionalidad_rep' => $this->request->getPostGet('nacionalidad_rep'),
                 'direccion_rep' => strtoupper($this->request->getPostGet('direccion_rep')),
                 'contacto_telf' => strtoupper($this->request->getPostGet('contacto_telf')),
                 'email' => $this->request->getPostGet('email'),
 
+                'observaciones' => strtoupper($this->request->getPostGet('observaciones')),
+                
             );
 
             $hay = $this->nap4Model->find($process['id']);
@@ -1033,11 +1500,11 @@ class Prod2 extends BaseController {
 
         if ($data['is_logged'] == 1 && $data['componente_2'] == 1) {
             
-            if ($this->session->idrol == 2) {
-                $data['centros'] = $this->nap2Model->_getMisAmie($this->session->nombre);
-            }else{
-                $data['centros'] = $this->nap2Model->_getCentrosEducativos();
-            }
+            $data['centros'] = $this->centroProd2Model->findAll();
+            $data['anios_lectivos'] = $this->anioLectivoModel->findAll();
+            $data['cohortes'] = $this->cohorteModel->findAll();
+            $data['nacionalidad'] = $this->nacionalidad;
+            $data['etnia'] = $this->etnia;
             
             $data['datos'] = $this->nap6Model->find($id);
 
@@ -1046,54 +1513,6 @@ class Prod2 extends BaseController {
             $data['title']='MYRP - NAP6 Estudiantes MINEDUC Virtual';
             $data['main_content']='componente2/nap6/prod2_nap6_edit_view';
             return view('includes/template', $data);
-        }else{
-
-            $this->logout();
-            return redirect()->to('/');
-        }
-    }
-
-    public function prod2_nap6_update() {
-        $data['idrol'] = $this->session->idrol;
-        $data['id'] = $this->session->idusuario;
-        $data['is_logged'] = $this->usuarioModel->_getLogStatus($data['id']);
-        $data['nombre'] = $this->session->nombre;
-        $data['componente_2'] = $this->session->componente_2;
-
-        if ($data['is_logged'] == 1 && $data['componente_2'] == 1) {
-
-            $process = array(
-                'id' => $this->request->getPostGet('id'),
-                'nombres_est' => strtoupper($this->request->getPostGet('nombres_est')),
-                'apellidos_est' => strtoupper($this->request->getPostGet('apellidos_est')),
-                'documento' => strtoupper($this->request->getPostGet('documento')),
-                'nacionalidad' => strtoupper($this->request->getPostGet('nacionalidad')),
-                'etnia' => strtoupper($this->request->getPostGet('etnia')),
-                'fecha_nac' => strtoupper($this->request->getPostGet('fecha_nac')),
-                'edad' => strtoupper($this->request->getPostGet('edad')),
-                'genero' => strtoupper($this->request->getPostGet('genero')),
-                'discapacidad' => strtoupper($this->request->getPostGet('discapacidad')),
-                'tipo_discapacidad' => strtoupper($this->request->getPostGet('tipo_discapacidad')),
-                'representante' => strtoupper($this->request->getPostGet('representante')),
-                'documento_rep' => strtoupper($this->request->getPostGet('documento_rep')),
-                'parentesto_rep' => strtoupper($this->request->getPostGet('parentesto_rep')),
-                'nacionalidad_rep' => strtoupper($this->request->getPostGet('nacionalidad_rep')),
-                'direccion_rep' => strtoupper($this->request->getPostGet('direccion_rep')),
-                'contacto_telf' => strtoupper($this->request->getPostGet('contacto_telf')),
-                'email' => $this->request->getPostGet('email'),
-
-            );
-
-            $hay = $this->nap6Model->find($process['id']);
-            if ($hay) {
-                //Actualizo
-                $this->nap6Model->_update($process);
-            }else{
-                //Grabo
-                $this->nap6Model->_save($process);
-            }
-
-            return redirect()->to('prod2-nap6-menu');
         }else{
 
             $this->logout();

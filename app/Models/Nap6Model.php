@@ -89,12 +89,21 @@ class Nap6Model extends Model {
 
     public function _update($datos) {
         $builder = $this->db->table($this->table);
+        
         if ($datos['nombres_est'] != 'NULL') {
             $builder->set('nombres_est', $datos['nombres_est']);
         }
 
         if ($datos['apellidos_est'] != 'NULL') {
             $builder->set('apellidos_est', $datos['apellidos_est']);
+        }
+
+        if ($datos['amie'] != 'NULL') {
+            $builder->set('amie', $datos['amie']);
+        }
+
+        if ($datos['anio_lectivo'] != 'NULL') {
+            $builder->set('anio_lectivo', $datos['anio_lectivo']);
         }
 
         if ($datos['documento'] != 'NULL') {
@@ -155,6 +164,10 @@ class Nap6Model extends Model {
 
         if ($datos['email'] != 'NULL') {
             $builder->set('email', $datos['email']);
+        }
+
+        if ($datos['observaciones'] != 'NULL') {
+            $builder->set('observaciones', $datos['observaciones']);
         }
         
         $builder->where('id', $datos['id']);
@@ -171,6 +184,14 @@ class Nap6Model extends Model {
             $builder->set('apellidos_est', $datos['apellidos_est']);
         }
 
+        if ($datos['amie'] != 'NULL') {
+            $builder->set('amie', $datos['amie']);
+        }
+
+        if ($datos['anio_lectivo'] != 'NULL') {
+            $builder->set('anio_lectivo', $datos['anio_lectivo']);
+        }
+
         if ($datos['documento'] != 'NULL') {
             $builder->set('documento', $datos['documento']);
         }
@@ -231,7 +252,10 @@ class Nap6Model extends Model {
             $builder->set('email', $datos['email']);
         }
 
-        $builder->set('id', $datos['id']);
+        if ($datos['observaciones'] != 'NULL') {
+            $builder->set('observaciones', $datos['observaciones']);
+        }
+
         $builder->insert();
     }
 

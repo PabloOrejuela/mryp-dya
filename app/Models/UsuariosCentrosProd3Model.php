@@ -64,4 +64,27 @@ class UsuariosCentrosProd3Model extends Model {
         //echo $this->db->getLastQuery();
         return $result;
     }
+
+    /**
+     *
+     * Esta función trae los Centros educativos que están bajo un ID del Prod 3
+     *
+     * @param Type $var El código amie del CE
+     * @return array
+     **/
+    public function _getAmiesProd3() {
+        $result = NULL;
+        $builder = $this->db->table($this->table);
+        $builder->select('idusuario, usuarios_centros_prod3.amie as amie, centro_educativo.nombre as nombre, idparroquia');
+        $builder->join('centro_educativo', 'centro_educativo.amie = usuarios_centros_prod3.amie');
+        $builder->orderBy('nombre', 'asc');
+        $query = $builder->get();
+        if ($query->getResult() != null) {
+            foreach ($query->getResult() as $row) {
+                $result[] = $row;
+            }
+        }
+        //echo $this->db->getLastQuery();
+        return $result;
+    }
 }

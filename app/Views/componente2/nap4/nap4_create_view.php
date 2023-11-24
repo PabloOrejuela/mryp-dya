@@ -120,12 +120,12 @@
                         id="select_info"   
                         
                     >
-                    <option value="" selected>--Seleccionar--</option>
+                    <option value="NULL" selected>--Seleccionar--</option>
                     <?php
                         
                         if ($centros != NULL && isset($centros) ) {
                             foreach ($centros as $key => $ce) {
-                                echo '<option value="'.$ce->amie.'" '.set_select('amie', $ce->amie, false).' >'.$ce->amie.' - '.$ce->nombre.'</option>';
+                                echo '<option value="'.$ce->amie.'" '.set_select('amie', $ce->amie, false).' >'.$ce->centro.'</option>';
                             }
                         }
                         
@@ -171,7 +171,6 @@
                     <input 
                         type="email" 
                         id="email_tutor" 
-                        style="text-transform: uppercase" 
                         name="email_tutor" 
                         value="<?= set_value('email_tutor'); ?>"
                         class="form-control" 

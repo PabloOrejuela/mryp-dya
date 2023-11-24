@@ -16,6 +16,9 @@
         background-color: rgb(1, 152, 201, 0.8);
         text-align:left;
     }
+    #btn-nap {
+        text-align:left;
+    }
 </style>
 <main class="container">
     <div class="container-fluid px-4">

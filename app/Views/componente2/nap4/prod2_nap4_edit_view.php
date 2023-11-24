@@ -23,45 +23,16 @@
                     <label for="nacionalidad">Nacionalidad:</label>
                     <select name="nacionalidad" class="form-control" id="nacionalidad" aria-label="nacionalidad">
                         <?php
-                            if ($datos->nacionalidad == "ECUATORIANA") {
-                                echo '<option value="ECUATORIANA" selected>ECUATORIANA</option>
-                                        <option value="VENEZOLANA">VENEZOLANA</option>
-                                        <option value="COLOMBIANA">COLOMBIANA</option>
-                                        <option value="PERUANA">PERUANA</option>
-                                        <option value="OTROS">OTROS</option>
-                                ';
-                            }elseif ($datos->nacionalidad == "VENEZOLANA") {
-                                echo '<option value="ECUATORIANA">ECUATORIANA</option>
-                                        <option value="VENEZOLANA" selected>VENEZOLANA</option>
-                                        <option value="COLOMBIANA">COLOMBIANA</option>
-                                        <option value="PERUANA">PERUANA</option>
-                                        <option value="OTROS">OTROS</option>
-                                ';
-                            }elseif ($datos->nacionalidad == "COLOMBIANA") {
-                                echo '<option value="ECUATORIANA">ECUATORIANA</option>
-                                        <option value="VENEZOLANA">VENEZOLANA</option>
-                                        <option value="COLOMBIANA" selected>COLOMBIANA</option>
-                                        <option value="PERUANA">PERUANA</option>
-                                        <option value="OTROS">OTROS</option>
-                                ';
-                            }elseif ($datos->nacionalidad == "PERUANA") {
-                                echo '<option value="ECUATORIANA">ECUATORIANA</option>
-                                        <option value="VENEZOLANA">VENEZOLANA</option>
-                                        <option value="COLOMBIANA">COLOMBIANA</option>
-                                        <option value="PERUANA" selected>PERUANA</option>
-                                        <option value="OTROS">OTROS</option>
-                                ';
-                            }else {
-                                echo '<option value="ECUATORIANA">ECUATORIANA</option>
-                                        <option value="VENEZOLANA">VENEZOLANA</option>
-                                        <option value="COLOMBIANA">COLOMBIANA</option>
-                                        <option value="PERUANA">PERUANA</option>
-                                        <option value="OTROS" selected>OTROS</option>
-                                ';
+                            if ($datos->nacionalidad) {
+                                foreach ($nacionalidad as $key => $value) {
+                                    if ($datos->nacionalidad == $value) {
+                                        echo '<option value="'.$key.'" '.set_select('nacionalidad', $key, false).' selected>'.$value.'</option>';
+                                    }else{
+                                        echo '<option value="'.$key.'" '.set_select('nacionalidad', $key, false).'>'.$value.'</option>';
+                                    }
+                                }
                             }
                         ?>
-                        
-                        
                     </select>
                 </div>
             </div>
@@ -70,76 +41,16 @@
                     <label for="etnia">Etnia:</label>
                     <select name="etnia" class="form-control" id="etnia" aria-label="etnia">
                         <?php
-                            if ($datos->etnia == "MESTIZA") {
-                                echo '<option value="MESTIZA" selected>MESTIZA</option>
-                                        <option value="INDIGENA">INDIGENA</option>
-                                        <option value="AFRODECENDIENTE">AFRODECENDIENTE</option>
-                                        <option value="AFROECUATORIANA">AFROECUATORIANA</option>
-                                        <option value="AFROVENEZOLANA">AFROVENEZOLANA</option>
-                                        <option value="BLANCA">BLANCA</option>
-                                        <option value="OTROS">OTROS</option>
-                                ';
-                            }elseif ($datos->etnia == "INDIGENA") {
-                                echo '<option value="MESTIZA">MESTIZA</option>
-                                        <option value="INDIGENA" selected>INDIGENA</option>
-                                        <option value="AFRODECENDIENTE">AFRODECENDIENTE</option>
-                                        <option value="AFROECUATORIANA">AFROECUATORIANA</option>
-                                        <option value="AFROVENEZOLANA">AFROVENEZOLANA</option>
-                                        <option value="BLANCA">BLANCA</option>
-                                        <option value="OTROS">OTROS</option>
-                                ';
-                            }elseif ($datos->etnia == "AFRODECENDIENTE") {
-                                echo '<option value="MESTIZA">MESTIZA</option>
-                                        <option value="INDIGENA">INDIGENA</option>
-                                        <option value="AFRODECENDIENTE" selected>AFRODECENDIENTE</option>
-                                        <option value="AFROECUATORIANA">AFROECUATORIANA</option>
-                                        <option value="AFROVENEZOLANA">AFROVENEZOLANA</option>
-                                        <option value="BLANCA">BLANCA</option>
-                                        <option value="OTROS">OTROS</option>    
-                                ';
-                            }elseif ($datos->etnia == "AFROECUATORIANA") {
-                                echo '<option value="ECUATORIANA">ECUATORIANA</option>
-                                        <option value="INDIGENA">INDIGENA</option>
-                                        <option value="AFRODECENDIENTE">AFRODECENDIENTE</option>
-                                        <option value="AFROECUATORIANA" selected>AFROECUATORIANA</option>
-                                        <option value="AFROVENEZOLANA">AFROVENEZOLANA</option>
-                                        <option value="BLANCA">BLANCA</option>
-                                        <option value="OTROS">OTROS</option>    
-                                ';
-                                
-                            }elseif ($datos->etnia == "AFROVENEZOLANA") {
-                                echo '<option value="ECUATORIANA">ECUATORIANA</option>
-                                        <option value="INDIGENA">INDIGENA</option>
-                                        <option value="AFRODECENDIENTE">AFRODECENDIENTE</option>
-                                        <option value="AFROECUATORIANA">AFROECUATORIANA</option>
-                                        <option value="AFROVENEZOLANA" selected>AFROVENEZOLANA</option>
-                                        <option value="BLANCA">BLANCA</option>
-                                        <option value="OTROS">OTROS</option>    
-                                ';
-                                
-                            }elseif ($datos->etnia == "BLANCA") {
-                                echo '<option value="ECUATORIANA">ECUATORIANA</option>
-                                        <option value="INDIGENA">INDIGENA</option>
-                                        <option value="AFRODECENDIENTE">AFRODECENDIENTE</option>
-                                        <option value="AFROECUATORIANA">AFROECUATORIANA</option>
-                                        <option value="AFROVENEZOLANA">AFROVENEZOLANA</option>
-                                        <option value="BLANCA" selected>BLANCA</option>
-                                        <option value="OTROS">OTROS</option>    
-                                ';
-                                
-                            }else {
-                                echo '<option value="ECUATORIANA">ECUATORIANA</option>
-                                        <option value="INDIGENA">INDIGENA</option>
-                                        <option value="AFRODECENDIENTE">AFRODECENDIENTE</option>
-                                        <option value="AFROECUATORIANA">AFROECUATORIANA</option>
-                                        <option value="AFROVENEZOLANA">AFROVENEZOLANA</option>
-                                        <option value="BLANCA">BLANCA</option>
-                                        <option value="OTRA" selected>OTROS</option>    
-                                ';
+                            if ($etnia) {
+                                foreach ($etnia as $key => $value) {
+                                    if ($datos->etnia == $value) {
+                                        echo '<option value="'.$key.'" '.set_select('etnia', $key, false).' selected>'.$value.'</option>';
+                                    }else{
+                                        echo '<option value="'.$key.'" '.set_select('etnia', $key, false).'>'.$value.'</option>';
+                                    }
+                                }
                             }
                         ?>
-                        
-                        
                     </select>
                 </div>
                 <div class="col-md-4 mb-3">
@@ -171,8 +82,6 @@
                                 ';
                             }
                         ?>
-                        
-                        
                     </select>
                 </div>
             </div>
@@ -188,7 +97,31 @@
             </div>
             <div class="row">
                 <div class="col-md-4 mb-3">
-                    
+                    <label for="anio_lectivo">Año lectivo:</label>
+                    <select 
+                        class="form-select" 
+                        aria-label="Default select example" 
+                        name="anio_lectivo"
+                        id="select_info"
+                    >
+                    <option value="0" selected>--Seleccionar--</option>
+                    <?php
+                        
+                        if ($anios_lectivos != NULL && isset($anios_lectivos) ) {
+                            foreach ($anios_lectivos as $key => $anio) {
+                                if ($anio->id == $datos->anio_lectivo) {
+                                    echo '<option value="'.$anio->id.'" '.set_select('anio_lectivo', $anio->id, false).' selected>'.$anio->anio_lectivo.'</option>';
+                                }else{
+                                    echo '<option value="'.$anio->id.'" '.set_select('anio_lectivo', $anio->id, false).' >'.$anio->anio_lectivo.'</option>';
+                                }
+                                
+                            }
+                        }else{
+                            echo '<option value="NULL" selected>Hubo un errror, no se cargaron los datos</option>';
+                        }
+                    ?>
+                    </select>
+                    <p id="error-message"><?= session('errors.anio_lectivo');?> </p>
                 </div>
                 <div class="col-md-4 mb-3">
                     <label for="amie">Centro educativo:</label>
@@ -198,10 +131,8 @@
                         aria-label="Default select example" 
                         name="amie"
                         id="select_info"  
-                        disabled
                     >
                     <?php
-                        
                         if ($centros != NULL && isset($centros) ) {
                             foreach ($centros as $key => $ce) {
                                 if ($ce->amie == $datos->amie) {
