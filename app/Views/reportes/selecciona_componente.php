@@ -40,8 +40,8 @@
                                         <h5 class="card-title">Componente 3</h5>
                                             <p class="card-text">Programa de Acompañamiento Pedagógico</p>';
                                         if ($this->session->idrol == 1 || $this->session->idrol == 3 || $this->session->idrol == 10) {
-                                            echo '<a href="'.site_url().'reporte-info-talleres" class="btn btn-info mb-2" target="_blank">Información estadistica Talleres</a>';
-                                            echo '<a href="'.site_url().'reporte-info-biblioteca" class="btn btn-info mb-2" target="_blank">Información estadistica Biblioteca y encuentro</a>';
+                                            echo '<a href="'.site_url().'reporte-info-talleres" class="btn btn-info mb-2" target="_blank">Reporte Talleres, Nacionalidad, Edad, Género, Etnia</a>';
+                                            echo '<a href="'.site_url().'reporte-info-biblioteca" class="btn btn-info mb-2" target="_blank">Reporte Biblioteca y encuentro</a>';
                                             echo '<a href="'.site_url().'reporte-info-arte" class="btn btn-info mb-2" target="_blank">Reporte Módulo Exp. Artística</a>';
                                             echo '<a href="'.site_url().'reporte-info-lengua" class="btn btn-info mb-2" target="_blank">Reporte Módulo Lenguaje</a>';
                                             echo '<a href="'.site_url().'reporte-info-ciudadania" class="btn btn-info mb-2" target="_blank">Reporte Módulo Ciudadanía</a>';

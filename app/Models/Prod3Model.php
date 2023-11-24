@@ -253,4 +253,39 @@ class Prod3Model extends Model {
         $builder->where('id', $datos['id']);
         $builder->update();
     }
+
+    public function _getCamposEstadistica() {
+        $result = NULL;
+        $builder = $this->db->table($this->table);
+        $builder->select($this->table.'.id as id,AVG(edad) as promEdad,nacionalidad,etnia.etnia as etnia,genero');
+        $builder->join('etnia', 'etnia.id = '.$this->table.'.etnia','left');
+        //$builder->join('anio_lectivo', 'anio_lectivo.id = producto_1.anio_lectivo');
+        $query = $builder->get();
+        if ($query->getResult() != null) {
+            foreach ($query->getResult() as $row) {
+                if ($row->id != NULL && $row != '') {
+                    $result[] = $row;
+                }
+            }
+        }
+        //echo $this->db->getLastQuery();
+        return $result;
+    }
+
+    public function _getTotalGeneros($genero) {
+        $result = NULL;
+        $builder = $this->db->table($this->table);
+        $builder->select('id, COUNT(genero) as genero');
+        $builder->where('genero', $genero);
+        $query = $builder->get();
+        if ($query->getResult() != null) {
+            foreach ($query->getResult() as $row) {
+                if ($row->id != NULL && $row != '') {
+                    $result = $row->genero;
+                }
+            }
+        }
+        //echo $this->db->getLastQuery();
+        return $result;
+    }
 }

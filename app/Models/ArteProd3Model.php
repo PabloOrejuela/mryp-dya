@@ -186,7 +186,6 @@ class ArteProd3Model extends Model {
         return $total;
     }
 
-
     public function _update($datos) {
         $builder = $this->db->table($this->table);
         if ($datos['docente_autoestima'] != 'NULL') {

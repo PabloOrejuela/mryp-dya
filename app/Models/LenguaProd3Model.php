@@ -157,6 +157,22 @@ class LenguaProd3Model extends Model {
         return $total;
     }
 
+    public function _getClasesLengua($id) {
+        $total = null;
+
+        $builder = $this->db->table($this->table);
+        $builder->select('*');
+        $builder->where('id_prod_3', $id);
+        $query = $builder->get();
+        if ($query->getResult() != null) {
+            foreach ($query->getResult() as $row) {
+                $total = $row;
+            }
+        }
+        //echo $this->db->getLastQuery();
+        return $total;
+    }
+
     public function _update($datos) {
         $builder = $this->db->table($this->table);
         if ($datos['enfoque_sociocultural'] != 'NULL') {
