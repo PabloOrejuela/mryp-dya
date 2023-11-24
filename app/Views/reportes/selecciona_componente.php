@@ -15,8 +15,12 @@
                                     <img src="'.site_url().'public/images/card-01.jpg" class="card-img-top" alt="card1">
                                     <div class="card-body" >
                                         <h5 class="card-title">Componente 1</h5>
-                                            <p class="card-text">Servicio de Apoyo Escolar implementado en tres provincias: Carchi, El Oro y Manabí (Manta) </p>
-                                            <a href="'.site_url().'reportes-p1" class="btn btn-info mb-2">Reportes</a>
+                                            <p class="card-text">Servicio de Apoyo Escolar implementado en tres provincias: Carchi, El Oro y Manabí (Manta) </p>';
+                                            if ($this->session->idrol == 1 || $this->session->idrol == 3 || $this->session->idrol == 10) {
+                                                echo '<a href="'.site_url().'prod1-reportes-coordinacion-menu" class="btn btn-info mb-2" target="_blank">Reportes Coordinación</a>';
+
+                                            }
+                                                echo '<a href="'.site_url().'reportes-p1" class="btn btn-info mb-2">Reportes por centro educativo</a>
                                     </div>
                                 </div>';
                         }

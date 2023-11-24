@@ -134,7 +134,7 @@
                         <thead>
                             <th colspan="11">
                                 <?php
-                                
+                                    
                                     if ($centro != NULL && isset($centro)) {
                                         echo 'Centro educativo '.$centro->nombre.' - '.$cohorte;
                                         $nombre =  json_encode($centro->nombre); 

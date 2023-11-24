@@ -230,6 +230,7 @@ $routes->get('reporte-analisis-pruebadiagnostico-p1', 'Reportes::reporte_analisi
 $routes->post('recibe-eval-prueba-diagnostico-tab', 'Reportes::recibe_eval_prueba_diagnostico_tab');
 $routes->get('reporte-destrezas-p1', 'Reportes::reporte_destrezas_p1');
 $routes->post('recibe-reporte-destrezas-p1-tab', 'Reportes::recibe_reporte_destrezas_p1_tab');
+$routes->get('prod1-reportes-coordinacion-menu', 'Reportes::prod1_reportes_coordinacion_menu');
 
 //REPORTES DIMANICOS
 $routes->get('reporte-diagnostico-dinamico-form', 'Reportes::reporte_diagnostico_dinamico_form');

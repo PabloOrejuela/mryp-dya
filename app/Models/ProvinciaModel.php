@@ -39,4 +39,25 @@ class ProvinciaModel extends Model {
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
+
+    public function _getProvinciasProd1() {
+        $result = NULL;
+        $builder = $this->db->table($this->table);
+        $builder->select('provincia');
+        $builder->distinct();
+        $builder->join('centro_educativo', 'centro_educativo.amie = '.$this->table.'.amie');
+        $builder->join('ciudades', 'ciudades.idciudades = centro_educativo.idciudades');
+        $builder->join('provincias', 'provincias.idprovincias = ciudades.idprovincias');
+        $builder->orderBy('provincia');
+        $query = $builder->get();
+        if ($query->getResult() != null) {
+            foreach ($query->getResult() as $row) {
+                if ($row->nacionalidad != NULL && $row != '') {
+                    $result[] = $row;
+                }
+            }
+        }
+        //echo $this->db->getLastQuery();
+        return $result;
+    }
 }

@@ -1,9 +1,9 @@
 <main class="container">
     <div class="container-fluid px-4">
-        <h3 class="mt-4"><?= esc($title).' - REPORTE DE DIAGNOSTICO COORDONADOR'; ?></h3>
+        <h3 class="mt-4"><?= esc($title).' - REPORTE DE DIAGNOSTICO'; ?></h3>
         <div class="card mb-6">
             <div class="card-body" id="card-reportes">
-                <form action="<?php echo base_url().'/reporte-diagnostico-coordinador';?>" method="post">
+                <form action="<?php echo base_url().'/reporte-diagnostico-dinamico';?>" method="post">
                     <input type="hidden" class="txt_csrfname" name="<?= csrf_token() ?>" value="<?= csrf_hash() ?>" />
                     <section>
                         <select name="provincia" id="provincia" class="form-select" style="width: 40%">
