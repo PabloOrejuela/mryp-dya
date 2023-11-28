@@ -56,6 +56,22 @@ class CentrosProvProd1ViewModel extends Model {
         return $result;
     }
 
+    public function _obtenCentrosProvincia($provincia) {
+        $result = NULL;
+        $builder = $this->db->table($this->table);
+        $builder->select('amie,nombre');
+        $builder->where('idprovincias', $provincia);
+        $builder->orderBy('nombre');
+        $query = $builder->get();
+        if ($query->getResult() != null) {
+            foreach ($query->getResult() as $row) {
+                $result[] = $row;
+            }
+        }
+        //echo $this->db->getLastQuery();
+        return $result;
+    }
+
     public function _obtenCiudades($provincia) {
         $result = NULL;
         $builder = $this->db->table($this->table);

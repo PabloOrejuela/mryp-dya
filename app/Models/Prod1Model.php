@@ -102,16 +102,16 @@ class Prod1Model extends Model {
                 }
             }
         }
-        echo $this->db->getLastQuery();
+        //echo $this->db->getLastQuery();
         return $result;
     }
 
-    public function _getRegistrosCoordinador($amie, $cohorte) {
-        $result = NULL;
+    public function _getRegistrosCoordinador($amie, $result) {
+        //$result = null;
         $builder = $this->db->table($this->table);
         $builder->select('*');
         $builder->where('amie', $amie);
-        $builder->where('cohorte', $cohorte);
+        //$builder->where('cohorte', $cohorte);
         //$builder->join('eval_final', 'eval_final.idprod = producto_1.id');
         $builder->orderBy('apellidos');
         $query = $builder->get();
@@ -123,6 +123,17 @@ class Prod1Model extends Model {
             }
         }
         //echo $this->db->getLastQuery();
+        return $result;
+    }
+
+    public function _getRegistrosCentros($centros) {
+        
+        $result = null;
+        foreach ($centros as $key => $value) {
+            //echo $value->amie;
+            $result = $this->_getRegistrosCoordinador($value->amie, $result);
+            //array_push($result, $this->_getRegistrosCoordinador($value->amie));
+        }
         return $result;
     }
 

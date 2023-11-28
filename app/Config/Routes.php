@@ -232,11 +232,13 @@ $routes->get('reporte-destrezas-p1', 'Reportes::reporte_destrezas_p1');
 $routes->post('recibe-reporte-destrezas-p1-tab', 'Reportes::recibe_reporte_destrezas_p1_tab');
 $routes->get('prod1-reportes-coordinacion-menu', 'Reportes::prod1_reportes_coordinacion_menu');
 
-//REPORTES DIMANICOS
-$routes->get('reporte-diagnostico-dinamico-form', 'Reportes::reporte_diagnostico_dinamico_form');
-$routes->post('reporte-diagnostico-dinamico', 'Reportes::reporte_diagnostico_dinamico');
-$routes->get('reporte-final-dinamico-form', 'Reportes::reporte_final_dinamico_form');
-$routes->post('reporte-final-dinamico', 'Reportes::reporte_final_dinamico');
+//REPORTES DINAMICOS
+// $routes->get('reporte-diagnostico-dinamico-form', 'Reportes::reporte_diagnostico_dinamico_form');
+// $routes->post('reporte-diagnostico-dinamico', 'Reportes::reporte_diagnostico_dinamico');
+$routes->get('reporte-diagnostico-lenguaje-coordinador', 'Reportes::reporte_diagnostico_lenguaje_coordinador');
+$routes->post('recibe-diagnostico-lenguaje-coordinador', 'Reportes::recibe_diagnostico_lenguaje_coordinador');
+// $routes->get('reporte-final-dinamico-form', 'Reportes::reporte_final_dinamico_form');
+// $routes->post('reporte-final-dinamico', 'Reportes::reporte_final_dinamico');
 
 
 

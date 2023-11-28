@@ -1,11 +1,12 @@
 <main class="container">
     <div class="container-fluid px-4">
-        <h3 class="mt-4"><?= esc($title).' - REPORTE DE DIAGNOSTICO'; ?></h3>
+        <h3 class="mt-4"><?= esc($title).' - REPORTE POR PROVINCIA'; ?></h3>
         <div class="card mb-6">
             <div class="card-body" id="card-reportes">
-                <form action="<?php echo base_url().'/reporte-diagnostico-dinamico';?>" method="post">
+                <form action="<?php echo base_url().'/recibe-diagnostico-lenguaje-coordinador';?>" method="post">
                     <input type="hidden" class="txt_csrfname" name="<?= csrf_token() ?>" value="<?= csrf_hash() ?>" />
                     <section>
+                        <label for="provincia">Provincia:</label>
                         <select name="provincia" id="provincia" class="form-select" style="width: 40%">
                             <option value="0">--Seleccionar provincia--</option>
                             <?php

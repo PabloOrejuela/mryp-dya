@@ -235,4 +235,22 @@ class DiagnosticoMyrpP1Model extends Model {
         return number_format($porcentaje, 2);
     }
 
+    public function _getDatosDiagLenguajeMyrp($registros) {
+        
+        $result = null;
+        foreach ($registros as $key => $value) {
+            
+            $builder = $this->db->table($this->table);
+            $builder->select('*');
+            $builder->where('idprod', $value->id);
+            $query = $builder->get();
+            if ($query->getResult() != null) {
+                foreach ($query->getResult() as $row) {
+                    $result[] = $row;
+                }
+            }
+            //echo $this->db->getLastQuery();
+        }
+        return $result;
+    }
 }

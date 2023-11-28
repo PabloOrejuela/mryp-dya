@@ -184,4 +184,23 @@ class EvalFinalP1Model extends Model {
         
         $builder->insert();
     }
+
+    public function _getDatosEvalLenguajeMyrp($registros) {
+        
+        $result = null;
+        foreach ($registros as $key => $value) {
+            
+            $builder = $this->db->table($this->table);
+            $builder->select('*');
+            $builder->where('idprod', $value->id);
+            $query = $builder->get();
+            if ($query->getResult() != null) {
+                foreach ($query->getResult() as $row) {
+                    $result[] = $row;
+                }
+            }
+            //echo $this->db->getLastQuery();
+        }
+        return $result;
+    }
 }

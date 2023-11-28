@@ -258,7 +258,7 @@ class Reportes extends BaseController {
         }
     }
 
-    public function reporte_diagnostico_dinamico_form() {
+    public function reporte_diagnostico_lenguaje_coordinador() {
         $data['idrol'] = $this->session->idrol;
         $data['id'] = $this->session->idusuario;
         $data['is_logged'] = $this->usuarioModel->_getLogStatus($data['id']);
@@ -272,7 +272,7 @@ class Reportes extends BaseController {
             //echo '<pre>'.var_export($data['provincias'], true).'</pre>';exit;
 
             $data['title']='MYRP - DYA';
-            $data['main_content']='reportes/prod1_reporte_diagnostico_dinamico_form';
+            $data['main_content']='reportes/prod1_reporte_diagnostico_lenguaje_coordinador_form';
             return view('includes/template_reportes', $data);
         }else{
 
@@ -327,7 +327,7 @@ class Reportes extends BaseController {
                     $data['total'] = 0;
                     $data['edad_max'] = 0;
 
-                    //PABLO poner un mensaje de que no hubo datos
+                    
                     return redirect()->to('reporte-diagnostico-dinamico-form');
                 }
                 //PABLO revisar por que sale siempre 100% de problemas en escritura
@@ -339,6 +339,580 @@ class Reportes extends BaseController {
 
             }
         }
+    }
+
+    public function recibe_diagnostico_lenguaje_coordinador() {
+
+        if ($this->session->reportes != NULL && $this->session->reportes == '1') {
+
+            if ($this->request->getPostGet('provincia') == 0) {
+
+                return redirect()->to('reporte-diagnostico-coordinador');
+
+            }else{
+                $data['provincia'] = $this->request->getPostGet('provincia');
+                $data['provincia_datos'] = $this->provinciaModel->find($data['provincia'] ); 
+    
+                //Variables
+                $data['masculino'] = 0;
+                $data['femenino'] = 0;
+                $data['sin_genero'] = 0;
+    
+                //TRAIGO TODOS LOS REGISTROS DE LA PROVINCIA
+                $data['centros'] = $this->centrosProvProd1ViewModel->_obtenCentrosProvincia($data['provincia']);
+                $data['registros'] = $this->prod1Model->_getRegistrosCentros($data['centros']);
+
+                //echo '<pre>'.var_export($data['provincia_datos'], true).'</pre>';exit;
+                
+                //Traer Total de estudiantes participantes
+                $data['total_registros'] = count($data['registros']);
+                //echo $data['total_registros'];
+
+                //Total de estudiantes que participan en la prueba de diagnóstico lectura
+
+                //Datos de Diagnostico Lenguaje
+                $data['datos_diagnostico_lenguaje'] = $this->diagMyrpP1->_getDatosDiagLenguajeMyrp($data['registros']);
+                $data['datos_evalfinal_lenguaje'] = $this->evalFinalP1->_getDatosEvalLenguajeMyrp($data['registros']);
+
+                //VARIABLES
+                //NECESITA APOYO DIAGNOSTICO
+                $siNecesitaApoyo = 0;
+                $noNecesitaApoyo = 0;
+                foreach ($data['datos_diagnostico_lenguaje'] as $key => $value) {
+                    if ($value->necesito_apoyo == 'SI') {
+                        $siNecesitaApoyo++;
+                    }else if($value->necesito_apoyo == 'NO'){
+                        $noNecesitaApoyo++;
+                    }
+                }
+
+                $etiquetas_apoyo = ["SI", "NO"];
+                $datosGrafica[0] = $siNecesitaApoyo;
+                $datosGrafica[1] = $noNecesitaApoyo;
+                $respuesta_necesita_apoyo = [
+                    "etiquetas" => $etiquetas_apoyo,
+                    "datos" => $datosGrafica,
+                    "color_necesita" => '#ed5c5c',
+                    "color_noNecesita" => '#e8f7e1',
+                    "total" => count($data['datos_diagnostico_lenguaje']),
+                ];
+                $data['chart_data_necesita_apoyo'] = json_encode($respuesta_necesita_apoyo);
+
+                //NECESITA APOYO EVAL FINAL
+                $siNecesitaApoyo = 0;
+                $noNecesitaApoyo = 0;
+                foreach ($data['datos_evalfinal_lenguaje'] as $key => $value) {
+                    if ($value->necesito_apoyo == 'SI') {
+                        $siNecesitaApoyo++;
+                    }else if($value->necesito_apoyo == 'NO'){
+                        $noNecesitaApoyo++;
+                    }
+                }
+
+                $etiquetas_apoyo = ["SI", "NO"];
+                $datosGrafica[0] = $siNecesitaApoyo;
+                $datosGrafica[1] = $noNecesitaApoyo;
+                $respuesta_necesita_apoyo_final = [
+                    "etiquetas" => $etiquetas_apoyo,
+                    "datos" => $datosGrafica,
+                    "color_necesita" => '#ed5c5c',
+                    "color_noNecesita" => '#e8f7e1',
+                    "total" => count($data['datos_evalfinal_lenguaje']),
+                ];
+                $data['chart_data_necesita_apoyo_final'] = json_encode($respuesta_necesita_apoyo_final);
+
+                //Pregunta 1 COMPRENSION LECTORA
+                $data['myChartP1CompLectora'] = json_encode($this->setDataRespuestaP1CompLectora($data));
+
+                //Pregunta 1 COMPRENSION LECTORA EVAL FINAL
+                $data['myChartP1CompLectoraFinal'] = json_encode($this->setDataRespuestaP1CompLectoraFinal($data));
+
+                //Pregunta 1 Inteligibilidad
+                $data['myChartP1Inteligibilidad'] = json_encode($this->setDataRespuestaP1Inteligi($data['datos_diagnostico_lenguaje']));
+
+                //Pregunta 1 Inteligibilidad EVAL FINAL
+                $data['myChartP1InteligibilidadFinal'] = json_encode($this->setDataRespuestaP1Inteligi($data['datos_evalfinal_lenguaje']));
+
+                //Pregunta 2 COMPRENSION LECTORA
+                $data['myChartP2CompLectora'] = json_encode($this->setDataRespuestaP2CompLectora($data['datos_diagnostico_lenguaje']));
+
+                //Pregunta 2 COMPRENSION LECTORA EVAL FINAL
+                $data['myChartP2CompLectoraFinal'] = json_encode($this->setDataRespuestaP2CompLectora($data['datos_evalfinal_lenguaje']));
+                
+                //Pregunta 3 COMPRENSION LECTORA
+                $data['myChartP3CompLectora'] = json_encode($this->setDataRespuestaP3CompLectora($data['datos_diagnostico_lenguaje']));
+
+                //Pregunta 3 COMPRENSION LECTORA EVAL FINAL
+                $data['myChartP3CompLectoraFinal'] = json_encode($this->setDataRespuestaP3CompLectora($data['datos_evalfinal_lenguaje']));
+                
+                //Pregunta 3 Inteligibilidad LECTORA
+                $data['myChartP3Intel'] = json_encode($this->setDataRespuestaP3Intel($data['datos_diagnostico_lenguaje']));
+
+                //Pregunta 3 Inteligibilidad LECTORA EVAL FINAL
+                $data['myChartP3IntelFinal'] = json_encode($this->setDataRespuestaP3Intel($data['datos_evalfinal_lenguaje']));
+
+                //Pregunta 3 COHERENCIA
+                $data['myChartP3Coher'] = json_encode($this->setDataRespuestaP3Coher($data['datos_diagnostico_lenguaje']));
+
+                //Pregunta 3 COHERENCIA EVAL FINAL
+                $data['myChartP3CoherFinal'] = json_encode($this->setDataRespuestaP3Coher($data['datos_evalfinal_lenguaje']));
+
+                //Pregunta 3 SINTAXIS
+                $data['myChartP3Sintax'] = json_encode($this->setDataRespuestaP3Sintax($data['datos_diagnostico_lenguaje']));
+
+                //Pregunta 3 SINTAXIS EVAL FINAL
+                $data['myChartP3SintaxFinal'] = json_encode($this->setDataRespuestaP3Sintax($data['datos_evalfinal_lenguaje']));
+
+                //Pregunta 3 Estándares EGB Subnivel 2 y 3 MYRP
+                $data['myChartP3Estandares'] = json_encode($this->setDataRespuestaP3Estandares($data['datos_diagnostico_lenguaje']));
+
+                //Pregunta 3 Estándares EGB Subnivel 2 y 3 EVAL FINAL
+                $data['myChartP3EstandaresFinal'] = json_encode($this->setDataRespuestaP3Estandares($data['datos_evalfinal_lenguaje']));
+
+                //Pregunta 4 COMPRENSION LECTORA
+                $data['myChartP4CompLectora'] = json_encode($this->setDataRespuestaP4CompLectora($data['datos_diagnostico_lenguaje']));
+
+                //Pregunta 4 COMPRENSION LECTORA EVAL FINAL
+                $data['myChartP4CompLectoraFinal'] = json_encode($this->setDataRespuestaP4CompLectora($data['datos_evalfinal_lenguaje']));
+
+                //Pregunta 4 Inteligibilidad LECTORA
+                $data['myChartP4Intel'] = json_encode($this->setDataRespuestaP4Intel($data['datos_diagnostico_lenguaje']));
+
+                //Pregunta 4 Inteligibilidad LECTORA EVAL FINAL
+                $data['myChartP4IntelFinal'] = json_encode($this->setDataRespuestaP4Intel($data['datos_evalfinal_lenguaje']));
+
+                //Pregunta 4 COHERENCIA
+                $data['myChartP4Coher'] = json_encode($this->setDataRespuestaP4Coher($data['datos_diagnostico_lenguaje']));
+
+                //Pregunta 4 COHERENCIA EVAL FINAL
+                $data['myChartP4CoherFinal'] = json_encode($this->setDataRespuestaP4Coher($data['datos_evalfinal_lenguaje']));
+
+                //Pregunta 4 SINTAXIS
+                $data['myChartP4Sintax'] = json_encode($this->setDataRespuestaP4Sintax($data['datos_diagnostico_lenguaje']));
+
+                //Pregunta 4 SINTAXIS EVAL FINAL
+                $data['myChartP4SintaxFinal'] = json_encode($this->setDataRespuestaP4Sintax($data['datos_evalfinal_lenguaje']));
+
+                //Pregunta 4 Estándares EGB Subnivel 2 y 3 MYRP
+                $data['myChartP4Estandares'] = json_encode($this->setDataRespuestaP4Estandares($data['datos_diagnostico_lenguaje']));
+
+                //Pregunta 4 Estándares EGB Subnivel 2 y 3 EVAL FINAL
+                $data['myChartP4EstandaresFinal'] = json_encode($this->setDataRespuestaP4Estandares($data['datos_evalfinal_lenguaje']));
+                //echo '<pre>'.var_export($data['myChartP3CompLectora'], true).'</pre>';
+                //echo '<pre>'.var_export($data['myChartP3CompLectoraFinal'], true).'</pre>';
+                //exit;
+
+                //Total de estudiantes que participan en la prueba final
+
+                //Rango de edades
+
+                
+                $data['provincias'] = $this->centrosProvProd1ViewModel->_getProvincias();
+
+                $data['title']='MYRP - DYA';
+                $data['main_content']='reportes/prod1_reporte_diagnostico_coordinador';
+                return view('includes/template_reportes', $data);
+
+            }
+        }
+    }
+
+    public function setDataRespuestaP4Estandares($data){
+        $respA = 0;
+        $respB = 0;
+        foreach ($data as $key => $value) {
+            if ($value->p4_estandares_egb_sub2y3 == 'A') {
+                $respA++;
+            }else if($value->p4_estandares_egb_sub2y3 == 'B'){
+                $respB++;
+            }
+        }
+
+        $etiquetas = ["Adecuado", "Debajo de lo esperado"];
+        $datosGrafica[0] = $respA;
+        $datosGrafica[1] = $respB;
+        $respuesta = [
+            "etiquetas" => $etiquetas,
+            "datos" => $datosGrafica,
+            "color_A" => '#e8f7e1',
+            "color_B" => '#F5D5D9',
+            "total" => count($data),
+        ];
+        return $respuesta;
+    }
+
+    public function setDataRespuestaP4Sintax($data){
+        $respA = 0;
+        $respB = 0;
+        $respC = 0;
+        $respD = 0;
+        foreach ($data as $key => $value) {
+            if ($value->p4_sintaxis == 'A') {
+                $respA++;
+            }else if($value->p4_sintaxis == 'B'){
+                $respB++;
+            }else if($value->p4_sintaxis == 'C'){
+                $respC++;
+            }else if($value->p4_sintaxis == 'D'){
+                $respD++;
+            }
+        }
+
+        $etiquetas = ["Adecuado", "En proceso", "Debajo de lo esperado", "Muy por debajo de lo esperado"];
+        $datosGrafica[0] = $respA;
+        $datosGrafica[1] = $respB;
+        $datosGrafica[2] = $respC;
+        $datosGrafica[3] = $respD;
+        $respuesta = [
+            "etiquetas" => $etiquetas,
+            "datos" => $datosGrafica,
+            "color_A" => '#e8f7e1',
+            "color_B" => '#F1F5D5',
+            "color_C" => '#F5D5D9',
+            "color_D" => '#FC656D',
+            "total" => count($data),
+        ];
+        return $respuesta;
+    }
+
+    public function setDataRespuestaP4Coher($data){
+        $respA = 0;
+        $respB = 0;
+        $respC = 0;
+        $respD = 0;
+        foreach ($data as $key => $value) {
+            if ($value->p4_coherencia == 'A') {
+                $respA++;
+            }else if($value->p4_coherencia == 'B'){
+                $respB++;
+            }else if($value->p4_coherencia == 'C'){
+                $respC++;
+            }else if($value->p4_coherencia == 'D'){
+                $respD++;
+            }
+        }
+
+        $etiquetas = ["Adecuado", "En proceso", "Debajo de lo esperado", "Muy por debajo de lo esperado"];
+        $datosGrafica[0] = $respA;
+        $datosGrafica[1] = $respB;
+        $datosGrafica[2] = $respC;
+        $datosGrafica[3] = $respD;
+        $respuesta = [
+            "etiquetas" => $etiquetas,
+            "datos" => $datosGrafica,
+            "color_A" => '#e8f7e1',
+            "color_B" => '#F1F5D5',
+            "color_C" => '#F5D5D9',
+            "color_D" => '#FC656D',
+            "total" => count($data),
+        ];
+        return $respuesta;
+    }
+
+    public function setDataRespuestaP4Intel($data){
+        $respA = 0;
+        $respB = 0;
+        $respC = 0;
+        foreach ($data as $key => $value) {
+            if ($value->p4_inteligibilidad == 'A') {
+                $respA++;
+            }else if($value->p4_inteligibilidad == 'B'){
+                $respB++;
+            }else if($value->p4_inteligibilidad == 'C'){
+                $respC++;
+            }
+        }
+
+        $etiquetas = ["Adecuado", "En proceso", "Muy por debajo de lo esperado"];
+        $datosGrafica[0] = $respA;
+        $datosGrafica[1] = $respB;
+        $datosGrafica[2] = $respC;
+        $respuesta = [
+            "etiquetas" => $etiquetas,
+            "datos" => $datosGrafica,
+            "color_A" => '#e8f7e1',
+            "color_B" => '#F1F5D5',
+            "color_C" => '#FC656D',
+            "total" => count($data),
+        ];
+        return $respuesta;
+    }
+
+    public function setDataRespuestaP4CompLectora($data){
+        $respA = 0;
+        $respB = 0;
+        $respC = 0;
+        foreach ($data as $key => $value) {
+            if ($value->p4_comprension_lectora == 'A') {
+                $respA++;
+            }else if($value->p4_comprension_lectora == 'B'){
+                $respB++;
+            }else if($value->p4_comprension_lectora == 'C'){
+                $respC++;
+            }
+        }
+
+        $etiquetas = ["Adecuado", "En proceso", "Debajo de lo esperado"];
+        $datosGrafica[0] = $respA;
+        $datosGrafica[1] = $respB;
+        $datosGrafica[2] = $respC;
+        $respuesta = [
+            "etiquetas" => $etiquetas,
+            "datos" => $datosGrafica,
+            "color_A" => '#e8f7e1',
+            "color_B" => '#F1F5D5',
+            "color_C" => '#F5D5D9',
+            "total" => count($data),
+        ];
+        return $respuesta;
+    }
+
+    public function setDataRespuestaP3Estandares($data){
+        $respA = 0;
+        $respB = 0;
+        foreach ($data as $key => $value) {
+            if ($value->p3_estandares_egb_sub2y3 == 'A') {
+                $respA++;
+            }else if($value->p3_estandares_egb_sub2y3 == 'B'){
+                $respB++;
+            }
+        }
+
+        $etiquetas = ["Adecuado", "Debajo de lo esperado"];
+        $datosGrafica[0] = $respA;
+        $datosGrafica[1] = $respB;
+        $respuesta = [
+            "etiquetas" => $etiquetas,
+            "datos" => $datosGrafica,
+            "color_A" => '#e8f7e1',
+            "color_B" => '#F5D5D9',
+            "total" => count($data),
+        ];
+        return $respuesta;
+    }
+
+    public function setDataRespuestaP3Sintax($data){
+        $respA = 0;
+        $respB = 0;
+        $respC = 0;
+        $respD = 0;
+        foreach ($data as $key => $value) {
+            if ($value->p3_sintaxis == 'A') {
+                $respA++;
+            }else if($value->p3_sintaxis == 'B'){
+                $respB++;
+            }else if($value->p3_sintaxis == 'C'){
+                $respC++;
+            }else if($value->p3_sintaxis == 'D'){
+                $respD++;
+            }
+        }
+
+        $etiquetas = ["Adecuado", "En proceso", "Debajo de lo esperado", "Muy por debajo de lo esperado"];
+        $datosGrafica[0] = $respA;
+        $datosGrafica[1] = $respB;
+        $datosGrafica[2] = $respC;
+        $datosGrafica[3] = $respD;
+        $respuesta = [
+            "etiquetas" => $etiquetas,
+            "datos" => $datosGrafica,
+            "color_A" => '#e8f7e1',
+            "color_B" => '#F1F5D5',
+            "color_C" => '#F5D5D9',
+            "color_D" => '#FC656D',
+            "total" => count($data),
+        ];
+        return $respuesta;
+    }
+
+    public function setDataRespuestaP3Coher($data){
+        $respA = 0;
+        $respB = 0;
+        $respC = 0;
+        $respD = 0;
+        foreach ($data as $key => $value) {
+            if ($value->p3_coherencia == 'A') {
+                $respA++;
+            }else if($value->p3_coherencia == 'B'){
+                $respB++;
+            }else if($value->p3_coherencia == 'C'){
+                $respC++;
+            }else if($value->p3_coherencia == 'D'){
+                $respD++;
+            }
+        }
+
+        $etiquetas = ["Adecuado", "En proceso", "Debajo de lo esperado", "Muy por debajo de lo esperado"];
+        $datosGrafica[0] = $respA;
+        $datosGrafica[1] = $respB;
+        $datosGrafica[2] = $respC;
+        $datosGrafica[3] = $respD;
+        $respuesta = [
+            "etiquetas" => $etiquetas,
+            "datos" => $datosGrafica,
+            "color_A" => '#e8f7e1',
+            "color_B" => '#F1F5D5',
+            "color_C" => '#F5D5D9',
+            "color_D" => '#FC656D',
+            "total" => count($data),
+        ];
+        return $respuesta;
+    }
+
+    public function setDataRespuestaP3Intel($data){
+        $respA = 0;
+        $respB = 0;
+        $respC = 0;
+        foreach ($data as $key => $value) {
+            if ($value->p3_inteligibilidad == 'A') {
+                $respA++;
+            }else if($value->p3_inteligibilidad == 'B'){
+                $respB++;
+            }else if($value->p3_inteligibilidad == 'C'){
+                $respC++;
+            }
+        }
+
+        $etiquetas = ["Adecuado", "En proceso", "Muy por debajo de lo esperado"];
+        $datosGrafica[0] = $respA;
+        $datosGrafica[1] = $respB;
+        $datosGrafica[2] = $respC;
+        $respuesta = [
+            "etiquetas" => $etiquetas,
+            "datos" => $datosGrafica,
+            "color_A" => '#e8f7e1',
+            "color_B" => '#F1F5D5',
+            "color_C" => '#FC656D',
+            "total" => count($data),
+        ];
+        return $respuesta;
+    }
+
+    public function setDataRespuestaP3CompLectora($data){
+        $respA = 0;
+        $respB = 0;
+        $respC = 0;
+        foreach ($data as $key => $value) {
+            if ($value->p3_comprension_lectora == 'A') {
+                $respA++;
+            }else if($value->p3_comprension_lectora == 'B'){
+                $respB++;
+            }else if($value->p3_comprension_lectora == 'C'){
+                $respC++;
+            }
+        }
+
+        $etiquetas = ["Adecuado", "En proceso", "Muy por debajo de lo esperado"];
+        $datosGrafica[0] = $respA;
+        $datosGrafica[1] = $respB;
+        $datosGrafica[2] = $respC;
+        $respuesta = [
+            "etiquetas" => $etiquetas,
+            "datos" => $datosGrafica,
+            "color_A" => '#e8f7e1',
+            "color_B" => '#F1F5D5',
+            "color_C" => '#FC656D',
+            "total" => count($data),
+        ];
+        return $respuesta;
+    }
+
+    public function setDataRespuestaP2CompLectora($data){
+        $respA = 0;
+        $respB = 0;
+        foreach ($data as $key => $value) {
+            if ($value->p2_comprension_lectora == 'A') {
+                $respA++;
+            }else if($value->p2_comprension_lectora == 'B'){
+                $respB++;
+            }
+        }
+
+        $etiquetas = ["Adecuado", "Muy por debajo de lo esperado"];
+        $datosGrafica[0] = $respA;
+        $datosGrafica[1] = $respB;
+        $respuesta = [
+            "etiquetas" => $etiquetas,
+            "datos" => $datosGrafica,
+            "color_A" => '#E8F7E1',
+            "color_B" => '#FC656D',
+            "total" => count($data),
+        ];
+        return $respuesta;
+    }
+
+    public function setDataRespuestaP1CompLectora($data){
+        $respA = 0;
+        $respB = 0;
+        foreach ($data['datos_diagnostico_lenguaje'] as $key => $value) {
+            if ($value->p1_comprension_lectora == 'A') {
+                $respA++;
+            }else if($value->p1_comprension_lectora == 'B'){
+                $respB++;
+            }
+        }
+
+        $etiquetas = ["Adecuado", "Muy por debajo de lo esperado"];
+        $datosGrafica[0] = $respA;
+        $datosGrafica[1] = $respB;
+        $respuesta = [
+            "etiquetas" => $etiquetas,
+            "datos" => $datosGrafica,
+            "color_A" => '#E8F7E1',
+            "color_B" => '#FC656D',
+            "total" => count($data['datos_diagnostico_lenguaje']),
+        ];
+
+        
+        return $respuesta;
+    }
+
+    public function setDataRespuestaP1CompLectoraFinal($data){
+        $respA = 0;
+        $respB = 0;
+        foreach ($data['datos_evalfinal_lenguaje'] as $key => $value) {
+            if ($value->p1_comprension_lectora == 'A') {
+                $respA++;
+            }else if($value->p1_comprension_lectora == 'B'){
+                $respB++;
+            }
+        }
+
+        $etiquetas = ["Adecuado", "Muy por debajo de lo esperado"];
+        $datosGrafica[0] = $respA;
+        $datosGrafica[1] = $respB;
+        $respuesta = [
+            "etiquetas" => $etiquetas,
+            "datos" => $datosGrafica,
+            "color_A" => '#e8f7e1',
+            "color_B" => '#FC656D',
+            "total" => count($data['datos_evalfinal_lenguaje']),
+        ];
+        return $respuesta;
+    }
+
+    public function setDataRespuestaP1Inteligi($data){
+        $respA = 0;
+        $respB = 0;
+        foreach ($data as $key => $value) {
+            if ($value->p1_inteligibilidad == 'A') {
+                $respA++;
+            }else if($value->p1_inteligibilidad == 'B'){
+                $respB++;
+            }
+        }
+
+        $etiquetas = ["Adecuado", "Muy por debajo de lo esperado"];
+        $datosGrafica[0] = $respA;
+        $datosGrafica[1] = $respB;
+        $respuesta = [
+            "etiquetas" => $etiquetas,
+            "datos" => $datosGrafica,
+            "color_A" => '#e8f7e1',
+            "color_B" => '#FC656D',
+            "total" => count($data),
+        ];
+        return $respuesta;
     }
 
     public function reporte_final_dinamico_form() {
@@ -410,7 +984,6 @@ class Reportes extends BaseController {
                     $data['total'] = 0;
                     $data['edad_max'] = 0;
 
-                    //PABLO poner un mensaje de que no hubo datos
                     return redirect()->to('reporte-final-dinamico-form');
                 }
 
