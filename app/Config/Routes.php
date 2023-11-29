@@ -237,8 +237,8 @@ $routes->get('prod1-reportes-coordinacion-menu', 'Reportes::prod1_reportes_coord
 // $routes->post('reporte-diagnostico-dinamico', 'Reportes::reporte_diagnostico_dinamico');
 $routes->get('reporte-diagnostico-lenguaje-coordinador', 'Reportes::reporte_diagnostico_lenguaje_coordinador');
 $routes->post('recibe-diagnostico-lenguaje-coordinador', 'Reportes::recibe_diagnostico_lenguaje_coordinador');
-// $routes->get('reporte-final-dinamico-form', 'Reportes::reporte_final_dinamico_form');
-// $routes->post('reporte-final-dinamico', 'Reportes::reporte_final_dinamico');
+$routes->get('reporte-diagnostico-mate-coordinador', 'Reportes::reporte_diagnostico_matematicas_coordinador');
+$routes->post('recibe-diagnostico-mate-coordinador', 'Reportes::recibe_diagnostico_mate_coordinador');
 
 
 

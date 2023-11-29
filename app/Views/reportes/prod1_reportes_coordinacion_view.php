@@ -1,12 +1,12 @@
 <main class="container">
     <div class="container-fluid px-4">
         <h3 class="mt-4"><?= esc($title).' - REPORTES POR PROVINCIA'; ?></h3>
-        <div class="card mb-4">
+        <div class="card mb-4" style="visibility: hidden" >
             <div class="card-header">
                 <i class="fa-solid fa-cash-register"></i>
                 <?= esc("Reporte de asistencia por provincia"); ?>
             </div>
-            <div class="card-body" id="card-reportes"> 
+            <div class="card-body" id="card-reportes" > 
                 <form action="<?php echo base_url().'/recibe-asistencia-tab';?>" method="post" id="form">
                     <div class="col-md-8 mb-3">
                         <label for="amie">Provincia:</label>
@@ -61,7 +61,7 @@
                     <button type="submit" class="btn btn-success">Generar reporte</button>
                 </form>
             </div>
-        <section>
+        <section style="visibility: hidden" >
         
             <div class="col-md-7" style="width: 700px;">
                 <div class="contenedor mb-3 mt-3" id="table-asistencia">

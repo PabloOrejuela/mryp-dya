@@ -492,4 +492,23 @@ class EvalMateP1Model extends Model {
         $porcentaje = ($result * 100) / count($registros);
         return $porcentaje;
     }
+
+    public function _getDatosMate($registros) {
+        
+        $result = null;
+        foreach ($registros as $key => $value) {
+            
+            $builder = $this->db->table($this->table);
+            $builder->select('*');
+            $builder->where('idprod', $value->id);
+            $query = $builder->get();
+            if ($query->getResult() != null) {
+                foreach ($query->getResult() as $row) {
+                    $result[] = $row;
+                }
+            }
+            //echo $this->db->getLastQuery();
+        }
+        return $result;
+    }
 }

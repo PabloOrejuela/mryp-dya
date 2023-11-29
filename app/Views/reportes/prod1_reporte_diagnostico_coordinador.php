@@ -1,7 +1,7 @@
 <style>
     .grafica{
-        max-width: 350px;
-        min-width: 300px;
+        max-width: 550px;
+        min-width: 400px;
         margin-bottom: 50px;
         margin-top: 0px;
         padding-top: 0px;

@@ -29,8 +29,9 @@
                 Reporte general Coordinación
               </a>
               <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <li><a class="dropdown-item" href="'.site_url().'reporte-diagnostico-lenguaje-coordinador">Reporte Analisis resultados - lenguaje</a></li>
-                <li><a class="dropdown-item" href="'.site_url().'reporte-final-coordinador">Reporte de análisis Final</a></li>
+                <li><a class="dropdown-item" href="'.site_url().'reporte-diagnostico-lenguaje-coordinador">Rep. Analisis resultados - lenguaje</a></li>
+                <li><a class="dropdown-item" href="'.site_url().'reporte-diagnostico-mate-coordinador">Rep. Analisis resultados - Matemáticas prueba Media/Avanzada</a></li>
+                <li><a class="dropdown-item" href="'.site_url().'reporte-diagnostico-matelement-coordinador">Rep. Analisis resultados - Matemáticas prueba Elemental</a></li>
               </ul>
             </li>
             ';

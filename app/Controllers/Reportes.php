@@ -281,6 +281,29 @@ class Reportes extends BaseController {
         }
     }
 
+    public function reporte_diagnostico_matematicas_coordinador() {
+        $data['idrol'] = $this->session->idrol;
+        $data['id'] = $this->session->idusuario;
+        $data['is_logged'] = $this->usuarioModel->_getLogStatus($data['id']);
+        $data['nombre'] = $this->session->nombre;
+        $data['componente_1'] = $this->session->componente_1;
+        $data['reportes'] = $this->session->reportes;
+
+        if ($data['is_logged'] == 1 && $data['componente_1'] == 1 && $data['reportes'] == 1) {
+
+            $data['provincias'] = $this->centrosProvProd1ViewModel->_getProvincias();
+            //echo '<pre>'.var_export($data['provincias'], true).'</pre>';exit;
+
+            $data['title']='MYRP - DYA';
+            $data['main_content']='reportes/prod1_reporte_diagnostico_mate_coordinador_form';
+            return view('includes/template_reportes', $data);
+        }else{
+
+            $this->logout();
+            return redirect()->to('/');
+        }
+    }
+
     public function reporte_diagnostico_dinamico() {
         // Ahora las imprimimos como JSON para pasarlas a AJAX, pero las agrupamos
 
@@ -935,6 +958,161 @@ class Reportes extends BaseController {
             $this->logout();
             return redirect()->to('/');
         }
+    }
+
+    public function recibe_diagnostico_mate_coordinador() {
+
+        if ($this->session->reportes != NULL && $this->session->reportes == '1') {
+
+            if ($this->request->getPostGet('provincia') == 0) {
+
+                return redirect()->to('reporte-diagnostico-coordinador');
+
+            }else{
+                $data['provincia'] = $this->request->getPostGet('provincia');
+                $data['provincia_datos'] = $this->provinciaModel->find($data['provincia'] ); 
+    
+                //Variables
+                $data['masculino'] = 0;
+                $data['femenino'] = 0;
+                $data['sin_genero'] = 0;
+    
+                //TRAIGO TODOS LOS REGISTROS DE LA PROVINCIA
+                $data['centros'] = $this->centrosProvProd1ViewModel->_obtenCentrosProvincia($data['provincia']);
+                $data['registros'] = $this->prod1Model->_getRegistrosCentros($data['centros']);
+
+                //echo '<pre>'.var_export($data['provincia_datos'], true).'</pre>';exit;
+                
+                //Traer Total de estudiantes participantes
+                $data['total_registros'] = count($data['registros']);
+
+                //Datos de Matemáticas
+                $data['datos_mate'] = $this->evalMateP1->_getDatosMate($data['registros']);
+                $data['datos_mate_final'] = $this->evalMateFinalP1->_getDatosMate($data['registros']);
+
+                //echo '<pre>'.var_export($data['datos_mate'][0], true).'</pre>';exit;
+                //VARIABLES
+            
+                //Pregunta 1 Orientacion
+                $data['myChartP1Orientacion'] = json_encode($this->setDataRespuesta($data['datos_mate'], 'orientacion_espacial_1'));
+                $data['myChartP1OrientacionFinal'] = json_encode($this->setDataRespuesta($data['datos_mate_final'], 'orientacion_espacial_1'));
+
+                //Pregunta 2 Orientacion
+                $data['myChartP2Orientacion'] = json_encode($this->setDataRespuesta($data['datos_mate'], 'orientacion_espacial_2'));
+                $data['myChartP2OrientacionFinal'] = json_encode($this->setDataRespuesta($data['datos_mate_final'], 'orientacion_espacial_2'));
+
+                //Pregunta 3 Orientacion
+                $data['myChartP3Orientacion'] = json_encode($this->setDataRespuesta($data['datos_mate'], 'orientacion_espacial_3'));
+                $data['myChartP3OrientacionFinal'] = json_encode($this->setDataRespuesta($data['datos_mate_final'], 'orientacion_espacial_3'));
+
+                //Pregunta 4 Orientacion
+                $data['myChartP4Orientacion'] = json_encode($this->setDataRespuesta($data['datos_mate'], 'orientacion_espacial_4'));
+                $data['myChartP4OrientacionFinal'] = json_encode($this->setDataRespuesta($data['datos_mate_final'], 'orientacion_espacial_4'));
+
+                //Pregunta 5 Clasificación
+                $data['myChartP5Clasificacion'] = json_encode($this->setDataRespuesta($data['datos_mate'], 'clasificacion_5'));
+                $data['myChartP5ClasificacionFinal'] = json_encode($this->setDataRespuesta($data['datos_mate_final'], 'clasificacion_5'));
+
+                //Pregunta 6 Clasificación
+                $data['myChartP6Clasificacion'] = json_encode($this->setDataRespuesta($data['datos_mate'], 'clasificacion_6'));
+                $data['myChartP6ClasificacionFinal'] = json_encode($this->setDataRespuesta($data['datos_mate_final'], 'clasificacion_6'));
+
+                //Pregunta 7 Clasificación
+                $data['myChartP7Seriacion'] = json_encode($this->setDataRespuesta($data['datos_mate'], 'seriacion_7'));
+                $data['myChartP7SeriacionFinal'] = json_encode($this->setDataRespuesta($data['datos_mate_final'], 'seriacion_7'));
+
+                //Pregunta 8 Clasificación
+                $data['myChartP8Seriacion'] = json_encode($this->setDataRespuesta($data['datos_mate'], 'seriacion_8'));
+                $data['myChartP8SeriacionFinal'] = json_encode($this->setDataRespuesta($data['datos_mate_final'], 'seriacion_8'));
+
+                //Pregunta 9 Clasificación
+                $data['myChartP9Seriacion'] = json_encode($this->setDataRespuesta($data['datos_mate'], 'seriacion_9'));
+                $data['myChartP9SeriacionFinal'] = json_encode($this->setDataRespuesta($data['datos_mate_final'], 'seriacion_9'));
+
+                //Pregunta 10 Esquema corporal
+                $data['myChartP10Esquema'] = json_encode($this->setDataRespuesta($data['datos_mate'], 'esquema_corporal_10'));
+                $data['myChartP10EsquemaFinal'] = json_encode($this->setDataRespuesta($data['datos_mate_final'], 'esquema_corporal_10'));
+
+                //Pregunta 11 Esquema corporal
+                $data['myChartP11Esquema'] = json_encode($this->setDataRespuesta($data['datos_mate'], 'esquema_corporal_11'));
+                $data['myChartP11EsquemaFinal'] = json_encode($this->setDataRespuesta($data['datos_mate_final'], 'esquema_corporal_11'));
+
+                //SUMA
+                $data['myChartSumaDos'] = json_encode($this->setDataRespuesta($data['datos_mate'], 'suma_dos_cifras'));
+                $data['myChartSumaDosFinal'] = json_encode($this->setDataRespuesta($data['datos_mate_final'], 'suma_dos_cifras'));
+                $data['myChartSumaCuatro'] = json_encode($this->setDataRespuesta($data['datos_mate'], 'suma_cuatro_cifras'));
+                $data['myChartSumaCuatroFinal'] = json_encode($this->setDataRespuesta($data['datos_mate_final'], 'suma_cuatro_cifras'));
+                $data['myChartSumaCinco'] = json_encode($this->setDataRespuesta($data['datos_mate'], 'suma_cinco_mas'));
+                $data['myChartSumaCincoFinal'] = json_encode($this->setDataRespuesta($data['datos_mate_final'], 'suma_cinco_mas'));
+
+                //Resta
+                $data['myChartRestaTres'] = json_encode($this->setDataRespuesta($data['datos_mate'], 'resta_tres_cifras'));
+                $data['myChartRestaTresFinal'] = json_encode($this->setDataRespuesta($data['datos_mate_final'], 'resta_tres_cifras'));
+                $data['myChartRestaCuatro'] = json_encode($this->setDataRespuesta($data['datos_mate'], 'resta_cuatro_cifras'));
+                $data['myChartRestaCuatroFinal'] = json_encode($this->setDataRespuesta($data['datos_mate_final'], 'resta_cuatro_cifras'));
+
+                //Multiplicación
+                $data['myChartMultiUna'] = json_encode($this->setDataRespuesta($data['datos_mate'], 'multiplicacion_una_cifra'));
+                $data['myChartMultiUnaFinal'] = json_encode($this->setDataRespuesta($data['datos_mate_final'], 'multiplicacion_una_cifra'));
+                $data['myChartMultiDos'] = json_encode($this->setDataRespuesta($data['datos_mate'], 'multiplicacion_dos_cifras'));
+                $data['myChartMultiDossFinal'] = json_encode($this->setDataRespuesta($data['datos_mate_final'], 'multiplicacion_dos_cifras'));
+
+                //División
+                $data['myChartDiviUna'] = json_encode($this->setDataRespuesta($data['datos_mate'], 'division_una_cifra'));
+                $data['myChartDiviUnaFinal'] = json_encode($this->setDataRespuesta($data['datos_mate_final'], 'division_una_cifra'));
+                $data['myChartDiviDos'] = json_encode($this->setDataRespuesta($data['datos_mate'], 'division_dos_cifras'));
+                $data['myChartDiviDossFinal'] = json_encode($this->setDataRespuesta($data['datos_mate_final'], 'division_dos_cifras'));
+
+                // echo '<pre>'.var_export($data['myChartP6Clasificacion'], true).'</pre>';
+                // echo '<pre>'.var_export($data['myChartP6ClasificacionFinal'], true).'</pre>';
+                // exit;
+
+                //Total de estudiantes que participan en la prueba final
+
+                //Rango de edades
+
+                
+                $data['provincias'] = $this->centrosProvProd1ViewModel->_getProvincias();
+
+                $data['title']='MYRP - DYA';
+                $data['main_content']='reportes/prod1_reporte_diagnostico_mate_coordinador';
+                return view('includes/template_reportes', $data);
+
+            }
+        }
+    }
+
+    public function setDataRespuesta($data, $campo){
+        $resp = 0;
+        $acierta = 0;
+        $noAcierta = 0;
+        foreach ($data as $key => $value) {
+            if ($value->$campo == '1' || $value->$campo == 1) {
+                $resp++;
+            }
+        }
+
+        $acierta = round(($resp * 100)/count($data));
+        $noAcierta = 100 - $acierta;
+
+        $etiquetas = [$acierta."% Acierta", $noAcierta."% No acierta"];
+        if ($acierta == 0 && $noAcierta != 0) {
+            $datosGrafica[0] = $noAcierta;
+        }else if($acierta != 0 && $noAcierta == 0){
+            $datosGrafica[0] = $acierta;
+        }else if($acierta != 0 && $noAcierta != 0){
+            $datosGrafica[0] = $acierta;
+            $datosGrafica[1] = $noAcierta;
+        }
+        
+        $respuesta = [
+            "etiquetas" => $etiquetas,
+            "datos" => $datosGrafica,
+            "color_A" => '#e8f7e1',
+            "color_B" => '#FC656D',
+            "total" => count($data),
+        ];
+        return $respuesta;
     }
 
     public function reporte_final_dinamico() {
