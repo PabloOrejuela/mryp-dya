@@ -9,171 +9,246 @@
 </style>
 <main class="container">
     <div class="container-fluid px-4">
-        <h3 class="mt-4"><?= esc($title).' - REPORTE ANALISIS - LENGUAJE'; ?></h3>
+        <h3 class="mt-4"><?= esc($title).' - REPORTE ANALISIS - MATEMATICAS'; ?></h3>
         <div class="card mb-4">
         </div>
         <section>
-            <h5 style="text-align:center;">ANALISIS DE LAS DESTREZAS DE LENGUAJE PROVINCIA:  <?= $provincia_datos->provincia;  ?></h5>
-            <table>
+            <h5 style="text-align:center;">ANALISIS DE LAS DESTREZAS DE MATEMATICA ELEMENTAL PROVINCIA:  <?= $provincia_datos->provincia;  ?></h5>
+
+            <!-- Relación Figuras Geométricas -->
+            <table class="mt-4">
                 <thead>
-                    <th colspan="3" style="text-align:center;"><h5>DIAGNOSTICO</h5></th>
-                    <th style="text-align:center;"><h5>EVALUACION FINAL MYRP</h5></th>
+                    <th colspan="4" style="text-align:center;"><h5>Relación Figuras Geométricas</h5></th>
+                </thead>
+                <thead>
+                    <th colspan="3" style="text-align:center;"><h5>DIAGNOSTICO MATEMATICAS</h5></th>
+                    <th style="text-align:center;"><h5>EVALUACION FINAL MATEMATICAS</h5></th>
                 </thead>
                 <tbody>
                     <tr>
-                        <td><canvas id="myChartNecsitoApoyo" class="grafica"></canvas></td>
+                        <td><canvas id="myChartP1RelacionFiguras" class="grafica mb-2"></canvas></td>
                         <td class="px-3"> </td>
                         <td class="px-3"> </td>
-                        <td class="px-3"><canvas id="myChartNecsitoApoyoFinal" class="grafica"></canvas></td>
+                        <td><canvas id="myChartP1RelacionFigurasFinal" class="grafica mb-2"></canvas></td>
+                    </tr>
+                    <tr>
+                        <td><canvas id="myChartP2RelacionFiguras" class="grafica mb-2"></canvas></td>
+                        <td class="px-3"> </td>
+                        <td class="px-3"> </td>
+                        <td><canvas id="myChartP2RelacionFigurasFinal" class="grafica mb-2"></canvas></td>
                     </tr>
                 </tbody>
             </table>
 
-            <!-- Pregunta 1 -->
+            <!-- Seriación 2 -->
             <table class="mt-4">
                 <thead>
-                    <th colspan="4" style="text-align:center;"><h5>PREGUNTA 1</h5></th>
+                    <th colspan="4" style="text-align:center;"><h5>Seriación 2</h5></th>
                 </thead>
                 <thead>
-                    <th colspan="3" style="text-align:center;"><h5>DIAGNOSTICO</h5></th>
-                    <th style="text-align:center;"><h5>EVALUACION FINAL MYRP</h5></th>
+                    <th colspan="3" style="text-align:center;"><h5>DIAGNOSTICO MATEMATICAS</h5></th>
+                    <th style="text-align:center;"><h5>EVALUACION FINAL MATEMATICAS</h5></th>
                 </thead>
                 <tbody>
                     <tr>
-                        <td><canvas id="myChartP1CompLectora" class="grafica mb-2"></canvas></td>
+                        <td><canvas id="myChartP2Seriacion" class="grafica mb-2"></canvas></td>
                         <td class="px-3"> </td>
                         <td class="px-3"> </td>
-                        <td><canvas id="myChartP1CompLectoraFinal" class="grafica mb-2"></canvas></td>
-                    </tr>
-                    <tr style="padding-top: 30px;">
-                        <td> </td>
-                        <td> </td>
+                        <td><canvas id="myChartP2SeriacionFinal" class="grafica mb-2"></canvas></td>
                     </tr>
                     <tr>
-                        <td><canvas id="myChartP1Inteligibilidad" class="grafica mb-2"></canvas></td>
+                        <td><canvas id="myChartP2Conjuntos" class="grafica mb-2"></canvas></td>
                         <td class="px-3"> </td>
                         <td class="px-3"> </td>
-                        <td><canvas id="myChartP1InteligibilidadFinal" class="grafica mb-2"></canvas></td>
+                        <td><canvas id="myChartP2ConjuntosFinal" class="grafica mb-2"></canvas></td>
+                    </tr>
+                    <tr>
+                        <td><canvas id="myChartP22Seriacion" class="grafica mb-2"></canvas></td>
+                        <td class="px-3"> </td>
+                        <td class="px-3"> </td>
+                        <td><canvas id="myChartP22SeriacionFinal" class="grafica mb-2"></canvas></td>
                     </tr>
                 </tbody>
             </table>
 
-            <!-- Pregunta 2 -->
+            <!-- Orientación Espacial -->
             <table class="mt-4">
                 <thead>
-                    <th colspan="4" style="text-align:center;"><h5>PREGUNTA 2</h5></th>
+                    <th colspan="4" style="text-align:center;"><h5>Orientación Espacial</h5></th>
                 </thead>
                 <thead>
-                    <th colspan="3" style="text-align:center;"><h5>DIAGNOSTICO</h5></th>
-                    <th style="text-align:center;"><h5>EVALUACION FINAL MYRP</h5></th>
+                    <th colspan="3" style="text-align:center;"><h5>DIAGNOSTICO MATEMATICAS</h5></th>
+                    <th style="text-align:center;"><h5>EVALUACION FINAL MATEMATICAS</h5></th>
                 </thead>
                 <tbody>
                     <tr>
-                        <td><canvas id="myChartP2CompLectora" class="grafica mb-2"></canvas></td>
+                        <td><canvas id="myChartP3OrientacionEspacial" class="grafica mb-2"></canvas></td>
                         <td class="px-3"> </td>
                         <td class="px-3"> </td>
-                        <td><canvas id="myChartP2CompLectoraFinal" class="grafica mb-2"></canvas></td>
-                    </tr>
-                </tbody>
-            </table>
-            
-            <!-- Pregunta 3 -->
-            <table class="mt-4">
-                <thead>
-                    <th colspan="4" style="text-align:center;"><h5>PREGUNTA 3</h5></th>
-                </thead>
-                <thead>
-                    <th colspan="3" style="text-align:center;"><h5>DIAGNOSTICO</h5></th>
-                    <th style="text-align:center;"><h5>EVALUACION FINAL MYRP</h5></th>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><canvas id="myChartP3CompLectora" class="grafica mb-2"></canvas></td>
-                        <td class="px-3"> </td>
-                        <td class="px-3"> </td>
-                        <td><canvas id="myChartP3CompLectoraFinal" class="grafica mb-2"></canvas></td>
+                        <td><canvas id="myChartP3OrientacionEspacialFinal" class="grafica mb-2"></canvas></td>
                     </tr>
                     <tr>
-                        <td><canvas id="myChartP3Intel" class="grafica mb-2"></canvas></td>
+                        <td><canvas id="myChartP31OrientacionEspacial" class="grafica mb-2"></canvas></td>
                         <td class="px-3"> </td>
                         <td class="px-3"> </td>
-                        <td><canvas id="myChartP3IntelFinal" class="grafica mb-2"></canvas></td>
+                        <td><canvas id="myChartP31OrientacionEspacialFinal" class="grafica mb-2"></canvas></td>
                     </tr>
                     <tr>
-                        <td><canvas id="myChartP3Coher" class="grafica mb-2"></canvas></td>
+                        <td><canvas id="myChartP32OrientacionEspacial" class="grafica mb-2"></canvas></td>
                         <td class="px-3"> </td>
                         <td class="px-3"> </td>
-                        <td><canvas id="myChartP3CoherFinal" class="grafica mb-2"></canvas></td>
-                    </tr>
-                    <tr>
-                        <td><canvas id="myChartP3Sintax" class="grafica mb-2"></canvas></td>
-                        <td class="px-3"> </td>
-                        <td class="px-3"> </td>
-                        <td><canvas id="myChartP3SintaxFinal" class="grafica mb-2"></canvas></td>
-                    </tr>
-                    <tr>
-                        <td><canvas id="myChartP3Estandares" class="grafica mb-2"></canvas></td>
-                        <td class="px-3"> </td>
-                        <td class="px-3"> </td>
-                        <td><canvas id="myChartP3EstandaresFinal" class="grafica mb-2"></canvas></td>
+                        <td><canvas id="myChartP32OrientacionEspacialFinal" class="grafica mb-2"></canvas></td>
                     </tr>
                 </tbody>
             </table>
 
-            <!-- PREGUNTA 4 -->
+            <!-- Esquema Corporal-->
             <table class="mt-4">
                 <thead>
-                    <th colspan="4" style="text-align:center;"><h5>PREGUNTA 4</h5></th>
+                    <th colspan="4" style="text-align:center;"><h5>Esquema Corporal</h5></th>
                 </thead>
                 <thead>
-                    <th colspan="3" style="text-align:center;"><h5>DIAGNOSTICO</h5></th>
-                    <th style="text-align:center;"><h5>EVALUACION FINAL MYRP</h5></th>
+                    <th colspan="3" style="text-align:center;"><h5>DIAGNOSTICO MATEMATICAS</h5></th>
+                    <th style="text-align:center;"><h5>EVALUACION FINAL MATEMATICAS</h5></th>
                 </thead>
                 <tbody>
                     <tr>
-                        <td><canvas id="myChartP4CompLectora" class="grafica mb-2"></canvas></td>
+                        <td><canvas id="myChartP33Esquema" class="grafica mb-2"></canvas></td>
                         <td class="px-3"> </td>
                         <td class="px-3"> </td>
-                        <td><canvas id="myChartP4CompLectoraFinal" class="grafica mb-2"></canvas></td>
+                        <td><canvas id="myChartP33EsquemaFinal" class="grafica mb-2"></canvas></td>
                     </tr>
                     <tr>
-                        <td><canvas id="myChartP4Intel" class="grafica mb-2"></canvas></td>
+                        <td><canvas id="myChartP4Esquema" class="grafica mb-2"></canvas></td>
                         <td class="px-3"> </td>
                         <td class="px-3"> </td>
-                        <td><canvas id="myChartP4IntelFinal" class="grafica mb-2"></canvas></td>
+                        <td><canvas id="myChartP4EsquemaFinal" class="grafica mb-2"></canvas></td>
                     </tr>
                     <tr>
-                        <td><canvas id="myChartP4Coher" class="grafica mb-2"></canvas></td>
+                        <td><canvas id="myChartP41Esquema" class="grafica mb-2"></canvas></td>
                         <td class="px-3"> </td>
                         <td class="px-3"> </td>
-                        <td><canvas id="myChartP4CoherFinal" class="grafica mb-2"></canvas></td>
+                        <td><canvas id="myChartP41EsquemaFinal" class="grafica mb-2"></canvas></td>
                     </tr>
                     <tr>
-                        <td><canvas id="myChartP4Sintax" class="grafica mb-2"></canvas></td>
+                        <td><canvas id="myChartP5Seriacion" class="grafica mb-2"></canvas></td>
                         <td class="px-3"> </td>
                         <td class="px-3"> </td>
-                        <td><canvas id="myChartP4SintaxFinal" class="grafica mb-2"></canvas></td>
-                    </tr>
-
-                    <tr>
-                        <td><canvas id="myChartP4Estandares" class="grafica mb-2"></canvas></td>
-                        <td class="px-3"> </td>
-                        <td class="px-3"> </td>
-                        <td><canvas id="myChartP4EstandaresFinal" class="grafica mb-2"></canvas></td>
+                        <td><canvas id="myChartP5SeriacionFinal" class="grafica mb-2"></canvas></td>
                     </tr>
                 </tbody>
             </table>
+
+            <!-- Suma-->
+            <table class="mt-4">
+                <thead>
+                    <th colspan="4" style="text-align:center;"><h5>Suma</h5></th>
+                </thead>
+                <thead>
+                    <th colspan="3" style="text-align:center;"><h5>DIAGNOSTICO MATEMATICAS</h5></th>
+                    <th style="text-align:center;"><h5>EVALUACION FINAL MATEMATICAS</h5></th>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><canvas id="myChartP6Suma" class="grafica mb-2"></canvas></td>
+                        <td class="px-3"> </td>
+                        <td class="px-3"> </td>
+                        <td><canvas id="myChartP6SumaFinal" class="grafica mb-2"></canvas></td>
+                    </tr>
+                    <tr>
+                        <td><canvas id="myChartP7Suma" class="grafica mb-2"></canvas></td>
+                        <td class="px-3"> </td>
+                        <td class="px-3"> </td>
+                        <td><canvas id="myChartP7SumaFinal" class="grafica mb-2"></canvas></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- Resta-->
+            <table class="mt-4">
+                <thead>
+                    <th colspan="4" style="text-align:center;"><h5>Resta</h5></th>
+                </thead>
+                <thead>
+                    <th colspan="3" style="text-align:center;"><h5>DIAGNOSTICO MATEMATICAS</h5></th>
+                    <th style="text-align:center;"><h5>EVALUACION FINAL MATEMATICAS</h5></th>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><canvas id="myChartP8Resta" class="grafica mb-2"></canvas></td>
+                        <td class="px-3"> </td>
+                        <td class="px-3"> </td>
+                        <td><canvas id="myChartP8RestaFinal" class="grafica mb-2"></canvas></td>
+                    </tr>
+                    <tr>
+                        <td><canvas id="myChartP9Resta" class="grafica mb-2"></canvas></td>
+                        <td class="px-3"> </td>
+                        <td class="px-3"> </td>
+                        <td><canvas id="myChartP9RestaFinal" class="grafica mb-2"></canvas></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- Multiplicación-->
+            <table class="mt-4">
+                <thead>
+                    <th colspan="4" style="text-align:center;"><h5>Multiplicación</h5></th>
+                </thead>
+                <thead>
+                    <th colspan="3" style="text-align:center;"><h5>DIAGNOSTICO MATEMATICAS</h5></th>
+                    <th style="text-align:center;"><h5>EVALUACION FINAL MATEMATICAS</h5></th>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><canvas id="myChartP10Multi" class="grafica mb-2"></canvas></td>
+                        <td class="px-3"> </td>
+                        <td class="px-3"> </td>
+                        <td><canvas id="myChartP10MultiFinal" class="grafica mb-2"></canvas></td>
+                    </tr>
+                    <tr>
+                        <td><canvas id="myChartP11Multi" class="grafica mb-2"></canvas></td>
+                        <td class="px-3"> </td>
+                        <td class="px-3"> </td>
+                        <td><canvas id="myChartP11MultiFinal" class="grafica mb-2"></canvas></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- División-->
+            <table class="mt-4">
+                <thead>
+                    <th colspan="4" style="text-align:center;"><h5>División</h5></th>
+                </thead>
+                <thead>
+                    <th colspan="3" style="text-align:center;"><h5>DIAGNOSTICO MATEMATICAS</h5></th>
+                    <th style="text-align:center;"><h5>EVALUACION FINAL MATEMATICAS</h5></th>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><canvas id="myChartP12Division" class="grafica mb-2"></canvas></td>
+                        <td class="px-3"> </td>
+                        <td class="px-3"> </td>
+                        <td><canvas id="myChartP12DivisionFinal" class="grafica mb-2"></canvas></td>
+                    </tr>
+                    <tr>
+                        <td><canvas id="myChartP13Division" class="grafica mb-2"></canvas></td>
+                        <td class="px-3"> </td>
+                        <td class="px-3"> </td>
+                        <td><canvas id="myChartP13DivisionFinal" class="grafica mb-2"></canvas></td>
+                    </tr>
+                </tbody>
+            </table>
+
         </section>
     </div>
 </main>
 
-<!-- Apoyo -->
+<!-- Relación Figuras Geométricas -->
 <script>
-
     //Le paso el JSON con los datos
-    var cData = JSON.parse(`<?php echo $chart_data_necesita_apoyo; ?>`);
+    var cData = JSON.parse(`<?php echo $myChartP1RelacionFiguras; ?>`);
     //console.log(cData.color_lectura);
-    var ctx = document.getElementById('myChartNecsitoApoyo').getContext('2d');
+    var ctx = document.getElementById('myChartP1RelacionFiguras').getContext('2d');
     var myChart = new Chart(ctx, {
         type: "pie",
         data: {
@@ -182,11 +257,11 @@
                 label:  'Resultados de las evaluaciones',
                 data: cData.datos,
                 backgroundColor: [
-
                     //SI
-                    cData.color_necesita,
+                    cData.color_A,
+
                     //NO
-                    cData.color_noNecesita,
+                    cData.color_B,
 
                 ],
                 borderColor: [
@@ -234,7 +309,7 @@
                 },
                 title: {
                     display: true,
-                    text: "Necesitó apoyo consigna lectora",
+                    text: "Pregunta 1",
                     font: {
                         size: 14
                     }
@@ -244,9 +319,9 @@
     });
 
     //Le paso el JSON con los datos
-    var cData = JSON.parse(`<?php echo $chart_data_necesita_apoyo_final; ?>`);
+    var cData = JSON.parse(`<?php echo $myChartP1RelacionFigurasFinal; ?>`);
     //console.log(cData.color_lectura);
-    var ctx = document.getElementById('myChartNecsitoApoyoFinal').getContext('2d');
+    var ctx = document.getElementById('myChartP1RelacionFigurasFinal').getContext('2d');
     var myChart = new Chart(ctx, {
         type: "pie",
         data: {
@@ -256,10 +331,10 @@
                 data: cData.datos,
                 backgroundColor: [
                     //SI
-                    cData.color_necesita,
+                    cData.color_A,
 
                     //NO
-                    cData.color_noNecesita,
+                    cData.color_B,
 
                 ],
                 borderColor: [
@@ -307,7 +382,595 @@
                 },
                 title: {
                     display: true,
-                    text: "Necesitó apoyo consigna lectora",
+                    text: "Pregunta 1",
+                    font: {
+                        size: 14
+                    }
+                }
+            }
+        }
+    });
+
+    //Le paso el JSON con los datos
+    var cData = JSON.parse(`<?php echo $myChartP2RelacionFiguras; ?>`);
+    //console.log(cData.color_lectura);
+    var ctx = document.getElementById('myChartP2RelacionFiguras').getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: "pie",
+        data: {
+            labels: cData.etiquetas,
+            datasets: [{
+                label:  'Resultados de las evaluaciones',
+                data: cData.datos,
+                backgroundColor: [
+                    //SI
+                    cData.color_A,
+
+                    //NO
+                    cData.color_B,
+
+                ],
+                borderColor: [
+                'rgb(118, 168, 134)',
+                ],
+                borderWidth: 1
+            }
+        ]
+        },
+        plugins: [ChartDataLabels],
+        options: {
+            scales:{
+                aspectRatio: 1,
+                y:[{
+                    ticks:{
+                        beginAtZero:true
+                    }
+                }],
+                x: {
+                    max: 600
+                },
+                y: {
+                    min: 0,
+                    max: 100
+                }
+            },
+            plugins: {
+                // Change options for ALL labels of THIS CHART
+                datalabels: {
+                    formatter: (value, ctx) => {
+                        return value + "%";
+                    },
+                    color: '#000000',
+                    anchor: 'left',
+                    align: 'end',
+                    offset: 10,
+                    labels: {
+                        title: {
+                            font: {
+                                weight: 'bold',
+                                size:14
+                            }
+                        }
+                    }
+                },
+                title: {
+                    display: true,
+                    text: "Pregunta 1.1",
+                    font: {
+                        size: 14
+                    }
+                }
+            }
+        }
+    });
+
+     //Le paso el JSON con los datos
+     var cData = JSON.parse(`<?php echo $myChartP2RelacionFigurasFinal; ?>`);
+    //console.log(cData.color_lectura);
+    var ctx = document.getElementById('myChartP2RelacionFigurasFinal').getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: "pie",
+        data: {
+            labels: cData.etiquetas,
+            datasets: [{
+                label:  'Resultados de las evaluaciones',
+                data: cData.datos,
+                backgroundColor: [
+                    //SI
+                    cData.color_A,
+
+                    //NO
+                    cData.color_B,
+
+                ],
+                borderColor: [
+                'rgb(118, 168, 134)',
+                ],
+                borderWidth: 1
+            }
+        ]
+        },
+        plugins: [ChartDataLabels],
+        options: {
+            scales:{
+                aspectRatio: 1,
+                y:[{
+                    ticks:{
+                        beginAtZero:true
+                    }
+                }],
+                x: {
+                    max: 600
+                },
+                y: {
+                    min: 0,
+                    max: 100
+                }
+            },
+            plugins: {
+                // Change options for ALL labels of THIS CHART
+                datalabels: {
+                    formatter: (value, ctx) => {
+                        return value + "%";
+                    },
+                    color: '#000000',
+                    anchor: 'left',
+                    align: 'end',
+                    offset: 10,
+                    labels: {
+                        title: {
+                            font: {
+                                weight: 'bold',
+                                size:14
+                            }
+                        }
+                    }
+                },
+                title: {
+                    display: true,
+                    text: "Pregunta 1.1",
+                    font: {
+                        size: 14
+                    }
+                }
+            }
+        }
+    });
+
+</script>
+
+<!-- Seriación 2-->
+<script>
+    //Le paso el JSON con los datos
+    var cData = JSON.parse(`<?php echo $myChartP2Seriacion; ?>`);
+    //console.log(cData.color_lectura);
+    var ctx = document.getElementById('myChartP2Seriacion').getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: "pie",
+        data: {
+            labels: cData.etiquetas,
+            datasets: [{
+                label:  'Resultados de las evaluaciones',
+                data: cData.datos,
+                backgroundColor: [
+                    //SI
+                    cData.color_A,
+
+                    //NO
+                    cData.color_B,
+
+                ],
+                borderColor: [
+                'rgb(118, 168, 134)',
+                ],
+                borderWidth: 1
+            }
+        ]
+        },
+        plugins: [ChartDataLabels],
+        options: {
+            scales:{
+                aspectRatio: 1,
+                y:[{
+                    ticks:{
+                        beginAtZero:true
+                    }
+                }],
+                x: {
+                    max: 600
+                },
+                y: {
+                    min: 0,
+                    max: 100
+                }
+            },
+            plugins: {
+                // Change options for ALL labels of THIS CHART
+                datalabels: {
+                    formatter: (value, ctx) => {
+                        return value + "%";
+                    },
+                    color: '#000000',
+                    anchor: 'left',
+                    align: 'end',
+                    offset: 10,
+                    labels: {
+                        title: {
+                            font: {
+                                weight: 'bold',
+                                size:14
+                            }
+                        }
+                    }
+                },
+                title: {
+                    display: true,
+                    text: "Seriación 2",
+                    font: {
+                        size: 14
+                    }
+                }
+            }
+        }
+    });
+
+    //Le paso el JSON con los datos
+    var cData = JSON.parse(`<?php echo $myChartP2SeriacionFinal; ?>`);
+    //console.log(cData.color_lectura);
+    var ctx = document.getElementById('myChartP2SeriacionFinal').getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: "pie",
+        data: {
+            labels: cData.etiquetas,
+            datasets: [{
+                label:  'Resultados de las evaluaciones',
+                data: cData.datos,
+                backgroundColor: [
+                    //SI
+                    cData.color_A,
+
+                    //NO
+                    cData.color_B,
+
+                ],
+                borderColor: [
+                'rgb(118, 168, 134)',
+                ],
+                borderWidth: 1
+            }
+        ]
+        },
+        plugins: [ChartDataLabels],
+        options: {
+            scales:{
+                aspectRatio: 1,
+                y:[{
+                    ticks:{
+                        beginAtZero:true
+                    }
+                }],
+                x: {
+                    max: 600
+                },
+                y: {
+                    min: 0,
+                    max: 100
+                }
+            },
+            plugins: {
+                // Change options for ALL labels of THIS CHART
+                datalabels: {
+                    formatter: (value, ctx) => {
+                        return value + "%";
+                    },
+                    color: '#000000',
+                    anchor: 'left',
+                    align: 'end',
+                    offset: 10,
+                    labels: {
+                        title: {
+                            font: {
+                                weight: 'bold',
+                                size:14
+                            }
+                        }
+                    }
+                },
+                title: {
+                    display: true,
+                    text: "Seriación 2",
+                    font: {
+                        size: 14
+                    }
+                }
+            }
+        }
+    });
+
+    //Le paso el JSON con los datos
+    var cData = JSON.parse(`<?php echo $myChartP2Conjuntos; ?>`);
+    //console.log(cData.color_lectura);
+    var ctx = document.getElementById('myChartP2Conjuntos').getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: "pie",
+        data: {
+            labels: cData.etiquetas,
+            datasets: [{
+                label:  'Resultados de las evaluaciones',
+                data: cData.datos,
+                backgroundColor: [
+                    //SI
+                    cData.color_A,
+
+                    //NO
+                    cData.color_B,
+
+                ],
+                borderColor: [
+                'rgb(118, 168, 134)',
+                ],
+                borderWidth: 1
+            }
+        ]
+        },
+        plugins: [ChartDataLabels],
+        options: {
+            scales:{
+                aspectRatio: 1,
+                y:[{
+                    ticks:{
+                        beginAtZero:true
+                    }
+                }],
+                x: {
+                    max: 600
+                },
+                y: {
+                    min: 0,
+                    max: 100
+                }
+            },
+            plugins: {
+                // Change options for ALL labels of THIS CHART
+                datalabels: {
+                    formatter: (value, ctx) => {
+                        return value + "%";
+                    },
+                    color: '#000000',
+                    anchor: 'left',
+                    align: 'end',
+                    offset: 10,
+                    labels: {
+                        title: {
+                            font: {
+                                weight: 'bold',
+                                size:14
+                            }
+                        }
+                    }
+                },
+                title: {
+                    display: true,
+                    text: "Conjuntos 2.1",
+                    font: {
+                        size: 14
+                    }
+                }
+            }
+        }
+    });
+
+    //Le paso el JSON con los datos
+    var cData = JSON.parse(`<?php echo $myChartP2ConjuntosFinal; ?>`);
+    //console.log(cData.color_lectura);
+    var ctx = document.getElementById('myChartP2ConjuntosFinal').getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: "pie",
+        data: {
+            labels: cData.etiquetas,
+            datasets: [{
+                label:  'Resultados de las evaluaciones',
+                data: cData.datos,
+                backgroundColor: [
+                    //SI
+                    cData.color_A,
+
+                    //NO
+                    cData.color_B,
+
+                ],
+                borderColor: [
+                'rgb(118, 168, 134)',
+                ],
+                borderWidth: 1
+            }
+        ]
+        },
+        plugins: [ChartDataLabels],
+        options: {
+            scales:{
+                aspectRatio: 1,
+                y:[{
+                    ticks:{
+                        beginAtZero:true
+                    }
+                }],
+                x: {
+                    max: 600
+                },
+                y: {
+                    min: 0,
+                    max: 100
+                }
+            },
+            plugins: {
+                // Change options for ALL labels of THIS CHART
+                datalabels: {
+                    formatter: (value, ctx) => {
+                        return value + "%";
+                    },
+                    color: '#000000',
+                    anchor: 'left',
+                    align: 'end',
+                    offset: 10,
+                    labels: {
+                        title: {
+                            font: {
+                                weight: 'bold',
+                                size:14
+                            }
+                        }
+                    }
+                },
+                title: {
+                    display: true,
+                    text: "Conjuntos 2.1",
+                    font: {
+                        size: 14
+                    }
+                }
+            }
+        }
+    });
+
+    //Le paso el JSON con los datos
+    var cData = JSON.parse(`<?php echo $myChartP22Seriacion; ?>`);
+    //console.log(cData.color_lectura);
+    var ctx = document.getElementById('myChartP22Seriacion').getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: "pie",
+        data: {
+            labels: cData.etiquetas,
+            datasets: [{
+                label:  'Resultados de las evaluaciones',
+                data: cData.datos,
+                backgroundColor: [
+                    //SI
+                    cData.color_A,
+
+                    //NO
+                    cData.color_B,
+
+                ],
+                borderColor: [
+                'rgb(118, 168, 134)',
+                ],
+                borderWidth: 1
+            }
+        ]
+        },
+        plugins: [ChartDataLabels],
+        options: {
+            scales:{
+                aspectRatio: 1,
+                y:[{
+                    ticks:{
+                        beginAtZero:true
+                    }
+                }],
+                x: {
+                    max: 600
+                },
+                y: {
+                    min: 0,
+                    max: 100
+                }
+            },
+            plugins: {
+                // Change options for ALL labels of THIS CHART
+                datalabels: {
+                    formatter: (value, ctx) => {
+                        return value + "%";
+                    },
+                    color: '#000000',
+                    anchor: 'left',
+                    align: 'end',
+                    offset: 10,
+                    labels: {
+                        title: {
+                            font: {
+                                weight: 'bold',
+                                size:14
+                            }
+                        }
+                    }
+                },
+                title: {
+                    display: true,
+                    text: "Seriación 2.2",
+                    font: {
+                        size: 14
+                    }
+                }
+            }
+        }
+    });
+
+    //Le paso el JSON con los datos
+    var cData = JSON.parse(`<?php echo $myChartP22SeriacionFinal; ?>`);
+    //console.log(cData.color_lectura);
+    var ctx = document.getElementById('myChartP22SeriacionFinal').getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: "pie",
+        data: {
+            labels: cData.etiquetas,
+            datasets: [{
+                label:  'Resultados de las evaluaciones',
+                data: cData.datos,
+                backgroundColor: [
+                    //SI
+                    cData.color_A,
+
+                    //NO
+                    cData.color_B,
+
+                ],
+                borderColor: [
+                'rgb(118, 168, 134)',
+                ],
+                borderWidth: 1
+            }
+        ]
+        },
+        plugins: [ChartDataLabels],
+        options: {
+            scales:{
+                aspectRatio: 1,
+                y:[{
+                    ticks:{
+                        beginAtZero:true
+                    }
+                }],
+                x: {
+                    max: 600
+                },
+                y: {
+                    min: 0,
+                    max: 100
+                }
+            },
+            plugins: {
+                // Change options for ALL labels of THIS CHART
+                datalabels: {
+                    formatter: (value, ctx) => {
+                        return value + "%";
+                    },
+                    color: '#000000',
+                    anchor: 'left',
+                    align: 'end',
+                    offset: 10,
+                    labels: {
+                        title: {
+                            font: {
+                                weight: 'bold',
+                                size:14
+                            }
+                        }
+                    }
+                },
+                title: {
+                    display: true,
+                    text: "Seriación 2.2",
                     font: {
                         size: 14
                     }
@@ -317,84 +980,12 @@
     });
 </script>
 
-<!-- Pregunta 1 -->
+<!-- Orientación Espacial -->
 <script>
     //Le paso el JSON con los datos
-    var cData = JSON.parse(`<?php echo $myChartP1CompLectora; ?>`);
+    var cData = JSON.parse(`<?php echo $myChartP3OrientacionEspacial; ?>`);
     //console.log(cData.color_lectura);
-    var ctx = document.getElementById('myChartP1CompLectora').getContext('2d');
-    var myChart = new Chart(ctx, {
-        type: "pie",
-        data: {
-            labels: cData.etiquetas,
-            datasets: [{
-                label:  'Resultados de las evaluaciones',
-                data: cData.datos,
-                backgroundColor: [
-                    //A
-                    cData.color_A,
-                    //B
-                    cData.color_B,
-
-                ],
-                borderColor: [
-                'rgb(118, 168, 134)',
-                ],
-                borderWidth: 1
-            }
-        ]
-        },
-        plugins: [ChartDataLabels],
-        options: {
-            scales:{
-                aspectRatio: 1,
-                y:[{
-                    ticks:{
-                        beginAtZero:true
-                    }
-                }],
-                x: {
-                    max: 600
-                },
-                y: {
-                    min: 0,
-                    max: 100
-                }
-            },
-            plugins: {
-                // Change options for ALL labels of THIS CHART
-                datalabels: {
-                    formatter: (value, ctx) => {
-                        return value + "%";
-                    },
-                    color: '#000000',
-                    anchor: 'left',
-                    align: 'end',
-                    offset: 10,
-                    labels: {
-                        title: {
-                            font: {
-                                weight: 'bold',
-                                size:14
-                            }
-                        }
-                    }
-                },
-                title: {
-                    display: true,
-                    text: "Comprensión consigna lectora",
-                    font: {
-                        size: 14
-                    }
-                }
-            }
-        }
-    });
-
-    //Le paso el JSON con los datos
-    var cData = JSON.parse(`<?php echo $myChartP1CompLectoraFinal; ?>`);
-    //console.log(cData.color_lectura);
-    var ctx = document.getElementById('myChartP1CompLectoraFinal').getContext('2d');
+    var ctx = document.getElementById('myChartP3OrientacionEspacial').getContext('2d');
     var myChart = new Chart(ctx, {
         type: "pie",
         data: {
@@ -455,7 +1046,7 @@
                 },
                 title: {
                     display: true,
-                    text: "Comprensión consigna lectora",
+                    text: "Pregunta 3",
                     font: {
                         size: 14
                     }
@@ -465,9 +1056,9 @@
     });
 
     //Le paso el JSON con los datos
-    var cData = JSON.parse(`<?php echo $myChartP1Inteligibilidad; ?>`);
+    var cData = JSON.parse(`<?php echo $myChartP3OrientacionEspacialFinal; ?>`);
     //console.log(cData.color_lectura);
-    var ctx = document.getElementById('myChartP1Inteligibilidad').getContext('2d');
+    var ctx = document.getElementById('myChartP3OrientacionEspacialFinal').getContext('2d');
     var myChart = new Chart(ctx, {
         type: "pie",
         data: {
@@ -528,7 +1119,7 @@
                 },
                 title: {
                     display: true,
-                    text: "Significado de la escritura y la Inteligibilidad",
+                    text: "Pregunta 3",
                     font: {
                         size: 14
                     }
@@ -538,9 +1129,9 @@
     });
 
     //Le paso el JSON con los datos
-    var cData = JSON.parse(`<?php echo $myChartP1InteligibilidadFinal; ?>`);
+    var cData = JSON.parse(`<?php echo $myChartP31OrientacionEspacial; ?>`);
     //console.log(cData.color_lectura);
-    var ctx = document.getElementById('myChartP1InteligibilidadFinal').getContext('2d');
+    var ctx = document.getElementById('myChartP31OrientacionEspacial').getContext('2d');
     var myChart = new Chart(ctx, {
         type: "pie",
         data: {
@@ -601,7 +1192,226 @@
                 },
                 title: {
                     display: true,
-                    text: "Significado de la escritura y la Inteligibilidad",
+                    text: "Pregunta 3.1",
+                    font: {
+                        size: 14
+                    }
+                }
+            }
+        }
+    });
+
+    //Le paso el JSON con los datos
+    var cData = JSON.parse(`<?php echo $myChartP31OrientacionEspacialFinal; ?>`);
+    //console.log(cData.color_lectura);
+    var ctx = document.getElementById('myChartP31OrientacionEspacialFinal').getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: "pie",
+        data: {
+            labels: cData.etiquetas,
+            datasets: [{
+                label:  'Resultados de las evaluaciones',
+                data: cData.datos,
+                backgroundColor: [
+                    //SI
+                    cData.color_A,
+
+                    //NO
+                    cData.color_B,
+
+                ],
+                borderColor: [
+                'rgb(118, 168, 134)',
+                ],
+                borderWidth: 1
+            }
+        ]
+        },
+        plugins: [ChartDataLabels],
+        options: {
+            scales:{
+                aspectRatio: 1,
+                y:[{
+                    ticks:{
+                        beginAtZero:true
+                    }
+                }],
+                x: {
+                    max: 600
+                },
+                y: {
+                    min: 0,
+                    max: 100
+                }
+            },
+            plugins: {
+                // Change options for ALL labels of THIS CHART
+                datalabels: {
+                    formatter: (value, ctx) => {
+                        return value + "%";
+                    },
+                    color: '#000000',
+                    anchor: 'left',
+                    align: 'end',
+                    offset: 10,
+                    labels: {
+                        title: {
+                            font: {
+                                weight: 'bold',
+                                size:14
+                            }
+                        }
+                    }
+                },
+                title: {
+                    display: true,
+                    text: "Pregunta 3.1",
+                    font: {
+                        size: 14
+                    }
+                }
+            }
+        }
+    });
+
+    //Le paso el JSON con los datos
+    var cData = JSON.parse(`<?php echo $myChartP32OrientacionEspacial; ?>`);
+    //console.log(cData.color_lectura);
+    var ctx = document.getElementById('myChartP32OrientacionEspacial').getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: "pie",
+        data: {
+            labels: cData.etiquetas,
+            datasets: [{
+                label:  'Resultados de las evaluaciones',
+                data: cData.datos,
+                backgroundColor: [
+                    //SI
+                    cData.color_A,
+
+                    //NO
+                    cData.color_B,
+
+                ],
+                borderColor: [
+                'rgb(118, 168, 134)',
+                ],
+                borderWidth: 1
+            }
+        ]
+        },
+        plugins: [ChartDataLabels],
+        options: {
+            scales:{
+                aspectRatio: 1,
+                y:[{
+                    ticks:{
+                        beginAtZero:true
+                    }
+                }],
+                x: {
+                    max: 600
+                },
+                y: {
+                    min: 0,
+                    max: 100
+                }
+            },
+            plugins: {
+                // Change options for ALL labels of THIS CHART
+                datalabels: {
+                    formatter: (value, ctx) => {
+                        return value + "%";
+                    },
+                    color: '#000000',
+                    anchor: 'left',
+                    align: 'end',
+                    offset: 10,
+                    labels: {
+                        title: {
+                            font: {
+                                weight: 'bold',
+                                size:14
+                            }
+                        }
+                    }
+                },
+                title: {
+                    display: true,
+                    text: "Pregunta 3.2",
+                    font: {
+                        size: 14
+                    }
+                }
+            }
+        }
+    });
+
+    //Le paso el JSON con los datos
+    var cData = JSON.parse(`<?php echo $myChartP32OrientacionEspacialFinal; ?>`);
+    //console.log(cData.color_lectura);
+    var ctx = document.getElementById('myChartP32OrientacionEspacialFinal').getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: "pie",
+        data: {
+            labels: cData.etiquetas,
+            datasets: [{
+                label:  'Resultados de las evaluaciones',
+                data: cData.datos,
+                backgroundColor: [
+                    //SI
+                    cData.color_A,
+
+                    //NO
+                    cData.color_B,
+
+                ],
+                borderColor: [
+                'rgb(118, 168, 134)',
+                ],
+                borderWidth: 1
+            }
+        ]
+        },
+        plugins: [ChartDataLabels],
+        options: {
+            scales:{
+                aspectRatio: 1,
+                y:[{
+                    ticks:{
+                        beginAtZero:true
+                    }
+                }],
+                x: {
+                    max: 600
+                },
+                y: {
+                    min: 0,
+                    max: 100
+                }
+            },
+            plugins: {
+                // Change options for ALL labels of THIS CHART
+                datalabels: {
+                    formatter: (value, ctx) => {
+                        return value + "%";
+                    },
+                    color: '#000000',
+                    anchor: 'left',
+                    align: 'end',
+                    offset: 10,
+                    labels: {
+                        title: {
+                            font: {
+                                weight: 'bold',
+                                size:14
+                            }
+                        }
+                    }
+                },
+                title: {
+                    display: true,
+                    text: "Pregunta 3.2",
                     font: {
                         size: 14
                     }
@@ -611,12 +1421,12 @@
     });
 </script>
 
-<!-- Pregunta 2 -->
+<!-- Esquema Corporal -->
 <script>
     //Le paso el JSON con los datos
-    var cData = JSON.parse(`<?php echo $myChartP2CompLectora; ?>`);
+    var cData = JSON.parse(`<?php echo $myChartP33Esquema; ?>`);
     //console.log(cData.color_lectura);
-    var ctx = document.getElementById('myChartP2CompLectora').getContext('2d');
+    var ctx = document.getElementById('myChartP33Esquema').getContext('2d');
     var myChart = new Chart(ctx, {
         type: "pie",
         data: {
@@ -677,7 +1487,7 @@
                 },
                 title: {
                     display: true,
-                    text: "Comprensión consigna lectora",
+                    text: "Pregunta 3.3",
                     font: {
                         size: 14
                     }
@@ -687,9 +1497,9 @@
     });
 
     //Le paso el JSON con los datos
-    var cData = JSON.parse(`<?php echo $myChartP2CompLectoraFinal; ?>`);
+    var cData = JSON.parse(`<?php echo $myChartP33EsquemaFinal; ?>`);
     //console.log(cData.color_lectura);
-    var ctx = document.getElementById('myChartP2CompLectoraFinal').getContext('2d');
+    var ctx = document.getElementById('myChartP33EsquemaFinal').getContext('2d');
     var myChart = new Chart(ctx, {
         type: "pie",
         data: {
@@ -750,7 +1560,7 @@
                 },
                 title: {
                     display: true,
-                    text: "Comprensión consigna lectora",
+                    text: "Pregunta 3.3",
                     font: {
                         size: 14
                     }
@@ -758,14 +1568,453 @@
             }
         }
     });
+
+    //Le paso el JSON con los datos
+    var cData = JSON.parse(`<?php echo $myChartP4Esquema; ?>`);
+    //console.log(cData.color_lectura);
+    var ctx = document.getElementById('myChartP4Esquema').getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: "pie",
+        data: {
+            labels: cData.etiquetas,
+            datasets: [{
+                label:  'Resultados de las evaluaciones',
+                data: cData.datos,
+                backgroundColor: [
+                    //SI
+                    cData.color_A,
+
+                    //NO
+                    cData.color_B,
+
+                ],
+                borderColor: [
+                'rgb(118, 168, 134)',
+                ],
+                borderWidth: 1
+            }
+        ]
+        },
+        plugins: [ChartDataLabels],
+        options: {
+            scales:{
+                aspectRatio: 1,
+                y:[{
+                    ticks:{
+                        beginAtZero:true
+                    }
+                }],
+                x: {
+                    max: 600
+                },
+                y: {
+                    min: 0,
+                    max: 100
+                }
+            },
+            plugins: {
+                // Change options for ALL labels of THIS CHART
+                datalabels: {
+                    formatter: (value, ctx) => {
+                        return value + "%";
+                    },
+                    color: '#000000',
+                    anchor: 'left',
+                    align: 'end',
+                    offset: 10,
+                    labels: {
+                        title: {
+                            font: {
+                                weight: 'bold',
+                                size:14
+                            }
+                        }
+                    }
+                },
+                title: {
+                    display: true,
+                    text: "Pregunta 4",
+                    font: {
+                        size: 14
+                    }
+                }
+            }
+        }
+    });
+
+    //Le paso el JSON con los datos
+    var cData = JSON.parse(`<?php echo $myChartP4EsquemaFinal; ?>`);
+    //console.log(cData.color_lectura);
+    var ctx = document.getElementById('myChartP4EsquemaFinal').getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: "pie",
+        data: {
+            labels: cData.etiquetas,
+            datasets: [{
+                label:  'Resultados de las evaluaciones',
+                data: cData.datos,
+                backgroundColor: [
+                    //SI
+                    cData.color_A,
+
+                    //NO
+                    cData.color_B,
+
+                ],
+                borderColor: [
+                'rgb(118, 168, 134)',
+                ],
+                borderWidth: 1
+            }
+        ]
+        },
+        plugins: [ChartDataLabels],
+        options: {
+            scales:{
+                aspectRatio: 1,
+                y:[{
+                    ticks:{
+                        beginAtZero:true
+                    }
+                }],
+                x: {
+                    max: 600
+                },
+                y: {
+                    min: 0,
+                    max: 100
+                }
+            },
+            plugins: {
+                // Change options for ALL labels of THIS CHART
+                datalabels: {
+                    formatter: (value, ctx) => {
+                        return value + "%";
+                    },
+                    color: '#000000',
+                    anchor: 'left',
+                    align: 'end',
+                    offset: 10,
+                    labels: {
+                        title: {
+                            font: {
+                                weight: 'bold',
+                                size:14
+                            }
+                        }
+                    }
+                },
+                title: {
+                    display: true,
+                    text: "Pregunta 4",
+                    font: {
+                        size: 14
+                    }
+                }
+            }
+        }
+    });
+
+    //Le paso el JSON con los datos
+    var cData = JSON.parse(`<?php echo $myChartP41Esquema; ?>`);
+    //console.log(cData.color_lectura);
+    var ctx = document.getElementById('myChartP41Esquema').getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: "pie",
+        data: {
+            labels: cData.etiquetas,
+            datasets: [{
+                label:  'Resultados de las evaluaciones',
+                data: cData.datos,
+                backgroundColor: [
+                    //SI
+                    cData.color_A,
+
+                    //NO
+                    cData.color_B,
+
+                ],
+                borderColor: [
+                'rgb(118, 168, 134)',
+                ],
+                borderWidth: 1
+            }
+        ]
+        },
+        plugins: [ChartDataLabels],
+        options: {
+            scales:{
+                aspectRatio: 1,
+                y:[{
+                    ticks:{
+                        beginAtZero:true
+                    }
+                }],
+                x: {
+                    max: 600
+                },
+                y: {
+                    min: 0,
+                    max: 100
+                }
+            },
+            plugins: {
+                // Change options for ALL labels of THIS CHART
+                datalabels: {
+                    formatter: (value, ctx) => {
+                        return value + "%";
+                    },
+                    color: '#000000',
+                    anchor: 'left',
+                    align: 'end',
+                    offset: 10,
+                    labels: {
+                        title: {
+                            font: {
+                                weight: 'bold',
+                                size:14
+                            }
+                        }
+                    }
+                },
+                title: {
+                    display: true,
+                    text: "Pregunta 4.1",
+                    font: {
+                        size: 14
+                    }
+                }
+            }
+        }
+    });
+
+    //Le paso el JSON con los datos
+    var cData = JSON.parse(`<?php echo $myChartP41EsquemaFinal; ?>`);
+    //console.log(cData.color_lectura);
+    var ctx = document.getElementById('myChartP41EsquemaFinal').getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: "pie",
+        data: {
+            labels: cData.etiquetas,
+            datasets: [{
+                label:  'Resultados de las evaluaciones',
+                data: cData.datos,
+                backgroundColor: [
+                    //SI
+                    cData.color_A,
+
+                    //NO
+                    cData.color_B,
+
+                ],
+                borderColor: [
+                'rgb(118, 168, 134)',
+                ],
+                borderWidth: 1
+            }
+        ]
+        },
+        plugins: [ChartDataLabels],
+        options: {
+            scales:{
+                aspectRatio: 1,
+                y:[{
+                    ticks:{
+                        beginAtZero:true
+                    }
+                }],
+                x: {
+                    max: 600
+                },
+                y: {
+                    min: 0,
+                    max: 100
+                }
+            },
+            plugins: {
+                // Change options for ALL labels of THIS CHART
+                datalabels: {
+                    formatter: (value, ctx) => {
+                        return value + "%";
+                    },
+                    color: '#000000',
+                    anchor: 'left',
+                    align: 'end',
+                    offset: 10,
+                    labels: {
+                        title: {
+                            font: {
+                                weight: 'bold',
+                                size:14
+                            }
+                        }
+                    }
+                },
+                title: {
+                    display: true,
+                    text: "Pregunta 4.1",
+                    font: {
+                        size: 14
+                    }
+                }
+            }
+        }
+    });
+
+    //Le paso el JSON con los datos
+    var cData = JSON.parse(`<?php echo $myChartP5Seriacion; ?>`);
+    //console.log(cData.color_lectura);
+    var ctx = document.getElementById('myChartP5Seriacion').getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: "pie",
+        data: {
+            labels: cData.etiquetas,
+            datasets: [{
+                label:  'Resultados de las evaluaciones',
+                data: cData.datos,
+                backgroundColor: [
+                    //SI
+                    cData.color_A,
+
+                    //NO
+                    cData.color_B,
+
+                ],
+                borderColor: [
+                'rgb(118, 168, 134)',
+                ],
+                borderWidth: 1
+            }
+        ]
+        },
+        plugins: [ChartDataLabels],
+        options: {
+            scales:{
+                aspectRatio: 1,
+                y:[{
+                    ticks:{
+                        beginAtZero:true
+                    }
+                }],
+                x: {
+                    max: 600
+                },
+                y: {
+                    min: 0,
+                    max: 100
+                }
+            },
+            plugins: {
+                // Change options for ALL labels of THIS CHART
+                datalabels: {
+                    formatter: (value, ctx) => {
+                        return value + "%";
+                    },
+                    color: '#000000',
+                    anchor: 'left',
+                    align: 'end',
+                    offset: 10,
+                    labels: {
+                        title: {
+                            font: {
+                                weight: 'bold',
+                                size:14
+                            }
+                        }
+                    }
+                },
+                title: {
+                    display: true,
+                    text: "Seriación 5",
+                    font: {
+                        size: 14
+                    }
+                }
+            }
+        }
+    });
+
+    //Le paso el JSON con los datos
+    var cData = JSON.parse(`<?php echo $myChartP5SeriacionFinal; ?>`);
+    //console.log(cData.color_lectura);
+    var ctx = document.getElementById('myChartP5SeriacionFinal').getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: "pie",
+        data: {
+            labels: cData.etiquetas,
+            datasets: [{
+                label:  'Resultados de las evaluaciones',
+                data: cData.datos,
+                backgroundColor: [
+                    //SI
+                    cData.color_A,
+
+                    //NO
+                    cData.color_B,
+
+                ],
+                borderColor: [
+                'rgb(118, 168, 134)',
+                ],
+                borderWidth: 1
+            }
+        ]
+        },
+        plugins: [ChartDataLabels],
+        options: {
+            scales:{
+                aspectRatio: 1,
+                y:[{
+                    ticks:{
+                        beginAtZero:true
+                    }
+                }],
+                x: {
+                    max: 600
+                },
+                y: {
+                    min: 0,
+                    max: 100
+                }
+            },
+            plugins: {
+                // Change options for ALL labels of THIS CHART
+                datalabels: {
+                    formatter: (value, ctx) => {
+                        return value + "%";
+                    },
+                    color: '#000000',
+                    anchor: 'left',
+                    align: 'end',
+                    offset: 10,
+                    labels: {
+                        title: {
+                            font: {
+                                weight: 'bold',
+                                size:14
+                            }
+                        }
+                    }
+                },
+                title: {
+                    display: true,
+                    text: "Seriación 5",
+                    font: {
+                        size: 14
+                    }
+                }
+            }
+        }
+    });
+
 </script>
 
-<!-- Pregunta 3 -->
+<!-- Suma -->
 <script>
     //Le paso el JSON con los datos
-    var cData = JSON.parse(`<?php echo $myChartP3CompLectora; ?>`);
+    var cData = JSON.parse(`<?php echo $myChartP6Suma; ?>`);
     //console.log(cData.color_lectura);
-    var ctx = document.getElementById('myChartP3CompLectora').getContext('2d');
+    var ctx = document.getElementById('myChartP6Suma').getContext('2d');
     var myChart = new Chart(ctx, {
         type: "pie",
         data: {
@@ -774,14 +2023,11 @@
                 label:  'Resultados de las evaluaciones',
                 data: cData.datos,
                 backgroundColor: [
-                    //A
+                    //SI
                     cData.color_A,
 
-                    //B
+                    //NO
                     cData.color_B,
-
-                    //C
-                    cData.color_C,
 
                 ],
                 borderColor: [
@@ -829,7 +2075,7 @@
                 },
                 title: {
                     display: true,
-                    text: "Comprensión consigna lectora",
+                    text: "Pregunta 6",
                     font: {
                         size: 14
                     }
@@ -839,9 +2085,9 @@
     });
 
     //Le paso el JSON con los datos
-    var cData = JSON.parse(`<?php echo $myChartP3CompLectoraFinal; ?>`);
+    var cData = JSON.parse(`<?php echo $myChartP6SumaFinal; ?>`);
     //console.log(cData.color_lectura);
-    var ctx = document.getElementById('myChartP3CompLectoraFinal').getContext('2d');
+    var ctx = document.getElementById('myChartP6SumaFinal').getContext('2d');
     var myChart = new Chart(ctx, {
         type: "pie",
         data: {
@@ -850,14 +2096,11 @@
                 label:  'Resultados de las evaluaciones',
                 data: cData.datos,
                 backgroundColor: [
-                    //A
+                    //SI
                     cData.color_A,
 
-                    //B
+                    //NO
                     cData.color_B,
-
-                    //C
-                    cData.color_C,
 
                 ],
                 borderColor: [
@@ -905,7 +2148,7 @@
                 },
                 title: {
                     display: true,
-                    text: "Comprensión consigna lectora",
+                    text: "Pregunta 6",
                     font: {
                         size: 14
                     }
@@ -915,9 +2158,9 @@
     });
 
     //Le paso el JSON con los datos
-    var cData = JSON.parse(`<?php echo $myChartP3Intel; ?>`);
+    var cData = JSON.parse(`<?php echo $myChartP7Suma; ?>`);
     //console.log(cData.color_lectura);
-    var ctx = document.getElementById('myChartP3Intel').getContext('2d');
+    var ctx = document.getElementById('myChartP7Suma').getContext('2d');
     var myChart = new Chart(ctx, {
         type: "pie",
         data: {
@@ -926,14 +2169,11 @@
                 label:  'Resultados de las evaluaciones',
                 data: cData.datos,
                 backgroundColor: [
-                    //A
+                    //SI
                     cData.color_A,
 
-                    //B
+                    //NO
                     cData.color_B,
-
-                    //C
-                    cData.color_C,
 
                 ],
                 borderColor: [
@@ -981,7 +2221,7 @@
                 },
                 title: {
                     display: true,
-                    text: "Inteligibilidad",
+                    text: "Pregunta 7",
                     font: {
                         size: 14
                     }
@@ -991,9 +2231,9 @@
     });
 
     //Le paso el JSON con los datos
-    var cData = JSON.parse(`<?php echo $myChartP3IntelFinal; ?>`);
+    var cData = JSON.parse(`<?php echo $myChartP7SumaFinal; ?>`);
     //console.log(cData.color_lectura);
-    var ctx = document.getElementById('myChartP3IntelFinal').getContext('2d');
+    var ctx = document.getElementById('myChartP7SumaFinal').getContext('2d');
     var myChart = new Chart(ctx, {
         type: "pie",
         data: {
@@ -1002,402 +2242,10 @@
                 label:  'Resultados de las evaluaciones',
                 data: cData.datos,
                 backgroundColor: [
-                    //A
+                    //SI
                     cData.color_A,
 
-                    //B
-                    cData.color_B,
-
-                    //C
-                    cData.color_C,
-
-                ],
-                borderColor: [
-                'rgb(118, 168, 134)',
-                ],
-                borderWidth: 1
-            }
-        ]
-        },
-        plugins: [ChartDataLabels],
-        options: {
-            scales:{
-                aspectRatio: 1,
-                y:[{
-                    ticks:{
-                        beginAtZero:true
-                    }
-                }],
-                x: {
-                    max: 600
-                },
-                y: {
-                    min: 0,
-                    max: 100
-                }
-            },
-            plugins: {
-                // Change options for ALL labels of THIS CHART
-                datalabels: {
-                    formatter: (value, ctx) => {
-                        return value + "%";
-                    },
-                    color: '#000000',
-                    anchor: 'left',
-                    align: 'end',
-                    offset: 10,
-                    labels: {
-                        title: {
-                            font: {
-                                weight: 'bold',
-                                size:14
-                            }
-                        }
-                    }
-                },
-                title: {
-                    display: true,
-                    text: "Inteligibilidad",
-                    font: {
-                        size: 14
-                    }
-                }
-            }
-        }
-    });
-
-    //Le paso el JSON con los datos
-    var cData = JSON.parse(`<?php echo $myChartP3Coher; ?>`);
-    //console.log(cData.color_lectura);
-    var ctx = document.getElementById('myChartP3Coher').getContext('2d');
-    var myChart = new Chart(ctx, {
-        type: "pie",
-        data: {
-            labels: cData.etiquetas,
-            datasets: [{
-                label:  'Resultados de las evaluaciones',
-                data: cData.datos,
-                backgroundColor: [
-                    //A
-                    cData.color_A,
-
-                    //B
-                    cData.color_B,
-
-                    //C
-                    cData.color_C,
-
-                    //C
-                    cData.color_D,
-
-                ],
-                borderColor: [
-                'rgb(118, 168, 134)',
-                ],
-                borderWidth: 1
-            }
-        ]
-        },
-        plugins: [ChartDataLabels],
-        options: {
-            scales:{
-                aspectRatio: 1,
-                y:[{
-                    ticks:{
-                        beginAtZero:true
-                    }
-                }],
-                x: {
-                    max: 600
-                },
-                y: {
-                    min: 0,
-                    max: 100
-                }
-            },
-            plugins: {
-                // Change options for ALL labels of THIS CHART
-                datalabels: {
-                    formatter: (value, ctx) => {
-                        return value + "%";
-                    },
-                    color: '#000000',
-                    anchor: 'left',
-                    align: 'end',
-                    offset: 10,
-                    labels: {
-                        title: {
-                            font: {
-                                weight: 'bold',
-                                size:14
-                            }
-                        }
-                    }
-                },
-                title: {
-                    display: true,
-                    text: "Coherencia",
-                    font: {
-                        size: 14
-                    }
-                }
-            }
-        }
-    });
-
-    //Le paso el JSON con los datos
-    var cData = JSON.parse(`<?php echo $myChartP3CoherFinal; ?>`);
-    //console.log(cData.color_lectura);
-    var ctx = document.getElementById('myChartP3CoherFinal').getContext('2d');
-    var myChart = new Chart(ctx, {
-        type: "pie",
-        data: {
-            labels: cData.etiquetas,
-            datasets: [{
-                label:  'Resultados de las evaluaciones',
-                data: cData.datos,
-                backgroundColor: [
-                    //A
-                    cData.color_A,
-
-                    //B
-                    cData.color_B,
-
-                    //C
-                    cData.color_C,
-
-                    //D
-                    cData.color_D,
-
-                ],
-                borderColor: [
-                'rgb(118, 168, 134)',
-                ],
-                borderWidth: 1
-            }
-        ]
-        },
-        plugins: [ChartDataLabels],
-        options: {
-            scales:{
-                aspectRatio: 1,
-                y:[{
-                    ticks:{
-                        beginAtZero:true
-                    }
-                }],
-                x: {
-                    max: 600
-                },
-                y: {
-                    min: 0,
-                    max: 100
-                }
-            },
-            plugins: {
-                // Change options for ALL labels of THIS CHART
-                datalabels: {
-                    formatter: (value, ctx) => {
-                        return value + "%";
-                    },
-                    color: '#000000',
-                    anchor: 'left',
-                    align: 'end',
-                    offset: 10,
-                    labels: {
-                        title: {
-                            font: {
-                                weight: 'bold',
-                                size:14
-                            }
-                        }
-                    }
-                },
-                title: {
-                    display: true,
-                    text: "Coherencia",
-                    font: {
-                        size: 14
-                    }
-                }
-            }
-        }
-    });
-
-    //Le paso el JSON con los datos
-    var cData = JSON.parse(`<?php echo $myChartP3Sintax; ?>`);
-    //console.log(cData.color_lectura);
-    var ctx = document.getElementById('myChartP3Sintax').getContext('2d');
-    var myChart = new Chart(ctx, {
-        type: "pie",
-        data: {
-            labels: cData.etiquetas,
-            datasets: [{
-                label:  'Resultados de las evaluaciones',
-                data: cData.datos,
-                backgroundColor: [
-                    //A
-                    cData.color_A,
-
-                    //B
-                    cData.color_B,
-
-                    //C
-                    cData.color_C,
-
-                    //C
-                    cData.color_D,
-
-                ],
-                borderColor: [
-                'rgb(118, 168, 134)',
-                ],
-                borderWidth: 1
-            }
-        ]
-        },
-        plugins: [ChartDataLabels],
-        options: {
-            scales:{
-                aspectRatio: 1,
-                y:[{
-                    ticks:{
-                        beginAtZero:true
-                    }
-                }],
-                x: {
-                    max: 600
-                },
-                y: {
-                    min: 0,
-                    max: 100
-                }
-            },
-            plugins: {
-                // Change options for ALL labels of THIS CHART
-                datalabels: {
-                    formatter: (value, ctx) => {
-                        return value + "%";
-                    },
-                    color: '#000000',
-                    anchor: 'left',
-                    align: 'end',
-                    offset: 10,
-                    labels: {
-                        title: {
-                            font: {
-                                weight: 'bold',
-                                size:14
-                            }
-                        }
-                    }
-                },
-                title: {
-                    display: true,
-                    text: "Sintaxis",
-                    font: {
-                        size: 14
-                    }
-                }
-            }
-        }
-    });
-
-    //Le paso el JSON con los datos
-    var cData = JSON.parse(`<?php echo $myChartP3SintaxFinal; ?>`);
-    //console.log(cData.color_lectura);
-    var ctx = document.getElementById('myChartP3SintaxFinal').getContext('2d');
-    var myChart = new Chart(ctx, {
-        type: "pie",
-        data: {
-            labels: cData.etiquetas,
-            datasets: [{
-                label:  'Resultados de las evaluaciones',
-                data: cData.datos,
-                backgroundColor: [
-                    //A
-                    cData.color_A,
-
-                    //B
-                    cData.color_B,
-
-                    //C
-                    cData.color_C,
-
-                    //D
-                    cData.color_D,
-
-                ],
-                borderColor: [
-                'rgb(118, 168, 134)',
-                ],
-                borderWidth: 1
-            }
-        ]
-        },
-        plugins: [ChartDataLabels],
-        options: {
-            scales:{
-                aspectRatio: 1,
-                y:[{
-                    ticks:{
-                        beginAtZero:true
-                    }
-                }],
-                x: {
-                    max: 600
-                },
-                y: {
-                    min: 0,
-                    max: 100
-                }
-            },
-            plugins: {
-                // Change options for ALL labels of THIS CHART
-                datalabels: {
-                    formatter: (value, ctx) => {
-                        return value + "%";
-                    },
-                    color: '#000000',
-                    anchor: 'left',
-                    align: 'end',
-                    offset: 10,
-                    labels: {
-                        title: {
-                            font: {
-                                weight: 'bold',
-                                size:14
-                            }
-                        }
-                    }
-                },
-                title: {
-                    display: true,
-                    text: "Sintaxis",
-                    font: {
-                        size: 14
-                    }
-                }
-            }
-        }
-    });
-
-    //Le paso el JSON con los datos
-    var cData = JSON.parse(`<?php echo $myChartP3Estandares; ?>`);
-    //console.log(cData.color_lectura);
-    var ctx = document.getElementById('myChartP3Estandares').getContext('2d');
-    var myChart = new Chart(ctx, {
-        type: "pie",
-        data: {
-            labels: cData.etiquetas,
-            datasets: [{
-                label:  'Resultados de las evaluaciones',
-                data: cData.datos,
-                backgroundColor: [
-                    //A
-                    cData.color_A,
-
-                    //B
+                    //NO
                     cData.color_B,
 
                 ],
@@ -1446,7 +2294,7 @@
                 },
                 title: {
                     display: true,
-                    text: "Estándares EGB Subnivel 2 y 3",
+                    text: "Pregunta 7",
                     font: {
                         size: 14
                     }
@@ -1455,86 +2303,14 @@
         }
     });
 
-    //Le paso el JSON con los datos
-    var cData = JSON.parse(`<?php echo $myChartP3EstandaresFinal; ?>`);
-    //console.log(cData.color_lectura);
-    var ctx = document.getElementById('myChartP3EstandaresFinal').getContext('2d');
-    var myChart = new Chart(ctx, {
-        type: "pie",
-        data: {
-            labels: cData.etiquetas,
-            datasets: [{
-                label:  'Resultados de las evaluaciones',
-                data: cData.datos,
-                backgroundColor: [
-                    //A
-                    cData.color_A,
-
-                    //B
-                    cData.color_B,
-
-                ],
-                borderColor: [
-                'rgb(118, 168, 134)',
-                ],
-                borderWidth: 1
-            }
-        ]
-        },
-        plugins: [ChartDataLabels],
-        options: {
-            scales:{
-                aspectRatio: 1,
-                y:[{
-                    ticks:{
-                        beginAtZero:true
-                    }
-                }],
-                x: {
-                    max: 600
-                },
-                y: {
-                    min: 0,
-                    max: 100
-                }
-            },
-            plugins: {
-                // Change options for ALL labels of THIS CHART
-                datalabels: {
-                    formatter: (value, ctx) => {
-                        return value + "%";
-                    },
-                    color: '#000000',
-                    anchor: 'left',
-                    align: 'end',
-                    offset: 10,
-                    labels: {
-                        title: {
-                            font: {
-                                weight: 'bold',
-                                size:14
-                            }
-                        }
-                    }
-                },
-                title: {
-                    display: true,
-                    text: "Estándares EGB Subnivel 2 y 3",
-                    font: {
-                        size: 14
-                    }
-                }
-            }
-        }
-    });
 </script>
 
-<!-- Pregunta 4 -->
+<!-- Resta -->
 <script>
     //Le paso el JSON con los datos
-    var cData = JSON.parse(`<?php echo $myChartP4CompLectora; ?>`);
+    var cData = JSON.parse(`<?php echo $myChartP8Resta; ?>`);
     //console.log(cData.color_lectura);
-    var ctx = document.getElementById('myChartP4CompLectora').getContext('2d');
+    var ctx = document.getElementById('myChartP8Resta').getContext('2d');
     var myChart = new Chart(ctx, {
         type: "pie",
         data: {
@@ -1543,14 +2319,11 @@
                 label:  'Resultados de las evaluaciones',
                 data: cData.datos,
                 backgroundColor: [
-                    //A
+                    //SI
                     cData.color_A,
 
-                    //B
+                    //NO
                     cData.color_B,
-
-                    //C
-                    cData.color_C,
 
                 ],
                 borderColor: [
@@ -1598,7 +2371,7 @@
                 },
                 title: {
                     display: true,
-                    text: "Comprensión consigna lectora",
+                    text: "Pregunta 8",
                     font: {
                         size: 14
                     }
@@ -1608,9 +2381,9 @@
     });
 
     //Le paso el JSON con los datos
-    var cData = JSON.parse(`<?php echo $myChartP4CompLectoraFinal; ?>`);
+    var cData = JSON.parse(`<?php echo $myChartP8RestaFinal; ?>`);
     //console.log(cData.color_lectura);
-    var ctx = document.getElementById('myChartP4CompLectoraFinal').getContext('2d');
+    var ctx = document.getElementById('myChartP8RestaFinal').getContext('2d');
     var myChart = new Chart(ctx, {
         type: "pie",
         data: {
@@ -1619,14 +2392,11 @@
                 label:  'Resultados de las evaluaciones',
                 data: cData.datos,
                 backgroundColor: [
-                    //A
+                    //SI
                     cData.color_A,
 
-                    //B
+                    //NO
                     cData.color_B,
-
-                    //C
-                    cData.color_C,
 
                 ],
                 borderColor: [
@@ -1674,7 +2444,7 @@
                 },
                 title: {
                     display: true,
-                    text: "Comprensión consigna lectora",
+                    text: "Pregunta 8",
                     font: {
                         size: 14
                     }
@@ -1684,9 +2454,9 @@
     });
 
     //Le paso el JSON con los datos
-    var cData = JSON.parse(`<?php echo $myChartP4Intel; ?>`);
+    var cData = JSON.parse(`<?php echo $myChartP9Resta; ?>`);
     //console.log(cData.color_lectura);
-    var ctx = document.getElementById('myChartP4Intel').getContext('2d');
+    var ctx = document.getElementById('myChartP9Resta').getContext('2d');
     var myChart = new Chart(ctx, {
         type: "pie",
         data: {
@@ -1695,14 +2465,11 @@
                 label:  'Resultados de las evaluaciones',
                 data: cData.datos,
                 backgroundColor: [
-                    //A
+                    //SI
                     cData.color_A,
 
-                    //B
+                    //NO
                     cData.color_B,
-
-                    //C
-                    cData.color_C,
 
                 ],
                 borderColor: [
@@ -1750,7 +2517,7 @@
                 },
                 title: {
                     display: true,
-                    text: "Inteligibilidad",
+                    text: "Pregunta 9",
                     font: {
                         size: 14
                     }
@@ -1760,9 +2527,9 @@
     });
 
     //Le paso el JSON con los datos
-    var cData = JSON.parse(`<?php echo $myChartP4IntelFinal; ?>`);
+    var cData = JSON.parse(`<?php echo $myChartP9RestaFinal; ?>`);
     //console.log(cData.color_lectura);
-    var ctx = document.getElementById('myChartP4IntelFinal').getContext('2d');
+    var ctx = document.getElementById('myChartP9RestaFinal').getContext('2d');
     var myChart = new Chart(ctx, {
         type: "pie",
         data: {
@@ -1771,402 +2538,10 @@
                 label:  'Resultados de las evaluaciones',
                 data: cData.datos,
                 backgroundColor: [
-                    //A
+                    //SI
                     cData.color_A,
 
-                    //B
-                    cData.color_B,
-
-                    //C
-                    cData.color_C,
-
-                ],
-                borderColor: [
-                'rgb(118, 168, 134)',
-                ],
-                borderWidth: 1
-            }
-        ]
-        },
-        plugins: [ChartDataLabels],
-        options: {
-            scales:{
-                aspectRatio: 1,
-                y:[{
-                    ticks:{
-                        beginAtZero:true
-                    }
-                }],
-                x: {
-                    max: 600
-                },
-                y: {
-                    min: 0,
-                    max: 100
-                }
-            },
-            plugins: {
-                // Change options for ALL labels of THIS CHART
-                datalabels: {
-                    formatter: (value, ctx) => {
-                        return value + "%";
-                    },
-                    color: '#000000',
-                    anchor: 'left',
-                    align: 'end',
-                    offset: 10,
-                    labels: {
-                        title: {
-                            font: {
-                                weight: 'bold',
-                                size:14
-                            }
-                        }
-                    }
-                },
-                title: {
-                    display: true,
-                    text: "Inteligibilidad",
-                    font: {
-                        size: 14
-                    }
-                }
-            }
-        }
-    });
-
-    //Le paso el JSON con los datos
-    var cData = JSON.parse(`<?php echo $myChartP4Coher; ?>`);
-    //console.log(cData.color_lectura);
-    var ctx = document.getElementById('myChartP4Coher').getContext('2d');
-    var myChart = new Chart(ctx, {
-        type: "pie",
-        data: {
-            labels: cData.etiquetas,
-            datasets: [{
-                label:  'Resultados de las evaluaciones',
-                data: cData.datos,
-                backgroundColor: [
-                    //A
-                    cData.color_A,
-
-                    //B
-                    cData.color_B,
-
-                    //C
-                    cData.color_C,
-
-                    //C
-                    cData.color_D,
-
-                ],
-                borderColor: [
-                'rgb(118, 168, 134)',
-                ],
-                borderWidth: 1
-            }
-        ]
-        },
-        plugins: [ChartDataLabels],
-        options: {
-            scales:{
-                aspectRatio: 1,
-                y:[{
-                    ticks:{
-                        beginAtZero:true
-                    }
-                }],
-                x: {
-                    max: 600
-                },
-                y: {
-                    min: 0,
-                    max: 100
-                }
-            },
-            plugins: {
-                // Change options for ALL labels of THIS CHART
-                datalabels: {
-                    formatter: (value, ctx) => {
-                        return value + "%";
-                    },
-                    color: '#000000',
-                    anchor: 'left',
-                    align: 'end',
-                    offset: 10,
-                    labels: {
-                        title: {
-                            font: {
-                                weight: 'bold',
-                                size:14
-                            }
-                        }
-                    }
-                },
-                title: {
-                    display: true,
-                    text: "Coherencia",
-                    font: {
-                        size: 14
-                    }
-                }
-            }
-        }
-    });
-
-    //Le paso el JSON con los datos
-    var cData = JSON.parse(`<?php echo $myChartP4CoherFinal; ?>`);
-    //console.log(cData.color_lectura);
-    var ctx = document.getElementById('myChartP4CoherFinal').getContext('2d');
-    var myChart = new Chart(ctx, {
-        type: "pie",
-        data: {
-            labels: cData.etiquetas,
-            datasets: [{
-                label:  'Resultados de las evaluaciones',
-                data: cData.datos,
-                backgroundColor: [
-                    //A
-                    cData.color_A,
-
-                    //B
-                    cData.color_B,
-
-                    //C
-                    cData.color_C,
-
-                    //D
-                    cData.color_D,
-
-                ],
-                borderColor: [
-                'rgb(118, 168, 134)',
-                ],
-                borderWidth: 1
-            }
-        ]
-        },
-        plugins: [ChartDataLabels],
-        options: {
-            scales:{
-                aspectRatio: 1,
-                y:[{
-                    ticks:{
-                        beginAtZero:true
-                    }
-                }],
-                x: {
-                    max: 600
-                },
-                y: {
-                    min: 0,
-                    max: 100
-                }
-            },
-            plugins: {
-                // Change options for ALL labels of THIS CHART
-                datalabels: {
-                    formatter: (value, ctx) => {
-                        return value + "%";
-                    },
-                    color: '#000000',
-                    anchor: 'left',
-                    align: 'end',
-                    offset: 10,
-                    labels: {
-                        title: {
-                            font: {
-                                weight: 'bold',
-                                size:14
-                            }
-                        }
-                    }
-                },
-                title: {
-                    display: true,
-                    text: "Coherencia",
-                    font: {
-                        size: 14
-                    }
-                }
-            }
-        }
-    });
-
-    //Le paso el JSON con los datos
-    var cData = JSON.parse(`<?php echo $myChartP4Sintax; ?>`);
-    //console.log(cData.color_lectura);
-    var ctx = document.getElementById('myChartP4Sintax').getContext('2d');
-    var myChart = new Chart(ctx, {
-        type: "pie",
-        data: {
-            labels: cData.etiquetas,
-            datasets: [{
-                label:  'Resultados de las evaluaciones',
-                data: cData.datos,
-                backgroundColor: [
-                    //A
-                    cData.color_A,
-
-                    //B
-                    cData.color_B,
-
-                    //C
-                    cData.color_C,
-
-                    //C
-                    cData.color_D,
-
-                ],
-                borderColor: [
-                'rgb(118, 168, 134)',
-                ],
-                borderWidth: 1
-            }
-        ]
-        },
-        plugins: [ChartDataLabels],
-        options: {
-            scales:{
-                aspectRatio: 1,
-                y:[{
-                    ticks:{
-                        beginAtZero:true
-                    }
-                }],
-                x: {
-                    max: 600
-                },
-                y: {
-                    min: 0,
-                    max: 100
-                }
-            },
-            plugins: {
-                // Change options for ALL labels of THIS CHART
-                datalabels: {
-                    formatter: (value, ctx) => {
-                        return value + "%";
-                    },
-                    color: '#000000',
-                    anchor: 'left',
-                    align: 'end',
-                    offset: 10,
-                    labels: {
-                        title: {
-                            font: {
-                                weight: 'bold',
-                                size:14
-                            }
-                        }
-                    }
-                },
-                title: {
-                    display: true,
-                    text: "Sintaxis",
-                    font: {
-                        size: 14
-                    }
-                }
-            }
-        }
-    });
-
-    //Le paso el JSON con los datos
-    var cData = JSON.parse(`<?php echo $myChartP4SintaxFinal; ?>`);
-    //console.log(cData.color_lectura);
-    var ctx = document.getElementById('myChartP4SintaxFinal').getContext('2d');
-    var myChart = new Chart(ctx, {
-        type: "pie",
-        data: {
-            labels: cData.etiquetas,
-            datasets: [{
-                label:  'Resultados de las evaluaciones',
-                data: cData.datos,
-                backgroundColor: [
-                    //A
-                    cData.color_A,
-
-                    //B
-                    cData.color_B,
-
-                    //C
-                    cData.color_C,
-
-                    //D
-                    cData.color_D,
-
-                ],
-                borderColor: [
-                'rgb(118, 168, 134)',
-                ],
-                borderWidth: 1
-            }
-        ]
-        },
-        plugins: [ChartDataLabels],
-        options: {
-            scales:{
-                aspectRatio: 1,
-                y:[{
-                    ticks:{
-                        beginAtZero:true
-                    }
-                }],
-                x: {
-                    max: 600
-                },
-                y: {
-                    min: 0,
-                    max: 100
-                }
-            },
-            plugins: {
-                // Change options for ALL labels of THIS CHART
-                datalabels: {
-                    formatter: (value, ctx) => {
-                        return value + "%";
-                    },
-                    color: '#000000',
-                    anchor: 'left',
-                    align: 'end',
-                    offset: 10,
-                    labels: {
-                        title: {
-                            font: {
-                                weight: 'bold',
-                                size:14
-                            }
-                        }
-                    }
-                },
-                title: {
-                    display: true,
-                    text: "Sintaxis",
-                    font: {
-                        size: 14
-                    }
-                }
-            }
-        }
-    });
-
-    //Le paso el JSON con los datos
-    var cData = JSON.parse(`<?php echo $myChartP4Estandares; ?>`);
-    //console.log(cData.color_lectura);
-    var ctx = document.getElementById('myChartP4Estandares').getContext('2d');
-    var myChart = new Chart(ctx, {
-        type: "pie",
-        data: {
-            labels: cData.etiquetas,
-            datasets: [{
-                label:  'Resultados de las evaluaciones',
-                data: cData.datos,
-                backgroundColor: [
-                    //A
-                    cData.color_A,
-
-                    //B
+                    //NO
                     cData.color_B,
 
                 ],
@@ -2215,7 +2590,7 @@
                 },
                 title: {
                     display: true,
-                    text: "Estándares EGB Subnivel 2 y 3",
+                    text: "Pregunta 9",
                     font: {
                         size: 14
                     }
@@ -2224,75 +2599,599 @@
         }
     });
 
-    //Le paso el JSON con los datos
-    var cData = JSON.parse(`<?php echo $myChartP4EstandaresFinal; ?>`);
-    //console.log(cData.color_lectura);
-    var ctx = document.getElementById('myChartP4EstandaresFinal').getContext('2d');
-    var myChart = new Chart(ctx, {
-        type: "pie",
-        data: {
-            labels: cData.etiquetas,
-            datasets: [{
-                label:  'Resultados de las evaluaciones',
-                data: cData.datos,
-                backgroundColor: [
-                    //A
-                    cData.color_A,
-
-                    //B
-                    cData.color_B,
-                ],
-                borderColor: [
-                'rgb(118, 168, 134)',
-                ],
-                borderWidth: 1
-            }
-        ]
-        },
-        plugins: [ChartDataLabels],
-        options: {
-            scales:{
-                aspectRatio: 1,
-                y:[{
-                    ticks:{
-                        beginAtZero:true
-                    }
-                }],
-                x: {
-                    max: 600
-                },
-                y: {
-                    min: 0,
-                    max: 100
-                }
-            },
-            plugins: {
-                // Change options for ALL labels of THIS CHART
-                datalabels: {
-                    formatter: (value, ctx) => {
-                        return value + "%";
-                    },
-                    color: '#000000',
-                    anchor: 'left',
-                    align: 'end',
-                    offset: 10,
-                    labels: {
-                        title: {
-                            font: {
-                                weight: 'bold',
-                                size:14
-                            }
-                        }
-                    }
-                },
-                title: {
-                    display: true,
-                    text: "Estándares EGB Subnivel 2 y 3",
-                    font: {
-                        size: 14
-                    }
-                }
-            }
-        }
-    });
 </script>
+
+<!-- Multiplicación -->
+<script>
+    //Le paso el JSON con los datos
+    var cData = JSON.parse(`<?php echo $myChartP10Multi; ?>`);
+    //console.log(cData.color_lectura);
+    var ctx = document.getElementById('myChartP10Multi').getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: "pie",
+        data: {
+            labels: cData.etiquetas,
+            datasets: [{
+                label:  'Resultados de las evaluaciones',
+                data: cData.datos,
+                backgroundColor: [
+                    //SI
+                    cData.color_A,
+
+                    //NO
+                    cData.color_B,
+
+                ],
+                borderColor: [
+                'rgb(118, 168, 134)',
+                ],
+                borderWidth: 1
+            }
+        ]
+        },
+        plugins: [ChartDataLabels],
+        options: {
+            scales:{
+                aspectRatio: 1,
+                y:[{
+                    ticks:{
+                        beginAtZero:true
+                    }
+                }],
+                x: {
+                    max: 600
+                },
+                y: {
+                    min: 0,
+                    max: 100
+                }
+            },
+            plugins: {
+                // Change options for ALL labels of THIS CHART
+                datalabels: {
+                    formatter: (value, ctx) => {
+                        return value + "%";
+                    },
+                    color: '#000000',
+                    anchor: 'left',
+                    align: 'end',
+                    offset: 10,
+                    labels: {
+                        title: {
+                            font: {
+                                weight: 'bold',
+                                size:14
+                            }
+                        }
+                    }
+                },
+                title: {
+                    display: true,
+                    text: "Pregunta 10",
+                    font: {
+                        size: 14
+                    }
+                }
+            }
+        }
+    });
+
+    //Le paso el JSON con los datos
+    var cData = JSON.parse(`<?php echo $myChartP10MultiFinal; ?>`);
+    //console.log(cData.color_lectura);
+    var ctx = document.getElementById('myChartP10MultiFinal').getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: "pie",
+        data: {
+            labels: cData.etiquetas,
+            datasets: [{
+                label:  'Resultados de las evaluaciones',
+                data: cData.datos,
+                backgroundColor: [
+                    //SI
+                    cData.color_A,
+
+                    //NO
+                    cData.color_B,
+
+                ],
+                borderColor: [
+                'rgb(118, 168, 134)',
+                ],
+                borderWidth: 1
+            }
+        ]
+        },
+        plugins: [ChartDataLabels],
+        options: {
+            scales:{
+                aspectRatio: 1,
+                y:[{
+                    ticks:{
+                        beginAtZero:true
+                    }
+                }],
+                x: {
+                    max: 600
+                },
+                y: {
+                    min: 0,
+                    max: 100
+                }
+            },
+            plugins: {
+                // Change options for ALL labels of THIS CHART
+                datalabels: {
+                    formatter: (value, ctx) => {
+                        return value + "%";
+                    },
+                    color: '#000000',
+                    anchor: 'left',
+                    align: 'end',
+                    offset: 10,
+                    labels: {
+                        title: {
+                            font: {
+                                weight: 'bold',
+                                size:14
+                            }
+                        }
+                    }
+                },
+                title: {
+                    display: true,
+                    text: "Pregunta 10",
+                    font: {
+                        size: 14
+                    }
+                }
+            }
+        }
+    });
+
+    //Le paso el JSON con los datos
+    var cData = JSON.parse(`<?php echo $myChartP11Multi; ?>`);
+    //console.log(cData.color_lectura);
+    var ctx = document.getElementById('myChartP11Multi').getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: "pie",
+        data: {
+            labels: cData.etiquetas,
+            datasets: [{
+                label:  'Resultados de las evaluaciones',
+                data: cData.datos,
+                backgroundColor: [
+                    //SI
+                    cData.color_A,
+
+                    //NO
+                    cData.color_B,
+
+                ],
+                borderColor: [
+                'rgb(118, 168, 134)',
+                ],
+                borderWidth: 1
+            }
+        ]
+        },
+        plugins: [ChartDataLabels],
+        options: {
+            scales:{
+                aspectRatio: 1,
+                y:[{
+                    ticks:{
+                        beginAtZero:true
+                    }
+                }],
+                x: {
+                    max: 600
+                },
+                y: {
+                    min: 0,
+                    max: 100
+                }
+            },
+            plugins: {
+                // Change options for ALL labels of THIS CHART
+                datalabels: {
+                    formatter: (value, ctx) => {
+                        return value + "%";
+                    },
+                    color: '#000000',
+                    anchor: 'left',
+                    align: 'end',
+                    offset: 10,
+                    labels: {
+                        title: {
+                            font: {
+                                weight: 'bold',
+                                size:14
+                            }
+                        }
+                    }
+                },
+                title: {
+                    display: true,
+                    text: "Pregunta 11",
+                    font: {
+                        size: 14
+                    }
+                }
+            }
+        }
+    });
+
+    //Le paso el JSON con los datos
+    var cData = JSON.parse(`<?php echo $myChartP11MultiFinal; ?>`);
+    //console.log(cData.color_lectura);
+    var ctx = document.getElementById('myChartP11MultiFinal').getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: "pie",
+        data: {
+            labels: cData.etiquetas,
+            datasets: [{
+                label:  'Resultados de las evaluaciones',
+                data: cData.datos,
+                backgroundColor: [
+                    //SI
+                    cData.color_A,
+
+                    //NO
+                    cData.color_B,
+
+                ],
+                borderColor: [
+                'rgb(118, 168, 134)',
+                ],
+                borderWidth: 1
+            }
+        ]
+        },
+        plugins: [ChartDataLabels],
+        options: {
+            scales:{
+                aspectRatio: 1,
+                y:[{
+                    ticks:{
+                        beginAtZero:true
+                    }
+                }],
+                x: {
+                    max: 600
+                },
+                y: {
+                    min: 0,
+                    max: 100
+                }
+            },
+            plugins: {
+                // Change options for ALL labels of THIS CHART
+                datalabels: {
+                    formatter: (value, ctx) => {
+                        return value + "%";
+                    },
+                    color: '#000000',
+                    anchor: 'left',
+                    align: 'end',
+                    offset: 10,
+                    labels: {
+                        title: {
+                            font: {
+                                weight: 'bold',
+                                size:14
+                            }
+                        }
+                    }
+                },
+                title: {
+                    display: true,
+                    text: "Pregunta 11",
+                    font: {
+                        size: 14
+                    }
+                }
+            }
+        }
+    });
+
+</script>
+
+<!-- División -->
+<script>
+    //Le paso el JSON con los datos
+    var cData = JSON.parse(`<?php echo $myChartP12Division; ?>`);
+    //console.log(cData.color_lectura);
+    var ctx = document.getElementById('myChartP12Division').getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: "pie",
+        data: {
+            labels: cData.etiquetas,
+            datasets: [{
+                label:  'Resultados de las evaluaciones',
+                data: cData.datos,
+                backgroundColor: [
+                    //SI
+                    cData.color_A,
+
+                    //NO
+                    cData.color_B,
+
+                ],
+                borderColor: [
+                'rgb(118, 168, 134)',
+                ],
+                borderWidth: 1
+            }
+        ]
+        },
+        plugins: [ChartDataLabels],
+        options: {
+            scales:{
+                aspectRatio: 1,
+                y:[{
+                    ticks:{
+                        beginAtZero:true
+                    }
+                }],
+                x: {
+                    max: 600
+                },
+                y: {
+                    min: 0,
+                    max: 100
+                }
+            },
+            plugins: {
+                // Change options for ALL labels of THIS CHART
+                datalabels: {
+                    formatter: (value, ctx) => {
+                        return value + "%";
+                    },
+                    color: '#000000',
+                    anchor: 'left',
+                    align: 'end',
+                    offset: 10,
+                    labels: {
+                        title: {
+                            font: {
+                                weight: 'bold',
+                                size:14
+                            }
+                        }
+                    }
+                },
+                title: {
+                    display: true,
+                    text: "Pregunta 12",
+                    font: {
+                        size: 14
+                    }
+                }
+            }
+        }
+    });
+
+    //Le paso el JSON con los datos
+    var cData = JSON.parse(`<?php echo $myChartP12DivisionFinal; ?>`);
+    //console.log(cData.color_lectura);
+    var ctx = document.getElementById('myChartP12DivisionFinal').getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: "pie",
+        data: {
+            labels: cData.etiquetas,
+            datasets: [{
+                label:  'Resultados de las evaluaciones',
+                data: cData.datos,
+                backgroundColor: [
+                    //SI
+                    cData.color_A,
+
+                    //NO
+                    cData.color_B,
+
+                ],
+                borderColor: [
+                'rgb(118, 168, 134)',
+                ],
+                borderWidth: 1
+            }
+        ]
+        },
+        plugins: [ChartDataLabels],
+        options: {
+            scales:{
+                aspectRatio: 1,
+                y:[{
+                    ticks:{
+                        beginAtZero:true
+                    }
+                }],
+                x: {
+                    max: 600
+                },
+                y: {
+                    min: 0,
+                    max: 100
+                }
+            },
+            plugins: {
+                // Change options for ALL labels of THIS CHART
+                datalabels: {
+                    formatter: (value, ctx) => {
+                        return value + "%";
+                    },
+                    color: '#000000',
+                    anchor: 'left',
+                    align: 'end',
+                    offset: 10,
+                    labels: {
+                        title: {
+                            font: {
+                                weight: 'bold',
+                                size:14
+                            }
+                        }
+                    }
+                },
+                title: {
+                    display: true,
+                    text: "Pregunta 12",
+                    font: {
+                        size: 14
+                    }
+                }
+            }
+        }
+    });
+
+    //Le paso el JSON con los datos
+    var cData = JSON.parse(`<?php echo $myChartP13Division; ?>`);
+    //console.log(cData.color_lectura);
+    var ctx = document.getElementById('myChartP13Division').getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: "pie",
+        data: {
+            labels: cData.etiquetas,
+            datasets: [{
+                label:  'Resultados de las evaluaciones',
+                data: cData.datos,
+                backgroundColor: [
+                    //SI
+                    cData.color_A,
+
+                    //NO
+                    cData.color_B,
+
+                ],
+                borderColor: [
+                'rgb(118, 168, 134)',
+                ],
+                borderWidth: 1
+            }
+        ]
+        },
+        plugins: [ChartDataLabels],
+        options: {
+            scales:{
+                aspectRatio: 1,
+                y:[{
+                    ticks:{
+                        beginAtZero:true
+                    }
+                }],
+                x: {
+                    max: 600
+                },
+                y: {
+                    min: 0,
+                    max: 100
+                }
+            },
+            plugins: {
+                // Change options for ALL labels of THIS CHART
+                datalabels: {
+                    formatter: (value, ctx) => {
+                        return value + "%";
+                    },
+                    color: '#000000',
+                    anchor: 'left',
+                    align: 'end',
+                    offset: 10,
+                    labels: {
+                        title: {
+                            font: {
+                                weight: 'bold',
+                                size:14
+                            }
+                        }
+                    }
+                },
+                title: {
+                    display: true,
+                    text: "Pregunta 13",
+                    font: {
+                        size: 14
+                    }
+                }
+            }
+        }
+    });
+
+    //Le paso el JSON con los datos
+    var cData = JSON.parse(`<?php echo $myChartP13DivisionFinal; ?>`);
+    //console.log(cData.color_lectura);
+    var ctx = document.getElementById('myChartP13DivisionFinal').getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: "pie",
+        data: {
+            labels: cData.etiquetas,
+            datasets: [{
+                label:  'Resultados de las evaluaciones',
+                data: cData.datos,
+                backgroundColor: [
+                    //SI
+                    cData.color_A,
+
+                    //NO
+                    cData.color_B,
+
+                ],
+                borderColor: [
+                'rgb(118, 168, 134)',
+                ],
+                borderWidth: 1
+            }
+        ]
+        },
+        plugins: [ChartDataLabels],
+        options: {
+            scales:{
+                aspectRatio: 1,
+                y:[{
+                    ticks:{
+                        beginAtZero:true
+                    }
+                }],
+                x: {
+                    max: 600
+                },
+                y: {
+                    min: 0,
+                    max: 100
+                }
+            },
+            plugins: {
+                // Change options for ALL labels of THIS CHART
+                datalabels: {
+                    formatter: (value, ctx) => {
+                        return value + "%";
+                    },
+                    color: '#000000',
+                    anchor: 'left',
+                    align: 'end',
+                    offset: 10,
+                    labels: {
+                        title: {
+                            font: {
+                                weight: 'bold',
+                                size:14
+                            }
+                        }
+                    }
+                },
+                title: {
+                    display: true,
+                    text: "Pregunta 13",
+                    font: {
+                        size: 14
+                    }
+                }
+            }
+        }
+    });
+
+</script>
+
+
+

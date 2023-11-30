@@ -239,7 +239,8 @@ $routes->get('reporte-diagnostico-lenguaje-coordinador', 'Reportes::reporte_diag
 $routes->post('recibe-diagnostico-lenguaje-coordinador', 'Reportes::recibe_diagnostico_lenguaje_coordinador');
 $routes->get('reporte-diagnostico-mate-coordinador', 'Reportes::reporte_diagnostico_matematicas_coordinador');
 $routes->post('recibe-diagnostico-mate-coordinador', 'Reportes::recibe_diagnostico_mate_coordinador');
-
+$routes->get('reporte-diagnostico-matelement-coordinador', 'Reportes::reporte_diagnostico_matematica_elem_coordinador');
+$routes->post('recibe-diagnostico-matelement-coordinador', 'Reportes::recibe_diagnostico_matelement_coordinador');
 
 
 /*

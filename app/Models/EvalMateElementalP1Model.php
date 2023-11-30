@@ -78,7 +78,26 @@ class EvalMateElementalP1Model extends Model {
         //echo $this->db->getLastQuery();
         return $result;
     }
-
+    
+    public function _getDatosMate($registros) {
+        
+        $result = null;
+        foreach ($registros as $key => $value) {
+            
+            $builder = $this->db->table($this->table);
+            $builder->select('*');
+            $builder->where('idprod', $value->id);
+            $query = $builder->get();
+            if ($query->getResult() != null) {
+                foreach ($query->getResult() as $row) {
+                    $result[] = $row;
+                }
+            }
+            //echo $this->db->getLastQuery();
+        }
+        return $result;
+    }
+    
     public function _update($datos) {
         $builder = $this->db->table($this->table);
         if ($datos['relacion_figuras_geo_1'] != 'NULL') {

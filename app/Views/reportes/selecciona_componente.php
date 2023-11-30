@@ -1,3 +1,9 @@
+<style>
+    #btn-dya {
+        background-color: rgb(26, 138, 84, 0.9);
+        text-align:center;
+    }
+</style>
 <main class="container">
     <div class="container-fluid px-4">
         <h3 class="mt-4"><?= esc($title).' - REPORTES'; ?></h3>
@@ -17,7 +23,7 @@
                                         <h5 class="card-title">Componente 1</h5>
                                             <p class="card-text">Servicio de Apoyo Escolar implementado en tres provincias: Carchi, El Oro y Manabí (Manta) </p>';
                                             if ($this->session->idrol == 1 || $this->session->idrol == 3 || $this->session->idrol == 10) {
-                                                echo '<a href="'.site_url().'prod1-reportes-coordinacion-menu" class="btn btn-info mb-2" target="_blank">Reportes Coordinación</a>';
+                                                echo '<a href="'.site_url().'prod1-reportes-coordinacion-menu" class="btn btn-info mb-2" target="_blank" id="btn-dya">Reportes Coordinación</a>';
 
                                             }
                                                 echo '<a href="'.site_url().'reportes-p1" class="btn btn-info mb-2">Reportes por centro educativo</a>

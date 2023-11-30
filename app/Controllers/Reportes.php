@@ -304,6 +304,29 @@ class Reportes extends BaseController {
         }
     }
 
+    public function reporte_diagnostico_matematica_elem_coordinador() {
+        $data['idrol'] = $this->session->idrol;
+        $data['id'] = $this->session->idusuario;
+        $data['is_logged'] = $this->usuarioModel->_getLogStatus($data['id']);
+        $data['nombre'] = $this->session->nombre;
+        $data['componente_1'] = $this->session->componente_1;
+        $data['reportes'] = $this->session->reportes;
+
+        if ($data['is_logged'] == 1 && $data['componente_1'] == 1 && $data['reportes'] == 1) {
+
+            $data['provincias'] = $this->centrosProvProd1ViewModel->_getProvincias();
+            //echo '<pre>'.var_export($data['provincias'], true).'</pre>';exit;
+
+            $data['title']='MYRP - DYA';
+            $data['main_content']='reportes/prod1_reporte_diagnostico_mate_elem_coordinador_form';
+            return view('includes/template_reportes', $data);
+        }else{
+
+            $this->logout();
+            return redirect()->to('/');
+        }
+    }
+
     public function reporte_diagnostico_dinamico() {
         // Ahora las imprimimos como JSON para pasarlas a AJAX, pero las agrupamos
 
@@ -409,9 +432,12 @@ class Reportes extends BaseController {
                     }
                 }
 
-                $etiquetas_apoyo = ["SI", "NO"];
-                $datosGrafica[0] = $siNecesitaApoyo;
-                $datosGrafica[1] = $noNecesitaApoyo;
+                $porcentNecesita = round(($siNecesitaApoyo * 100)/count($data['datos_diagnostico_lenguaje']));
+                $porcentNoNecesita = 100 - $porcentNecesita;
+
+                $etiquetas_apoyo = [$porcentNecesita."% SI", $porcentNoNecesita."% NO"];
+                $datosGrafica[0] = $porcentNecesita;
+                $datosGrafica[1] = $porcentNoNecesita;
                 $respuesta_necesita_apoyo = [
                     "etiquetas" => $etiquetas_apoyo,
                     "datos" => $datosGrafica,
@@ -432,9 +458,12 @@ class Reportes extends BaseController {
                     }
                 }
 
-                $etiquetas_apoyo = ["SI", "NO"];
-                $datosGrafica[0] = $siNecesitaApoyo;
-                $datosGrafica[1] = $noNecesitaApoyo;
+                $porcentNecesita = round(($siNecesitaApoyo * 100)/count($data['datos_evalfinal_lenguaje']));
+                $porcentNoNecesita = 100 - $porcentNecesita;
+
+                $etiquetas_apoyo = [$porcentNecesita."% SI", $porcentNoNecesita."% NO"];
+                $datosGrafica[0] = $porcentNecesita;
+                $datosGrafica[1] = $porcentNoNecesita;
                 $respuesta_necesita_apoyo_final = [
                     "etiquetas" => $etiquetas_apoyo,
                     "datos" => $datosGrafica,
@@ -551,9 +580,12 @@ class Reportes extends BaseController {
             }
         }
 
-        $etiquetas = ["Adecuado", "Debajo de lo esperado"];
-        $datosGrafica[0] = $respA;
-        $datosGrafica[1] = $respB;
+        $porcentA = round(($respA * 100)/count($data));
+        $porcentB = 100 - $porcentA;
+
+        $etiquetas = [$porcentA."% Adecuado", $porcentB."% Muy por debajo de lo esperado"];
+        $datosGrafica[0] = $porcentA;
+        $datosGrafica[1] = $porcentB;
         $respuesta = [
             "etiquetas" => $etiquetas,
             "datos" => $datosGrafica,
@@ -581,11 +613,16 @@ class Reportes extends BaseController {
             }
         }
 
-        $etiquetas = ["Adecuado", "En proceso", "Debajo de lo esperado", "Muy por debajo de lo esperado"];
-        $datosGrafica[0] = $respA;
-        $datosGrafica[1] = $respB;
-        $datosGrafica[2] = $respC;
-        $datosGrafica[3] = $respD;
+        $porcentA = round(($respA * 100)/count($data));
+        $porcentB = round(($respB * 100)/count($data));
+        $porcentC = round(($respC * 100)/count($data));
+        $porcentD = 100 - ($porcentA + $porcentB + $porcentC);
+
+        $etiquetas = [$porcentA."% Adecuado", $porcentB."% En proceso", $porcentC."% Debajo de lo esperado", $porcentD."% Muy por debajo de lo esperado"];
+        $datosGrafica[0] = $porcentA;
+        $datosGrafica[1] = $porcentB;
+        $datosGrafica[2] = $porcentC;
+        $datosGrafica[3] = $porcentD;
         $respuesta = [
             "etiquetas" => $etiquetas,
             "datos" => $datosGrafica,
@@ -615,11 +652,16 @@ class Reportes extends BaseController {
             }
         }
 
-        $etiquetas = ["Adecuado", "En proceso", "Debajo de lo esperado", "Muy por debajo de lo esperado"];
-        $datosGrafica[0] = $respA;
-        $datosGrafica[1] = $respB;
-        $datosGrafica[2] = $respC;
-        $datosGrafica[3] = $respD;
+        $porcentA = round(($respA * 100)/count($data));
+        $porcentB = round(($respB * 100)/count($data));
+        $porcentC = round(($respC * 100)/count($data));
+        $porcentD = 100 - ($porcentA + $porcentB + $porcentC);
+
+        $etiquetas = [$porcentA."% Adecuado", $porcentB."% En proceso", $porcentC."% Debajo de lo esperado", $porcentD."% Muy por debajo de lo esperado"];
+        $datosGrafica[0] = $porcentA;
+        $datosGrafica[1] = $porcentB;
+        $datosGrafica[2] = $porcentC;
+        $datosGrafica[3] = $porcentD;
         $respuesta = [
             "etiquetas" => $etiquetas,
             "datos" => $datosGrafica,
@@ -646,10 +688,14 @@ class Reportes extends BaseController {
             }
         }
 
-        $etiquetas = ["Adecuado", "En proceso", "Muy por debajo de lo esperado"];
-        $datosGrafica[0] = $respA;
-        $datosGrafica[1] = $respB;
-        $datosGrafica[2] = $respC;
+        $porcentA = round(($respA * 100)/count($data));
+        $porcentB = round(($respB * 100)/count($data));
+        $porcentC = 100 - ($porcentA + $porcentB);
+
+        $etiquetas = [$porcentA."% Adecuado", $porcentB."% En proceso", $porcentC."% Muy por debajo de lo esperado"];
+        $datosGrafica[0] = $porcentA;
+        $datosGrafica[1] = $porcentB;
+        $datosGrafica[2] = $porcentC;
         $respuesta = [
             "etiquetas" => $etiquetas,
             "datos" => $datosGrafica,
@@ -675,10 +721,14 @@ class Reportes extends BaseController {
             }
         }
 
-        $etiquetas = ["Adecuado", "En proceso", "Debajo de lo esperado"];
-        $datosGrafica[0] = $respA;
-        $datosGrafica[1] = $respB;
-        $datosGrafica[2] = $respC;
+        $porcentA = round(($respA * 100)/count($data));
+        $porcentB = round(($respB * 100)/count($data));
+        $porcentC = 100 - ($porcentA + $porcentB);
+
+        $etiquetas = [$porcentA."% Adecuado", $porcentB."% En proceso", $porcentC."% Muy por debajo de lo esperado"];
+        $datosGrafica[0] = $porcentA;
+        $datosGrafica[1] = $porcentB;
+        $datosGrafica[2] = $porcentC;
         $respuesta = [
             "etiquetas" => $etiquetas,
             "datos" => $datosGrafica,
@@ -701,9 +751,12 @@ class Reportes extends BaseController {
             }
         }
 
-        $etiquetas = ["Adecuado", "Debajo de lo esperado"];
-        $datosGrafica[0] = $respA;
-        $datosGrafica[1] = $respB;
+        $porcentA = round(($respA * 100)/count($data));
+        $porcentB = 100 - $porcentA;
+
+        $etiquetas = [$porcentA."% Adecuado", $porcentB."% Muy por debajo de lo esperado"];
+        $datosGrafica[0] = $porcentA;
+        $datosGrafica[1] = $porcentB;
         $respuesta = [
             "etiquetas" => $etiquetas,
             "datos" => $datosGrafica,
@@ -731,11 +784,16 @@ class Reportes extends BaseController {
             }
         }
 
-        $etiquetas = ["Adecuado", "En proceso", "Debajo de lo esperado", "Muy por debajo de lo esperado"];
-        $datosGrafica[0] = $respA;
-        $datosGrafica[1] = $respB;
-        $datosGrafica[2] = $respC;
-        $datosGrafica[3] = $respD;
+        $porcentA = round(($respA * 100)/count($data));
+        $porcentB = round(($respB * 100)/count($data));
+        $porcentC = round(($respC * 100)/count($data));
+        $porcentD = 100 - ($porcentA + $porcentB + $porcentC);
+
+        $etiquetas = [$porcentA."% Adecuado", $porcentB."% En proceso", $porcentC."% Debajo de lo esperado", $porcentD."% Muy por debajo de lo esperado"];
+        $datosGrafica[0] = $porcentA;
+        $datosGrafica[1] = $porcentB;
+        $datosGrafica[2] = $porcentC;
+        $datosGrafica[3] = $porcentD;
         $respuesta = [
             "etiquetas" => $etiquetas,
             "datos" => $datosGrafica,
@@ -765,11 +823,16 @@ class Reportes extends BaseController {
             }
         }
 
-        $etiquetas = ["Adecuado", "En proceso", "Debajo de lo esperado", "Muy por debajo de lo esperado"];
-        $datosGrafica[0] = $respA;
-        $datosGrafica[1] = $respB;
-        $datosGrafica[2] = $respC;
-        $datosGrafica[3] = $respD;
+        $porcentA = round(($respA * 100)/count($data));
+        $porcentB = round(($respB * 100)/count($data));
+        $porcentC = round(($respC * 100)/count($data));
+        $porcentD = 100 - ($porcentA + $porcentB + $porcentC);
+
+        $etiquetas = [$porcentA."% Adecuado", $porcentB."% En proceso", $porcentC."% Debajo de lo esperado", $porcentD."% Muy por debajo de lo esperado"];
+        $datosGrafica[0] = $porcentA;
+        $datosGrafica[1] = $porcentB;
+        $datosGrafica[2] = $porcentC;
+        $datosGrafica[3] = $porcentD;
         $respuesta = [
             "etiquetas" => $etiquetas,
             "datos" => $datosGrafica,
@@ -795,11 +858,15 @@ class Reportes extends BaseController {
                 $respC++;
             }
         }
+        $porcentA = round(($respA * 100)/count($data));
+        $porcentB = round(($respB * 100)/count($data));
+        $porcentC = 100 - ($porcentA + $porcentB);
 
-        $etiquetas = ["Adecuado", "En proceso", "Muy por debajo de lo esperado"];
-        $datosGrafica[0] = $respA;
-        $datosGrafica[1] = $respB;
-        $datosGrafica[2] = $respC;
+        $etiquetas = [$porcentA."% Adecuado", $porcentB."% En proceso", $porcentC."% Muy por debajo de lo esperado"];
+        $datosGrafica[0] = $porcentA;
+        $datosGrafica[1] = $porcentB;
+        $datosGrafica[2] = $porcentC;
+
         $respuesta = [
             "etiquetas" => $etiquetas,
             "datos" => $datosGrafica,
@@ -825,10 +892,15 @@ class Reportes extends BaseController {
             }
         }
 
-        $etiquetas = ["Adecuado", "En proceso", "Muy por debajo de lo esperado"];
-        $datosGrafica[0] = $respA;
-        $datosGrafica[1] = $respB;
-        $datosGrafica[2] = $respC;
+        $porcentA = round(($respA * 100)/count($data));
+        $porcentB = round(($respB * 100)/count($data));
+        $porcentC = 100 - ($porcentA + $porcentB);
+
+        $etiquetas = [$porcentA."% Adecuado", $porcentB."% En proceso", $porcentC."% Muy por debajo de lo esperado"];
+        $datosGrafica[0] = $porcentA;
+        $datosGrafica[1] = $porcentB;
+        $datosGrafica[2] = $porcentC;
+
         $respuesta = [
             "etiquetas" => $etiquetas,
             "datos" => $datosGrafica,
@@ -850,10 +922,13 @@ class Reportes extends BaseController {
                 $respB++;
             }
         }
+        $porcentA = round(($respA * 100)/count($data));
+        $porcentB = 100 - $porcentA;
 
-        $etiquetas = ["Adecuado", "Muy por debajo de lo esperado"];
-        $datosGrafica[0] = $respA;
-        $datosGrafica[1] = $respB;
+        $etiquetas = [$porcentA."% Adecuado", $porcentB."% Muy por debajo de lo esperado"];
+        $datosGrafica[0] = $porcentA;
+        $datosGrafica[1] = $porcentB;
+
         $respuesta = [
             "etiquetas" => $etiquetas,
             "datos" => $datosGrafica,
@@ -875,9 +950,12 @@ class Reportes extends BaseController {
             }
         }
 
-        $etiquetas = ["Adecuado", "Muy por debajo de lo esperado"];
-        $datosGrafica[0] = $respA;
-        $datosGrafica[1] = $respB;
+        $porcentA = round(($respA * 100)/count($data['datos_diagnostico_lenguaje']));
+        $porcentB = 100 - $porcentA;
+
+        $etiquetas = [$porcentA."% Adecuado", $porcentB."% Muy por debajo de lo esperado"];
+        $datosGrafica[0] = $porcentA;
+        $datosGrafica[1] = $porcentB;
         $respuesta = [
             "etiquetas" => $etiquetas,
             "datos" => $datosGrafica,
@@ -900,10 +978,12 @@ class Reportes extends BaseController {
                 $respB++;
             }
         }
+        $porcentA = round(($respA * 100)/count($data['datos_evalfinal_lenguaje']));
+        $porcentB = 100 - $porcentA;
 
-        $etiquetas = ["Adecuado", "Muy por debajo de lo esperado"];
-        $datosGrafica[0] = $respA;
-        $datosGrafica[1] = $respB;
+        $etiquetas = [$porcentA."% Adecuado", $porcentB."% Muy por debajo de lo esperado"];
+        $datosGrafica[0] = $porcentA;
+        $datosGrafica[1] = $porcentB;
         $respuesta = [
             "etiquetas" => $etiquetas,
             "datos" => $datosGrafica,
@@ -925,9 +1005,13 @@ class Reportes extends BaseController {
             }
         }
 
-        $etiquetas = ["Adecuado", "Muy por debajo de lo esperado"];
-        $datosGrafica[0] = $respA;
-        $datosGrafica[1] = $respB;
+        $porcentA = round(($respA * 100)/count($data));
+        $porcentB = 100 - $porcentA;
+
+        $etiquetas = [$porcentA."% Adecuado", $porcentB."% Muy por debajo de lo esperado"];
+        $datosGrafica[0] = $porcentA;
+        $datosGrafica[1] = $porcentB;
+
         $respuesta = [
             "etiquetas" => $etiquetas,
             "datos" => $datosGrafica,
@@ -1113,6 +1197,120 @@ class Reportes extends BaseController {
             "total" => count($data),
         ];
         return $respuesta;
+    }
+
+    public function recibe_diagnostico_matelement_coordinador() {
+
+        if ($this->session->reportes != NULL && $this->session->reportes == '1') {
+
+            if ($this->request->getPostGet('provincia') == 0) {
+
+                return redirect()->to('reporte-diagnostico-coordinador');
+
+            }else{
+                $data['provincia'] = $this->request->getPostGet('provincia');
+                $data['provincia_datos'] = $this->provinciaModel->find($data['provincia'] ); 
+    
+                //Variables
+                $data['masculino'] = 0;
+                $data['femenino'] = 0;
+                $data['sin_genero'] = 0;
+    
+                //TRAIGO TODOS LOS REGISTROS DE LA PROVINCIA
+                $data['centros'] = $this->centrosProvProd1ViewModel->_obtenCentrosProvincia($data['provincia']);
+                $data['registros'] = $this->prod1Model->_getRegistrosCentros($data['centros']);
+
+                //echo '<pre>'.var_export($data['provincia_datos'], true).'</pre>';exit;
+                
+                //Traer Total de estudiantes participantes
+                $data['total_registros'] = count($data['registros']);
+
+                //Datos de Matemáticas
+                $data['datos_mate'] = $this->evalMateElemP1->_getDatosMate($data['registros']);
+                $data['datos_mate_final'] = $this->evalMateFinalElemP1->_getDatosMate($data['registros']);
+
+                //echo '<pre>'.var_export($data['datos_mate'], true).'</pre>';exit;
+                //VARIABLES
+            
+                //Pregunta 1 Relación Figuras Geométricas
+                $data['myChartP1RelacionFiguras'] = json_encode($this->setDataRespuesta($data['datos_mate'], 'relacion_figuras_geo_1'));
+                $data['myChartP1RelacionFigurasFinal'] = json_encode($this->setDataRespuesta($data['datos_mate_final'], 'relacion_figuras_geo_1'));
+
+                //Pregunta 1.1 Relación Figuras Geométricas
+                $data['myChartP2RelacionFiguras'] = json_encode($this->setDataRespuesta($data['datos_mate'], 'relacion_figuras_geo_1_1'));
+                $data['myChartP2RelacionFigurasFinal'] = json_encode($this->setDataRespuesta($data['datos_mate_final'], 'relacion_figuras_geo_1_1'));
+
+                //Pregunta 2 Seriación
+                $data['myChartP2Seriacion'] = json_encode($this->setDataRespuesta($data['datos_mate'], 'seriacion_2'));
+                $data['myChartP2SeriacionFinal'] = json_encode($this->setDataRespuesta($data['datos_mate_final'], 'seriacion_2'));
+
+                //Conjuntos 2.1
+                $data['myChartP2Conjuntos'] = json_encode($this->setDataRespuesta($data['datos_mate'], 'conjuntos_2_1'));
+                $data['myChartP2ConjuntosFinal'] = json_encode($this->setDataRespuesta($data['datos_mate_final'], 'conjuntos_2_1'));
+
+                //Seriación 2.2 
+                $data['myChartP22Seriacion'] = json_encode($this->setDataRespuesta($data['datos_mate'], 'seriacion_2_2'));
+                $data['myChartP22SeriacionFinal'] = json_encode($this->setDataRespuesta($data['datos_mate_final'], 'seriacion_2_2'));
+
+                //Orientación Espacial 3 
+                $data['myChartP3OrientacionEspacial'] = json_encode($this->setDataRespuesta($data['datos_mate'], 'orientacion_3'));
+                $data['myChartP3OrientacionEspacialFinal'] = json_encode($this->setDataRespuesta($data['datos_mate_final'], 'orientacion_3'));
+                $data['myChartP31OrientacionEspacial'] = json_encode($this->setDataRespuesta($data['datos_mate'], 'orientacion_3_1'));
+                $data['myChartP31OrientacionEspacialFinal'] = json_encode($this->setDataRespuesta($data['datos_mate_final'], 'orientacion_3_1'));
+                $data['myChartP32OrientacionEspacial'] = json_encode($this->setDataRespuesta($data['datos_mate'], 'orientacion_3_2'));
+                $data['myChartP32OrientacionEspacialFinal'] = json_encode($this->setDataRespuesta($data['datos_mate_final'], 'orientacion_3_2'));
+
+                //Esquema Corporal 
+                $data['myChartP33Esquema'] = json_encode($this->setDataRespuesta($data['datos_mate'], 'esquema_corporal_3_3'));
+                $data['myChartP33EsquemaFinal'] = json_encode($this->setDataRespuesta($data['datos_mate_final'], 'esquema_corporal_3_3'));
+                $data['myChartP4Esquema'] = json_encode($this->setDataRespuesta($data['datos_mate'], 'esquema_corporal_4'));
+                $data['myChartP4EsquemaFinal'] = json_encode($this->setDataRespuesta($data['datos_mate_final'], 'esquema_corporal_4'));
+                $data['myChartP41Esquema'] = json_encode($this->setDataRespuesta($data['datos_mate'], 'esquema_corporal_4_1'));
+                $data['myChartP41EsquemaFinal'] = json_encode($this->setDataRespuesta($data['datos_mate_final'], 'esquema_corporal_4_1'));
+                $data['myChartP5Seriacion'] = json_encode($this->setDataRespuesta($data['datos_mate'], 'seriacion_5'));
+                $data['myChartP5SeriacionFinal'] = json_encode($this->setDataRespuesta($data['datos_mate_final'], 'seriacion_5'));
+
+                //Suma 
+                $data['myChartP6Suma'] = json_encode($this->setDataRespuesta($data['datos_mate'], 'suma_6'));
+                $data['myChartP6SumaFinal'] = json_encode($this->setDataRespuesta($data['datos_mate_final'], 'suma_6'));
+                $data['myChartP7Suma'] = json_encode($this->setDataRespuesta($data['datos_mate'], 'suma_7'));
+                $data['myChartP7SumaFinal'] = json_encode($this->setDataRespuesta($data['datos_mate_final'], 'suma_7'));
+
+                //Resta
+                $data['myChartP8Resta'] = json_encode($this->setDataRespuesta($data['datos_mate'], 'resta_8'));
+                $data['myChartP8RestaFinal'] = json_encode($this->setDataRespuesta($data['datos_mate_final'], 'resta_8'));
+                $data['myChartP9Resta'] = json_encode($this->setDataRespuesta($data['datos_mate'], 'resta_9'));
+                $data['myChartP9RestaFinal'] = json_encode($this->setDataRespuesta($data['datos_mate_final'], 'resta_9'));
+
+                //Multiplicación
+                $data['myChartP10Multi'] = json_encode($this->setDataRespuesta($data['datos_mate'], 'multiplica_10'));
+                $data['myChartP10MultiFinal'] = json_encode($this->setDataRespuesta($data['datos_mate_final'], 'multiplica_10'));
+                $data['myChartP11Multi'] = json_encode($this->setDataRespuesta($data['datos_mate'], 'multiplica_11'));
+                $data['myChartP11MultiFinal'] = json_encode($this->setDataRespuesta($data['datos_mate_final'], 'multiplica_11'));
+
+                //División
+                $data['myChartP12Division'] = json_encode($this->setDataRespuesta($data['datos_mate'], 'divide_12'));
+                $data['myChartP12DivisionFinal'] = json_encode($this->setDataRespuesta($data['datos_mate_final'], 'divide_12'));
+                $data['myChartP13Division'] = json_encode($this->setDataRespuesta($data['datos_mate'], 'divide_13'));
+                $data['myChartP13DivisionFinal'] = json_encode($this->setDataRespuesta($data['datos_mate_final'], 'divide_13'));
+
+                // echo '<pre>'.var_export($data['myChartP1Orientacion'], true).'</pre>';
+                // echo '<pre>'.var_export($data['myChartP1OrientacionFinal'], true).'</pre>';
+                // exit;
+
+                //Total de estudiantes que participan en la prueba final
+
+                //Rango de edades
+
+                
+                $data['provincias'] = $this->centrosProvProd1ViewModel->_getProvincias();
+
+                $data['title']='MYRP - DYA';
+                $data['main_content']='reportes/prod1_reporte_diagnostico_mate_elem_coordinador';
+                return view('includes/template_reportes', $data);
+
+            }
+        }
     }
 
     public function reporte_final_dinamico() {

@@ -79,6 +79,25 @@ class EvalMateFinalElementalP1Model extends Model {
         return $result;
     }
 
+    public function _getDatosMate($registros) {
+        
+        $result = null;
+        foreach ($registros as $key => $value) {
+            
+            $builder = $this->db->table($this->table);
+            $builder->select('*');
+            $builder->where('idprod', $value->id);
+            $query = $builder->get();
+            if ($query->getResult() != null) {
+                foreach ($query->getResult() as $row) {
+                    $result[] = $row;
+                }
+            }
+            //echo $this->db->getLastQuery();
+        }
+        return $result;
+    }
+
     public function _getEvalFinalMateElementalP1($id) {
         $result = 0;
         $builder = $this->db->table($this->table);
