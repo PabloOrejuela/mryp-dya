@@ -7,4 +7,8 @@
     <li>Reporte de resultados Matematica Elemental - coordinación</li>
     <li>Reporte de resultados Matematica Elemental y avanzada con porcentajes</li>
     <li>Lista la parte demográfica en los reportes</li>
-</ul>        
+</ul>     
+
+<ul>
+    <li>Corregido error en los reportes de los técnicos Prod 1</li>
+</ul>

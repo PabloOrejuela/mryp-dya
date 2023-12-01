@@ -126,6 +126,26 @@ class Prod1Model extends Model {
         return $result;
     }
 
+    public function _getRegistrosTecnico($amie, $result) {
+        $result = null;
+        $builder = $this->db->table($this->table);
+        $builder->select('*');
+        $builder->where('amie', $amie);
+        //$builder->where('cohorte', $cohorte);
+        //$builder->join('eval_final', 'eval_final.idprod = producto_1.id');
+        $builder->orderBy('apellidos');
+        $query = $builder->get();
+        if ($query->getResult() != null) {
+            foreach ($query->getResult() as $row) {
+                if ($row->id != NULL && $row != '') {
+                    $result[] = $row;
+                }
+            }
+        }
+        //echo $this->db->getLastQuery();
+        return $result;
+    }
+
     public function _getRegistrosCentros($centros) {
         
         $result = null;

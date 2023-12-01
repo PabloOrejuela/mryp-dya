@@ -1615,7 +1615,7 @@ class Reportes extends BaseController {
         }
 
         if ($this->session->idrol == 1 || $this->session->idrol == 3 || $this->session->idrol == 11) {
-            $data['registros'] = $this->prod1Model->_getRegistrosCoordinador($data['amie'], $data['cohorte']);
+            $data['registros'] = $this->prod1Model->_getRegistrosTecnico($data['amie'], $data['cohorte']);
         }else{
             $data['registros'] = $this->prod1Model->_getRegistros($data['amie'], $data['cohorte'], $this->session->nombre);
         }
@@ -1701,7 +1701,7 @@ class Reportes extends BaseController {
 
         // $data['registros'] = $this->prod1Model->_getRegistros($data['amie'], $data['cohorte'], $this->session->nombre);
         if ($this->session->idrol == 1 || $this->session->idrol == 3 || $this->session->idrol == 11) {
-            $data['registros'] = $this->prod1Model->_getRegistrosCoordinador($data['amie'], $data['cohorte']);
+            $data['registros'] = $this->prod1Model->_getRegistrosTecnico($data['amie'], $data['cohorte']);
         }else{
             $data['registros'] = $this->prod1Model->_getRegistros($data['amie'], $data['cohorte'], $this->session->nombre);
         }
@@ -1861,7 +1861,7 @@ class Reportes extends BaseController {
         
             $data['centro'] = $this->centroEducativoModel->find($data['amie']);
             if ($this->session->idrol == 1 || $this->session->idrol == 3 || $this->session->idrol == 11) {
-                $data['registros'] = $this->prod1Model->_getRegistrosCoordinador($data['amie'], $data['cohorte']);
+                $data['registros'] = $this->prod1Model->_getRegistrosTecnico($data['amie'], $data['cohorte']);
             }else{
                 $data['registros'] = $this->prod1Model->_getRegistros($data['amie'], $data['cohorte'], $this->session->nombre);
             }
