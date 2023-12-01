@@ -6,5 +6,5 @@
     <li>Reporte de resultados Matematica Avanzada - coordinación</li>
     <li>Reporte de resultados Matematica Elemental - coordinación</li>
     <li>Reporte de resultados Matematica Elemental y avanzada con porcentajes</li>
-    <li>Nota: Falta la parte demográfica en los reportes</li>
+    <li>Lista la parte demográfica en los reportes</li>
 </ul>        

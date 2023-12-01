@@ -199,6 +199,22 @@ class Prod1Model extends Model {
         return $result;
     }
 
+    public function _getEdad($id) {
+        $result = NULL;
+        $builder = $this->db->table($this->table);
+        $builder->select('edad');
+        $builder->where('id', $id);
+        $query = $builder->get();
+        if ($query->getResult() != null) {
+            foreach ($query->getResult() as $row) {
+                $result = $row->edad;
+            }
+        }     
+        
+        //echo $this->db->getLastQuery();
+        return $result;
+    }
+
     public function _getRegistrosAdmin($amie, $cohorte) {
         $result = NULL;
         $builder = $this->db->table($this->table);

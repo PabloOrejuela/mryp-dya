@@ -6,6 +6,10 @@
         margin-top: 0px;
         padding-top: 0px;
     }
+
+    #td-center{
+        text-align:center;
+    }
 </style>
 <main class="container">
     <div class="container-fluid px-4">
@@ -13,6 +17,77 @@
         <div class="card mb-4">
         </div>
         <section>
+            <table class="table table-bordered mb-3">
+                <thead class="table-light">
+                    <th style="text-align:center;">Número Est. que riden prueba de diagnóstico</th>
+                    <th style="text-align:center;">Número Est. que riden prueba final</th>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td id="td-center"><?= count($datos_diagnostico_lenguaje);  ?> estudiantes riden prueba de diagnóstico</td>
+                        <td id="td-center"><?= count($datos_evalfinal_lenguaje);  ?> estudiantes riden prueba final</td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table table-bordered mb-3">
+                <thead class="table-light">
+                    <th style="text-align:center;" colspan="2">RANGO DE EDADES PRUEBA DIAGNOSTICO</th>
+                </thead>
+                <thead class="table-light">
+                    <th style="text-align:center;">Edad mínima</th>
+                    <th style="text-align:center;">Edad máxima</th>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td id="td-center"><?= $rangoEdadesDiagnostico['min']; ?> años de edad</td>
+                        <td id="td-center" class="px-3"><?= $rangoEdadesDiagnostico['max'];  ?> años de edad</td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table table-bordered mb-3">
+                <thead class="table-light">
+                    <th style="text-align:center;" colspan="2">RANGO DE EDADES PRUEBA FINAL</th>
+                </thead>
+                <thead class="table-light">
+                    <th style="text-align:center;">Edad mínima</th>
+                    <th style="text-align:center;">Edad máxima</th>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td id="td-center"><?= $rangoEdadesFinal['min']; ?> años de edad</td>
+                        <td id="td-center" class="px-3"><?= $rangoEdadesFinal['max'];  ?> años de edad</td>
+                    </tr>
+                </tbody>
+            </table>
+            <br>
+            <table>
+                <thead>
+                    <th colspan="4" style="text-align:center;"><h5>GENERO</h5></th>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><canvas id="myChartGeneroDiagLengua" class="grafica"></canvas></td>
+                        <td class="px-3"> </td>
+                        <td class="px-3"> </td>
+                        <td class="px-3"><canvas id="myChartGeneroFinalLengua" class="grafica"></canvas></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <table>
+                <thead>
+                    <th colspan="4" style="text-align:center;"><h5>Nacionalidad</h5></th>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><canvas id="myChartNacionalidadDiagLengua" class="grafica"></canvas></td>
+                        <td class="px-3"> </td>
+                        <td class="px-3"> </td>
+                        <td class="px-3"><canvas id="myChartNacionalidadFinalLengua" class="grafica"></canvas></td>
+                    </tr>
+                </tbody>
+            </table>
+
             <h5 style="text-align:center;">ANALISIS DE LAS DESTREZAS DE LENGUAJE PROVINCIA:  <?= $provincia_datos->provincia;  ?></h5>
             <table>
                 <thead>
@@ -166,6 +241,326 @@
         </section>
     </div>
 </main>
+
+<!-- Género -->
+<script>
+
+    //Le paso el JSON con los datos
+    var cData = JSON.parse(`<?php echo $myChartGeneroDiagLengua; ?>`);
+    //console.log(cData.color_lectura);
+    var ctx = document.getElementById('myChartGeneroDiagLengua').getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: "pie",
+        data: {
+            labels: cData.etiquetas,
+            datasets: [{
+                label:  'Resultados de las evaluaciones',
+                data: cData.datos,
+                backgroundColor: [
+
+                    //Masculino
+                    cData.color_A,
+                    //Fem
+                    cData.color_B,
+                    //Sin dato
+                    cData.color_C,
+
+                ],
+                borderColor: [
+                'rgb(118, 168, 134)',
+                ],
+                borderWidth: 1
+            }
+        ]
+        },
+        plugins: [ChartDataLabels],
+        options: {
+            scales:{
+                aspectRatio: 1,
+                y:[{
+                    ticks:{
+                        beginAtZero:true
+                    }
+                }],
+                x: {
+                    max: 600
+                },
+                y: {
+                    min: 0,
+                    max: 100
+                }
+            },
+            plugins: {
+                // Change options for ALL labels of THIS CHART
+                datalabels: {
+                    formatter: (value, ctx) => {
+                        return value + "%";
+                    },
+                    color: '#000000',
+                    anchor: 'left',
+                    align: 'end',
+                    offset: 10,
+                    labels: {
+                        title: {
+                            font: {
+                                weight: 'bold',
+                                size:14
+                            }
+                        }
+                    }
+                },
+                title: {
+                    display: true,
+                    text: "Est. rinden prueba diágnostico",
+                    font: {
+                        size: 14
+                    }
+                }
+            }
+        }
+    });
+
+    //Le paso el JSON con los datos
+    var cData = JSON.parse(`<?php echo $myChartGeneroFinalLengua; ?>`);
+    //console.log(cData.color_lectura);
+    var ctx = document.getElementById('myChartGeneroFinalLengua').getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: "pie",
+        data: {
+            labels: cData.etiquetas,
+            datasets: [{
+                label:  'Resultados de las evaluaciones',
+                data: cData.datos,
+                backgroundColor: [
+                    //SI
+                    cData.color_A,
+
+                    //NO
+                    cData.color_B,
+
+                    //NO
+                    cData.color_C,
+                    //NO
+                    cData.color_D,
+
+
+                ],
+                borderColor: [
+                'rgb(118, 168, 134)',
+                ],
+                borderWidth: 1
+            }
+        ]
+        },
+        plugins: [ChartDataLabels],
+        options: {
+            scales:{
+                aspectRatio: 1,
+                y:[{
+                    ticks:{
+                        beginAtZero:true
+                    }
+                }],
+                x: {
+                    max: 600
+                },
+                y: {
+                    min: 0,
+                    max: 100
+                }
+            },
+            plugins: {
+                // Change options for ALL labels of THIS CHART
+                datalabels: {
+                    formatter: (value, ctx) => {
+                        return value + "%";
+                    },
+                    color: '#000000',
+                    anchor: 'left',
+                    align: 'end',
+                    offset: 10,
+                    labels: {
+                        title: {
+                            font: {
+                                weight: 'bold',
+                                size:14
+                            }
+                        }
+                    }
+                },
+                title: {
+                    display: true,
+                    text: "Est. rinden prueba final",
+                    font: {
+                        size: 14
+                    }
+                }
+            }
+        }
+    });
+</script>
+
+<!-- Nacionalidad -->
+<script>
+
+    //Le paso el JSON con los datos
+    var cData = JSON.parse(`<?php echo $myChartNacionalidadDiagLengua; ?>`);
+    //console.log(cData.color_lectura);
+    var ctx = document.getElementById('myChartNacionalidadDiagLengua').getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: "pie",
+        data: {
+            labels: cData.etiquetas,
+            datasets: [{
+                label:  'Resultados de las evaluaciones',
+                data: cData.datos,
+                backgroundColor: [
+
+                     //SI
+                     cData.color_A,
+
+                    //NO
+                    cData.color_B,
+
+                    //NO
+                    cData.color_C,
+                    //NO
+                    cData.color_D,
+
+                ],
+                borderColor: [
+                'rgb(118, 168, 134)',
+                ],
+                borderWidth: 1
+            }
+        ]
+        },
+        plugins: [ChartDataLabels],
+        options: {
+            scales:{
+                aspectRatio: 1,
+                y:[{
+                    ticks:{
+                        beginAtZero:true
+                    }
+                }],
+                x: {
+                    max: 600
+                },
+                y: {
+                    min: 0,
+                    max: 100
+                }
+            },
+            plugins: {
+                // Change options for ALL labels of THIS CHART
+                datalabels: {
+                    formatter: (value, ctx) => {
+                        return value + "%";
+                    },
+                    color: '#000000',
+                    anchor: 'left',
+                    align: 'end',
+                    offset: 10,
+                    labels: {
+                        title: {
+                            font: {
+                                weight: 'bold',
+                                size:14
+                            }
+                        }
+                    }
+                },
+                title: {
+                    display: true,
+                    text: "Est. rinden prueba diágnostico",
+                    font: {
+                        size: 14
+                    }
+                }
+            }
+        }
+    });
+
+    //Le paso el JSON con los datos
+    var cData = JSON.parse(`<?php echo $myChartNacionalidadFinalLengua; ?>`);
+    //console.log(cData.color_lectura);
+    var ctx = document.getElementById('myChartNacionalidadFinalLengua').getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: "pie",
+        data: {
+            labels: cData.etiquetas,
+            datasets: [{
+                label:  'Resultados de las evaluaciones',
+                data: cData.datos,
+                backgroundColor: [
+                    //SI
+                    cData.color_A,
+
+                    //NO
+                    cData.color_B,
+
+                    //NO
+                    cData.color_C,
+                    //NO
+                    cData.color_D,
+
+
+                ],
+                borderColor: [
+                'rgb(118, 168, 134)',
+                ],
+                borderWidth: 1
+            }
+        ]
+        },
+        plugins: [ChartDataLabels],
+        options: {
+            scales:{
+                aspectRatio: 1,
+                y:[{
+                    ticks:{
+                        beginAtZero:true
+                    }
+                }],
+                x: {
+                    max: 600
+                },
+                y: {
+                    min: 0,
+                    max: 100
+                }
+            },
+            plugins: {
+                // Change options for ALL labels of THIS CHART
+                datalabels: {
+                    formatter: (value, ctx) => {
+                        return value + "%";
+                    },
+                    color: '#000000',
+                    anchor: 'left',
+                    align: 'end',
+                    offset: 10,
+                    labels: {
+                        title: {
+                            font: {
+                                weight: 'bold',
+                                size:14
+                            }
+                        }
+                    }
+                },
+                title: {
+                    display: true,
+                    text: "Est. rinden prueba final",
+                    font: {
+                        size: 14
+                    }
+                }
+            }
+        }
+    });
+</script>
 
 <!-- Apoyo -->
 <script>

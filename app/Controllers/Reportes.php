@@ -550,14 +550,22 @@ class Reportes extends BaseController {
 
                 //Pregunta 4 Estándares EGB Subnivel 2 y 3 EVAL FINAL
                 $data['myChartP4EstandaresFinal'] = json_encode($this->setDataRespuestaP4Estandares($data['datos_evalfinal_lenguaje']));
-                //echo '<pre>'.var_export($data['myChartP3CompLectora'], true).'</pre>';
-                //echo '<pre>'.var_export($data['myChartP3CompLectoraFinal'], true).'</pre>';
-                //exit;
 
-                //Total de estudiantes que participan en la prueba final
+                //Género
+                $data['myChartGeneroDiagLengua'] = json_encode($this->setDataGenero($data['datos_diagnostico_lenguaje']));
+                $data['myChartGeneroFinalLengua'] = json_encode($this->setDataGenero($data['datos_evalfinal_lenguaje']));
 
+                //Nacionalidad
+                $data['myChartNacionalidadDiagLengua'] = json_encode($this->setDataNacionalidad($data['datos_diagnostico_lenguaje']));
+                $data['myChartNacionalidadFinalLengua'] = json_encode($this->setDataNacionalidad($data['datos_evalfinal_lenguaje']));
+                // echo '<pre>'.var_export($data['myChartGeneroDiagLengua'], true).'</pre>';
+                // echo '<pre>'.var_export($data['myChartGeneroFinalLengua'], true).'</pre>';
+                // exit;
+                
                 //Rango de edades
-
+                $data['rangoEdadesDiagnostico'] = $this->setDataRangoEdades($data['datos_diagnostico_lenguaje']);
+                $data['rangoEdadesFinal'] = $this->setDataRangoEdades($data['datos_evalfinal_lenguaje']);
+               
                 
                 $data['provincias'] = $this->centrosProvProd1ViewModel->_getProvincias();
 
@@ -567,6 +575,97 @@ class Reportes extends BaseController {
 
             }
         }
+    }
+
+    public function setDataGenero($data){
+        $mas = 0;
+        $fem = 0;
+        $otro = 0;
+        $genero = 0;
+        foreach ($data as $key => $value) {
+            $genero = $this->prod1Model->find($value->idprod);
+            if ($genero->genero == 'MASCULINO') {
+                $mas++;
+            }else if($genero->genero == 'FEMENINO'){
+                $fem++;
+            }
+        }
+
+        $porcentM = round(($mas * 100)/count($data));
+        $porcentF = round(($fem * 100)/count($data));
+        $porcentO = 100 - ($porcentM + $porcentF);
+
+        $etiquetas = [$porcentM."% Masculino", $porcentF."% Femenino", $porcentO."% Sin dato"];
+        $datosGrafica[0] = $porcentM;
+        $datosGrafica[1] = $porcentF;
+        $datosGrafica[2] = $porcentO;
+        $respuesta = [
+            "etiquetas" => $etiquetas,
+            "datos" => $datosGrafica,
+            "color_A" => '#e8f7e1',
+            "color_B" => '#71b7e4',
+            "color_C" => '#929292',
+            "total" => count($data),
+        ];
+        return $respuesta;
+    }
+
+    public function setDataNacionalidad($data){
+        $ecua = 0;
+        $vene = 0;
+        $colo = 0;
+        $otro = 0;
+        $nacionalidad = 0;
+        foreach ($data as $key => $value) {
+            $nacionalidad = $this->prod1Model->find($value->idprod);
+            if ($nacionalidad->nacionalidad == 'ECUATORIANA') {
+                $ecua++;
+            }else if($nacionalidad->nacionalidad == 'VENEZOLANA'){
+                $vene++;
+            }else if($nacionalidad->nacionalidad == 'COLOMBIANA'){
+                $colo++;
+            }
+        }
+
+        $porcentE = round(($ecua * 100)/count($data));
+        $porcentV = round(($vene * 100)/count($data));
+        $porcentC = round(($colo * 100)/count($data));
+        $porcentO = 100 - ($porcentE + $porcentV + $porcentC);
+
+        $etiquetas = [$porcentE."% Ecuatoriana", $porcentV."% Venezolana", $porcentC."% Colombiana" , $porcentO."% Otros"];
+        $datosGrafica[0] = $porcentE;
+        $datosGrafica[1] = $porcentV;
+        $datosGrafica[2] = $porcentC;
+        $datosGrafica[3] = $porcentO;
+        $respuesta = [
+            "etiquetas" => $etiquetas,
+            "datos" => $datosGrafica,
+            "color_A" => '#e8f7e1',
+            "color_B" => '#71b7e4',
+            "color_C" => '#b8f11e',
+            "color_D" => '#929292',
+            "total" => count($data),
+        ];
+        return $respuesta;
+    }
+
+    public function setDataRangoEdades($data){
+        $max = 0;
+        $min = 0;
+        
+        foreach ($data as $key => $value) {
+            $est[] = $value->idprod;
+        }
+
+        foreach ($est as $key => $e) {
+            $edades[] = $this->prod1Model->_getEdad($e);
+        }
+
+        $respuesta['min'] = min($edades);
+        $respuesta['max'] = max($edades);
+
+        //echo '<pre>'.var_export($respuesta, true).'</pre>';exit;
+        return $respuesta;
     }
 
     public function setDataRespuestaP4Estandares($data){
@@ -1074,8 +1173,6 @@ class Reportes extends BaseController {
                 $data['datos_mate'] = $this->evalMateP1->_getDatosMate($data['registros']);
                 $data['datos_mate_final'] = $this->evalMateFinalP1->_getDatosMate($data['registros']);
 
-                //echo '<pre>'.var_export($data['datos_mate'][0], true).'</pre>';exit;
-                //VARIABLES
             
                 //Pregunta 1 Orientacion
                 $data['myChartP1Orientacion'] = json_encode($this->setDataRespuesta($data['datos_mate'], 'orientacion_espacial_1'));
@@ -1147,14 +1244,21 @@ class Reportes extends BaseController {
                 $data['myChartDiviDos'] = json_encode($this->setDataRespuesta($data['datos_mate'], 'division_dos_cifras'));
                 $data['myChartDiviDossFinal'] = json_encode($this->setDataRespuesta($data['datos_mate_final'], 'division_dos_cifras'));
 
-                // echo '<pre>'.var_export($data['myChartP6Clasificacion'], true).'</pre>';
-                // echo '<pre>'.var_export($data['myChartP6ClasificacionFinal'], true).'</pre>';
-                // exit;
+                //Género
+                $data['myChartGeneroDiagMate'] = json_encode($this->setDataGenero($data['datos_mate']));
+                $data['myChartGeneroFinalMate'] = json_encode($this->setDataGenero($data['datos_mate_final']));
 
-                //Total de estudiantes que participan en la prueba final
+                //Nacionalidad
+                $data['myChartNacionalidadDiagMate'] = json_encode($this->setDataNacionalidad($data['datos_mate']));
+                $data['myChartNacionalidadFinalMate'] = json_encode($this->setDataNacionalidad($data['datos_mate_final']));
 
                 //Rango de edades
+                $data['rangoEdadesDiagnostico'] = $this->setDataRangoEdades($data['datos_mate']);
+                $data['rangoEdadesFinal'] = $this->setDataRangoEdades($data['datos_mate_final']);
 
+                // echo '<pre>'.var_export($data['myChartEdadesDiagMate'], true).'</pre>';
+                // echo '<pre>'.var_export($data['myChartEdadesFinalMate'], true).'</pre>';
+                // exit;
                 
                 $data['provincias'] = $this->centrosProvProd1ViewModel->_getProvincias();
 
@@ -1294,14 +1398,20 @@ class Reportes extends BaseController {
                 $data['myChartP13Division'] = json_encode($this->setDataRespuesta($data['datos_mate'], 'divide_13'));
                 $data['myChartP13DivisionFinal'] = json_encode($this->setDataRespuesta($data['datos_mate_final'], 'divide_13'));
 
+                //Género
+                $data['myChartGeneroDiagMate'] = json_encode($this->setDataGenero($data['datos_mate']));
+                $data['myChartGeneroFinalMate'] = json_encode($this->setDataGenero($data['datos_mate_final']));
+
+                //Nacionalidad
+                $data['myChartNacionalidadDiagMate'] = json_encode($this->setDataNacionalidad($data['datos_mate']));
+                $data['myChartNacionalidadFinalMate'] = json_encode($this->setDataNacionalidad($data['datos_mate_final']));
+
+                //Rango de edades
+                $data['rangoEdadesDiagnostico'] = $this->setDataRangoEdades($data['datos_mate']);
+                $data['rangoEdadesFinal'] = $this->setDataRangoEdades($data['datos_mate_final']);
                 // echo '<pre>'.var_export($data['myChartP1Orientacion'], true).'</pre>';
                 // echo '<pre>'.var_export($data['myChartP1OrientacionFinal'], true).'</pre>';
                 // exit;
-
-                //Total de estudiantes que participan en la prueba final
-
-                //Rango de edades
-
                 
                 $data['provincias'] = $this->centrosProvProd1ViewModel->_getProvincias();
 
