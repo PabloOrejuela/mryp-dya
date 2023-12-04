@@ -19,8 +19,8 @@ class Prod4 extends BaseController {
         if ($data['is_logged'] == 1 && $data['componente_4'] == 1) {
             $this->session->set('form_error', "");
 
-            //$data['componente_4'] = $this->prod4Model->_getAllRegistros();
-            $data['componente_4'] = $this->prod4Model->_getMisRegistros($data['id']);
+            $data['componente_4'] = $this->prod4Model->_getAllRegistros();
+            //$data['componente_4'] = $this->prod4Model->_getMisRegistros($data['id']);
             //echo '<pre>'.var_export($data['componente_4'], true).'</pre>';exit;
 
             $data['title']='MYRP - DYA';

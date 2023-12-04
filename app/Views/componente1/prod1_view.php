@@ -28,7 +28,6 @@
                         <th>Fecha Nac</th>
                         <th>Tutor</th>
                         <th>Tutor 2</th>
-                        <th>Borrar registro</th>
                     </thead>
                     <tbody>
                     <?php
@@ -48,12 +47,6 @@
                                     <td>'.$value->fecha_nac.'</td>
                                     <td>'.$value->tutor_apoyo.'</td>
                                     <td>'.$value->tutor_apoyo_2.'</td>
-                                    <td>
-                                        <div class="contenedor">
-                                            <a type="button" id="btn-register" href="'.site_url().'prod-1-delete/'.$value->id.'" class="edit">
-                                                <img src="'.site_url().'public/images/delete.png" height="25" >
-                                            </a>
-                                        </div>
                                     </td>';
                             }
                         }
