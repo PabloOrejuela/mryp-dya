@@ -68,7 +68,7 @@ class EvalMateFinalElementalP1Model extends Model {
     public function _getEvalMateFinalElem($idprod) {
         $result = NULL;
         $builder = $this->db->table($this->table);
-        $builder->select('*')->where('idprod', strtoupper($idprod));
+        $builder->select('*')->where('idprod', $idprod);
         $query = $builder->get();
         if ($query->getResult() != null) {
             foreach ($query->getResult() as $row) {

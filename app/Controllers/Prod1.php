@@ -1073,6 +1073,440 @@ class Prod1 extends BaseController {
         }        
     }
 
+    public function descargaRegistrosProcesos(){
+        ini_set('memory_limit', '256M');
+
+        $registros = $this->prod1Model->_getAllRegistrosExcel();
+        //echo '<pre>'.var_export($registros, true).'</pre>';exit;
+        $fila = 1;
+
+        //Creo la hoja
+        $phpExcel = new Spreadsheet();
+        $phpExcel
+            ->getProperties()
+            ->setCreator("Aquí va el creador, como cadena")
+            ->setLastModifiedBy('Parzibyte') // última vez modificado por
+            ->setTitle('Prod 1 - Registros')
+            ->setSubject('Reportes MYRP')
+            ->setDescription('Reporte con los registros del Prod 1')
+            ->setKeywords('etiquetas o palabras clave separadas por espacios')
+            ->setCategory('Registros');
+
+        $nombreDelDocumento = "Prod 1 - Registros y procesos.xlsx";
+
+        //Selecciono la pestaña
+        $hoja = $phpExcel->getActiveSheet();
+
+        $styleCabecera = [
+            'font' => [
+                'bold' => true,
+                'size' => 10
+            ],
+            'alignment' => [
+                'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
+            ]
+        ];
+
+        $styleFila = [
+            'font' => [
+                'bold' => false,
+            ],
+            'alignment' => [
+                'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT,
+            ]
+        ];
+
+        $styleFilaProcess = [
+            'font' => [
+                'bold' => false,
+                'size' => 10
+            ],
+            'alignment' => [
+                'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
+            ]
+        ];
+
+        $phpExcel->getActiveSheet()->getStyle('A'.$fila.':EZ'.$fila)->applyFromArray($styleCabecera);
+        
+
+        $hoja->setCellValue('A'.$fila, "REGISTROS");
+        $phpExcel->getActiveSheet()->mergeCells('A'.$fila.':AA'.$fila);
+        $phpExcel->getActiveSheet()->getStyle('A'.$fila.':AA'.$fila)->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('a1ccd4');
+
+        $hoja->setCellValue('AB'.$fila, "DIAGNOSTICO LECTURA Y ESCRITURA");
+        $phpExcel->getActiveSheet()->mergeCells('AB'.$fila.':AQ'.$fila);
+        $phpExcel->getActiveSheet()->getStyle('AB'.$fila.':AQ'.$fila)->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('afd6a7');
+
+        $hoja->setCellValue('AR'.$fila, "EVALUACION FINAL LECTURA Y ESCRITURA");
+        $phpExcel->getActiveSheet()->mergeCells('AR'.$fila.':BG'.$fila);
+        $phpExcel->getActiveSheet()->getStyle('AR'.$fila.':BG'.$fila)->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('b7a2da');
+
+        $hoja->setCellValue('BH'.$fila, "EVALUACION MATEMÁTICA ELEMENTAL");
+        $phpExcel->getActiveSheet()->mergeCells('BH'.$fila.':CA'.$fila);
+        $phpExcel->getActiveSheet()->getStyle('BH'.$fila.':CA'.$fila)->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('C7B2da');
+
+        $hoja->setCellValue('CB'.$fila, "EVALUACION FINAL MATEMÁTICA ELEMENTAL");
+        $phpExcel->getActiveSheet()->mergeCells('CB'.$fila.':CU'.$fila);
+        $phpExcel->getActiveSheet()->getStyle('CB'.$fila.':CU'.$fila)->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('A2B6dC');
+
+        $hoja->setCellValue('CV'.$fila, "EVALUACION MATEMÁTICA MEDIA/SUPERIOR");
+        $phpExcel->getActiveSheet()->mergeCells('CV'.$fila.':DO'.$fila);
+        $phpExcel->getActiveSheet()->getStyle('CV'.$fila.':DO'.$fila)->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('f2f1b1');
+
+        $hoja->setCellValue('DP'.$fila, "EVALUACION FINAL MATEMÁTICA MEDIA/SUPERIOR");
+        $phpExcel->getActiveSheet()->mergeCells('DP'.$fila.':EI'.$fila);
+        $phpExcel->getActiveSheet()->getStyle('DP'.$fila.':EI'.$fila)->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('ebea7a');
+
+
+        $fila = 2;
+        $phpExcel->getActiveSheet()->getStyle('A'.$fila.':CZ'.$fila)->applyFromArray($styleCabecera);
+        //Edito la info que va a ir en el archivo excel
+        $hoja->setCellValue('A'.$fila, "AMIE");
+        $hoja->setCellValue('B'.$fila, "CENTRO EDUCATIVO");
+        $hoja->setCellValue('C'.$fila, "CIUDAD");
+        $hoja->setCellValue('D'.$fila, "PROVINCIA");
+        $hoja->setCellValue('E'.$fila, "COHORTE");
+        $hoja->setCellValue('F'.$fila, "FECHA INICIO");
+        $hoja->setCellValue('G'.$fila, "FECHA FIN");
+        $hoja->setCellValue('H'.$fila, "AÑO LECTIVO");
+        $hoja->setCellValue('I'.$fila, "NOMBRES");
+        $hoja->setCellValue('J'.$fila, "APELLIDOS");
+        $hoja->setCellValue('K'.$fila, "DOCUMENTO");
+        $hoja->setCellValue('L'.$fila, "NACIONALIDAD");
+        $hoja->setCellValue('M'.$fila, "ETNIA");
+        $hoja->setCellValue('N'.$fila, "FECHA NACIMIENTO");
+        $hoja->setCellValue('P'.$fila, "EDAD");
+        $hoja->setCellValue('P'.$fila, "GÉNERO");
+        $hoja->setCellValue('Q'.$fila, "DISCAPACIDAD");
+        $hoja->setCellValue('R'.$fila, "TIPO DISCAPACIDAD");
+        $hoja->setCellValue('S'.$fila, "AÑO EGB");
+        $hoja->setCellValue('T'.$fila, "TUTOR APOYO");
+        $hoja->setCellValue('U'.$fila, "DOCENTE");
+        $hoja->setCellValue('V'.$fila, "REPRESENTANTE");
+        $hoja->setCellValue('W'.$fila, "PARENTESTO");
+        $hoja->setCellValue('X'.$fila, "NACIONALIDAD");
+        $hoja->setCellValue('V'.$fila, "DIRECCION");
+        $hoja->setCellValue('Z'.$fila, "CONTACTO");
+        $hoja->setCellValue('AA'.$fila, "EMAIL");
+        //diagnostico lye
+        $hoja->setCellValue('AB'.$fila, "Necesitó apoyo consigna lectora (S,N)");
+        $hoja->setCellValue('AC'.$fila, "Observación durante la aplicación");
+        $hoja->setCellValue('AD'.$fila, "P1 - Comprensión consigna lectora");
+        $hoja->setCellValue('AE'.$fila, "P1 - Significado de la escritura y la Inteligibilidad (A,B)");
+        $hoja->setCellValue('AF'.$fila, "P2 - Comprensión consigna lectora (A,B)");
+        $hoja->setCellValue('AG'.$fila, "P2 - Descripción del dibujo");
+        $hoja->setCellValue('AH'.$fila, "P3 - Comprensión consigna lectora (A,B,C)");
+        $hoja->setCellValue('AI'.$fila, "P3 - Inteligibilidad (A, B, C)");
+        $hoja->setCellValue('AJ'.$fila, "P3 - Coherencia (A,B,C,D)");
+        $hoja->setCellValue('AK'.$fila, "P3 - Sintáxis (A,B,C,D)");
+        $hoja->setCellValue('AL'.$fila, "P3 - Estándares EGB Subnivel 2 y 3 (A,B)");
+        $hoja->setCellValue('AM'.$fila, "P4 - Comprensión consigna lectora (A,B,C)");
+        $hoja->setCellValue('AN'.$fila, "P4 - Inteligibilidad (A, B, C)");
+        $hoja->setCellValue('AO'.$fila, "P4 - Coherencia (A,B,C,D)");
+        $hoja->setCellValue('AP'.$fila, "P4 - Sintáxis (A,B,C,D)");
+        $hoja->setCellValue('AQ'.$fila, "P4 - Estándares EGB Subnivel 2 y 3 (A,B)");
+
+        //Eval final lye
+        $hoja->setCellValue('AR'.$fila, "Necesitó apoyo consigna lectora (S,N)");
+        $hoja->setCellValue('AS'.$fila, "Observación durante la aplicación");
+        $hoja->setCellValue('AT'.$fila, "P1 - Comprensión consigna lectora");
+        $hoja->setCellValue('AU'.$fila, "P1 - Significado de la escritura y la Inteligibilidad (A,B)");
+        $hoja->setCellValue('AV'.$fila, "P2 - Comprensión consigna lectora (A,B)");
+        $hoja->setCellValue('AW'.$fila, "P2 - Descripción del dibujo");
+        $hoja->setCellValue('AX'.$fila, "P3 - Comprensión consigna lectora (A,B,C)");
+        $hoja->setCellValue('AY'.$fila, "P3 - Inteligibilidad (A, B, C)");
+        $hoja->setCellValue('AZ'.$fila, "P3 - Coherencia (A,B,C,D)");
+        $hoja->setCellValue('BA'.$fila, "P3 - Sintáxis (A,B,C,D)");
+        $hoja->setCellValue('BB'.$fila, "P3 - Estándares EGB Subnivel 2 y 3 (A,B)");
+        $hoja->setCellValue('BC'.$fila, "P4 - Comprensión consigna lectora (A,B,C)");
+        $hoja->setCellValue('BD'.$fila, "P4 - Inteligibilidad (A, B, C)");
+        $hoja->setCellValue('BE'.$fila, "P4 - Coherencia (A,B,C,D)");
+        $hoja->setCellValue('BF'.$fila, "P4 - Sintáxis (A,B,C,D)");
+        $hoja->setCellValue('BG'.$fila, "P4 - Estándares EGB Subnivel 2 y 3 (A,B)");
+
+        //Mate elemental
+        $hoja->setCellValue('BH'.$fila, "P1 - Relación Figuras Geométricas");
+        $hoja->setCellValue('BI'.$fila, "P2 - Relación Figuras Geométricas");
+        $hoja->setCellValue('BJ'.$fila, "2 - Seriación 2");
+        $hoja->setCellValue('BK'.$fila, "2.1 - Seriación 2");
+        $hoja->setCellValue('BL'.$fila, "2.2 - Seriación 2");
+        $hoja->setCellValue('BM'.$fila, "3 - Orientación Espacial");
+        $hoja->setCellValue('BN'.$fila, "3.1 - Seriación 2");
+        $hoja->setCellValue('BO'.$fila, "3.2 - Seriación 2");
+        $hoja->setCellValue('BP'.$fila, "3.3 - Esquema Corporal");
+        $hoja->setCellValue('BQ'.$fila, "4 - Esquema Corporal");
+        $hoja->setCellValue('BR'.$fila, "4.1 - Esquema Corporal");
+        $hoja->setCellValue('BS'.$fila, "5 - Esquema Corporal");
+        $hoja->setCellValue('BT'.$fila, "6 - Suma");
+        $hoja->setCellValue('BU'.$fila, "7 - Suma");
+        $hoja->setCellValue('BV'.$fila, "8 - Resta");
+        $hoja->setCellValue('BW'.$fila, "9 - Resta");
+        $hoja->setCellValue('BX'.$fila, "10 - Multiplicación");
+        $hoja->setCellValue('BY'.$fila, "11 - Multiplicación");
+        $hoja->setCellValue('BZ'.$fila, "12 - División");
+        $hoja->setCellValue('CA'.$fila, "13 - División");
+
+        //Mate elemental Final
+        $hoja->setCellValue('CB'.$fila, "P1 - Relación Figuras Geométricas");
+        $hoja->setCellValue('CC'.$fila, "P2 - Relación Figuras Geométricas");
+        $hoja->setCellValue('CD'.$fila, "2 - Seriación 2");
+        $hoja->setCellValue('CE'.$fila, "2.1 - Seriación 2");
+        $hoja->setCellValue('CF'.$fila, "2.2 - Seriación 2");
+        $hoja->setCellValue('CG'.$fila, "3 - Orientación Espacial");
+        $hoja->setCellValue('CH'.$fila, "3.1 - Seriación 2");
+        $hoja->setCellValue('CI'.$fila, "3.2 - Seriación 2");
+        $hoja->setCellValue('CJ'.$fila, "3.3 - Esquema Corporal");
+        $hoja->setCellValue('CK'.$fila, "4 - Esquema Corporal");
+        $hoja->setCellValue('CL'.$fila, "4.1 - Esquema Corporal");
+        $hoja->setCellValue('CM'.$fila, "5 - Esquema Corporal");
+        $hoja->setCellValue('CN'.$fila, "6 - Suma");
+        $hoja->setCellValue('CO'.$fila, "7 - Suma");
+        $hoja->setCellValue('CP'.$fila, "8 - Resta");
+        $hoja->setCellValue('CQ'.$fila, "9 - Resta");
+        $hoja->setCellValue('CR'.$fila, "10 - Multiplicación");
+        $hoja->setCellValue('CS'.$fila, "11 - Multiplicación");
+        $hoja->setCellValue('CT'.$fila, "12 - División");
+        $hoja->setCellValue('CU'.$fila, "13 - División");
+
+        //Mate MEDIA SUPERIOR
+        $hoja->setCellValue('CV'.$fila, "P1 - Orientación espacial");
+        $hoja->setCellValue('CW'.$fila, "P2 - Orientación espacial");
+        $hoja->setCellValue('CX'.$fila, "P3 - Orientación espacial");
+        $hoja->setCellValue('CY'.$fila, "P4 - Orientación espacial");
+        $hoja->setCellValue('CZ'.$fila, "P5 - Clasificación");
+        $hoja->setCellValue('DA'.$fila, "P6 - Clasificación");
+        $hoja->setCellValue('DB'.$fila, "P7 - Seriación");
+        $hoja->setCellValue('DC'.$fila, "P8 - Seriación");
+        $hoja->setCellValue('DD'.$fila, "P9 - Seriación");
+        $hoja->setCellValue('DE'.$fila, "P10 - Esquema Corporal");
+        $hoja->setCellValue('DF'.$fila, "P11 - Esquema Corporal");
+        $hoja->setCellValue('DG'.$fila, "P12 - Suma de dos cifras");
+        $hoja->setCellValue('DH'.$fila, "P13 - Suma de cuatro cifras");
+        $hoja->setCellValue('DI'.$fila, "P14 - Suma de cinco o mas cifras");
+        $hoja->setCellValue('DJ'.$fila, "P15 - Resta de tres cifras");
+        $hoja->setCellValue('DK'.$fila, "P16 - Resta de cuatro cifras");
+        $hoja->setCellValue('DL'.$fila, "P17 - Multiplicación una cifra");
+        $hoja->setCellValue('DM'.$fila, "P18 - Multiplicación dos cifras");
+        $hoja->setCellValue('DN'.$fila, "P19 - División una cifra");
+        $hoja->setCellValue('DO'.$fila, "P20 - División dos cifras");
+
+        //Mate FINAL MEDIA SUPERIOR
+        $hoja->setCellValue('DP'.$fila, "P1 - Orientación espacial");
+        $hoja->setCellValue('DQ'.$fila, "P2 - Orientación espacial");
+        $hoja->setCellValue('DR'.$fila, "P3 - Orientación espacial");
+        $hoja->setCellValue('DS'.$fila, "P4 - Orientación espacial");
+        $hoja->setCellValue('DT'.$fila, "P5 - Clasificación");
+        $hoja->setCellValue('DU'.$fila, "P6 - Clasificación");
+        $hoja->setCellValue('DV'.$fila, "P7 - Seriación");
+        $hoja->setCellValue('DW'.$fila, "P8 - Seriación");
+        $hoja->setCellValue('DX'.$fila, "P9 - Seriación");
+        $hoja->setCellValue('DY'.$fila, "P10 - Esquema Corporal");
+        $hoja->setCellValue('DZ'.$fila, "P11 - Esquema Corporal");
+        $hoja->setCellValue('EA'.$fila, "P12 - Suma de dos cifras");
+        $hoja->setCellValue('EB'.$fila, "P13 - Suma de cuatro cifras");
+        $hoja->setCellValue('EC'.$fila, "P14 - Suma de cinco o mas cifras");
+        $hoja->setCellValue('ED'.$fila, "P15 - Resta de tres cifras");
+        $hoja->setCellValue('EE'.$fila, "P16 - Resta de cuatro cifras");
+        $hoja->setCellValue('EF'.$fila, "P17 - Multiplicación una cifra");
+        $hoja->setCellValue('EG'.$fila, "P18 - Multiplicación dos cifras");
+        $hoja->setCellValue('EH'.$fila, "P19 - División una cifra");
+        $hoja->setCellValue('EI'.$fila, "P20 - División dos cifras");
+
+        $fila = 3;
+
+        foreach ($registros as $key => $value) {
+            //echo $value->id.'<br>';
+            $diagnostico = $this->diagMyrpP1->_getDiagMyrpP1($value->id);
+            $diagLectEscrFinal = $this->evalFinalP1->_getEvalFinal($value->id);
+            $mateElemental = $this->evalMateElemP1->_getEvalMateElem($value->id);
+            $mateElementalFinal = $this->evalMateFinalElemP1->_getEvalMateFinalElem($value->id);
+            $mateAvanzada = $this->evalMateP1->_getEvalMate($value->id);
+            $mateAvanzadaFinal = $this->evalMateFinalP1->_getEvalMateFinal($value->id);
+            //echo '<pre>'.var_export($diagnostico, true).'</pre>';
+            $phpExcel->getActiveSheet()->getStyle('A'.$fila.':AZ'.$fila)->applyFromArray($styleFila);
+            $phpExcel->getActiveSheet()->getStyle('AB'.$fila.':EI'.$fila)->applyFromArray($styleFilaProcess);
+            $hoja->setCellValue('A'.$fila, $value->amie);
+            $hoja->setCellValue('B'.$fila, $value->nombre);
+            $hoja->setCellValue('C'.$fila, $value->ciudad);
+            $hoja->setCellValue('D'.$fila, $value->provincia);
+            $hoja->setCellValue('E'.$fila, $value->cohorte);
+            $hoja->setCellValue('F'.$fila, $value->fecha_inicio);
+            $hoja->setCellValue('G'.$fila, $value->fecha_fin);
+            $hoja->setCellValue('H'.$fila, $value->anio_lectivo);
+            $hoja->setCellValue('I'.$fila, $value->nombres);
+            $hoja->setCellValue('J'.$fila, $value->apellidos);
+            $hoja->setCellValue('K'.$fila, $value->documento);
+            $hoja->setCellValue('L'.$fila, $value->nacionalidad);
+            $hoja->setCellValue('M'.$fila, $value->etnia);
+            $hoja->setCellValue('N'.$fila, $value->fecha_nac);
+            $hoja->setCellValue('O'.$fila, $value->edad);
+            $hoja->setCellValue('P'.$fila, $value->genero);
+            $hoja->setCellValue('Q'.$fila, $value->discapacidad);
+            $hoja->setCellValue('R'.$fila, $value->tipo_discapacidad);
+            $hoja->setCellValue('S'.$fila, $value->anio_egb);
+            $hoja->setCellValue('T'.$fila, $value->tutor_apoyo);
+            $hoja->setCellValue('U'.$fila, $value->docente_tutor);
+            $hoja->setCellValue('V'.$fila, $value->representante);
+            $hoja->setCellValue('W'.$fila, $value->parentesto_rep);
+            $hoja->setCellValue('X'.$fila, $value->nacionalidad_rep);
+            $hoja->setCellValue('Y'.$fila, $value->direccion_rep);
+            $hoja->setCellValue('Z'.$fila, $value->contacto_telf);
+            $hoja->setCellValue('AA'.$fila, $value->email);
+
+            //Diagnóstico MYRP
+            if ($diagnostico) {
+                $hoja->setCellValue('AB'.$fila, $diagnostico->necesito_apoyo);
+                $hoja->setCellValue('AC'.$fila, $diagnostico->observacion);
+                $hoja->setCellValue('AD'.$fila, $diagnostico->p1_comprension_lectora);
+                $hoja->setCellValue('AE'.$fila, $diagnostico->p1_inteligibilidad);
+                $hoja->setCellValue('AF'.$fila, $diagnostico->p2_comprension_lectora);
+                $hoja->setCellValue('AG'.$fila, $diagnostico->p2_descripcion_dibujo);
+                $hoja->setCellValue('AH'.$fila, $diagnostico->p3_comprension_lectora);
+                $hoja->setCellValue('AI'.$fila, $diagnostico->p3_inteligibilidad);
+                $hoja->setCellValue('AJ'.$fila, $diagnostico->p3_coherencia);
+                $hoja->setCellValue('AK'.$fila, $diagnostico->p3_sintaxis);
+                $hoja->setCellValue('AL'.$fila, $diagnostico->p3_estandares_egb_sub2y3);
+                $hoja->setCellValue('AM'.$fila, $diagnostico->p4_comprension_lectora);
+                $hoja->setCellValue('AN'.$fila, $diagnostico->p4_inteligibilidad);
+                $hoja->setCellValue('AO'.$fila, $diagnostico->p4_coherencia);
+                $hoja->setCellValue('AP'.$fila, $diagnostico->p4_sintaxis);
+                $hoja->setCellValue('AQ'.$fila, $diagnostico->p4_estandares_egb_sub2y3);
+            }
+            
+            if ($diagLectEscrFinal) {
+                //Evaluación final lect y escritura
+                $hoja->setCellValue('AR'.$fila, $diagLectEscrFinal->necesito_apoyo);
+                $hoja->setCellValue('AS'.$fila, $diagLectEscrFinal->observacion);
+                $hoja->setCellValue('AT'.$fila, $diagLectEscrFinal->p1_comprension_lectora);
+                $hoja->setCellValue('AU'.$fila, $diagLectEscrFinal->p1_inteligibilidad);
+                $hoja->setCellValue('AV'.$fila, $diagLectEscrFinal->p2_comprension_lectora);
+                $hoja->setCellValue('AW'.$fila, $diagLectEscrFinal->p2_descripcion_dibujo);
+                $hoja->setCellValue('AX'.$fila, $diagLectEscrFinal->p3_comprension_lectora);
+                $hoja->setCellValue('AY'.$fila, $diagLectEscrFinal->p3_inteligibilidad);
+                $hoja->setCellValue('AZ'.$fila, $diagLectEscrFinal->p3_coherencia);
+                $hoja->setCellValue('BA'.$fila, $diagLectEscrFinal->p3_sintaxis);
+                $hoja->setCellValue('BB'.$fila, $diagLectEscrFinal->p3_estandares_egb_sub2y3);
+                $hoja->setCellValue('BC'.$fila, $diagLectEscrFinal->p4_comprension_lectora);
+                $hoja->setCellValue('BD'.$fila, $diagLectEscrFinal->p4_inteligibilidad);
+                $hoja->setCellValue('BE'.$fila, $diagLectEscrFinal->p4_coherencia);
+                $hoja->setCellValue('BF'.$fila, $diagLectEscrFinal->p4_sintaxis);
+                $hoja->setCellValue('BG'.$fila, $diagLectEscrFinal->p4_estandares_egb_sub2y3);
+            }
+            
+            if ($mateElemental) {
+                $hoja->setCellValue('BH'.$fila, $mateElemental->relacion_figuras_geo_1);
+                $hoja->setCellValue('BI'.$fila, $mateElemental->relacion_figuras_geo_1_1);
+                $hoja->setCellValue('BJ'.$fila, $mateElemental->seriacion_2);
+                $hoja->setCellValue('BK'.$fila, $mateElemental->conjuntos_2_1);
+                $hoja->setCellValue('BL'.$fila, $mateElemental->seriacion_2_2);
+                $hoja->setCellValue('BM'.$fila, $mateElemental->orientacion_3);
+                $hoja->setCellValue('BN'.$fila, $mateElemental->orientacion_3_1);
+                $hoja->setCellValue('BO'.$fila, $mateElemental->orientacion_3_2);
+                $hoja->setCellValue('BP'.$fila, $mateElemental->esquema_corporal_3_3);
+                $hoja->setCellValue('BQ'.$fila, $mateElemental->esquema_corporal_4);
+                $hoja->setCellValue('BR'.$fila, $mateElemental->esquema_corporal_4_1);
+                $hoja->setCellValue('BS'.$fila, $mateElemental->seriacion_5);
+                $hoja->setCellValue('BT'.$fila, $mateElemental->suma_6);
+                $hoja->setCellValue('BU'.$fila, $mateElemental->suma_7);
+                $hoja->setCellValue('BV'.$fila, $mateElemental->resta_8);
+                $hoja->setCellValue('BW'.$fila, $mateElemental->resta_9);
+                $hoja->setCellValue('BX'.$fila, $mateElemental->multiplica_10);
+                $hoja->setCellValue('BY'.$fila, $mateElemental->multiplica_11);
+                $hoja->setCellValue('BZ'.$fila, $mateElemental->divide_12);
+                $hoja->setCellValue('CA'.$fila, $mateElemental->divide_13);
+            }
+
+            if ($mateElementalFinal) {
+                $hoja->setCellValue('CB'.$fila, $mateElementalFinal->relacion_figuras_geo_1);
+                $hoja->setCellValue('CC'.$fila, $mateElementalFinal->relacion_figuras_geo_1_1);
+                $hoja->setCellValue('CD'.$fila, $mateElementalFinal->seriacion_2);
+                $hoja->setCellValue('CE'.$fila, $mateElementalFinal->conjuntos_2_1);
+                $hoja->setCellValue('CF'.$fila, $mateElementalFinal->seriacion_2_2);
+                $hoja->setCellValue('CG'.$fila, $mateElementalFinal->orientacion_3);
+                $hoja->setCellValue('CH'.$fila, $mateElementalFinal->orientacion_3_1);
+                $hoja->setCellValue('CI'.$fila, $mateElementalFinal->orientacion_3_2);
+                $hoja->setCellValue('CJ'.$fila, $mateElementalFinal->esquema_corporal_3_3);
+                $hoja->setCellValue('CK'.$fila, $mateElementalFinal->esquema_corporal_4);
+                $hoja->setCellValue('CL'.$fila, $mateElementalFinal->esquema_corporal_4_1);
+                $hoja->setCellValue('CM'.$fila, $mateElementalFinal->seriacion_5);
+                $hoja->setCellValue('CN'.$fila, $mateElementalFinal->suma_6);
+                $hoja->setCellValue('CO'.$fila, $mateElementalFinal->suma_7);
+                $hoja->setCellValue('CP'.$fila, $mateElementalFinal->resta_8);
+                $hoja->setCellValue('CQ'.$fila, $mateElementalFinal->resta_9);
+                $hoja->setCellValue('CR'.$fila, $mateElementalFinal->multiplica_10);
+                $hoja->setCellValue('CS'.$fila, $mateElementalFinal->multiplica_11);
+                $hoja->setCellValue('CT'.$fila, $mateElementalFinal->divide_12);
+                $hoja->setCellValue('CU'.$fila, $mateElementalFinal->divide_13);
+            }
+
+            if ($mateAvanzada) {
+                $hoja->setCellValue('CV'.$fila, $mateAvanzada->orientacion_espacial_1);
+                $hoja->setCellValue('CW'.$fila, $mateAvanzada->orientacion_espacial_2);
+                $hoja->setCellValue('CX'.$fila, $mateAvanzada->orientacion_espacial_3);
+                $hoja->setCellValue('CY'.$fila, $mateAvanzada->orientacion_espacial_4);
+                $hoja->setCellValue('CZ'.$fila, $mateAvanzada->clasificacion_5);
+                $hoja->setCellValue('DA'.$fila, $mateAvanzada->clasificacion_6);
+                $hoja->setCellValue('DB'.$fila, $mateAvanzada->seriacion_7);
+                $hoja->setCellValue('DC'.$fila, $mateAvanzada->seriacion_8);
+                $hoja->setCellValue('DD'.$fila, $mateAvanzada->seriacion_9);
+                $hoja->setCellValue('DE'.$fila, $mateAvanzada->esquema_corporal_10);
+                $hoja->setCellValue('DF'.$fila, $mateAvanzada->esquema_corporal_11);
+                $hoja->setCellValue('DG'.$fila, $mateAvanzada->suma_dos_cifras);
+                $hoja->setCellValue('DH'.$fila, $mateAvanzada->suma_cuatro_cifras);
+                $hoja->setCellValue('DI'.$fila, $mateAvanzada->suma_cinco_mas);
+                $hoja->setCellValue('DJ'.$fila, $mateAvanzada->resta_tres_cifras);
+                $hoja->setCellValue('DK'.$fila, $mateAvanzada->resta_cuatro_cifras);
+                $hoja->setCellValue('DL'.$fila, $mateAvanzada->multiplicacion_una_cifra);
+                $hoja->setCellValue('DM'.$fila, $mateAvanzada->multiplicacion_dos_cifras);
+                $hoja->setCellValue('DN'.$fila, $mateAvanzada->division_una_cifra);
+                $hoja->setCellValue('DO'.$fila, $mateAvanzada->division_dos_cifras);
+            }
+
+            if ($mateAvanzadaFinal) {
+                $hoja->setCellValue('DP'.$fila, $mateAvanzadaFinal->orientacion_espacial_1);
+                $hoja->setCellValue('DQ'.$fila, $mateAvanzadaFinal->orientacion_espacial_2);
+                $hoja->setCellValue('DR'.$fila, $mateAvanzadaFinal->orientacion_espacial_3);
+                $hoja->setCellValue('DS'.$fila, $mateAvanzadaFinal->orientacion_espacial_4);
+                $hoja->setCellValue('DT'.$fila, $mateAvanzadaFinal->clasificacion_5);
+                $hoja->setCellValue('DU'.$fila, $mateAvanzadaFinal->clasificacion_6);
+                $hoja->setCellValue('DV'.$fila, $mateAvanzadaFinal->seriacion_7);
+                $hoja->setCellValue('DW'.$fila, $mateAvanzadaFinal->seriacion_8);
+                $hoja->setCellValue('DX'.$fila, $mateAvanzadaFinal->seriacion_9);
+                $hoja->setCellValue('DY'.$fila, $mateAvanzadaFinal->esquema_corporal_10);
+                $hoja->setCellValue('DZ'.$fila, $mateAvanzadaFinal->esquema_corporal_11);
+                $hoja->setCellValue('EA'.$fila, $mateAvanzadaFinal->suma_dos_cifras);
+                $hoja->setCellValue('EB'.$fila, $mateAvanzadaFinal->suma_cuatro_cifras);
+                $hoja->setCellValue('EC'.$fila, $mateAvanzadaFinal->suma_cinco_mas);
+                $hoja->setCellValue('ED'.$fila, $mateAvanzadaFinal->resta_tres_cifras);
+                $hoja->setCellValue('EE'.$fila, $mateAvanzadaFinal->resta_cuatro_cifras);
+                $hoja->setCellValue('EF'.$fila, $mateAvanzadaFinal->multiplicacion_una_cifra);
+                $hoja->setCellValue('EG'.$fila, $mateAvanzadaFinal->multiplicacion_dos_cifras);
+                $hoja->setCellValue('EH'.$fila, $mateAvanzadaFinal->division_una_cifra);
+                $hoja->setCellValue('EI'.$fila, $mateAvanzadaFinal->division_dos_cifras);
+            }
+
+            $fila++;
+        }
+
+        //Creo el writter y guardo la hoja
+        
+        $writter = new XlsxWriter($phpExcel, 'Xlsx');
+        
+        //Cabeceras para descarga
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        header('Content-Disposition: attachment;filename="' . $nombreDelDocumento . '"');
+        header('Cache-Control: max-age=0');
+        
+        $r = $writter->save('php://output');exit;
+        if ($r) {
+            return redirect()->to('cargar_info_view');
+        }else{
+            $error = 'Hubo un error u no se pudo descargar';
+            return redirect()->to('cargar_info_view');
+        }        
+        
+    }
+
     public function logout(){
         //destruyo la session  y salgo
         

@@ -84,7 +84,7 @@ class DiagnosticoMyrpP1Model extends Model {
             }
             //echo $this->db->getLastQuery();
         //}
-        echo '<pre>'.var_export($result, true).'</pre>';exit;
+        //echo '<pre>'.var_export($result, true).'</pre>';exit;
         $porcentaje = ($result * 100) / count($registros);
         return number_format($porcentaje, 2);
     }

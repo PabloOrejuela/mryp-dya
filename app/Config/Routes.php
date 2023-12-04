@@ -75,6 +75,7 @@ $routes->get('prod-1-form-tipo-eval-mate-final/(:num)', 'Prod1::prod_1_form_elij
 $routes->post('prod1-elije-evalMate', 'Prod1::prod1_elije_evalMate');
 $routes->post('prod1-elije-evalMateFinal', 'Prod1::prod1_elije_evalMateFinal');
 $routes->get('prod-1-descargar-registros', 'Prod1::prod_1_descargar_registros');
+$routes->get('prod1-registros-procesos', 'Prod1::descargaRegistrosProcesos');
 
 $routes->get('prod-1-reg-eval-mate', 'Prod1::prod_1_reg_eval_mate');
 $routes->get('prod-1-reg-eval-mate-final/(:num)', 'Prod1::prod_1_reg_eval_mate_final/$1');

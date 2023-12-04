@@ -486,7 +486,7 @@
                             </div>
                         </div>
                         <div class="col-md-3 mb-2">
-                            <label for="apoyo"><span id="pregunta"></span>13.Suma de cinco o mas cifras:</label>
+                            <label for="apoyo"><span id="pregunta"></span>14.Suma de cinco o mas cifras:</label>
                             <div class="col-sm-8">
                                 <select 
                                     class="form-select" 
@@ -560,7 +560,7 @@
                             </div>
                         </div>
                         <div class="col-md-3 mb-2">
-                            <label for="apoyo"><span id="pregunta"></span>15.Resta de cuatro cifras:</label>
+                            <label for="apoyo"><span id="pregunta"></span>16.Resta de cuatro cifras:</label>
                             <div class="col-sm-8">
                                 <select 
                                     class="form-select" 

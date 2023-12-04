@@ -68,14 +68,14 @@ class EvalMateElementalP1Model extends Model {
     public function _getEvalMateElem($idprod) {
         $result = NULL;
         $builder = $this->db->table($this->table);
-        $builder->select('*')->where('idprod', strtoupper($idprod));
+        $builder->select('*')->where('idprod', $idprod);
         $query = $builder->get();
         if ($query->getResult() != null) {
             foreach ($query->getResult() as $row) {
                 $result = $row;
             }
         }
-        //echo $this->db->getLastQuery();
+        //echo $this->db->getLastQuery().'<br>';
         return $result;
     }
     
