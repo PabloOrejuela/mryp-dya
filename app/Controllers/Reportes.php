@@ -424,6 +424,7 @@ class Reportes extends BaseController {
                 //NECESITA APOYO DIAGNOSTICO
                 $siNecesitaApoyo = 0;
                 $noNecesitaApoyo = 0;
+                $respC = 0;
                 foreach ($data['datos_diagnostico_lenguaje'] as $key => $value) {
                     if ($value->necesito_apoyo == 'SI') {
                         $siNecesitaApoyo++;
@@ -433,16 +434,19 @@ class Reportes extends BaseController {
                 }
 
                 $porcentNecesita = round(($siNecesitaApoyo * 100)/count($data['datos_diagnostico_lenguaje']));
-                $porcentNoNecesita = 100 - $porcentNecesita;
+                $porcentNoNecesita = round(($noNecesitaApoyo * 100)/count($data['datos_diagnostico_lenguaje']));
+                $porcentC = 100 - ($porcentNecesita + $porcentNoNecesita);
 
-                $etiquetas_apoyo = [$porcentNecesita."% SI", $porcentNoNecesita."% NO"];
+                $etiquetas_apoyo = [$porcentNecesita."% SI", $porcentNoNecesita."% NO", $porcentC."% Sin dato"];
                 $datosGrafica[0] = $porcentNecesita;
                 $datosGrafica[1] = $porcentNoNecesita;
+                $datosGrafica[2] = $porcentC;
                 $respuesta_necesita_apoyo = [
                     "etiquetas" => $etiquetas_apoyo,
                     "datos" => $datosGrafica,
                     "color_necesita" => '#ed5c5c',
                     "color_noNecesita" => '#e8f7e1',
+                    "color_C" => '#bdbdbd',
                     "total" => count($data['datos_diagnostico_lenguaje']),
                 ];
                 $data['chart_data_necesita_apoyo'] = json_encode($respuesta_necesita_apoyo);
@@ -450,6 +454,7 @@ class Reportes extends BaseController {
                 //NECESITA APOYO EVAL FINAL
                 $siNecesitaApoyo = 0;
                 $noNecesitaApoyo = 0;
+                $respC = 0;
                 foreach ($data['datos_evalfinal_lenguaje'] as $key => $value) {
                     if ($value->necesito_apoyo == 'SI') {
                         $siNecesitaApoyo++;
@@ -458,17 +463,20 @@ class Reportes extends BaseController {
                     }
                 }
 
-                $porcentNecesita = round(($siNecesitaApoyo * 100)/count($data['datos_evalfinal_lenguaje']));
-                $porcentNoNecesita = 100 - $porcentNecesita;
+                $porcentNecesita = round(($siNecesitaApoyo * 100)/count($data['datos_diagnostico_lenguaje']));
+                $porcentNoNecesita = round(($noNecesitaApoyo * 100)/count($data['datos_diagnostico_lenguaje']));
+                $porcentC = 100 - ($porcentNecesita + $porcentNoNecesita);
 
-                $etiquetas_apoyo = [$porcentNecesita."% SI", $porcentNoNecesita."% NO"];
+                $etiquetas_apoyo = [$porcentNecesita."% SI", $porcentNoNecesita."% NO", $porcentC."% Sin dato"];
                 $datosGrafica[0] = $porcentNecesita;
                 $datosGrafica[1] = $porcentNoNecesita;
+                $datosGrafica[2] = $porcentC;
                 $respuesta_necesita_apoyo_final = [
                     "etiquetas" => $etiquetas_apoyo,
                     "datos" => $datosGrafica,
                     "color_necesita" => '#ed5c5c',
                     "color_noNecesita" => '#e8f7e1',
+                    "color_C" => '#bdbdbd',
                     "total" => count($data['datos_evalfinal_lenguaje']),
                 ];
                 $data['chart_data_necesita_apoyo_final'] = json_encode($respuesta_necesita_apoyo_final);
@@ -671,6 +679,7 @@ class Reportes extends BaseController {
     public function setDataRespuestaP4Estandares($data){
         $respA = 0;
         $respB = 0;
+        $respC = 0;
         foreach ($data as $key => $value) {
             if ($value->p4_estandares_egb_sub2y3 == 'A') {
                 $respA++;
@@ -680,16 +689,19 @@ class Reportes extends BaseController {
         }
 
         $porcentA = round(($respA * 100)/count($data));
-        $porcentB = 100 - $porcentA;
+        $porcentB = round(($respB * 100)/count($data));
+        $porcentC = 100 - ($porcentA - $porcentB);
 
-        $etiquetas = [$porcentA."% Adecuado", $porcentB."% Muy por debajo de lo esperado"];
+        $etiquetas = [$porcentA."% Adecuado", $porcentB."% Muy por debajo de lo esperado", $porcentC."% Sin dato"];
         $datosGrafica[0] = $porcentA;
         $datosGrafica[1] = $porcentB;
+        $datosGrafica[2] = $porcentC;
         $respuesta = [
             "etiquetas" => $etiquetas,
             "datos" => $datosGrafica,
             "color_A" => '#e8f7e1',
             "color_B" => '#F5D5D9',
+            "color_C" => '#bdbdbd',
             "total" => count($data),
         ];
         return $respuesta;
@@ -700,6 +712,7 @@ class Reportes extends BaseController {
         $respB = 0;
         $respC = 0;
         $respD = 0;
+        $respE = 0;
         foreach ($data as $key => $value) {
             if ($value->p4_sintaxis == 'A') {
                 $respA++;
@@ -715,13 +728,15 @@ class Reportes extends BaseController {
         $porcentA = round(($respA * 100)/count($data));
         $porcentB = round(($respB * 100)/count($data));
         $porcentC = round(($respC * 100)/count($data));
-        $porcentD = 100 - ($porcentA + $porcentB + $porcentC);
+        $porcentD = round(($respD * 100)/count($data));
+        $porcentE = 100 - ($porcentA + $porcentB + $porcentC + $porcentD);
 
-        $etiquetas = [$porcentA."% Adecuado", $porcentB."% En proceso", $porcentC."% Debajo de lo esperado", $porcentD."% Muy por debajo de lo esperado"];
+        $etiquetas = [$porcentA."% Adecuado", $porcentB."% En proceso", $porcentC."% Debajo de lo esperado", $porcentD."% Muy por debajo de lo esperado", $porcentE."% Sin dato"];
         $datosGrafica[0] = $porcentA;
         $datosGrafica[1] = $porcentB;
         $datosGrafica[2] = $porcentC;
         $datosGrafica[3] = $porcentD;
+        $datosGrafica[4] = $porcentE;
         $respuesta = [
             "etiquetas" => $etiquetas,
             "datos" => $datosGrafica,
@@ -729,6 +744,7 @@ class Reportes extends BaseController {
             "color_B" => '#F1F5D5',
             "color_C" => '#F5D5D9',
             "color_D" => '#FC656D',
+            "color_E" => '#bdbdbd',
             "total" => count($data),
         ];
         return $respuesta;
@@ -739,6 +755,7 @@ class Reportes extends BaseController {
         $respB = 0;
         $respC = 0;
         $respD = 0;
+        $respE = 0;
         foreach ($data as $key => $value) {
             if ($value->p4_coherencia == 'A') {
                 $respA++;
@@ -754,13 +771,15 @@ class Reportes extends BaseController {
         $porcentA = round(($respA * 100)/count($data));
         $porcentB = round(($respB * 100)/count($data));
         $porcentC = round(($respC * 100)/count($data));
-        $porcentD = 100 - ($porcentA + $porcentB + $porcentC);
+        $porcentD = round(($respD * 100)/count($data));
+        $porcentE = 100 - ($porcentA + $porcentB + $porcentC + $porcentD);
 
-        $etiquetas = [$porcentA."% Adecuado", $porcentB."% En proceso", $porcentC."% Debajo de lo esperado", $porcentD."% Muy por debajo de lo esperado"];
+        $etiquetas = [$porcentA."% Adecuado", $porcentB."% En proceso", $porcentC."% Debajo de lo esperado", $porcentD."% Muy por debajo de lo esperado", $porcentE."% Sin dato"];
         $datosGrafica[0] = $porcentA;
         $datosGrafica[1] = $porcentB;
         $datosGrafica[2] = $porcentC;
         $datosGrafica[3] = $porcentD;
+        $datosGrafica[4] = $porcentE;
         $respuesta = [
             "etiquetas" => $etiquetas,
             "datos" => $datosGrafica,
@@ -768,6 +787,7 @@ class Reportes extends BaseController {
             "color_B" => '#F1F5D5',
             "color_C" => '#F5D5D9',
             "color_D" => '#FC656D',
+            "color_E" => '#bdbdbd',
             "total" => count($data),
         ];
         return $respuesta;
@@ -777,6 +797,7 @@ class Reportes extends BaseController {
         $respA = 0;
         $respB = 0;
         $respC = 0;
+        $respD = 0;
         foreach ($data as $key => $value) {
             if ($value->p4_inteligibilidad == 'A') {
                 $respA++;
@@ -789,18 +810,21 @@ class Reportes extends BaseController {
 
         $porcentA = round(($respA * 100)/count($data));
         $porcentB = round(($respB * 100)/count($data));
-        $porcentC = 100 - ($porcentA + $porcentB);
+        $porcentC = round(($respC * 100)/count($data));
+        $porcentD = 100 - ($porcentA + $porcentB + $porcentC);
 
-        $etiquetas = [$porcentA."% Adecuado", $porcentB."% En proceso", $porcentC."% Muy por debajo de lo esperado"];
+        $etiquetas = [$porcentA."% Adecuado", $porcentB."% En proceso", $porcentC."% Muy por debajo de lo esperado", $porcentD."% Sin dato"];
         $datosGrafica[0] = $porcentA;
         $datosGrafica[1] = $porcentB;
         $datosGrafica[2] = $porcentC;
+        $datosGrafica[3] = $porcentD;
         $respuesta = [
             "etiquetas" => $etiquetas,
             "datos" => $datosGrafica,
             "color_A" => '#e8f7e1',
             "color_B" => '#F1F5D5',
             "color_C" => '#FC656D',
+            "color_D" => '#bdbdbd',
             "total" => count($data),
         ];
         return $respuesta;
@@ -822,73 +846,10 @@ class Reportes extends BaseController {
 
         $porcentA = round(($respA * 100)/count($data));
         $porcentB = round(($respB * 100)/count($data));
-        $porcentC = 100 - ($porcentA + $porcentB);
-
-        $etiquetas = [$porcentA."% Adecuado", $porcentB."% En proceso", $porcentC."% Muy por debajo de lo esperado"];
-        $datosGrafica[0] = $porcentA;
-        $datosGrafica[1] = $porcentB;
-        $datosGrafica[2] = $porcentC;
-        $respuesta = [
-            "etiquetas" => $etiquetas,
-            "datos" => $datosGrafica,
-            "color_A" => '#e8f7e1',
-            "color_B" => '#F1F5D5',
-            "color_C" => '#F5D5D9',
-            "total" => count($data),
-        ];
-        return $respuesta;
-    }
-
-    public function setDataRespuestaP3Estandares($data){
-        $respA = 0;
-        $respB = 0;
-        foreach ($data as $key => $value) {
-            if ($value->p3_estandares_egb_sub2y3 == 'A') {
-                $respA++;
-            }else if($value->p3_estandares_egb_sub2y3 == 'B'){
-                $respB++;
-            }
-        }
-
-        $porcentA = round(($respA * 100)/count($data));
-        $porcentB = 100 - $porcentA;
-
-        $etiquetas = [$porcentA."% Adecuado", $porcentB."% Muy por debajo de lo esperado"];
-        $datosGrafica[0] = $porcentA;
-        $datosGrafica[1] = $porcentB;
-        $respuesta = [
-            "etiquetas" => $etiquetas,
-            "datos" => $datosGrafica,
-            "color_A" => '#e8f7e1',
-            "color_B" => '#F5D5D9',
-            "total" => count($data),
-        ];
-        return $respuesta;
-    }
-
-    public function setDataRespuestaP3Sintax($data){
-        $respA = 0;
-        $respB = 0;
-        $respC = 0;
-        $respD = 0;
-        foreach ($data as $key => $value) {
-            if ($value->p3_sintaxis == 'A') {
-                $respA++;
-            }else if($value->p3_sintaxis == 'B'){
-                $respB++;
-            }else if($value->p3_sintaxis == 'C'){
-                $respC++;
-            }else if($value->p3_sintaxis == 'D'){
-                $respD++;
-            }
-        }
-
-        $porcentA = round(($respA * 100)/count($data));
-        $porcentB = round(($respB * 100)/count($data));
         $porcentC = round(($respC * 100)/count($data));
         $porcentD = 100 - ($porcentA + $porcentB + $porcentC);
 
-        $etiquetas = [$porcentA."% Adecuado", $porcentB."% En proceso", $porcentC."% Debajo de lo esperado", $porcentD."% Muy por debajo de lo esperado"];
+        $etiquetas = [$porcentA."% Adecuado", $porcentB."% En proceso", $porcentC."% Muy por debajo de lo esperado", $porcentD."% Sin dato"];
         $datosGrafica[0] = $porcentA;
         $datosGrafica[1] = $porcentB;
         $datosGrafica[2] = $porcentC;
@@ -899,7 +860,83 @@ class Reportes extends BaseController {
             "color_A" => '#e8f7e1',
             "color_B" => '#F1F5D5',
             "color_C" => '#F5D5D9',
+            "color_D" => '#bdbdbd',
+            "total" => count($data),
+        ];
+        return $respuesta;
+    }
+
+    public function setDataRespuestaP3Estandares($data){
+        $respA = 0;
+        $respB = 0;
+        $respC = 0;
+        foreach ($data as $key => $value) {
+            if ($value->p3_estandares_egb_sub2y3 == 'A') {
+                $respA++;
+            }else if($value->p3_estandares_egb_sub2y3 == 'B'){
+                $respB++;
+            }
+        }
+
+        $porcentA = round(($respA * 100)/count($data));
+        $porcentB = round(($respB * 100)/count($data));
+        $porcentC = 100 - ($porcentA+$porcentB);
+
+        $etiquetas = [$porcentA."% Adecuado", $porcentB."% Muy por debajo de lo esperado", $porcentC."% Sin dato"];
+        $datosGrafica[0] = $porcentA;
+        $datosGrafica[1] = $porcentB;
+        $datosGrafica[2] = $porcentC;
+        $respuesta = [
+            "etiquetas" => $etiquetas,
+            "datos" => $datosGrafica,
+            "color_A" => '#e8f7e1',
+            "color_B" => '#F5D5D9',
+            "color_C" => '#bdbdbd',
+            "total" => count($data),
+        ];
+        return $respuesta;
+    }
+
+    public function setDataRespuestaP3Sintax($data){
+        $respA = 0;
+        $respB = 0;
+        $respC = 0;
+        $respD = 0;
+        $respE = 0;
+        foreach ($data as $key => $value) {
+            if ($value->p3_sintaxis == 'A') {
+                $respA++;
+            }else if($value->p3_sintaxis == 'B'){
+                $respB++;
+            }else if($value->p3_sintaxis == 'C'){
+                $respC++;
+            }else if($value->p3_sintaxis == 'D'){
+                $respD++;
+            }else{
+                $respE++;
+            }
+        }
+
+        $porcentA = round(($respA * 100)/count($data));
+        $porcentB = round(($respB * 100)/count($data));
+        $porcentC = round(($respC * 100)/count($data));
+        $porcentD = round(($respD * 100)/count($data));
+        $porcentE = 100 - ($porcentA + $porcentB + $porcentC + $porcentD);
+
+        $etiquetas = [$porcentA."% Adecuado", $porcentB."% En proceso", $porcentC."% Debajo de lo esperado", $porcentD."% Muy por debajo de lo esperado", $porcentE."% Sin dato"];
+        $datosGrafica[0] = $porcentA;
+        $datosGrafica[1] = $porcentB;
+        $datosGrafica[2] = $porcentC;
+        $datosGrafica[3] = $porcentD;
+        $datosGrafica[4] = $porcentE;
+        $respuesta = [
+            "etiquetas" => $etiquetas,
+            "datos" => $datosGrafica,
+            "color_A" => '#e8f7e1',
+            "color_B" => '#F1F5D5',
+            "color_C" => '#F5D5D9',
             "color_D" => '#FC656D',
+            "color_E" => '#bdbdbd',
             "total" => count($data),
         ];
         return $respuesta;
@@ -910,6 +947,7 @@ class Reportes extends BaseController {
         $respB = 0;
         $respC = 0;
         $respD = 0;
+        $respE = 0;
         foreach ($data as $key => $value) {
             if ($value->p3_coherencia == 'A') {
                 $respA++;
@@ -925,13 +963,15 @@ class Reportes extends BaseController {
         $porcentA = round(($respA * 100)/count($data));
         $porcentB = round(($respB * 100)/count($data));
         $porcentC = round(($respC * 100)/count($data));
-        $porcentD = 100 - ($porcentA + $porcentB + $porcentC);
+        $porcentD = round(($respD * 100)/count($data));
+        $porcentE = 100 - ($porcentA + $porcentB + $porcentC + $porcentD);
 
-        $etiquetas = [$porcentA."% Adecuado", $porcentB."% En proceso", $porcentC."% Debajo de lo esperado", $porcentD."% Muy por debajo de lo esperado"];
+        $etiquetas = [$porcentA."% Adecuado", $porcentB."% En proceso", $porcentC."% Debajo de lo esperado", $porcentD."% Muy por debajo de lo esperado", $porcentE."% Sin dato"];
         $datosGrafica[0] = $porcentA;
         $datosGrafica[1] = $porcentB;
         $datosGrafica[2] = $porcentC;
         $datosGrafica[3] = $porcentD;
+        $datosGrafica[4] = $porcentE;
         $respuesta = [
             "etiquetas" => $etiquetas,
             "datos" => $datosGrafica,
@@ -939,6 +979,7 @@ class Reportes extends BaseController {
             "color_B" => '#F1F5D5',
             "color_C" => '#F5D5D9',
             "color_D" => '#FC656D',
+            "color_E" => '#bdbdbd',
             "total" => count($data),
         ];
         return $respuesta;
@@ -948,6 +989,7 @@ class Reportes extends BaseController {
         $respA = 0;
         $respB = 0;
         $respC = 0;
+        $respD = 0;
         foreach ($data as $key => $value) {
             if ($value->p3_inteligibilidad == 'A') {
                 $respA++;
@@ -959,12 +1001,14 @@ class Reportes extends BaseController {
         }
         $porcentA = round(($respA * 100)/count($data));
         $porcentB = round(($respB * 100)/count($data));
-        $porcentC = 100 - ($porcentA + $porcentB);
+        $porcentC = round(($respC * 100)/count($data));
+        $porcentD = 100 - ($porcentA + $porcentB + $porcentC);
 
-        $etiquetas = [$porcentA."% Adecuado", $porcentB."% En proceso", $porcentC."% Muy por debajo de lo esperado"];
+        $etiquetas = [$porcentA."% Adecuado", $porcentB."% En proceso", $porcentC."% Muy por debajo de lo esperado", $porcentD."% Sin dato"];
         $datosGrafica[0] = $porcentA;
         $datosGrafica[1] = $porcentB;
         $datosGrafica[2] = $porcentC;
+        $datosGrafica[3] = $porcentD;
 
         $respuesta = [
             "etiquetas" => $etiquetas,
@@ -972,6 +1016,7 @@ class Reportes extends BaseController {
             "color_A" => '#e8f7e1',
             "color_B" => '#F1F5D5',
             "color_C" => '#FC656D',
+            "color_D" => '#bdbdbd',
             "total" => count($data),
         ];
         return $respuesta;
@@ -981,6 +1026,7 @@ class Reportes extends BaseController {
         $respA = 0;
         $respB = 0;
         $respC = 0;
+        $respD = 0;
         foreach ($data as $key => $value) {
             if ($value->p3_comprension_lectora == 'A') {
                 $respA++;
@@ -993,12 +1039,14 @@ class Reportes extends BaseController {
 
         $porcentA = round(($respA * 100)/count($data));
         $porcentB = round(($respB * 100)/count($data));
-        $porcentC = 100 - ($porcentA + $porcentB);
+        $porcentC = round(($respC * 100)/count($data));
+        $porcentD = 100 - ($porcentA + $porcentB + $porcentC);
 
-        $etiquetas = [$porcentA."% Adecuado", $porcentB."% En proceso", $porcentC."% Muy por debajo de lo esperado"];
+        $etiquetas = [$porcentA."% Adecuado", $porcentB."% En proceso", $porcentC."% Muy por debajo de lo esperado", $porcentD."% Sin dato"];
         $datosGrafica[0] = $porcentA;
         $datosGrafica[1] = $porcentB;
         $datosGrafica[2] = $porcentC;
+        $datosGrafica[3] = $porcentD;
 
         $respuesta = [
             "etiquetas" => $etiquetas,
@@ -1006,6 +1054,7 @@ class Reportes extends BaseController {
             "color_A" => '#e8f7e1',
             "color_B" => '#F1F5D5',
             "color_C" => '#FC656D',
+            "color_D" => '#bdbdbd',
             "total" => count($data),
         ];
         return $respuesta;
@@ -1014,6 +1063,7 @@ class Reportes extends BaseController {
     public function setDataRespuestaP2CompLectora($data){
         $respA = 0;
         $respB = 0;
+        $respC = 0;
         foreach ($data as $key => $value) {
             if ($value->p2_comprension_lectora == 'A') {
                 $respA++;
@@ -1022,17 +1072,20 @@ class Reportes extends BaseController {
             }
         }
         $porcentA = round(($respA * 100)/count($data));
-        $porcentB = 100 - $porcentA;
+        $porcentB = round(($respB * 100)/count($data));
+        $porcentC = 100 - ($porcentA + $porcentB);
 
-        $etiquetas = [$porcentA."% Adecuado", $porcentB."% Muy por debajo de lo esperado"];
+        $etiquetas = [$porcentA."% Adecuado", $porcentB."% Muy por debajo de lo esperado", $porcentC."% Sin dato"];
         $datosGrafica[0] = $porcentA;
         $datosGrafica[1] = $porcentB;
+        $datosGrafica[2] = $porcentC;
 
         $respuesta = [
             "etiquetas" => $etiquetas,
             "datos" => $datosGrafica,
             "color_A" => '#E8F7E1',
             "color_B" => '#FC656D',
+            "color_C" => '#bdbdbd',
             "total" => count($data),
         ];
         return $respuesta;
@@ -1041,6 +1094,7 @@ class Reportes extends BaseController {
     public function setDataRespuestaP1CompLectora($data){
         $respA = 0;
         $respB = 0;
+        $respC = 0;
         foreach ($data['datos_diagnostico_lenguaje'] as $key => $value) {
             if ($value->p1_comprension_lectora == 'A') {
                 $respA++;
@@ -1050,16 +1104,19 @@ class Reportes extends BaseController {
         }
 
         $porcentA = round(($respA * 100)/count($data['datos_diagnostico_lenguaje']));
-        $porcentB = 100 - $porcentA;
+        $porcentB = round(($respB * 100)/count($data['datos_diagnostico_lenguaje']));
+        $porcentC = 100 - ($porcentA + $porcentB);
 
-        $etiquetas = [$porcentA."% Adecuado", $porcentB."% Muy por debajo de lo esperado"];
+        $etiquetas = [$porcentA."% Adecuado", $porcentB."% Muy por debajo de lo esperado", $porcentC."% Sin dato"];
         $datosGrafica[0] = $porcentA;
         $datosGrafica[1] = $porcentB;
+        $datosGrafica[2] = $porcentC;
         $respuesta = [
             "etiquetas" => $etiquetas,
             "datos" => $datosGrafica,
             "color_A" => '#E8F7E1',
             "color_B" => '#FC656D',
+            "color_C" => '#bdbdbd',
             "total" => count($data['datos_diagnostico_lenguaje']),
         ];
 
@@ -1070,6 +1127,7 @@ class Reportes extends BaseController {
     public function setDataRespuestaP1CompLectoraFinal($data){
         $respA = 0;
         $respB = 0;
+        $respC = 0;
         foreach ($data['datos_evalfinal_lenguaje'] as $key => $value) {
             if ($value->p1_comprension_lectora == 'A') {
                 $respA++;
@@ -1078,16 +1136,19 @@ class Reportes extends BaseController {
             }
         }
         $porcentA = round(($respA * 100)/count($data['datos_evalfinal_lenguaje']));
-        $porcentB = 100 - $porcentA;
+        $porcentB = round(($respB * 100)/count($data['datos_evalfinal_lenguaje']));
+        $porcentC = 100 - ($porcentA+$porcentB);
 
-        $etiquetas = [$porcentA."% Adecuado", $porcentB."% Muy por debajo de lo esperado"];
+        $etiquetas = [$porcentA."% Adecuado", $porcentB."% Muy por debajo de lo esperado", $porcentC."% Sin dato"];
         $datosGrafica[0] = $porcentA;
         $datosGrafica[1] = $porcentB;
+        $datosGrafica[2] = $porcentC;
         $respuesta = [
             "etiquetas" => $etiquetas,
             "datos" => $datosGrafica,
             "color_A" => '#e8f7e1',
             "color_B" => '#FC656D',
+            "color_C" => '#bdbdbd',
             "total" => count($data['datos_evalfinal_lenguaje']),
         ];
         return $respuesta;
@@ -1096,6 +1157,7 @@ class Reportes extends BaseController {
     public function setDataRespuestaP1Inteligi($data){
         $respA = 0;
         $respB = 0;
+        $respC = 0;
         foreach ($data as $key => $value) {
             if ($value->p1_inteligibilidad == 'A') {
                 $respA++;
@@ -1105,17 +1167,20 @@ class Reportes extends BaseController {
         }
 
         $porcentA = round(($respA * 100)/count($data));
-        $porcentB = 100 - $porcentA;
+        $porcentB = round(($respB * 100)/count($data));
+        $porcentC = 100 - ($porcentA+$porcentB);
 
-        $etiquetas = [$porcentA."% Adecuado", $porcentB."% Muy por debajo de lo esperado"];
+        $etiquetas = [$porcentA."% Adecuado", $porcentB."% Muy por debajo de lo esperado", $porcentC."% Sin dato"];
         $datosGrafica[0] = $porcentA;
         $datosGrafica[1] = $porcentB;
+        $datosGrafica[2] = $porcentC;
 
         $respuesta = [
             "etiquetas" => $etiquetas,
             "datos" => $datosGrafica,
             "color_A" => '#e8f7e1',
             "color_B" => '#FC656D',
+            "color_C" => '#bdbdbd',
             "total" => count($data),
         ];
         return $respuesta;

@@ -229,7 +229,11 @@ class Prod3Model extends Model {
     public function _getAllRegistrosExcel() {
         $result = NULL;
         $builder = $this->db->table($this->table);
-        $builder->select($this->table.'.id as id,edad,centro_educativo.amie as amie,centro_educativo.nombre as ce,ciudad,provincia,producto_3.nombre as nombre,documento,nacionalidad,etnia.etnia as etnia,genero,discapacidad,tipo,celular,email');
+        $builder->select($this->table.'.id as id,edad,centro_educativo.amie as amie,centro_educativo.nombre as ce,
+        ciudad,provincia,producto_3.nombre as nombre,documento,nacionalidad,etnia.etnia as etnia,genero,
+        discapacidad,tipo,celular,email,inicial_1,inicial_2,pri_egb,seg_egb,ter_egb,cuart_egb,quin_egb,sex_egb,
+        sept_egb,oct_egb,nov_egb,dec_egb,pri_bach,seg_bach,ter_bach,especialidad,funcion,
+        '.$this->table.'.created_at as fecha');
         $builder->join('centro_educativo', 'centro_educativo.amie = '.$this->table.'.amie');
         $builder->join('ciudades', 'ciudades.idciudades = centro_educativo.idciudades');
         $builder->join('provincias', 'provincias.idprovincias = ciudades.idprovincias');

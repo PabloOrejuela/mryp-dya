@@ -55,6 +55,7 @@
                                             echo '<a href="'.site_url().'reporte-info-arte" class="btn btn-info mb-2" target="_blank">Reporte Módulo Exp. Artística</a>';
                                             echo '<a href="'.site_url().'reporte-info-lengua" class="btn btn-info mb-2" target="_blank">Reporte Módulo Lenguaje</a>';
                                             echo '<a href="'.site_url().'reporte-info-ciudadania" class="btn btn-info mb-2" target="_blank">Reporte Módulo Ciudadanía</a>';
+                                            echo'<a href="'.site_url().'prod3-registros-procesos" class="btn btn-info mb-2" id="btn-dya">Descargar registros y procesos P3 (.xlsx)</a>';
                                         }
                                             echo '<a href="'.site_url().'prod3-reporte-certificados" class="btn btn-info mb-2" target="_blank">APRUEBA CERTIFICADOS</a>
                                     </div>

@@ -1332,7 +1332,12 @@ class Prod1 extends BaseController {
             $hoja->setCellValue('E'.$fila, $value->cohorte);
             $hoja->setCellValue('F'.$fila, $value->fecha_inicio);
             $hoja->setCellValue('G'.$fila, $value->fecha_fin);
-            $hoja->setCellValue('H'.$fila, $value->anio_lectivo);
+            if ($value->anio_lectivo == 2) {
+                $hoja->setCellValue('H'.$fila, '2023 - 2024');
+            }else{
+                $hoja->setCellValue('H'.$fila, '2022 - 2023');
+            }
+            
             $hoja->setCellValue('I'.$fila, $value->nombres);
             $hoja->setCellValue('J'.$fila, $value->apellidos);
             $hoja->setCellValue('K'.$fila, $value->documento);

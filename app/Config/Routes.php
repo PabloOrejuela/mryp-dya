@@ -112,6 +112,7 @@ $routes->get('reporte-info-biblioteca', 'ReportesProd3::reporte_info_biblioteca'
 $routes->get('reporte-info-arte', 'ReportesProd3::reporte_info_arte');
 $routes->get('reporte-info-lengua', 'ReportesProd3::reporte_info_lengua');
 $routes->get('reporte-info-ciudadania', 'ReportesProd3::reporte_info_ciudadania');
+$routes->get('prod3-registros-procesos', 'Prod3::descargaRegistrosProcesos');
 
 //NAP
 $routes->post('cargar-nap2', 'CargarInformacion::cargar_nap2');

@@ -202,6 +202,7 @@ class EvalFinalP1Model extends Model {
             }
             //echo $this->db->getLastQuery();
         }
+        //echo '<pre>'.var_export($result, true).'</pre>';exit;
         return $result;
     }
 }

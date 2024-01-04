@@ -8,7 +8,7 @@
                 <?= esc("Componente 3 - Ingreso y edición de variables de proceso"); ?>
             </div>
             <div class="card-body"> 
-                <table class="table table-bordered table-striped table-hover" id="datatablesSimple">
+                <table class="table table-bordered table-striped table-hover" id="datatablesSimpleProd3Process">
                     <thead>
                         <th>No.</th>
                         <th>Nombre</th>

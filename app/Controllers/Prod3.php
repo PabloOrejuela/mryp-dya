@@ -1024,4 +1024,383 @@ class Prod3 extends BaseController {
             return redirect()->to('prod_3');
         }
     }
+
+    public function descargaRegistrosProcesos(){
+        ini_set('memory_limit', '256M');
+
+        $registros = $this->prod3Model->_getAllRegistrosExcel();
+        //echo '<pre>'.var_export($registros, true).'</pre>';exit;
+        $fila = 1;
+
+        //Creo la hoja
+        $phpExcel = new Spreadsheet();
+        $phpExcel
+            ->getProperties()
+            ->setCreator("Pablo Orejuela")
+            ->setLastModifiedBy('Pablo Orejuela') // última vez modificado por
+            ->setTitle('Prod 3 - Registros')
+            ->setSubject('Reportes MYRP')
+            ->setDescription('Reporte con los registros del Prod 3')
+            ->setKeywords('etiquetas o palabras clave separadas por espacios')
+            ->setCategory('Registros');
+
+        $nombreDelDocumento = "Prod 3 - Registros y procesos.xlsx";
+
+        //Selecciono la pestaña
+        $hoja = $phpExcel->getActiveSheet();
+
+        $styleCabecera = [
+            'font' => [
+                'bold' => true,
+                'size' => 10
+            ],
+            'alignment' => [
+                'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
+            ]
+        ];
+
+        $styleFila = [
+            'font' => [
+                'bold' => false,
+            ],
+            'alignment' => [
+                'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT,
+            ]
+        ];
+
+        $styleFilaProcess = [
+            'font' => [
+                'bold' => false,
+                'size' => 10
+            ],
+            'alignment' => [
+                'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
+            ]
+        ];
+
+        $phpExcel->getActiveSheet()->getStyle('A'.$fila.':EZ'.$fila)->applyFromArray($styleCabecera);
+        
+
+        $hoja->setCellValue('A'.$fila, "REGISTROS");
+        $phpExcel->getActiveSheet()->mergeCells('A'.$fila.':AF'.$fila);
+        $phpExcel->getActiveSheet()->getStyle('A'.$fila.':AF'.$fila)->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('a1ccd4');
+
+        $hoja->setCellValue('AG'.$fila, "EXPRESIÓN ARTÍSTICA (TALLERES)");
+        $phpExcel->getActiveSheet()->mergeCells('AG'.$fila.':AR'.$fila);
+        $phpExcel->getActiveSheet()->getStyle('AG'.$fila.':AR'.$fila)->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('afd6a7');
+
+        $hoja->setCellValue('AS'.$fila, "EXPRESIÓN ARTÍSTICA (CLASES)");
+        $phpExcel->getActiveSheet()->mergeCells('AS'.$fila.':AZ'.$fila);
+        $phpExcel->getActiveSheet()->getStyle('AS'.$fila.':AZ'.$fila)->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('b7a2da');
+
+        $hoja->setCellValue('BA'.$fila, "LENGUAJE (TALLERES)");
+        $phpExcel->getActiveSheet()->mergeCells('BA'.$fila.':BL'.$fila);
+        $phpExcel->getActiveSheet()->getStyle('BA'.$fila.':BL'.$fila)->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('fda68c');
+
+        $hoja->setCellValue('BM'.$fila, "LENGUAJE (CLASES)");
+        $phpExcel->getActiveSheet()->mergeCells('BM'.$fila.':CP'.$fila);
+        $phpExcel->getActiveSheet()->getStyle('BM'.$fila.':CP'.$fila)->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('f4ca70');
+
+        $hoja->setCellValue('CQ'.$fila, "OTROS");
+        $phpExcel->getActiveSheet()->mergeCells('CQ'.$fila.':DK'.$fila);
+        $phpExcel->getActiveSheet()->getStyle('CQ'.$fila.':DK'.$fila)->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('f2f1b1');
+
+
+        $fila = 2;
+        $phpExcel->getActiveSheet()->getStyle('A'.$fila.':DK'.$fila)->applyFromArray($styleCabecera);
+        //Edito la info que va a ir en el archivo excel
+        $hoja->setCellValue('A'.$fila, "AMIE");
+        $hoja->setCellValue('B'.$fila, "CENTRO EDUCATIVO");
+        $hoja->setCellValue('C'.$fila, "CIUDAD");
+        $hoja->setCellValue('D'.$fila, "PROVINCIA");
+        $hoja->setCellValue('E'.$fila, "AÑO LECTIVO");
+        $hoja->setCellValue('F'.$fila, "NOMBRES");
+        $hoja->setCellValue('G'.$fila, "DOCUMENTO");
+        $hoja->setCellValue('H'.$fila, "NACIONALIDAD");
+        $hoja->setCellValue('I'.$fila, "GÉNERO");
+        $hoja->setCellValue('J'.$fila, "EDAD");
+        $hoja->setCellValue('K'.$fila, "ETNIA");
+        $hoja->setCellValue('L'.$fila, "DISCAPACIDAD");
+        $hoja->setCellValue('M'.$fila, "TIPO DISCAPACIDAD");
+        $hoja->setCellValue('N'.$fila, "EMAIL");
+        $hoja->setCellValue('O'.$fila, "CELULAR");
+        $hoja->setCellValue('P'.$fila, "INICIAL 1");
+        $hoja->setCellValue('Q'.$fila, "INICIAL 2");
+        $hoja->setCellValue('R'.$fila, "1RO EGB");
+        $hoja->setCellValue('S'.$fila, "2do EGB");
+        $hoja->setCellValue('T'.$fila, "3ro EGB");
+        $hoja->setCellValue('U'.$fila, "4to EGB");
+        $hoja->setCellValue('V'.$fila, "5to EGB");
+        $hoja->setCellValue('W'.$fila, "6to EGB");
+        $hoja->setCellValue('X'.$fila, "7mo EGB");
+        $hoja->setCellValue('Y'.$fila, "8vo EGB");
+        $hoja->setCellValue('Z'.$fila, "9no EGB");
+        $hoja->setCellValue('AA'.$fila, "10mo EGB");
+        $hoja->setCellValue('AB'.$fila, "1ro BACH");
+        $hoja->setCellValue('AC'.$fila, "2do BACH");
+        $hoja->setCellValue('AD'.$fila, "3ro BACH");
+        $hoja->setCellValue('AE'.$fila, "ESPECIALIDAD");
+        $hoja->setCellValue('AF'.$fila, "FUNCION");
+        
+        //EXP ARTITICA
+        $hoja->setCellValue('AG'.$fila, "Docente y Autoestima");
+        $hoja->setCellValue('AH'.$fila, "MES");
+        $hoja->setCellValue('AI'.$fila, "Arte y sus usos");
+        $hoja->setCellValue('AJ'.$fila, "MES");
+        $hoja->setCellValue('AK'.$fila, "Creatiidad");
+        $hoja->setCellValue('AL'.$fila, "MES");
+        $hoja->setCellValue('AM'.$fila, "Etapas de desarrollo artístico en los niños");
+        $hoja->setCellValue('AN'.$fila, "MES");
+        $hoja->setCellValue('AO'.$fila, "Clase de arte: Autorretrato");
+        $hoja->setCellValue('AP'.$fila, "MES");
+        $hoja->setCellValue('AQ'.$fila, "Incluir el arte en nuestras clases");
+        $hoja->setCellValue('AR'.$fila, "MES");
+        $hoja->setCellValue('AS'.$fila, "Autorretrato");
+        $hoja->setCellValue('AT'.$fila, "MES");
+        $hoja->setCellValue('AU'.$fila, "Emociones");
+        $hoja->setCellValue('AV'.$fila, "MES");
+        $hoja->setCellValue('AW'.$fila, "La familia");
+        $hoja->setCellValue('AX'.$fila, "MES");
+        $hoja->setCellValue('AY'.$fila, "La camiseta");
+        $hoja->setCellValue('AZ'.$fila, "MES");
+
+        //LENGUAJE
+        $hoja->setCellValue('BA'.$fila, "Enfoque sociocultural para la enseñanza de la lectura y escritura");
+        $hoja->setCellValue('BB'.$fila, "MES");
+        $hoja->setCellValue('BC'.$fila, "Comunicación Oral: Expresiones Dialectales.");
+        $hoja->setCellValue('BD'.$fila, "MES");
+        $hoja->setCellValue('BE'.$fila, "Comunicación Oral: Desarrollo de la expresión oral.");
+        $hoja->setCellValue('BF'.$fila, "MES");
+        $hoja->setCellValue('BG'.$fila, "Comprensión Lectora");
+        $hoja->setCellValue('BH'.$fila, "MES");
+        $hoja->setCellValue('BI'.$fila, "Producción de textos");
+        $hoja->setCellValue('BJ'.$fila, "MES");
+        $hoja->setCellValue('BK'.$fila, "Estrategias de producción de textos");
+        $hoja->setCellValue('BL'.$fila, "MES");
+        $hoja->setCellValue('BM'.$fila, "Los zapatos");
+        $hoja->setCellValue('BN'.$fila, "MES");
+        $hoja->setCellValue('BO'.$fila, "La noticia");
+        $hoja->setCellValue('BP'.$fila, "MES");
+        $hoja->setCellValue('BQ'.$fila, "La carta");
+        $hoja->setCellValue('BR'.$fila, "MES");
+        $hoja->setCellValue('BS'.$fila, "La niña y la abeja");
+        $hoja->setCellValue('BT'.$fila, "MES");
+        $hoja->setCellValue('BU'.$fila, "El cuento");
+        $hoja->setCellValue('BV'.$fila, "MES");
+        $hoja->setCellValue('BW'.$fila, "Cuerdas");
+        $hoja->setCellValue('BX'.$fila, "MES");
+        $hoja->setCellValue('BY'.$fila, "Los refranes");
+        $hoja->setCellValue('BZ'.$fila, "MES");
+        $hoja->setCellValue('CA'.$fila, "Juegos tradicionales");
+        $hoja->setCellValue('CB'.$fila, "MES");
+        $hoja->setCellValue('CC'.$fila, "Los derechos humanos");
+        $hoja->setCellValue('CD'.$fila, "MES");
+        $hoja->setCellValue('CE'.$fila, "El noticiero");
+        $hoja->setCellValue('CF'.$fila, "MES");
+        $hoja->setCellValue('CG'.$fila, "El discurso");
+        $hoja->setCellValue('CH'.$fila, "MES");
+        $hoja->setCellValue('CI'.$fila, "Influencers");
+        $hoja->setCellValue('CJ'.$fila, "MES");
+        $hoja->setCellValue('CK'.$fila, "Inferencias");
+        $hoja->setCellValue('CL'.$fila, "MES");
+        $hoja->setCellValue('CM'.$fila, "El elefante");
+        $hoja->setCellValue('CN'.$fila, "MES");
+        $hoja->setCellValue('CO'.$fila, "El pitch");
+        $hoja->setCellValue('CP'.$fila, "MES");
+
+
+        //CIUDADANIA
+        $hoja->setCellValue('CQ'.$fila, "Ciudadanía y diversidad 1");
+        $hoja->setCellValue('CR'.$fila, "MES");
+        $hoja->setCellValue('CS'.$fila, "Ciudadanía y diversidad 2");
+        $hoja->setCellValue('CT'.$fila, "MES");
+        $hoja->setCellValue('CU'.$fila, "Diversidad de sexo / genéricas");
+        $hoja->setCellValue('CV'.$fila, "MES");
+        $hoja->setCellValue('CW'.$fila, "Violencias basadas en género y ciudadanía");
+        $hoja->setCellValue('CX'.$fila, "MES");
+        $hoja->setCellValue('CY'.$fila, "Diversidades estéticas");
+        $hoja->setCellValue('CZ'.$fila, "MES");
+        $hoja->setCellValue('DA'.$fila, "Diversidades neurodivergentes y ciudadanía");
+        $hoja->setCellValue('DB'.$fila, "MES");
+        $hoja->setCellValue('DC'.$fila, "El Racismo");
+        $hoja->setCellValue('DD'.$fila, "MES");
+        $hoja->setCellValue('DE'.$fila, "El rechazo y la discriminación");
+        $hoja->setCellValue('DF'.$fila, "MES");
+
+        //OTROS
+        $hoja->setCellValue('DG'.$fila, "Grupo Inter - aprendizaje");
+        $hoja->setCellValue('DH'.$fila, "Tema");
+        $hoja->setCellValue('DI'.$fila, "Fecha del Grupo Inter - aprendizaje");
+        $hoja->setCellValue('DJ'.$fila, "Visita a la Biblioteca Viajera");
+        $hoja->setCellValue('DK'.$fila, "Fecha de la visita a la Biblioteca Viajera");
+
+        $fila = 3;
+        //echo '<pre>'.var_export($registros, true).'</pre>';exit;
+        foreach ($registros as $key => $value) {
+            $fechaEntero = strtotime($value->fecha);
+            $aniolectivo = date("Y", $fechaEntero);
+            //echo $value->id.'<br>';
+            $expArtistica = $this->arteProd3Model->_getProd3Arte($value->id);
+            $lenguaje = $this->lenguaProd3Model->_getProd3lengua($value->id);
+            $ciudadania = $this->ciudadProd3Model->_getProd3Ciudad($value->id);
+            $otros = $this->otrosProd3Model->_getProd3Otros($value->id);
+
+            //echo '<pre>'.var_export($aniolectivo, true).'</pre>';exit;
+            $phpExcel->getActiveSheet()->getStyle('D'.$fila.':AZ'.$fila)->applyFromArray($styleFila);
+            $phpExcel->getActiveSheet()->getStyle('AB'.$fila.':EI'.$fila)->applyFromArray($styleFilaProcess);
+            $hoja->setCellValue('A'.$fila, $value->amie);
+            $hoja->setCellValue('B'.$fila, $value->ce);
+            $hoja->setCellValue('C'.$fila, $value->ciudad);
+            $hoja->setCellValue('D'.$fila, $value->provincia);
+            $hoja->setCellValue('E'.$fila, $aniolectivo);
+            $hoja->setCellValue('F'.$fila, $value->nombre);
+            $hoja->setCellValue('G'.$fila, $value->documento);
+            $hoja->setCellValue('H'.$fila, $value->nacionalidad);
+            $hoja->setCellValue('I'.$fila, $value->genero);
+            $hoja->setCellValue('J'.$fila, $value->edad);
+            $hoja->setCellValue('K'.$fila, $value->etnia);
+            $hoja->setCellValue('L'.$fila, $value->discapacidad);
+            $hoja->setCellValue('M'.$fila, $value->tipo);
+            $hoja->setCellValue('N'.$fila, $value->email);
+            $hoja->setCellValue('O'.$fila, $value->celular);
+            $hoja->setCellValue('P'.$fila, $value->inicial_1);
+            $hoja->setCellValue('Q'.$fila, $value->inicial_2);
+            $hoja->setCellValue('R'.$fila, $value->pri_egb);
+            $hoja->setCellValue('S'.$fila, $value->seg_egb);
+            $hoja->setCellValue('T'.$fila, $value->ter_egb);
+            $hoja->setCellValue('U'.$fila, $value->cuart_egb);
+            $hoja->setCellValue('V'.$fila, $value->quin_egb);
+            $hoja->setCellValue('W'.$fila, $value->sex_egb);
+            $hoja->setCellValue('X'.$fila, $value->sept_egb);
+            $hoja->setCellValue('Y'.$fila, $value->oct_egb);
+            $hoja->setCellValue('Z'.$fila, $value->nov_egb);
+            $hoja->setCellValue('AA'.$fila, $value->dec_egb);
+            $hoja->setCellValue('AB'.$fila, $value->pri_bach);
+            $hoja->setCellValue('AC'.$fila, $value->seg_bach);
+            $hoja->setCellValue('AD'.$fila, $value->ter_bach);
+            $hoja->setCellValue('AE'.$fila, $value->especialidad);
+            $hoja->setCellValue('AF'.$fila, $value->funcion);
+            
+
+            //EXP ARTITICA
+            if ($expArtistica) {
+                $hoja->setCellValue('AG'.$fila, $expArtistica->docente_autoestima);
+                $hoja->setCellValue('AH'.$fila, $expArtistica->docente_autoestima_mes);
+                $hoja->setCellValue('AI'.$fila, $expArtistica->arte_usos);
+                $hoja->setCellValue('AJ'.$fila, $expArtistica->arte_usos_mes);
+                $hoja->setCellValue('AK'.$fila, $expArtistica->creatividad);
+                $hoja->setCellValue('AL'.$fila, $expArtistica->creatividad_mes);
+                $hoja->setCellValue('AM'.$fila, $expArtistica->etapas);
+                $hoja->setCellValue('AN'.$fila, $expArtistica->etapas_mes);
+                $hoja->setCellValue('AO'.$fila, $expArtistica->autorretrato_taller);
+                $hoja->setCellValue('AP'.$fila, $expArtistica->autorretrato_taller_mes);
+                $hoja->setCellValue('AQ'.$fila, $expArtistica->incluir_clases);
+                $hoja->setCellValue('AR'.$fila, $expArtistica->incluir_clases_mes);
+                $hoja->setCellValue('AS'.$fila, $expArtistica->autorretrato_clase);
+                $hoja->setCellValue('AT'.$fila, $expArtistica->autorretrato_clase_mes);
+                $hoja->setCellValue('AU'.$fila, $expArtistica->emociones);
+                $hoja->setCellValue('AV'.$fila, $expArtistica->emociones_mes);
+                $hoja->setCellValue('AW'.$fila, $expArtistica->familia);
+                $hoja->setCellValue('AX'.$fila, $expArtistica->familia_mes);
+                $hoja->setCellValue('AY'.$fila, $expArtistica->camiseta);
+                $hoja->setCellValue('AZ'.$fila, $expArtistica->camiseta_mes);
+            }
+
+            //LENGUAJE
+            if ($lenguaje) {
+                $hoja->setCellValue('BA'.$fila, $lenguaje->enfoque_sociocultural);
+                $hoja->setCellValue('BB'.$fila, $lenguaje->enfoque_sociocultural_mes);
+                $hoja->setCellValue('BC'.$fila, $lenguaje->exp_dialectales);
+                $hoja->setCellValue('BD'.$fila, $lenguaje->exp_dialectales_mes);
+                $hoja->setCellValue('BE'.$fila, $lenguaje->exp_oral);
+                $hoja->setCellValue('BF'.$fila, $lenguaje->exp_oral_mes);
+                $hoja->setCellValue('BG'.$fila, $lenguaje->comp_lectora);
+                $hoja->setCellValue('BH'.$fila, $lenguaje->comp_lectora_mes);
+                $hoja->setCellValue('BI'.$fila, $lenguaje->prod_textos);
+                $hoja->setCellValue('BJ'.$fila, $lenguaje->prod_textos_mes);
+                $hoja->setCellValue('BK'.$fila, $lenguaje->extrategia_prod_text);
+                $hoja->setCellValue('BL'.$fila, $lenguaje->extrategia_prod_text_mes);
+                $hoja->setCellValue('BM'.$fila, $lenguaje->zapatos);
+                $hoja->setCellValue('BN'.$fila, $lenguaje->zapatos_mes);
+                $hoja->setCellValue('BO'.$fila, $lenguaje->noticia);
+                $hoja->setCellValue('BP'.$fila, $lenguaje->noticia_mes);
+                $hoja->setCellValue('BQ'.$fila, $lenguaje->carta);
+                $hoja->setCellValue('BR'.$fila, $lenguaje->carta_mes);
+                $hoja->setCellValue('BS'.$fila, $lenguaje->ninia_abeja);
+                $hoja->setCellValue('BT'.$fila, $lenguaje->ninia_abeja_mes);
+                $hoja->setCellValue('BU'.$fila, $lenguaje->cuento);
+                $hoja->setCellValue('BV'.$fila, $lenguaje->cuento_mes);
+                $hoja->setCellValue('BW'.$fila, $lenguaje->cuerdas);
+                $hoja->setCellValue('BX'.$fila, $lenguaje->cuerdas_mes);
+                $hoja->setCellValue('BY'.$fila, $lenguaje->refranes);
+                $hoja->setCellValue('BZ'.$fila, $lenguaje->refranes_mes);
+                $hoja->setCellValue('CA'.$fila, $lenguaje->juegos);
+                $hoja->setCellValue('CB'.$fila, $lenguaje->juegos_mes);
+                $hoja->setCellValue('CC'.$fila, $lenguaje->derechos_humanos);
+                $hoja->setCellValue('CD'.$fila, $lenguaje->derechos_humanos_mes);
+                $hoja->setCellValue('CE'.$fila, $lenguaje->noticiero);
+                $hoja->setCellValue('CF'.$fila, $lenguaje->noticiero_mes);
+                $hoja->setCellValue('CG'.$fila, $lenguaje->discurso);
+                $hoja->setCellValue('CH'.$fila, $lenguaje->discurso_mes);
+                $hoja->setCellValue('CI'.$fila, $lenguaje->influencers);
+                $hoja->setCellValue('CJ'.$fila, $lenguaje->influencers_mes);
+                $hoja->setCellValue('CK'.$fila, $lenguaje->inferencias);
+                $hoja->setCellValue('CL'.$fila, $lenguaje->inferencias_mes);
+                $hoja->setCellValue('CM'.$fila, $lenguaje->elefante);
+                $hoja->setCellValue('CN'.$fila, $lenguaje->elefante_mes);
+                $hoja->setCellValue('CO'.$fila, $lenguaje->pitch);
+                $hoja->setCellValue('CP'.$fila, $lenguaje->pitch_mes);
+            }
+
+            //CIUDADANIA
+            if ($ciudadania) {
+                $hoja->setCellValue('CQ'.$fila, $ciudadania->interculturalidad);
+                $hoja->setCellValue('CR'.$fila, $ciudadania->interculturalidad_mes);
+                $hoja->setCellValue('CS'.$fila, $ciudadania->masculinidad);
+                $hoja->setCellValue('CT'.$fila, $ciudadania->masculinidad_mes);
+                $hoja->setCellValue('CU'.$fila, $ciudadania->sexo_genero);
+                $hoja->setCellValue('CV'.$fila, $ciudadania->sexo_genero_mes);
+                $hoja->setCellValue('CW'.$fila, $ciudadania->violencia_genero);
+                $hoja->setCellValue('CX'.$fila, $ciudadania->violencia_genero_mes);
+                $hoja->setCellValue('CY'.$fila, $ciudadania->diversidad_estetica);
+                $hoja->setCellValue('CZ'.$fila, $ciudadania->diversidad_estetica_mes);
+                $hoja->setCellValue('DA'.$fila, $ciudadania->diversidad_neuro);
+                $hoja->setCellValue('DB'.$fila, $ciudadania->diversidad_neuro_mes);
+                $hoja->setCellValue('DC'.$fila, $ciudadania->racismo_clase_ciu);
+                $hoja->setCellValue('DD'.$fila, $ciudadania->racismo_clase_ciu_mes);
+                $hoja->setCellValue('DE'.$fila, $ciudadania->rechazo_clase_ciu);
+                $hoja->setCellValue('DF'.$fila, $ciudadania->rechazo_clase_ciu_mes);
+
+            }
+
+            //OTROS
+            if ($otros) {
+                $hoja->setCellValue('DG'.$fila, $otros->grupo_interaprendizaje);
+                $hoja->setCellValue('DH'.$fila, $otros->tema_grupo_inter);
+                $hoja->setCellValue('DI'.$fila, $otros->fecha_grupo_inter);
+                $hoja->setCellValue('DJ'.$fila, $otros->visita_biblioteca_viajera);
+                $hoja->setCellValue('DK'.$fila, $otros->fecha_visita_biblioteca_viajera);
+            }
+            
+            $fila++;
+        }
+
+        //Creo el writter y guardo la hoja
+        
+        $writter = new XlsxWriter($phpExcel, 'Xlsx');
+        
+        //Cabeceras para descarga
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        header('Content-Disposition: attachment;filename="' . $nombreDelDocumento . '"');
+        header('Cache-Control: max-age=0');
+        
+        $r = $writter->save('php://output');exit;
+        if ($r) {
+            return redirect()->to('cargar_info_view');
+        }else{
+            $error = 'Hubo un error u no se pudo descargar';
+            return redirect()->to('cargar_info_view');
+        }        
+        
+    }
 }

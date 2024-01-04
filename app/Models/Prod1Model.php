@@ -111,8 +111,48 @@ class Prod1Model extends Model {
         $builder = $this->db->table($this->table);
         $builder->select('*');
         $builder->where('amie', $amie);
-        //$builder->where('cohorte', $cohorte);
+        //$builder->where('cohorte', 'SEGUNDA COHORTE');
         //$builder->join('eval_final', 'eval_final.idprod = producto_1.id');
+        $builder->orderBy('apellidos');
+        $query = $builder->get();
+        if ($query->getResult() != null) {
+            foreach ($query->getResult() as $row) {
+                if ($row->id != NULL && $row != '') {
+                    $result[] = $row;
+                }
+            }
+        }
+        //echo $this->db->getLastQuery();
+        return $result;
+    }
+
+    public function _getRegistrosCoordinadorDiagMYRP($amie, $result) {
+        //$result = null;
+        $builder = $this->db->table($this->table);
+        $builder->select('*');
+        $builder->where('amie', $amie);
+        //$builder->where('cohorte', 'SEGUNDA COHORTE');
+        $builder->join('diag_myrp', 'diag_myrp.idprod = producto_1.id');
+        $builder->orderBy('apellidos');
+        $query = $builder->get();
+        if ($query->getResult() != null) {
+            foreach ($query->getResult() as $row) {
+                if ($row->id != NULL && $row != '') {
+                    $result[] = $row;
+                }
+            }
+        }
+        //echo $this->db->getLastQuery();
+        return $result;
+    }
+
+    public function _getRegistrosCoordinadorDiagFinal($amie, $result) {
+        //$result = null;
+        $builder = $this->db->table($this->table);
+        $builder->select('*');
+        $builder->where('amie', $amie);
+        //$builder->where('cohorte', 'SEGUNDA COHORTE');
+        $builder->join('eval_final', 'eval_final.idprod = producto_1.id');
         $builder->orderBy('apellidos');
         $query = $builder->get();
         if ($query->getResult() != null) {
@@ -262,7 +302,7 @@ class Prod1Model extends Model {
         $builder->join('centro_educativo', 'centro_educativo.amie = producto_1.amie');
         $builder->join('ciudades', 'ciudades.idciudades = centro_educativo.idciudades');
         $builder->join('provincias', 'provincias.idprovincias = ciudades.idprovincias');
-        $builder->join('anio_lectivo', 'anio_lectivo.id = producto_1.anio_lectivo');
+        //$builder->join('anio_lectivo', 'anio_lectivo.id = producto_1.anio_lectivo');
         $query = $builder->get();
         if ($query->getResult() != null) {
             foreach ($query->getResult() as $row) {

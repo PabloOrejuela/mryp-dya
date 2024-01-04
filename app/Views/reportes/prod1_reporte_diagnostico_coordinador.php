@@ -582,6 +582,7 @@
                     cData.color_necesita,
                     //NO
                     cData.color_noNecesita,
+                    cData.color_C,
 
                 ],
                 borderColor: [
@@ -655,6 +656,7 @@
 
                     //NO
                     cData.color_noNecesita,
+                    cData.color_C,
 
                 ],
                 borderColor: [
@@ -730,6 +732,7 @@
                     cData.color_A,
                     //B
                     cData.color_B,
+                    cData.color_C,
 
                 ],
                 borderColor: [
@@ -803,6 +806,7 @@
 
                     //NO
                     cData.color_B,
+                    cData.color_C,
 
                 ],
                 borderColor: [
@@ -876,6 +880,7 @@
 
                     //NO
                     cData.color_B,
+                    cData.color_C,
 
                 ],
                 borderColor: [
@@ -949,6 +954,7 @@
 
                     //NO
                     cData.color_B,
+                    cData.color_C,
 
                 ],
                 borderColor: [
@@ -1025,6 +1031,7 @@
 
                     //NO
                     cData.color_B,
+                    cData.color_C,
 
                 ],
                 borderColor: [
@@ -1098,6 +1105,7 @@
 
                     //NO
                     cData.color_B,
+                    cData.color_C,
 
                 ],
                 borderColor: [
@@ -1177,6 +1185,7 @@
 
                     //C
                     cData.color_C,
+                    cData.color_D,
 
                 ],
                 borderColor: [
@@ -1253,6 +1262,7 @@
 
                     //C
                     cData.color_C,
+                    cData.color_D,
 
                 ],
                 borderColor: [
@@ -1329,6 +1339,7 @@
 
                     //C
                     cData.color_C,
+                    cData.color_D,
 
                 ],
                 borderColor: [
@@ -1405,6 +1416,7 @@
 
                     //C
                     cData.color_C,
+                    cData.color_D,
 
                 ],
                 borderColor: [
@@ -1484,6 +1496,7 @@
 
                     //C
                     cData.color_D,
+                    cData.color_E,
 
                 ],
                 borderColor: [
@@ -1563,6 +1576,7 @@
 
                     //D
                     cData.color_D,
+                    cData.color_E,
 
                 ],
                 borderColor: [
@@ -1642,6 +1656,7 @@
 
                     //C
                     cData.color_D,
+                    cData.color_E,
 
                 ],
                 borderColor: [
@@ -1721,6 +1736,7 @@
 
                     //D
                     cData.color_D,
+                    cData.color_E,
 
                 ],
                 borderColor: [
@@ -1794,6 +1810,7 @@
 
                     //B
                     cData.color_B,
+                    cData.color_C,
 
                 ],
                 borderColor: [
@@ -1867,6 +1884,7 @@
 
                     //B
                     cData.color_B,
+                    cData.color_C,
 
                 ],
                 borderColor: [
@@ -1946,6 +1964,7 @@
 
                     //C
                     cData.color_C,
+                    cData.color_D,
 
                 ],
                 borderColor: [
@@ -2022,6 +2041,7 @@
 
                     //C
                     cData.color_C,
+                    cData.color_D,
 
                 ],
                 borderColor: [
@@ -2098,6 +2118,7 @@
 
                     //C
                     cData.color_C,
+                    cData.color_D,
 
                 ],
                 borderColor: [
@@ -2174,6 +2195,7 @@
 
                     //C
                     cData.color_C,
+                    cData.color_D,
 
                 ],
                 borderColor: [
@@ -2253,6 +2275,7 @@
 
                     //C
                     cData.color_D,
+                    cData.color_E,
 
                 ],
                 borderColor: [
@@ -2332,6 +2355,7 @@
 
                     //D
                     cData.color_D,
+                    cData.color_E,
 
                 ],
                 borderColor: [
@@ -2411,6 +2435,7 @@
 
                     //C
                     cData.color_D,
+                    cData.color_E,
 
                 ],
                 borderColor: [
@@ -2490,6 +2515,7 @@
 
                     //D
                     cData.color_D,
+                    cData.color_E,
 
                 ],
                 borderColor: [
@@ -2563,6 +2589,7 @@
 
                     //B
                     cData.color_B,
+                    cData.color_C,
 
                 ],
                 borderColor: [
@@ -2636,6 +2663,7 @@
 
                     //B
                     cData.color_B,
+                    cData.color_C,
                 ],
                 borderColor: [
                 'rgb(118, 168, 134)',
