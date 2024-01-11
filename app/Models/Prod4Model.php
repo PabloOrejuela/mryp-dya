@@ -50,7 +50,8 @@ class Prod4Model extends Model {
     public function _getMisRegistros($id) {
         $result = NULL;
         $builder = $this->db->table($this->table);
-        $builder->select('producto_4.id as id, nombres, documento, cohorte');
+        $builder->select('producto_4.id as id, cohortes.cohorte as cohorte, nombres, documento');
+        $builder->join('cohortes', 'cohortes.id = producto_4.cohorte');
         $builder->join('centro_prod_4', 'centro_prod_4.id = producto_4.idcentro4');
         $builder->where('centro_prod_4.tecnico', $id);
         $builder->orderBy('id');
