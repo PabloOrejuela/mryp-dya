@@ -104,6 +104,7 @@ $routes->get('prod-3-otros-procesos', 'Prod3::prod_3_otros_procesos');
 $routes->get('prod3-form-biblioteca/(:any)', 'Prod3::prod3_form_biblioteca/$1');
 $routes->post('prod3-biblioteca-update', 'Prod3::prod3_biblioteca_update');
 $routes->get('prod-3-descargar-registros', 'Prod3::prod_3_descargar_registros');
+$routes->get('prod_3_get_registros', 'Prod3::prod_3_get_registros');
 
 //Reportes Prod 3
 $routes->get('prod3-reporte-certificados', 'ReportesProd3::prod3_reporte_certificados');

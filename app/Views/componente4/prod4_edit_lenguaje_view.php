@@ -96,7 +96,7 @@
                 </div>
             </div>   
             <?= form_hidden('idProd4', $id);  ?>
-            <button type="submit" class="btn btn-info mb-3">Guardar</button>
+            <button type="submit" class="btn btn-info mb-3">Actualizar</button>
         </form>
         <button onclick="history.back()" class="btn btn-success mb-3">Regresar</button>
     </div>

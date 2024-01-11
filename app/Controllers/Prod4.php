@@ -19,8 +19,14 @@ class Prod4 extends BaseController {
         if ($data['is_logged'] == 1 && $data['componente_4'] == 1) {
             $this->session->set('form_error', "");
 
-            $data['componente_4'] = $this->prod4Model->_getAllRegistros();
-            //$data['componente_4'] = $this->prod4Model->_getMisRegistros($data['id']);
+            $data['cohortes'] = $this->cohorteModel->findAll();
+
+            if ($data['idrol'] == '8' && $data['componente_4'] == 1) {
+                $data['componente_4'] = $this->prod4Model->_getMisRegistros($data['id']);
+            }else{
+                $data['componente_4'] = $this->prod4Model->_getAllRegistros();
+            }
+            
             //echo '<pre>'.var_export($data['componente_4'], true).'</pre>';exit;
 
             $data['title']='MYRP - DYA';
@@ -197,7 +203,7 @@ class Prod4 extends BaseController {
 
             //echo '<pre>'.var_export($data['componente_4'], true).'</pre>';exit;
             $data['title']='MYRP - DYA';
-            $data['main_content']='componente4/prod4_process_view2';
+            $data['main_content']='componente4/prod4_process_view';
             return view('includes/template', $data);
         }else{
 

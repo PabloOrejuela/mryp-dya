@@ -2,7 +2,7 @@
     .contenedor{
         margin-left:20px;
         margin-right:20px;
-        font-size: 0.75em;
+        font-size: 0.8em;
     }
 </style>
 <main class="contenedor px-2">
@@ -44,9 +44,15 @@
                                 $value->estado = $this->prod4ResultadosModel->_getProd4Estado($value->id);
                                 echo '<tr>
                                     <td>'.$value->id.'</td>
-                                    <td><a href="'.site_url().'prod_4_edit/'.$value->id.'">'.$value->nombres.'</a></td>
-                                    <td>'.$value->cohorte.'</td>
-                                    <td>'.$value->documento.'</td>';
+                                    <td><a href="'.site_url().'prod_4_edit/'.$value->id.'">'.$value->nombres.'</a></td>';
+
+                                    // foreach ($cohortes as $key => $cohorte) {
+                                    //     if ($value->cohorte == $cohorte->id) {
+                                    //         echo '<td>'.$cohorte->cohorte.'</td>';
+                                    //     }
+                                    // }
+                                echo '<td>'.$value->cohorte.'</td>';
+                                echo '<td>'.$value->documento.'</td>';
                                     if ($value->estado == 1) {
                                         echo '<td>Activa</td>';
                                     }else if($value->estado == 2){
@@ -61,49 +67,49 @@
                                 echo '<td>
                                         <div class="contenedor">
                                             <a type="button" id="btn-register" href="'.site_url().'prod4-reg-lengua/'.$value->id.'" class="edit">
-                                                <img src="'.site_url().'public/images/test.png" width="30">
+                                                <img src="'.site_url().'public/images/test.png" width="27">
                                             </a>
                                         </div>
                                     </td>
                                     <td>
                                         <div class="contenedor">
                                             <a type="button" id="btn-register" href="'.site_url().'prod4-reg-mate/'.$value->id.'" class="edit">
-                                                <img src="'.site_url().'public/images/eval-mate.png" width="30" >
+                                                <img src="'.site_url().'public/images/eval-mate.png" width="27" >
                                             </a>
                                         </div>
                                     </td>
                                     <td>
                                         <div class="contenedor">
                                             <a type="button" id="btn-register" href="'.site_url().'prod4-reg-psico/'.$value->id.'" class="edit">
-                                                <img src="'.site_url().'public/images/psico.png" width="30" >
+                                                <img src="'.site_url().'public/images/psico.png" width="27" >
                                             </a>
                                         </div>
                                     </td>
                                     <td>
                                         <div class="contenedor">
                                             <a type="button" id="btn-register" href="'.site_url().'prod4-reg-pedagogica/'.$value->id.'" class="edit">
-                                                <img src="'.site_url().'public/images/pedagogicas.png" width="30" >
+                                                <img src="'.site_url().'public/images/pedagogicas.png" width="27" >
                                             </a>
                                         </div>
                                     </td>
                                     <td>
                                         <div class="contenedor">
                                             <a type="button" id="btn-register" href="'.site_url().'prod4-reg-otros/'.$value->id.'" class="edit">
-                                                <img src="'.site_url().'public/images/reg-process.png" width="30" >
+                                                <img src="'.site_url().'public/images/reg-process.png" width="27" >
                                             </a>
                                         </div>
                                     </td>
                                     <td>
                                         <div class="contenedor">
                                             <a type="button" id="btn-register" href="'.site_url().'prod4-reg-atenciones/'.$value->id.'" class="edit">
-                                                <img src="'.site_url().'public/images/atenciones.png" width="30" >
+                                                <img src="'.site_url().'public/images/atenciones.png" width="27" >
                                             </a>
                                         </div>
                                     </td>
                                     <td>
                                         <div class="contenedor">
                                             <a type="button" id="btn-register" href="'.site_url().'prod4-reg-resultados/'.$value->id.'" class="edit">
-                                                <img src="'.site_url().'public/images/resultados.png" width="30" >
+                                                <img src="'.site_url().'public/images/resultados.png" width=27" >
                                             </a>
                                         </div>
                                     </td>
